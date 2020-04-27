@@ -8,8 +8,15 @@
 </head>
 <body>
 
-	<h2> 메인 페이지 입니다. </h2>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
+	<!-- Main Content -->
+	
+	
+	
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 	
 
 </body>
