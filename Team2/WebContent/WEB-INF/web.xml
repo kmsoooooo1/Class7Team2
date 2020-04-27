@@ -9,4 +9,17 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 회원관리 -->
+  <servlet>
+     <servlet-name>MemberFrontController</servlet-name>
+     <servlet-class>team2.member.action.MemberFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>MemberFrontController</servlet-name>
+     <url-pattern>*.me</url-pattern>
+  </servlet-mapping>  
+  <!-- 회원관리 -->
+  
 </web-app>

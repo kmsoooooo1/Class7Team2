@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title></title>
+<title>Insert title here</title>
 </head>
 <body>
 
-	<%
-		response.sendRedirect("./Main.me");
-	%>
+	<h2> 메인 페이지 입니다. </h2>
+	
+	
 
 </body>
 </html>
