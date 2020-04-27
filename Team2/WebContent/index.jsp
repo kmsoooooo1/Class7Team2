@@ -8,24 +8,7 @@
 </head>
 <body>
 
-	<div>
-	
-		<h3> Park_Harim 첫 작성 </h3>
-		
-		<h2> Park 작성 중 </h2>
-	
-	
-		<h3> harim test222</h3>
-		
-	</div>
-	
-	<h2> Park 작성중 </h2>
-	
-
-
-
-	
-	<h3>harim test333</h3>
+	<h2> Park_Harim </h2>
 	
 	<h3>harim test444</h3>
 	
