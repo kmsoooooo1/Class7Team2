@@ -5,10 +5,11 @@
 		auth="Container"
 		type="javax.sql.DataSource"
 		url="jdbc:mysql://localhost:3306/team2_project"
-		username="jspid"
-		password="jsppass"
+		username="root"
+		password="oracle"
 		driverClassName="com.mysql.jdbc.Driver"
 		maxActivie="500"
 		maxIdle="100"
 	/>
 </Context>
+
