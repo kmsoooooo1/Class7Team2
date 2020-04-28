@@ -45,6 +45,8 @@ public class BoardReviewAction implements Action {
 		// 페이징 처리
 	
 		ArrayList boardList = bdao.getBoardList(category,cri);
+		//bdao 자원 해제
+		bdao.closeDB();
 				
 		System.out.println("boardList : " + boardList);
 		
