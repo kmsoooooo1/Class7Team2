@@ -22,17 +22,25 @@ public class BoardFrontController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 		
-		if(command.equals("/q&a.bo")){
+		if(command.equals("/Insert.bo")){
 			forward = new ActionForward();
-			forward.setPath("writer.jsp");
-			forward.setRedirect(true);
+			forward.setPath("./board/insert.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/InsertAction.bo")){
+			action = new insertBoardAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
 		}else if(command.equals("/BoardMain.bo")) {
 			forward = new ActionForward();
 			forward.setPath("./board/main_page.jsp");
 			forward.setRedirect(false);
 		}else if(command.equals("/BoardWrite.bo")) {
 			System.out.println("/BoardWrite.bo 주소 처리");
-			
+      
 			forward = new ActionForward();
 			forward.setPath("./board/board_insert.jsp");
 			forward.setRedirect(false);			
@@ -57,8 +65,7 @@ public class BoardFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			
+      }
 		}else if(command.equals("/review.bo")) {
 			System.out.println("/review.bo 주소 처리");
 			

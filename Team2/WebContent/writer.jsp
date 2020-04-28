@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript">
 		
@@ -24,17 +24,13 @@
 		<input type="button" onclick="return save();" value="저장"/>
 		<button type="button">취소</button>
 	</form>
-	
-	
-	
-	
 </body>
 <script type="text/javascript">
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 	 oAppRef: oEditors,
 	 elPlaceHolder: "ir1",
-	 sSkinURI: "editor/SmartEditor2Skin.html",
+	 sSkinURI: "${pageContext.request.contextPath}/editor/SmartEditor2Skin.html",
 	 fCreator: "createSEditor2"
 	});
 </script>
