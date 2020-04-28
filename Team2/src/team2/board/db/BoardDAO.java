@@ -22,6 +22,45 @@ public class BoardDAO {
 		getConnection();
 	}
 	
+	public int insert(BoardDTO dto){
+		int chk = 0;
+		
+		sql = "select coalesce(max(b_idx),0) idx from team2_board";
+		try {
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()){
+				sql = "insert into team2_project.team2_board"
+						+ "(b_idx,b_category,b_p_cate,b_title,b_writer, b_content, b_ref,ip_addr,b_file)"
+						+ "values ("
+						+ (rs.getInt("idx")+1) + ",'"
+						+ dto.getB_category() + "','"
+						+ dto.getB_p_cate() + "','"
+						+ dto.getB_title() + "','"
+						+ dto.getB_writer() + "','"
+						+ dto.getB_content() + "',"
+						+ (rs.getInt("idx")+1) + ",'"
+						+ dto.getIp_addr() + "','"
+						+ dto.getB_file() + "')";
+			
+				chk = stmt.executeUpdate(sql);
+			}else{
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return chk;
+	}
+	
+	
+	
+	
+	
 	private void getConnection(){
 		try {
 			Context init = new InitialContext();

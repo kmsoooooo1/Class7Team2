@@ -21,10 +21,18 @@ public class BoardFrontController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 		
-		if(command.equals("/q&a.bo")){
+		if(command.equals("/Insert.bo")){
 			forward = new ActionForward();
-			forward.setPath("writer.jsp");
-			forward.setRedirect(true);
+			forward.setPath("./board/insert.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/InsertAction.bo")){
+			action = new insertBoardAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
 		}
 		
 		if(forward!=null){
