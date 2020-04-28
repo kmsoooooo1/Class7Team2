@@ -52,6 +52,10 @@ public class MemberFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./board/main_page.jsp");
 			forward.setRedirect(false);
+		}else if(command.equals("/MemberJoin.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/insertForm.jsp");
+			forward.setRedirect(false);
 		}
 		
 		// 페이지 이동처리 
