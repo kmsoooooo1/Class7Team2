@@ -4,45 +4,151 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원 가입 </title>
+<script>
+	function check(){	// 전송될때 불러지는 함수	
+		var id1 = joinform.id.value;
+		var phone1 = joinform.phone.value;
+		//var forms = document.getElementById("joinform");
+
+		if ((joinform.name.value == "")
+				|| (joinform.name.value.length <= 1)) {
+			alert("이름을 제대로 입력해 주세요.");
+			joinform.name.focus();
+			return false;
+		}
+		if (id1.length == 0) {
+			alert("아이디를 입력하세요.");
+			joinform.id.focus();
+			return false;
+		}
+		if (phone1.length == 0) {
+			alert("휴대폰 번호를 입력하세요.");
+			joinform.phone.focus();
+			return false;
+		}
+		// 이름 한글 2자이상 입력받기
+		var regExp = /([가-힣]){2,}/g;  //가부터 힣까지 2글자 이상.
+		
+		if(!regExp.test(joinform.name.value)){
+			alert("이름은 한글 2자 이상입니다.");
+			return false;
+		}
+		
+		//중복확인을 했는지 검사
+		//그리고 중복확인을하고나서도 포커스를 눌려서 아이디를 수정한경우를 막기 위한 코드이기도함		
+		if(joinform.idcheck.value == "false"){
+		alert("아이디 중복 검사를 하지 않으셨습니다.");
+		return false;
+	}	
+	
+	return true;
+	
+	function openConfirmId(joinform) {
+		var id = joinform.id.value;
+		var url = "./MemberIDCheckAction.me?MEMBER_ID="
+				+ joinform.id.value;
+
+		if (id.length == 0) {
+			alert("아이디를 입력하세요.");
+			joinform.id.focus();
+			return false;
+		}
+//상식 정규식은 항상 슬러시 / 로 시작한다.
+		
+	
+		
+	open(
+		 url,
+		 "confirm",
+		 "toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=200");
+		}
+	//숫자 키만 입력받도록 하기 위해서 숫자 인지 아닌 지를 판별해서
+	//숫자가 아니면 이벤트가 발생하지 않은 것으로 해주는 함수
+	function gNumCheck() {
+		
+		//크롬에서는 event로 iE에서는 window.event로 event 객체를 생성		
+		var e = event || window.event;
+		
+		//누른 키값 가져오기
+		//크롬에서는 keyCode로 IE에서는 which로 받아온다.
+		                     //true(익스플로러)  false(크롬)
+		var key = ('which' in e)?  e.which:e.keyCode;
+		              
+		if (key < 48 || key> 57) {  //숫자외의 키가 들어온다면
+			//IE에서 기본적으로 제공되는 이벤트 제거
+			if(e.preventDefault)
+				e.preventDefault();
+			//그이외 브라우저에서 기본적으로 제공되는 이벤트 제거
+			 else
+			e.returnValue=false;
+		}
+	
+	}
+	
+	
+	function func(){
+		//MEMBER_ID에 (아이디입력창에) 포커스가 가면 수행되는 함수.
+		joinform.idcheck.value="false";
+		
+	}
+	
+</script>
 </head>
 <body>
 	<h2>회원가입 페이지</h2>
 	
 	<fieldset>
 		<legend>회 원 가 입</legend>
-		<form action="./MemberJoinAction.me" method="post">
+		<!-- 회원가입 -->
+		<form action="./MemberJoinAction.me" method="post" name="joinform"
+			onsubmit="return check()">
+		
+		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
+			  중복체크를하고나면 true로 변경. 단 다시 아이디 체크박스를 누르면 false로 변경!-->
+			<input type="hidden" name="idcheck" value="false" />
+			
 		<table border="1">
 		<tr>
-			<td>아이디</td> <td><input type="text" name="id"></td>
+		 	<td>아이디</td>
+			<td><input type="text" name="id" size="20" maxlength=30 onfocus="func()"/>
+				<input type="button" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" />
+			</td>
 		</tr>
 		<tr>
-			<td>비밀번호</td> <td><input type="text" name="pass1"></td>
+			<td>비밀번호</td> <td><input type="password" name="pass"></td>
 		</tr>
 		<tr>
-			<td>비밀번호 확인</td> <td><input type="text" name="pass2"></td>
+			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
 		</tr>
 		<tr>
-			<td>이름</td> <td><input type="text" name="name"></td>
+			<td>이름</td> <td><input type="text" name="name" size="20"></td>
 		</tr>
 		<tr>
-			<td>전화번호</td> <td><input type="text" name="phone"></td>
+			<td>전화번호</td> 
+			<!-- 눌렸을때 호출되는 gNumCheck()메서드 등록  -->
+			<td><input type="text" name="phone" onkeypress="gNumCheck()" size="24" />
+			</td>
 		</tr>
 		<tr>
-			<td>우편번호</td> <td><input type="text" name="zipcode" size="7" readonly>
-				<input type="button" value="주소찾기" onclick="DaumPostcode()"></td>
+			<td>우편번호</td>
+			<td><input type="text" name="zipcode" id="zipcode" size="7" readonly>
+				<input type="button" value="주소찾기" onclick="DaumPostcode()">
+			</td>
 		</tr>
 		<tr>
-			<td>주소</td> <td><input type="text" name="addr1" id="addr1" size="45" readonly></td>
+			<td>주소</td> <td><input type="text" name="addr1" id="addr1" size="40" readonly></td>
 		</tr>
 		<tr>
-			<td>상세주소</td> <td><input type="text" name="addr2" id="addr2" size="45"></td>
+			<td>상세주소</td> <td><input type="text" name="addr2" id="addr2" size="40"></td>
 		</tr>
 		<tr>
-			<td>이메일</td> <td><input type="text" name="email"></td>
+			<td>이메일</td> <td><input type="email" name="email"></td>
 		</tr>
 		</table>
 		<input type="submit" value="회원가입">
+		<input type="reset" value="취소">
+		
 		<!-- ----- DAUM 우편번호 API 시작 ----- -->
 <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
   <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
