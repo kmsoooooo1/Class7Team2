@@ -4,6 +4,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 public class AnimalAddAction implements Action {
 
 	@Override
@@ -21,17 +24,7 @@ public class AnimalAddAction implements Action {
 		//파일 업로드(cos.jar)
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		// 2. GoodsDTO 객체 생성 (전달받은 정보를 저장)
-		GoodsDTO gdto = new GoodsDTO();
-		
-		gdto.setCategory(multi.getParameter("category"));
-		gdto.setName(multi.getParameter("name"));
-		gdto.setPrice(Integer.parseInt(multi.getParameter("price")));
-		gdto.setColor(multi.getParameter("color"));
-		gdto.setAmount(Integer.parseInt(multi.getParameter("amount")));
-		gdto.setSize(multi.getParameter("price"));
-		gdto.setContent(multi.getParameter("content"));
-		gdto.setBest(0); //인기상품 정보 - 0
+		// 2. AnimalDTO 객체 생성 (전달받은 정보를 저장)
 		
 		//gdto.setNum(Integer.parseInt(multi.getParameter("num"))); -> DB에서 입력할수 있게 처리(DAO)
 		//gdto.setDate(date); -> DB에서 입력할수 있게 처리(DAO)
@@ -39,13 +32,8 @@ public class AnimalAddAction implements Action {
 		//여러개 이미지 처리
 		//여러 이미지 파일을 하나의 string 파일로 묶어버리기
 		String image = multi.getFilesystemName("file1") + "," + multi.getFilesystemName("file2") + "," + multi.getFilesystemName("file3") + "," + multi.getFilesystemName("file4");
-		gdto.setImage(image);
 		
-		// 3. AdminGoodsDAO 객체를 생성해서 처리
-		// -> insertGoods (dto)
-		
-		AdminGoodsDAO agdao = new AdminGoodsDAO(); //ConnectionPool 사용하는 요소들은 FrameWork 에서는 특정 파일로 빼내서 사용한다. 
-		agdao.insertGoods(gdto);
+		// 3. AnimalDAO 객체를 생성해서 처리
 		
 		
 		// 4. 페이지 이동(List 페이지)
@@ -54,8 +42,6 @@ public class AnimalAddAction implements Action {
 		forward.setRedirect(true); //주소도 바뀌고 내용도 바뀌기 때문에 true	
 		
 		return forward;
-		
-		return null;
 	}
 	
 	
