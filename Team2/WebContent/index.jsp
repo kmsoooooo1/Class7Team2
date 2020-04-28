@@ -9,7 +9,7 @@
 <body>
 
 	<%
-		response.sendRedirect("./MemberJoin.me");
+		response.sendRedirect("./Main.me");
 	%>
 
 </body>
