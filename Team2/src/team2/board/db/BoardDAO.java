@@ -71,7 +71,6 @@ public class BoardDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return conn;
 	}
 	
 	public void closeDB(){
@@ -125,10 +124,7 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			closeDB();
 		}
-		
 	}
 	//insertBoard(BoardDTO bdto)
 	
@@ -137,9 +133,6 @@ public class BoardDAO {
 		int check = 0;
 		
 		try {
-			
-			conn = getConnection();
-			
 			sql = "select count(*) from team2_board where b_category = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, category);
@@ -151,8 +144,6 @@ public class BoardDAO {
 			System.out.println("게시판 글 개수 확인 chek : " + check);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			closeDB();
 		}
 		
 		return check;
@@ -164,8 +155,6 @@ public class BoardDAO {
 			ArrayList boardList = new ArrayList();
 			
 			try {
-				conn = getConnection();
-				
 				sql = "select * from team2_board where b_category = ? order by b_idx desc limit ?,?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, category);
@@ -195,8 +184,6 @@ public class BoardDAO {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}finally{
-				closeDB();
 			}
 			
 			return boardList;
