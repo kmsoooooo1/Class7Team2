@@ -52,6 +52,28 @@ public class MemberFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./board/main_page.jsp");
 			forward.setRedirect(false);
+		}else if(command.equals("/MemberJoin.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/insertForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/MemberJoinAction.me")){
+			action = new MemberJoinAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/MemberLogin.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/loginForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/MemberLoginAction.me")){
+			action = new MemberLoginAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		// 페이지 이동처리 
