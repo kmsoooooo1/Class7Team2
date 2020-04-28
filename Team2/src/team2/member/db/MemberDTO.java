@@ -7,12 +7,11 @@ public class MemberDTO {
 	private String pass;
 	private String name;
 	private String phone;
-	private String m_addr1;
-	private String m_addr2;
-	private String m_addr3;
-	private String m_addr4;
+	private String zipcode;
+	private String addr1;
+	private String addr2;
 	private String email;
-	private Date regdate;
+	private Date reg_date;
 	
 	public String getId() {
 		return id;
@@ -38,29 +37,23 @@ public class MemberDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getM_addr1() {
-		return m_addr1;
+	public String getZipcode() {
+		return zipcode;
 	}
-	public void setM_addr1(String m_addr1) {
-		this.m_addr1 = m_addr1;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
-	public String getM_addr2() {
-		return m_addr2;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setM_addr2(String m_addr2) {
-		this.m_addr2 = m_addr2;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
-	public String getM_addr3() {
-		return m_addr3;
+	public String getAddr2() {
+		return addr2;
 	}
-	public void setM_addr3(String m_addr3) {
-		this.m_addr3 = m_addr3;
-	}
-	public String getM_addr4() {
-		return m_addr4;
-	}
-	public void setM_addr4(String m_addr4) {
-		this.m_addr4 = m_addr4;
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 	public String getEmail() {
 		return email;
@@ -68,18 +61,19 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getReg_date() {
+		return reg_date;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
 	}
 	
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pass=" + pass + ", name=" + name + ", phone=" + phone + ", m_addr1=" + m_addr1
-				+ ", m_addr2=" + m_addr2 + ", m_addr3=" + m_addr3 + ", m_addr4=" + m_addr4 + ", email=" + email
-				+ ", regdate=" + regdate + "]";
+		return "MemberDTO [id=" + id + ", pass=" + pass + ", name=" + name + ", phone=" + phone + ", zipcode=" + zipcode
+				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", email=" + email + ", reg_date=" + reg_date + "]";
 	}
+	
+	
 	
 }

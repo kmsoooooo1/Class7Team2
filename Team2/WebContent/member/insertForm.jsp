@@ -124,7 +124,11 @@
 			</td>
 		</tr>
 		<tr>
+<<<<<<< HEAD
+			<td>비밀번호</td> <td><input type="text" name="pass"></td>
+=======
 			<td>비밀번호</td> <td><input type="password" name="pass"></td>
+>>>>>>> refs/heads/CH_SH
 		</tr>
 		<tr>
 			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
@@ -213,7 +217,7 @@
         }).embed(element_wrap);
         // iframe을 넣은 element를 보이게 한다.
         element_wrap.style.display = 'block';
-    }
+    } 
 </script>
 <!-- ----- DAUM 우편번호 API 종료----- -->
 		</form>	

@@ -21,7 +21,7 @@ public class MemberDAO {
 		Context init = new InitialContext();
 		
 		DataSource ds 
-		 = (DataSource) init.lookup("java:comp/env/jdbc/team2DB");
+		 = (DataSource) init.lookup("java:comp/env/jdbc/team2");
 		
 		con = ds.getConnection();
 		
@@ -41,10 +41,63 @@ public class MemberDAO {
 	}
 	
 	
+	// insertMember(mdto)
+	public void insertMember(MemberDTO mdto){
+		try {
+			getConnection();
+			sql="insert into team2_member values(?,?,?,?,?,?,?,?,now())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getId());
+			pstmt.setString(2, mdto.getPass());
+			pstmt.setString(3, mdto.getName());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getZipcode());
+			pstmt.setString(6, mdto.getAddr1());
+			pstmt.setString(7, mdto.getAddr2());
+			pstmt.setString(8, mdto.getEmail());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+	}
+	// insertMember(mdto)
 	
-	
-	
-	
+	// idCheck(id,pass)
+	public int idCheck(String id, String pass){
+		int check = -1;
+		try {
+			getConnection();
+			sql="select pass from team2_member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				if(pass.equals(rs.getString("pass"))){
+					check = 1;
+				}else{
+					check = 0;
+				}
+			}else{
+				check = -1;
+			}
+			
+			System.out.println("아이디 체크 완료 : "+check);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		
+		return check;
+	}
+	// idCheck(id,pass)
 	
 	
 	
