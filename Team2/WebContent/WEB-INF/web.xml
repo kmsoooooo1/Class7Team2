@@ -22,4 +22,28 @@
   </servlet-mapping>  
   <!-- 회원관리 -->
   
+  <!-- 관리자 페이지 -->
+  <servlet>
+     <servlet-name>AdminFrontController</servlet-name>
+     <servlet-class>team2.admin.action.AdminFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminFrontController</servlet-name>
+     <url-pattern>*.ad</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 페이지 -->
+  
+  <!-- 관리자 동물 관리 페이지 -->
+  <servlet>
+     <servlet-name>AdminAnimalFrontController</servlet-name>
+     <servlet-class>team2.admin.animal.action.AdminAnimalFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminAnimalFrontController</servlet-name>
+     <url-pattern>*.aa</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 동물 관리 페이지 -->
+  
 </web-app>
