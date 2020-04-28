@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 public class BoardFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +34,51 @@ public class BoardFrontController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			};
+		}else if(command.equals("/BoardMain.bo")) {
+			forward = new ActionForward();
+			forward.setPath("./board/main_page.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/BoardWrite.bo")) {
+			System.out.println("/BoardWrite.bo 주소 처리");
+      
+			forward = new ActionForward();
+			forward.setPath("./board/board_insert.jsp");
+			forward.setRedirect(false);			
+		}else if(command.equals("/BoardWriteAction.bo")) {
+			System.out.println("/BoardWriteAction.bo 주소 처리");
+			
+			action = new BoardWriteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/notice.bo")) {
+			System.out.println("/notice.bo 주소 처리");
+
+			String category = request.getParameter("category");
+			request.setAttribute("category", category);
+			action = new BoardNoticeAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+      }
+		}else if(command.equals("/review.bo")) {
+			System.out.println("/review.bo 주소 처리");
+			
+			String category = request.getParameter("category");
+			request.setAttribute("category", category);
+			
+			action = new BoardReviewAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if(forward!=null){
