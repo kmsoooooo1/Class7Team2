@@ -4,13 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>Insert title here</title>
 </head>
 <body>
 
-	<%
-		response.sendRedirect("./Main.me");
-	%>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+	<!-- Main Content -->
+	
+	
+	
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	
 
 </body>
 </html>
