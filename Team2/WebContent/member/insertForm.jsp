@@ -124,11 +124,7 @@
 			</td>
 		</tr>
 		<tr>
-<<<<<<< HEAD
-			<td>비밀번호</td> <td><input type="text" name="pass"></td>
-=======
 			<td>비밀번호</td> <td><input type="password" name="pass"></td>
->>>>>>> refs/heads/CH_SH
 		</tr>
 		<tr>
 			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
