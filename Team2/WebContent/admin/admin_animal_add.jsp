@@ -38,12 +38,8 @@
 					</select>
 				</td>
 			<tr>
-				<td> 동물 이름 </td>
-				<td> <input type="text" name="a_name"> </td>
-			</tr>
-			<tr>
-				<td> 동물 색상 </td>
-				<td> <input type="text" name="a_color"> </td>
+				<td> 동물 모프 </td>
+				<td> <input type="text" name="a_morph"> </td>
 			</tr>
 			<tr>
 				<td> 동물 성별 </td>
