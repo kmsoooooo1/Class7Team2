@@ -85,6 +85,36 @@ LOCK TABLES `team2_board` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `team2_member`
+--
+
+DROP TABLE IF EXISTS `team2_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `team2_member` (
+  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `zipcode` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `addr1` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `addr2` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `reg_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `team2_member`
+--
+
+LOCK TABLES `team2_member` WRITE;
+/*!40000 ALTER TABLE `team2_member` DISABLE KEYS */;
+/*!40000 ALTER TABLE `team2_member` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'team2_project'
 --
 
@@ -101,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-27 11:54:03
+-- Dump completed on 2020-04-28 16:07:56
