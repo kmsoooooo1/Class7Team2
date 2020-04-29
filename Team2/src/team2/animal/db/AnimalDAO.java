@@ -88,8 +88,13 @@ public class AnimalDAO {
 			StringBuffer SQL = new StringBuffer();
 			
 			//SQL buffer 안에 sql 구문 넣어주기
+			
+			//만약 category가 all이고 sub_category가 없으면(관리자 페이지에서 모든 동물을 부를때)
+			if(category.equals("all") && sub_category.equals("")){
+				SQL.append("select * from team2_animals order by num desc");
+			}
 			//만약 category가 파충류이면
-			if(category.equals("파충류")){
+			else if(category.equals("파충류")){
 				SQL.append("select * from team2_animals where category = '파충류'");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
@@ -116,7 +121,10 @@ public class AnimalDAO {
 			pstmt = con.prepareStatement(SQL.toString());
 			
 			//?에 값 지정하기
-			if(category.equals("파충류")){
+			if(category.equals("all") && sub_category.equals("")){
+				SQL.append("select * from team2_animals order by num desc");
+			}
+			else if(category.equals("파충류")){
 				SQL.append("select * from team2_animals where category = '파충류'");
 				if(sub_category.equals("all")) {
 				}
