@@ -25,7 +25,7 @@ public class AnimalAddAction implements Action {
 		int maxSize = 10 * 1024 * 1024; //10MB
 		
 		//파일 업로드(cos.jar)
-		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8");
 		
 		// 2. AnimalDTO & AniamlDAO 객체 생성
 		AnimalDTO adto = new AnimalDTO();
@@ -48,7 +48,7 @@ public class AnimalAddAction implements Action {
 		
 		// 4. 페이지 이동(List 페이지)
 		ActionForward forward = new ActionForward();
-		forward.setPath("");
+		forward.setPath("./Main.ad");
 		forward.setRedirect(true); //주소도 바뀌고 내용도 바뀌기 때문에 true	
 		
 		return forward;
