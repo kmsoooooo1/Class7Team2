@@ -13,10 +13,7 @@
 	
 	<!-- Main Content -->
 	
-	<a href="./notice.bo?category=notice">공지사항</a>
-	<a href="./review.bo?category=review">상품후기</a>
 	
-	<h2> 메인 페이지 </h2>
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>

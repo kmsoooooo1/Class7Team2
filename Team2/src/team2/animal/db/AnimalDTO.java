@@ -15,9 +15,6 @@ public class AnimalDTO {
 	private String a_image;
 	private int a_amount;
 	private int a_price;
-	private int category_num;
-	private int sub_category_num;	
-	private int sub_category_index_num;
 	private String content;
 	private int a_view_count;
 	private Date date;
@@ -88,24 +85,6 @@ public class AnimalDTO {
 	public void setA_price(int a_price) {
 		this.a_price = a_price;
 	}
-	public int getCategory_num() {
-		return category_num;
-	}
-	public void setCategory_num(int category_num) {
-		this.category_num = category_num;
-	}
-	public int getSub_category_num() {
-		return sub_category_num;
-	}
-	public void setSub_category_num(int sub_category_num) {
-		this.sub_category_num = sub_category_num;
-	}
-	public int getSub_category_index_num() {
-		return sub_category_index_num;
-	}
-	public void setSub_category_index_num(int sub_category_index_num) {
-		this.sub_category_index_num = sub_category_index_num;
-	}
 	public String getContent() {
 		return content;
 	}
@@ -123,6 +102,14 @@ public class AnimalDTO {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	@Override
+	public String toString() {
+		return "AnimalDTO [num=" + num + ", category=" + category + ", sub_category=" + sub_category
+				+ ", sub_category_index=" + sub_category_index + ", a_morph=" + a_morph + ", a_sex=" + a_sex
+				+ ", a_status=" + a_status + ", a_code=" + a_code + ", a_image=" + a_image + ", a_amount=" + a_amount
+				+ ", a_price=" + a_price + ", content=" + content + ", a_view_count=" + a_view_count + ", date=" + date
+				+ "]";
 	}
 
 }

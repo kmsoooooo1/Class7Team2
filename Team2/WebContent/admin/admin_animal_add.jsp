@@ -39,7 +39,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td> 동물 모프  </td>
+				<td> 동물 모프 (종의 이름)  </td>
 				<td> <input type="text" name="a_morph"> </td>
 			</tr>
 			<tr>
@@ -49,7 +49,7 @@
 						<option value="default"> 성별을 선택해주세요 </option>
 						<option value="암컷"> 암컷 </option>
 						<option value="수컷"> 수컷 </option>
-						<option value="해당사항없음"> 해당사항없음 </option>
+						<option value="성별없음"> 성별없음 </option>
 					</select> 
 				</td>
 			</tr>
@@ -66,19 +66,19 @@
 			</tr>
 			<tr>
 				<td rowspan="5"> 동물 기본 이미지(5장)</td>
-				<td> <input type="file" name="image_file1"> </td>
+				<td> <input type="file" name="file1"> </td>
 			</tr>
 			<tr>
-				<td> <input type="file" name="image_file2"> </td>
+				<td> <input type="file" name="file2"> </td>
 			</tr>
 			<tr>
-				<td> <input type="file" name="image_file3"> </td>
+				<td> <input type="file" name="file3"> </td>
 			</tr>
 			<tr>
-				<td> <input type="file" name="image_file4"> </td>
+				<td> <input type="file" name="file4"> </td>
 			</tr>
 			<tr>
-				<td> <input type="file" name="image_file5"> </td>
+				<td> <input type="file" name="file5"> </td>
 			</tr>
 			<tr>
 				<td> 동물 보유 수량 </td>
@@ -89,7 +89,20 @@
 				<td> <input type="text" name="a_price"> </td>
 			</tr>
 			<tr>
-				<td colspan="2"> <textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea> </td>
+				<td colspan="2"> 
+					<textarea name="ir1" id="ir1" rows="10" cols="100">
+						<br>
+							<span style="font-weight: bold"> 학명 </span> : <br><br>
+							<span style="font-weight: bold"> 서식지 </span> : <br><br>
+							<span style="font-weight: bold"> 수명 </span> : <br><br>
+							<span style="font-weight: bold"> 크기 </span> : <br><br>		
+							<span style="font-weight: bold"> 습성  </span> : <br><br>		
+							<span style="font-weight: bold"> 온도 </span> : <br><br>			
+							<span style="font-weight: bold"> 습도 </span> : <br><br>		
+							<span style="font-weight: bold"> 특징 </span> : <br><br><br>
+						<br>
+					</textarea> 
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> 

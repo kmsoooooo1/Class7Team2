@@ -47,15 +47,17 @@ public class MemberFrontController extends HttpServlet{
 		Action action = null; // 처리 페이지정보 객체 (인터페이스-execute())
 		ActionForward forward = null; // 페이지 이동정보 저장 객체 
 		
-		//메인페이지 이동
+		// 메인페이지 이동
 		if(command.equals("/Main.me")){
 			forward = new ActionForward();
 			forward.setPath("./board/main_page.jsp");
 			forward.setRedirect(false);
+		// 회원 가입페이지 이동
 		}else if(command.equals("/MemberJoin.me")){
 			forward = new ActionForward();
 			forward.setPath("./member/insertForm.jsp");
 			forward.setRedirect(false);
+		// MemberJoinAction.me로 이동	
 		}else if(command.equals("/MemberJoinAction.me")){
 			action = new MemberJoinAction();
 			try {
@@ -63,10 +65,12 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		// 로그인페이지 이동			
 		}else if(command.equals("/MemberLogin.me")){
 			forward = new ActionForward();
 			forward.setPath("./member/loginForm.jsp");
 			forward.setRedirect(false);
+		// MemberLoginAction.me로 이동	
 		}else if(command.equals("/MemberLoginAction.me")){
 			action = new MemberLoginAction();
 			try {
@@ -74,7 +78,54 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		// 아이디 중복체크 페이지 이동	
+		}else if(command.equals("/MemberIDCheckAction.me")){
+			System.out.println("/MemberIDCheckActon.me 주소 요청");
+			action = new MemberIDCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// 회원 수정 페이지 이동	
+		}else if(command.equals("/MemberUpdate.me")){
+			action = new MemberUpdate();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// MemberUpdateAction.me로 이동	
+		}else if(command.equals("/MemberUpdateAction.me")){
+			action = new MemberUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// 회원 탈퇴 페이지 이동	
+		}else if(command.equals("/MemberDelete.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/deleteForm.jsp");
+			forward.setRedirect(false);
+		// MemberDeleteAction.me로 이동	
+		}else if(command.equals("/MemberDeleteAction.me")){
+			action = new MemberDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// 로그아웃 동작 
+		}else if(command.equals("/MemberLogout.me")){
+			action = new MemberLogoutAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+	
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
