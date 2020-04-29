@@ -41,8 +41,8 @@
 			%>
 			
 			<td colspan="2">
-  			<img src="./upload/multiupload/<%=adto.getA_image().split(",")[0]%>" width="300" height="300"> <br> 
-		    <a href=''> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%></a> <br>
+  			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_image().split(",")[0]%>" width="300" height="300"> </a> <br> 
+		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <br>
 		    <%=newformat_price%>원 <br>    
 			</td>
 			<%

@@ -59,6 +59,15 @@ public class AnimalFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		//동물 디테일(내용) 가져오기
+		else if(command.equals("/AnimalDetail.an")){
+			action = new AnimalDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
