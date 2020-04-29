@@ -78,6 +78,18 @@
   </servlet-mapping>  
   <!-- 게시판 Controller Mapping -->
   
+  <!-- 동물리스트 페이지 -->
+  <servlet>
+     <servlet-name>AnimalFrontController</servlet-name>
+     <servlet-class>team2.animal.action.AnimalFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AnimalFrontController</servlet-name>
+     <url-pattern>*.an</url-pattern>
+  </servlet-mapping>  
+  <!-- 동물리스트 페이지 -->
+  
   
   
   
