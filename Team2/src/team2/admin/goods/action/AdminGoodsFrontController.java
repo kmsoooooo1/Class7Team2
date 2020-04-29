@@ -1,4 +1,4 @@
-package team2.member.action;
+package team2.admin.goods.action;
 
 import java.io.IOException;
 
@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberFrontController extends HttpServlet{
+
+public class AdminGoodsFrontController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,7 +20,7 @@ public class MemberFrontController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
-
+	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 가상주소를 비교해서 처리 
@@ -47,77 +48,31 @@ public class MemberFrontController extends HttpServlet{
 		Action action = null; // 처리 페이지정보 객체 (인터페이스-execute())
 		ActionForward forward = null; // 페이지 이동정보 저장 객체 
 		
-		// 메인페이지 이동
-		if(command.equals("/Main.me")){
+		
+		//관리자 사육용품 등록하는 페이지 가기
+		if(command.equals("/GoodsAdd.ag")){
+			System.out.println("/GoodsAdd.ag 처리완료(view 페이지 이동)");
+			
 			forward = new ActionForward();
-			forward.setPath("./board/main_page.jsp");
+			forward.setPath("./admin/admin_goods_add.jsp");
 			forward.setRedirect(false);
-		// 회원 가입페이지 이동
-		}else if(command.equals("/MemberJoin.me")){
-			forward = new ActionForward();
-			forward.setPath("./member/insertForm.jsp");
-			forward.setRedirect(false);
-		// MemberJoinAction.me로 이동	
-		}else if(command.equals("/MemberJoinAction.me")){
-			action = new MemberJoinAction();
+		}
+		// 새로운 상품 등록 처리하는 페이지
+		else if(command.equals("/GoodsAddAction.ag")){
+			System.out.println("/GoodsAddAction.ag 처리 완료(model 이동)");
+			
+			action = new GoodsAddAction();
+			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		// 로그인페이지 이동			
-		}else if(command.equals("/MemberLogin.me")){
-			forward = new ActionForward();
-			forward.setPath("./member/loginForm.jsp");
-			forward.setRedirect(false);
-		// MemberLoginAction.me로 이동	
-		}else if(command.equals("/MemberLoginAction.me")){
-			action = new MemberLoginAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		// 아이디 중복체크 페이지 이동	
-		}else if(command.equals("/MemberIDCheckAction.me")){
-			System.out.println("/MemberIDCheckActon.me 주소 요청");
-			action = new MemberIDCheckAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		// 회원 수정 페이지 이동	
-		}else if(command.equals("/MemberUpdate.me")){
-			action = new MemberUpdate();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		// MemberUpdateAction.me로 이동	
-		}else if(command.equals("/MemberUpdateAction.me")){
-			action = new MemberUpdateAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		// 회원 탈퇴 페이지 이동	
-		}else if(command.equals("/MemberDelete.me")){
-			forward = new ActionForward();
-			forward.setPath("./member/deleteForm.jsp");
-			forward.setRedirect(false);
-		// MemberDeleteAction.me로 이동	
-		}else if(command.equals("/MemberDeleteAction.me")){
-			action = new MemberDeleteAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-	
+		
+		
+		
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
@@ -133,6 +88,4 @@ public class MemberFrontController extends HttpServlet{
 		
 		
 	}
-	
-	
 }
