@@ -54,6 +54,18 @@
   </servlet-mapping>  
   <!-- 관리자 동물 관리 페이지 -->
   
+  <!-- 관리자 사육용품 관리 페이지 -->
+  <servlet>
+     <servlet-name>AdminGoodsFrontController</servlet-name>
+     <servlet-class>team2.admin.goods.action.AdminGoodsFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminGoodsFrontController</servlet-name>
+     <url-pattern>*.ag</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 사육용품 관리 페이지 -->
+  
   <!-- 게시판 Controller Mapping -->
   <servlet>
      <servlet-name>BoardFrontController</servlet-name>
