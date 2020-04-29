@@ -7,21 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	request.setCharacterEncoding("UTF-8");
-	String title = request.getParameter("title");
-	String content = request.getParameter("ir1");
+	<h1>WebContent/board/video.jsp</h1>
 	
-	System.out.println(title);
-	System.out.println(content);
-%>
-
-<h1>제목</h1>
-<h2><%=title %></h2>
-<h1>내용</h1>
-<p>
-	<%=content %>
-</p>
-
 </body>
 </html>
