@@ -151,7 +151,7 @@
 			<td>상세주소</td> <td><input type="text" name="addr2" id="addr2" size="40"></td>
 		</tr>
 		<tr>
-			<td>이메일</td> <td><input type="email" name="email" required></td>
+			<td>이메일</td> <td><input type="email" name="email"></td>
 		</tr>
 		</table>
 		<input type="submit" value="회원가입">
