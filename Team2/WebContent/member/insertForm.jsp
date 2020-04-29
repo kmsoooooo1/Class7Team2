@@ -6,93 +6,100 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 가입 </title>
 <script>
-	function check(){	// 전송될때 불러지는 함수	
-		var id1 = joinform.id.value;
-		var phone1 = joinform.phone.value;
-		//var forms = document.getElementById("joinform");
-
+	//submit을 눌렀을 때 호출되는 함수
+	//유효성 검사를 위한 함수
+	function check() {  //전송될때 불러지는 함수.
+	
+	// ID 가져오는건 window.onload 안에서만 가져올 수 있으므로 forms는 안쓰는걸로 한다. ★★★★
+	var id1 = joinform.id.value;
+	var mobile = joinform.phone.value;
+	//var forms = document.getElementById("joinform");				
 		if ((joinform.name.value == "")
 				|| (joinform.name.value.length <= 1)) {
-			alert("이름을 제대로 입력해 주세요.");
-			joinform.name.focus();
+					alert("이름을 제대로 입력해 주세요.");
+					joinform.name.focus();
+					return false;
+				}
+				if (id1.length == 0) {
+					alert("아이디를 입력하세요.");
+					joinform.id.focus();
+					return false;
+				}
+				if (mobile.length == 0) {
+					alert("휴대폰 번호를 입력하세요.");
+					joinform.phone.focus();
+					return false;
+				}
+
+		//이름을 한글 2자이상 입력받기
+		//정규식 객체 생성
+		//정규식(javascript, java, c#, php에서 모두 활용) 객체 생성
+		var regExp = /([가-힣]){2,}/g;  //가부터 힣까지 2글자 이상.
+		
+			if(!regExp.test(joinform.name.value)){
+				alert("이름은 한글 2자 이상입니다.");
+				return false;
+			}
+
+		//중복확인을 했는지 검사
+		//그리고 중복확인을하고나서도 포커스를 눌려서 아이디를 수정한경우를 막기 위한 코드이기도함
+						
+		if(joinform.idcheck.value == "false"){
+			alert("아이디 중복 검사를 하지 않으셨습니다.");
 			return false;
-		}
+		}	
+		return true;
+	}
+
+	function openConfirmId(joinform) {
+		var id1 = joinform.id.value;
+		var url = "./MemberIDCheckAction.me?id="
+				+ joinform.id.value;
+
 		if (id1.length == 0) {
 			alert("아이디를 입력하세요.");
 			joinform.id.focus();
 			return false;
 		}
-		if (phone1.length == 0) {
-			alert("휴대폰 번호를 입력하세요.");
-			joinform.phone.focus();
-			return false;
-		}
-		// 이름 한글 2자이상 입력받기
-		var regExp = /([가-힣]){2,}/g;  //가부터 힣까지 2글자 이상.
 		
-		if(!regExp.test(joinform.name.value)){
-			alert("이름은 한글 2자 이상입니다.");
-			return false;
-		}
 		
-		//중복확인을 했는지 검사
-		//그리고 중복확인을하고나서도 포커스를 눌려서 아이디를 수정한경우를 막기 위한 코드이기도함		
-		if(joinform.idcheck.value == "false"){
-		alert("아이디 중복 검사를 하지 않으셨습니다.");
-		return false;
-	}	
-	
-	return true;
-	
-	function openConfirmId(joinform) {
-		var id = joinform.id.value;
-		var url = "./MemberIDCheckAction.me?MEMBER_ID="
-				+ joinform.id.value;
+		//상식 정규식은 항상 슬러시 / 로 시작한다.
 
-		if (id.length == 0) {
-			alert("아이디를 입력하세요.");
-			joinform.id.focus();
-			return false;
-		}
-//상식 정규식은 항상 슬러시 / 로 시작한다.
+		open(
+				url,
+				"confirm",
+				"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=200");
 		
-	
-		
-	open(
-		 url,
-		 "confirm",
-		 "toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=200");
-		}
+	}
+
 	//숫자 키만 입력받도록 하기 위해서 숫자 인지 아닌 지를 판별해서
 	//숫자가 아니면 이벤트가 발생하지 않은 것으로 해주는 함수
 	function gNumCheck() {
 		
-		//크롬에서는 event로 iE에서는 window.event로 event 객체를 생성		
-		var e = event || window.event;
-		
-		//누른 키값 가져오기
-		//크롬에서는 keyCode로 IE에서는 which로 받아온다.
-		                     //true(익스플로러)  false(크롬)
-		var key = ('which' in e)?  e.which:e.keyCode;
-		              
+	//크롬에서는 event로 iE에서는 window.event로 event 객체를 생성		
+	var e = event || window.event;
+			
+	//누른 키값 가져오기
+	//크롬에서는 keyCode로 IE에서는 which로 받아온다.
+	//true(익스플로러)  false(크롬)
+	var key = ('which' in e)?  e.which:e.keyCode;
+		         	
 		if (key < 48 || key> 57) {  //숫자외의 키가 들어온다면
-			//IE에서 기본적으로 제공되는 이벤트 제거
-			if(e.preventDefault)
-				e.preventDefault();
-			//그이외 브라우저에서 기본적으로 제공되는 이벤트 제거
-			 else
-			e.returnValue=false;
+		//IE에서 기본적으로 제공되는 이벤트 제거
+		if(e.preventDefault)
+		e.preventDefault();
+	     //그이외 브라우저에서 기본적으로 제공되는 이벤트 제거
+		else
+		e.returnValue=false;
 		}
 	
 	}
-	
-	
+		
 	function func(){
-		//MEMBER_ID에 (아이디입력창에) 포커스가 가면 수행되는 함수.
+		//id에 (아이디입력창에) 포커스가 가면 수행되는 함수.
 		joinform.idcheck.value="false";
 		
 	}
-	
 </script>
 </head>
 <body>
@@ -111,16 +118,13 @@
 		<table border="1">
 		<tr>
 		 	<td>아이디</td>
-			<td><input type="text" name="id" size="20" maxlength=30 onfocus="func()"/>
-				<input type="button" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" />
+			<td>
+			 <input type="text" name="id" size="20" maxlength=30 onfocus="func()"/>
+			 <input type="button" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" />
 			</td>
 		</tr>
 		<tr>
-<<<<<<< HEAD
-			<td>비밀번호</td> <td><input type="text" name="pass"></td>
-=======
-			<td>비밀번호</td> <td><input type="password" name="pass"></td>
->>>>>>> refs/heads/CH_SH
+			<td>비밀번호</td> <td><input type="password" name="pass"></td> 
 		</tr>
 		<tr>
 			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
