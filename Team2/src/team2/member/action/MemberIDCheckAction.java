@@ -15,7 +15,7 @@ public class MemberIDCheckAction implements Action{
 		// 한글처리
 		
 		//앞 페이지에서 넘어온 데이터 가져오기
-		String id = request.getParameter("MEMBER_ID");
+		String id = request.getParameter("id");
 		 
 		MemberDAO dao = MemberDAO.getInstance();
 		
@@ -28,7 +28,7 @@ public class MemberIDCheckAction implements Action{
 		
 		//이동할 페이지 설정 //★
 		ActionForward forward = new ActionForward();
-		forward.setPath("./member/member_idchk.jsp");
+		forward.setPath("./member/idchk.jsp");
 		forward.setRedirect(false);
 		
 		return forward;
