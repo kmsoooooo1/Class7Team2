@@ -53,19 +53,19 @@
 		  
 		  <tr> 
 		   <td rowspan="5">상품 기본 이미지(5장)</td>
-		   <td><input type="file" name="img_file1"></td>
+		   <td><input type="file" name="file1"></td>
 		  </tr>
 		  <tr>
-		   <td><input type="file" name="img_file2"></td>
+		   <td><input type="file" name="file2"></td>
 		  </tr>
 		  <tr>
-		   <td><input type="file" name="img_file3"></td>
+		   <td><input type="file" name="file3"></td>
 		  </tr>
 		  <tr>
-		   <td><input type="file" name="img_file4"></td>
+		   <td><input type="file" name="file4"></td>
 		  </tr>
 		  <tr>
-		   <td><input type="file" name="img_file5"></td>
+		   <td><input type="file" name="file5"></td>
 		  </tr>
 		  
 		  <tr> 
