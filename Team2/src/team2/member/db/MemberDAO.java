@@ -13,7 +13,7 @@ public class MemberDAO {
 
 	//아래는 싱글톤 클래스를 만들기 위한 코드이다.
 	private static MemberDAO obj;
-	private MemberDAO(){}
+	public MemberDAO(){}
 		
 	public static MemberDAO getInstance(){
 		if(obj == null)
@@ -68,7 +68,7 @@ public class MemberDAO {
 	// insertMember(mdto)
 	public void insertMember(MemberDTO mdto){
 		try {
-			getConnection();
+			con = getConnection();
 			sql="insert into team2_member values(?,?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mdto.getId());
@@ -94,7 +94,7 @@ public class MemberDAO {
 	public int idCheck(String id, String pass){
 		int check = -1;
 		try {
-			getConnection();
+			con = getConnection();
 			sql="select pass from team2_member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -151,6 +151,145 @@ public class MemberDAO {
 	 return result;
 	   }
 	// confirmId(id)
+	
+	// getMember(id)
+	public MemberDTO getMember(String id){
+		MemberDTO mdto = null;
+		
+		try {
+			con = getConnection();
+			sql = "select * from team2_member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				mdto = new MemberDTO();
+				mdto.setId(rs.getString("id"));
+				mdto.setPass(rs.getString("pass"));
+				mdto.setName(rs.getString("name"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setZipcode(rs.getString("zipcode"));
+				mdto.setAddr1(rs.getString("addr1"));
+				mdto.setAddr2(rs.getString("addr2"));
+				mdto.setEmail(rs.getString("email"));
+				mdto.setReg_date(rs.getDate("reg_date"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		
+		return mdto;
+	}
+	// getMember(id)
+	
+	// updateMember(mdto)
+	public int updateMember(MemberDTO mdto){
+		int check = -1;
+		
+		try {
+			con = getConnection();
+			sql ="select pass from team2_member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				if(mdto.getPass().equals(rs.getString("pass"))){
+					sql ="update team2_member set name=?,phone=?,zipcode=?,addr1=?,addr2=?,email=? where id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, mdto.getName());
+					pstmt.setString(2, mdto.getPhone());
+					pstmt.setString(3, mdto.getZipcode());
+					pstmt.setString(4, mdto.getAddr1());
+					pstmt.setString(5, mdto.getAddr2());
+					pstmt.setString(6, mdto.getEmail());
+					pstmt.setString(7, mdto.getId());
+					
+					pstmt.executeUpdate();
+					
+					check = 1;
+					
+					
+					
+				}else{
+					check = 0;
+				}
+			}else{
+				check = -1;
+			}
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return check;
+	}
+	// updateMember(mdto)
+	
+	// deleteMember(id, pass)
+	//한명의 정보를 삭제하는 메서드
+	public boolean deleteMember(String id, String pass){
+		String sql = null;
+		boolean result = false;
+	
+		// id를 가지고 데이터를 찾아와서 pass가 일치하면 데이터를 삭제
+		 try{
+			 if(connect()){
+				 sql = "select pass from member where id=?";
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setString(1, id);
+				 rs = pstmt.executeQuery();
+													
+				 if(rs.next()){								
+					 String memberpw = rs.getString("pass");			
+					 if(memberpw.equals(pass)){
+
+						 sql = "delete from member where id=?";
+						 pstmt = con.prepareStatement(sql);						
+						 pstmt.setString(1, id);		 
+						
+						 int rowCnt = pstmt.executeUpdate();
+															 		    
+						 if(rowCnt > 0)		
+							result = true;
+						}					
+				 }				
+			 }
+			
+		 }catch(Exception e){	
+			 System.out.println("삭제 실패:" + e.getMessage());
+		 }finally{
+			 closeDB();
+		 }	
+		  return result;
+			  	  
+		 }	
+	// deleteMember(id, pass)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
