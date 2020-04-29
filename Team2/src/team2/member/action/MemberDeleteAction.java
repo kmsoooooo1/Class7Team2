@@ -30,7 +30,7 @@ public class MemberDeleteAction implements Action{
 	// 데이터베이스의 메서드를 이용해서 삭제하고 결과를 가져오기
 	MemberDAO dao = MemberDAO.getInstance();
 	String pass = request.getParameter("pass");
-	
+	 
 	boolean check = dao.deleteMember(id, pass);
 							
 	if(check){ // 정상적으로 삭제되었다면

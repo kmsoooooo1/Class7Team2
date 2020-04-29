@@ -236,7 +236,45 @@ public class MemberDAO {
 	}
 	// updateMember(mdto)
 	
+	// deleteMember(id, pass)
+	//한명의 정보를 삭제하는 메서드
+	public boolean deleteMember(String id, String pass){
+		String sql = null;
+		boolean result = false;
 	
+		// id를 가지고 데이터를 찾아와서 pass가 일치하면 데이터를 삭제
+		 try{
+			 if(connect()){
+				 sql = "select pass from member where id=?";
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setString(1, id);
+				 rs = pstmt.executeQuery();
+													
+				 if(rs.next()){								
+					 String memberpw = rs.getString("pass");			
+					 if(memberpw.equals(pass)){
+
+						 sql = "delete from member where id=?";
+						 pstmt = con.prepareStatement(sql);						
+						 pstmt.setString(1, id);		 
+						
+						 int rowCnt = pstmt.executeUpdate();
+															 		    
+						 if(rowCnt > 0)		
+							result = true;
+						}					
+				 }				
+			 }
+			
+		 }catch(Exception e){	
+			 System.out.println("삭제 실패:" + e.getMessage());
+		 }finally{
+			 closeDB();
+		 }	
+		  return result;
+			  	  
+		 }	
+	// deleteMember(id, pass)
 	
 	
 	
