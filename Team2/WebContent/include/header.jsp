@@ -16,7 +16,6 @@
 			String id = (String) session.getAttribute("id");
 			if(id == null){	
 		%>
-			<a href="./Main.ad"> 관리자 페이지(임시) </a>
 			<a href="./MemberJoin.me"> 회원가입 </a>
 			<a href="./MemberLogin.me"> 로그인 </a>
 		<% }else if(id.equals("admin")) { %>
