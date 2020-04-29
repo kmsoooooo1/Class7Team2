@@ -21,7 +21,7 @@
        //상식 나를 연창의 name 값에 접근 하는 방법.
        // open 메서드를 사용한 곳은 meber_join.jsp 파일에서 사용했다.
        //나를 연창의 joinform의 MEMBER_ID (name 속성중에 하나)의 value값을 변경시켜라//★★
-         opener.document.joinform.MEMBER_ID.value = "<%=id%>";
+         opener.document.joinform.id.value = "<%=id%>";
          
          //중복체크가 끝나면 true (중복체크 했다고)로 만들어준당
          opener.document.joinform.idcheck.value="true";        

@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div>
+		<a href="./Main.me" id="logo"> 갈라파고스(로고) </a>
 		<%
 			request.setCharacterEncoding("UTF-8");
 			
@@ -15,14 +16,14 @@
 			String id = (String) session.getAttribute("id");
 			if(id == null){	
 		%>
-			<a href="./Main.ad"> 관리자 페이지(임시) </a>
+			<a href="./Main.ad"> 관리자 페이지(임시) </a> 
 			<a href="./MemberJoin.me"> 회원가입 </a>
 			<a href="./MemberLogin.me"> 로그인 </a>
 		<% }else if(id.equals("admin")) { %>
 			<a href="./Main.ad"> 관리자 페이지 </a>
-			<a href=""> 로그아웃 </a>
+			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% }else{ %>
-			<a href=""> 로그아웃 </a>
+			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% } %> 
 	</div>
 </body>

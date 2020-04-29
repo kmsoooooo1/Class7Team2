@@ -1,4 +1,4 @@
-package team2.admin.animal.action;
+package team2.admin.goods.action;
 
 import java.io.IOException;
 
@@ -8,10 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import team2.admin.animal.action.Action;
-import team2.admin.animal.action.ActionForward;
 
-public class AdminAnimalFrontController extends HttpServlet{
+public class AdminGoodsFrontController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +20,7 @@ public class AdminAnimalFrontController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
-
+	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 가상주소를 비교해서 처리 
@@ -50,21 +48,31 @@ public class AdminAnimalFrontController extends HttpServlet{
 		Action action = null; // 처리 페이지정보 객체 (인터페이스-execute())
 		ActionForward forward = null; // 페이지 이동정보 저장 객체 
 		
-		//관리자 새로운 동물 추가하는 페이지로 가기
-		if(command.equals("/AnimalAdd.aa")){
+		
+		//관리자 사육용품 등록하는 페이지 가기
+		if(command.equals("/GoodsAdd.ag")){
+			System.out.println("/GoodsAdd.ag 처리완료(view 페이지 이동)");
+			
 			forward = new ActionForward();
-			forward.setPath("./admin/admin_animal_add.jsp");
+			forward.setPath("./admin/admin_goods_add.jsp");
 			forward.setRedirect(false);
 		}
-		//새로운 동물 추가하는 페이지 처리
-		else if(command.equals("/AnimalAddAction.aa")){
-			action = new AnimalAddAction();
+		// 새로운 상품 등록 처리하는 페이지
+		else if(command.equals("/GoodsAddAction.ag")){
+			System.out.println("/GoodsAddAction.ag 처리 완료(model 이동)");
+			
+			action = new GoodsAddAction();
+			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		
+		
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
@@ -80,6 +88,4 @@ public class AdminAnimalFrontController extends HttpServlet{
 		
 		
 	}
-	
-	
 }

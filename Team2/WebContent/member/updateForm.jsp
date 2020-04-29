@@ -1,3 +1,4 @@
+<%@page import="team2.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,15 +42,6 @@
 				return false;
 			}
 
-		//중복확인을 했는지 검사
-		//그리고 중복확인을하고나서도 포커스를 눌려서 아이디를 수정한경우를 막기 위한 코드이기도함
-						
-		if(joinform.idcheck.value == "false"){
-			alert("아이디 중복 검사를 하지 않으셨습니다.");
-			return false;
-		}	
-		return true;
-	}
 
 	function openConfirmId(joinform) {
 		var id1 = joinform.id.value;
@@ -103,12 +95,24 @@
 </script>
 </head>
 <body>
-	<h2>회원가입 페이지</h2>
+	<%
+		String id = (String)session.getAttribute("id");
+	
+		if(id == null){
+			response.sendRedirect("./MemberLogin.me");
+		}
+		
+		MemberDTO mdto = (MemberDTO)request.getAttribute("mdto");
+	
+	%>
+
+
+	<h2>회원 정보 수정 페이지</h2>
 	
 	<fieldset>
-		<legend>회 원 가 입</legend>
+		<legend>회 원 정 보 수 정 </legend>
 		<!-- 회원가입 -->
-		<form action="./MemberJoinAction.me" method="post" name="joinform"
+		<form action="./MemberUpdateAction.me" method="post" name="joinform"
 			onsubmit="return check()">
 		
 		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
@@ -119,42 +123,38 @@
 		<tr>
 		 	<td>아이디</td>
 			<td>
-			 <input type="text" name="id" size="20" maxlength=30 onfocus="func()"/>
-			 <input type="button" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" />
+			 <input type="text" name="id" size="20" maxlength=30 value="<%=mdto.getId() %>" readonly onfocus="func()"/>
 			</td>
 		</tr>
 		<tr>
-			<td>비밀번호</td> <td><input type="password" name="pass"></td> 
+			<td>비밀번호</td> <td><input type="password" name="pass" required></td>
 		</tr>
 		<tr>
-			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
-		</tr>
-		<tr>
-			<td>이름</td> <td><input type="text" name="name" size="20"></td>
+			<td>이름</td> <td><input type="text" name="name" value="<%=mdto.getName() %>" size="20"></td>
 		</tr>
 		<tr>
 			<td>전화번호</td> 
 			<!-- 눌렸을때 호출되는 gNumCheck()메서드 등록  -->
-			<td><input type="text" name="phone" onkeypress="gNumCheck()" size="24" />
+			<td><input type="text" name="phone" value="<%=mdto.getPhone() %>" onkeypress="gNumCheck()" size="24" />
 			</td>
 		</tr>
 		<tr>
 			<td>우편번호</td>
-			<td><input type="text" name="zipcode" id="zipcode" size="7" readonly>
+			<td><input type="text" name="zipcode" id="zipcode" size="7" value="<%=mdto.getZipcode() %>" readonly>
 				<input type="button" value="주소찾기" onclick="DaumPostcode()">
 			</td>
 		</tr>
 		<tr>
-			<td>주소</td> <td><input type="text" name="addr1" id="addr1" size="40" readonly></td>
+			<td>주소</td> <td><input type="text" value="<%=mdto.getAddr1() %>" name="addr1" id="addr1" size="40" readonly></td>
 		</tr>
 		<tr>
-			<td>상세주소</td> <td><input type="text" name="addr2" id="addr2" size="40"></td>
+			<td>상세주소</td> <td><input type="text" value="<%=mdto.getAddr2() %>" name="addr2" id="addr2" size="40"></td>
 		</tr>
 		<tr>
-			<td>이메일</td> <td><input type="email" name="email"></td>
+			<td>이메일</td> <td><input type="email" value="<%=mdto.getEmail() %>" name="email"></td>
 		</tr>
 		</table>
-		<input type="submit" value="회원가입">
+		<input type="submit" value="회원정보 수정">
 		<input type="reset" value="취소">
 		
 		<!-- ----- DAUM 우편번호 API 시작 ----- -->
