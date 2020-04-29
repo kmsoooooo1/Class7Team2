@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>회원 가입 </title>
 <script>
 	//submit을 눌렀을 때 호출되는 함수
@@ -108,7 +109,7 @@
 	<fieldset>
 		<legend>회 원 가 입</legend>
 		<!-- 회원가입 -->
-		<form action="./MemberJoinAction.me" method="post" name="joinform"
+		<form action="./MemberJoinAction.me" method="post" name="joinform" id="joinform"
 			onsubmit="return check()">
 		
 		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
@@ -124,10 +125,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td>비밀번호</td> <td><input type="password" name="pass"></td> 
+			<td>비밀번호</td> <td> <input type="password" id="pass" name="pass" class="inputTypeText" onkeyup="checkValidPW()"> (영문/숫자 조합, 8자리 이상) &nbsp; <span id="pwConstraintMsg"></span> </td> 
 		</tr>
 		<tr>
-			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
+			<td>비밀번호 확인</td> <td> <input type="password" id="user_pass_confirm" name="user_pass_confirm" onkeyup="checkSamePW()" class="inputTypeText"> &nbsp; <span id="pwConfirmMsg"></span> </td>
 		</tr>
 		<tr>
 			<td>이름</td> <td><input type="text" name="name" size="20"></td>
@@ -222,4 +223,43 @@
 	
 	
 </body>
+
+<!-- 비밀번호 유효성 검사 -->
+<script type="text/javascript">
+
+var passCheck;
+var passDoubleCheck;
+
+//비밀번호 유효성검사 함수
+function checkValidPW() {
+	//비밀번호 조건에 부합하지 않으면
+	if(!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val())){            
+        $('#pwConstraintMsg').text('사용 할 수 없는 비밀번호 입니다.').css({'color':'red', 'font-size':12});
+        $('#pass').val($('#pass').val()).focus();
+        passCheck = false;
+    } 
+	//비밀번호 조건에 부합한다면
+	else if(/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val())) {
+    	$('#pwConstraintMsg').text('사용가능한 비밀번호 입니다.').css({'color':'green', 'font-size':12});
+    	passCheck = true;
+    }
+}
+
+//비밀번호와 비밀번호확인란이 같은지 검사하는 함수
+function checkSamePW() {
+	//비밀번호와 비밀번호확인란이 같지 않으면
+	if(document.joinform.pass.value != document.joinform.user_pass_confirm.value ){
+		$('#pwConfirmMsg').text(' 비밀번호가 다릅니다.').css({'color':'red', 'font-size':12});
+		$('#user_pass_confirm').val($('#user_pass_confirm').val()).focus();
+		passDoubleCheck = false;
+    }
+	//비밀번호와 비밀번호확인란이 같으면
+	else {
+    	$('#pwConfirmMsg').text('비밀번호가 일치합니다.').css({'color':'green', 'font-size':12});	
+    	passDoubleCheck = true;
+    }
+}
+
+</script>
+
 </html>
