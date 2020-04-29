@@ -16,7 +16,7 @@ public class MemberIDCheckAction implements Action{
 		
 		//앞 페이지에서 넘어온 데이터 가져오기
 		String id = request.getParameter("MEMBER_ID");
-		
+		 
 		MemberDAO dao = MemberDAO.getInstance();
 		
 		boolean check = dao.confirmId(id);

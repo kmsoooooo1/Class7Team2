@@ -124,7 +124,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>비밀번호</td> <td><input type="password" name="pass"></td>
+			<td>비밀번호</td> <td><input type="password" name="pass"></td> 
 		</tr>
 		<tr>
 			<td>비밀번호 확인</td> <td><input type="password" name="pass2"></td>
