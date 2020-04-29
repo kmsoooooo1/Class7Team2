@@ -56,6 +56,15 @@ public class AdminAnimalFrontController extends HttpServlet{
 			forward.setPath("./admin/admin_animal_add.jsp");
 			forward.setRedirect(false);
 		}
+		//새로운 동물 추가하는 페이지 처리
+		else if(command.equals("/AnimalAddAction.aa")){
+			action = new AnimalAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
