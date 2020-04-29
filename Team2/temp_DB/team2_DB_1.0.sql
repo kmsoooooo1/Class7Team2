@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `team2_project` /*!40100 DEFAULT CHARACTER SET ut
 USE `team2_project`;
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: team2_project
+-- Host: localhost    Database: team2_project
 -- ------------------------------------------------------
 -- Server version	5.6.45-log
 
@@ -26,17 +26,21 @@ DROP TABLE IF EXISTS `team2_animals`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_animals` (
   `num` int(11) NOT NULL,
-  `category` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `sub_category` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sub_category_index` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `product_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `image` text COLLATE utf8_unicode_ci,
+  `a_morph` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `a_sex` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `a_status` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `a_code` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `a_image` text COLLATE utf8_unicode_ci NOT NULL,
+  `a_amount` int(11) NOT NULL,
+  `a_price` int(11) NOT NULL,
   `category_num` int(11) DEFAULT NULL,
   `sub_category_num` int(11) DEFAULT NULL,
   `sub_category_index_num` int(11) DEFAULT NULL,
   `content` text COLLATE utf8_unicode_ci,
-  `amount` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
+  `a_view_count` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -101,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-27 11:54:03
+-- Dump completed on 2020-04-28 19:14:20
