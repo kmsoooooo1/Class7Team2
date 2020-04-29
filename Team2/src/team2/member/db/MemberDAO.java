@@ -10,6 +10,17 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class MemberDAO {
+
+	//아래는 싱글톤 클래스를 만들기 위한 코드이다.
+	private static MemberDAO obj;
+	public MemberDAO(){}
+		
+	public static MemberDAO getInstance(){
+		if(obj == null)
+			obj = new MemberDAO();
+		return obj;
+	}
+	
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -26,6 +37,19 @@ public class MemberDAO {
 		con = ds.getConnection();
 		
 		return con;
+	}
+	// 데이터 베이스에 접속하고 그 결과를 리턴한는 메서드
+	// ID중복체크(리턴 메서드)
+	public boolean connect(){
+		try{
+			Context init = new InitialContext();
+			DataSource ds = 
+					(DataSource)init.lookup("java:comp/env/jdbc/team2");
+			con = ds.getConnection();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
 	}
 	
 	// 자원 해제 
@@ -99,7 +123,34 @@ public class MemberDAO {
 	}
 	// idCheck(id,pass)
 	
-	
+	// confirmId(id)
+	//아이디 중복 체크 해주는 메서드
+		//중복되는 ID가 존재하는 경우 true
+	public boolean confirmId(String id){
+			
+		String sql = null;
+		boolean result = false;
+			
+		try{
+			if(connect()){
+				sql = "select id from team2_member where id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+						
+				if(rs.next()){
+					result = true;  
+				}
+			}			
+	 }catch(Exception e){
+	System.out.println("아이디 가져오기 실패:" + e.getMessage());
+	 }finally{
+	  closeDB();
+	 }
+			
+	 return result;
+	   }
+	// confirmId(id)
 	
 	
 	

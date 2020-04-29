@@ -63,6 +63,7 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+					
 		}else if(command.equals("/MemberLogin.me")){
 			forward = new ActionForward();
 			forward.setPath("./member/loginForm.jsp");
@@ -74,7 +75,16 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/MemberIDCheckAction.me")){
+			System.out.println("/MemberIDCheckActon.me 주소 요청");
+			action = new MemberIDCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+	
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
