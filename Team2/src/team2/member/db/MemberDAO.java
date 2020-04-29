@@ -13,7 +13,7 @@ public class MemberDAO {
 
 	//아래는 싱글톤 클래스를 만들기 위한 코드이다.
 	private static MemberDAO obj;
-	private MemberDAO(){}
+	public MemberDAO(){}
 		
 	public static MemberDAO getInstance(){
 		if(obj == null)
