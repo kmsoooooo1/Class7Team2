@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div>
+		<a href="./Main.me" id="logo"> 갈라파고스(로고) </a>
 		<%
 			request.setCharacterEncoding("UTF-8");
 			
