@@ -20,6 +20,7 @@
 			<a href="./MemberLogin.me"> 로그인 </a>
 		<% }else if(id.equals("admin")) { %>
 			<a href="./Main.ad"> 관리자 페이지 </a>
+			<a href="./Main_Info.me"> 마이 페이지 </a>
 			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% }else{ %>
 			<a href="./MemberLogout.me"> 로그아웃 </a>
