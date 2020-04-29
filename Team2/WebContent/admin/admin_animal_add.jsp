@@ -38,7 +38,7 @@
 					</select>
 				</td>
 			<tr>
-				<td> 동물 모프 </td>
+				<td> 동물 모프  </td>
 				<td> <input type="text" name="a_morph"> </td>
 			</tr>
 			<tr>
