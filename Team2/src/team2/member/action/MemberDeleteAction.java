@@ -13,45 +13,57 @@ public class MemberDeleteAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-	
-	// 로그인 되어 있지 않으면 MemberLogin.me로 이동
-	HttpSession session = request.getSession();
-	String id = (String)session.getAttribute("id");
-				
-	// 이동방법과 이동할 페이지를 저장할 객체 생성
-	ActionForward forward = new ActionForward();
-				
-		if(id==null){
-			forward.setRedirect(true);
-			forward.setPath("./MemberLogin.me");
-			return forward;
-		}
-				
-	// 데이터베이스의 메서드를 이용해서 삭제하고 결과를 가져오기
-	MemberDAO dao = MemberDAO.getInstance();
-	String pass = request.getParameter("pass");
-	 
-	boolean check = dao.deleteMember(id, pass);
-							
-	if(check){ // 정상적으로 삭제되었다면
-			   // 세션을 삭제 - 보통 로그아웃 처리할 때 주로 이용
-		session.invalidate();
-		forward.setPath("./member/delchk.jsp");
-		}else{ // 삭제에 실패했을 때
-		response.setContentType("text/html; charset=UTF-8");
-		try{
-			PrintWriter out = response.getWriter();
-						out.println("<script>");
-						out.println("alert('비밀번호가 틀렸습니다.')");
-						out.println("history.back()");
-						out.println("</script>");
-						out.close();
-						forward = null;
-			}catch(Exception e){
-						forward = null;
+		
+		System.out.println("@@@ MemberDeleteAction_execute() ");
+		// 세션 제어
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+				 
+		ActionForward forward = new ActionForward();
+			if(id == null){
+				forward.setPath("./MemberLogin.me");
+				forward.setRedirect(true);
+				return forward;
 			}
-		}
-		return forward;
+		// 파라미터값 저장(id,pass)
+		String pass = request.getParameter("pass");
+				
+		// MemberDAO객체 생성후 이동
+		MemberDAO mdao = new MemberDAO();		 
+
+		// deleteMember(id,pass or mb);
+		int check = mdao.deleteMember(id,pass);
+				
+		// update동작 처럼  0,1,-1 이동
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+				 
+			if( check == 0 ){
+				out.print("<script>");
+				out.print(" alert('비밀번호 오류'); ");
+				out.print(" history.back(); ");
+				out.print("</script>");
+				out.close();
+				return null;
+			}else if(check == -1){
+				out.print("<script>");
+				out.print(" alert('아이디 없음'); ");
+				out.print(" history.back(); ");
+				out.print("</script>"); 
+				out.close();
+				return null;
+			}
+			// check == 1;
+		    // 세션값 초기화(id정보삭제)
+			session.invalidate();
+				 
+				out.print("<script>");
+				out.print(" alert('회원 탈퇴 성공'); ");
+				out.print(" location.href='./Main.me'; ");
+				out.print("</script>"); 
+				out.close();
+		return null;
 	}
 
+	
 }
