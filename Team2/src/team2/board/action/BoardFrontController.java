@@ -57,7 +57,7 @@ public class BoardFrontController extends HttpServlet {
 		}else if(command.equals("/notice.bo")) {
 			System.out.println("/notice.bo 주소 처리");
 
-			String category = request.getParameter("category");
+			String category = "notice";
 			request.setAttribute("category", category);
 			action = new BoardNoticeAction();
 			
@@ -69,7 +69,7 @@ public class BoardFrontController extends HttpServlet {
 		}else if(command.equals("/review.bo")) {
 			System.out.println("/review.bo 주소 처리");
 			
-			String category = request.getParameter("category");
+			String category = "review";
 			request.setAttribute("category", category);
 			
 			action = new BoardReviewAction();

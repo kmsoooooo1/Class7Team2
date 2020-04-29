@@ -52,9 +52,10 @@ public class BoardWriteAction implements Action {
 		
 		BoardDAO bdao = new BoardDAO();
 		
-		for(int i=0; i<40; i++){
 		bdao.insertBoard(bdto);
-		}
+		//bdao 자원 해제
+		bdao.closeDB();
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./BoardMain.bo");

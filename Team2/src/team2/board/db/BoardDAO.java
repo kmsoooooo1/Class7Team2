@@ -141,7 +141,7 @@ public class BoardDAO {
 			if(rs.next()){
 				check = rs.getInt(1);
 			}
-			System.out.println("게시판 글 개수 확인 chek : " + check);
+			System.out.println("게시판 글 개수 확인 check : " + check);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -33,7 +33,7 @@ public class BoardNoticeAction implements Action {
 		
 		int currentPage = Integer.parseInt(pageNum);
 		
-		int pageSize = 10;
+		int pageSize = 5;
 		
 		Criteria cri = new Criteria();
 		
@@ -50,6 +50,8 @@ public class BoardNoticeAction implements Action {
 		// 페이징 처리
 
 		ArrayList boardList = bdao.getBoardList(category,cri);
+		//bdao 자원 해제
+		bdao.closeDB();
 		
 		System.out.println("cri : " +cri);
 		System.out.println("pageMaker : " +pageMaker);
