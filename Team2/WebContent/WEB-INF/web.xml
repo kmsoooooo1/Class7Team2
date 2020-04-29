@@ -9,4 +9,67 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+<!--   DB 접속 resource file -->
+	<resource-ref>
+		<description>Team2</description>
+		<res-ref-name>jdbc/team2</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+  
+  
+  <!-- 회원관리 -->
+  <servlet>
+     <servlet-name>MemberFrontController</servlet-name>
+     <servlet-class>team2.member.action.MemberFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>MemberFrontController</servlet-name>
+     <url-pattern>*.me</url-pattern>
+  </servlet-mapping>  
+  <!-- 회원관리 -->
+  
+  <!-- 관리자 페이지 -->
+  <servlet>
+     <servlet-name>AdminFrontController</servlet-name>
+     <servlet-class>team2.admin.action.AdminFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminFrontController</servlet-name>
+     <url-pattern>*.ad</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 페이지 -->
+  
+  <!-- 관리자 동물 관리 페이지 -->
+  <servlet>
+     <servlet-name>AdminAnimalFrontController</servlet-name>
+     <servlet-class>team2.admin.animal.action.AdminAnimalFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminAnimalFrontController</servlet-name>
+     <url-pattern>*.aa</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 동물 관리 페이지 -->
+  
+  <!-- 게시판 Controller Mapping -->
+  <servlet>
+     <servlet-name>BoardFrontController</servlet-name>
+     <servlet-class>team2.board.action.BoardFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>BoardFrontController</servlet-name>
+     <url-pattern>*.bo</url-pattern>
+  </servlet-mapping>  
+  <!-- 게시판 Controller Mapping -->
+  
+  
+  
+  
+  
+  
+  
 </web-app>

@@ -334,7 +334,7 @@
     	var tempFile,
     		sUploadURL;
     	
-    	sUploadURL= '/Team2/file_uploader_html5.jsp'; 	//upload URL
+    	sUploadURL= '/Team2/editor/file_uploader_html5.jsp'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -480,7 +480,7 @@
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
  			// sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.jsp',	//샘플 URL입니다.
  	        // sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
- 	        sUrl : '/Team2/file_uploader.jsp',
+ 	        sUrl : '/Team2/editor/file_uploader.jsp',
  			sCallback : '/Team2/editor/photo_uploader/popup/callback.html',
  	        
  	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
