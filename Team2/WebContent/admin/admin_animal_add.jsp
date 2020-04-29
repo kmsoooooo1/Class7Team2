@@ -37,6 +37,7 @@
 						<option> 서서브 종을 선택해주세요 </option>
 					</select>
 				</td>
+			</tr>
 			<tr>
 				<td> 동물 모프  </td>
 				<td> <input type="text" name="a_morph"> </td>
