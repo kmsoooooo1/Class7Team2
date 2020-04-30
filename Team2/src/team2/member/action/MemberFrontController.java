@@ -124,15 +124,30 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		// 회원 정보 페이지 이동	
-		}else if(command.equals("/MemberInfo.me")){
-			System.out.println("/MemberInfo.me 주소 호출");
+		// 마이 페이지 이동	
+		}else if(command.equals("/MemberPage.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/memberPage.jsp");
+			forward.setRedirect(false);
+		// 회원 목록페이지 이동	
+		}else if(command.equals("/MemberList.me")){
+			System.out.println("/MemberList.me 주소 호출");
 			action = new MemberInfoAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		// 회원 정보 페이지 이동	
+		}else if(command.equals("/MemberInfo.me")){
+			System.out.println("/MemberInfo.me 주소 요청");
+			action = new MemberInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 	
 		

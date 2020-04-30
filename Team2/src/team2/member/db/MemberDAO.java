@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -278,7 +280,47 @@ public class MemberDAO {
 	}
 	// deleteMember(id,pass)
 	
-	
+	// getMemberList()
+	public List<MemberDTO> getMemberList(){
+		
+		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
+		
+		try {
+			// 1,2
+			con = getConnection();
+			// 3 sql
+			sql = "select * from team2_member";
+			pstmt = con.prepareStatement(sql);
+			
+			// 4 실행
+			rs = pstmt.executeQuery();
+			
+			// 5  rs 값 비교
+		    while(rs.next()){
+		    	
+		    	MemberDTO mdto = new MemberDTO();
+		    	
+				mdto.setId(rs.getString("id"));
+				mdto.setPass(rs.getString("pass"));
+				mdto.setName(rs.getString("name"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setZipcode(rs.getString("zipcode"));
+				mdto.setAddr1(rs.getString("addr1"));
+				mdto.setAddr2(rs.getString("addr2"));
+				mdto.setEmail(rs.getString("email"));
+				mdto.setReg_date(rs.getDate("reg_date"));
+		    	
+		    	//  한사람의 정보를  memberList배열에 한칸으로 저저장
+		    	memberList.add(mdto);
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return memberList;
+	}
+	// getMemberList()
 	
 	
 	

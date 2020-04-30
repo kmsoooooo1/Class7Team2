@@ -21,18 +21,37 @@
     MemberDTO mb = (MemberDTO)request.getAttribute("mdto");
   %>
   <h1> 회원정보 페이지 </h1>
-  
-  <h2> 아이디 : <%=mb.getId() %></h2>
-  <h2> 비밀번호 : <%=mb.getPass() %></h2>
-  <h2> 이름: <%=mb.getName() %></h2>
-  <h2> 휴대전화 : <%=mb.getPhone() %></h2>
-  <h2> 우편번호 : <%=mb.getZipcode() %></h2>
-  <h2> 주소 : <%=mb.getAddr1() %></h2>
-  <h2> 상세 주소 : <%=mb.getAddr2() %></h2>
-  <h2> 이메일 : <%=mb.getEmail() %></h2>
-  <h2> 회원가입일 : <%=mb.getReg_date() %></h2>
-  
-  
-  <h3><a href="./Main.me"> main 페이지 </a></h3>
+  <table border="1">
+   <tr>
+    <th>아이디</th><td><%=mb.getId() %></td>
+   </tr>
+   <tr>
+    <th>비밀번호</th><td><%=mb.getPass() %></td>
+   </tr>
+   <tr>
+    <th>이름</th><td><%=mb.getName() %></td>
+   </tr>
+   <tr>
+    <th>휴대전화</th><td><%=mb.getPhone() %></td>
+   </tr>
+   <tr>
+    <th>우편번호</th><td><%=mb.getZipcode() %></td>
+   </tr>
+   <tr>
+    <th>주소</th><td><%=mb.getAddr1() %></h2></td>
+   </tr>
+   <tr>
+    <th>상세주소</th><td><%=mb.getAddr2() %></td>
+   </tr>
+   <tr>
+    <th>이메일</th><td><%=mb.getEmail() %></td>
+   </tr>
+   <tr>
+    <th>회원가입일</th><td><%=mb.getReg_date() %></td>
+   </tr>
+  </table>
+  <br>
+  <br>
+  <h3><a href="./MemberPage.me"> 마이 페이지로 이동... </a></h3>
 </body>
 </html>
