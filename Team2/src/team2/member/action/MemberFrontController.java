@@ -124,6 +124,15 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		// 회원 정보 페이지 이동	
+		}else if(command.equals("/MemberInfo.me")){
+			System.out.println("/MemberInfo.me 주소 호출");
+			action = new MemberInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	
 		

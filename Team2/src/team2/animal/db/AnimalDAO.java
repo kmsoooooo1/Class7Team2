@@ -160,6 +160,56 @@ public class AnimalDAO {
 		}
 		return animalList;
 	}
+	
+	//동물페이지 조회수 1업 시키는 함수
+	public void updateAnimalViewCount(String a_code){    	
+    	try {
+			con = getConnection();
+			sql = "update team2_animals set a_view_count = a_view_count + 1 where a_code=?";	
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a_code);
+			pstmt.executeUpdate();
+		}
+    	catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+    }
+	
+	//동물 상세 정보 가져오는 함수
+	public AnimalDTO getAnimalDetail(String a_code) {
+		AnimalDTO adto = null;
+		try {
+			con = getConnection();
+			sql = "select * from team2_animals where a_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, a_code);
+			rs = pstmt.executeQuery();	
+			if(rs.next()) {
+				adto = new AnimalDTO();
+				//만약 동물이 DB에 있다면
+				adto.setCategory(rs.getString("category"));
+				adto.setSub_category(rs.getString("sub_category"));
+				adto.setSub_category_index(rs.getString("sub_category_index"));
+				adto.setA_morph(rs.getString("a_morph"));
+				adto.setA_sex(rs.getString("a_sex"));
+				adto.setA_status(rs.getString("a_status"));
+				adto.setA_code(rs.getString("a_code"));
+				adto.setA_image(rs.getString("a_image"));
+				adto.setA_amount(rs.getInt("a_amount"));
+				adto.setA_price(rs.getInt("a_price"));
+				adto.setContent(rs.getString("content"));
+				adto.setA_view_count(rs.getInt("a_view_count"));
+				adto.setDate(rs.getDate("date"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return adto;
+	}
 
 	
 	
