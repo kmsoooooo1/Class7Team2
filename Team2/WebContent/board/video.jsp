@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h1>WebContent/board/video.jsp</h1>
-	
+	ddd
 </body>
 </html>
