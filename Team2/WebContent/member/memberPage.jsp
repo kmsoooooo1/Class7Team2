@@ -40,7 +40,7 @@
 	<hr>
 	<hr>
 	<a href="./BoardList.bo">게시판 리스트 이동하기</a>
-	
+	 
 	
 	<hr>
 	<hr>

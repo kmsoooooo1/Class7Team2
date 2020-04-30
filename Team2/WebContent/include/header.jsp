@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div> 
 		<a href="./Main.me" id="logo"> 갈라파고스(로고) </a>
 		<%
 			request.setCharacterEncoding("UTF-8");

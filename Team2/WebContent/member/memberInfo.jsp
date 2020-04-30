@@ -42,7 +42,7 @@
    </tr>
    <tr>
     <th>상세주소</th><td><%=mb.getAddr2() %></td>
-   </tr>
+   </tr> 
    <tr>
     <th>이메일</th><td><%=mb.getEmail() %></td>
    </tr>

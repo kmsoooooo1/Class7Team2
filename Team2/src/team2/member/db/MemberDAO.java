@@ -292,7 +292,7 @@ public class MemberDAO {
 			sql = "select * from team2_member";
 			pstmt = con.prepareStatement(sql);
 			
-			// 4 실행
+			// 4 실행 
 			rs = pstmt.executeQuery();
 			
 			// 5  rs 값 비교

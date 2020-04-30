@@ -37,7 +37,7 @@ public class MemberInfoAction implements Action{
 		// 회원정보를 request 영역에 저장
 		request.setAttribute("mdto", mdto);
 				
-		// 페이지 이동  ./memeber/memberInfo.jsp
+		// 페이지 이동  ./memeber/memberInfo.jsp 
 		forward.setPath("./member/memberInfo.jsp");
 		forward.setRedirect(false);		
 		return forward;

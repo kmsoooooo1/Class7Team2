@@ -30,7 +30,7 @@ public class MemberListAction implements Action{
 			
 			return forward;
 		}
-		
+		 
 		// DB 처리객체  MemberDAO 생성
 		MemberDAO mdao = new MemberDAO();
 		// getMemberList() -> 회원 목록 List정보를 가져오기

@@ -139,7 +139,7 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		// 회원 정보 페이지 이동	
-		}else if(command.equals("/MemberInfo.me")){
+		}else if(command.equals("/MemberInfo.me")){ 
 			System.out.println("/MemberInfo.me 주소 요청");
 			action = new MemberInfoAction();
 			try {

@@ -36,7 +36,7 @@
 	      <td>상세주소</td>
 	      <td>이메일</td>
 	      <td>가입일자</td>
-	    </tr>
+	    </tr> 
 	    
 	    <%
 	       for(int i=0;i<memberList.size();i++){
