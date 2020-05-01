@@ -44,20 +44,10 @@ public class BoardFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./board/board_insert.jsp");
 			forward.setRedirect(false);			
-		}else if(command.equals("/BoardWriteAction.bo")) {
-			System.out.println("/BoardWriteAction.bo 주소 처리");
-			
-			action = new BoardWriteAction();
-			
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}else if(command.equals("/notice.bo")) {
 			System.out.println("/notice.bo 주소 처리");
 
-			String category = request.getParameter("category");
+			String category = "notice";
 			request.setAttribute("category", category);
 			action = new BoardNoticeAction();
 			
@@ -69,7 +59,7 @@ public class BoardFrontController extends HttpServlet {
 		}else if(command.equals("/review.bo")) {
 			System.out.println("/review.bo 주소 처리");
 			
-			String category = request.getParameter("category");
+			String category = "review";
 			request.setAttribute("category", category);
 			
 			action = new BoardReviewAction();
@@ -79,7 +69,41 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/BoardContent.bo")) {
+			System.out.println("/BoardContent.bo 주소 처리");
+			
+			action = new BoardContentAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BoardUpdate.bo")) {
+			System.out.println("/BoardUpdate.bo 주소 처리");
+			
+			action = new BoardUpdate();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BoardUpdateAction.bo")) {
+			System.out.println("/BoardUpdateAction.bo 주소 처리");
+			
+			action = new BoardUpdateAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
+		
+		//action
 		
 		if(forward!=null){
 			if(forward.isRedirect()){

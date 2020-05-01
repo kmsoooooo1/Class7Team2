@@ -28,7 +28,7 @@
 		String pageNum = (String)request.getAttribute("pageNum");
 	%>
 	
-		 <h2><a href="./BoardWrite.bo"> 글 쓰기  </a></h2>
+		 <h2><a href="./Insert.bo"> 글 쓰기 (스마트에디터)  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
 	
 	<table border="1">
@@ -65,7 +65,9 @@
 		    
 		    <td><%=bdto.getB_writer() %></td>
 		    <td>
+		     <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
 		    	<img src="<%=imgPath %>" width=180 height=150>
+		    	</a>
 		    </td>
 		    <td><%=bdto.getB_reg_date() %></td>
 		    <td><%=bdto.getB_view() %></td>
