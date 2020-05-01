@@ -90,7 +90,17 @@
   </servlet-mapping>  
   <!-- 동물리스트 페이지 -->
   
+  <!-- 장바구니 -->
+  <servlet>
+     <servlet-name>BasketFrontController</servlet-name>
+     <servlet-class>team2.basket.action.BasketFrontController</servlet-class>
+  </servlet>
   
+  <servlet-mapping>
+     <servlet-name>BasketFrontController</servlet-name>
+     <url-pattern>*.ba</url-pattern>
+  </servlet-mapping>
+  <!-- 장바구니 -->
   
   
   

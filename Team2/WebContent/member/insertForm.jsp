@@ -422,10 +422,8 @@
             },
             width : '100%',
             height : '100%'
-        }).embed(element_wrap);
-        // iframe을 넣은 element를 보이게 한다.
-        element_wrap.style.display = 'block';
-    } 
+        }).open();
+    }
 </script> 
 <!-- ----- DAUM 우편번호 API 종료----- -->
 		</form>	
