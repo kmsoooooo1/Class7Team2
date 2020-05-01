@@ -175,6 +175,7 @@ public class BoardDAO {
 					bdto.setB_file(rs.getString("b_file"));
 					bdto.setB_idx(rs.getInt("b_idx"));
 					bdto.setB_like(rs.getInt("b_like"));
+					bdto.setB_view(rs.getInt("b_view"));
 					bdto.setB_p_cate(rs.getString("b_p_cate"));
 					
 					
@@ -190,4 +191,96 @@ public class BoardDAO {
 			
 		}
 		//getBoardList(startRow,pageSize)
+		
+		//updateView(int num)
+		public void updateView(int num) {
+			
+			try {
+				
+				sql = "update team2_board "
+						+ "set b_view = b_view + 1 where b_idx = ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				
+				pstmt.executeUpdate();
+				
+				System.out.println("해당글 ("+num+") 조회수 1 증가");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//updateView(int num)
+		
+		// BoardDTO getBoard(int num)
+		public BoardDTO getBoard(int num) {
+			
+			BoardDTO bdto = null;
+			
+			try {
+				
+				sql = "select * from team2_board where b_idx=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					bdto = new BoardDTO();
+					
+					bdto.setB_idx(rs.getInt("b_idx"));
+					bdto.setB_title(rs.getString("b_title"));
+					bdto.setB_category(rs.getString("b_category"));
+					bdto.setB_p_cate(rs.getString("b_p_cate"));
+					bdto.setB_title(rs.getString("b_title"));
+					bdto.setB_writer(rs.getString("b_writer"));
+					bdto.setB_content(rs.getString("b_content"));
+					bdto.setB_ref(rs.getInt("b_ref"));
+					bdto.setB_view(rs.getInt("b_view"));
+					bdto.setB_reg_date(rs.getDate("b_reg_date"));
+					bdto.setIp_addr(rs.getString("ip_addr"));
+					bdto.setB_file(rs.getString("b_file"));
+					
+					
+				}
+				
+				System.out.println("cotent DTO 저장 : " +bdto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return bdto;
+		}
+		// BoardDTO getBoard(int num)
+
+		//updateBoard()
+		public void updateBoard(BoardDTO bdto) {
+			
+			try {
+				sql = "update team2_board set b_category=?,b_title=?,b_content=? where b_idx=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, bdto.getB_category());
+				pstmt.setString(2, bdto.getB_title());
+				pstmt.setString(3, bdto.getB_content());
+				pstmt.setInt(4, bdto.getB_idx());
+				
+				pstmt.executeUpdate();
+				
+				System.out.println("Content 수정 완료! ");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Content 수정 실패@@@");
+			}
+			
+		}
+		//updateBoard()
+		
+		
+		
+		
+		
+		
+		
 }

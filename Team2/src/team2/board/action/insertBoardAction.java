@@ -43,7 +43,7 @@ public class insertBoardAction implements Action {
 		if(chk >0){
 			//	insert 성공
 			System.out.println("글 등록 성공!");
-			forward.setPath("./List.bo");
+			forward.setPath("./BoardMain.bo");
 			forward.setRedirect(true);
 		}else{
 			//	insert 실패

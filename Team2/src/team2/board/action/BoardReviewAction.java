@@ -57,8 +57,7 @@ public class BoardReviewAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./board/board_review.jsp");
-		forward.setRedirect(false);
-		
+		forward.setRedirect(false);	
 		
 		return forward;
 	}
