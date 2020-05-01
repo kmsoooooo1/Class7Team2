@@ -10,13 +10,28 @@ public class cSet {
 	
 	//	p_Category index
 	private int pc;
-	
-	public cSet() {}
+
+	// Category별 index 문자 변환
+	private String category;
+	private String p_category;
+
+	// Category 초기값 지정
+	public cSet() {
+		this.c = 0;
+		this.pc = 0;
+		StrDate();
+	}
 
 	public cSet(int c, int pc) {
 		super();
 		this.c = c;
 		this.pc = pc;
+	}
+	
+	// Category별 index 문자열 변환
+	private void StrDate() {
+		this.category = Category[c];
+		this.p_category = p_Category[pc];
 	}
 
 	public int getC() {
@@ -25,6 +40,7 @@ public class cSet {
 
 	public void setC(int c) {
 		this.c = c;
+		StrDate();
 	}
 
 	public int getPc() {
@@ -33,8 +49,24 @@ public class cSet {
 
 	public void setPc(int pc) {
 		this.pc = pc;
+		StrDate();
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getP_category() {
+		return p_category;
+	}
+
+	public void setP_category(String p_category) {
+		this.p_category = p_category;
+	}
 	@Override
 	public String toString() {
 		return "Selected Now : cSet [Category=" + Category[c] + ", p_Category=" + p_Category[pc] + "]";

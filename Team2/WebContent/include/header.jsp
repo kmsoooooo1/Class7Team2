@@ -26,8 +26,8 @@
 		<% } %> 
 	</div>
 	
-	<a href="./notice.bo?category=notice">공지사항</a>
-	<a href="./review.bo?category=review">상품후기</a>
+	<a href="./BoardList.bo?category=0">공지사항</a>
+	<a href="./BoardList.bo?category=1">상품후기</a>
 	
 	<!-- 메인 메뉴 -->
 	<div>
