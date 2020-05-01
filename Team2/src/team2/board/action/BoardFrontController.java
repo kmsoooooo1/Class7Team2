@@ -64,7 +64,7 @@ public class BoardFrontController extends HttpServlet {
 			System.out.println("/notice.bo 주소 처리");
 			
 			forward = new ActionForward();
-			forward.setPath("./board/board_list.jsp");
+			forward.setPath("./board/board_notice.jsp");
 			forward.setRedirect(false);
 			
 		}else if(command.equals("/review.bo")) {
@@ -77,7 +77,7 @@ public class BoardFrontController extends HttpServlet {
 			session.setAttribute("cset", cset);
 			
 			forward = new ActionForward();
-			forward.setPath("./board/board_list.jsp");
+			forward.setPath("./board/board_review.jsp");
 			forward.setRedirect(false);
 			
 		}else if(command.equals("/BoardContent.bo")) {
