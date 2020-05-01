@@ -29,7 +29,7 @@ public class BoardDAO {
 	
 	public int insert(BoardDTO dto){
 		int chk = 0;
-		
+		System.out.println(dto);
 		sql = "select coalesce(max(b_idx),0) idx from team2_board";
 		try {
 			stmt = conn.createStatement();
@@ -50,6 +50,7 @@ public class BoardDAO {
 						+ dto.getIp_addr() + "','"
 						+ dto.getB_file() + "')";
 			
+				System.out.println(sql);
 				chk = stmt.executeUpdate(sql);
 			}
 		} catch (SQLException e) {
