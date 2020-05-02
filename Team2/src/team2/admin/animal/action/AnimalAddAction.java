@@ -38,7 +38,10 @@ public class AnimalAddAction implements Action {
 		adto.setA_code(multi.getParameter("a_code"));
 		adto.setA_thumbnail(multi.getFilesystemName("a_thumbnail"));
 		adto.setA_amount(Integer.parseInt(multi.getParameter("a_amount")));
-		adto.setA_price(Integer.parseInt(multi.getParameter("a_price")));
+		adto.setA_price_origin(Integer.parseInt(multi.getParameter("a_price_origin")));
+		adto.setA_discount_rate(Integer.parseInt(multi.getParameter("a_discount_rate")));
+		adto.setA_price_sale(Integer.parseInt(multi.getParameter("a_price_sale")));
+		adto.setA_mileage(Integer.parseInt(multi.getParameter("a_mileage")));
 		adto.setContent(multi.getParameter("ir1"));
 		
 		AnimalDAO adao = new AnimalDAO();

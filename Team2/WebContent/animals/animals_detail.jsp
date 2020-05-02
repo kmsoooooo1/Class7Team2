@@ -22,7 +22,9 @@
 	
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
-		String newformat_price = formatter.format(animalDetail.getA_price());
+		String newformat_price_origin = formatter.format(animalDetail.getA_price_origin());
+		String newformat_mileage = formatter.format(animalDetail.getA_mileage());
+		String newformat_price_sale = formatter.format(animalDetail.getA_price_sale());
 	%>
 
 	<!-- Header -->
@@ -38,7 +40,7 @@
 	
 		<table border="1">
 			<tr>
-				<td> <img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[0]%>" width="500" height="500"> </td>
+				<td> <img src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>" width="500" height="500"> </td>
 				<td>
 					<!-- 종 이름 -->
 					<span id="a_morph"> <%=animalDetail.getA_morph()%> </span>
@@ -47,18 +49,23 @@
 					<table border="1">
 						<tr>
 							<td> 판매가 </td>
-							<td> <%=newformat_price%>원 <% //만약 할인율이 있으면 {%> % OFF <%//}%> </td> 
+							<td> 
+								<%=newformat_price_origin%>원 
+								<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
+									<%=animalDetail.getA_discount_rate()%>% OFF 
+								<%}%> 
+							</td> 
 						</tr>
 						<tr>
 							<td> 적립금 </td>
-							<td> 원 </td>
+							<td> <%=animalDetail.getA_mileage()%>원 </td>
 						</tr>
-						<%//만약 할인율이 있으면 {%>
+						<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
 						<tr>
 							<td> 할인판매가  </td>
-							<td> 원 ( % 할인율) </td>
+							<td> <%=animalDetail.getA_price_sale()%>원 ( <%=animalDetail.getA_discount_rate()%>% 할인율) </td>
 						</tr>
-						<%//}%>
+						<%}%>
 					</table> 
 					<hr>
 					<!-- 배송방법 -->
@@ -106,9 +113,6 @@
 		<!-- 동물 추가 내용 -->
 		<div>
 			제품상세정보 <br>
-			<img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[0]%>" width="600" height="600"> <br> <br>
-			<img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[1]%>" width="600" height="600"> <br> <br>
-			<img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[2]%>" width="600" height="600"> <br> <br>
 			<p> 
 				<%=animalDetail.getContent()%>
 			</p>

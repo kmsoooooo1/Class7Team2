@@ -52,7 +52,7 @@ public class AnimalDAO {
 			if(rs.next()){
 				num = rs.getInt(1) + 1;
 			}
-			sql = "insert into team2_animals values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
+			sql = "insert into team2_animals values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, adto.getCategory());
@@ -62,11 +62,14 @@ public class AnimalDAO {
 			pstmt.setString(6, adto.getA_sex());
 			pstmt.setString(7, adto.getA_status());
 			pstmt.setString(8, adto.getA_code());
-			pstmt.setString(9, adto.getA_image());
+			pstmt.setString(9, adto.getA_thumbnail());
 			pstmt.setInt(10, adto.getA_amount());
-			pstmt.setInt(11, adto.getA_price());
-			pstmt.setString(12, adto.getContent());
-			pstmt.setInt(13, 0);
+			pstmt.setInt(11, adto.getA_price_origin());
+			pstmt.setInt(12, adto.getA_discount_rate());
+			pstmt.setInt(13, adto.getA_price_sale());
+			pstmt.setInt(14, adto.getA_mileage());
+			pstmt.setString(15, adto.getContent());
+			pstmt.setInt(16, 0);
 			pstmt.executeUpdate();
 			
 			System.out.println(pstmt.toString());
@@ -153,9 +156,12 @@ public class AnimalDAO {
 				adto.setA_sex(rs.getString("a_sex"));
 				adto.setA_status(rs.getString("a_status"));
 				adto.setA_code(rs.getString("a_code"));
-				adto.setA_image(rs.getString("a_image"));
+				adto.setA_thumbnail(rs.getString("a_thumbnail"));
 				adto.setA_amount(rs.getInt("a_amount"));
-				adto.setA_price(rs.getInt("a_price"));
+				adto.setA_price_origin(rs.getInt("a_price_origin"));
+				adto.setA_discount_rate(rs.getInt("a_discount_rate"));
+				adto.setA_price_sale(rs.getInt("a_price_sale"));
+				adto.setA_mileage(rs.getInt("a_mileage"));
 				adto.setContent(rs.getString("content"));
 				adto.setA_view_count(rs.getInt("a_view_count"));
 				adto.setDate(rs.getDate("date"));
@@ -204,9 +210,12 @@ public class AnimalDAO {
 				adto.setA_sex(rs.getString("a_sex"));
 				adto.setA_status(rs.getString("a_status"));
 				adto.setA_code(rs.getString("a_code"));
-				adto.setA_image(rs.getString("a_image"));
+				adto.setA_thumbnail(rs.getString("a_thumbnail"));
 				adto.setA_amount(rs.getInt("a_amount"));
-				adto.setA_price(rs.getInt("a_price"));
+				adto.setA_price_origin(rs.getInt("a_price_origin"));
+				adto.setA_discount_rate(rs.getInt("a_discount_rate"));
+				adto.setA_price_sale(rs.getInt("a_price_sale"));
+				adto.setA_mileage(rs.getInt("a_mileage"));
 				adto.setContent(rs.getString("content"));
 				adto.setA_view_count(rs.getInt("a_view_count"));
 				adto.setDate(rs.getDate("date"));

@@ -77,7 +77,7 @@
 				<td> 판매가(할인전) :  <input id="a_price_origin_val" type="text" name="a_price_origin" value="" onkeyup="calMileage()">원 </td>
 			</tr>
 			<tr>
-				<td> 할인율(%) :  <input id="a_discount_rate_val" type="text" name="a_discount_rate" onkeyup="calDiscount()">%</td>
+				<td> 할인율(없으면 0 기재) :  <input id="a_discount_rate_val" type="text" name="a_discount_rate" onkeyup="calDiscount()">%</td>
 			</tr>
 			<tr>
 				<td> 판매가(할인후) :  <input id="a_price_sale_val" type="text" name="a_price_sale">원 </td>

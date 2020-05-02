@@ -21,6 +21,10 @@
 	
 	<!-- Main Content -->
 	
+	<span> Total <%=animalList.size()%> items</span> 
+	
+	<hr>
+	
 	<table border="1">
 		<%    
 	        int size = animalList.size();
@@ -36,14 +40,23 @@
 					AnimalDTO adto = animalList.get(num);
 					//###,###,###원 표기하기 위해서 format 바꾸기
 					DecimalFormat formatter = new DecimalFormat("#,###,###,###");
-					String newformat_price = formatter.format(adto.getA_price());
-					
+					String newformat_price_origin = formatter.format(adto.getA_price_origin());
+					String newformat_price_sale = formatter.format(adto.getA_price_sale());
 			%>
 			
 			<td colspan="2">
-  			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_image().split(",")[0]%>" width="300" height="300"> </a> <br> 
-		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <br>
-		    <%=newformat_price%>원 <br>    
+  			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> <br> 
+		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <hr>
+		    <%if(adto.getA_discount_rate() != 0) { //만약 할인율이 있으면%>
+		    	<span style="text-decoration:line-through"> <%=newformat_price_origin%>원 </span> <br>
+		    	<span style="color: red; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span>
+		    <%}else{ //없으면%>
+		   		<%=newformat_price_origin%>원 <br>
+			<%}%>
+			
+			<!-- 만약 수량이 0이면 soldout 문구 띄우기 -->
+		
+			
 			</td>
 			<%
 			   num++;  

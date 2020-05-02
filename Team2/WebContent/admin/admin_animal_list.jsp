@@ -22,7 +22,7 @@
 	<table border="1">
 		<tr>
 			<th></th>
-			<th> 이미지 </th>
+			<th> 썸네일 </th>
 			<th> 카테고리 </th>
 			<th> 서브 카테고리 </th>
 			<th> 서-서브 카테고리 </th>
@@ -31,7 +31,10 @@
 			<th> 상태 </th>
 			<th> 코드</th>
 			<th> 수량 </th>
-			<th> 금액 </th>
+			<th> 판매가 </th>
+			<th> 할인율 </th>
+			<th> 할인판매가 </th>
+			<th> 적립금 </th>
 			<th> 조회수 </th>
 			<th> 등록일자 </th>
 			<th> 수정하기 </th>
@@ -43,7 +46,7 @@
 		%>
 			<tr>
 				<td><%=adto.getNum()%></td>
-				<td><img src="./upload/multiupload/<%=adto.getA_image().split(",")[0]%>" width="50" height="50"></td>
+				<td><img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="50" height="50"></td>
 				<td><%=adto.getCategory()%></td>
 				<td><%=adto.getSub_category()%></td>
 				<td><%=adto.getSub_category_index()%></td>
@@ -52,7 +55,10 @@
 				<td><%=adto.getA_status()%></td>
 				<td><%=adto.getA_code()%></td>
 				<td><%=adto.getA_amount()%></td>
-				<td><%=adto.getA_price()%></td>
+				<td><%=adto.getA_price_origin()%></td>
+				<td><%=adto.getA_discount_rate()%></td>
+				<td><%=adto.getA_price_sale()%></td>
+				<td><%=adto.getA_mileage()%></td>
 				<td><%=adto.getA_view_count()%></td>
 				<td><%=adto.getDate()%></td>
 				<td> <a href=""><button type="button"> 수정 </button></a> </td>
