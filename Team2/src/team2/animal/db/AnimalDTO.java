@@ -12,9 +12,12 @@ public class AnimalDTO {
 	private String a_sex;
 	private String a_status;
 	private String a_code;
-	private String a_image;
+	private String a_thumbnail;
 	private int a_amount;
-	private int a_price;
+	private int a_price_origin;
+	private int a_discount_rate;
+	private int a_price_sale;
+	private int a_mileage;
 	private String content;
 	private int a_view_count;
 	private Date date;
@@ -67,11 +70,11 @@ public class AnimalDTO {
 	public void setA_code(String a_code) {
 		this.a_code = a_code;
 	}
-	public String getA_image() {
-		return a_image;
+	public String getA_thumbnail() {
+		return a_thumbnail;
 	}
-	public void setA_image(String a_image) {
-		this.a_image = a_image;
+	public void setA_thumbnail(String a_thumbnail) {
+		this.a_thumbnail = a_thumbnail;
 	}
 	public int getA_amount() {
 		return a_amount;
@@ -79,11 +82,29 @@ public class AnimalDTO {
 	public void setA_amount(int a_amount) {
 		this.a_amount = a_amount;
 	}
-	public int getA_price() {
-		return a_price;
+	public int getA_price_origin() {
+		return a_price_origin;
 	}
-	public void setA_price(int a_price) {
-		this.a_price = a_price;
+	public void setA_price_origin(int a_price_origin) {
+		this.a_price_origin = a_price_origin;
+	}
+	public int getA_discount_rate() {
+		return a_discount_rate;
+	}
+	public void setA_discount_rate(int a_discount_rate) {
+		this.a_discount_rate = a_discount_rate;
+	}
+	public int getA_price_sale() {
+		return a_price_sale;
+	}
+	public void setA_price_sale(int a_price_sale) {
+		this.a_price_sale = a_price_sale;
+	}
+	public int getA_mileage() {
+		return a_mileage;
+	}
+	public void setA_mileage(int a_mileage) {
+		this.a_mileage = a_mileage;
 	}
 	public String getContent() {
 		return content;
@@ -107,9 +128,10 @@ public class AnimalDTO {
 	public String toString() {
 		return "AnimalDTO [num=" + num + ", category=" + category + ", sub_category=" + sub_category
 				+ ", sub_category_index=" + sub_category_index + ", a_morph=" + a_morph + ", a_sex=" + a_sex
-				+ ", a_status=" + a_status + ", a_code=" + a_code + ", a_image=" + a_image + ", a_amount=" + a_amount
-				+ ", a_price=" + a_price + ", content=" + content + ", a_view_count=" + a_view_count + ", date=" + date
-				+ "]";
+				+ ", a_status=" + a_status + ", a_code=" + a_code + ", a_thumbnail=" + a_thumbnail + ", a_amount="
+				+ a_amount + ", a_price_origin=" + a_price_origin + ", a_discount_rate=" + a_discount_rate
+				+ ", a_price_sale=" + a_price_sale + ", a_mileage=" + a_mileage + ", content=" + content
+				+ ", a_view_count=" + a_view_count + ", date=" + date + "]";
 	}
 
 }

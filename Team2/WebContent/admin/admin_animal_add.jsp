@@ -65,41 +65,39 @@
 				<td> <input type="text" name="a_code"> </td>
 			</tr>
 			<tr>
-				<td rowspan="5"> 동물 기본 이미지(5장)</td>
-				<td> <input type="file" name="file1"> </td>
-			</tr>
-			<tr>
-				<td> <input type="file" name="file2"> </td>
-			</tr>
-			<tr>
-				<td> <input type="file" name="file3"> </td>
-			</tr>
-			<tr>
-				<td> <input type="file" name="file4"> </td>
-			</tr>
-			<tr>
-				<td> <input type="file" name="file5"> </td>
+				<td> 동물 썸네일용 이미지 </td>
+				<td> <input type="file" name="a_thumbnail"> </td>
 			</tr>
 			<tr>
 				<td> 동물 보유 수량 </td>
 				<td> <input type="text" name="a_amount"> </td>
 			</tr>
 			<tr>
-				<td> 가격 </td>
-				<td> <input type="text" name="a_price"> </td>
+				<td rowspan="3"> 동물 가격 </td>
+				<td> 판매가(할인전) :  <input id="a_price_origin_val" type="text" name="a_price_origin" value="" onkeyup="calMileage()">원 </td>
+			</tr>
+			<tr>
+				<td> 할인율(%) :  <input id="a_discount_rate_val" type="text" name="a_discount_rate" onkeyup="calDiscount()">%</td>
+			</tr>
+			<tr>
+				<td> 판매가(할인후) :  <input id="a_price_sale_val" type="text" name="a_price_sale">원 </td>
+			</tr>
+			<tr>
+				<td> 적립금 </td>
+				<td> <input id="a_mileage_val" type="text" name="a_mileage">원 </td>
 			</tr>
 			<tr>
 				<td colspan="2"> 
 					<textarea name="ir1" id="ir1" rows="10" cols="100">
 						<br>
-							<span style="font-weight: bold"> 학명 </span> : <br><br>
-							<span style="font-weight: bold"> 서식지 </span> : <br><br>
-							<span style="font-weight: bold"> 수명 </span> : <br><br>
-							<span style="font-weight: bold"> 크기 </span> : <br><br>		
-							<span style="font-weight: bold"> 습성  </span> : <br><br>		
-							<span style="font-weight: bold"> 온도 </span> : <br><br>			
-							<span style="font-weight: bold"> 습도 </span> : <br><br>		
-							<span style="font-weight: bold"> 특징 </span> : <br><br><br>
+							<span style="font-weight: bold"> 학명 </span> : <br>
+							<span style="font-weight: bold"> 서식지 </span> : <br>
+							<span style="font-weight: bold"> 수명 </span> : <br>
+							<span style="font-weight: bold"> 크기 </span> : <br>		
+							<span style="font-weight: bold"> 습성  </span> : <br>
+							<span style="font-weight: bold"> 온도 </span> : <br>
+							<span style="font-weight: bold"> 습도 </span> : <br>	
+							<span style="font-weight: bold"> 특징 </span> : <br><br>
 						<br>
 					</textarea> 
 				</td>
@@ -212,6 +210,29 @@
 			target.appendChild(opt);
 		}	
 	}
+	
+	//판매가격 입력시 할인율 계산하는 함수
+	function calDiscount() {
+    	var origin_price = $('#a_price_origin_val').val(); 		// 오리지날 판매가격 12000
+        var discount_rate = $('#a_discount_rate_val').val();	// 할인율 10
+        var dec = (discount_rate / 100).toFixed(2);				// 0.01
+        var mult = origin_price * dec; 							// 12000 * 0.01
+        var discount = origin_price - mult;						// 12000 - (12000*0.01)
+        $('#a_price_sale_val').val(discount);
+	}
+	
+	//판매가격 입력시 적립금 계산하는 함수
+	function calMileage() {
+		var origin_price = $('#a_price_origin_val').val();
+		var mileage_rate = "1.4";
+        var dec = (mileage_rate / 100).toFixed(3);				// 0.014(1.4%) 적립
+        var mult = Math.floor(origin_price * dec);				// 12000 * 0.014
+        $('#a_mileage_val').val(Math.round(mult/100) * 100);	// 둘째자리부터 반올림해서 표시 1260 이면 1300으로
+	}
+    
+</script>
+	
+	
 
 </script>
 </html>

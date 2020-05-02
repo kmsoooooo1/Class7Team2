@@ -36,9 +36,7 @@ public class AnimalAddAction implements Action {
 		adto.setA_sex(multi.getParameter("a_sex"));
 		adto.setA_status(multi.getParameter("a_status"));
 		adto.setA_code(multi.getParameter("a_code"));
-		//기본 이미지
-		String images = multi.getFilesystemName("file1") + "," + multi.getFilesystemName("file2") + "," + multi.getFilesystemName("file3") + "," + multi.getFilesystemName("file4") + "," + multi.getFilesystemName("file5");
-		adto.setA_image(images);
+		adto.setA_thumbnail(multi.getFilesystemName("a_thumbnail"));
 		adto.setA_amount(Integer.parseInt(multi.getParameter("a_amount")));
 		adto.setA_price(Integer.parseInt(multi.getParameter("a_price")));
 		adto.setContent(multi.getParameter("ir1"));

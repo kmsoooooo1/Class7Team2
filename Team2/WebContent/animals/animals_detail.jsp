@@ -72,15 +72,29 @@
 							<option value=""> 고속버스택배 (+14,000원) </option>
 							<option value=""> 매장방문수령 </option>				
 						</select>  
+					<hr>
 					<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
+					<table border="1">
+						<tr>
+							<td> 상품명 </td>
+							<td> 상품수 </td>
+							<td> 가격 </td>
+						</tr>
+						<!--
+						
+							상품정보 자바스크립트로 실시간으로 제어하기	
+						
+						-->
+						<tr>
+							<td colspan="3"> TOTAL : 원 (개) </td>
+						</tr>
+					</table>
 					<hr>
+					<button type="button"> 바로구매 </button>
+					<button type="button"> 장바구니 </button>
+					<button type="button"> 관심상품 </button>
 					<br>
-					총 상품금액(수량): 0원 (0개) 
-					<br>
-					<hr>
-					<button type="button"> 바로구매하기 </button>
-					<button type="button"> 장바구니 담기 </button>
-					<button type="button"> 관심상품등록 </button>
+					<button type="button"> 카카오톡 상담 </button>
 				</td>
 			</tr>
 		</table>
