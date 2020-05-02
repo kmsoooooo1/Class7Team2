@@ -19,12 +19,16 @@ public class AnimalListAction implements Action{
 		//구분짓기 위한 변수 받기
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
+		String sub_category_index = request.getParameter("sub_category_index");
 		if(sub_category == null) {
 			//만약 유저가 '파충류'나 '양서류'만 선택했을시 sub_category에는 All을 넣어서 모든 파충류 또는 양서류를 가지고 온다.
 			sub_category = "all"; 
 		}
+		if(sub_category_index == null) {
+			sub_category_index = "all";
+		}
 		
-		List<AnimalDTO> animalList = adao.getAnimalList(category, sub_category); 
+		List<AnimalDTO> animalList = adao.getAnimalList(category, sub_category, sub_category_index); 
 		
 		//등록된 모든 상품의 정보를 가져와서 request 영역에 저장
 		request.setAttribute("animalList", animalList);

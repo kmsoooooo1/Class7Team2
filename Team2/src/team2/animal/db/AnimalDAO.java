@@ -71,9 +71,6 @@ public class AnimalDAO {
 			pstmt.setString(15, adto.getContent());
 			pstmt.setInt(16, 0);
 			pstmt.executeUpdate();
-			
-			System.out.println(pstmt.toString());
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -82,7 +79,7 @@ public class AnimalDAO {
 	}
 	
 	//동물 리스트 가져오는 함수 
-	public List<AnimalDTO> getAnimalList(String category, String sub_category) {
+	public List<AnimalDTO> getAnimalList(String category, String sub_category, String sub_category_index) {
 		List<AnimalDTO> animalList = new ArrayList<AnimalDTO>();
 		try {
 			con = getConnection();
@@ -92,21 +89,28 @@ public class AnimalDAO {
 			
 			//SQL buffer 안에 sql 구문 넣어주기
 			
-			//만약 category가 all이고 sub_category가 없으면(관리자 페이지에서 모든 동물을 부를때)
-			if(category.equals("all") && sub_category.equals("")){
+			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 모든 동물을 부를때)
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
 				SQL.append("select * from team2_animals order by num desc");
 			}
 			//만약 category가 파충류이면
 			else if(category.equals("파충류")){
-				SQL.append("select * from team2_animals where category = '파충류'");
+				SQL.append("select * from team2_animals where category = '파충류' ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
 					SQL.append("order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
-					//추가
-					SQL.append("AND sub_category = ? order by num desc");
+					SQL.append("AND sub_category = ? ");
+					//만약 sub_category_index가 없으면
+					if(sub_category_index.equals("all")){
+						SQL.append("order by num desc");
+					}
+					//만약 sub_category_index가 있으면
+					else {
+						SQL.append("AND sub_category_index = ? order by num desc");
+					}
 				}
 			}else if(category.equals("양서류")){
 				SQL.append("select * from team2_animals where category = '양서류'");
@@ -116,7 +120,6 @@ public class AnimalDAO {
 				}
 				//만약 sub_category가 있으면
 				else {
-					//추가
 					SQL.append("AND sub_category = ? order by num desc");
 				}
 			}
@@ -124,18 +127,20 @@ public class AnimalDAO {
 			pstmt = con.prepareStatement(SQL.toString());
 			
 			//?에 값 지정하기
-			if(category.equals("all") && sub_category.equals("")){
-				SQL.append("select * from team2_animals order by num desc");
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
 			}
 			else if(category.equals("파충류")){
-				SQL.append("select * from team2_animals where category = '파충류'");
 				if(sub_category.equals("all")) {
 				}
 				else {
 					pstmt.setString(1, sub_category);
+					if(sub_category_index.equals("all")){
+					}
+					else {
+						pstmt.setString(2, sub_category_index);
+					}
 				}
 			}else if(category.equals("양서류")){
-				SQL.append("select * from team2_animals where category = '양서류'");
 				if(sub_category.equals("all")) {
 				}
 				else {

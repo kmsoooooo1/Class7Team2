@@ -17,8 +17,9 @@ public class AnimalListAction implements Action{
 		
 		String category = request.getParameter("category");
 		String sub_category = "";
+		String sub_category_index = "";
 		
-		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category);
+		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category, sub_category_index);
 		
 		request.setAttribute("admin_animalList", admin_animalList); 
 		

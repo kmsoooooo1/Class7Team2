@@ -33,8 +33,8 @@
 	<!-- Main Content -->
 	<form action="" method="post" name="fr"> 
 	
-		<h4> <%=animalDetail.getA_morph() %> </h4>
-		
+		<!-- 동물 종 이름 -->
+		<h4> <%=animalDetail.getA_morph()%> </h4>
 		<!-- 동물 코드 -->
 		<input type="hidden" name="a_code" value="<%=animalDetail.getA_code()%>">
 	
@@ -43,7 +43,12 @@
 				<td> <img src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>" width="500" height="500"> </td>
 				<td>
 					<!-- 종 이름 -->
-					<span id="a_morph"> <%=animalDetail.getA_morph()%> </span>
+					<%if(animalDetail.getA_amount() == 0){%>
+						<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
+						<h4> <%=animalDetail.getA_morph()%> </h4>
+					<%}else{%>
+						<h4> <%=animalDetail.getA_morph()%> </h4>
+					<%}%>
 					<hr>
 					<!-- 판매가, 적립금, 할인판매가 -->
 					<table border="1">
@@ -58,12 +63,12 @@
 						</tr>
 						<tr>
 							<td> 적립금 </td>
-							<td> <%=animalDetail.getA_mileage()%>원 </td>
+							<td> <%=newformat_mileage%>원 </td>
 						</tr>
 						<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
 						<tr>
 							<td> 할인판매가  </td>
-							<td> <%=animalDetail.getA_price_sale()%>원 ( <%=animalDetail.getA_discount_rate()%>% 할인율) </td>
+							<td> <%=newformat_price_sale%>원 (<%=animalDetail.getA_discount_rate()%>% 할인율) </td>
 						</tr>
 						<%}%>
 					</table> 
@@ -97,11 +102,18 @@
 						</tr>
 					</table>
 					<hr>
-					<button type="button"> 바로구매 </button>
-					<button type="button"> 장바구니 </button>
-					<button type="button"> 관심상품 </button>
-					<br>
-					<button type="button"> 카카오톡 상담 </button>
+					<%if(animalDetail.getA_amount() == 0){%>
+						<span> 품절 </span>
+						<button type="button"> 관심상품 </button>
+						<br>
+						<button type="button"> 카카오톡 상담 </button>
+					<%}else{%>
+						<button type="button"> 바로구매 </button>
+						<button type="button"> 장바구니 </button>
+						<button type="button"> 관심상품 </button>
+						<br>
+						<button type="button"> 카카오톡 상담 </button>
+					<%}%>
 				</td>
 			</tr>
 		</table>

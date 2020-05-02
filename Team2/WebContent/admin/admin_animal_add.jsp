@@ -132,7 +132,7 @@
 
 	//첫번째 카테고리를 선택했을시
 	function categoryChange(e){
-		var animal_p = ["서브 종을 선택해주세요", "게코 도마뱀", "뱀", "거북"]; 	//파충류 선택했을시 나오는 리스트
+		var animal_p = ["서브 종을 선택해주세요", "도마뱀", "뱀", "거북"]; 	//파충류 선택했을시 나오는 리스트
 		var animal_y = ["서브 종을 선택해주세요", "프로그", "살라맨더", "팩맨"];	//양서류 선택했을시 나오는 리스트
 		
 		var empty_sub_category = ["서브 종을 선택해주세요"];					//빈 리스트, 서브 카테고리에 뿌려주기 위한 빈 리스트
@@ -180,15 +180,15 @@
 	}
 	//두번째 카테고리를 선택했을시
 	function sub_categoryChange(e){
-		var animal_geDo = ["서서브 종을 선택해주세요", "레오파드 게코", "크레스티드 게코", "펫테일 게코", "기타 게코"]; 	//게코 도마뱀을 선택했을시 나오는 리스트
+		var animal_Do = ["서서브 종을 선택해주세요", "리자드/모니터", "레오파드 게코", "크레스티드 게코", "카멜레온"]; 	//게코 도마뱀을 선택했을시 나오는 리스트
 		var animal_snake = ["서서브 종을 선택해주세요", "콘스네이크", "킹스네이크", "파이톤", "기타 애완뱀"];			//뱀을 선택했을시 나오는 리스트
 		var animal_turtle = ["서서브 종을 선택해주세요", "육지거북 ", "수생/습지 거북"];	//거북을 선택했을시 나오는 리스트
 		var empty_sub_category_index = ["-"];	//관리자가 양서류를 선택했을시 나오는 empty 리스트
 		
 		var target = document.getElementById("sub_category_index");
 
-		if(e.value == "게코 도마뱀") {
-			var d = animal_geDo;
+		if(e.value == "도마뱀") {
+			var d = animal_Do;
 		}
 		else if(e.value == "뱀") {
 			var d = animal_snake;
