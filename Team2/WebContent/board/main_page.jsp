@@ -20,6 +20,23 @@
 		<li><a href="./ParentTip.bo">유튜브</a></li>
 	</ul>
 	
+	<hr>
+	
+	<!-- 신상품 리스트 -->
+	- 신상품 
+	
+	<!-- 파충류 리스트 -->
+	- 파충류
+	
+	<!-- 양서류 리스트 -->
+	- 양서류
+	
+	<!-- 상품 리스트 -->
+	- 상품
+	
+	
+	<hr>
+	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>	
 

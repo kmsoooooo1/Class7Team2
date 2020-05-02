@@ -40,29 +40,39 @@
 			<tr>
 				<td> <img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[0]%>" width="500" height="500"> </td>
 				<td>
-					이름  <span id="a_morph"> <%=animalDetail.getA_morph()%> </span> 
-					<br>
-					판매가 <%=newformat_price%>원
-					<br>
-					배송비 
+					<!-- 종 이름 -->
+					<span id="a_morph"> <%=animalDetail.getA_morph()%> </span>
+					<hr>
+					<!-- 판매가, 적립금, 할인판매가 -->
+					<table border="1">
+						<tr>
+							<td> 판매가 </td>
+							<td> <%=newformat_price%>원 <% //만약 할인율이 있으면 {%> % OFF <%//}%> </td> 
+						</tr>
+						<tr>
+							<td> 적립금 </td>
+							<td> 원 </td>
+						</tr>
+						<%//만약 할인율이 있으면 {%>
+						<tr>
+							<td> 할인판매가  </td>
+							<td> 원 ( % 할인율) </td>
+						</tr>
+						<%//}%>
+					</table> 
+					<hr>
+					<!-- 배송방법 -->
+					배송방법
 						<select name="">
-							<option value=""> 주문시 결제(선결제) </option>
-							<option value=""> 수령시 결제(착불) </option>
-						</select>
-					<br>
-					3,000원 (30,000원 이상 구매 시 무료) 
-					<hr>
-					배송방법(생물) 
-						<select name="" >
-							<option value=""> -[필수] 옵션을 선택해 주세요 - </option>
+							<option value=""> -[필수]배송방법을 선택해 주세요 - </option>
 							<option value=""> --------------- </option>
-							<option value=""> 고속버스배송 (+10,000원) </option>
-							<option value=""> 방문구매 </option>
-							<option value=""> 지하철택배(후불) </option>
-							<option value=""> 퀵서비스(후불) </option>		
-						</select> 
-					<hr>
-					<!-- 구매하고자 하는 정보 자동으로 올라가는 부분 -->
+							<option value=""> 일반포장 </option>
+							<option value=""> 퀵서비스(착불) </option>
+							<option value=""> 지하철택배(착불) </option>
+							<option value=""> 고속버스택배 (+14,000원) </option>
+							<option value=""> 매장방문수령 </option>				
+						</select>  
+					<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
 					<hr>
 					<br>
 					총 상품금액(수량): 0원 (0개) 
@@ -99,9 +109,7 @@
 
 </body>
 <script type="text/javascript">
-	//id값이 'a_morph'인 span태그 안에 있는 값 가져오기
-	var a_morph = $('#a_morph').val();
-	document.title = a_morph;
+	
 
 </script>
 </html>
