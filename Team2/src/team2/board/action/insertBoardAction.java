@@ -2,16 +2,20 @@ package team2.board.action;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartFilter;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import team2.board.db.BoardDAO;
 import team2.board.db.BoardDTO;
@@ -22,58 +26,91 @@ public class insertBoardAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		
-		//	수정중
-		//	멀티파일업로드기능
-		
-		
-		System.out.println("InsertAction 실행");
-		ActionForward forward = new ActionForward();
-
-		//	ServletContext context = request.getServletContext();
-		ServletContext context = request.getServletContext();
-		String realPath = context.getRealPath("/upload/board"); // '/' 폴더에 대한 정보를 저장
-		
-		//파일 크기 지정
-		int maxSize = 10 * 1024 * 1024; //10MB
-		
-		File file;
-		
-		String b_file = "";
-		
-		//파일 업로드(cos.jar)
-		MultipartRequest multi = new MultipartRequest(
-				request,
-				realPath,
-				maxSize,
-				"UTF-8",
-				new DefaultFileRenamePolicy());
-		
-		
-		
-		Enumeration files = multi.getFileNames();
-		
-		while(files.hasMoreElements()) {
-			String name = (String)files.nextElement();
-			file = multi.getFile(name);
-			String str = file.getName();
-			b_file +="," + str;
-		}
-		
+		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		
-		System.out.println("b_file : " +b_file);
+		System.out.println("InsertAction 실행");
+		ActionForward forward = new ActionForward();
 		
+		//	ServletContext context = request.getServletContext();
+		ServletContext context = request.getServletContext();
+		String realPath = context.getRealPath("/upload/board"); // '/' 폴더에 대한 정보를 저장
+		
+		//	DB업로드 할 파일명 변수
+		String b_file = "";
+		//	받아올 request 변수
+		Map<String, String> board = new HashMap<>();
+
+		System.out.println("realPath : "+realPath);
+		
+		System.out.println("before : " + request.getParameter("b_category"));
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		System.out.println("after : " + request.getParameter("b_category"));
+		if(!isMultipart) {
+		}else {
+			FileItemFactory factory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			
+			List items = null;
+			try {
+				items = upload.parseRequest(request);
+			}catch(Exception e){
+				System.err.println("Item get Error : " + e.toString());
+				e.printStackTrace();
+			}
+			
+			Iterator itr = items.iterator();
+			while(itr.hasNext()) {
+				FileItem item = (FileItem)itr.next();
+				if(item.isFormField()) {
+					System.out.println("fieldName : "+item.getFieldName());
+					System.out.println("value : " + item.getString("utf-8"));
+					board.put(item.getFieldName(), item.getString("utf-8"));
+					
+				}else {
+					try {
+						//	업로드한 파일 및 파일명 확인
+						String itemName = item.getName();
+						System.out.println("File name = " + itemName);
+						
+						//	파일명을 현재시간으로 변경 후 저장
+						String fileExt = itemName.substring(itemName.lastIndexOf("."));
+				        String uploadedFileName = System.currentTimeMillis() + fileExt; 
+				        System.out.println(fileExt);
+				        System.out.println(uploadedFileName);
+						
+						//	DB에 저장할 파일명 변수에 파일명 추가
+						b_file +="," + uploadedFileName;
+						File savedFile = new File(uploadedFileName);
+						
+						//	파일이름 저장
+						System.out.println(savedFile.getName());
+						
+						//	저장할 경로에 파일 객체 생성
+						File upFile = new File(realPath +"/" +savedFile.getName());
+						
+						//	파일 저장
+						item.write(upFile);
+						
+					}catch(Exception e) {
+						System.err.println("Write : " + e.toString());
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		System.out.println(board.toString());
 		
 		//	dto 생성 및 설정
 		BoardDTO dto = new BoardDTO();
-		dto.setB_category(multi.getParameter("b_category"));
-		dto.setB_p_cate(multi.getParameter("b_p_cate"));
-		dto.setB_title(multi.getParameter("b_title"));
-		dto.setB_writer(multi.getParameter(id));
-		dto.setB_content(multi.getParameter("ir1"));
+		dto.setB_category(board.get("b_category"));
+		dto.setB_p_cate(board.get("b_p_cate"));
+		dto.setB_title(board.get("b_title"));
+		dto.setB_writer(id);
+		dto.setB_content(board.get("ir1"));
 		dto.setIp_addr(request.getRemoteAddr());
 		dto.setB_file(b_file);
 		
@@ -90,7 +127,7 @@ public class insertBoardAction implements Action {
 			forward.setPath("./BoardMain.bo");
 			forward.setRedirect(true);
 		}else{
-			//	insert 실패
+				//	insert 실패
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
