@@ -65,11 +65,16 @@ public class insertBoardAction implements Action {
 			while(itr.hasNext()) {
 				FileItem item = (FileItem)itr.next();
 				if(item.isFormField()) {
+					//	request
+					//	! type="file"
 					System.out.println("fieldName : "+item.getFieldName());
 					System.out.println("value : " + item.getString("utf-8"));
+					
+					//	HashMap을 이용해 Collection에 항목 추가
 					board.put(item.getFieldName(), item.getString("utf-8"));
 					
 				}else {
+					//	  type="file"
 					try {
 						//	업로드한 파일 및 파일명 확인
 						String itemName = item.getName();
@@ -89,7 +94,7 @@ public class insertBoardAction implements Action {
 						System.out.println(savedFile.getName());
 						
 						//	저장할 경로에 파일 객체 생성
-						File upFile = new File(realPath +"/" +savedFile.getName());
+						File upFile = new File(realPath + "/" +savedFile.getName());
 						
 						//	파일 저장
 						item.write(upFile);
