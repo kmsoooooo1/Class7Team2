@@ -30,7 +30,7 @@
 		String pageNum = (String)request.getAttribute("pageNum");
 	%>
 	
-		 <h2><a href="./BoardWrite.bo"> 글 쓰기  </a></h2>
+		 <h2><a href="./Insert.bo"> 글 쓰기 (스마트에디터)  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
 	
 	<table border="1">

@@ -49,10 +49,11 @@
             <table width ="360" border="0">
                  <tr >
                       <td align = "center">
-                            <font size ="2">아이디를 입력하세요</ font>< p>
+                            <font size ="2">아이디를 입력하세요</font>
+                      <p>
                             <input type ="text" size="20" maxlength= "20" name ="id"/>
                             <input type ="submit" value= "중복확인" />
-                      </p >
+                      </p>
                       </td >
                  </tr >
             </table >

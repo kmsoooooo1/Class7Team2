@@ -7,7 +7,7 @@ public class Criteria {
 	
 	//getPageStart 특정 페이지의 게시글 시작 번호, 게시글 시작 행 번호
 	public int getPageStart() {
-		return (page-1)*perpageNum+1;
+		return (this.page-1)*perpageNum;
 	}
 	
 	public Criteria() {
