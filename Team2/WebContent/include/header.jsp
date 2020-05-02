@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div> 
 		<a href="./Main.me" id="logo"> 갈라파고스(로고) </a>
 		<%
 			request.setCharacterEncoding("UTF-8");
@@ -22,6 +22,7 @@
 			<a href="./Main.ad"> 관리자 페이지 </a>
 			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% }else{ %>
+			<a href="./MemberPage.me"> 마이 페이지 </a>
 			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% } %> 
 	</div>
