@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `team2_project` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `team2_project`;
--- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: team2_project
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	5.6.45-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,22 +23,22 @@ DROP TABLE IF EXISTS `team2_animals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_animals` (
-  `num` int NOT NULL,
-  `category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `sub_category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sub_category_index` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `a_morph` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `a_sex` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `a_status` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `a_code` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `a_thumbnail` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `a_amount` int NOT NULL,
-  `a_price_origin` int DEFAULT NULL,
-  `a_discount_rate` int DEFAULT NULL,
-  `a_price_sale` int DEFAULT NULL,
-  `a_mileage` int DEFAULT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `a_view_count` int DEFAULT NULL,
+  `num` int(11) NOT NULL,
+  `category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `sub_category` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sub_category_index` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `a_morph` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `a_sex` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `a_status` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `a_code` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `a_thumbnail` text COLLATE utf8_unicode_ci NOT NULL,
+  `a_amount` int(11) NOT NULL,
+  `a_price_origin` int(11) DEFAULT NULL,
+  `a_discount_rate` int(11) DEFAULT NULL,
+  `a_price_sale` int(11) DEFAULT NULL,
+  `a_mileage` int(11) DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `a_view_count` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`a_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -64,10 +62,10 @@ DROP TABLE IF EXISTS `team2_basket`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_basket` (
-  `b_num` int NOT NULL,
+  `b_num` int(11) NOT NULL,
   `id` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `b_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `b_amount` int DEFAULT NULL,
+  `b_amount` int(11) DEFAULT NULL,
   `b_option` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`b_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -90,18 +88,18 @@ DROP TABLE IF EXISTS `team2_board`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_board` (
-  `b_idx` int NOT NULL AUTO_INCREMENT,
-  `b_category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `b_p_cate` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `b_title` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `b_writer` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `b_content` varchar(2000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `b_ref` int NOT NULL,
-  `b_like` int DEFAULT '0',
-  `b_view` int DEFAULT '0',
+  `b_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `b_category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `b_p_cate` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `b_title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `b_writer` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `b_content` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
+  `b_ref` int(11) NOT NULL,
+  `b_like` int(11) DEFAULT '0',
+  `b_view` int(11) DEFAULT '0',
   `b_reg_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `ip_addr` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `b_file` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ip_addr` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `b_file` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`b_idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -116,6 +114,37 @@ LOCK TABLES `team2_board` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `team2_comment`
+--
+
+DROP TABLE IF EXISTS `team2_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `team2_comment` (
+  `c_idx` int(11) NOT NULL,
+  `c_category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `c_content_idx` int(11) NOT NULL,
+  `c_id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `c_comment` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `c_like` int(11) DEFAULT '0',
+  `c_regdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `ip_addr` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`c_idx`),
+  KEY `cmt_id_fk` (`c_id`),
+  CONSTRAINT `cmt_id_fk` FOREIGN KEY (`c_id`) REFERENCES `team2_member` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `team2_comment`
+--
+
+LOCK TABLES `team2_comment` WRITE;
+/*!40000 ALTER TABLE `team2_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `team2_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `team2_goods`
 --
 
@@ -123,17 +152,17 @@ DROP TABLE IF EXISTS `team2_goods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_goods` (
-  `num` int NOT NULL,
-  `category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `sub_category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sub_category_index` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `g_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `g_code` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `g_image` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `g_amount` int NOT NULL,
-  `g_price` int NOT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `g_view_count` int DEFAULT NULL,
+  `num` int(11) NOT NULL,
+  `category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `sub_category` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sub_category_index` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `g_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `g_code` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `g_image` text COLLATE utf8_unicode_ci NOT NULL,
+  `g_amount` int(11) NOT NULL,
+  `g_price` int(11) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `g_view_count` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -156,14 +185,14 @@ DROP TABLE IF EXISTS `team2_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_member` (
-  `id` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `pass` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `zipcode` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `addr1` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `addr2` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `zipcode` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `addr1` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `addr2` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `reg_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -196,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-03 14:53:04
+-- Dump completed on 2020-05-03 15:29:51
