@@ -75,14 +75,14 @@
 					<hr>
 					<!-- 배송방법 -->
 					배송방법
-						<select name="">
-							<option value=""> -[필수]배송방법을 선택해 주세요 - </option>
-							<option value=""> --------------- </option>
-							<option value=""> 일반포장 </option>
-							<option value=""> 퀵서비스(착불) </option>
-							<option value=""> 지하철택배(착불) </option>
-							<option value=""> 고속버스택배 (+14,000원) </option>
-							<option value=""> 매장방문수령 </option>				
+						<select id="delivery_method" name="delivery_method">
+							<option value="default"> -[필수]배송방법을 선택해 주세요 - </option>
+							<option value="default"> --------------- </option>
+							<option value="일반포장"> 일반포장 </option>
+							<option value="퀵서비스"> 퀵서비스(착불) </option>
+							<option value="지하철"> 지하철택배(착불) </option>
+							<option value="고속버스"> 고속버스택배 (+14,000원) </option>
+							<option value="매장방문"> 매장방문수령 </option>				
 						</select>  
 					<hr>
 					<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
@@ -108,8 +108,8 @@
 						<br>
 						<button type="button"> 카카오톡 상담 </button>
 					<%}else{%>
-						<button type="button"> 바로구매 </button>
-						<button type="button"> 장바구니 </button>
+						<button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
+						<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
 						<button type="button"> 관심상품 </button>
 						<br>
 						<button type="button"> 카카오톡 상담 </button>
@@ -139,6 +139,46 @@
 
 </body>
 <script type="text/javascript">
+
+	//장바구니 버튼을 클릭했을시
+	function valueBasketChecked() {
+		//만약 배송방법을 선택하지 않았다면
+		if(document.getElementById("delivery_method").value == "default"){
+			alert("배송옵션을 선턱해주세요");
+			document.fr.delivery_method.focus();
+			return false;
+		}
+		//배송방법을 선택했을시
+		else {
+			var isBasket = confirm("장바구니에 담으시겠습니까?");
+			if(isBasket) {
+				document.fr.action="";
+				document.fr.sbmit();
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	//구매하기 버튼을 클릭했을시
+	function valueOrderChecked() {
+		//만약 배송방법을 선택하지 않았다면
+		if(document.getElementById("delivery_method").value == "default"){
+			alert("배송옵션을 선턱해주세요");
+			document.fr.delivery_method.focus();
+			return false;
+		}
+		//배송방법을 선택했을시
+		else {
+			var isBasket = confirm("구매하시겠습니까?");
+			if(isBasket) {
+				document.fr.action="";
+				document.fr.sbmit();
+			} else {
+				return false;
+			}
+		}
+	}
 	
 
 </script>
