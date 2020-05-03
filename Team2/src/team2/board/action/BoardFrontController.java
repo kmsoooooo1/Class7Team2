@@ -137,6 +137,20 @@ public class BoardFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./board/video.jsp");
 			forward.setRedirect(false);
+
+		}else if(command.equals("/BoardList.bo")){
+			
+			System.out.println("/BoardList.bo 주소 처리");
+			
+			// 카테고리 별 게시판 뷰 페이지로 이동
+			
+			action = new BoardListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if(command.equals("/InsertCommentAction.bo")) {
 			
 			//	board 답글 insert Action 실행
