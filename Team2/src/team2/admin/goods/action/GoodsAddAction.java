@@ -44,19 +44,15 @@ public class GoodsAddAction implements Action{
 		gdto.setSub_category_index(multi.getParameter("sub_category_index"));
 		gdto.setG_name(multi.getParameter("g_name"));
 		gdto.setG_code(multi.getParameter("g_code"));
-		
-		String image = multi.getFilesystemName("file1")+","
-				+ multi.getFilesystemName("file2")+","
-				+ multi.getFilesystemName("file3")+","
-				+ multi.getFilesystemName("file4")+","
-				+ multi.getFilesystemName("file5");
-		gdto.setG_image(image);
+		gdto.setG_thumbnail(multi.getFilesystemName("g_thumbnail"));
 		gdto.setG_amount(Integer.parseInt(multi.getParameter("g_amount")));
-		gdto.setG_price(Integer.parseInt(multi.getParameter("g_price")));
-		gdto.setContent(multi.getParameter("content"));
+		gdto.setG_price_origin(Integer.parseInt(multi.getParameter("g_price_origin")));
+		gdto.setG_discount_rate(Integer.parseInt(multi.getParameter("g_discount_rate")));
+		gdto.setG_price_sale(Integer.parseInt(multi.getParameter("g_price_sale")));
+		gdto.setG_mileage(Integer.parseInt(multi.getParameter("g_mileage")));
+		gdto.setContent(multi.getParameter("ir1"));
 		//gdto.setDate(multi.getParameter("date"));  -> 디비에서 입력
 		
-		System.out.println("이미지 파일정보 : " + image);
 		System.out.println("GoodsDTO 저장완료 : " + gdto.toString());
 		
 		// 3. AdminGoodsDAO 객체를 생성해서 처리
@@ -65,6 +61,7 @@ public class GoodsAddAction implements Action{
 		
 		gdao.insertGoods(gdto);
 		
+		// 페이지 이동
 		ActionForward forward = new ActionForward();
 		
 		forward.setPath("./Main.ad");

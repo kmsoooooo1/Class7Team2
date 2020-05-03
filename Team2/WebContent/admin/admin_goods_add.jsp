@@ -52,21 +52,10 @@
 		  </tr>
 		  
 		  <tr> 
-		   <td rowspan="5">상품 기본 이미지(5장)</td>
-		   <td><input type="file" name="file1"></td>
+		   <td>상품 썸네일 이미지</td>
+		   <td><input type="file" name="g_thumbnail"></td>
 		  </tr>
-		  <tr>
-		   <td><input type="file" name="file2"></td>
-		  </tr>
-		  <tr>
-		   <td><input type="file" name="file3"></td>
-		  </tr>
-		  <tr>
-		   <td><input type="file" name="file4"></td>
-		  </tr>
-		  <tr>
-		   <td><input type="file" name="file5"></td>
-		  </tr>
+		
 		  
 		  <tr> 
 		   <td>상품 개수</td>
@@ -74,22 +63,39 @@
 		  </tr>
 		  
 		  <tr> 
-		   <td>상품 가격</td>
-		   <td><input type="text" name="g_price"></td>
+		   <td rowspan="3">상품 가격</td>
+		   <td> 판매가(할인전) : <input type="text" id="g_price_origin_val" name="g_price_origin" value="" onkeyup="calMileage()">원 </td>
 		  </tr> 
-		
-		  <tr> <!-- content -->
-		   <td colspan="2"><textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea></td>
+		  <tr>
+			<td> 할인율(없으면 0 기재) :  <input type="text" id="g_discount_rate_val" name="g_discount_rate" onkeyup="calDiscount()">%</td>
 		  </tr>
+		  <tr>
+			<td> 판매가(할인후) :  <input  type="text" id="g_price_sale_val" name="g_price_sale">원 </td>
+		  </tr>
+		
+		  <tr>
+			<td> 적립금 </td>
+			<td> <input  type="text" id="g_mileage_val" name="g_mileage">원 </td>
+		  </tr>
+		  
+		  
+		  <tr> <!-- content -->
+		   <td colspan="2">
+		   		<textarea name="ir1" id="ir1" rows="10" cols="100">
+		   		  <br>
+					<span style="font-weight: bold"> 관련 동물(종) </span> : <br><br>
+				  <br>
+		   		</textarea>
+		   </td>
+		  </tr>
+		  
 		  <tr>
 			<td colspan="2"> 
 				<input type="button" onclick="return save();" value="추가하기"/>
 				<button type="reset">취소</button>
 			</td>
-		</tr>
+		  </tr>
 		  
-		 
-		
 		</table>
 	</form>
 	
@@ -210,6 +216,26 @@
 			opt.innerHTML = d[i];
 			target.appendChild(opt);
 		}	
+	}
+	
+	
+	//판매가격 입력시 할인율 계산하는 함수
+	function calDiscount() {
+    	var origin_price = $('#g_price_origin_val').val(); 		// 오리지날 판매가격 12000
+        var discount_rate = $('#g_discount_rate_val').val();	// 할인율 10
+        var dec = (discount_rate / 100).toFixed(2);				// 0.01
+        var mult = origin_price * dec; 							// 12000 * 0.01
+        var discount = origin_price - mult;						// 12000 - (12000*0.01)
+        $('#g_price_sale_val').val(discount);
+	}
+	
+	//판매가격 입력시 적립금 계산하는 함수
+	function calMileage() {
+		var origin_price = $('#g_price_origin_val').val();
+		var mileage_rate = "1.4";
+        var dec = (mileage_rate / 100).toFixed(3);				// 0.014(1.4%) 적립
+        var mult = Math.floor(origin_price * dec);				// 12000 * 0.014
+        $('#g_mileage_val').val(Math.round(mult/100) * 100);	// 둘째자리부터 반올림해서 표시 1260 이면 1300으로
 	}
 	
 

@@ -70,6 +70,16 @@ public class AdminGoodsFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		// 상품 리스트 가져오는 페이지(관리자)
+		else if(command.equals("/GoodsList.ag")){
+			action = new GoodsListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		
