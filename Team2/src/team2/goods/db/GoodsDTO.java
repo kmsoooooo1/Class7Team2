@@ -7,7 +7,7 @@ public class GoodsDTO {
 	private String category;
 	private String sub_category;
 	private String sub_category_index;
-	private String name;
+	private String g_name;
 	private String g_code;
 	private String g_image;
 	private int g_amount;
@@ -40,11 +40,11 @@ public class GoodsDTO {
 	public void setSub_category_index(String sub_category_index) {
 		this.sub_category_index = sub_category_index;
 	}
-	public String getName() {
-		return name;
+	public String getG_name() {
+		return g_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setG_name(String g_name) {
+		this.g_name = g_name;
 	}
 	public String getG_code() {
 		return g_code;
@@ -92,7 +92,7 @@ public class GoodsDTO {
 	@Override
 	public String toString() {
 		return "GoodsDTO [num=" + num + ", category=" + category + ", sub_category=" + sub_category
-				+ ", sub_category_index=" + sub_category_index + ", name=" + name + ", g_code=" + g_code + ", g_image=" + g_image
+				+ ", sub_category_index=" + sub_category_index + ", g_name=" + g_name + ", g_code=" + g_code + ", g_image=" + g_image
 				+ ", g_amount=" + g_amount + ", g_price=" + g_price + ", content=" + content + ", g_view_count="
 				+ g_view_count + ", date=" + date + "]";
 	}

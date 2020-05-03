@@ -19,9 +19,8 @@
 		<!-- 관리자 동물 파트 -->
 		<div> 
 			<h4> 동물 파트 </h4>
+			<a href="./AnimalList.aa?category=all"> 모든 동물 리스트 </a>
 			<a href="./AnimalAdd.aa">동물 추가하기</a>
-			<a href="">동물 수정하기</a>
-			<a href="">동물 삭제하기</a>
 		</div>
 		
 		<!-- 관리자 상품 파트 -->

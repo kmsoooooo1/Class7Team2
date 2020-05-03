@@ -52,7 +52,7 @@ public class AnimalDAO {
 			if(rs.next()){
 				num = rs.getInt(1) + 1;
 			}
-			sql = "insert into team2_animals values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
+			sql = "insert into team2_animals values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, adto.getCategory());
@@ -62,15 +62,15 @@ public class AnimalDAO {
 			pstmt.setString(6, adto.getA_sex());
 			pstmt.setString(7, adto.getA_status());
 			pstmt.setString(8, adto.getA_code());
-			pstmt.setString(9, adto.getA_image());
+			pstmt.setString(9, adto.getA_thumbnail());
 			pstmt.setInt(10, adto.getA_amount());
-			pstmt.setInt(11, adto.getA_price());
-			pstmt.setString(12, adto.getContent());
-			pstmt.setInt(13, 0);
+			pstmt.setInt(11, adto.getA_price_origin());
+			pstmt.setInt(12, adto.getA_discount_rate());
+			pstmt.setInt(13, adto.getA_price_sale());
+			pstmt.setInt(14, adto.getA_mileage());
+			pstmt.setString(15, adto.getContent());
+			pstmt.setInt(16, 0);
 			pstmt.executeUpdate();
-			
-			System.out.println(pstmt.toString());
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -79,7 +79,7 @@ public class AnimalDAO {
 	}
 	
 	//동물 리스트 가져오는 함수 
-	public List<AnimalDTO> getAnimalList(String category, String sub_category) {
+	public List<AnimalDTO> getAnimalList(String category, String sub_category, String sub_category_index) {
 		List<AnimalDTO> animalList = new ArrayList<AnimalDTO>();
 		try {
 			con = getConnection();
@@ -88,17 +88,29 @@ public class AnimalDAO {
 			StringBuffer SQL = new StringBuffer();
 			
 			//SQL buffer 안에 sql 구문 넣어주기
+			
+			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 모든 동물을 부를때)
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+				SQL.append("select * from team2_animals order by num desc");
+			}
 			//만약 category가 파충류이면
-			if(category.equals("파충류")){
-				SQL.append("select * from team2_animals where category = '파충류'");
+			else if(category.equals("파충류")){
+				SQL.append("select * from team2_animals where category = '파충류' ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
 					SQL.append("order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
-					//추가
-					SQL.append("AND sub_category = ? order by num desc");
+					SQL.append("AND sub_category = ? ");
+					//만약 sub_category_index가 없으면
+					if(sub_category_index.equals("all")){
+						SQL.append("order by num desc");
+					}
+					//만약 sub_category_index가 있으면
+					else {
+						SQL.append("AND sub_category_index = ? order by num desc");
+					}
 				}
 			}else if(category.equals("양서류")){
 				SQL.append("select * from team2_animals where category = '양서류'");
@@ -108,7 +120,6 @@ public class AnimalDAO {
 				}
 				//만약 sub_category가 있으면
 				else {
-					//추가
 					SQL.append("AND sub_category = ? order by num desc");
 				}
 			}
@@ -116,15 +127,20 @@ public class AnimalDAO {
 			pstmt = con.prepareStatement(SQL.toString());
 			
 			//?에 값 지정하기
-			if(category.equals("파충류")){
-				SQL.append("select * from team2_animals where category = '파충류'");
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+			}
+			else if(category.equals("파충류")){
 				if(sub_category.equals("all")) {
 				}
 				else {
 					pstmt.setString(1, sub_category);
+					if(sub_category_index.equals("all")){
+					}
+					else {
+						pstmt.setString(2, sub_category_index);
+					}
 				}
 			}else if(category.equals("양서류")){
-				SQL.append("select * from team2_animals where category = '양서류'");
 				if(sub_category.equals("all")) {
 				}
 				else {
@@ -145,9 +161,12 @@ public class AnimalDAO {
 				adto.setA_sex(rs.getString("a_sex"));
 				adto.setA_status(rs.getString("a_status"));
 				adto.setA_code(rs.getString("a_code"));
-				adto.setA_image(rs.getString("a_image"));
+				adto.setA_thumbnail(rs.getString("a_thumbnail"));
 				adto.setA_amount(rs.getInt("a_amount"));
-				adto.setA_price(rs.getInt("a_price"));
+				adto.setA_price_origin(rs.getInt("a_price_origin"));
+				adto.setA_discount_rate(rs.getInt("a_discount_rate"));
+				adto.setA_price_sale(rs.getInt("a_price_sale"));
+				adto.setA_mileage(rs.getInt("a_mileage"));
 				adto.setContent(rs.getString("content"));
 				adto.setA_view_count(rs.getInt("a_view_count"));
 				adto.setDate(rs.getDate("date"));
@@ -196,9 +215,12 @@ public class AnimalDAO {
 				adto.setA_sex(rs.getString("a_sex"));
 				adto.setA_status(rs.getString("a_status"));
 				adto.setA_code(rs.getString("a_code"));
-				adto.setA_image(rs.getString("a_image"));
+				adto.setA_thumbnail(rs.getString("a_thumbnail"));
 				adto.setA_amount(rs.getInt("a_amount"));
-				adto.setA_price(rs.getInt("a_price"));
+				adto.setA_price_origin(rs.getInt("a_price_origin"));
+				adto.setA_discount_rate(rs.getInt("a_discount_rate"));
+				adto.setA_price_sale(rs.getInt("a_price_sale"));
+				adto.setA_mileage(rs.getInt("a_mileage"));
 				adto.setContent(rs.getString("content"));
 				adto.setA_view_count(rs.getInt("a_view_count"));
 				adto.setDate(rs.getDate("date"));

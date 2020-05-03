@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div> 
 		<a href="./Main.me" id="logo"> 갈라파고스(로고) </a>
 		<%
 			request.setCharacterEncoding("UTF-8");
@@ -22,6 +22,7 @@
 			<a href="./Main.ad"> 관리자 페이지 </a>
 			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% }else{ %>
+			<a href="./MemberPage.me"> 마이 페이지 </a>
 			<a href="./MemberLogout.me"> 로그아웃 </a>
 		<% } %> 
 	</div>
@@ -32,13 +33,19 @@
 	<!-- 메인 메뉴 -->
 	<div>
 		<ul>
-			<li> <a href="./AnimalList.an?category=파충류"> 파충류 </a>
+			<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀"> 도마뱀 </a>
 				<ul>
-					<li> <a href="./AnimalList.an?category=파충류&sub_category=게코 도마뱀"> 게코 도마뱀 </a> </li>
-					<li> <a href="./AnimalList.an?category=파충류&sub_category=뱀"> 뱀 </a> </li>
-					<li> <a href="./AnimalList.an?category=파충류&sub_category=거북"> 거북 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a> </li>
 				</ul>
 			</li>
+			<li> <a href="./AnimalList.an?category=파충류&sub_category=뱀"> 뱀 </a> </li>
+			
+			<li> <a href="./AnimalList.an?category=파충류&sub_category=거북"> 거북 </a> </li>
+			
+			
 			<li> <a href="./AnimalList.an?category=양서류"> 양서류 </a>
 				<ul>
 					<li> <a href="./AnimalList.an?category=양서류&sub_category=프로그"> 프로그 </a> </li>
@@ -48,5 +55,7 @@
 			</li>
 		</ul>
 	</div>
+	
+	<hr>
 </body>
 </html>

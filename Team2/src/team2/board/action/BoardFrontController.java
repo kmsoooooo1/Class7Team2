@@ -137,6 +137,7 @@ public class BoardFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./board/video.jsp");
 			forward.setRedirect(false);
+
 		}else if(command.equals("/BoardList.bo")){
 			
 			System.out.println("/BoardList.bo 주소 처리");
@@ -148,6 +149,17 @@ public class BoardFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/InsertCommentAction.bo")) {
+			
+			//	board 답글 insert Action 실행
+			
+			action = new insertCommenctAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
