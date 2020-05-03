@@ -26,7 +26,7 @@
 		<!-- 관리자 상품 파트 -->
 		<div>
 			<h4> 상품 파트 </h4>
-			<a href="#"> 모든 상품 리스트 </a>
+			<a href="./GoodsList.ag?category=all"> 모든 상품 리스트 </a>
 			<a href="./GoodsAdd.ag">사육용품 추가하기</a>
 		</div>
 		
