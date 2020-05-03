@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-CREATE DATABASE  IF NOT EXISTS `team2_project` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+CREATE DATABASE  IF NOT EXISTS `team2_project`/*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `team2_project`;
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
@@ -172,7 +171,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2020-05-03  1:44:47
-=======
+
 CREATE DATABASE  IF NOT EXISTS `team2_project` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `team2_project`;
 -- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
@@ -371,5 +370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-03 14:53:04
->>>>>>> refs/heads/master
+
