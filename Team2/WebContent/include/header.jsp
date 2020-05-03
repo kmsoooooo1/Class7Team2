@@ -53,6 +53,27 @@
 					<li> <a href="./AnimalList.an?category=양서류&sub_category=팩맨"> 팩맨 </a> </li>
 				</ul>
 			</li>
+			
+			<li> <a href="#"> 먹이 </a>
+				<ul>
+					<li><a href="#"> 생먹이 </a></li>
+					<li><a href="#"> 냉동먹이 </a></li>
+					<li><a href="#"> 인공사료 </a></li>
+					<li><a href="#"> 칼슘/약품 </a></li>
+				</ul>
+			</li>
+			
+			<li> <a href="#"> 사육용품 </a>
+				<ul>
+					<li><a href="#"> 사육장 </a></li>
+					<li><a href="#"> 장식/그릇 </a></li>
+					<li><a href="#"> 램프 </a></li>
+					<li><a href="#"> 바닥재 </a></li>
+					<li><a href="#"> 온/습도 관련 </a></li>
+					<li><a href="#"> 보조용품 </a></li>
+					<li><a href="#"> 수족관 </a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	
