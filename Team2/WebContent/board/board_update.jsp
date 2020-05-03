@@ -1,3 +1,4 @@
+<%@page import="team2.board.action.cSet"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,7 +17,6 @@
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getAttribute("pageNum");
-
 	%>
 	
 	<form action="./BoardUpdateAction.bo?pageNum=${pageNum}" method="post">
@@ -28,13 +28,26 @@
 		</tr>
 		<tr>
 			<td>카테고리</td>
-			<td><c:set var="category" value="<%=bdto.getB_category() %>" />
-			<select name="category">
-		   <option value="notice" <c:if test="${category eq 'notice'} "> selected</c:if>>공지사항</option>
-		   <option value="review" <c:if test="${category eq 'review'} "> selected</c:if>>상품후기</option>
-		   <option value="qna" <c:if test="${category eq 'qna'} "> selected</c:if>>상품문의</option>
-	  </select>
+			<td>
+			<select name="b_category">
+				<%for(int i = 0; i<cSet.Category.length; i++){ %>
+					<option value=<%=cSet.Category[i] %>><%=cSet.Category[i]%></option>
+				<%} %>
+			</select>
 			</td>
+		</tr>
+		<tr>
+			<td>세부카테고리</td>
+			<td>
+			<select name="b_p_cate">
+				<%for(int i = 0; i<cSet.p_Category.length; i++){ %>
+					<option value=<%=cSet.p_Category[i] %>><%=cSet.p_Category[i] %></option>
+				<%} %>
+			</select>
+			</td>
+		</tr>
+
+		<tr>
 			<td>제목</td><td><input type="text" name="title" value="<%=bdto.getB_title()%>"></td>
 		</tr>
 	
