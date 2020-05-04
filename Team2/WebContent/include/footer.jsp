@@ -8,6 +8,7 @@
 </head>
 <body>
 <div id="footer_inner">
+	<hr>
 	<div class="footer_nav_wrap">
 		<ul>
 			<li>회사소개</li>

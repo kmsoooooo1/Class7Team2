@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="../js/board/commentInsert.js"></script>
 </head>
 <body>
 	<h1>WebContent/board/board_content.jsp</h1>
@@ -13,6 +14,8 @@
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
+		
+		if(bdto!=null){
 	%>
 	
 	<table border ="1">
@@ -47,8 +50,21 @@
 			
 			</td>
 		</tr>
+	</table>
+	<%} %>
+	<div class="comment_wrap">
+		<div>
+			<form name="fr" action="./InsertCommentAction.bo" method="post">
+				<input type="hidden" name="c_category" value="board">
+<%-- 				<input type="hidden" name="b_idx" value=<%=bdto.getB_idx()%>> --%>
+				<textarea name="comment"></textarea>
+				<button type="button" onclick="return insertCommenctCheck()">등록</button>
+			</form>
+		</div>
+		<div></div>
+	</div>
 		
 	
-	</table>
+
 </body>
 </html>

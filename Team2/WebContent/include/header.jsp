@@ -27,19 +27,25 @@
 		<% } %> 
 	</div>
 	
-	<a href="./notice.bo?category=notice">공지사항</a>
-	<a href="./review.bo?category=review">상품후기</a>
+	<a href="./BoardList.bo?category=0">공지사항</a>
+	<a href="./BoardList.bo?category=1">상품후기</a>
 	
 	<!-- 메인 메뉴 -->
 	<div>
 		<ul>
-			<li> <a href="./AnimalList.an?category=파충류"> 파충류 </a>
+			<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀"> 도마뱀 </a>
 				<ul>
-					<li> <a href="./AnimalList.an?category=파충류&sub_category=게코 도마뱀"> 게코 도마뱀 </a> </li>
-					<li> <a href="./AnimalList.an?category=파충류&sub_category=뱀"> 뱀 </a> </li>
-					<li> <a href="./AnimalList.an?category=파충류&sub_category=거북"> 거북 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a> </li>
+					<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a> </li>
 				</ul>
 			</li>
+			<li> <a href="./AnimalList.an?category=파충류&sub_category=뱀"> 뱀 </a> </li>
+			
+			<li> <a href="./AnimalList.an?category=파충류&sub_category=거북"> 거북 </a> </li>
+			
+			
 			<li> <a href="./AnimalList.an?category=양서류"> 양서류 </a>
 				<ul>
 					<li> <a href="./AnimalList.an?category=양서류&sub_category=프로그"> 프로그 </a> </li>
@@ -49,5 +55,7 @@
 			</li>
 		</ul>
 	</div>
+	
+	<hr>
 </body>
 </html>

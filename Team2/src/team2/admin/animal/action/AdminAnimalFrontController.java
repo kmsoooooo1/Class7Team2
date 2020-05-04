@@ -65,6 +65,15 @@ public class AdminAnimalFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		//모든동물 리스트 가져오는 페이지로 가기
+		else if(command.equals("/AnimalList.aa")) {
+			action = new AnimalListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 

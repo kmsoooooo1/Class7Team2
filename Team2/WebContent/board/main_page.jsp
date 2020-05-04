@@ -12,12 +12,33 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
+	<ul>
+		<li><a href="./notice.bo">공지사항</a></li>
+		<li><a href="">Q&A</a></li>
+		<li><a href="./review.bo">후기&리뷰</a></li>
+		<li><a href="./aHospital.bo">동물병원정보</a></li>
+		<li><a href="./ParentTip.bo">유튜브</a></li>
+	</ul>
+	
+	<hr>
+	
+	<!-- 신상품 리스트 -->
+	- 신상품 
+	
+	<!-- 파충류 리스트 -->
+	- 파충류
+	
+	<!-- 양서류 리스트 -->
+	- 양서류
+	
+	<!-- 상품 리스트 -->
+	- 상품
 	
 	
+	<hr>
 	
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
-	
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>	
 
 </body>
 </html>

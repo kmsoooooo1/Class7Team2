@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import team2.board.action.Criteria;
+import team2.board.action.cSet;
 
 
 public class BoardDAO {
@@ -29,7 +30,7 @@ public class BoardDAO {
 	
 	public int insert(BoardDTO dto){
 		int chk = 0;
-		
+		System.out.println(dto);
 		sql = "select coalesce(max(b_idx),0) idx from team2_board";
 		try {
 			stmt = conn.createStatement();
@@ -50,6 +51,7 @@ public class BoardDAO {
 						+ dto.getIp_addr() + "','"
 						+ dto.getB_file() + "')";
 			
+				System.out.println(sql);
 				chk = stmt.executeUpdate(sql);
 			}
 		} catch (SQLException e) {
@@ -128,58 +130,113 @@ public class BoardDAO {
 	}
 	//insertBoard(BoardDTO bdto)
 	
-	//getBoardCount(BoardDTO bdto)
-	public int getBoardCount(String category) {
-		int check = 0;
+	//getBoardCount(cSet cset)
+	public int getBoardCount(cSet cset) {
+		int total = 0;
 		
+		int sub = cset.getPc();
+		System.out.println("category : " +cset.getCategory());
+	
 		try {
-			sql = "select count(*) from team2_board where b_category = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, category);
-			rs = pstmt.executeQuery();
+			if(sub==0){
+				//서브카테고리가 없을 떄
+				
+				sql = "select count(*) from team2_board where b_category = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cset.getCategory());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					total = rs.getInt(1);
+				}
+				System.out.println(cset + " 글 개수 확인 : " + total);
+				
+			}else{
+				//서브카테고리가 있을 때
 			
-			if(rs.next()){
-				check = rs.getInt(1);
+				sql = "select count(*) from team2_board where b_category = ? AND and b_p_cate = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cset.getCategory());
+				pstmt.setString(2, cset.getP_category());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					total = rs.getInt(1);
+				}
+				System.out.println(cset + "게시판 글 개수 확인 : " + total);
 			}
-			System.out.println("게시판 글 개수 확인 check : " + check);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return check;
+		return total;
 	}
-	//getBoardCount(BoardDTO bdto)
+	//getBoardCount(cSet cset)
 	
-	//getBoardList(startRow,pageSize)
-		public ArrayList getBoardList(String category, Criteria cri){
-			ArrayList boardList = new ArrayList();
+	//getBoardList(cSet cset, Criteria cri)
+		public ArrayList<BoardDTO> getBoardList(cSet cset, Criteria cri){
+			ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+			
+			int sub = cset.getPc();
 			
 			try {
-				sql = "select * from team2_board where b_category = ? order by b_idx desc limit ?,?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, category);
-				pstmt.setInt(2, cri.getPageStart());
-				pstmt.setInt(3, cri.getPerpageNum());
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()){
-					BoardDTO bdto = new BoardDTO();
+				if(sub==0){
+				//서브카테고리가 없을 떄
+					sql = "select * from team2_board where b_category = ? order by b_idx desc limit ?,?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, cset.getCategory());
+					pstmt.setInt(2, cri.getPageStart());
+					pstmt.setInt(3, cri.getPerpageNum());
 					
-					bdto.setB_title(rs.getString("b_title"));
-					bdto.setB_writer(rs.getString("b_writer"));
-					bdto.setIp_addr(rs.getString("ip_addr"));
-					bdto.setB_reg_date(rs.getDate("b_reg_date"));
-					bdto.setB_category(rs.getString("b_category"));
-					bdto.setB_content(rs.getString("b_content"));
-					bdto.setB_file(rs.getString("b_file"));
-					bdto.setB_idx(rs.getInt("b_idx"));
-					bdto.setB_like(rs.getInt("b_like"));
-					bdto.setB_view(rs.getInt("b_view"));
-					bdto.setB_p_cate(rs.getString("b_p_cate"));
+					rs = pstmt.executeQuery();
 					
+					while(rs.next()){
+						BoardDTO bdto = new BoardDTO();
+						
+						bdto.setB_title(rs.getString("b_title"));
+						bdto.setB_writer(rs.getString("b_writer"));
+						bdto.setIp_addr(rs.getString("ip_addr"));
+						bdto.setB_reg_date(rs.getDate("b_reg_date"));
+						bdto.setB_category(rs.getString("b_category"));
+						bdto.setB_content(rs.getString("b_content"));
+						bdto.setB_file(rs.getString("b_file"));
+						bdto.setB_idx(rs.getInt("b_idx"));
+						bdto.setB_like(rs.getInt("b_like"));
+						bdto.setB_view(rs.getInt("b_view"));
+						bdto.setB_p_cate(rs.getString("b_p_cate"));
+						
+						
+						boardList.add(bdto);
+					}
+				}else{
+					//서브카테고리가 있을 떄
+					sql = "select * from team2_board where b_category = ? and b_p_cate = ? order by b_idx desc limit ?,?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, cset.getCategory());
+					pstmt.setString(1, cset.getP_category());
+					pstmt.setInt(2, cri.getPageStart());
+					pstmt.setInt(3, cri.getPerpageNum());
 					
-					boardList.add(bdto);
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()){
+						BoardDTO bdto = new BoardDTO();
+						
+						bdto.setB_title(rs.getString("b_title"));
+						bdto.setB_writer(rs.getString("b_writer"));
+						bdto.setIp_addr(rs.getString("ip_addr"));
+						bdto.setB_reg_date(rs.getDate("b_reg_date"));
+						bdto.setB_category(rs.getString("b_category"));
+						bdto.setB_content(rs.getString("b_content"));
+						bdto.setB_file(rs.getString("b_file"));
+						bdto.setB_idx(rs.getInt("b_idx"));
+						bdto.setB_like(rs.getInt("b_like"));
+						bdto.setB_view(rs.getInt("b_view"));
+						bdto.setB_p_cate(rs.getString("b_p_cate"));
+						
+						
+						boardList.add(bdto);
+					}
 				}
 				System.out.println("게시판 글 arraylist로 저장 완료 : " + boardList);
 				
@@ -190,7 +247,7 @@ public class BoardDAO {
 			return boardList;
 			
 		}
-		//getBoardList(startRow,pageSize)
+		//getBoardList(cSet cset, Criteria cri)
 		
 		//updateView(int num)
 		public void updateView(int num) {
@@ -257,13 +314,14 @@ public class BoardDAO {
 		public void updateBoard(BoardDTO bdto) {
 			
 			try {
-				sql = "update team2_board set b_category=?,b_title=?,b_content=? where b_idx=?";
+				sql = "update team2_board set b_category=?,b_p_cate=?,b_title=?,b_content=? where b_idx=?";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, bdto.getB_category());
-				pstmt.setString(2, bdto.getB_title());
-				pstmt.setString(3, bdto.getB_content());
-				pstmt.setInt(4, bdto.getB_idx());
+				pstmt.setString(2, bdto.getB_p_cate());
+				pstmt.setString(3, bdto.getB_title());
+				pstmt.setString(4, bdto.getB_content());
+				pstmt.setInt(5, bdto.getB_idx());
 				
 				pstmt.executeUpdate();
 				

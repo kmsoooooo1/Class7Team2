@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title> 테스트 </title>
 </head>
 <body>
@@ -22,7 +23,9 @@
 	
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
-		String newformat_price = formatter.format(animalDetail.getA_price());
+		String newformat_price_origin = formatter.format(animalDetail.getA_price_origin());
+		String newformat_mileage = formatter.format(animalDetail.getA_mileage());
+		String newformat_price_sale = formatter.format(animalDetail.getA_price_sale());
 	%>
 
 	<!-- Header -->
@@ -30,78 +33,363 @@
 	
 	<!-- Main Content -->
 	<form action="" method="post" name="fr"> 
-	
-		<h4> <%=animalDetail.getA_morph() %> </h4>
 		
-		<!-- 동물 코드 -->
-		<input type="hidden" name="a_code" value="<%=animalDetail.getA_code()%>">
+		<!-- 상품 기본 정보 파트 ------------------------------------------------------------------------------------------ -->
+		<div id="menu0">
+			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
+			<input type="hidden" name="a_code" value="<%=animalDetail.getA_code()%>">
+			<input type="hidden" id="a_price_origin" name="a_price_origin" value="<%=animalDetail.getA_price_origin()%>">
+			<input type="hidden" id="a_price_sale" name="a_price_sale" value="<%=animalDetail.getA_price_sale()%>">
+			<input type="hidden" id="a_discount_rate" name="a_discount_rate" value="<%=animalDetail.getA_discount_rate()%>">
+		
+			<table border="0">
+				<tr>
+					<td> <img src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>" width="500" height="500"> </td>
+					<td>
+						<!-- 종 이름 -->
+						<%if(animalDetail.getA_amount() == 0){%>
+							<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
+							<h4> <%=animalDetail.getA_morph()%> </h4>
+						<%}else{%>
+							<h4> <%=animalDetail.getA_morph()%> </h4>
+						<%}%>
+						<hr>
+						<!-- 판매가, 적립금, 할인판매가 -->
+						<table border="1">
+							<tr>
+								<td> 판매가 </td>
+								<td> 
+									<%=newformat_price_origin%>원 
+									<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
+										<%=animalDetail.getA_discount_rate()%>% OFF 
+									<%}%> 
+								</td> 
+							</tr>
+							<tr>
+								<td> 적립금 </td>
+								<td> <%=newformat_mileage%>원 </td>
+							</tr>
+							<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
+							<tr>
+								<td> 할인판매가  </td>
+								<td> <%=newformat_price_sale%>원 (<%=animalDetail.getA_discount_rate()%>% 할인율) </td>
+							</tr>
+							<%}%>
+						</table> 
+						<hr>
+						<!-- 배송방법 -->
+						배송방법
+							<select id="delivery_method" name="delivery_method" onchange="changeDeliMethod();">
+								<option value="default"> -[필수]배송방법을 선택해 주세요 - </option>
+								<option value="default"> --------------- </option>
+								<option value="일반포장"> 일반포장 </option>
+								<option value="퀵서비스"> 퀵서비스(착불) </option>
+								<option value="지하철"> 지하철택배(착불) </option>
+								<option value="고속버스"> 고속버스택배 (+14,000원) </option>
+								<option value="매장방문"> 매장방문수령 </option>				
+							</select>  
+						<hr>
+						<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
+						<table border="1">
+							<tr>
+								<td> 상품명 </td>
+								<td> 상품수 </td>
+								<td> 가격 </td>
+							</tr>
+							<!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
+							<div id="final_product_info">
+								<tr>
+									<td> <%=animalDetail.getA_morph()%> </td>
+									<td>
+										<!-- 주문 전 수량  -->
+										<input type="text" id="a_amount" name="a_amount" value="1" maxlength="3" size="3" onchange="amountChange();">
+										<!-- 수량 +/- 버튼 -->
+										<input type="button" id="amountPlus" name="amountPlus" value="+" onclick="plus();">
+										<input type="button" id="amountMinus" name="amountMinus" value="-" onclick="minus();">
+									</td>
+									<td>
+										<span id="total_product_price">
+											<%if(animalDetail.getA_discount_rate() != 0){%>
+												<%=animalDetail.getA_price_sale()%>원
+											<%}else{%>
+												<%=animalDetail.getA_price_origin()%>원
+											<%}%>
+										</span> <br>
+										<span id="total_product_mileage">적 <%=animalDetail.getA_mileage()%>원</span>
+									</td>
+								</tr>
+								
+							</div>
+							<tr>
+								<td colspan="3"> TOTAL : <span id="total_price"></span>원 (<span id="total_amount"></span>개) </td>
+							</tr>
+						</table>
+						<hr>
+						<%if(animalDetail.getA_amount() == 0){%>
+							<span> 품절 </span>
+							<button type="button"> 관심상품 </button>
+							<br>
+							<button type="button"> 카카오톡 상담 </button>
+						<%}else{%>
+							<button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
+							<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
+							<button type="button"> 관심상품 </button>
+							<br>
+							<button type="button"> 카카오톡 상담 </button>
+						<%}%>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<br>
+		<hr>
+	</form>
 	
+	<!-- 상품 관련 상품들 파트 ------------------------------------------------------------------------------------------ -->
+	<div id="menu2">
+		<div>
+			RECOMMEND ITEMS <br>
+			본 상품의 구매자 분들은 아래 상품들도 함께 구매하셨습니다.
+		</div>
+	</div>
+	
+	<br>
+	<hr>
+		
+	<!-- 상품 상세 정보 파트 ------------------------------------------------------------------------------------------ -->
+	<div id="menu1">
+		<!-- 소메뉴 -->
+		<div>
+			<ul style="list-style: none;">
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
+				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+			</ul>
+		</div>
+	
+		<p> <%=animalDetail.getContent()%> </p>
+	</div>
+	
+	<br>
+	<hr>
+
+	<!-- 상품 REVIEW 파트 -------------------------------------------------------------------------------------------->
+	<div id="menu3">
+		<!-- 소메뉴 -->
+		<div>
+			<ul style="list-style: none;">
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
+				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+			</ul>
+		</div>
+		
+		REVIEW <br>
+		상품의 사용후기를 적어주세요.
 		<table border="1">
 			<tr>
-				<td> <img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[0]%>" width="500" height="500"> </td>
+				<td> 
+					제목: 잘받았습니다. <br>
+					내용: 꼼꼼히 싸주시고 좋습니다. 
+				</td> 
 				<td>
-					이름  <span id="a_morph"> <%=animalDetail.getA_morph()%> </span> 
-					<br>
-					판매가 <%=newformat_price%>원
-					<br>
-					배송비 
-						<select name="">
-							<option value=""> 주문시 결제(선결제) </option>
-							<option value=""> 수령시 결제(착불) </option>
-						</select>
-					<br>
-					3,000원 (30,000원 이상 구매 시 무료) 
-					<hr>
-					배송방법(생물) 
-						<select name="" >
-							<option value=""> -[필수] 옵션을 선택해 주세요 - </option>
-							<option value=""> --------------- </option>
-							<option value=""> 고속버스배송 (+10,000원) </option>
-							<option value=""> 방문구매 </option>
-							<option value=""> 지하철택배(후불) </option>
-							<option value=""> 퀵서비스(후불) </option>		
-						</select> 
-					<hr>
-					<!-- 구매하고자 하는 정보 자동으로 올라가는 부분 -->
-					<hr>
-					<br>
-					총 상품금액(수량): 0원 (0개) 
-					<br>
-					<hr>
-					<button type="button"> 바로구매하기 </button>
-					<button type="button"> 장바구니 담기 </button>
-					<button type="button"> 관심상품등록 </button>
+					작성자: testID
+				</td>
+				<td>
+					작성날짜: 2020-04-30
 				</td>
 			</tr>
 		</table>
-		
-		<br>
-		<hr>
-		<br>
-		
-		<!-- 동물 추가 내용 -->
+		<button type="button"> 리뷰작성 </button>
+		<button type="button"> 모두보기 </button>
+	</div>
+	
+	<br>
+	<hr>
+	
+	<!-- 상품 Q&A 파트 ------------------------------------------------------------------------------------------ -->
+	<div id="menu4">
+		<!-- 소메뉴 -->
 		<div>
-			제품상세정보 <br>
-			<img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[0]%>" width="600" height="600"> <br> <br>
-			<img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[1]%>" width="600" height="600"> <br> <br>
-			<img src="./upload/multiupload/<%=animalDetail.getA_image().split(",")[2]%>" width="600" height="600"> <br> <br>
-			<p> 
-				<%=animalDetail.getContent()%>
-			</p>
-			
-			
+			<ul style="list-style: none;">
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
+				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
+				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+			</ul>
 		</div>
-		
-	</form>
+	
+		Q & A <br>
+		상품에 대해 궁금한 점을 해결해 드립니다. 
+		<table border="1">
+			<tr>
+				<td> 번호 </td>
+				<td> 제목 </td>
+				<td> 작성자 </td>
+				<td> 작성일 </td>
+				<td> 조회 </td>
+			</tr>
+			<tr>
+				<td> 41 </td>
+				<td> 질문[1] </td>
+				<td> 김민수 </td>
+				<td> 2020-04-27 </td>
+				<td> 8 </td>
+			</tr>
+			<tr>
+				<td> 40 </td>
+				<td> 질문2[2] </td>
+				<td> 김민수 </td>
+				<td> 2020-04-27 </td>
+				<td> 9 </td>
+			</tr>
+		</table>
+		<button type="button">상품문의하기</button>
+		<button type="button">모두보기</button>
+	</div>
+	
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 
 </body>
 <script type="text/javascript">
-	//id값이 'a_morph'인 span태그 안에 있는 값 가져오기
-	var a_morph = $('#a_morph').val();
-	document.title = a_morph;
 
+	//사용자가 배송방법을 선택했을시
+	function changeDeliMethod(){
+		
+	}
+
+	//주문수량 변경시----------------------------------------------------------------------------------------
+	var a_price_origin = document.getElementById('a_price_origin').value;	//오리지날 판매가
+	var a_discount_rate = document.getElementById('a_discount_rate').value;	//할인율
+	var a_price_sale = document.getElementById('a_price_sale').value;		//할인된 판매가
+	
+	var final_price;	//수정된 수량 * 금액 = 최종금액
+	
+	//주문 전 수량 변경시 함수(키보드로 입력시)
+	function amountChange(){
+		var new_a_amount = document.getElementById('a_amount').value;	//사용자가 새로 수정하는 수량
+		//사용자가 키보드로 input에 0보다 작은수를 입력했을시
+		if(new_a_amount < 1) {
+			alert("상품의 최소 구매량은 1개입니다.");
+			new_a_amount = parseInt("1");
+			$("#a_amount").val(new_a_amount);
+		}
+	}
+	
+	//사용자가 '+'를 눌렸을시
+	function plus(){
+		var new_a_amount = document.getElementById('a_amount').value;	//사용자가 새로 수정하는 수량
+		//사용자가 수량 999에서 +를 눌렸을시
+		if(new_a_amount == 999) {
+			alert("상품의 최대 구매량은 999개입니다.");
+			new_a_amount = parseInt("999");
+			$("#a_amount").val(new_a_amount);
+		}else {
+			new_a_amount++;
+			$("#a_amount").val(new_a_amount);
+			//만약 할인율(a_discount_rate)이 0이 아니면
+			if(a_discount_rate != 0) {
+				//할인된 판매가로 최종 판매가 계산하기
+				final_price = a_price_sale * new_a_amount;
+				//계산된 값 span 태그에 넣기
+				document.getElementById("total_product_price").innerHTML = final_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			}
+			//할인율이 0이면
+			else{
+				//오리지날 판매가로 최종 판매가 계산하기
+				final_price = a_price_origin * new_a_amount;
+				//계산된 값 span 태그에 넣기
+				document.getElementById("total_product_price").innerHTML = final_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			}
+		}
+	}
+	
+	//사용자가 '-'를 눌렸을시
+	function minus(){
+		var new_a_amount = document.getElementById('a_amount').value;	//사용자가 새로 수정하는 수량
+		//사용자가 수량 1에서 -를 눌렸을시
+		if(new_a_amount == 1) {
+			alert("상품의 최소 구매량은 1개입니다.");
+			new_a_amount = parseInt("1");
+			$("#a_amount").val(new_a_amount);
+		}else {
+			new_a_amount--;
+			$("#a_amount").val(new_a_amount);
+			//만약 할인율(a_discount_rate)이 0이 아니면
+			if(a_discount_rate != 0) {
+				//할인된 판매가로 최종 판매가 계산하기
+				final_price = a_price_sale * new_a_amount;
+				//계산된 값 span 태그에 넣기
+				document.getElementById("total_product_price").innerHTML = final_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			}
+			//할인율이 0이면
+			else{
+				//오리지날 판매가로 최종 판매가 계산하기
+				final_price = a_price_origin * new_a_amount;
+				//계산된 값 span 태그에 넣기
+				document.getElementById("total_product_price").innerHTML = final_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			}
+		}
+	}
+	
+	//구매하기, 장바구니 버튼 눌렸을시 ------------------------------------------------------------------------------------
+
+	//장바구니 버튼을 클릭했을시
+	function valueBasketChecked() {
+		//만약 배송방법을 선택하지 않았다면
+		if(document.getElementById("delivery_method").value == "default"){
+			alert("배송옵션을 선턱해주세요");
+			document.fr.delivery_method.focus();
+			return false;
+		}
+		//배송방법을 선택했을시
+		else {
+			var isBasket = confirm("장바구니에 담으시겠습니까?");
+			if(isBasket) {
+				document.fr.action="";
+				document.fr.sbmit();
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	//구매하기 버튼을 클릭했을시
+	function valueOrderChecked() {
+		//만약 배송방법을 선택하지 않았다면
+		if(document.getElementById("delivery_method").value == "default"){
+			alert("배송옵션을 선턱해주세요");
+			document.fr.delivery_method.focus();
+			return false;
+		}
+		//배송방법을 선택했을시
+		else {
+			var isBasket = confirm("구매하시겠습니까?");
+			if(isBasket) {
+				document.fr.action="";
+				document.fr.sbmit();
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	//소메뉴 눌렸을시 ------------------------------------------------------------------------------------
+	
+	//소메뉴에서 클릭했을시 특정 div로 스크롤 이동시키는 함수 ex) 기본 정보 눌렸을시 기본정보div로 이동하기
+	function menuMove(seq){
+        var offset = $("#menu" + seq).offset();
+        $('html, body').animate({scrollTop : offset.top}, 300);
+    }
+	
+	
 </script>
 </html>

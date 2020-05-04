@@ -23,9 +23,16 @@
 	
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
+		
+		//페이징 필요 값
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
 		String pageNum = (String)request.getAttribute("pageNum");
+	
+		//카테고리별 필요 값
+		String category = request.getParameter("category");
+		String sub_category = request.getParameter("sub_category");
+		
 	%>
 	
 		 <h2><a href="./Insert.bo"> 글 쓰기 (스마트에디터)  </a></h2>
@@ -80,17 +87,17 @@
 		<ul class="btn-group paging">
 	<c:if test="${pageMaker.prev }">
 	<li>
-		<a href='<c:url value="./review.bo?pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">[이전]</i></a>	
+		<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">[이전]</i></a>	
 	</li>
 	</c:if>
 	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
 	<li>
-		<a href='<c:url value="./review.bo?pageNum=${pageNum}"/>'><i class="fa">[${pageNum }]</i></a>
+		<a href='<c:url value="./BoardList.bo?category=${category}&pageNum=${pageNum}"/>'><i class="fa">[${pageNum }]</i></a>
 	</li>
 	</c:forEach>
 	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 	<li>
-		<a href='<c:url value="./review.bo?pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">[다음]</i></a>
+		<a href='<c:url value="./BoardList.bo?category=${category }&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">[다음]</i></a>
 	</li>
 	</c:if>
 
