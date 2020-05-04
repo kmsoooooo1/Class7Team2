@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
 <!-- 
 	   로그인한 사용자의 경우 사용자 ID를 출력,
 	   로그인X 사용자의 경우 로그인페이지로 이동 	   
