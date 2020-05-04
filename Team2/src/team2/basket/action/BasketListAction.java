@@ -1,0 +1,49 @@
+package team2.basket.action;
+
+import java.util.Vector;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import team2.basket.db.BasketDAO;
+
+public class BasketListAction implements Action {
+
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		ActionForward forward = new ActionForward();
+		
+		if(id == null){
+			forward.setPath("./MemberLogin.me");
+			forward.setRedirect(true);
+			
+			return forward;
+		}
+		
+		// BasketDAO 객체 생성
+		BasketDAO bkdao = new BasketDAO();
+		
+		// 장바구니 리스트를 가져와서 저장
+		Vector vec = bkdao.getBasketList(id);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return null;
+	}
+
+}
