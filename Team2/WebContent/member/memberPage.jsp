@@ -1,5 +1,3 @@
-<%@page import="team2.member.db.MemberDAO"%>
-<%@page import="team2.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,22 +19,40 @@
 	   if(id == null){
 		  response.sendRedirect("./MemberLogin.me");   
 	   }   
-	   MemberDAO mdao = new MemberDAO();
-	   MemberDTO mdto = mdao.getMember(id);
 	 %>
 	
-	<h3>환영합니다. <%=mdto.getName() %> 회원님!</h3> 
+	<h2>사용자 ID :<%=id %></h2> 
+	<h2>사용자 ID :${id }</h2> 
 	
+	<input type="button" value="로그아웃"
+	       onclick="location.href='./MemberLogout.me';"
+	/>
+	<hr>
+	<hr>
 	<a href="./MemberInfo.me">회원 정보 조회</a>
-	<a href="./MemberUpdate.me">회원정보 수정</a>
-	<a href="./MemberDelete.me">회원탈퇴</a>
+	<hr>
+	<hr>
+	<a href="./MemberUpdate.me">회원 정보 수정하기</a>
+	<hr>
+	<hr>
+	<a href="./MemberDelete.me">회원 정보 삭제하기</a>
 	
 	<hr>
-	<a href="">주문내역</a>
-	<a href="./BasketList.ba">장바구니</a>
-	<a href="">내 게시글</a>
+	<hr>
+	<a href="./BoardList.bo">게시판 리스트 이동하기</a>
+	 
 	
-	
-
+	<hr>
+	<hr>
+	<a href="./GoodsList.go">상품 정보보기(사용자) 이동하기</a>
+	<hr>
+	<hr>
+	<a href="./BasketList.ba">장바구니 페이지 이동하기</a>
+	<hr>
+	<hr>
+	<a href="./OrderList.or">주문목록 페이지 이동하기</a>
+	<hr>
+	<hr>
+	 <h3><a href="./Main.me"> main 페이지 </a></h3>
 </body>
 </html>

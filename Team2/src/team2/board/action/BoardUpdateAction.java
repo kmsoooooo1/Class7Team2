@@ -17,7 +17,8 @@ public class BoardUpdateAction implements Action {
 		
 		BoardDTO bdto = new BoardDTO();
 		
-		bdto.setB_category(request.getParameter("category"));;
+		bdto.setB_category(request.getParameter("b_category"));;
+		bdto.setB_category(request.getParameter("b_p_cate"));;
 		bdto.setB_title(request.getParameter("title"));
 		bdto.setB_content(request.getParameter("content"));
 		bdto.setB_idx(Integer.parseInt(request.getParameter("num")));
