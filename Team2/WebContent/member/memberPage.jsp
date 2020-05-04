@@ -43,7 +43,7 @@
      <span>1%바로 적립</span>
     </span>
    </div>
-  </div>
+  </div> 
   
   <!-- 회원 이미지 끝 -->
   <div>
