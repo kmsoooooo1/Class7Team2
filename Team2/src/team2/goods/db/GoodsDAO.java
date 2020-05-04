@@ -49,7 +49,7 @@ public class GoodsDAO {
 	
 	//////////////////////////////////////////////////////////////////////
 	
-	//insertGoods(gdto);
+	//insertGoods(gdto); 관리자
 	public void insertGoods(GoodsDTO gdto){
 		int num = 0;
 		
@@ -100,7 +100,7 @@ public class GoodsDAO {
 		}//자원반납
 	}//insertGoods(gdto);
 	
-	//getGoodsList();
+	//getGoodsList(); 관리자
 	public List<GoodsDTO> getGoodsList(){
 		
 		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
@@ -247,6 +247,107 @@ public class GoodsDAO {
 			closeDB();
 		}
 	}//deleteGoods(num)
+	
+	// 관리자 제어 끝 일반사용자 제어 시작
+	
+	// GoodsList(category, sub_category, sub_category_index)
+	public List<GoodsDTO> GoodsList(String category,String sub_category,String sub_category_index){
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		
+		//StringBuffer: 저장공간(메모리)
+		StringBuffer SQL = new StringBuffer();
+		
+		try {
+			con = getConnection();
+			
+			//SQL buffer 안에 sql 구문 넣어주기
+			
+			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 상품을 부를때)
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+				SQL.append("SELECT * FROM team2_goods order by num desc");
+			}
+			//만약 category가 먹이 이면
+			else if(category.equals("먹이")){
+				SQL.append("SELECT * FROM team2_goods WHERE category='먹이' ");
+				// 만약 sub_category가 없으면
+				if(sub_category.equals("all")) {
+					SQL.append("order by num");
+				}
+				//만약 sub_category가 있으면
+				else {
+					SQL.append("AND sub_category = ? order by num desc");
+				}
+			}
+			// sub_category_index는 메뉴에서 다루지 않음.
+			// sub_category 클릭 시 index 나오게 구현할 예정
+			else if(category.equals("사육용품")){
+				SQL.append("SELECT * FROM team2_goods WHERE category='사육용품' ");
+				//만약 sub_category가 없으면
+				if(sub_category.equals("all")) {
+					SQL.append("order by num");
+				}
+				//만약 sub_category가 있으면
+				else {
+					SQL.append("AND sub_category = ? order by num desc");
+				}
+			}
+			
+			pstmt = con.prepareStatement(SQL.toString());
+			
+			//?에 값 지정하기
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+			}
+			else if(category.equals("먹이")){
+				if(sub_category.equals("all")){
+				}
+				else{
+					pstmt.setString(1, sub_category);
+				}
+			}else if(category.equals("사육용품")){
+				if(sub_category.equals("all")) {
+				}
+				else {
+					pstmt.setString(1, sub_category);
+				}
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			// 상품이 있을때마다
+			while(rs.next()){
+				
+				GoodsDTO gdto = new GoodsDTO();
+				
+				gdto.setCategory(rs.getString("category"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setDate(rs.getDate("date"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setNum(rs.getInt("num"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				
+				goodsList.add(gdto);
+			}
+			System.out.println("사용자 사육용품&먹이 목록 저장 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return goodsList;
+	}
+	// GoodsList(category, sub_category, sub_category_index)
+	
 	
 	
 }
