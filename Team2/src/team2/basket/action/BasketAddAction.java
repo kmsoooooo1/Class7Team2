@@ -33,6 +33,9 @@ public class BasketAddAction implements Action {
 		bkdto.setB_code(request.getParameter("b_code"));
 		bkdto.setB_amount(Integer.parseInt(request.getParameter("b_amount")));
 		bkdto.setB_option(request.getParameter("b_option"));
+		bkdto.setB_a_num(Integer.parseInt(request.getParameter("b_a_num")));
+		bkdto.setB_g_num(Integer.parseInt(request.getParameter("b_g_num")));
+		
 		
 		BasketDAO bkdao = new BasketDAO();
 		
@@ -45,9 +48,9 @@ public class BasketAddAction implements Action {
 		}
 		
 		
-		
-		
-		return null;
+		forward.setPath("./BasketList.ba");
+		forward.setRedirect(true);
+		return forward;
 	}
 
 }

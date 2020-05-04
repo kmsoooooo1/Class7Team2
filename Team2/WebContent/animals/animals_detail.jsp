@@ -354,8 +354,8 @@
 		else {
 			var isBasket = confirm("장바구니에 담으시겠습니까?");
 			if(isBasket) {
-				document.fr.action="";
-				document.fr.sbmit();
+				document.fr.action="./BasketAdd.ba";
+				document.fr.submit();
 			} else {
 				return false;
 			}

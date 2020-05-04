@@ -1,5 +1,6 @@
 package team2.basket.action;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,20 +31,17 @@ public class BasketListAction implements Action {
 		// 장바구니 리스트를 가져와서 저장
 		Vector vec = bkdao.getBasketList(id);
 		
+		// 해당 정보를 request에 저장
+		ArrayList basketList = (ArrayList)vec.get(0);
+		ArrayList animalList = (ArrayList)vec.get(1);
 		
+		request.setAttribute("basketList", basketList);
+		request.setAttribute("animalList", animalList);
 		
+		forward.setPath("./order/animal_basket.jsp");
+		forward.setRedirect(true);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return null;
+		return forward;
 	}
 
 }
