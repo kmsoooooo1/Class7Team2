@@ -80,6 +80,28 @@ public class AdminGoodsFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		// 상품 수정하는 페이지(관리자)
+		else if(command.equals("/GoodsModify.ag")){
+			action = new AdminGoodsModifyForm();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		// 상품 수정 처리 페이지
+		else if(command.equals("/GoodsModifyAction.ag")){
+			action = new GoodsModifyAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

@@ -204,9 +204,89 @@ public class GoodsDAO {
 	}
 	//getGoodsList();
 	
+	//getGoods(num); 관리자
+	public GoodsDTO getGoods(int num){
+		
+		GoodsDTO gdto = null;
+		
+		try {
+			con = getConnection();
+			
+			sql = "SELECT * FROM team2_goods WHERE num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				gdto = new GoodsDTO();
+				
+				gdto.setCategory(rs.getString("category"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setDate(rs.getDate("date"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setNum(rs.getInt("num"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return gdto;
+	}//getGoods(num);
 	
-	
-	
+	//modifyGoods(gdto); 관리자
+	public void modifyGoods(GoodsDTO gdto){
+		// 상품정보 수정
+		
+		try {
+			con = getConnection();
+			
+			sql="UPDATE team2_goods SET "
+					+ "category=?,sub_category=?,sub_category_index=?,g_name=?,g_code=?,g_thumbnail=?,g_amount=?,g_price_origin=?,"
+					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,content=? "
+					+ "WHERE num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, gdto.getCategory());
+			pstmt.setString(2, gdto.getSub_category());
+			pstmt.setString(3, gdto.getSub_category_index());
+			pstmt.setString(4, gdto.getG_name());
+			pstmt.setString(5, gdto.getG_code());
+			pstmt.setString(6, gdto.getG_thumbnail());
+			pstmt.setInt(7, gdto.getG_amount());
+			pstmt.setInt(8, gdto.getG_price_origin());
+			pstmt.setInt(9, gdto.getG_discount_rate());
+			pstmt.setInt(10, gdto.getG_price_sale());
+			pstmt.setInt(11, gdto.getG_mileage());
+			pstmt.setString(12, gdto.getContent());
+			pstmt.setInt(13, gdto.getNum());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("상품 정보 수정 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+	}//modifyGoods(gdto);
 	
 	
 	

@@ -1,112 +1,127 @@
+<%@page import="team2.goods.db.GoodsDTO"%>	
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
-
+	
+	<%
+		GoodsDTO gdto = (GoodsDTO)request.getAttribute("gdto");
+	%>
+	
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	
 	<!-- Main Content -->
-	<h1>WebContent/admin/admin_goods_add.jsp</h1>
+	<form action="./GoodsModifyAction.ag" method="post" name="fr" enctype="multipart/form-data">
 	
-	<h2> 관리자 사육용품 등록 페이지</h2>
-	
-	<form action="./GoodsAddAction.ag" method="post" name="fr" enctype="multipart/form-data">
-		<table border="1">
-		  <tr>
+	  <input type="hidden" id="num" name="num" value="<%=gdto.getNum()%>">
+	  <input type="hidden" id="sub_category_sel" name="sub_category_sel" value="<%=gdto.getSub_category()%>">
+	  <input type="hidden" id="sub_category_index_sel" name="sub_category_index_sel" value="<%=gdto.getSub_category_index()%>">
+	  
+	    <table border="1">
+         <tr>
 		   <td>카테고리</td>
 		   <td> 
 		     <!-- 상품 카테고리 -->
 		     <select name="category" onchange="categoryChange(this)">
-		     	<option value="default">종류를 선택하세요</option>
-		     	<option value="먹이">먹이</option>
-		     	<option value="사육용품">사육용품</option>
+		     	<option value="default"
+		     	<%if(gdto.getCategory().equals("default")){ %> selected <%} %>
+		     	>종류를 선택하세요</option>
+		     	<option value="먹이"
+		     	<%if(gdto.getCategory().equals("먹이")){ %> selected <%} %>
+		     	>먹이</option>
+		     	<option value="사육용품"
+		     	<%if(gdto.getCategory().equals("사육용품")){ %> selected <%} %>
+		     	>사육용품</option>
 		     </select>	
 		     <!-- 상품 서브 카테고리 -->
-		     <select name="sub_category" id="sub_category" onchange="sub_categoryChange(this)">
-		     	<option>서브 상품을 선택하세요</option>
+		     <select name="sub_category"  id="sub_category" onchange="sub_categoryChange(this)">
+		     	<option value="sub_category_sel"><%=gdto.getSub_category() %></option>
 		     </select>
 		     <!-- 상품 최종 카테고리 -->
 		      <select name="sub_category_index" id="sub_category_index">
-		     	<option>최종 서브 상품을 선택하세요</option>
+		     	<option><%=gdto.getSub_category_index() %></option>
 		     </select>
 		   </td> 
 		  </tr>
 		  
 		  <tr> 
-		   <td>상품 이름</td>
-		   <td><input type="text" name="g_name"></td>
+		    <td>상품 이름</td>
+		    <td><input type="text" name="g_name" value="<%=gdto.getG_name()%>"></td>
 		  </tr>
 		  
 		  <tr>
-		   <td>상품 코드</td>
-		   <td><input type="text" name="g_code"></td>
+		    <td>상품 코드</td>
+		    <td><input type="text" name="g_code" value="<%=gdto.getG_code()%>"></td>
 		  </tr>
 		  
 		  <tr> 
-		   <td>상품 썸네일 이미지</td>
-		   <td><input type="file" name="g_thumbnail"></td>
+		    <td>상품 썸네일 이미지</td>
+		    <td><input type="file" name="g_thumbnail" value="<%=gdto.getG_thumbnail()%>" ></td>
 		  </tr>
 		
 		  
 		  <tr> 
-		   <td>상품 개수</td>
-		   <td><input type="text" name="g_amount"></td>
+		    <td>상품 개수</td>
+		    <td><input type="text" name="g_amount" value="<%=gdto.getG_amount()%>"></td>
 		  </tr>
 		  
 		  <tr> 
-		   <td rowspan="3">상품 가격</td>
-		   <td> 판매가(할인전) : <input type="text" id="g_price_origin_val" name="g_price_origin" value="" onkeyup="calMileage()">원 </td>
+		    <td rowspan="3">상품 가격</td>
+		    <td> 판매가(할인전) : <input type="text" id="g_price_origin_val" name="g_price_origin" value="<%=gdto.getG_price_origin()%>" onkeyup="calMileage()">원 </td>
 		  </tr> 
 		  <tr>
-			<td> 할인율(없으면 0 기재) :  <input type="text" id="g_discount_rate_val" name="g_discount_rate" onkeyup="calDiscount()">%</td>
+			<td> 할인율(없으면 0 기재) :  <input type="text" id="g_discount_rate_val" name="g_discount_rate" value="<%=gdto.getG_discount_rate() %>" onkeyup="calDiscount()">%</td>
 		  </tr>
 		  <tr>
-			<td> 판매가(할인후) :  <input  type="text" id="g_price_sale_val" name="g_price_sale">원 </td>
+			<td> 판매가(할인후) :  <input  type="text" id="g_price_sale_val" name="g_price_sale" value="<%=gdto.getG_price_sale()%>">원 </td>
 		  </tr>
 		
 		  <tr>
 			<td> 적립금 </td>
-			<td> <input  type="text" id="g_mileage_val" name="g_mileage">원 </td>
+			<td> <input  type="text" id="g_mileage_val" name="g_mileage" value="<%=gdto.getG_mileage()%>">원 </td>
 		  </tr>
 		  
 		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
 		   		<textarea name="ir1" id="ir1" rows="10" cols="100">
-		   		  <br>
-				<span style="font-weight: bold"> 관련 동물(종) </span> : <br><br>
-				  <br>
+		   		   <br>
+					<span style="font-weight: bold"> 관련 동물(종) </span> :  
+				   <br>
 		   		</textarea>
 		   </td>
 		  </tr>
 		  
 		  <tr>
 			<td colspan="2"> 
-				<input type="button" onclick="return save();" value="추가하기"/>
-				<button type="reset">취소</button>
+				<input type="submit" value="상품수정">
+				<input type="reset" value="다시 등록">
 			</td>
 		  </tr>
 		  
-		</table>
+	    </table>
+	
 	</form>
 	
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
-
 </body>
 
 <script type="text/javascript">
+
+
 	
+	// editer
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 	 oAppRef: oEditors,
@@ -119,6 +134,7 @@
 	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 	    document.fr.submit();
 	};
+	
 	
 	//첫번째 카테고리를 선택했을시
 	function categoryChange(e){
@@ -221,26 +237,22 @@
 	
 	//판매가격 입력시 할인율 계산하는 함수
 	function calDiscount() {
-    	var origin_price = $('#g_price_origin_val').val(); 		// 오리지날 판매가격 12000
-        var discount_rate = $('#g_discount_rate_val').val();	// 할인율 10
-        var dec = (discount_rate / 100).toFixed(2);				// 0.01
-        var mult = origin_price * dec; 							// 12000 * 0.01
-        var discount = origin_price - mult;						// 12000 - (12000*0.01)
-        $('#g_price_sale_val').val(discount);
+		var origin_price = $('#g_price_origin_val').val(); 		// 오리지날 판매가격 12000
+	    var discount_rate = $('#g_discount_rate_val').val();	// 할인율 10
+	    var dec = (discount_rate / 100).toFixed(2);				// 0.01
+	    var mult = origin_price * dec; 							// 12000 * 0.01
+	    var discount = origin_price - mult;						// 12000 - (12000*0.01)
+	    $('#g_price_sale_val').val(discount);
 	}
 	
 	//판매가격 입력시 적립금 계산하는 함수
 	function calMileage() {
 		var origin_price = $('#g_price_origin_val').val();
 		var mileage_rate = "1.4";
-        var dec = (mileage_rate / 100).toFixed(3);				// 0.014(1.4%) 적립
-        var mult = Math.floor(origin_price * dec);				// 12000 * 0.014
-        $('#g_mileage_val').val(Math.round(mult/100) * 100);	// 둘째자리부터 반올림해서 표시 1260 이면 1300으로
+	    var dec = (mileage_rate / 100).toFixed(3);				// 0.014(1.4%) 적립
+	    var mult = Math.floor(origin_price * dec);				// 12000 * 0.014
+	    $('#g_mileage_val').val(Math.round(mult/100) * 100);	// 둘째자리부터 반올림해서 표시 1260 이면 1300으로
 	}
-	
 
 </script>
-
-
-
 </html>
