@@ -297,17 +297,20 @@ DROP TABLE IF EXISTS `team2_goods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_goods` (
-  `num` int NOT NULL,
-  `category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `sub_category` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sub_category_index` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `g_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `g_code` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `g_image` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `g_amount` int NOT NULL,
-  `g_price` int NOT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `g_view_count` int DEFAULT NULL,
+  `num` int(11) NOT NULL,
+  `category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `sub_category` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sub_category_index` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `g_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `g_code` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `g_thumbnail` text COLLATE utf8_unicode_ci NOT NULL,
+  `g_amount` int(11) NOT NULL,
+  `g_price_origin` int(11) NOT NULL,
+  `g_discount_rate` int(11) DEFAULT NULL,
+  `g_price_sale` int(11) DEFAULT NULL,
+  `g_mileage` int(11) DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `g_view_count` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
