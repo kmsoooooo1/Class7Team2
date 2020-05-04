@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 public class AdminGoodsFrontController extends HttpServlet{
 
 	@Override
@@ -101,6 +102,18 @@ public class AdminGoodsFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		// 상품 삭제 처리 페이지(관리자)
+		else if(command.equals("/GoodsDeleteAction.ag")){
+			action = new GoodsDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		

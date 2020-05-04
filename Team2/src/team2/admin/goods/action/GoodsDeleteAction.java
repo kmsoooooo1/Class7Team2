@@ -1,28 +1,24 @@
 package team2.admin.goods.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import team2.goods.db.GoodsDAO;
-import team2.goods.db.GoodsDTO;
 
-public class GoodsListAction implements Action{
+public class GoodsDeleteAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
 		GoodsDAO gdao = new GoodsDAO();
 		
-		
-		List<GoodsDTO> goodsList = gdao.getGoodsList();
-		
-		request.setAttribute("goodsList", goodsList);
+		gdao.deleteGoods(num);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./admin/admin_goods_list.jsp");
-		forward.setRedirect(false);
+		forward.setPath("./GoodsList.ag");
+		forward.setRedirect(true);
 		
 		return forward;
 	}

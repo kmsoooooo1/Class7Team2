@@ -44,7 +44,7 @@
 		     </select>	
 		     <!-- 상품 서브 카테고리 -->
 		     <select name="sub_category"  id="sub_category" onchange="sub_categoryChange(this)">
-		     	<option value="sub_category_sel"><%=gdto.getSub_category() %></option>
+		     	<option><%=gdto.getSub_category() %></option>
 		     </select>
 		     <!-- 상품 최종 카테고리 -->
 		      <select name="sub_category_index" id="sub_category_index">

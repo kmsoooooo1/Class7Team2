@@ -101,74 +101,15 @@ public class GoodsDAO {
 	}//insertGoods(gdto);
 	
 	//getGoodsList();
-	public List<GoodsDTO> getGoodsList(String category, String sub_category, String sub_category_index){
+	public List<GoodsDTO> getGoodsList(){
 		
 		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
 		
 		try {
 			con = getConnection();
 			
-			//StringBuffer: 저장공간(메모리)
-			StringBuffer SQL = new StringBuffer();
-			
-			//SQL buffer 안에 sql 구문 넣어주기
-			
-			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 모든 동물을 부를때)
-			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
-				SQL.append("select * from team2_goods order by num desc");
-			}
-			//category가 먹이 이면
-			else if(category.equals("먹이")){
-				SQL.append("SELECT * FROM team2_goods WHERE category = '먹이' ");
-				// sub_category가 없으면
-				if(sub_category.equals("all")){
-					SQL.append("order by num desc");
-				}
-				// sub_category가 있으면
-				else{
-					SQL.append("AND sub_category = ? ");
-					// sub_category_index가 없으면
-					if(sub_category_index.equals("all")){
-						SQL.append("order by num desc");
-					}
-					//만약 sub_category_index가 있으면
-					else {
-						SQL.append("AND sub_category_index = ? order by num desc");
-					}
-				}
-			}else if(category.equals("사육용품")){
-				SQL.append("SELECT * FROM team2_goods WHERE category = '사육용품'");
-				//만약 sub_category가 없으면	
-				if(sub_category.equals("all")) {
-					SQL.append("order by num");
-				}
-				//만약 sub_category가 있으면
-				else {
-					SQL.append("AND sub_category = ? order by num desc");
-				}
-			}
-			
-			pstmt = con.prepareStatement(SQL.toString());
-			
-			// ?에 값 지정
-			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){}
-			else if(category.equals("먹이")){
-				if(sub_category.equals("all")) {}
-				else {
-					pstmt.setString(1, sub_category);
-					if(sub_category_index.equals("all")){
-					}
-					else {
-						pstmt.setString(2, sub_category_index);
-					}
-				}
-			}else if(category.equals("사육용품")){
-				if(sub_category.equals("all")) {
-				}
-				else {
-					pstmt.setString(1, sub_category);
-				}
-			}
+			sql="SELECT * FROM team2_goods";
+			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
@@ -201,8 +142,7 @@ public class GoodsDAO {
 		}
 		
 		return goodsList;
-	}
-	//getGoodsList();
+	}//getGoodsList();
 	
 	//getGoods(num); 관리자
 	public GoodsDTO getGoods(int num){
@@ -288,6 +228,25 @@ public class GoodsDAO {
 		
 	}//modifyGoods(gdto);
 	
+	//deleteGoods(num) 관리자
+	public void deleteGoods(int num){
+		try {
+			con = getConnection();
+			
+			sql="DELETE FROM team2_goods WHERE num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println(num+"번 상품 삭제 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+	}//deleteGoods(num)
 	
 	
 }

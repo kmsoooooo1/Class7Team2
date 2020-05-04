@@ -61,13 +61,14 @@
 		   <td><%=gdto.getG_view_count() %></td>
 		   <td><%=gdto.getDate() %></td>
 		   <td><a href="./GoodsModify.ag?num=<%=gdto.getNum()%>"><button type="button"> 수정 </button></a></td>
-		   <td><a href=""><button type="button"> 삭제 </button></a></td>
+		   <td><a href="./GoodsDeleteAction.ag?num=<%=gdto.getNum()%>"><button type="button"> 삭제 </button></a></td>
 		</tr>
 		
 		<%} %>
 		
 	</table>
 	
+	<a href="./GoodsAdd.ag"><button>상품 추가하기</button></a>
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 </body>
