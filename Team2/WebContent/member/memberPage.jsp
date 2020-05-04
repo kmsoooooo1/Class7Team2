@@ -20,7 +20,7 @@
 	   
 	   if(id == null){
 		  response.sendRedirect("./MemberLogin.me");   
-	   }   
+	   }    
 	 %>
 <!-- 회원 이미지 -->	 
  <div>
