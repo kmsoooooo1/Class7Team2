@@ -255,24 +255,7 @@
 		
 		var objRow;
 		objRow = document.all["final_product_info_table"].insertRow();
-		
-		//배송방법을 선택했을시 선택한 항목 selected으로 바꾸기
-		$('#delivery_method option[value="'+ delivery_method +'"]').attr('selected', true);
-		
-		var delivery_method_option = document.getElementById('delivery_method_option').value;
-		if(delivery_method_option == undefined) { //배송방법이 정의되지 않았다면
-			delivery_method_option = ""; //빈 공백 추가
-		}
-		
-		//배송방법이 selected 된 option 체크하는 each 구문
-		$('#delivery_method option').each(function() {
-			//만약 옵션의 값과 
-			
-		});
-		
-		
-		//배송방법 항목 가지고 오기
-		var delivery_method = document.getElementById('delivery_method').value;
+
 		//사용자가 올바른 배송방법을 선택 하지 않았을시
 		if(delivery_method == "default"){
 			document.getElementById("final_product_info_table").style.display = "none";
@@ -281,13 +264,14 @@
 		else {
 			//모프 - 첫번째 td(cell) 항목
 			var objCell_morph = objRow.insertCell();
-			objCell_morph.innerHTML = "<span>" + a_morph + "</span> <br>" + "<span id='delivery_method_option'>[옵션:" + delivery_method + "]</span>";
+			objCell_morph.innerHTML = "<span id='objCell_morph'>" + a_morph + "</span> <br>" + "<span id='delivery_method_option'>[옵션:" + delivery_method + "]</span>";
 			
 			//상품수 - 두번째 td(cell) 항목
 			var objCell_amount = objRow.insertCell();
 			objCell_amount.innerHTML = "<input type='text' id='a_amount' name='a_amount' value='1' maxlength='3' size='3' onchange='amountChange();'>" 
 										+ " <input type='button' id='amountPlus' name='amountPlus' value='+' onclick='plus();'> " 
-										+ " <input type='button' id='amountMinus' name='amountMinus' value='-' onclick='minus();'> ";		
+										+ " <input type='button' id='amountMinus' name='amountMinus' value='-' onclick='minus();'> "
+										+ " <input type='button' id='deleteCell' name='deleteCell' value='x' onclick='delCell(this);'> ";		
 			
 			//가격, 적립금 - 세번째 td(cell) 항목
 			var objCell_price = objRow.insertCell();
@@ -303,11 +287,9 @@
 											+ a_price_origin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
 											+ "<span id='total_product_mileage'>(적" + a_mileage + "원)</span>";
 				}
-			
-			//만약 최종 상품 정보에 정보가 추가되어있으면(같은 배송방법으로 추가되면 이라는 말과 같음)
-// 			var delivery_method = document.getElementById('delivery_method').value; //추가되어있는 td안에 옵션(배송정보) 값
-// 			if(delivery_method)
 		}
+		
+		$("select option[value*='"+ delivery_method +"']").attr('disabled',true);
 	}
 
 	//주문수량 변경시----------------------------------------------------------------------------------------
@@ -383,6 +365,13 @@
 				document.getElementById("total_product_price").innerHTML = final_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			}
 		}
+	}
+	
+	//사용자가 상품정보를 제거했을시
+	function delCell(obj){
+		var delivery_method = document.getElementById('delivery_method').value;	//배송방법
+		$(obj).parent().parent().remove();
+		$("select option[value*='"+ delivery_method +"']").removeAttr('disabled');
 	}
 	
 	//구매하기, 장바구니 버튼 눌렸을시 ------------------------------------------------------------------------------------
