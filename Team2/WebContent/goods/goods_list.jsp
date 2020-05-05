@@ -75,7 +75,7 @@
 			%>
 			<td colspan="2">
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="300" height="300"> </a><br>
-				<a href=''><%=gdto.getG_name() %></a> 
+				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a> 
 				<hr>
 				<%if(gdto.getG_discount_rate() != 0){ // 만약 할인율 있으면 %>
 					<span style="text-decoration: line-through;"> <%=newformat_price_origin %>원 </span> <br>
