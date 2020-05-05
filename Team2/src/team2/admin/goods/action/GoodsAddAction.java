@@ -16,7 +16,7 @@ public class GoodsAddAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
-		// 1. 파일 업로드(이미지 5개)
+		// 1. 파일 업로드
 		// 파일 저장 위치
 		ServletContext context = request.getServletContext();
 		String realPath = context.getRealPath("/upload/multiupload");
@@ -50,6 +50,8 @@ public class GoodsAddAction implements Action{
 		gdto.setG_discount_rate(Integer.parseInt(multi.getParameter("g_discount_rate")));
 		gdto.setG_price_sale(Integer.parseInt(multi.getParameter("g_price_sale")));
 		gdto.setG_mileage(Integer.parseInt(multi.getParameter("g_mileage")));
+		gdto.setG_delivery(multi.getParameter("g_delivery"));
+		gdto.setG_option(multi.getParameter("g_option"));
 		gdto.setContent(multi.getParameter("ir1"));
 		//gdto.setDate(multi.getParameter("date"));  -> 디비에서 입력
 		

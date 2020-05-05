@@ -34,6 +34,8 @@
 		   <th>할인율(%)</th>
 		   <th>할인 판매가</th>
 		   <th>적립금</th>
+		   <th>배송 방법</th>
+		   <th>옵션</th>
 		   <th>조회수</th>
 		   <th>등록일자</th>
 		   <th>수정하기</th>
@@ -58,6 +60,8 @@
 		   <td><%=gdto.getG_discount_rate()%></td>
 		   <td><%=gdto.getG_price_sale() %></td>
 		   <td><%=gdto.getG_mileage() %></td>
+		   <td><%=gdto.getG_delivery() %></td>
+		   <td><%=gdto.getG_option() %></td>
 		   <td><%=gdto.getG_view_count() %></td>
 		   <td><%=gdto.getDate() %></td>
 		   <td><a href="./GoodsModify.ag?num=<%=gdto.getNum()%>"><button type="button"> 수정 </button></a></td>

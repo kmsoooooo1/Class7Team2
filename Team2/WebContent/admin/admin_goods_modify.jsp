@@ -26,6 +26,7 @@
 	  <input type="hidden" id="sub_category_sel" name="sub_category_sel" value="<%=gdto.getSub_category()%>">
 	  <input type="hidden" id="sub_category_index_sel" name="sub_category_index_sel" value="<%=gdto.getSub_category_index()%>">
 	  
+	  
 	    <table border="1">
          <tr>
 		   <td>카테고리</td>
@@ -90,6 +91,22 @@
 			<td> <input  type="text" id="g_mileage_val" name="g_mileage" value="<%=gdto.getG_mileage()%>">원 </td>
 		  </tr>
 		  
+		  <tr>
+		    <td> 배송 방법</td>
+		    <td>
+		      <input type="radio" name="g_delivery" value="일반배송"
+		      <%if(gdto.getG_delivery().equals("일반배송")){ %> checked <%} %>
+		      > 일반배송
+		      <input type="radio" name="g_delivery" value="선택배송"
+		      <%if(gdto.getG_delivery().equals("선택배송")){ %> checked <%} %>
+		      > 선택배송
+		    </td>
+		  </tr>
+		  
+		  <tr>
+		     <td> 옵션 </td>
+		     <td> <input type="text" name="g_option" value="<%=gdto.getG_option()%>"> </td>
+		  </tr>
 		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
@@ -119,7 +136,8 @@
 
 <script type="text/javascript">
 
-
+	
+	
 	
 	// editer
 	var oEditors = [];

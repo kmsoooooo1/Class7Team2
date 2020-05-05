@@ -68,7 +68,7 @@ public class GoodsDAO {
 			}
 			
 			// ? 추가
-			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -83,8 +83,10 @@ public class GoodsDAO {
 			pstmt.setInt(10, gdto.getG_discount_rate());
 			pstmt.setInt(11, gdto.getG_price_sale());
 			pstmt.setInt(12, gdto.getG_mileage());
-			pstmt.setString(13, gdto.getContent());
-			pstmt.setInt(14, 0);
+			pstmt.setString(13, gdto.getG_delivery());
+			pstmt.setString(14, gdto.getG_option());
+			pstmt.setString(15, gdto.getContent());
+			pstmt.setInt(16, 0);
 			
 			// 실행
 			pstmt.executeUpdate();
@@ -127,6 +129,8 @@ public class GoodsDAO {
 				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
 				gdto.setG_price_sale(rs.getInt("g_price_sale"));
 				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));
@@ -177,6 +181,8 @@ public class GoodsDAO {
 				gdto.setNum(rs.getInt("num"));
 				gdto.setSub_category(rs.getString("sub_category"));
 				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
 				
 			}
 		} catch (Exception e) {
@@ -197,7 +203,7 @@ public class GoodsDAO {
 			
 			sql="UPDATE team2_goods SET "
 					+ "category=?,sub_category=?,sub_category_index=?,g_name=?,g_code=?,g_thumbnail=?,g_amount=?,g_price_origin=?,"
-					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,content=? "
+					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,g_delivery=?,g_option=?,content=? "
 					+ "WHERE num=?";
 			
 			pstmt = con.prepareStatement(sql);
@@ -213,8 +219,10 @@ public class GoodsDAO {
 			pstmt.setInt(9, gdto.getG_discount_rate());
 			pstmt.setInt(10, gdto.getG_price_sale());
 			pstmt.setInt(11, gdto.getG_mileage());
-			pstmt.setString(12, gdto.getContent());
-			pstmt.setInt(13, gdto.getNum());
+			pstmt.setString(12, gdto.getG_delivery());
+			pstmt.setString(13, gdto.getG_option());
+			pstmt.setString(14, gdto.getContent());
+			pstmt.setInt(15, gdto.getNum());
 			
 			pstmt.executeUpdate();
 			
