@@ -99,17 +99,17 @@ public class BasketDAO {
 			
 			// 상품을 장바구니에 저장
 			// 장바구니에 상품 정보를 저장
-			sql="insert into team2_basket values(?,?,?,?,?,?,?)";
+			sql="insert into team2_basket values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			pstmt.setString(2, bkdto.getId());
 			pstmt.setString(3, bkdto.getB_code());
 			pstmt.setInt(4, bkdto.getB_amount());
 			pstmt.setString(5, bkdto.getB_option());
-			pstmt.setInt(6, bkdto.getB_a_num());
-			pstmt.setInt(7, bkdto.getB_g_num());
 			
 			pstmt.executeUpdate();
+			
+			System.out.println("장바구니 저장 완료!!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
