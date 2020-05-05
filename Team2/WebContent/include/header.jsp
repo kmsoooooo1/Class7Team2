@@ -56,10 +56,10 @@
 			
 			<li> <a href="./GoodsList.go?category=먹이"> 먹이 </a>
 				<ul>
+					<li><a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a></li>
 					<li><a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a></li>
 					<li><a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a></li>
 					<li><a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a></li>
-					<li><a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a></li>
 				</ul>
 			</li>
 			

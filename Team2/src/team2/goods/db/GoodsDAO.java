@@ -348,6 +348,73 @@ public class GoodsDAO {
 	}
 	// GoodsList(category, sub_category, sub_category_index)
 	
+	//updateGoodsViewCount(g_code)
+	public void updateGoodsViewCount(String g_code){
+		
+		try {
+			con = getConnection();
+			
+			sql = "UPDATE team2_goods SET g_view_count = g_view_count + 1 WHERE g_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, g_code);
+			pstmt.executeUpdate();
+			
+			System.out.println("상품 페이지 조회수 1 증가 완료");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+	}//updateGoodsViewCount(g_code)
+	
+	//getGoodsDetail(g_code) 상품 상세정보 가져오는 함수
+	public GoodsDTO getGoodsDetail(String g_code){
+		GoodsDTO gdto = null;
+		
+		try {
+			con = getConnection();
+			
+			sql="SELECT * FROM team2_goods WHERE g_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, g_code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				gdto = new GoodsDTO();
+				// 만약 상품이 db에 있다면
+				gdto.setCategory(rs.getString("category"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setDate(rs.getDate("date"));
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return gdto;
+	}//getGoodsDetail(g_code)
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

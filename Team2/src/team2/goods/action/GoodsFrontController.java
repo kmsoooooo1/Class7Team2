@@ -60,6 +60,18 @@ public class GoodsFrontController extends HttpServlet{
 			}
 			
 		}
+		// 상품 상세 내용 가져오기
+		else if(command.equals("/GoodsDetail.go")){
+			action = new GoodsDetailAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		
 		
 		///////////////////////////////////////////////////////////////////
