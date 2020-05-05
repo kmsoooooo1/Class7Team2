@@ -341,6 +341,8 @@ public class GoodsDAO {
 				gdto.setNum(rs.getInt("num"));
 				gdto.setSub_category(rs.getString("sub_category"));
 				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
 				
 				goodsList.add(gdto);
 			}
@@ -403,6 +405,8 @@ public class GoodsDAO {
 				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
 				gdto.setG_price_sale(rs.getInt("g_price_sale"));
 				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));

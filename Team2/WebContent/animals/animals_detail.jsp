@@ -346,7 +346,7 @@
 	function valueBasketChecked() {
 		//만약 배송방법을 선택하지 않았다면
 		if(document.getElementById("delivery_method").value == "default"){
-			alert("배송옵션을 선턱해주세요");
+			alert("배송옵션을 선택해주세요");
 			document.fr.delivery_method.focus();
 			return false;
 		}
@@ -366,7 +366,7 @@
 	function valueOrderChecked() {
 		//만약 배송방법을 선택하지 않았다면
 		if(document.getElementById("delivery_method").value == "default"){
-			alert("배송옵션을 선턱해주세요");
+			alert("배송옵션을 선택해주세요");
 			document.fr.delivery_method.focus();
 			return false;
 		}
