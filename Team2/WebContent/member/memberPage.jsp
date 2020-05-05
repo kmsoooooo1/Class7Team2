@@ -78,7 +78,7 @@
 	 <!-- 최근 본 상품 -->
 	 <li><a href="#">최근 본 상품</a></li>
 	 <!-- 내가쓴글 -->
-	 <li><a href="./BoardList.bo">내 게시글</a></li>
+	 <li><a href="./BoardList.bo?category=1">내 게시글</a></li>
     </ul>
    </div>
    
