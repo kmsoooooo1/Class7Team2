@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -47,7 +49,7 @@ public class GoodsDAO {
 	
 	//////////////////////////////////////////////////////////////////////
 	
-	//insertGoods(gdto);
+	//insertGoods(gdto); 관리자
 	public void insertGoods(GoodsDTO gdto){
 		int num = 0;
 		
@@ -66,7 +68,7 @@ public class GoodsDAO {
 			}
 			
 			// ? 추가
-			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -75,11 +77,14 @@ public class GoodsDAO {
 			pstmt.setString(4, gdto.getSub_category_index());
 			pstmt.setString(5, gdto.getG_name());
 			pstmt.setString(6, gdto.getG_code());
-			pstmt.setString(7, gdto.getG_image());
+			pstmt.setString(7, gdto.getG_thumbnail());
 			pstmt.setInt(8, gdto.getG_amount());
-			pstmt.setInt(9, gdto.getG_price());
-			pstmt.setString(10, gdto.getContent());
-			pstmt.setInt(11, 0);
+			pstmt.setInt(9, gdto.getG_price_origin());
+			pstmt.setInt(10, gdto.getG_discount_rate());
+			pstmt.setInt(11, gdto.getG_price_sale());
+			pstmt.setInt(12, gdto.getG_mileage());
+			pstmt.setString(13, gdto.getContent());
+			pstmt.setInt(14, 0);
 			
 			// 실행
 			pstmt.executeUpdate();
@@ -88,13 +93,321 @@ public class GoodsDAO {
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("상품 등록 실패");
 		}finally{
 			closeDB();
 		}//자원반납
 	}//insertGoods(gdto);
+	
+	//getGoodsList(); 관리자
+	public List<GoodsDTO> getGoodsList(){
+		
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		
+		try {
+			con = getConnection();
+			
+			sql="SELECT * FROM team2_goods";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				GoodsDTO gdto = new GoodsDTO();
+				gdto.setNum(rs.getInt("num"));
+				gdto.setCategory(rs.getString("category"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setDate(rs.getDate("date"));
+				
+				goodsList.add(gdto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return goodsList;
+	}//getGoodsList();
+	
+	//getGoods(num); 관리자
+	public GoodsDTO getGoods(int num){
+		
+		GoodsDTO gdto = null;
+		
+		try {
+			con = getConnection();
+			
+			sql = "SELECT * FROM team2_goods WHERE num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				gdto = new GoodsDTO();
+				
+				gdto.setCategory(rs.getString("category"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setDate(rs.getDate("date"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setNum(rs.getInt("num"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return gdto;
+	}//getGoods(num);
+	
+	//modifyGoods(gdto); 관리자
+	public void modifyGoods(GoodsDTO gdto){
+		// 상품정보 수정
+		
+		try {
+			con = getConnection();
+			
+			sql="UPDATE team2_goods SET "
+					+ "category=?,sub_category=?,sub_category_index=?,g_name=?,g_code=?,g_thumbnail=?,g_amount=?,g_price_origin=?,"
+					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,content=? "
+					+ "WHERE num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, gdto.getCategory());
+			pstmt.setString(2, gdto.getSub_category());
+			pstmt.setString(3, gdto.getSub_category_index());
+			pstmt.setString(4, gdto.getG_name());
+			pstmt.setString(5, gdto.getG_code());
+			pstmt.setString(6, gdto.getG_thumbnail());
+			pstmt.setInt(7, gdto.getG_amount());
+			pstmt.setInt(8, gdto.getG_price_origin());
+			pstmt.setInt(9, gdto.getG_discount_rate());
+			pstmt.setInt(10, gdto.getG_price_sale());
+			pstmt.setInt(11, gdto.getG_mileage());
+			pstmt.setString(12, gdto.getContent());
+			pstmt.setInt(13, gdto.getNum());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("상품 정보 수정 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+	}//modifyGoods(gdto);
+	
+	//deleteGoods(num) 관리자
+	public void deleteGoods(int num){
+		try {
+			con = getConnection();
+			
+			sql="DELETE FROM team2_goods WHERE num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println(num+"번 상품 삭제 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+	}//deleteGoods(num)
+	
+	// 관리자 제어 끝 일반사용자 제어 시작
+	
+	// GoodsList(category, sub_category, sub_category_index)
+	public List<GoodsDTO> GoodsList(String category,String sub_category,String sub_category_index){
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		
+		//StringBuffer: 저장공간(메모리)
+		StringBuffer SQL = new StringBuffer();
+		
+		try {
+			con = getConnection();
+			
+			//SQL buffer 안에 sql 구문 넣어주기
+			
+			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 상품을 부를때)
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+				SQL.append("SELECT * FROM team2_goods order by num desc");
+			}
+			//만약 category가 먹이 이면
+			else if(category.equals("먹이")){
+				SQL.append("SELECT * FROM team2_goods WHERE category='먹이' ");
+				// 만약 sub_category가 없으면
+				if(sub_category.equals("all")) {
+					SQL.append("order by num");
+				}
+				//만약 sub_category가 있으면
+				else {
+					SQL.append("AND sub_category = ? order by num desc");
+				}
+			}
+			// sub_category_index는 메뉴에서 다루지 않음.
+			// sub_category 클릭 시 index 나오게 구현할 예정
+			else if(category.equals("사육용품")){
+				SQL.append("SELECT * FROM team2_goods WHERE category='사육용품' ");
+				//만약 sub_category가 없으면
+				if(sub_category.equals("all")) {
+					SQL.append("order by num");
+				}
+				//만약 sub_category가 있으면
+				else {
+					SQL.append("AND sub_category = ? order by num desc");
+				}
+			}
+			
+			pstmt = con.prepareStatement(SQL.toString());
+			
+			//?에 값 지정하기
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+			}
+			else if(category.equals("먹이")){
+				if(sub_category.equals("all")){
+				}
+				else{
+					pstmt.setString(1, sub_category);
+				}
+			}else if(category.equals("사육용품")){
+				if(sub_category.equals("all")) {
+				}
+				else {
+					pstmt.setString(1, sub_category);
+				}
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			// 상품이 있을때마다
+			while(rs.next()){
+				
+				GoodsDTO gdto = new GoodsDTO();
+				
+				gdto.setCategory(rs.getString("category"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setDate(rs.getDate("date"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setNum(rs.getInt("num"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				
+				goodsList.add(gdto);
+			}
+			System.out.println("사용자 사육용품&먹이 목록 저장 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return goodsList;
+	}
+	// GoodsList(category, sub_category, sub_category_index)
+	
+	//updateGoodsViewCount(g_code)
+	public void updateGoodsViewCount(String g_code){
+		
+		try {
+			con = getConnection();
+			
+			sql = "UPDATE team2_goods SET g_view_count = g_view_count + 1 WHERE g_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, g_code);
+			pstmt.executeUpdate();
+			
+			System.out.println("상품 페이지 조회수 1 증가 완료");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+	}//updateGoodsViewCount(g_code)
+	
+	//getGoodsDetail(g_code) 상품 상세정보 가져오는 함수
+	public GoodsDTO getGoodsDetail(String g_code){
+		GoodsDTO gdto = null;
+		
+		try {
+			con = getConnection();
+			
+			sql="SELECT * FROM team2_goods WHERE g_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, g_code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				gdto = new GoodsDTO();
+				// 만약 상품이 db에 있다면
+				gdto.setCategory(rs.getString("category"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setDate(rs.getDate("date"));
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return gdto;
+	}//getGoodsDetail(g_code)
+	
 	
 	
 	
