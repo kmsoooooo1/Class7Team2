@@ -25,7 +25,7 @@
 		String id2 = (String)session.getAttribute("id");
 		CommentDAO cdao = new CommentDAO();
 		List<CommentDTO> list = cdao.getList(Integer.parseInt(request.getParameter("num")));
-				
+		cdao.closeDB();
 		if(bdto!=null){
 	%>
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import team2.board.db.BoardDAO;
 import team2.board.db.BoardDTO;
@@ -30,6 +31,9 @@ public class BoardListAction implements Action {
 		
 		cset.setC(c);
 		cset.setPc(pc);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("cset", cset);
 		
 		System.out.println(cset);
 		

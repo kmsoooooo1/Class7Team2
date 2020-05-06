@@ -1,10 +1,13 @@
 package team2.board.action;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
 
 import team2.board.db.CommentDAO;
 import team2.board.db.CommentDTO;
@@ -20,10 +23,13 @@ public class insertCommenctAction implements Action {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		
+		String bdto = request.getParameter("bdto");
+		
+		System.out.println("CommentAction bdto : " + bdto);
+		
 		CommentDTO dto = new CommentDTO();
 		
 		request.setCharacterEncoding("UTF-8");
-		
 		
 		System.out.println("comment : "+request.getParameter("comment"));
 		System.out.println("ID : " + id);
@@ -42,15 +48,16 @@ public class insertCommenctAction implements Action {
 		dao.closeDB();
 		
 		if(chk>0){
-			
 			// 	comment 등록 성공시
+			request.setAttribute("bdto", bdto);
+			request.setAttribute("pageNum", 1);
+			request.setAttribute("num", dto.getC_b_idx());
+			
 			forward.setPath("./BoardContent.bo");
 			forward.setRedirect(true);
 			
 		}else{
-			
 			//	comment 등록 실패시
-			
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			
