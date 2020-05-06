@@ -46,7 +46,7 @@ public class BasketAddAction implements Action {
 		
 		
 		forward.setPath("./BasketList.ba");
-		forward.setRedirect(true);
+		forward.setRedirect(false);
 		return forward;
 	}
 

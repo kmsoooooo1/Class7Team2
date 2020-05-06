@@ -109,6 +109,8 @@ public class BasketDAO {
 			
 			pstmt.executeUpdate();
 			
+			System.out.println("장바구니 저장 완료!!");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
@@ -150,7 +152,7 @@ public class BasketDAO {
 				basketList.add(bkdto);
 				
 				// 각각의 장바구니에 해당하는 상품 정보 저장
-				sql ="select * from team2_animal where num=?";
+				sql ="select * from team2_animals where num=?";
 				
 				pstmt2 = con.prepareStatement(sql);
 				
