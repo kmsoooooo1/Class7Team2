@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../js/board/commentInsert.js"></script>
+<script type="text/javascript" src="./js/board/commentInsert.js"></script>
 </head>
 <body>
 	<h1>WebContent/board/board_content.jsp</h1>
@@ -21,7 +21,7 @@
 		String id2 = (String)session.getAttribute("id");
 		CommentDAO cdao = new CommentDAO();
 		List<CommentDTO> list = cdao.getList(Integer.parseInt(request.getParameter("num")));
-		
+		cdao.closeDB();
 		if(bdto!=null){
 	%>
 	
