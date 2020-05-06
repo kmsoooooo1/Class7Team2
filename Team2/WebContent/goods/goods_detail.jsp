@@ -37,7 +37,7 @@
 	   <!-- 상품 기본 정보 파트 -->
 	   <div id="menu0">
 	      <!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
-	      <input type="hidden" name="g_code" value="<%=goodsDetail.getG_code()%>">
+	      <input type="hidden" name="product_code" value="<%=goodsDetail.getG_code()%>">
 	      <input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=goodsDetail.getG_price_origin()%>">
 	      <input type="hidden" id="g_price_sale" name="g_price_sale" value="<%=goodsDetail.getG_price_sale()%>">
 		  <input type="hidden" id="g_discount_rate" name="g_discount_rate" value="<%=goodsDetail.getG_discount_rate()%>">
@@ -47,7 +47,8 @@
 		     	<td> <img src="./upload/multiupload/<%=goodsDetail.getG_thumbnail()%>" width="500" height="500"> </td>
 		        <td>
 		        	<!-- 상품명 -->
-		        	<%if(goodsDetail.getG_amount() != 0){ %>
+		        	<%if(goodsDetail.getG_amount() == 0){%>
+		        	  
 		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
 		        	  <h4> <%=goodsDetail.getG_name() %> </h4>
 		        	<%}else{ %>
@@ -90,14 +91,16 @@
 			        		<option value="default">-[필수] 선택하시오-</option>
 			        		<option value="default">------------------------------</option>
 			        		<%if(! goodsDetail.getG_option().equals("")){
-			        				String[] a = goodsDetail.getG_option().split(",");
+			        				String[] option = goodsDetail.getG_option().split(",");
 			        				
 			        				//System.out.println(Arrays.toString(a));
-			        				for(String str: a){
+			        				for(String str: option){
 			        		%>
-			        			<option>
+			        			<option id="option" value="option">
 			        			<%=str %> 
-			        			<%if(goodsDetail.getG_amount() == 0){ %>
+			        			<%if(goodsDetail.getG_amount() == 0){ 
+			        					
+			        			%>
 			        			   [품절] 
 			        			<%} %>
 			        			</option>

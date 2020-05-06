@@ -34,19 +34,23 @@
 				else if(joinform.email.value == ""){
 					alert("이메일을 입력해주세요.");
 					joinform.email.focus();
+					return false;
 				}
 				if ((joinform.pass.value == "") 
 				|| (!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val()))){
 					alert("비밀번호가 조건에 맞지 않습니다.");
 					joinform.pass.focus();
+					return false;
 				}
 				else if (!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#user_pass_confirm').val())){
 					alert("비밀번호 확인란을 다시 입력해주세요.");
 					joinform.user_pass_confirm.focus();
+					return false;
 				}
 				else if(document.joinform.pass.value != document.joinform.user_pass_confirm.value){
 					alert("비밀번호가 동일하지 않습니다.");
 					joinform.user_pass_confirm.focus();
+					return false;
 				}
 				
 		//이름을 한글 2자이상 입력받기
@@ -123,6 +127,9 @@
 </script>
 </head>
 <body>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+
 	<h2>회원가입 페이지</h2>
 	
 	<fieldset>
@@ -431,6 +438,9 @@
 	
 	
 	
+
+<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 </body>
 
 <!-- 비밀번호 유효성 검사 -->

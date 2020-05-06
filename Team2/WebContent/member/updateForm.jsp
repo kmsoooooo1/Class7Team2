@@ -105,7 +105,9 @@
 		MemberDTO mdto = (MemberDTO)request.getAttribute("mdto");
 	
 	%>
-
+	
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
 
 	<h2>회원 정보 수정 페이지</h2>
 	
@@ -219,7 +221,8 @@
 		</form>	
 	</fieldset>
 	
-	
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 	
 </body>
 </html>

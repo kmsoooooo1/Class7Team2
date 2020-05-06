@@ -1,3 +1,4 @@
+<%@page import="team2.admin.goods.action.GoodsDeleteAction"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
@@ -85,9 +86,12 @@
 				<%} %>
 				
 				<!-- 만약 수량이 0이면 soldout 문구 띄우기 -->
-				<%if(gdto.getG_amount() == 0){ %>
+				<%if(gdto.getG_amount() == 0){%>
+						
+					
+			
 					<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
-				<%} %>
+				<% } %>
 				
 			</td>
 			<%

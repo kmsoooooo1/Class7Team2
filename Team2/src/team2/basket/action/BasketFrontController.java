@@ -56,7 +56,14 @@ public class BasketFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		} else if(command.equals("/BasketList.ba")){
+			action = new BasketListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		
 		// 페이지 이동 처리

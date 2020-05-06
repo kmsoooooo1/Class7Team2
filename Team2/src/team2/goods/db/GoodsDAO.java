@@ -281,7 +281,7 @@ public class GoodsDAO {
 			else if(category.equals("먹이")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
-						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+						+ "group_concat(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
 				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
@@ -297,7 +297,7 @@ public class GoodsDAO {
 			else if(category.equals("사육용품")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
-						+ "max(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
+						+ "group_concat(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
 					SQL.append("order by num desc");
@@ -398,7 +398,7 @@ public class GoodsDAO {
 			
 			sql="SELECT category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "min(g_amount) as g_amount FROM team2_goods WHERE g_code = ? group by g_code";
+						+ "group_concat(g_amount) as g_amount FROM team2_goods WHERE g_code = ? group by g_code";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
