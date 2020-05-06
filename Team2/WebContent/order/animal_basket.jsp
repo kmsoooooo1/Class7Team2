@@ -30,7 +30,7 @@
     <td>선택</td>
   </tr>
   <%
- // for(int i=0;i<basketList.size();i++){
+ 	for(int i=0;i<basketList.size();i++){
 	  BasketDTO bkdto = new BasketDTO();
 	  AnimalDTO adto = new AnimalDTO(); 
 	  %>
@@ -54,7 +54,7 @@
 		 </tr>
 		 
 	  <%
-  //}  
+  }  
   %>
   
   </table>
