@@ -27,7 +27,7 @@ public class BasketAddAction implements Action {
 		}
 		
 		request.setCharacterEncoding("UTF-8");
-
+		
 		BasketDTO bkdto = new BasketDTO();
 		
 		//동물 또는 상품 코드
