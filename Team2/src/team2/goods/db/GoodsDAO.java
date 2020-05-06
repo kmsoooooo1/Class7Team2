@@ -268,7 +268,7 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
-			// sold out 제어
+			
 			
 			
 			//SQL buffer 안에 sql 구문 넣어주기
@@ -390,6 +390,7 @@ public class GoodsDAO {
 	}//updateGoodsViewCount(g_code)
 	
 	//getGoodsDetail(g_code) 상품 상세정보 가져오는 함수
+	// 수정 필요
 	public GoodsDTO getGoodsDetail(String g_code){
 		GoodsDTO gdto = null;
 		
@@ -422,6 +423,8 @@ public class GoodsDAO {
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));
+				
+				
 			}
 			
 		} catch (Exception e) {
