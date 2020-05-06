@@ -5,8 +5,7 @@ import java.sql.Timestamp;
 public class CommentDTO {
 	
 	private int c_idx;
-	private String c_category;
-	private int c_content_idx;
+	private int c_b_idx;
 	private String c_id;
 	private String c_comment;
 	private int c_like;
@@ -15,12 +14,11 @@ public class CommentDTO {
 	
 	public CommentDTO() {}
 	
-	public CommentDTO(int c_idx, String c_category, int c_content_idx, String c_id, String c_comment, int c_like,
+	public CommentDTO(int c_idx, int c_content_idx, String c_id, String c_comment, int c_like,
 			Timestamp c_regdate, String ip_addr) {
 		super();
 		this.c_idx = c_idx;
-		this.c_category = c_category;
-		this.c_content_idx = c_content_idx;
+		this.c_b_idx = c_content_idx;
 		this.c_id = c_id;
 		this.c_comment = c_comment;
 		this.c_like = c_like;
@@ -35,17 +33,11 @@ public class CommentDTO {
 	public void setC_idx(int c_idx) {
 		this.c_idx = c_idx;
 	}
-	public String getC_category() {
-		return c_category;
+	public int getC_b_idx() {
+		return c_b_idx;
 	}
-	public void setC_category(String c_category) {
-		this.c_category = c_category;
-	}
-	public int getC_content_idx() {
-		return c_content_idx;
-	}
-	public void setC_content_idx(int c_content_idx) {
-		this.c_content_idx = c_content_idx;
+	public void setC_b_idx(int c_content_idx) {
+		this.c_b_idx = c_content_idx;
 	}
 	public String getC_id() {
 		return c_id;
@@ -79,7 +71,7 @@ public class CommentDTO {
 	}
 	@Override
 	public String toString() {
-		return "CommentDTO [c_idx=" + c_idx + ", c_category=" + c_category + ", c_content_idx=" + c_content_idx
+		return "CommentDTO [c_idx=" + c_idx + ", c_b_idx=" + c_b_idx
 				+ ", c_id=" + c_id + ", c_comment=" + c_comment + ", c_like=" + c_like + ", c_regdate=" + c_regdate
 				+ ", ip_addr=" + ip_addr + "]";
 	}
