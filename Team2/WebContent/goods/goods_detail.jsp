@@ -87,7 +87,7 @@
 		        	옵션선택	
 			        	<select>
 			        		<option value="default">-[필수] 선택하시오-</option>
-			        		<option value="default">-----------------------</option>
+			        		<option value="default">------------------------------</option>
 			        		<%if(! goodsDetail.getG_option().equals("")){ %>
 			        			<option><%=goodsDetail.getG_option() %></option>
 			        		<%} %>
