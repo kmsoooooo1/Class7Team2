@@ -82,6 +82,23 @@
 		        	
 		        	<hr>
 		        	
+		        	<!-- 옵션을 셀렉트박스로 가져오기 -->
+		        	<%if(! goodsDetail.getG_option().equals("")){ %>
+		        	옵션선택	
+			        	<select>
+			        		<option value="default">-[필수] 선택하시오-</option>
+			        		<option value="default">-----------------------</option>
+			        		<%if(! goodsDetail.getG_option().equals("")){ %>
+			        			<option><%=goodsDetail.getG_option() %></option>
+			        		<%} %>
+			        	</select>
+		        	<%} %>
+		        	
+		        	
+		        	
+		        	
+		        	<hr>
+		        	
 		        	<!-- 배송(일반배송, 선택배송) 구분 -->
 		        	<!-- 일반 배송일 때, -->
 		        	<%if(goodsDetail.getG_delivery().equals("일반배송")){ %>

@@ -268,6 +268,9 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
+			// sold out 제어
+			
+			
 			//SQL buffer 안에 sql 구문 넣어주기
 			
 			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 상품을 부를때)
@@ -276,10 +279,13 @@ public class GoodsDAO {
 			}
 			//만약 category가 먹이 이면
 			else if(category.equals("먹이")){
-				SQL.append("SELECT * FROM team2_goods WHERE category='먹이' ");
+				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
+						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num");
+					SQL.append("order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
@@ -289,10 +295,12 @@ public class GoodsDAO {
 			// sub_category_index는 메뉴에서 다루지 않음.
 			// sub_category 클릭 시 index 나오게 구현할 예정
 			else if(category.equals("사육용품")){
-				SQL.append("SELECT * FROM team2_goods WHERE category='사육용품' ");
+				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
+						+ "max(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num");
+					SQL.append("order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
@@ -318,6 +326,8 @@ public class GoodsDAO {
 					pstmt.setString(1, sub_category);
 				}
 			}
+			
+			System.out.println(SQL);
 			
 			rs = pstmt.executeQuery();
 			
@@ -386,7 +396,9 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
-			sql="SELECT * FROM team2_goods WHERE g_code = ?";
+			sql="SELECT category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
+						+ "max(g_amount) as g_amount FROM team2_goods WHERE g_code = ? group by g_code";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
