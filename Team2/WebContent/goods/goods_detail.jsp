@@ -1,3 +1,4 @@
+<%@page import="java.util.Arrays"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -46,7 +47,7 @@
 		     	<td> <img src="./upload/multiupload/<%=goodsDetail.getG_thumbnail()%>" width="500" height="500"> </td>
 		        <td>
 		        	<!-- 상품명 -->
-		        	<%if(goodsDetail.getG_amount() == 0){ %>
+		        	<%if(goodsDetail.getG_amount() != 0){ %>
 		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
 		        	  <h4> <%=goodsDetail.getG_name() %> </h4>
 		        	<%}else{ %>
@@ -88,9 +89,22 @@
 			        	<select>
 			        		<option value="default">-[필수] 선택하시오-</option>
 			        		<option value="default">------------------------------</option>
-			        		<%if(! goodsDetail.getG_option().equals("")){ %>
-			        			<option><%=goodsDetail.getG_option() %></option>
-			        		<%} %>
+			        		<%if(! goodsDetail.getG_option().equals("")){
+			        				String[] a = goodsDetail.getG_option().split(",");
+			        				
+			        				//System.out.println(Arrays.toString(a));
+			        				for(String str: a){
+			        		%>
+			        			<option>
+			        			<%=str %> 
+			        			<%if(goodsDetail.getG_amount() == 0){ %>
+			        			   [품절] 
+			        			<%} %>
+			        			</option>
+			        		<%	
+			        				}
+			        			}		
+			        		%>
 			        	</select>
 		        	<%} %>
 		        	

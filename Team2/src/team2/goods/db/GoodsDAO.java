@@ -398,7 +398,7 @@ public class GoodsDAO {
 			
 			sql="SELECT category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "max(g_amount) as g_amount FROM team2_goods WHERE g_code = ? group by g_code";
+						+ "min(g_amount) as g_amount FROM team2_goods WHERE g_code = ? group by g_code";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
