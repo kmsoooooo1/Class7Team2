@@ -152,11 +152,12 @@ public class BasketDAO {
 				basketList.add(bkdto);
 				
 				// 각각의 장바구니에 해당하는 상품 정보 저장
-				sql ="select * from team2_animals where num=?";
+
+				sql ="select * from team2_animals where a_code=?";
 				
 				pstmt2 = con.prepareStatement(sql);
 				
-				pstmt2.setInt(1, bkdto.getB_a_num());
+				pstmt2.setString(1, bkdto.getB_code());
 				
 				rs2 = pstmt2.executeQuery();
 				
