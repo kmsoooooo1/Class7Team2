@@ -165,9 +165,9 @@ public class BasketDAO {
 					AnimalDTO adto = new AnimalDTO();
 					
 					adto.setA_thumbnail(rs2.getString("a_thumbnail"));
-					adto.setA_morph(rs.getString("a_morph"));
-					adto.setA_price_sale(rs.getInt("a_price_sale"));
-					adto.setA_mileage(rs.getInt("a_mileage"));
+					adto.setA_morph(rs2.getString("a_morph"));
+					adto.setA_price_sale(rs2.getInt("a_price_sale"));
+					adto.setA_mileage(rs2.getInt("a_mileage"));
 					
 					// 상품정보 하나를 리스트 한칸에 저장
 					animalList.add(adto);
