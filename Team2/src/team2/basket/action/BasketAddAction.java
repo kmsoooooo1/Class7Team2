@@ -28,13 +28,10 @@ public class BasketAddAction implements Action {
 		
 		BasketDTO bkdto = new BasketDTO();
 		
-		bkdto.setB_num(Integer.parseInt(request.getParameter("b_num")));
 		bkdto.setId(id);
-		bkdto.setB_code(request.getParameter("b_code"));
-		bkdto.setB_amount(Integer.parseInt(request.getParameter("b_amount")));
-		bkdto.setB_option(request.getParameter("b_option"));
-		bkdto.setB_a_num(Integer.parseInt(request.getParameter("b_a_num")));
-		bkdto.setB_g_num(Integer.parseInt(request.getParameter("b_g_num")));
+		bkdto.setB_code(request.getParameter("a_code"));
+		bkdto.setB_amount(Integer.parseInt(request.getParameter("a_amount")));
+		bkdto.setB_option(request.getParameter("delivary_method"));
 		
 		
 		BasketDAO bkdao = new BasketDAO();

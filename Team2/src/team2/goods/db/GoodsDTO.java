@@ -9,9 +9,12 @@ public class GoodsDTO {
 	private String sub_category_index;
 	private String g_name;
 	private String g_code;
-	private String g_image;
+	private String g_thumbnail;
 	private int g_amount;
-	private int g_price;
+	private int g_price_origin;
+	private int g_discount_rate;
+	private int g_price_sale;
+	private int g_mileage;
 	private String content;
 	private int g_view_count;
 	private Date date;
@@ -52,11 +55,11 @@ public class GoodsDTO {
 	public void setG_code(String g_code) {
 		this.g_code = g_code;
 	}
-	public String getG_image() {
-		return g_image;
+	public String getG_thumbnail() {
+		return g_thumbnail;
 	}
-	public void setG_image(String g_image) {
-		this.g_image = g_image;
+	public void setG_thumbnail(String g_thumbnail) {
+		this.g_thumbnail = g_thumbnail;
 	}
 	public int getG_amount() {
 		return g_amount;
@@ -64,11 +67,29 @@ public class GoodsDTO {
 	public void setG_amount(int g_amount) {
 		this.g_amount = g_amount;
 	}
-	public int getG_price() {
-		return g_price;
+	public int getG_price_origin() {
+		return g_price_origin;
 	}
-	public void setG_price(int g_price) {
-		this.g_price = g_price;
+	public void setG_price_origin(int g_price_origin) {
+		this.g_price_origin = g_price_origin;
+	}
+	public int getG_discount_rate() {
+		return g_discount_rate;
+	}
+	public void setG_discount_rate(int g_discount_rate) {
+		this.g_discount_rate = g_discount_rate;
+	}
+	public int getG_price_sale() {
+		return g_price_sale;
+	}
+	public void setG_price_sale(int g_price_sale) {
+		this.g_price_sale = g_price_sale;
+	}
+	public int getG_mileage() {
+		return g_mileage;
+	}
+	public void setG_mileage(int g_mileage) {
+		this.g_mileage = g_mileage;
 	}
 	public String getContent() {
 		return content;
@@ -92,9 +113,10 @@ public class GoodsDTO {
 	@Override
 	public String toString() {
 		return "GoodsDTO [num=" + num + ", category=" + category + ", sub_category=" + sub_category
-				+ ", sub_category_index=" + sub_category_index + ", g_name=" + g_name + ", g_code=" + g_code + ", g_image=" + g_image
-				+ ", g_amount=" + g_amount + ", g_price=" + g_price + ", content=" + content + ", g_view_count="
-				+ g_view_count + ", date=" + date + "]";
+				+ ", sub_category_index=" + sub_category_index + ", g_name=" + g_name + ", g_code=" + g_code
+				+ ", g_thumbnail=" + g_thumbnail + ", g_amount=" + g_amount + ", g_price_origin=" + g_price_origin
+				+ ", g_discount_rate=" + g_discount_rate + ", g_price_sale=" + g_price_sale + ", g_mileage=" + g_mileage
+				+ ", content=" + content + ", g_view_count=" + g_view_count + ", date=" + date + "]";
 	}
 	
 	
