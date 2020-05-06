@@ -54,32 +54,6 @@ public class BoardFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./board/main_page.jsp");
 			forward.setRedirect(false);
-		}else if(command.equals("/notice.bo")) {
-			
-			//	notice Category 설정 후 board_list.jsp로 이동
-			
-			cset.setC(0);
-			session.setAttribute("cset", cset);
-			
-			System.out.println("/notice.bo 주소 처리");
-			
-			forward = new ActionForward();
-			forward.setPath("./board/board_notice.jsp");
-			forward.setRedirect(false);
-			
-		}else if(command.equals("/review.bo")) {
-			
-			System.out.println("/review.bo 주소 처리");
-			
-			//	review Category 설정 후 board_list.jsp로 이동
-			
-			cset.setC(1);
-			session.setAttribute("cset", cset);
-			
-			forward = new ActionForward();
-			forward.setPath("./board/board_review.jsp");
-			forward.setRedirect(false);
-			
 		}else if(command.equals("/BoardContent.bo")) {
 			
 			//	board 글 내용 보기 페이지로 이동
@@ -162,8 +136,19 @@ public class BoardFrontController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(command.equals("/downloadAction.bo")){
+			
+			System.out.println("/downloadAction.bo 주소 처리");
+			
+			// 파일 다운로드
+			action = new downloadAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
 		
 		
 		//action
