@@ -87,8 +87,13 @@ public class insertBoardAction implements Action {
 				        System.out.println(uploadedFileName);
 						
 						//	DB에 저장할 파일명 변수에 파일명 추가
-						b_file = uploadedFileName;
-						b_file +="," + uploadedFileName;
+				        // b_file 시작 시 ","가 나와 if문으로 첫번째 값 그대로 저장
+				        if(b_file == ""){
+				        	b_file = uploadedFileName;
+						}else{
+							b_file +="," + uploadedFileName;
+						}
+				        
 						File savedFile = new File(uploadedFileName);
 						
 						//	파일이름 저장
@@ -128,7 +133,7 @@ public class insertBoardAction implements Action {
 		//	dao 자원 해제
 		dao.closeDB();
 		
-		//작성 후 리스트 이동
+		//작성 후 리스트 이동  문자열(category)을 숫자로 전환후 파라미터값 전달
 		cSet cset = new cSet();
 		String category = board.get("b_category");
 		cset.setCategory(category);

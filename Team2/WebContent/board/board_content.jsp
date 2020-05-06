@@ -1,4 +1,7 @@
 <%@page import="java.io.File"%>
+<%@page import="team2.board.db.CommentDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="team2.board.db.CommentDAO"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,14 +22,10 @@
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
 
-// 		String dir = application.getRealPath("/upload/board/");
-// 		String files[] = bdto.getB_file().split(",");
-	
-// 		for(String file : files) {
-// 		out.write("<a href=\"" + request.getContextPath() + "/downloadAction.bo?file=" +
-// 		java.net.URLEncoder.encode(file, "UTF-8") + "\">" +file + "</a><br>");
-// 		}
-		
+		String id2 = (String)session.getAttribute("id");
+		CommentDAO cdao = new CommentDAO();
+		List<CommentDTO> list = cdao.getList(Integer.parseInt(request.getParameter("num")));
+				
 		if(bdto!=null){
 	%>
 	
@@ -75,16 +74,46 @@
 	</table>
 	<%} %>
 	<div class="comment_wrap">
-		<div>
-			<form name="fr" action="./InsertCommentAction.bo" method="post">
-				<input type="hidden" name="c_category" value="board">
-<%-- 				<input type="hidden" name="b_idx" value=<%=bdto.getB_idx()%>> --%>
-				<textarea name="comment"></textarea>
-				<button type="button" onclick="return insertCommenctCheck()">등록</button>
-			</form>
-		</div>
-		<div></div>
+	<div>
+		<form name="fr" action="./InsertCommentAction.bo" method="post">
+			<input type="hidden" name="c_category" value="board">
+			<input type="hidden" name="c_b_idx" value=<%=bdto.getB_idx()%>>
+			<textarea name="comment" 
+				<%if(id2!=null){ %>
+				placeholder="댓글을 입력해 주세요."
+				<%}else{ %>
+				placeholder="로그인이 필요합니다."
+				disabled="disabled"
+				<%} %>
+				></textarea>
+			<button type="button" onclick="return insertCommenctCheck()"
+				<%if(id2==null){ %>
+					disabled="disabled"
+				<%} %>
+			>등록</button>
+		</form>
 	</div>
+	<div>
+		<ul>	
+		<%if(list.size()>0){
+			for(CommentDTO dto : list){ %>
+			
+			<li>
+				<div class="comment_wrap">
+					작성자 : <%=dto.getC_id() %><br>
+					댓글 : <%=dto.getC_comment() %><br>
+					IP : <%=dto.getIp_addr() %><br>
+					작성일자 : <%=dto.getC_regdate() %>
+				</div>
+			</li>
+			
+		<%	} 
+		  }else{ %>
+		  
+	  <%  } %>
+		</ul>
+	</div>
+</div>
 		
 	
 
