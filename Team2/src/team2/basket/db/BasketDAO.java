@@ -150,11 +150,11 @@ public class BasketDAO {
 				basketList.add(bkdto);
 				
 				// 각각의 장바구니에 해당하는 상품 정보 저장
-				sql ="select * from team2_animal where num=?";
+				sql ="select * from team2_animals where a_code=?";
 				
 				pstmt2 = con.prepareStatement(sql);
 				
-				pstmt2.setInt(1, bkdto.getB_a_num());
+				pstmt2.setString(1, bkdto.getB_code());
 				
 				rs2 = pstmt2.executeQuery();
 				
@@ -163,9 +163,9 @@ public class BasketDAO {
 					AnimalDTO adto = new AnimalDTO();
 					
 					adto.setA_thumbnail(rs2.getString("a_thumbnail"));
-					adto.setA_morph(rs.getString("a_morph"));
-					adto.setA_price_sale(rs.getInt("a_price_sale"));
-					adto.setA_mileage(rs.getInt("a_mileage"));
+					adto.setA_morph(rs2.getString("a_morph"));
+					adto.setA_price_sale(rs2.getInt("a_price_sale"));
+					adto.setA_mileage(rs2.getInt("a_mileage"));
 					
 					// 상품정보 하나를 리스트 한칸에 저장
 					animalList.add(adto);
