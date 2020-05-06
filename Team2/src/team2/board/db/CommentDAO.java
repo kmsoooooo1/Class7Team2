@@ -52,15 +52,20 @@ public class CommentDAO {
 	public int insertComment(CommentDTO cdto) {
 		int chk = 0;
 		
-		String sql = "insert into team2_comment (c_idx, c_category, c_content_idx, c_id, c_comment, ip_addr) \r\n" + 
-				"values ((select num from (select coalesce(max(c_idx),0) num from team2_project.team2_comment innerTable) outertable)+1,'"
-				+ cdto.getC_category() + "',"
-				+ cdto.getC_content_idx() + ",'"
+		String sql = "insert into team2_comment (c_idx, c_b_idx, c_id, c_comment, ip_addr)" + 
+				"values ((select num from (select coalesce(max(c_idx),0) num from team2_project.team2_comment innerTable) outertable)+1,"
+				+ cdto.getC_b_idx() + ",'"
 				+ cdto.getC_id() + "','"
 				+ cdto.getC_comment() + "','"
 				+ cdto.getIp_addr() + "')";
 		
-		System.out.println(sql);
+		try {
+			chk = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return chk;
 	}
 	
@@ -105,8 +110,7 @@ public class CommentDAO {
 			while(rs.next()) {
 				dto = new CommentDTO(
 						rs.getInt("c_idx"),
-						rs.getString("c_category"),
-						rs.getInt("c_content_idx"),
+						rs.getInt("c_b_idx"),
 						rs.getString("c_id"),
 						rs.getString("c_comment"),
 						rs.getInt("c_like"),
@@ -123,6 +127,16 @@ public class CommentDAO {
 		
 		return list;
 	}
+	
+	public List<CommentDTO> getList(int c_b_idx){
+		
+		String sql = "select * from team2_comment where c_b_idx=" + c_b_idx;
+		
+		List<CommentDTO> list = selectList(sql);
+		
+		return list;
+	}
+	
 	
 	public int deleteComment(int c_idx) {
 		int chk = 0;

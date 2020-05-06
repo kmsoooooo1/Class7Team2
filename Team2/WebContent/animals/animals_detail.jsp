@@ -186,7 +186,7 @@
 				</td>
 			</tr>
 		</table>
-		<button type="button"> 리뷰작성 </button>
+		<button type="button" onclick="location.href='./Insert.bo?C=1&CODE=<%=animalDetail.getA_code() %>'"> 리뷰작성 </button>
 		<button type="button"> 모두보기 </button>
 	</div>
 	
@@ -231,7 +231,7 @@
 				<td> 9 </td>
 			</tr>
 		</table>
-		<button type="button">상품문의하기</button>
+		<button type="button" onclick="location.href='./Insert.bo?C=2&CODE=<%=animalDetail.getA_code()%>'">상품문의하기</button>
 		<button type="button">모두보기</button>
 	</div>
 	
