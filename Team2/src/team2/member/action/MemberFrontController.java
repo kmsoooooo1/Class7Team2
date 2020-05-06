@@ -160,12 +160,24 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		// 비밀번호 찾기 페이지 이동	
-		}else if(command.equals("MemberPWFind.me")){
+		}else if(command.equals("/MemberPWFind.me")){
 			forward = new ActionForward();
 			forward.setPath("./member/pwFind.jsp");
 			forward.setRedirect(false);
 		}else if(command.equals("/MemberPWFindAction.me")){
 			action = new MemberPWFindAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// 비밀번호 변경 페이지 이동	
+		}else if(command.equals("/ChangePass.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/changePass.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/MemberChangePassAction.me")){
+			action = new MemberChangePassAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {

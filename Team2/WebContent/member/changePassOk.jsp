@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<script type="text/javascript">
+	alert("패스워드 변경이 완료되었습니다.\n 이용해주셔서 감사합니다.");
+	location.href="./MemberLogin.me";
+</script>
 </body>
 </html>

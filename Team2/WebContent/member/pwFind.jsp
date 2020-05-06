@@ -9,9 +9,9 @@
 <body>
 <fieldset><legend>비밀번호 찾기</legend>
  <form action="./MemberPWFindAction.me" method="post">
-  <label>가입하신 이메일을 입력하세요</label><br>
+  <label>이메일을 입력하세요</label><br>
    <input type="email" name="email"><br>
-  <label>ID</label>
+  <label>아이디</label>
    <input type="text" name="id"><br>
    <input type="submit" class="btn" value="비밀번호 찾기">
    <input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
