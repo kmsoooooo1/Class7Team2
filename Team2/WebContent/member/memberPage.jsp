@@ -1,3 +1,5 @@
+<%@page import="team2.member.db.MemberDAO"%>
+<%@page import="team2.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +22,12 @@
 	   
 	   if(id == null){
 		  response.sendRedirect("./MemberLogin.me");   
-	   }    
+	   }  
+	   
+	   // id에 맞는 회원의 이름 화면에 출력
+	   MemberDAO mdao = new MemberDAO();
+	   MemberDTO mdto = mdao.getMember(id);
+	   String name = mdto.getName();
 	 %>
 <!-- 회원 이미지 -->	 
  <div>
@@ -34,7 +41,7 @@
   <!-- 회원 정보 -->   
   <div>
    <span>
-    <span><%=id %></span>
+    <span><%=name %></span>
    </span>
    <span>
     <span>
@@ -52,7 +59,7 @@
     	환영합니다.   
     <b>
     <span>
-    <span>${id }</span>
+    <span><%=name %></span>
     </span>
     </b>
     	회원님!
@@ -149,7 +156,7 @@
        "저희 쇼핑몰을 이용해 주셔서 감사합니다."
        <strong>
         <span>
-        <span>${id }</span>
+        <span><%=name %></span>
         </span>
        </strong>
        "회원님은"

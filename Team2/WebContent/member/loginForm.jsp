@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+
 	<h2> 회원 로그인 </h2>
 	<fieldset>
 		<legend>로그인</legend>
@@ -23,6 +27,10 @@
 			<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me'">
 		</form>
 	</fieldset>
+	
+	
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 	
 </body>
 </html>

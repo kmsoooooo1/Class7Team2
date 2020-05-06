@@ -127,6 +127,9 @@
 </script>
 </head>
 <body>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+
 	<h2>회원가입 페이지</h2>
 	
 	<fieldset>
@@ -435,6 +438,9 @@
 	
 	
 	
+
+<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 </body>
 
 <!-- 비밀번호 유효성 검사 -->

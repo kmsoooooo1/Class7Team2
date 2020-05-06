@@ -6,7 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -322,7 +330,68 @@ public class MemberDAO {
 	}
 	// getMemberList()
 	
-	
+	// findID(email)
+	public int findID(String email){
+		int check = -1;
+		
+		try {
+			con = getConnection();
+			sql = "select id from team2_member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				String id = rs.getString("id");
+				Thread t1 = new Thread(new Runnable(){
+
+					@Override
+					public void run() {
+						String host = "smtp.gmail.com";
+						final String user = "wgdw2020";
+						final String password = "123!@#dD";
+						
+						// 세션
+						Properties props = new Properties();
+						props.put("mail.smtp.host", host);
+						props.put("mail.smtp.auth", "true");
+						props.put("mail.smtp.starttls.enable", "true");
+						
+						Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(user, password);
+							}
+						});
+					try{
+						MimeMessage message = new MimeMessage(session);
+						message.setFrom(new InternetAddress(user));
+						message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+						
+						// Subject
+						message.setSubject("[Subject] 회원 정보 확인 메일입니다.");
+
+						// Text
+						message.setText("회원님의 아이디는 "+id+"입니다.");
+
+						// send the message
+						Transport.send(message);
+						System.out.println("message sent successfully...");
+					} catch (MessagingException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			
+			check=1;
+			t1.start();
+		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return check;
+	}
+	// findID(email)
 	
 	
 	

@@ -90,6 +90,18 @@
   </servlet-mapping>  
   <!-- 동물리스트 페이지 -->
   
+  <!-- 상품 리스트 페이지 -->
+  <servlet>
+     <servlet-name>GoodsFrontController</servlet-name>
+     <servlet-class>team2.goods.action.GoodsFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>GoodsFrontController</servlet-name>
+     <url-pattern>*.go</url-pattern>
+  </servlet-mapping>  
+  <!-- 상품 리스트 페이지 -->
+  
   <!-- 장바구니 -->
   <servlet>
      <servlet-name>BasketFrontController</servlet-name>

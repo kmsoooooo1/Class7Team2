@@ -39,7 +39,7 @@ public class BasketListAction implements Action {
 		request.setAttribute("animalList", animalList);
 		
 		forward.setPath("./order/animal_basket.jsp");
-		forward.setRedirect(true);
+		forward.setRedirect(false);
 		
 		return forward;
 	}

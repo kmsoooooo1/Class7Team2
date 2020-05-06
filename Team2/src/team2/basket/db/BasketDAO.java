@@ -99,17 +99,17 @@ public class BasketDAO {
 			
 			// 상품을 장바구니에 저장
 			// 장바구니에 상품 정보를 저장
-			sql="insert into team2_basket values(?,?,?,?,?,?,?)";
+			sql="insert into team2_basket values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			pstmt.setString(2, bkdto.getId());
 			pstmt.setString(3, bkdto.getB_code());
 			pstmt.setInt(4, bkdto.getB_amount());
 			pstmt.setString(5, bkdto.getB_option());
-			pstmt.setInt(6, bkdto.getB_a_num());
-			pstmt.setInt(7, bkdto.getB_g_num());
 			
 			pstmt.executeUpdate();
+			
+			System.out.println("장바구니 저장 완료!!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -147,18 +147,17 @@ public class BasketDAO {
 				bkdto.setB_code(rs.getString("b_code"));
 				bkdto.setB_amount(rs.getInt("b_amount"));
 				bkdto.setB_option(rs.getString("b_option"));
-				bkdto.setB_a_num(rs.getInt("b_a_num"));
-				bkdto.setB_g_num(rs.getInt("b_g_num"));
 				
 				// 장바구니 하나의 정보를 리스트 한칸에 저장
 				basketList.add(bkdto);
 				
 				// 각각의 장바구니에 해당하는 상품 정보 저장
-				sql ="select * from team2_animal where num=?";
+
+				sql ="select * from team2_animals where a_code=?";
 				
 				pstmt2 = con.prepareStatement(sql);
 				
-				pstmt2.setInt(1, bkdto.getB_a_num());
+				pstmt2.setString(1, bkdto.getB_code());
 				
 				rs2 = pstmt2.executeQuery();
 				
@@ -167,9 +166,9 @@ public class BasketDAO {
 					AnimalDTO adto = new AnimalDTO();
 					
 					adto.setA_thumbnail(rs2.getString("a_thumbnail"));
-					adto.setA_morph(rs.getString("a_morph"));
-					adto.setA_price_sale(rs.getInt("a_price_sale"));
-					adto.setA_mileage(rs.getInt("a_mileage"));
+					adto.setA_morph(rs2.getString("a_morph"));
+					adto.setA_price_sale(rs2.getInt("a_price_sale"));
+					adto.setA_mileage(rs2.getInt("a_mileage"));
 					
 					// 상품정보 하나를 리스트 한칸에 저장
 					animalList.add(adto);
