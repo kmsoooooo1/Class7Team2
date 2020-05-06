@@ -9,10 +9,10 @@
 <body>
 <fieldset><legend>아이디 찾기</legend>
 <form action="./MemberIDFindAction.me" method="post">
-<label>당신의 이메일 주소는 무엇입니까?</label><br>
+<label>가입하신 이메일 주소를 입력해주세요</label><br>
 <input type="text" name="email"><br>
 <input type="submit" class="btn" value="아이디 찾기">
-<input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./login.shw';">
+<input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
 </form>
 </fieldset>
 </body>

@@ -393,7 +393,78 @@ public class MemberDAO {
 	}
 	// findID(email)
 	
-	
+	// findPW(email,id)
+	public int findPW(String email,String id){
+		int check = -1;
+		
+		try {
+			con = getConnection();
+			sql = "select id from team2_member where email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				if(id.equals(rs.getString("id"))){
+				// ID 정보 확인 완료
+				Thread t1 = new Thread(new Runnable() {
+						
+					@Override
+					public void run() {
+						String host = "smtp.gmail.com";
+						final String user = "wgdw2020";
+						final String password = "123!@#dD";
+
+
+						// Get the session object
+						Properties props = new Properties();
+						props.put("mail.smtp.host", host);
+						props.put("mail.smtp.auth", "true");
+						props.put("mail.smtp.starttls.enable","true");
+
+						Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(user, password);
+							}
+					});
+						// Compose the message
+						try {
+							MimeMessage message = new MimeMessage(session);
+							message.setFrom(new InternetAddress(user));
+							message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+							// Subject
+							message.setSubject("[Subject] 회원 정보 확인 메일입니다.");
+
+							// Text
+							message.setText(id+"회원님의 패스워드 변경 페이지로 이동합니다.\n 해당 링크를 클릭하여 비밀번호 변경페이지로 이동해 주세요.\n http://192.168.7.5:8088/WGDW/ChangePass.shw?id="+id);
+
+							// send the message
+							Transport.send(message);
+								System.out.println("message sent successfully...");
+							} catch (MessagingException e) {
+								e.printStackTrace();		
+							}
+						}
+					});	
+					check=1;
+					t1.start();
+				}else{
+					//유효한 정보가 아님
+					check=0;
+				}
+			}else{
+				//정보가 존재하지 않습니다.
+				check=-1;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return check;
+	}
+	// findPW(email,id)
 	
 	
 	

@@ -32,7 +32,7 @@ public class MemberIDFindAction implements Action{
 		PrintWriter out= response.getWriter();
 		out.print("<script>");
 		out.print("alert('인증 메일을 전송하였습니다. 메일함을 확인해주세요.');");
-		out.print("location.href='./start.me';");
+		out.print("location.href='./MemberLogin.me';");
 		out.print("</script>");
 		
 		out.close();
