@@ -37,7 +37,7 @@
 		<!-- 상품 기본 정보 파트 ------------------------------------------------------------------------------------------ -->
 		<div id="menu0">
 			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율, 모프, 적립금  -->
-			<input type="hidden" name="a_code" value="<%=animalDetail.getA_code()%>">
+			<input type="hidden" name="product_code" value="<%=animalDetail.getA_code()%>">
 			<input type="hidden" id="a_price_origin" name="a_price_origin" value="<%=animalDetail.getA_price_origin()%>">
 			<input type="hidden" id="a_price_sale" name="a_price_sale" value="<%=animalDetail.getA_price_sale()%>">
 			<input type="hidden" id="a_discount_rate" name="a_discount_rate" value="<%=animalDetail.getA_discount_rate()%>">
@@ -603,7 +603,7 @@
 		else {
 			var isBasket = confirm("장바구니에 담으시겠습니까?");
 			if(isBasket) {
-				document.fr.action="";
+				document.fr.action="./BasketAdd.ba";
 				document.fr.submit();
 			} else {
 				return false;
