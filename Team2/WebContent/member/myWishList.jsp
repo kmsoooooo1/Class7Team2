@@ -11,7 +11,7 @@
 		<table>
 			<tr>
 				<td align="right"><h2>관심상품</h2></td>
-				<td align="left"><img src="<%=request.getContextPath()%>/img/Beating_Heart.gif" height="50" width="50"></td>
+				<td align="left"><img src=""></td>
 			</tr>
 			<tr>
 				<td colspan="2">관심있는 상품을 담아보세요.</td>
@@ -21,14 +21,14 @@
 		<table>
 			<tr align="center">
 			<td>
-				<a href="my_index.do">마이쇼핑</a> | 
-				<a href="order_list.do">주문내역</a> | 
-				<a href="">회원정보</a> | 
-				<a href="my_wish_list.do">관심상품</a> | 
-				<a href="my_pointList.do">적립금</a> | 
-				<a href="my_coupon.do">쿠폰</a> | 
-				<a href="">게시물관리</a> | 
-				<a href="addr_list.do">배송주소록</a> | 
+				<a href="./MemberPage.me">마이페이지</a> | 
+				<a href="#">주문내역</a> | 
+				<a href="./MemberInfo.me">회원정보</a> | 
+				<a href="#">관심상품</a> | 
+				<a href="#">적립금</a> | 
+				<a href="#">쿠폰</a> | 
+				<a href="./BoardList.bo?category=1">게시물</a> | 
+				<a href="#">배송주소록</a> | 
 			</td>
 			</tr>
 		</table>
