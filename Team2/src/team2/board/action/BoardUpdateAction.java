@@ -13,14 +13,14 @@ public class BoardUpdateAction implements Action {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		//String pageNum = request.getParameter("pageNum");
-		
+		//카테고리저장 해서 forward 처리
 		String category = (String)request.getParameter("b_category");
-		
+		int num = Integer.parseInt(request.getParameter("num"));
+		String pageNum = request.getParameter("pageNum");
+
 		BoardDTO bdto = new BoardDTO();
 		
 		bdto.setB_category(category);;
-		bdto.setB_p_cate(request.getParameter("b_p_cate"));;
 		bdto.setB_title(request.getParameter("title"));
 		bdto.setB_content(request.getParameter("content"));
 		bdto.setB_idx(Integer.parseInt(request.getParameter("num")));
@@ -33,13 +33,9 @@ public class BoardUpdateAction implements Action {
 		
 		bdao.closeDB();
 		
-		cSet cset = new cSet();
-		
-		cset.setCategory(category);
-		System.out.println(cset.getC());
-		
+		//수정한 페이지로 이동
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardMain.bo?category="+cset.getC());
+		forward.setPath("./BoardContent.bo?num="+num+"&pageNum="+pageNum);
 		forward.setRedirect(true);
 		
 		return forward;

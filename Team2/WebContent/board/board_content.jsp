@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../js/board/commentInsert.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/commentInsert.js"></script>
 
 </head>
 <body>
@@ -63,7 +63,7 @@
 				<input type="button" value="수정"
 					onclick="location.href='./BoardUpdate.bo?pageNum=<%=pageNum%>&num=<%=bdto.getB_idx()%>'">
 				<input type="button" value="삭제"
-					onclick="">
+					onclick="location.href='./BoardDelete.bo?num=<%=bdto.getB_idx()%>&category=<%=bdto.getB_category() %>'">
 				<input type="button" value="댓글"
 					onclick="">
 				<input type="button" value="목록이동"

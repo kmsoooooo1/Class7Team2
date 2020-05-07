@@ -30,7 +30,6 @@ public class BoardListAction implements Action {
 		cSet cset = new cSet();
 		
 		cset.setC(c);
-		cset.setPc(pc);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("cset", cset);
