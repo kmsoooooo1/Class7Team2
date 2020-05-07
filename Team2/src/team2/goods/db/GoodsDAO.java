@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
+
 public class GoodsDAO {
 
 	Connection con = null;
@@ -389,22 +391,22 @@ public class GoodsDAO {
 		}
 	}//updateGoodsViewCount(g_code)
 	
-	//getGoodsDetail(g_code) 상품 상세정보 가져오는 함수
+	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
 	// 수정 필요
-	public GoodsDTO getGoodsDetail(String g_code){
-		GoodsDTO gdto = null;
+	public List<GoodsDTO> getGoodsDetailList(String g_code){
+		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
 		
 		try {
 			con = getConnection();
 			
-			sql="SELECT category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
-						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "group_concat(g_amount) as g_amount FROM team2_goods WHERE g_code = ? group by g_code";
+			sql="select * from team2_goods where g_code = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
+				GoodsDTO gdto = new GoodsDTO();
+				
 				gdto = new GoodsDTO();
 				// 만약 상품이 db에 있다면
 				gdto.setCategory(rs.getString("category"));
@@ -424,7 +426,7 @@ public class GoodsDAO {
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));
 				
-				
+				detailList.add(gdto);
 			}
 			
 		} catch (Exception e) {
@@ -432,7 +434,7 @@ public class GoodsDAO {
 			e.printStackTrace();
 		}
 		
-		return gdto;
+		return detailList;
 	}//getGoodsDetail(g_code)
 	
 	

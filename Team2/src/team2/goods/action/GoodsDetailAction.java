@@ -1,5 +1,7 @@
 package team2.goods.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,9 +22,9 @@ public class GoodsDetailAction implements Action{
 		gdao.updateGoodsViewCount(g_code);
 		
 		// 상품 세부정보 가져오기
-		GoodsDTO gdto = gdao.getGoodsDetail(g_code);
+		List<GoodsDTO> detailList = gdao.getGoodsDetailList(g_code);
 		
-		request.setAttribute("goodsDetail", gdto);
+		request.setAttribute("detailList", detailList);
 		
 		
 		ActionForward forward = new ActionForward();
