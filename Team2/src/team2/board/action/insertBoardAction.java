@@ -118,17 +118,17 @@ public class insertBoardAction implements Action {
 		//	dto 생성 및 설정
 		BoardDTO dto = new BoardDTO();
 		dto.setB_category(board.get("b_category"));
-		dto.setB_p_cate(board.get("b_p_cate"));
 		dto.setB_title(board.get("b_title"));
 		dto.setB_writer(id);
 		dto.setB_content(board.get("ir1"));
 		dto.setIp_addr(request.getRemoteAddr());
 		dto.setB_file(b_file);
+		dto.setB_p_code(board.get("b_p_code"));
 		
 		BoardDAO dao = new BoardDAO();
 		
 		//	insert 동작 실행
-		int chk = dao.insert(dto);
+		int chk = dao.insertBoard(dto);
 		
 		//	dao 자원 해제
 		dao.closeDB();

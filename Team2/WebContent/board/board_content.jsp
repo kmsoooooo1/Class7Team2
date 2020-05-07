@@ -109,7 +109,11 @@
 			
 		<%	} 
 		  }else{ %>
-		  
+		  	<li>
+		  		<div class="content_wrap">
+		  			작성된 댓글이 없습니다.
+		  		</div>
+		  	</li>
 	  <%  } %>
 		</ul>
 	</div>

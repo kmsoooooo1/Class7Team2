@@ -1,3 +1,4 @@
+<%@page import="team2.board.db.ProductDTO"%>
 <%@page import="team2.board.action.cSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,6 +12,7 @@
 <script type="text/javascript">
 	function save(){
 	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+	    document.fr.b_category.disabled="";
 	    document.fr.submit();
 	};
 </script>
@@ -33,7 +35,7 @@
 	
 	String p_code = request.getParameter("CODE");
 %>
-<h1>글 작성</h1>
+<h1><%=cSet.Category[c] %> 작성</h1>
 
 	<form name="fr" action="./InsertAction.bo" method="post" enctype="multipart/form-data">
 		카테고리
@@ -52,23 +54,27 @@
 <%-- 				<option value=<%=cSet.p_Category[i] %>><%=cSet.p_Category[i] %></option> --%>
 <%-- 			<%} %> --%>
 <!-- 		</select><br> -->
-	<%if(!(c<1)){ %>
+<%	if(!(c<1)){ %>
 		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
-		<%if(p_code==null){ %>
-			<button type="button" onclick="">상품검색</button>
-		<%} %>
+<%		if(p_code==null){ %>
+			<button type="button" onclick="">상품검색</button><br>
+<%		}else{
+		
+			ProductDTO dto = new ProductDTO(p_code);
+			System.out.println(dto);
+%>
 		<br>
 		<table>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="500" height="500"></td>
+				<td><%=dto.getCategory() %></td>
+				<td><%=dto.getSub_category() %></td>
+				<td><%=dto.getSub_category_idx() %></td>
+				<td><%=dto.getName() %></td>
 			</tr>
 		</table>
-	<%} %>
+<%		}
+	} %>
 	
 	
 		글제목<input type="text" name="b_title"><br>
