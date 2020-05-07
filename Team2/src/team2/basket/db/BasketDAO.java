@@ -85,9 +85,6 @@ public class BasketDAO {
 	// basketAdd(bkdto)
 	public void basketAdd(BasketDTO bkdto){
 		
-		//넘어온 값 확인(넘어온 product_code에서 맨 앞 글자, 동물이면 a, 관련상품이면 g)
-		//char checkFirstValue = request.getParameter("product_code").charAt(0); //a 또는 g
-		
 		int b_num = 0;
 		try {
 			con = getConnection();
