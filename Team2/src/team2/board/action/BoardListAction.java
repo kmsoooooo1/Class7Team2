@@ -19,18 +19,10 @@ public class BoardListAction implements Action {
 		
 		//카테고리 분류 값
 		int c = Integer.parseInt(request.getParameter("category"));
-		String sub = request.getParameter("sub_category");
-		
-		int pc = 0;
-		if(sub!=null){
-			
-			pc = Integer.parseInt(request.getParameter("sub_category"));
-		}
 		
 		cSet cset = new cSet();
 		
 		cset.setC(c);
-		cset.setPc(pc);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("cset", cset);
@@ -80,9 +72,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("pageNum", pageNum);
 		
 		//카테고리별 전송 값
-		request.setAttribute("category", c);
-		request.setAttribute("sub_category", sub);
-		
+		request.setAttribute("category", c);		
 		
 		ActionForward forward = new ActionForward();
 		

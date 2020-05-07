@@ -22,7 +22,8 @@ public class insertCommenctAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
-		
+		String num = request.getParameter("num");
+		String pageNum = request.getParameter("pageNum");
 		String bdto = request.getParameter("bdto");
 		
 		System.out.println("CommentAction bdto : " + bdto);
@@ -53,7 +54,7 @@ public class insertCommenctAction implements Action {
 			request.setAttribute("pageNum", 1);
 			request.setAttribute("num", dto.getC_b_idx());
 			
-			forward.setPath("./BoardContent.bo");
+			forward.setPath("./BoardContent.bo?num="+num+"&pageNum="+pageNum);
 			forward.setRedirect(true);
 			
 		}else{

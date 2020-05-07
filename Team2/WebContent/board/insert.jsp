@@ -18,9 +18,17 @@
 </script>
 </head>
 <body>
+<jsp:include page="../include/header.jsp"/>
 <%
-	String c_str = request.getParameter("C");
+	String id2 = (String)session.getAttribute("id");
+	if(id2==null){%>
+		<script type="text/javascript">
+			alert("로그인이 필요한 페이지입니다.");
+			history.back();
+		</script>	
+<%	}
 
+	String c_str = request.getParameter("C");
 	System.out.println("c_str : " + c_str);
 	int c = -1;
 	if(c_str!=null){
@@ -48,12 +56,7 @@
 				><%=cSet.Category[i]%></option>
 			<%} %>
 		</select><br>
-<!-- 		세부카테고리 -->
-<!-- 		<select name="b_p_cate"> -->
-<%-- 			<%for(int i = 0; i<cSet.p_Category.length; i++){ %> --%>
-<%-- 				<option value=<%=cSet.p_Category[i] %>><%=cSet.p_Category[i] %></option> --%>
-<%-- 			<%} %> --%>
-<!-- 		</select><br> -->
+		
 <%	if(!(c<1)){ %>
 		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
 <%		if(p_code==null){ %>
