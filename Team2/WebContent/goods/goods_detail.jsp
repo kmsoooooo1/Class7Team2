@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -67,7 +68,7 @@
 		cook.setMaxAge(60*60); // 한시간 유지
 		response.addCookie(cook);
 		
-	}
+	
 		
 		
 		
