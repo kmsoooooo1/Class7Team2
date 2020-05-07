@@ -178,21 +178,45 @@
 		
 		REVIEW <br>
 		상품의 사용후기를 적어주세요.
+		
+	<%
+	
+		BoardDAO bdao = new BoardDAO();
+		List<BoardDTO> bList = bdao.getPList(1, animalDetail.getA_code());
+		
+	%>
+		
 		<table border="1">
 			<tr>
+				<th>글쓴이</th>
+				<th>제목</th>
+				<th>작성일자</th>
+				<th>조회수</th>
+			</tr>
+		<%if(bList.size()>0){
+			for(BoardDTO dto : bList){%>
+			<tr>
 				<td> 
-					제목: 잘받았습니다. <br>
-				 	내용: 꼼꼼히 싸주시고 좋습니다. 
+					<%=dto.getB_writer() %>
 				</td> 
 				<td>
-					작성자: testID
+					<%=dto.getB_title() %>
 				</td>
 				<td>
-					작성날짜: 2020-04-30
+					<%=dto.getB_reg_date() %>
+				</td>
+				<td>
+					<%=dto.getB_view() %>
 				</td>
 			</tr>
+		<%	}
+		  }else{ %>
+		  	<tr>
+		  		<td colspan='4'>작성된 글이 없습니다.</td>
+		  	</tr>
+	  	<%} %>
 		</table>
-		<button type="button"> 리뷰작성 </button>
+		<button type="button" onclick="location.href='./Insert.bo?C=1&CODE=<%=animalDetail.getA_code() %>'"> 리뷰작성 </button>
 		<button type="button"> 모두보기 </button>
 	</div>
 	
@@ -213,31 +237,43 @@
 		</div>
 	
 		Q & A <br>
-		상품에 대해 궁금한 점을 해결해 드립니다. 
+		상품에 대해 궁금한 점을 해결해 드립니다.
+		
+	<%	
+		bList = bdao.getPList(2, animalDetail.getA_code());
+		bdao.closeDB();
+	%>
+		
 		<table border="1">
 			<tr>
-				<td> 번호 </td>
-				<td> 제목 </td>
-				<td> 작성자 </td>
-				<td> 작성일 </td>
-				<td> 조회 </td>
+				<th>제목 </th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
 			</tr>
+	<%
+		if(bList.size()>0){
+			for(BoardDTO dto:bList){
+		%>
 			<tr>
-				<td> 41 </td>
-				<td> 질문[1] </td>
-				<td> 김민수 </td>
-				<td> 2020-04-27 </td>
-				<td> 8 </td>
+				<td><%=dto.getB_title() %></td>
+				<td><%=dto.getB_writer() %></td>
+				<td><%=dto.getB_reg_date() %></td>
+				<td><%=dto.getB_view() %></td>
 			</tr>
+		
+		<%
+			}
+		}else{
+		%>
 			<tr>
-				<td> 40 </td>
-				<td> 질문2[2] </td>
-				<td> 김민수 </td>
-				<td> 2020-04-27 </td>
-				<td> 9 </td>
+				<td colspan="4">작성된 글이 없습니다.</td>
 			</tr>
+		<%
+		}
+	%>
 		</table>
-		<button type="button">상품문의하기</button>
+		<button type="button" onclick="location.href='./Insert.bo?C=2&CODE=<%=animalDetail.getA_code()%>'">상품문의하기</button>
 		<button type="button">모두보기</button>
 	</div>
 	

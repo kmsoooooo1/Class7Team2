@@ -1,5 +1,8 @@
 package team2.board.action;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class cSet {
 
 	public static final String[] Category = {"Notice","Review","QnA"};
@@ -33,7 +36,12 @@ public class cSet {
 		this.category = Category[c];
 		this.p_category = p_Category[pc];
 	}
-
+	
+	//문자열로 받은 카테고리 int로 선언
+	private void IntDate(String a) {
+		this.c = Arrays.asList(Category).indexOf(a);
+	}
+	
 	public int getC() {
 		return c;
 	}
@@ -58,6 +66,7 @@ public class cSet {
 
 	public void setCategory(String category) {
 		this.category = category;
+		IntDate(category);
 	}
 
 	public String getP_category() {
