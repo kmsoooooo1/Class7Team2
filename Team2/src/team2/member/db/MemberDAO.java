@@ -371,7 +371,7 @@ public class MemberDAO {
 						message.setSubject("[Subject] 회원 정보 확인 메일입니다.");
 
 						// Text
-						message.setText("회원님의 아이디는 "+id+"입니다.\n 갈라파고스 페이지 이동.\n http://192.168.7.16:8088/Team2/MemberLogin.me");
+						message.setText("회원님의 아이디는 "+id+"입니다.\n 갈라파고스 페이지 이동.\n http://localhost:8088/Team2/MemberLogin.me");
 
 						// send the message
 						Transport.send(message);
