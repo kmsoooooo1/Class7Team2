@@ -147,8 +147,44 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+		// 아이디 찾기 페이지 이동	
+		}else if(command.equals("/MemberIDFind.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/idFind.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/MemberIDFindAction.me")){
+			action = new MemberIDFindAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// 비밀번호 찾기 페이지 이동	
+		}else if(command.equals("/MemberPWFind.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/pwFind.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/MemberPWFindAction.me")){
+			action = new MemberPWFindAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		// 비밀번호 변경 페이지 이동	
+		}else if(command.equals("/ChangePass.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/changePass.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/MemberChangePassAction.me")){
+			action = new MemberChangePassAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 	
 		
 		// 페이지 이동처리 

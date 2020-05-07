@@ -25,6 +25,9 @@
 			</table>
 			<input type="submit" value="로그인">
 			<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me'">
+			<input type="button" value="아이디 찾기" onclick="location.href='./MemberIDFind.me'">
+				/
+			<input type="button" value="비밀번호 찾기" onclick="location.href='./MemberPWFind.me'">
 		</form>
 	</fieldset>
 	
