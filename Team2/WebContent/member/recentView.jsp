@@ -1,3 +1,6 @@
+<%@page import="team2.animal.db.AnimalDAO"%>
+<%@page import="team2.animal.db.AnimalDTO"%>
+<%@page import="java.net.URLDecoder"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,36 +11,49 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table width="100%" border="1" summary="" class="">
- <caption>최근 본 상품 목록</caption>
- <thread>
-  <tr>
-   <th scope="col">이미지</th>
-   <th scope="col">상품명</th>
-   <th scope="col">옵션정보</th>
-   <th scope="col">판매가</th>
-   <th scope="col">주문</th>
-  </tr> 
- </thread>
- <tbody>
-  <tr>
-   <!-- 이미지 -->
-   <td><a href=""><img src="" alt=""></a></td>
-   <!-- 상품명 -->
-   <td><a href=""></a></td>
-   <!-- 옵션정보 -->
-   <td><a href=""></a></td>
-   <!-- 판매가 -->
-   <td><a href=""></a></td>
-   <!-- 담기,주문,삭제 -->
-   <td>
-    <a href="#" onclick="#">담기</a>
-   	<a href="#" onclick="#">주문</a>
-    <a href="#" onclick="#">삭제</a>
-   </td>
-  </tr>
- </tbody>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+<table border="1">
+	<tr>
+		<td>이미지</td>
+		<td>상품명</td>
+		<td>판매가</td>
+		<td>옵션정보</td>
+		<td>주문</td>
+	</tr>
+		<%
+		// 쿠키 얻어오기
+		Cookie[] cook = request.getCookies();
+		if(cook!= null){
+			for(int i=0; i<cook.length; i++){
+				
+			// 전송된 쿠키 이름 얻어오기
+			String name = cook[i].getName();
+			// 쿠키 이름에 item이 포함되어 있다면
+			if(name.indexOf("item")!= -1){
+		
+			// 해당 value얻어오기
+			String value = cook[i].getValue();
+			
+			String item = URLDecoder.decode(value, "UTF-8");
+			out.println(item + "<br>");
+		
+			}
+		}
+		
+		}else{
+				%>
+				<tr>
+					<td colspan="5">최근에 본 상품이 없습니다.</td>
+				</tr>
+				<%
+		}
+		%>
 </table>
 
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	
 </body>
 </html>
