@@ -1,15 +1,19 @@
+<%@page import="java.io.File"%>
 <%@page import="team2.board.db.CommentDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="team2.board.db.CommentDAO"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="./js/board/commentInsert.js"></script>
+<script type="text/javascript" src="../js/board/commentInsert.js"></script>
+
 </head>
 <body>
 	<h1>WebContent/board/board_content.jsp</h1>
@@ -17,7 +21,7 @@
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
-		
+
 		String id2 = (String)session.getAttribute("id");
 		CommentDAO cdao = new CommentDAO();
 		List<CommentDTO> list = cdao.getList(Integer.parseInt(request.getParameter("num")));
@@ -36,12 +40,22 @@
 		</tr>
 	
 		<tr>
-			<td>첨부파일</td><td><%=bdto.getB_file() %></td>
+			<td>내용</td><td colspan="3" height=400 width=500><%=bdto.getB_content() %></td>
+	
 		</tr>
-	
+		
 		<tr>
-			<td>내용</td><td colspan="3"><%=bdto.getB_content() %></td>
-	
+			<td>첨부파일</td>
+			<td>
+			<%String files[] = bdto.getB_file().split(","); %>
+			<c:set var="files" value="<%=files %>" />
+			<c:set var="getContextPath" value="<%=request.getContextPath()%>" />
+		
+			 <c:forEach var="file" items="${files}">
+			<a href="${getContextPath}/downloadAction.bo?file=${file} ">
+ 			${file}</a>
+			 </c:forEach>
+			 </td>
 		</tr>
 		
 		<tr>
@@ -104,4 +118,11 @@
 	
 
 </body>
+<script type="text/javascript">
+	function downFile(file){
+		var contextPath = "<%=request.getContextPath()%>";
+		var url = contextPath + "/downloadAction.bo?file="+file;
+		location.href=url;	
+	}
+</script>
 </html>

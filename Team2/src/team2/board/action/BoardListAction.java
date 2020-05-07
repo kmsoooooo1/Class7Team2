@@ -92,7 +92,7 @@ public class BoardListAction implements Action {
 		}else if(cset.getC()==1){
 			forward.setPath("./board/board_review.jsp");
 		}else if(cset.getC()==2){
-			forward.setPath("./board/board_QnA.jsp");	
+			forward.setPath("./board/board_qna.jsp");	
 		}
 		forward.setRedirect(false);
 		
