@@ -37,7 +37,7 @@ public class insertBoardAction implements Action {
 		//	ServletContext context = request.getServletContext();
 		ServletContext context = request.getServletContext();
 		String realPath = context.getRealPath("/upload/board"); // '/' 폴더에 대한 정보를 저장
-		
+
 		//	DB업로드 할 파일명 변수
 		String b_file = "";
 		//	받아올 request 변수
@@ -87,7 +87,13 @@ public class insertBoardAction implements Action {
 				        System.out.println(uploadedFileName);
 						
 						//	DB에 저장할 파일명 변수에 파일명 추가
-						b_file +="," + uploadedFileName;
+				        // b_file 시작 시 ","가 나와 if문으로 첫번째 값 그대로 저장
+				        if(b_file == ""){
+				        	b_file = uploadedFileName;
+						}else{
+							b_file +="," + uploadedFileName;
+						}
+				        
 						File savedFile = new File(uploadedFileName);
 						
 						//	파일이름 저장
@@ -112,24 +118,32 @@ public class insertBoardAction implements Action {
 		//	dto 생성 및 설정
 		BoardDTO dto = new BoardDTO();
 		dto.setB_category(board.get("b_category"));
-		dto.setB_p_cate(board.get("b_p_cate"));
 		dto.setB_title(board.get("b_title"));
 		dto.setB_writer(id);
 		dto.setB_content(board.get("ir1"));
 		dto.setIp_addr(request.getRemoteAddr());
 		dto.setB_file(b_file);
+		dto.setB_p_code(board.get("b_p_code"));
 		
 		BoardDAO dao = new BoardDAO();
 		
 		//	insert 동작 실행
-		int chk = dao.insert(dto);
+		int chk = dao.insertBoard(dto);
 		
 		//	dao 자원 해제
 		dao.closeDB();
+		
+		//작성 후 리스트 이동  문자열(category)을 숫자로 전환후 파라미터값 전달
+		cSet cset = new cSet();
+		String category = board.get("b_category");
+		cset.setCategory(category);
+		System.out.println("카테고리 넘버 :" + cset.getC());
+		System.out.println("카테고리 넘버 :" + category);
+		
 		if(chk >0){
 			//	insert 성공
 			System.out.println("글 등록 성공!");
-			forward.setPath("./BoardMain.bo");
+			forward.setPath("./BoardList.bo?category="+cset.getC());
 			forward.setRedirect(true);
 		}else{
 				//	insert 실패

@@ -28,12 +28,7 @@
 		
 		// GoodsDetailAction 객체에서 저장된 정보를 저장
 		List<GoodsDTO> detailList = (List<GoodsDTO>) request.getAttribute("detailList");
-		
-		
-	%>
 	
-	
-	<%
 
 	for(int i=0; i<detailList.size(); i++){
 
@@ -46,6 +41,36 @@
 		String newformat_price_sale = formatter.format(goodsDetail.getG_price_sale());
 	
 	
+		// 상품에 대한 정보를 쿠키에 담기
+		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
+		
+		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
+		int price = 0;
+		
+		// 할인율이 있으면
+		if(goodsDetail.getG_discount_rate() != 0){
+			price = goodsDetail.getG_price_sale();
+			// 할인율이 없으면
+		}else{
+			price = goodsDetail.getG_price_origin();
+		}
+		
+		Cookie cook = new Cookie("item"+goodsDetail.getG_code(), URLEncoder.encode(
+				
+				  "<tr> <td> <a href='./goodsDetail.go?g_code="+goodsDetail.getG_code()+"'> <img src='./upload/multiupload/"+goodsDetail.getG_thumbnail()+"' width='150' height='150'></a> </td>" 
+				+ "<td>"+ goodsDetail.getG_name()+"</td>"
+				+ "<td>"+ price +"</td>"
+				+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
+				+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
+				+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
+				+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>","UTF-8")); 
+		cook.setMaxAge(60*60); // 한시간 유지
+		response.addCookie(cook);
+		
+	}
+		
+		
+		
 	%>
 	
 	

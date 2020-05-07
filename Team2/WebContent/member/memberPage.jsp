@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="team2.member.db.MemberDAO"%>
 <%@page import="team2.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>마이 페이지</title>
 </head>
 <body>
 <!-- Header -->
@@ -83,7 +84,7 @@
 	 	 </a>
 	 </li>
 	 <!-- 최근 본 상품 -->
-	 <li><a href="#">최근 본 상품</a></li>
+	 <li><a href="./recentView.me">최근 본 상품</a></li>
 	 <!-- 내가쓴글 -->
 	 <li><a href="./BoardList.bo?category=1">내 게시글</a></li>
     </ul>
@@ -250,18 +251,45 @@
  
  <!-- 최근 본 상품 -->
  <div>
-  <h3>
-  <span>최근 본 상품</span>
-   <a href="#"></a>
-  </h3>
-  <div>
-   <table width="100%" border="1" summary="">
-    <caption>최근 본 상품 목록</caption>
-   </table>
-   <p>
-   	최근본 상품 내역이 없습니다.
-   </p>
-  </div>
+  <span><h3>최근 본 상품</h3></span>
+  <a href="./recentView.me">더보기></a>
+  <table border="1">
+	<tr>
+		<td>이미지</td>
+		<td>상품명</td>
+		<td>판매가</td>
+		<td>옵션정보</td>
+		<td>주문</td>
+	</tr>
+		<%
+		// 쿠키 얻어오기
+		Cookie[] cook = request.getCookies();
+		if(cook!= null){
+			for(int i=0; i<cook.length; i++){
+				
+			// 전송된 쿠키 이름 얻어오기
+			String name1 = cook[i].getName();
+			// 쿠키 이름에 item이 포함되어 있다면
+			if(name1.indexOf("item")!= -1){
+		
+			// 해당 value얻어오기
+			String value = cook[i].getValue();
+			
+			String item = URLDecoder.decode(value, "UTF-8");
+			out.println(item + "<br>");
+		
+			}
+		}
+		
+		}else{
+				%>
+				<tr>
+					<td colspan="5">최근에 본 상품이 없습니다.</td>
+				</tr>
+				<%
+		}
+		%>
+	</table>
  </div>
  
  <!-- 내 게시글 -->
