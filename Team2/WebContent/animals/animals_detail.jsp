@@ -1,7 +1,7 @@
+<%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.List"%>
 <%@page import="team2.board.db.BoardDAO"%>
-<%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -74,6 +74,12 @@
 			<input type="hidden" id="a_discount_rate" name="a_discount_rate" value="<%=animalDetail.getA_discount_rate()%>">
 			<input type="hidden" id="a_morph" name="a_morph" value="<%=animalDetail.getA_morph()%>">
 			<input type="hidden" id="a_mileage" name="a_mileage" value="<%=animalDetail.getA_mileage()%>">
+			
+			<!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
+			<input type="hidden" id="selectedValues" name="selectedValues" value="">
+			
+			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
+			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 		
 			<table border="0">
 				<tr>
@@ -203,19 +209,43 @@
 		
 		REVIEW <br>
 		상품의 사용후기를 적어주세요.
+		
+	<%
+	
+		BoardDAO bdao = new BoardDAO();
+		List<BoardDTO> bList = bdao.getPList(1, animalDetail.getA_code());
+		
+	%>
+		
 		<table border="1">
 			<tr>
+				<th>글쓴이</th>
+				<th>제목</th>
+				<th>작성일자</th>
+				<th>조회수</th>
+			</tr>
+		<%if(bList.size()>0){
+			for(BoardDTO dto : bList){%>
+			<tr>
 				<td> 
-					제목: 잘받았습니다. <br>
-				 	내용: 꼼꼼히 싸주시고 좋습니다. 
+					<%=dto.getB_writer() %>
 				</td> 
 				<td>
-					작성자: testID
+					<%=dto.getB_title() %>
 				</td>
 				<td>
-					작성날짜: 2020-04-30
+					<%=dto.getB_reg_date() %>
+				</td>
+				<td>
+					<%=dto.getB_view() %>
 				</td>
 			</tr>
+		<%	}
+		  }else{ %>
+		  	<tr>
+		  		<td colspan='4'>작성된 글이 없습니다.</td>
+		  	</tr>
+	  	<%} %>
 		</table>
 		<button type="button" onclick="location.href='./Insert.bo?C=1&CODE=<%=animalDetail.getA_code() %>'"> 리뷰작성 </button>
 		<button type="button"> 모두보기 </button>
@@ -238,29 +268,41 @@
 		</div>
 	
 		Q & A <br>
-		상품에 대해 궁금한 점을 해결해 드립니다. 
+		상품에 대해 궁금한 점을 해결해 드립니다.
+		
+	<%	
+		bList = bdao.getPList(2, animalDetail.getA_code());
+		bdao.closeDB();
+	%>
+		
 		<table border="1">
 			<tr>
-				<td> 번호 </td>
-				<td> 제목 </td>
-				<td> 작성자 </td>
-				<td> 작성일 </td>
-				<td> 조회 </td>
+				<th>제목 </th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
 			</tr>
+	<%
+		if(bList.size()>0){
+			for(BoardDTO dto:bList){
+		%>
 			<tr>
-				<td> 41 </td>
-				<td> 질문[1] </td>
-				<td> 김민수 </td>
-				<td> 2020-04-27 </td>
-				<td> 8 </td>
+				<td><%=dto.getB_title() %></td>
+				<td><%=dto.getB_writer() %></td>
+				<td><%=dto.getB_reg_date() %></td>
+				<td><%=dto.getB_view() %></td>
 			</tr>
+		
+		<%
+			}
+		}else{
+		%>
 			<tr>
-				<td> 40 </td>
-				<td> 질문2[2] </td>
-				<td> 김민수 </td>
-				<td> 2020-04-27 </td>
-				<td> 9 </td>
+				<td colspan="4">작성된 글이 없습니다.</td>
 			</tr>
+		<%
+		}
+	%>
 		</table>
 		<button type="button" onclick="location.href='./Insert.bo?C=2&CODE=<%=animalDetail.getA_code()%>'">상품문의하기</button>
 		<button type="button">모두보기</button>
@@ -278,6 +320,14 @@
 	var total_price; //추가되는 tr의 총 판매가
 	var final_total_price = 0; //최종 total 판매가 계산하기 위한 변수
 	var final_total_amount = 0; //최종 total 수량 계산하기 위한 변수
+	
+	var count = 0; //사용자가 배송방법을 추가하거나 없앨때 늘어나고 줄어드는 변수
+	
+	var selectedValues = ""; //사용자가 선택한 배송방법들을 차례대로 담는 변수
+	
+	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
+	
+	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
 	
 	function changeDeliMethod(){
 		
@@ -355,6 +405,16 @@
 		final_total_amount += Number(total_amount);
 		//태그에 추가하기
 		$('#final_total_amount').text(final_total_amount);
+		
+		//사용자가 select option 에서 selected 한 값 selectedValues input hidden value에 차례대로 넣기
+		selectedValues += (delivery_method + ",");
+		//추가된 values 변수를 태그에 담기
+		$("#selectedValues").val(selectedValues);
+		
+		count += Number("1");
+		
+		//추가된 배송방법 selectedArray에 추가하기
+		selectedArray.push(delivery_method);
 	}
 
 	//주문수량 변경시----------------------------------------------------------------------------------------
@@ -594,7 +654,6 @@
 			
 			//select option 태그안에 사용자가 선택한 배송방법 활성화 시키기
 			$("select option[value*='"+ delivery_method +"']").removeAttr('disabled');
-		
 		}
 		//할인율이 0이면
 		else {
@@ -614,9 +673,13 @@
 			$(obj).parent().parent().remove();
 			
 			//select option 태그안에 사용자가 선택한 배송방법 활성화 시키기
-			$("select option[value*='"+ delivery_method +"']").removeAttr('disabled');
+			$("select option[value*='"+ delivery_method +"']").removeAttr('disabled');			
 		}
-	
+		
+		count -= Number("1");
+		
+		//selectedArray에 삭제하고 싶은 배송방법을 삭제하기
+		selectedArray.splice(selectedArray.indexOf(delivery_method),1);
 	}
 
 	
@@ -634,6 +697,17 @@
 		else {
 			var isBasket = confirm("장바구니에 담으시겠습니까?");
 			if(isBasket) {
+				//submit 되기 전에 최종 입력한 수량들을 selectedAmount input hidden value에 차례대로 넣기
+				//selectedAmounts += ($('#a_amount_' + delivery_method).val() + ",");
+				
+				for(var i=0; i<count; i++){
+					//selectedArray[i] -> 선택된 배송방법의 value들
+					selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ",")
+				}
+				
+				//추가된 values 변수를 태그에 담기
+				$("#selectedAmounts").val(selectedAmounts);
+				
 				document.fr.action="./BasketAdd.ba";
 				document.fr.submit();
 			} else {
@@ -669,7 +743,6 @@
         var offset = $("#menu" + seq).offset();
         $('html, body').animate({scrollTop : offset.top}, 300);
     }
-	
-	
+
 </script>
 </html>
