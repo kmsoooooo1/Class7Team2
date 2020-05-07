@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>비밀번호 찾기</title>
+<title>비밀번호 찾기 페이지</title>
 </head>
 <body>
 <fieldset><legend>비밀번호 찾기</legend>

@@ -83,7 +83,7 @@ public class MemberChangePassAction implements Action{
 			return null;
 		}
 		ActionForward forward=new ActionForward();
-		forward.setPath("./member/passChangeCMP.jsp");
+		forward.setPath("./member/changePassOk.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}
