@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv= "Content-Type" content ="text/html; charset=UTF-8">
 
-<title> Insert title here</title>
+<title> 아이디 중복체크 페이지</title>
   <script>
       //현재 창을 열게 해준 창의 joinform.MEMBER_ID에게 id값을 넘겨주고 현재창을 닫는 함수
      
