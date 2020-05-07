@@ -269,10 +269,7 @@ public class GoodsDAO {
 		
 		try {
 			con = getConnection();
-			
-			
-			
-			
+
 			//SQL buffer 안에 sql 구문 넣어주기
 			
 			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 상품을 부를때)
@@ -432,6 +429,8 @@ public class GoodsDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
 		
 		return detailList;

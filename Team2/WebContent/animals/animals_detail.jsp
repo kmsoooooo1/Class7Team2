@@ -658,7 +658,7 @@
 		//할인율이 0이면
 		else {
 			//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 빼고나서 저장하기
-			final_total_price -= Number(a_price_origin);
+			final_total_price -= Number(total_price);
 			//태그에 추가하기
 			$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			

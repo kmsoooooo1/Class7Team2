@@ -369,9 +369,9 @@
 		var delivery_method = document.getElementById('delivery_method').value;	//배송방법
 		
 		var g_name = document.getElementById('g_name').value; // 상품명
-		var a_price_origin = document.getElementById('a_price_origin').value;	//오리지날 판매가
-		var a_discount_rate = document.getElementById('a_discount_rate').value;	//할인율
-		var a_price_sale = document.getElementById('a_price_sale').value;		//할인된 판매가
+		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
+		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
+		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
 		
 		//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
 		if(delivery_method == '고속버스'){
@@ -434,6 +434,7 @@
 		
 		//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 저장하기, 만약 처음이면 0에 추가하기
 		final_total_price += Number(total_price);
+		
 		//태그에 추가하기
 		$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 		
@@ -451,7 +452,7 @@
 	var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
 	var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
 	var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
-	var g_mileage = document.getElementById('a_mileage').value;				//적립금
+	var g_mileage = document.getElementById('g_mileage').value;				//적립금
 
 	
 	//주문 전 수량 변경시 함수(키보드로 입력시)
@@ -528,16 +529,16 @@
 		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
 		
 		//delivery_method 인수로 들어온 값에 따라 new_g_amount 값 바꾸기
-		var new_g_amount = document.getElementById('g_amount' + delivery_method).value;	//사용자가 새로 수정하는 수량
+		var new_g_amount = document.getElementById('g_amount_' + delivery_method).value;	//사용자가 새로 수정하는 수량
 		
 		//사용자가 수량 999에서 +를 눌렸을시
 		if(new_g_amount == 999) {
 			alert("상품의 최대 구매량은 999개입니다.");
 			new_g_amount = parseInt("999");
-			$("#g_amount" + delivery_method).val(new_g_amount);
+			$("#g_amount_" + delivery_method).val(new_g_amount);
 		}else {
 			new_g_amount++;
-			$("#g_amount" + delivery_method).val(new_g_amount);
+			$("#g_amount_" + delivery_method).val(new_g_amount);
 			
 			//final_total_amount 태그 제어
 			final_total_amount += Number("1");
@@ -600,16 +601,16 @@
 		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
 		
 		//delivery_method 인수로 들어온 값에 따라 new_g_amount 값 바꾸기
-		var new_g_amount = document.getElementById('g_amount' + delivery_method).value;	//사용자가 새로 수정하는 수량
+		var new_g_amount = document.getElementById('g_amount_' + delivery_method).value;	//사용자가 새로 수정하는 수량
 		
 		//사용자가 수량 1에서 -를 눌렸을시
 		if(new_g_amount == 1) {
 			alert("상품의 최소 구매량은 1개입니다.");
 			new_g_amount = parseInt("1");
-			$("#g_amount" + delivery_method).val(new_g_amount);
+			$("#g_amount_" + delivery_method).val(new_g_amount);
 		}else {
 			new_g_amount--;
-			$("#g_amount" + delivery_method).val(new_g_amount);
+			$("#g_amount_" + delivery_method).val(new_g_amount);
 			
 			//final_total_amount 태그 제어
 			final_total_amount -= Number("1");
@@ -690,7 +691,7 @@
 		//할인율이 0이면
 		else{
 			//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 빼고나서 저장하기
-			final_total_price -= Number(g_price_origin);
+			final_total_price -= Number(total_price);
 			//태그에 추가하기
 			$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			
