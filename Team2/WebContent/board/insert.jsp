@@ -78,8 +78,6 @@
 		</table>
 <%		}
 	} %>
-	
-	
 		글제목<input type="text" name="b_title"><br>
 		내용<textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
 		첨부파일<input type="file" name="file" multiple="multiple"><br>
