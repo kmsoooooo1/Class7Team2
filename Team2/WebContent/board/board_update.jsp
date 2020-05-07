@@ -27,7 +27,6 @@
 	%>
 	<!-- 메인,서브 카테고리 저장 -->
 	<c:set var="m_ca" value="<%=bdto.getB_category() %>" />
-	<c:set var="s_ca" value="<%=bdto.getB_p_cate() %>" />
 	
 	<form name= "fr" action="./BoardUpdateAction.bo?pageNum=${pageNum}" method="post">
 		<input type="hidden" name="num" value="<%=bdto.getB_idx() %>">	
@@ -40,14 +39,6 @@
 				<%for(int i = 0; i<cSet.Category.length; i++){ %>
 					<c:set var="cSet_m" value="<%=cSet.Category[i] %>" />
 					<option value=<%=cSet.Category[i] %> <c:if test="${m_ca eq cSet_m}">selected</c:if>><%=cSet.Category[i]%></option>
-				<%} %>
-			</select><br>
-
-			세부카테고리
-			<select name="b_p_cate">
-				<%for(int i = 0; i<cSet.p_Category.length; i++){ %>
-				<c:set var="cSet_s" value="<%=cSet.p_Category[i] %>" />
-					<option value=<%=cSet.p_Category[i] %> <c:if test="${s_ca eq cSet_s}">selected</c:if>><%=cSet.p_Category[i] %></option>
 				<%} %>
 			</select><br>
 
