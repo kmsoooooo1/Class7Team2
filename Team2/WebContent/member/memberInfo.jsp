@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원 정보 페이지</title>
 </head>
 <body>
  <%
@@ -20,7 +20,7 @@
     // MemberInfoAction 클래스에서 전달된 정보를 저장 (request영역데이터)
     MemberDTO mb = (MemberDTO)request.getAttribute("mdto");
   %>
-  <h1> 회원정보 페이지 </h1>
+  <h1><%=mb.getName() %>님의 회원정보 </h1>
   <table border="1">
    <tr>
     <th>아이디</th><td><%=mb.getId() %></td>

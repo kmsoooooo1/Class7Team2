@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ID찾기</title>
+<title>아이디찾기 페이지</title>
 </head>
 <body>
 <fieldset><legend>아이디 찾기</legend>

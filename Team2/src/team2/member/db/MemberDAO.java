@@ -348,8 +348,8 @@ public class MemberDAO {
 					@Override
 					public void run() {
 						String host = "smtp.gmail.com";
-						final String user = "wgdw2020";
-						final String password = "123!@#dD";
+						final String user = "wjdckdgus500";
+						final String password = "eksxp200";
 						
 						// 세션
 						Properties props = new Properties();
@@ -371,7 +371,7 @@ public class MemberDAO {
 						message.setSubject("[Subject] 회원 정보 확인 메일입니다.");
 
 						// Text
-						message.setText("회원님의 아이디는 "+id+"입니다.");
+						message.setText("회원님의 아이디는 "+id+"입니다.\n 갈라파고스 페이지 이동.\n http://192.168.7.16:8088/Team2/MemberLogin.me");
 
 						// send the message
 						Transport.send(message);
@@ -399,54 +399,55 @@ public class MemberDAO {
 		
 		try {
 			con = getConnection();
-			sql = "select id from team2_member where email=?";
-			pstmt = con.prepareStatement(sql);
+			sql="select id from team2_member where email=?";
+			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, email);
-			rs = pstmt.executeQuery();
-			
+			rs=pstmt.executeQuery();
 			if(rs.next()){
 				if(id.equals(rs.getString("id"))){
-				// ID 정보 확인 완료
-				Thread t1 = new Thread(new Runnable() {
+					//ID 정보 확인 완료
+					Thread t1 = new Thread(new Runnable() {
 						
-					@Override
-					public void run() {
-						String host = "smtp.gmail.com";
-						final String user = "wgdw2020";
-						final String password = "123!@#dD";
+						@Override
+						public void run() {
+							String host = "smtp.gmail.com";
+							final String user = "wjdckdgus500";
+							final String password = "eksxp200";
 
 
-						// Get the session object
-						Properties props = new Properties();
-						props.put("mail.smtp.host", host);
-						props.put("mail.smtp.auth", "true");
-						props.put("mail.smtp.starttls.enable","true");
+							// Get the session object
+							Properties props = new Properties();
+							props.put("mail.smtp.host", host);
+							props.put("mail.smtp.auth", "true");
+							props.put("mail.smtp.starttls.enable","true");
 
-						Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-							protected PasswordAuthentication getPasswordAuthentication() {
-								return new PasswordAuthentication(user, password);
-							}
-					});
-						// Compose the message
-						try {
-							MimeMessage message = new MimeMessage(session);
-							message.setFrom(new InternetAddress(user));
-							message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+							Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+								protected PasswordAuthentication getPasswordAuthentication() {
+									return new PasswordAuthentication(user, password);
+								}
+							});
 
-							// Subject
-							message.setSubject("[Subject] 회원 정보 확인 메일입니다.");
+							// Compose the message
+							try {
+								MimeMessage message = new MimeMessage(session);
+								message.setFrom(new InternetAddress(user));
+								message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
-							// Text
-							message.setText(id+"회원님의 패스워드 변경 페이지로 이동합니다.\n 해당 링크를 클릭하여 비밀번호 변경페이지로 이동해 주세요.\n http://192.168.7.5:8088/WGDW/ChangePass.shw?id="+id);
+								// Subject
+								message.setSubject("[Subject] 회원 정보 확인 메일입니다.");
 
-							// send the message
-							Transport.send(message);
+								// Text
+								message.setText(id+"회원님의 패스워드 변경 페이지로 이동합니다.\n 해당 링크를 클릭하여 비밀번호 변경페이지로 이동해 주세요.\n http://192.168.7.16:8088/Team2/ChangePass.me?id="+id);
+
+								// send the message
+								Transport.send(message);
 								System.out.println("message sent successfully...");
 							} catch (MessagingException e) {
-								e.printStackTrace();		
+								e.printStackTrace();
 							}
 						}
-					});	
+					});
+					
 					check=1;
 					t1.start();
 				}else{
@@ -458,17 +459,15 @@ public class MemberDAO {
 				check=-1;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return check;
-	}
+	}	
 	// findPW(email,id)
 	
 	// changePass(id,pass)
 	public void changePass(String id,String pass){
-		
 		try {
 			con=getConnection();
 			sql="update team2_member set pass=? where id=?";
@@ -485,6 +484,7 @@ public class MemberDAO {
 		}
 	}
 	// changePass(id,pass)
+	
 	
 	
 	
