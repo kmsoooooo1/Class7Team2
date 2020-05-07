@@ -29,6 +29,7 @@ public class BasketAddAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		
 		BasketDTO bkdto = new BasketDTO();
+		BasketDAO bkdao = new BasketDAO();
 		
 		//동물 또는 상품 코드
 		String b_code = request.getParameter("product_code");
@@ -44,22 +45,26 @@ public class BasketAddAction implements Action {
 			int a_price_origin = Integer.parseInt(request.getParameter("a_price_origin"));
 		}
 		
+		//사용자가 추가한 배송방법 리스트 가지고 오기
+		String selectedValues = request.getParameter("selectedValues");
 		
-//		bkdto.setId(id);
-//		bkdto.setB_code(request.getParameter("product_code"));
-//		bkdto.setB_amount(Integer.parseInt(request.getParameter("a_amount")));
-//		bkdto.setB_option(request.getParameter("delivary_method"));
+		//사용자가 추가한 배송방법들의 수량들 리스트 가지고 오기
+		String selectedAmounts = request.getParameter("selectedAmounts");
 		
-		BasketDAO bkdao = new BasketDAO();
+		// split()을 이용해 ','를 기준으로 문자열을 자른다.
+        // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
+		String splitSelectedValues[] = selectedValues.split(",");
+		String splitSelectedAmounts[] = selectedAmounts.split(",");
 		
-		// 기존의 장바구니에 상품이 있는지 체크
-		int check = bkdao.checkGoods(bkdto);
-		
-		// 없을 경우 바구니에 추가
-		if(check !=1){
+		for(int i=0; i<splitSelectedValues.length; i++){
+			bkdto.setId(id);
+			bkdto.setB_code(b_code);
+			bkdto.setB_amount(splitSelectedAmounts[i]);
+			bkdto.setB_option(splitSelectedValues[i]);
+			
+			//추가하기
 			bkdao.basketAdd(bkdto);
 		}
-		
 		
 		forward.setPath("./BasketList.ba");
 		forward.setRedirect(true);

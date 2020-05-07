@@ -64,7 +64,7 @@ public class BasketDAO {
 						+ "where id=? and b_code=? and b_option=?";
 				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, bkdto.getB_amount());
+				pstmt.setString(1, bkdto.getB_amount());
 				pstmt.setString(2, bkdto.getId());
 				pstmt.setString(3, bkdto.getB_code());
 				pstmt.setString(4, bkdto.getB_option());
@@ -108,13 +108,9 @@ public class BasketDAO {
 			pstmt.setInt(1, b_num);
 			pstmt.setString(2, bkdto.getId());
 			pstmt.setString(3, bkdto.getB_code());
-			pstmt.setInt(4, bkdto.getB_amount());
+			pstmt.setString(4, bkdto.getB_amount());
 			pstmt.setString(5, bkdto.getB_option());
-			
 			pstmt.executeUpdate();
-			
-			System.out.println("장바구니 저장 완료!!");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
@@ -149,7 +145,7 @@ public class BasketDAO {
 				bkdto.setB_num(rs.getInt("b_num"));
 				bkdto.setId(rs.getString("id"));
 				bkdto.setB_code(rs.getString("b_code"));
-				bkdto.setB_amount(rs.getInt("b_amount"));
+				bkdto.setB_amount(rs.getString("b_amount"));
 				bkdto.setB_option(rs.getString("b_option"));
 				
 				// 장바구니 하나의 정보를 리스트 한칸에 저장
