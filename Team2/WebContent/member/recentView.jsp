@@ -13,7 +13,7 @@
 <body>
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
+	<h3>RECENTLY VIEWED</h3>
 <table border="1">
 	<tr>
 		<td>이미지</td>
