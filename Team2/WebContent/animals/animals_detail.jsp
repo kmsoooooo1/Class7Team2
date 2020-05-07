@@ -1,4 +1,7 @@
 <%@page import="java.net.URLEncoder"%>
+<%@page import="java.util.List"%>
+<%@page import="team2.board.db.BoardDAO"%>
+<%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
