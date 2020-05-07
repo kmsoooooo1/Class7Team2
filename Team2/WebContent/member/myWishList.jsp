@@ -28,7 +28,7 @@
 				<a href="#">적립금</a> | 
 				<a href="#">쿠폰</a> | 
 				<a href="./BoardList.bo?category=1">게시물</a> | 
-				<a href="#">배송주소록</a> | 
+				<a href="#">배송주소록</a> |  
 			</td>
 			</tr>
 		</table>
