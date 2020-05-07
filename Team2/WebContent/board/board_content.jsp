@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../js/board/commentInsert.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/commentInsert.js"></script>
 
 </head>
 <body>
@@ -21,10 +21,10 @@
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
-
+		String num = request.getParameter("num");
 		String id2 = (String)session.getAttribute("id");
 		CommentDAO cdao = new CommentDAO();
-		List<CommentDTO> list = cdao.getList(Integer.parseInt(request.getParameter("num")));
+		List<CommentDTO> list = cdao.getList(Integer.parseInt(num));
 		cdao.closeDB();
 		if(bdto!=null){			
 	%>
@@ -75,7 +75,7 @@
 	<%} %>
 	<div class="comment_wrap">
 	<div>
-		<form name="fr" action="./InsertCommentAction.bo" method="post">
+		<form name="fr" action="./InsertCommentAction.bo?num=<%=num %>&pageNum=<%=pageNum %>" method="post">
 			<input type="hidden" name="c_category" value="board">
 			<input type="hidden" name="c_b_idx" value=<%=bdto.getB_idx()%>>
 			<textarea name="comment" 
