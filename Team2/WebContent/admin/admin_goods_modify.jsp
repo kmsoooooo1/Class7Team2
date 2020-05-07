@@ -108,6 +108,12 @@
 		     <td> <input type="text" name="g_option" value="<%=gdto.getG_option()%>"> </td>
 		  </tr>
 		  
+		  <tr>
+		     <td> 옵션 추가 가격 </td>
+		     <td> <input type="text" name="g_option_price" value="<%=gdto.getG_option_price()%>"> </td>
+		  </tr>
+		  
+		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
 		   		<textarea name="ir1" id="ir1" rows="10" cols="100">

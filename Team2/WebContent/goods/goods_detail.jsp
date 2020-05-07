@@ -88,6 +88,8 @@
 		  <input type="hidden" id="g_discount_rate" name="g_discount_rate" value="<%=goodsDetail.getG_discount_rate()%>">
 		  <input type="hidden" id="g_mileage" name="g_mileage" value="<%=goodsDetail.getG_mileage()%>">
 		  <input type="hidden" id="g_name" name="g_name" value="<%=goodsDetail.getG_name()%>">
+		  <input type="hidden" id="g_option_price" name="g_option_price" value="<%=goodsDetail.getG_option_price()%>">
+		  
 		  
 		    <!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
 			<input type="hidden" id="selectedValues" name="selectedValues" value="">
@@ -101,7 +103,6 @@
 		        <td>
 		        	<!-- 상품명 -->
 		        	<%if(goodsDetail.getG_amount() == 0){%>
-		        	  
 		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
 		        	  <h4> <%=goodsDetail.getG_name() %> </h4>
 		        	<%}else{ %>
