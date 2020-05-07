@@ -6,7 +6,6 @@ public class BoardDTO {
 
 	private int b_idx;
 	private String b_category;
-	private String b_p_cate;
 	private String b_title;
 	private String b_writer;
 	private String b_content;
@@ -16,18 +15,18 @@ public class BoardDTO {
 	private Date b_reg_date;
 	private String ip_addr;
 	private String b_file;
+	private String b_p_code;
 	
 	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BoardDTO(int b_idx, String b_category, String b_p_cate, String b_title, String b_writer, String b_content,
-			int b_ref, int b_like, int b_view, Date b_reg_date, String ip_addr, String b_file) {
+	public BoardDTO(int b_idx, String b_category, String b_title, String b_writer, String b_content,
+			int b_ref, int b_like, int b_view, Date b_reg_date, String ip_addr, String b_file, String b_p_code) {
 		super();
 		this.b_idx = b_idx;
 		this.b_category = b_category;
-		this.b_p_cate = b_p_cate;
 		this.b_title = b_title;
 		this.b_writer = b_writer;
 		this.b_content = b_content;
@@ -37,6 +36,7 @@ public class BoardDTO {
 		this.b_reg_date = b_reg_date;
 		this.ip_addr = ip_addr;
 		this.b_file = b_file;
+		this.b_p_code = b_p_code;
 	}
 
 
@@ -51,12 +51,6 @@ public class BoardDTO {
 	}
 	public void setB_category(String b_category) {
 		this.b_category = b_category;
-	}
-	public String getB_p_cate() {
-		return b_p_cate;
-	}
-	public void setB_p_cate(String b_p_cate) {
-		this.b_p_cate = b_p_cate;
 	}
 	public String getB_title() {
 		return b_title;
@@ -112,11 +106,19 @@ public class BoardDTO {
 	public void setB_file(String b_file) {
 		this.b_file = b_file;
 	}
+	public String getB_p_code() {
+		return b_p_code;
+	}
+
+	public void setB_p_code(String b_p_code) {
+		this.b_p_code = b_p_code;
+	}
+
 	@Override
 	public String toString() {
-		return "BoardDTO [b_idx=" + b_idx + ", b_category=" + b_category + ", b_p_cate=" + b_p_cate + ", b_title="
+		return "BoardDTO [b_idx=" + b_idx + ", b_category=" + b_category + ", b_title="
 				+ b_title + ", b_writer=" + b_writer + ", b_content=" + b_content + ", b_ref=" + b_ref + ", b_like="
 				+ b_like + ", b_view=" + b_view + ", b_reg_date=" + b_reg_date + ", ip_addr=" + ip_addr + ", b_file="
-				+ b_file + "]";
+				+ b_file + ", b_p_code=" + b_p_code + "]";
 	}
 }
