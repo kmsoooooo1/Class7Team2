@@ -70,8 +70,10 @@ public class ProductDTO {
 	}
 	
 	private void getProduct(String p_code){
-		char c = p_code.charAt(1);
-		if(c=='A'){
+		char c = p_code.charAt(0);
+		System.out.println("c : " + c);
+		if(c=='a'){
+			System.out.println("Animals 검색");
 			AnimalDAO dao = new AnimalDAO();
 			AnimalDTO dto = dao.getAnimalDetail(p_code);
 			dao.closeDB();
@@ -82,7 +84,8 @@ public class ProductDTO {
 				this.name = dto.getA_morph();
 				this.img_src = dto.getA_thumbnail();
 			}
-		}else if(c=='G'){
+		}else if(c=='g'){
+			System.out.println("Goods 검색");
 			GoodsDAO dao = new GoodsDAO();
 			GoodsDTO dto = dao.getGoodsDetail(p_code);
 			dao.closeDB();

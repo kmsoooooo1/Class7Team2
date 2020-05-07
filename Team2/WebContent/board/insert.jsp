@@ -66,7 +66,7 @@
 		<br>
 		<table>
 			<tr>
-				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="500" height="500"></td>
+				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
 				<td><%=dto.getCategory() %></td>
 				<td><%=dto.getSub_category() %></td>
 				<td><%=dto.getSub_category_idx() %></td>
