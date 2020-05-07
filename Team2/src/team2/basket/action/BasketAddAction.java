@@ -33,23 +33,21 @@ public class BasketAddAction implements Action {
 		
 		//동물 또는 상품 코드
 		String b_code = request.getParameter("product_code");
-		
-		//할인율
-		int a_discount_rate = Integer.parseInt(request.getParameter("a_discount_rate"));
-		//만약 할인율이 0이 아니면
-		if(a_discount_rate != 0){
-			int a_price_sale = Integer.parseInt(request.getParameter("a_price_sale"));
-		}
-		//만약 할인율이 0이면
-		else {
-			int a_price_origin = Integer.parseInt(request.getParameter("a_price_origin"));
-		}
-		
-		//사용자가 추가한 배송방법 리스트 가지고 오기
-		String selectedValues = request.getParameter("selectedValues");
-		
+
+		//넘어온 값들의 수량들(b_amount)
 		//사용자가 추가한 배송방법들의 수량들 리스트 가지고 오기
 		String selectedAmounts = request.getParameter("selectedAmounts");
+		
+		//옵션(b_option)
+		String b_option = request.getParameter("option");
+		//동물페이지에서는 옵션이 없기 때문에 상품페이지에서 관리하면된다. 여기서는 DB에 임의적으로 넣어야 하기 때문에 적는거다.
+		if(request.getParameter("option") == null){
+			b_option = ""; //빈 공백 값을 넣는다.
+		}
+	
+		//배송방법(b_delivery_method)
+		//사용자가 추가한 배송방법 리스트 가지고 오기
+		String selectedValues = request.getParameter("selectedValues");
 		
 		// split()을 이용해 ','를 기준으로 문자열을 자른다.
         // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
@@ -60,7 +58,8 @@ public class BasketAddAction implements Action {
 			bkdto.setId(id);
 			bkdto.setB_code(b_code);
 			bkdto.setB_amount(splitSelectedAmounts[i]);
-			bkdto.setB_option(splitSelectedValues[i]);
+			bkdto.setB_option(b_option);
+			bkdto.setB_delivery_method(splitSelectedValues[i]);
 			
 			//추가하기
 			bkdao.basketAdd(bkdto);

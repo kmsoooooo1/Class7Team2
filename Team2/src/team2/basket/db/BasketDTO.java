@@ -6,6 +6,7 @@ public class BasketDTO {
 	private String b_code;
 	private String b_amount;
 	private String b_option;
+	private String b_delivery_method;
 	
 	public int getB_num() {
 		return b_num;
@@ -37,9 +38,16 @@ public class BasketDTO {
 	public void setB_option(String b_option) {
 		this.b_option = b_option;
 	}
+	public String getB_delivery_method() {
+		return b_delivery_method;
+	}
+	public void setB_delivery_method(String b_delivery_method) {
+		this.b_delivery_method = b_delivery_method;
+	}
+	
 	@Override
 	public String toString() {
 		return "BasketDTO [b_num=" + b_num + ", id=" + id + ", b_code=" + b_code + ", b_amount=" + b_amount
-				+ ", b_option=" + b_option + "]";
+				+ ", b_option=" + b_option + ", b_delivery_method=" + b_delivery_method + "]";
 	}
 }
