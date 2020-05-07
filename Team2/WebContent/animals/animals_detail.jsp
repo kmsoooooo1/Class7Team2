@@ -406,8 +406,8 @@
 		//태그에 추가하기
 		$('#final_total_amount').text(final_total_amount);
 		
-		//사용자가 select option 에서 selected 한 값 selectedValues input hidden value에 차례대로 넣기
-		selectedValues += (delivery_method + ",");
+		//사용자가 select option 에서 selected 한 값  input hidden value에 차례대로 넣기
+		 selectedValues += (delivery_method + ",");
 		//추가된 values 변수를 태그에 담기
 		$("#selectedValues").val(selectedValues);
 		

@@ -89,7 +89,13 @@
 		  <input type="hidden" id="g_mileage" name="g_mileage" value="<%=goodsDetail.getG_mileage()%>">
 		  <input type="hidden" id="g_name" name="g_name" value="<%=goodsDetail.getG_name()%>">
 		  
-		  <table border="0">
+		    <!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
+			<input type="hidden" id="selectedValues" name="selectedValues" value="">
+			
+			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
+			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
+		  
+		   <table border="0">
 		     <tr>
 		     	<td> <img src="./upload/multiupload/<%=goodsDetail.getG_thumbnail()%>" width="500" height="500"> </td>
 		        <td>
@@ -163,7 +169,8 @@
 		        	
 		        	<!-- 배송(일반배송, 선택배송) 구분 -->
 		        	<!-- 일반 배송일 때, -->
-		        	<%if(goodsDetail.getG_delivery().equals("일반배송")){ %>
+		        	<%if(goodsDetail.getG_delivery().equals("일반배송") &&  goodsDetail.getG_option() == null){ %>
+		        	<!-- 일반배송+ 옵션 없는 경우----------------------------------------------- -->
 		        	<table border="1">
 		        	<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
 		        	  <tr>
@@ -172,13 +179,50 @@
 		        	    <td> 가격 </td>
 		        	  </tr>
 		        	  <!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
-		        	 <tbody id="final_product_info_table"></tbody>
-
+					  <!-- <tbody id="final_product_info_table"></tbody> -->
+					  <tr>
+					  	<td>
+					  		<%=goodsDetail.getG_name()%> <br>
+					  		[옵션:일반배송]
+					  	</td>
+					  	<td>상품수</td>
+					  	<td>총 가격</td>
+					  </tr>
+						
 						<tr>
 							<td colspan="3"> TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) </td>
 						</tr>
 		        	
 		        	</table>
+		        	
+		    
+		        	<!-- 일반 배송이고 옵션이 있는 경우 --------------------------------------------->
+		        	<%}else if(goodsDetail.getG_delivery().equals("일반배송") && goodsDetail.getG_option() != null){ %>
+		        		<!-- 일반배송+옵션(+추가 금액 없음) -->
+						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
+						
+						 <table border="1">
+							<tr>
+								<td> 상품명 </td>
+								<td> 상품수 </td>
+								<td> 가격 </td>
+							</tr>
+							<!-- 옵션을 선택했을시 최종 상품 정보 나타내기 -->
+							<!-- <tbody id="final_product_info_table"></tbody> -->
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							
+							</tr>
+
+
+							<tr>
+								<td colspan="3"> TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) </td>
+							</tr>
+						</table>
+		        		
+		        		
 		        	<%}else{ %>
 		        	<!-- 선택 배송일 때, -->
 		        	배송방법
@@ -358,11 +402,34 @@
 </body>
 <script type="text/javascript">
 
-	//사용자가 배송방법을 선택했을시-------------------------------------------
+
 	
 	var total_price; //추가되는 tr의 총 판매가
 	var final_total_price = 0; //최종 total 판매가 계산하기 위한 변수
 	var final_total_amount = 0; //최종 total 수량 계산하기 위한 변수
+	
+	var count = 0; //사용자가 배송방법을 추가하거나 없앨때 늘어나고 줄어드는 변수
+	
+	var selectedValues = ""; //사용자가 선택한 배송방법들을 차례대로 담는 변수
+	
+	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
+	
+	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
+	
+	
+	// 일반 배송(배송방법 없음) + 옵션선택 있는 경우------------------------------------------------
+	// 필요한 데이터 : 상품수, 가격, TOTAL
+	
+	
+
+
+
+
+	
+	
+	
+	
+	//사용자가 배송방법을 선택했을시-------------------------------------------
 	
 	function changeDeliMethod(){
 		
@@ -444,9 +511,21 @@
 		
 		//태그에 추가하기
 		$('#final_total_amount').text(final_total_amount);
+		
+		//사용자가 select option 에서 selected 한 값 selectedValues input hidden value에 차례대로 넣기
+		selectedValues += (delivery_method + ",");
+		//추가된 values 변수를 태그에 담기
+		$("#selectedValues").val(selectedValues);
+		
+		count += Number("1");
+		
+		//추가된 배송방법 selectedArray에 추가하기
+		selectedArray.push(delivery_method);
+		
+		
 	}
 
-	//주문수량 변경 시
+	//주문수량 변경 시-----------------------------------------------------------------------------
 	var delivery_method = document.getElementById('delivery_method').value;	//배송방법
 	
 	var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
@@ -455,7 +534,7 @@
 	var g_mileage = document.getElementById('g_mileage').value;				//적립금
 
 	
-	//주문 전 수량 변경시 함수(키보드로 입력시)
+	//주문 전 수량 변경시 함수(키보드로 입력시)----------------------------------------------------------
 	function amountChange(delivery_method){
 		
 		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
@@ -708,6 +787,12 @@
 			//select option 태그안에 사용자가 선택한 배송방법 활성화 시키기
 			$("select option[value*='"+ delivery_method +"']").removeAttr('disabled');
 		}
+		
+		count -= Number("1");
+		
+		//selectedArray에 삭제하고 싶은 배송방법을 삭제하기
+		selectedArray.splice(selectedArray.indexOf(delivery_method),1);
+		
 	}
 	
 	
@@ -726,7 +811,18 @@
 		else {
 			var isBasket = confirm("장바구니에 담으시겠습니까?");
 			if(isBasket) {
-				document.fr.action="";
+				//submit 되기 전에 최종 입력한 수량들을 selectedAmount input hidden value에 차례대로 넣기
+				//selectedAmounts += ($('#g_amount_' + delivery_method).val() + ",");
+				
+				for(var i=0; i<count; i++){
+					//selectedArray[i] -> 선택된 배송방법의 value들
+					selectedAmounts += ($('#g_amount_' + selectedArray[i]).val() + ",")
+				}
+				
+				//추가된 values 변수를 태그에 담기
+				$("#selectedAmounts").val(selectedAmounts);
+				
+				document.fr.action="./BasketAdd.ba";
 				document.fr.submit();
 			} else {
 				return false;
