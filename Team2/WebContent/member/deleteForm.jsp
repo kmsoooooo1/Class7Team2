@@ -15,6 +15,9 @@
       }   
    %>   
    
+   <!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+   
 <fieldset>
     <legend>회원 탈퇴하기</legend>
      <form action="./MemberDeleteAction.me" method="post">
@@ -23,6 +26,10 @@
        <input type="submit" value="탈퇴하기">
      </form>    
    </fieldset>
+
+
+<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 
 </body>
 </html>
