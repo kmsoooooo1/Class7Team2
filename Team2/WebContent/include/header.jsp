@@ -15,15 +15,6 @@
 			//로그인 되었는지
 			String id = (String) session.getAttribute("id");
 			
-			session.setMaxInactiveInterval(10);   
-			
-			session.setAttribute("id",id);
-
-			int getMaxInactiveinterval = (session.getMaxInactiveInterval() * 1000);
-			
-			System.out.println("getMaxInactiveinterval   : " + getMaxInactiveinterval);
-
-
 			if(id == null){	
 		%>
 			<a href="./MemberJoin.me"> 회원가입 </a>
@@ -90,17 +81,5 @@
 	
 	<hr>
 </body>
-<script type="text/javascript">
 
-setTimeout(function() {
-	var id = sessionStorage.getItem(id);
-	
-	if(id == null){
-    alert('alert 창 메시지');
-    window.location.reload();
-	}
-
-}, <%=getMaxInactiveinterval%>);
-
-</script>
 </html>
