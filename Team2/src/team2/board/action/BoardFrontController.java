@@ -170,6 +170,15 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/updateCommentAction.bo")){
+			System.out.println("/updateCommentAction.bo 주소 처리");
+			action = new updateCommentAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		//action
