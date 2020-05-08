@@ -130,7 +130,7 @@ public class CommentDAO {
 	
 	public List<CommentDTO> getList(int c_b_idx){
 		
-		String sql = "select * from team2_comment where c_b_idx=" + c_b_idx;
+		String sql = "select * from team2_comment where c_b_idx=" + c_b_idx + " order by c_idx desc";
 		
 		List<CommentDTO> list = selectList(sql);
 		
@@ -144,6 +144,23 @@ public class CommentDAO {
 		String sql = "delete from team2_comment where c_idx=" + c_idx;
 		
 		System.out.println(sql);
+		try {
+			chk = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return chk;
+	}
+
+	public int updateComment(CommentDTO dto) {
+		// TODO Auto-generated method stub
+		String sql = "update team2_comment set c_comment='" + dto.getC_comment() + "' where c_idx="+ dto.getC_idx();
+		int chk = -1;
+		
+		System.out.println("sql : "+sql);
+		
 		try {
 			chk = stmt.executeUpdate(sql);
 		} catch (SQLException e) {

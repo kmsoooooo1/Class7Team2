@@ -78,6 +78,24 @@
 			<td> <input  type="text" id="g_mileage_val" name="g_mileage">원 </td>
 		  </tr>
 		  
+		  <tr>
+		    <td> 배송 방법</td>
+		    <td>
+		      <input type="radio" name="g_delivery" value="일반배송" checked="checked"> 일반배송
+		      <input type="radio" name="g_delivery" value="선택배송"> 선택배송
+		    </td>
+		  </tr>
+		  
+		  <tr>
+		     <td> 옵션 </td>
+		     <td> <input type="text" name="g_option"> </td>
+		  </tr>
+		  
+		 <!-- 추가가격이 없으면 0 입력 -->
+		  <tr>
+		  	<td> 옵션 추가 가격 </td>
+		  	<td> <input type="text" name="g_option_price" placeholder="추가 가격이 없으면 0 입력"> </td>
+		  </tr>
 		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
@@ -106,6 +124,7 @@
 </body>
 
 <script type="text/javascript">
+	
 	
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
