@@ -87,7 +87,7 @@ public class GoodsDAO {
 			pstmt.setInt(12, gdto.getG_mileage());
 			pstmt.setString(13, gdto.getG_delivery());
 			pstmt.setString(14, gdto.getG_option());
-			pstmt.setString(15, gdto.getG_option_price());
+			pstmt.setInt(15, gdto.getG_option_price());
 			pstmt.setString(16, gdto.getContent());
 			pstmt.setInt(17, 0);
 			
@@ -134,6 +134,7 @@ public class GoodsDAO {
 				gdto.setG_mileage(rs.getInt("g_mileage"));
 				gdto.setG_delivery(rs.getString("g_delivery"));
 				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));
@@ -186,6 +187,7 @@ public class GoodsDAO {
 				gdto.setSub_category_index(rs.getString("sub_category_index"));
 				gdto.setG_delivery(rs.getString("g_delivery"));
 				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
 				
 			}
 		} catch (Exception e) {
@@ -206,7 +208,7 @@ public class GoodsDAO {
 			
 			sql="UPDATE team2_goods SET "
 					+ "category=?,sub_category=?,sub_category_index=?,g_name=?,g_code=?,g_thumbnail=?,g_amount=?,g_price_origin=?,"
-					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,g_delivery=?,g_option=?,content=? "
+					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,g_delivery=?,g_option=?,g_option_price=?,content=? "
 					+ "WHERE num=?";
 			
 			pstmt = con.prepareStatement(sql);
@@ -224,8 +226,9 @@ public class GoodsDAO {
 			pstmt.setInt(11, gdto.getG_mileage());
 			pstmt.setString(12, gdto.getG_delivery());
 			pstmt.setString(13, gdto.getG_option());
-			pstmt.setString(14, gdto.getContent());
-			pstmt.setInt(15, gdto.getNum());
+			pstmt.setInt(14, gdto.getG_option_price());
+			pstmt.setString(15, gdto.getContent());
+			pstmt.setInt(16, gdto.getNum());
 			
 			pstmt.executeUpdate();
 			
@@ -280,8 +283,8 @@ public class GoodsDAO {
 			//만약 category가 먹이 이면
 			else if(category.equals("먹이")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
-						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
-						+ "group_concat(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
+						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
 				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
@@ -296,8 +299,8 @@ public class GoodsDAO {
 			// sub_category 클릭 시 index 나오게 구현할 예정
 			else if(category.equals("사육용품")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
-						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,g_option,group_concat(g_option),"
-						+ "group_concat(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
+						+ "max(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
 					SQL.append("order by num desc");
@@ -420,6 +423,7 @@ public class GoodsDAO {
 				gdto.setG_mileage(rs.getInt("g_mileage"));
 				gdto.setG_delivery(rs.getString("g_delivery"));
 				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));

@@ -13,7 +13,7 @@ public class GoodsDetailAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// 넘겨준 삼품 코드 값 저장
+		// 넘겨준 상품 코드 값 저장
 		String g_code = request.getParameter("g_code");
 		
 		GoodsDAO gdao = new GoodsDAO();

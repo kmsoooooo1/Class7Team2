@@ -52,7 +52,7 @@ public class GoodsAddAction implements Action{
 		gdto.setG_mileage(Integer.parseInt(multi.getParameter("g_mileage")));
 		gdto.setG_delivery(multi.getParameter("g_delivery"));
 		gdto.setG_option(multi.getParameter("g_option"));
-		gdto.setG_option_price(multi.getParameter("g_option_price"));
+		gdto.setG_option_price(Integer.parseInt(multi.getParameter("g_option_price")));
 		gdto.setContent(multi.getParameter("ir1"));
 		//gdto.setDate(multi.getParameter("date"));  -> 디비에서 입력
 		

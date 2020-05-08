@@ -52,6 +52,7 @@ public class GoodsModifyAction implements Action{
 		gdto.setG_mileage(Integer.parseInt(multi.getParameter("g_mileage")));
 		gdto.setG_delivery(multi.getParameter("g_delivery"));
 		gdto.setG_option(multi.getParameter("g_option"));
+		gdto.setG_option_price(Integer.parseInt(multi.getParameter("g_option_price")));
 		gdto.setContent(multi.getParameter("ir1"));
 		System.out.println("수정할 상품 정보 : " + gdto);
 		
