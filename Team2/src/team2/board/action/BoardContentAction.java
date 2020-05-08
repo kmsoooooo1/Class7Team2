@@ -28,12 +28,11 @@ public class BoardContentAction implements Action {
 		BoardDAO bdao = new BoardDAO();
 		
 		bdao.updateView(num);
-		
 		BoardDTO bdto = bdao.getBoard(num);
 		
 		request.setAttribute("bdto", bdto);
 		request.setAttribute("pageNum", pageNum);
-		
+		bdao.closeDB();
 		ActionForward forward = new ActionForward();
 		forward.setPath("/board/board_content.jsp");
 		forward.setRedirect(false);

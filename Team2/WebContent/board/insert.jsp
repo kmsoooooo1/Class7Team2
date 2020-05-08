@@ -10,9 +10,79 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+	
+var sel_files = [];
+	
+	$(document).ready(function() {
+		$("#input_imgs").on("change", handleImgsFileSelect);
+	}); 
+	
+	function fileUploadAction() {
+		alert("fileUploadAction");
+		$("#input_imgs").trigger('click');
+	}
+	
+	function handleImgsFileSelect(e) {
+       
+        sel_files = [];
+        $(".imgs_wrap").empty();
+
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        
+        var index = 0;
+        filesArr.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+                alert("확장자는 이미지파일만 가능합니다.");
+                return;
+            }
+
+            sel_files.push(f);
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='100' height='100' title='Click to remove'></a>";
+                $(".imgs_wrap").append(html);
+                index++;
+
+            }
+            reader.readAsDataURL(f);
+            
+        });
+    }
+	
+    function deleteImageAction(index) {
+    	alert("index : "+index);
+
+        sel_files.splice(index, 1);
+
+    	alert("sel length 후 : "+sel_files.length);
+
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+    	alert("filesArr"+filesArr);
+    	
+        var img_id = "#img_id_"+index;
+        $(img_id).remove(); 
+    }
+    
 	function save(){
 	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 	    document.fr.b_category.disabled="";
+
+	    alert("첨부된 사진"+sel_files.length);
+	  	var data = new FormData();
+	  	
+        for(var i=0, len=sel_files.length; i<len; i++) {
+            var name = "image_"+i;
+            data.append(name, sel_files[i]);
+        }
+        data.append("image_count", sel_files.length);
+        
+        if(sel_files.length < 1) {
+            alert("썸네일이 없습니다.");
+            return;
+        }  
 	    document.fr.submit();
 	};
 </script>
@@ -82,7 +152,17 @@
 	
 		글제목<input type="text" name="b_title"><br>
 		내용<textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
-		첨부파일<input type="file" name="file" multiple="multiple"><br>
+		
+		<div class="input_wrap">
+		첨부파일 (첫번째 사진이 썸네일) <br>
+		<input type="file" name="file" id="input_imgs" multiple="multiple"><br>
+		
+		</div>
+		
+        <div class="imgs_wrap">
+            <img id="img"/>
+        </div>
+		
 		<input type="button" onclick="return save();" value="확인"/>
 		<button type="button" onclick="">목록으로</button>
 	</form>
