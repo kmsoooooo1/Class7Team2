@@ -1,5 +1,7 @@
 package team2.board.db;
 
+import java.util.List;
+
 import team2.animal.db.AnimalDAO;
 import team2.animal.db.AnimalDTO;
 import team2.goods.db.GoodsDAO;
@@ -87,7 +89,8 @@ public class ProductDTO {
 		}else if(c=='g'){
 			System.out.println("Goods 검색");
 			GoodsDAO dao = new GoodsDAO();
-			GoodsDTO dto = dao.getGoodsDetail(p_code);
+			List<GoodsDTO> list= dao.getGoodsDetailList(p_code);
+			GoodsDTO dto = list.get(0);
 			dao.closeDB();
 			if(dto!=null){
 				this.category = dto.getCategory();
