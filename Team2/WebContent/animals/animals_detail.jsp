@@ -147,13 +147,13 @@
 							<span> 품절 </span>
 							<button type="button"> 관심상품 </button>
 							<br>
-							<button type="button"> 카카오톡 상담 </button>
+							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 						<%}else{%>
 							<button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
 							<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
 							<button type="button"> 관심상품 </button>
 							<br>
-							<button type="button"> 카카오톡 상담 </button>
+							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 						<%}%>
 					</td>
 				</tr>
@@ -743,6 +743,13 @@
         var offset = $("#menu" + seq).offset();
         $('html, body').animate({scrollTop : offset.top}, 300);
     }
+			
+	// 카카오 채팅 상담 -----------------------------------------------------------------------------------
+	function kakaoChat() {
+		var popupX = (window.screen.width / 6) - (200 / 2); 
+		var popupY = (window.screen.height / 4) - (300 / 2);  
+		window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
+	}
 
 </script>
 </html>

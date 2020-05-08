@@ -115,16 +115,16 @@ public class BoardDAO {
 	
 		try {
 
-			sql = "select count(*) from team2_board where b_category = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, cset.getCategory());
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				total = rs.getInt(1);
-			}
-			System.out.println(cset + " 글 개수 확인 : " + total);
-			
+				sql = "select count(*) from team2_board where b_category = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cset.getCategory());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					total = rs.getInt(1);
+				}
+				System.out.println(cset + " 글 개수 확인 : " + total);
+				
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,35 +140,34 @@ public class BoardDAO {
 	
 	public ArrayList<BoardDTO> getBoardList(cSet cset, Criteria cri){
 		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
-	
+		
 		try {
 
-			sql = "select * from team2_board where b_category = ? order by b_idx desc limit ?,?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, cset.getCategory());
-			pstmt.setInt(2, cri.getPageStart());
-			pstmt.setInt(3, cri.getPerpageNum());
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				BoardDTO bdto = new BoardDTO();
+				sql = "select * from team2_board where b_category = ? order by b_idx desc limit ?,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cset.getCategory());
+				pstmt.setInt(2, cri.getPageStart());
+				pstmt.setInt(3, cri.getPerpageNum());
 				
-				bdto.setB_title(rs.getString("b_title"));
-				bdto.setB_writer(rs.getString("b_writer"));
-				bdto.setIp_addr(rs.getString("ip_addr"));
-				bdto.setB_reg_date(rs.getDate("b_reg_date"));
-				bdto.setB_category(rs.getString("b_category"));
-				bdto.setB_content(rs.getString("b_content"));
-				bdto.setB_file(rs.getString("b_file"));
-				bdto.setB_idx(rs.getInt("b_idx"));
-				bdto.setB_like(rs.getInt("b_like"));
-				bdto.setB_view(rs.getInt("b_view"));
+				rs = pstmt.executeQuery();
 				
-				
-				boardList.add(bdto);
-			}
-
+				while(rs.next()){
+					BoardDTO bdto = new BoardDTO();
+					
+					bdto.setB_title(rs.getString("b_title"));
+					bdto.setB_writer(rs.getString("b_writer"));
+					bdto.setIp_addr(rs.getString("ip_addr"));
+					bdto.setB_reg_date(rs.getDate("b_reg_date"));
+					bdto.setB_category(rs.getString("b_category"));
+					bdto.setB_content(rs.getString("b_content"));
+					bdto.setB_file(rs.getString("b_file"));
+					bdto.setB_idx(rs.getInt("b_idx"));
+					bdto.setB_like(rs.getInt("b_like"));
+					bdto.setB_view(rs.getInt("b_view"));
+					
+					
+					boardList.add(bdto);
+				}
 			
 			System.out.println("게시판 글 arraylist로 저장 완료 : " + boardList);
 			
@@ -235,6 +234,7 @@ public class BoardDAO {
 				bdto.setB_reg_date(rs.getDate("b_reg_date"));
 				bdto.setIp_addr(rs.getString("ip_addr"));
 				bdto.setB_file(rs.getString("b_file"));
+				bdto.setB_p_code(rs.getString("b_p_code"));
 				
 			}
 			
@@ -250,13 +250,13 @@ public class BoardDAO {
 	public void updateBoard(BoardDTO bdto) {
 		
 		try {
-			sql = "update team2_board set b_category=?,b_p_cate=?,b_title=?,b_content=? where b_idx=?";
+			sql = "update team2_board set b_category=?,b_title=?,b_content=? where b_idx=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bdto.getB_category());
-			pstmt.setString(3, bdto.getB_title());
-			pstmt.setString(4, bdto.getB_content());
-			pstmt.setInt(5, bdto.getB_idx());
+			pstmt.setString(2, bdto.getB_title());
+			pstmt.setString(3, bdto.getB_content());
+			pstmt.setInt(4, bdto.getB_idx());
 			
 			pstmt.executeUpdate();
 			
@@ -320,7 +320,20 @@ public class BoardDAO {
 	//	board getList End
 	////////////////////////////////////////////////////////////////////
 	
-	
+	public void deleteBoard(int num) {
+		
+		try {
+			sql = "delete from team2_board where b_idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DB 삭제 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 		
 		
 		
