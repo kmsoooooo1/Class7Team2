@@ -1,5 +1,3 @@
-alert("연결성공 commentInsert");
-
 function insertCommenctCheck(){
 	var fr = document.fr;
 	if(fr.comment.value==""){

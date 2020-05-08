@@ -18,39 +18,45 @@
 </script>
 </head>
 <body>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+	<!-- Main Content -->
 	<h1>WebContent/board/board_update.jsp</h1>
 	
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
-		String pageNum = (String)request.getAttribute("pageNum");
-
+		String pageNum = request.getParameter("pageNum");
+		
 	%>
-	<!-- 메인,서브 카테고리 저장 -->
-	<c:set var="m_ca" value="<%=bdto.getB_category() %>" />
+
 	
 	<form name= "fr" action="./BoardUpdateAction.bo?pageNum=${pageNum}" method="post">
 		<input type="hidden" name="num" value="<%=bdto.getB_idx() %>">	
-			
+		<input type="hidden" name="pageNum" value="<%=pageNum %>">	
+		<input type="hidden" name="b_category" value="<%=bdto.getB_category() %>">	
 			글번호  <%=bdto.getB_idx() %> <br>
 			조회수 <%=bdto.getB_view()%> <br>
+			카테고리 <%=bdto.getB_category() %> <br>			
 
-			카테고리
-			<select name="b_category">
-				<%for(int i = 0; i<cSet.Category.length; i++){ %>
-					<c:set var="cSet_m" value="<%=cSet.Category[i] %>" />
-					<option value=<%=cSet.Category[i] %> <c:if test="${m_ca eq cSet_m}">selected</c:if>><%=cSet.Category[i]%></option>
-				<%} %>
-			</select><br>
 
-			제목 <input type="text" name="title" value="<%=bdto.getB_title()%>"></td>
+			제목 <input type="text" name="title" value="<%=bdto.getB_title()%>">
+
 			<br>
 			첨부파일  <br>
-			<%String files[] = bdto.getB_file().split(","); %>
+			<%
+				//첨부된 파일 확인하여 불러오기
+				String files[] = bdto.getB_file().split(","); 
+				String ex = files[0];
+			%>
 			<c:set var="files" value="<%=files %>" />
+			<c:set var="ex" value="<%=ex %>" />
+			<c:if test="${ex ne null}">
 			<c:forEach var="file" items="${files}">
 			${file} <a href="${getContextPath}/deleteFileAction.bo?file=${file} ">
  			삭제하기 </a><br>
 			 </c:forEach>
+			 </c:if>
 			<input type="file" name="file" >
 			
 			<br>
