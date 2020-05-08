@@ -16,7 +16,8 @@ public class GoodsDTO {
 	private int g_price_sale;
 	private int g_mileage;
 	private String g_delivery;
-	private String g_option;
+	private String g_option;	
+	private String g_option_price;
 	private String content;
 	private int g_view_count;
 	private Date date;
@@ -161,7 +162,16 @@ public class GoodsDTO {
 		this.g_option = g_option;
 	}
 
+	public String getG_option_price() {
+		return g_option_price;
+	}
 
+
+	public void setG_option_price(String g_option_price) {
+		this.g_option_price = g_option_price;
+	}
+	
+	
 	public String getContent() {
 		return content;
 	}
@@ -198,9 +208,12 @@ public class GoodsDTO {
 				+ ", sub_category_index=" + sub_category_index + ", g_name=" + g_name + ", g_code=" + g_code
 				+ ", g_thumbnail=" + g_thumbnail + ", g_amount=" + g_amount + ", g_price_origin=" + g_price_origin
 				+ ", g_discount_rate=" + g_discount_rate + ", g_price_sale=" + g_price_sale + ", g_mileage=" + g_mileage
-				+ ", g_delivery=" + g_delivery + ", g_option=" + g_option + ", content=" + content + ", g_view_count="
-				+ g_view_count + ", date=" + date + "]";
+				+ ", g_delivery=" + g_delivery + ", g_option=" + g_option + ", g_option_price=" + g_option_price
+				+ ", content=" + content + ", g_view_count=" + g_view_count + ", date=" + date + "]";
 	}
+
+
+	
 
 
 	

@@ -70,7 +70,7 @@ public class GoodsDAO {
 			}
 			
 			// ? 추가
-			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -87,8 +87,9 @@ public class GoodsDAO {
 			pstmt.setInt(12, gdto.getG_mileage());
 			pstmt.setString(13, gdto.getG_delivery());
 			pstmt.setString(14, gdto.getG_option());
-			pstmt.setString(15, gdto.getContent());
-			pstmt.setInt(16, 0);
+			pstmt.setString(15, gdto.getG_option_price());
+			pstmt.setString(16, gdto.getContent());
+			pstmt.setInt(17, 0);
 			
 			// 실행
 			pstmt.executeUpdate();

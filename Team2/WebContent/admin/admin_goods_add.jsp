@@ -91,6 +91,12 @@
 		     <td> <input type="text" name="g_option"> </td>
 		  </tr>
 		  
+		  <!-- 옵션 추가 가격 -->
+		  <tr>
+		     <td> 옵션 가격 추가</td>
+		     <td> <input type="text" name="g_option_price" placeholder="추가 가격이 없으면 빈칸"> </td>
+		  </tr>
+		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
 		   		<textarea name="ir1" id="ir1" rows="10" cols="100">
