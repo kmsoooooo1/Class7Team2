@@ -14,6 +14,7 @@
 			
 			//로그인 되었는지
 			String id = (String) session.getAttribute("id");
+			
 			if(id == null){	
 		%>
 			<a href="./MemberJoin.me"> 회원가입 </a>
@@ -80,4 +81,5 @@
 	
 	<hr>
 </body>
+
 </html>

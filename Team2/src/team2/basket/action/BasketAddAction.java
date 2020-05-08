@@ -15,6 +15,8 @@ public class BasketAddAction implements Action {
 		
 		// 로그인 정보 없을 시 로그인페이지로 이동
 		HttpSession session = request.getSession();
+		
+		//id값
 		String id = (String)session.getAttribute("id");
 		ActionForward forward = new ActionForward();
 		
@@ -27,23 +29,41 @@ public class BasketAddAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		
 		BasketDTO bkdto = new BasketDTO();
-		
-		bkdto.setId(id);
-		bkdto.setB_code(request.getParameter("a_code"));
-		bkdto.setB_amount(Integer.parseInt(request.getParameter("a_amount")));
-		bkdto.setB_option(request.getParameter("delivary_method"));
-		
-		
 		BasketDAO bkdao = new BasketDAO();
 		
-		// 기존의 장바구니에 상품이 있는지 체크
-		int check = bkdao.checkGoods(bkdto);
+		//동물 또는 상품 코드
+		String b_code = request.getParameter("product_code");
+
+		//넘어온 값들의 수량들(b_amount)
+		//사용자가 추가한 배송방법들의 수량들 리스트 가지고 오기
+		String selectedAmounts = request.getParameter("selectedAmounts");
 		
-		// 없을 경우 바구니에 추가
-		if(check !=1){
+		//옵션(b_option)
+		String b_option = request.getParameter("option");
+		//동물페이지에서는 옵션이 없기 때문에 상품페이지에서 관리하면된다. 여기서는 DB에 임의적으로 넣어야 하기 때문에 적는거다.
+		if(request.getParameter("option") == null){
+			b_option = ""; //빈 공백 값을 넣는다.
+		}
+	
+		//배송방법(b_delivery_method)
+		//사용자가 추가한 배송방법 리스트 가지고 오기
+		String selectedValues = request.getParameter("selectedValues");
+		
+		// split()을 이용해 ','를 기준으로 문자열을 자른다.
+        // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
+		String splitSelectedValues[] = selectedValues.split(",");
+		String splitSelectedAmounts[] = selectedAmounts.split(",");
+		
+		for(int i=0; i<splitSelectedValues.length; i++){
+			bkdto.setId(id);
+			bkdto.setB_code(b_code);
+			bkdto.setB_amount(splitSelectedAmounts[i]);
+			bkdto.setB_option(b_option);
+			bkdto.setB_delivery_method(splitSelectedValues[i]);
+			
+			//추가하기
 			bkdao.basketAdd(bkdto);
 		}
-		
 		
 		forward.setPath("./BasketList.ba");
 		forward.setRedirect(true);
