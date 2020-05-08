@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
+
 public class GoodsDAO {
 
 	Connection con = null;
@@ -68,7 +70,7 @@ public class GoodsDAO {
 			}
 			
 			// ? 추가
-			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO team2_goods VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -83,8 +85,11 @@ public class GoodsDAO {
 			pstmt.setInt(10, gdto.getG_discount_rate());
 			pstmt.setInt(11, gdto.getG_price_sale());
 			pstmt.setInt(12, gdto.getG_mileage());
-			pstmt.setString(13, gdto.getContent());
-			pstmt.setInt(14, 0);
+			pstmt.setString(13, gdto.getG_delivery());
+			pstmt.setString(14, gdto.getG_option());
+			pstmt.setInt(15, gdto.getG_option_price());
+			pstmt.setString(16, gdto.getContent());
+			pstmt.setInt(17, 0);
 			
 			// 실행
 			pstmt.executeUpdate();
@@ -127,6 +132,9 @@ public class GoodsDAO {
 				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
 				gdto.setG_price_sale(rs.getInt("g_price_sale"));
 				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));
@@ -177,6 +185,9 @@ public class GoodsDAO {
 				gdto.setNum(rs.getInt("num"));
 				gdto.setSub_category(rs.getString("sub_category"));
 				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
 				
 			}
 		} catch (Exception e) {
@@ -197,7 +208,7 @@ public class GoodsDAO {
 			
 			sql="UPDATE team2_goods SET "
 					+ "category=?,sub_category=?,sub_category_index=?,g_name=?,g_code=?,g_thumbnail=?,g_amount=?,g_price_origin=?,"
-					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,content=? "
+					+ "g_discount_rate=?,g_price_sale=?,g_mileage=?,g_delivery=?,g_option=?,g_option_price=?,content=? "
 					+ "WHERE num=?";
 			
 			pstmt = con.prepareStatement(sql);
@@ -213,8 +224,11 @@ public class GoodsDAO {
 			pstmt.setInt(9, gdto.getG_discount_rate());
 			pstmt.setInt(10, gdto.getG_price_sale());
 			pstmt.setInt(11, gdto.getG_mileage());
-			pstmt.setString(12, gdto.getContent());
-			pstmt.setInt(13, gdto.getNum());
+			pstmt.setString(12, gdto.getG_delivery());
+			pstmt.setString(13, gdto.getG_option());
+			pstmt.setInt(14, gdto.getG_option_price());
+			pstmt.setString(15, gdto.getContent());
+			pstmt.setInt(16, gdto.getNum());
 			
 			pstmt.executeUpdate();
 			
@@ -259,7 +273,7 @@ public class GoodsDAO {
 		
 		try {
 			con = getConnection();
-			
+
 			//SQL buffer 안에 sql 구문 넣어주기
 			
 			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 상품을 부를때)
@@ -268,10 +282,13 @@ public class GoodsDAO {
 			}
 			//만약 category가 먹이 이면
 			else if(category.equals("먹이")){
-				SQL.append("SELECT * FROM team2_goods WHERE category='먹이' ");
+				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
+						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num");
+					SQL.append("order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
@@ -281,10 +298,12 @@ public class GoodsDAO {
 			// sub_category_index는 메뉴에서 다루지 않음.
 			// sub_category 클릭 시 index 나오게 구현할 예정
 			else if(category.equals("사육용품")){
-				SQL.append("SELECT * FROM team2_goods WHERE category='사육용품' ");
+				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
+						+ "max(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num");
+					SQL.append("order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
@@ -311,6 +330,8 @@ public class GoodsDAO {
 				}
 			}
 			
+			System.out.println(SQL);
+			
 			rs = pstmt.executeQuery();
 			
 			// 상품이 있을때마다
@@ -333,6 +354,8 @@ public class GoodsDAO {
 				gdto.setNum(rs.getInt("num"));
 				gdto.setSub_category(rs.getString("sub_category"));
 				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
 				
 				goodsList.add(gdto);
 			}
@@ -369,19 +392,22 @@ public class GoodsDAO {
 		}
 	}//updateGoodsViewCount(g_code)
 	
-	//getGoodsDetail(g_code) 상품 상세정보 가져오는 함수
-	public GoodsDTO getGoodsDetail(String g_code){
-		GoodsDTO gdto = null;
+	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
+	// 수정 필요
+	public List<GoodsDTO> getGoodsDetailList(String g_code){
+		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
 		
 		try {
 			con = getConnection();
 			
-			sql="SELECT * FROM team2_goods WHERE g_code = ?";
+			sql="select * from team2_goods where g_code = ? order by g_amount desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
+				GoodsDTO gdto = new GoodsDTO();
+				
 				gdto = new GoodsDTO();
 				// 만약 상품이 db에 있다면
 				gdto.setCategory(rs.getString("category"));
@@ -395,17 +421,24 @@ public class GoodsDAO {
 				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
 				gdto.setG_price_sale(rs.getInt("g_price_sale"));
 				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
 				gdto.setContent(rs.getString("content"));
 				gdto.setG_view_count(rs.getInt("g_view_count"));
 				gdto.setDate(rs.getDate("date"));
+				
+				detailList.add(gdto);
 			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
 		
-		return gdto;
+		return detailList;
 	}//getGoodsDetail(g_code)
 	
 	

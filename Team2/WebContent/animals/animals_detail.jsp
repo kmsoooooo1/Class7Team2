@@ -147,13 +147,13 @@
 							<span> 품절 </span>
 							<button type="button"> 관심상품 </button>
 							<br>
-							<button type="button"> 카카오톡 상담 </button>
+							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 						<%}else{%>
 							<button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
 							<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
 							<button type="button"> 관심상품 </button>
 							<br>
-							<button type="button"> 카카오톡 상담 </button>
+							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 						<%}%>
 					</td>
 				</tr>
@@ -406,8 +406,8 @@
 		//태그에 추가하기
 		$('#final_total_amount').text(final_total_amount);
 		
-		//사용자가 select option 에서 selected 한 값 selectedValues input hidden value에 차례대로 넣기
-		selectedValues += (delivery_method + ",");
+		//사용자가 select option 에서 selected 한 값  input hidden value에 차례대로 넣기
+		 selectedValues += (delivery_method + ",");
 		//추가된 values 변수를 태그에 담기
 		$("#selectedValues").val(selectedValues);
 		
@@ -658,7 +658,7 @@
 		//할인율이 0이면
 		else {
 			//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 빼고나서 저장하기
-			final_total_price -= Number(a_price_origin);
+			final_total_price -= Number(total_price);
 			//태그에 추가하기
 			$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			
@@ -743,6 +743,13 @@
         var offset = $("#menu" + seq).offset();
         $('html, body').animate({scrollTop : offset.top}, 300);
     }
+			
+	// 카카오 채팅 상담 -----------------------------------------------------------------------------------
+	function kakaoChat() {
+		var popupX = (window.screen.width / 6) - (200 / 2); 
+		var popupY = (window.screen.height / 4) - (300 / 2);  
+		window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
+	}
 
 </script>
 </html>
