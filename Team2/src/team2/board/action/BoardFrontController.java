@@ -148,6 +148,7 @@ public class BoardFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
 		}else if(command.equals("/deleteCommentAction.bo")){
 			System.out.println("/deleteCommentAction.bo 주소처리");
 			action = new deleteCommentAction();
@@ -155,10 +156,20 @@ public class BoardFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+
+		}else if(command.equals("/BoardDelete.bo")){
+			
+			System.out.println("/BoardDelete.bo 주소 처리");
+			
+			// 파일 다운로드
+			action = new boardDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
 		
 		//action
 		
