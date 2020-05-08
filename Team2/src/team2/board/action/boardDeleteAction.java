@@ -4,9 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import team2.board.db.BoardDAO;
-import team2.board.db.BoardDTO;
 
-public class BoardUpdateAction implements Action {
+public class boardDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -14,28 +13,24 @@ public class BoardUpdateAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		
 		//카테고리저장 해서 forward 처리
-		String category = (String)request.getParameter("b_category");
+		String category = (String)request.getParameter("category");
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
-
-		BoardDTO bdto = new BoardDTO();
-		
-		bdto.setB_category(category);
-		bdto.setB_title(request.getParameter("title"));
-		bdto.setB_content(request.getParameter("content"));
-		bdto.setB_idx(Integer.parseInt(request.getParameter("num")));
 		
 		BoardDAO bdao = new BoardDAO();
 		
-		System.out.println("bdto 값 : " +bdto);
-		
-		bdao.updateBoard(bdto);
+		bdao.deleteBoard(num);
 		
 		bdao.closeDB();
 		
-		//수정한 페이지로 이동
+		//게시판페이지 이동
+		cSet cset = new cSet();
+		
+		cset.setCategory(category);
+		System.out.println("c 값 @@@@@" +cset.getC());
+		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardContent.bo?num="+num+"&pageNum="+pageNum);
+		forward.setPath("./BoardList.bo?category="+cset.getC());
 		forward.setRedirect(true);
 		
 		return forward;

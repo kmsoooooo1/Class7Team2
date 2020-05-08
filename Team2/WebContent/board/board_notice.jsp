@@ -19,6 +19,7 @@
   	}
  
  </style>
+ 
 </head>
 <body>
 	<h1>WebContent/board/board_notice.jsp</h1>

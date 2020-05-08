@@ -4,18 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<title>Insert title here</title>
+<title>비밀번호 변경완료페이지</title>
 </head>
 <body>
-	<h1>성공</h1>
-
-
-
-
-
-
-
+<script type="text/javascript">
+	alert("패스워드 변경이 완료되었습니다.\n 이용해주셔서 감사합니다.");
+	location.href="./MemberLogin.me";
+</script>
 </body>
 </html>

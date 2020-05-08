@@ -25,6 +25,7 @@
 		String pageNum = request.getParameter("pageNum");
 		
 	%>
+
 	
 	<form name= "fr" action="./BoardUpdateAction.bo?pageNum=${pageNum}" method="post">
 		<input type="hidden" name="num" value="<%=bdto.getB_idx() %>">	
@@ -34,7 +35,9 @@
 			조회수 <%=bdto.getB_view()%> <br>
 			카테고리 <%=bdto.getB_category() %> <br>			
 
+
 			제목 <input type="text" name="title" value="<%=bdto.getB_title()%>">
+
 			<br>
 			첨부파일  <br>
 			<%

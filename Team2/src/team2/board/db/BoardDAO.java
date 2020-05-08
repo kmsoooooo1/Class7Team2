@@ -111,12 +111,10 @@ public class BoardDAO {
 	public int getBoardCount(cSet cset) {
 		int total = 0;
 		
-
 		System.out.println("category : " +cset.getCategory());
 	
 		try {
 
-				
 				sql = "select count(*) from team2_board where b_category = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, cset.getCategory());
@@ -142,7 +140,6 @@ public class BoardDAO {
 	
 	public ArrayList<BoardDTO> getBoardList(cSet cset, Criteria cri){
 		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
-		
 		
 		try {
 
