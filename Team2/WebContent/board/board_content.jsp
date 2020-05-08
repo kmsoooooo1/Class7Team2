@@ -12,19 +12,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../js/board/commentInsert.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/commentInsert.js"></script>
+<style>
+	.commentUpdate{
+		display:none;
+	}
+</style>
 </head>
 <body>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+	<!-- Main Content -->
+
 	<h1>WebContent/board/board_content.jsp</h1>
 	
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
-
+		String num = request.getParameter("num");
 		String id2 = (String)session.getAttribute("id");
 		CommentDAO cdao = new CommentDAO();
-		List<CommentDTO> list = cdao.getList(Integer.parseInt(request.getParameter("num")));
+		List<CommentDTO> list = cdao.getList(Integer.parseInt(num));
 		cdao.closeDB();
 		if(bdto!=null){			
 	%>
@@ -63,7 +72,7 @@
 				<input type="button" value="수정"
 					onclick="location.href='./BoardUpdate.bo?pageNum=<%=pageNum%>&num=<%=bdto.getB_idx()%>'">
 				<input type="button" value="삭제"
-					onclick="">
+					onclick="location.href='./BoardDelete.bo?num=<%=bdto.getB_idx()%>&category=<%=bdto.getB_category() %>'">
 				<input type="button" value="댓글"
 					onclick="">
 				<input type="button" value="목록이동"
@@ -75,7 +84,7 @@
 	<%} %>
 	<div class="comment_wrap">
 	<div>
-		<form name="fr" action="./InsertCommentAction.bo" method="post">
+		<form name="fr" action="./InsertCommentAction.bo?num=<%=num %>&pageNum=<%=pageNum %>" method="post">
 			<input type="hidden" name="c_category" value="board">
 			<input type="hidden" name="c_b_idx" value=<%=bdto.getB_idx()%>>
 			<textarea name="comment" 
@@ -96,23 +105,46 @@
 	<div>
 		<ul>	
 		<%if(list.size()>0){
+			System.out.println(list.toString());
+			int cnt = 0;
 			for(CommentDTO dto : list){ %>
 			
 			<li>
-				<div class="comment_wrap">
-					작성자 : <%=dto.getC_id() %><br>
-					댓글 : <%=dto.getC_comment() %><br>
-					IP : <%=dto.getIp_addr() %><br>
-					작성일자 : <%=dto.getC_regdate() %>
+				<div class="comment_wrap comment<%=dto.getC_idx()%>">
+						작성자 : <%=dto.getC_id() %><br>
+						댓글 
+						<div class="commentInfo comment<%=cnt%>info">
+							 <%=dto.getC_comment() %><br>
+						</div>
+						<div class="commentUpdate comment<%=cnt%>update">
+							<form name="updatefr" action="./updateCommentAction.bo" method="post">
+								<input type="hidden" name="num" value=<%=num%>>
+								<input type="hidden" name="pageNum" value=<%=pageNum%>>
+								<input type="hidden" name="cnum" value=<%=dto.getC_idx() %>>
+								<textarea name="comment"><%=dto.getC_comment()%></textarea>
+								<button type="button" type="button" onclick="return updateCommentCheck(<%=cnt%>)">수정</button>
+								<button type="button" type="button" onclick="updateCommentCancle(<%=cnt%>)">취소</button>
+							</form>
+						</div>
+						IP : <%=dto.getIp_addr() %><br>
+						작성일자 : <%=dto.getC_regdate() %>	
+					
+					
+					<button onclick="deleteComment(<%=cnt%>);">삭제</button>
+				<%if(id2!=null && id2.equals(dto.getC_id())){ %>
+					<button onclick="updateComment(<%=cnt %>)">수정</button>
+				<%} %>
 				</div>
 			</li>
 			
-		<%	} 
+		<%	cnt++;
+			} 
 		  }else{ %>
 		  	<li>
 		  		<div class="content_wrap">
 		  			작성된 댓글이 없습니다.
 		  		</div>
+		  		
 		  	</li>
 	  <%  } %>
 		</ul>
@@ -128,5 +160,23 @@
 		var url = contextPath + "/downloadAction.bo?file="+file;
 		location.href=url;	
 	}
+	
+	function updateComment(c_idx){
+ 		document.getElementsByClassName('comment'+c_idx+'info')[0].style.display = "none";
+ 		document.getElementsByClassName('comment'+c_idx+'update')[0].style.display = "block";
+	}
+	
+	function updateCommentCancle(c_idx){
+		document.getElementsByClassName('comment'+c_idx+'info')[0].style.display = "block";
+ 		document.getElementsByClassName('comment'+c_idx+'update')[0].style.display = "none";
+	}
+	
+	function deleteComment(c_idx){
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			location.href="./deleteCommentAction.bo?num=<%=num%>&pageNum=<%=pageNum%>&cnum="+c_idx;
+		}
+	}
+	
+
 </script>
 </html>

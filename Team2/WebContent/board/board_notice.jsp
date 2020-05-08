@@ -19,8 +19,13 @@
   	}
  
  </style>
+ 
 </head>
 <body>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+	<!-- Main Content -->
 	<h1>WebContent/board/board_notice.jsp</h1>
 	
 	<%
@@ -84,6 +89,6 @@
 
 	</ul>
 
-
+x
 </body>
 </html>

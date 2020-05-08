@@ -64,7 +64,7 @@ public class BasketDAO {
 						+ "where id=? and b_code=? and b_option=?";
 				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, bkdto.getB_amount());
+				pstmt.setString(1, bkdto.getB_amount());
 				pstmt.setString(2, bkdto.getId());
 				pstmt.setString(3, bkdto.getB_code());
 				pstmt.setString(4, bkdto.getB_option());
@@ -84,6 +84,7 @@ public class BasketDAO {
 	
 	// basketAdd(bkdto)
 	public void basketAdd(BasketDTO bkdto){
+		
 		int b_num = 0;
 		try {
 			con = getConnection();
@@ -99,18 +100,15 @@ public class BasketDAO {
 			
 			// 상품을 장바구니에 저장
 			// 장바구니에 상품 정보를 저장
-			sql="insert into team2_basket values(?,?,?,?,?)";
+			sql="insert into team2_basket values(?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			pstmt.setString(2, bkdto.getId());
 			pstmt.setString(3, bkdto.getB_code());
-			pstmt.setInt(4, bkdto.getB_amount());
+			pstmt.setString(4, bkdto.getB_amount());
 			pstmt.setString(5, bkdto.getB_option());
-			
+			pstmt.setString(6, bkdto.getB_delivery_method());
 			pstmt.executeUpdate();
-			
-			System.out.println("장바구니 저장 완료!!");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
@@ -134,7 +132,7 @@ public class BasketDAO {
 		try {
 			con = getConnection();
 			// 장바구니 정보 저장
-			sql="select * from team2_basket where id=?";
+			sql="select * from team2_basket where id = ? order by b_num desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
@@ -145,8 +143,9 @@ public class BasketDAO {
 				bkdto.setB_num(rs.getInt("b_num"));
 				bkdto.setId(rs.getString("id"));
 				bkdto.setB_code(rs.getString("b_code"));
-				bkdto.setB_amount(rs.getInt("b_amount"));
+				bkdto.setB_amount(rs.getString("b_amount"));
 				bkdto.setB_option(rs.getString("b_option"));
+				bkdto.setB_delivery_method(rs.getString("b_delivery_method"));
 				
 				// 장바구니 하나의 정보를 리스트 한칸에 저장
 				basketList.add(bkdto);
@@ -169,26 +168,52 @@ public class BasketDAO {
 					adto.setA_morph(rs2.getString("a_morph"));
 					adto.setA_price_sale(rs2.getInt("a_price_sale"));
 					adto.setA_mileage(rs2.getInt("a_mileage"));
+					adto.setA_discount_rate(rs2.getInt("a_discount_rate"));
+					adto.setA_price_origin(rs2.getInt("a_price_origin"));
 					
 					// 상품정보 하나를 리스트 한칸에 저장
 					animalList.add(adto);
 				}
 			}
-			
-			vec.add(0,basketList);
-			vec.add(1,animalList);
-			
-			
+			vec.add(0, basketList);
+			vec.add(1, animalList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
 			closeDB();
 		}
-		
 		return vec;
 	}
-	
 	// getBasketList(id)
+	
+	
+	//장바구니 수량 수정하는 함수
+	public void modiAmount(String b_code, String b_option, String b_delivery_method, int new_amount) {
+		try {
+			con = getConnection();
+			sql="select * from team2_basket where b_code = ? and b_option = ? and b_delivery_method = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, b_code);
+			pstmt.setString(2, b_option);
+			pstmt.setString(3, b_delivery_method);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				//상품이 존재하면
+				sql="update team2_basket set b_amount = ? where b_code = ? and b_option = ? and b_delivery_method = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, new_amount);
+				pstmt.setString(2, b_code);
+				pstmt.setString(3, b_option);
+				pstmt.setString(4, b_delivery_method);
+				pstmt.executeUpdate();
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
 	
 	
 	
