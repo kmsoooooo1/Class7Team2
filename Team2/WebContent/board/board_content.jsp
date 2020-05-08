@@ -12,13 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/basic.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board/commentInsert.js"></script>
-<script type="text/javascript">
-	function updateComment(var c_idx){
-		
-	}
-</script>
 </head>
 <body>
 	<h1>WebContent/board/board_content.jsp</h1>
@@ -105,12 +99,19 @@
 			
 			<li>
 				<div class="comment_wrap comment<%=dto.getC_idx()%>">
-					작성자 : <%=dto.getC_id() %><br>
-					댓글 : <%=dto.getC_comment() %><br>
-					IP : <%=dto.getIp_addr() %><br>
-					작성일자 : <%=dto.getC_regdate() %>
+					<div class="comment<%=dto.getC_idx()%>info">
+						작성자 : <%=dto.getC_id() %><br>
+						댓글 : <%=dto.getC_comment() %><br>
+						IP : <%=dto.getIp_addr() %><br>
+						작성일자 : <%=dto.getC_regdate() %>	
+					</div>
+					<div class="comment<%=dto.getC_idx()%>update">
+						
+					</div>
 					<button onclick="deleteComment(<%=dto.getC_idx()%>);">삭제</button>
+				<%if(id2!=null && id2.equals(dto.getC_id())){ %>
 					<button onclick="updateComment(<%=dto.getC_idx() %>)">수정</button>
+				<%} %>
 				</div>
 			</li>
 			
@@ -135,5 +136,16 @@
 		var url = contextPath + "/downloadAction.bo?file="+file;
 		location.href=url;	
 	}
+	
+	function updateComment(c_idx){
+		
+	}
+	
+	function deleteComment(c_idx){
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			location.href="./deleteCommentAction.bo?num=<%=num%>&pageNum=<%=pageNum%>&cnum="+c_idx;
+		}
+	}
+
 </script>
 </html>
