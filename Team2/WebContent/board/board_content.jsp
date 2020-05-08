@@ -15,6 +15,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board/commentInsert.js"></script>
 </head>
 <body>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+	<!-- Main Content -->
+
 	<h1>WebContent/board/board_content.jsp</h1>
 	
 	<%
@@ -62,7 +67,7 @@
 				<input type="button" value="수정"
 					onclick="location.href='./BoardUpdate.bo?pageNum=<%=pageNum%>&num=<%=bdto.getB_idx()%>'">
 				<input type="button" value="삭제"
-					onclick="">
+					onclick="location.href='./BoardDelete.bo?num=<%=bdto.getB_idx()%>&category=<%=bdto.getB_category() %>'">
 				<input type="button" value="댓글"
 					onclick="">
 				<input type="button" value="목록이동"
