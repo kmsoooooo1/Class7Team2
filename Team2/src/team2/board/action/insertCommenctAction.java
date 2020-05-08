@@ -20,6 +20,7 @@ public class insertCommenctAction implements Action {
 		System.out.println("Insert Comment Action 실행!");
 		ActionForward forward = new ActionForward();
 		
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		String num = request.getParameter("num");

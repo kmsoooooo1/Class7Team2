@@ -143,6 +143,7 @@ public class CommentDAO {
 		
 		String sql = "delete from team2_comment where c_idx=" + c_idx;
 		
+		System.out.println(sql);
 		try {
 			chk = stmt.executeUpdate(sql);
 		} catch (SQLException e) {
