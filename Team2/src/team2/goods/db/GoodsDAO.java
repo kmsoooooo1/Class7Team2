@@ -400,7 +400,7 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
-			sql="select * from team2_goods where g_code = ?";
+			sql="select * from team2_goods where g_code = ? order by g_amount desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
