@@ -5,6 +5,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,9 +47,9 @@
 				DecimalFormat formatter = new DecimalFormat("#,###,###,###");
 		%>
 		<tr>
-			<input type="hidden" id="b_code" name="b_code" value="<%=bkdto.getB_code()%>">
-			<input type="hidden" id="b_option" name="b_option" value="<%=bkdto.getB_option()%>">
-			<input type="hidden" id="b_delivery_method" name="b_delivery_method" value="<%=bkdto.getB_delivery_method()%>">
+			<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
+			<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
+			<input type="hidden" id="b_delivery_method<%=i%>" name="b_delivery_method<%=i%>" value="<%=bkdto.getB_delivery_method()%>">
 			
 			<!-- 체크박스 -->
 			<td> <input type="checkbox"> </td>
@@ -79,9 +80,9 @@
 			<!-- 수량 -->
 			<td>
 				<!-- 장바구니 수량  -->
-				<input type="text" id="b_amount_<%=bkdto.getB_code()%>_<%=bkdto.getB_option()%>_<%=bkdto.getB_delivery_method()%>" name="b_amount_<%=bkdto.getB_code()%>_<%=bkdto.getB_option()%>_<%=bkdto.getB_delivery_method()%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3">개
+				<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3">개
 				<!-- 수량 +/- 버튼 -->
-				<input type="button" id="amountPlus" name="amountPlus" value="+" onkeyup='plus(<%=bkdto.getB_code()%>, <%=bkdto.getB_option()%>, <%=bkdto.getB_delivery_method()%> );'>
+				<input type="button" id="amountPlus" name="amountPlus" value="+" onkeyup='plus(<%=i%>);'>
 				<input type="button" id="amountMinus" name="amountMinus" value="-"> <br>
 				<button type="button" id="modibtn" name="modiBtn"> 수정 </button>
 			</td>
@@ -188,6 +189,15 @@
 </body>
 
 <script type="text/javascript">
+
+	//basketList의 리스트를 자바스크립트 단에서 그대로 추가하기
+	//추가하는 이유: html단에서 for loop으로 돌아가기 때문에 자바스크립트에서도 똑같이 for loop을 돌리기 위해서 size를 임의적으로 만들ㄹ어야 한다. 자바스크립트에서는 basketList.lengh 가 basketList의 size이다. 
+	var basketList = [];
+	<c:forEach items="${basketList}" var="basketList">
+		basketList.push("${basketList}");
+	</c:forEach>
+	
+	
 		
 	//증가함수 클릭시
 	function plus(b_code, b_option, b_delivery_method){

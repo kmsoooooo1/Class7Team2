@@ -1,3 +1,5 @@
+<%@page import="team2.admin.goods.action.GoodsDeleteAction"%>
+
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
@@ -15,6 +17,7 @@
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
+		String g_code = request.getParameter("g_code");
 		
 		// GoodsListAction 객체에서 저장된 정보를 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>)request.getAttribute("goodsList");
@@ -88,6 +91,7 @@
 				<%if(gdto.getG_amount() == 0){ %>
 					<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
 				<%} %>
+
 				
 			</td>
 			<%
