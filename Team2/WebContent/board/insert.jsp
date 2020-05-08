@@ -64,6 +64,7 @@ var sel_files = [];
     	
         var img_id = "#img_id_"+index;
         $(img_id).remove(); 
+        
     }
     
 	function save(){
