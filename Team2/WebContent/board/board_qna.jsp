@@ -11,17 +11,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
- <style type="text/css">
-  ul{ list-style: none;}
-  li{ float:left;
-  	  font-style: normal;
-  	}
- 
- </style>
 </head>
 <body>
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+<%-- 	<header> <jsp:include page="/include/header.jsp" /> </header> --%>
 	
 	<!-- Main Content -->
 	<h1>WebContent/board/board_qna.jsp</h1>
@@ -46,25 +39,24 @@
 	    <td>IP</td>
 	  </tr>
 	  
-	  <%
-	    for(int i=0;i<boardList.size();i++){ 
-             BoardDTO bdto = (BoardDTO) boardList.get(i);
-	  %>
-	
-		  <tr>
-		    <td><%=bdto.getB_idx() %></td>
-		    <td>
-		    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-		    	<%=bdto.getB_title() %>
-		    	</a>
-		    </td>
-		    
-		    <td><%=bdto.getB_writer() %></td>
-		    <td><%=bdto.getB_reg_date() %></td>
-		    <td><%=bdto.getB_view() %></td>
-		    <td><%=bdto.getIp_addr() %></td>
-		  </tr>
-	  <% } %>
+  <%
+    for(int i=0;i<boardList.size();i++){ 
+            BoardDTO bdto = (BoardDTO) boardList.get(i);
+  %>
+	  <tr>
+	    <td><%=bdto.getB_idx() %></td>
+	    <td>
+	    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+	    	<%=bdto.getB_title() %>
+	    	</a>
+	    </td>
+	    
+	    <td><%=bdto.getB_writer() %></td>
+	    <td><%=bdto.getB_reg_date() %></td>
+	    <td><%=bdto.getB_view() %></td>
+	    <td><%=bdto.getIp_addr() %></td>
+	  </tr>
+  <% } %>
 	
 	</table>
 	
