@@ -400,10 +400,7 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
-			sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,group_concat(g_amount) as g_amount,"
-					+ "g_price_origin,g_discount_rate,g_price_sale,g_mileage,g_delivery,group_concat(g_option) as g_option,"
-					+ "group_concat(g_option_price) as g_option_price,content,g_view_count,date "
-					+ "from team2_goods where g_code = ?";
+			sql="select * from team2_goods where g_code = ? order by g_amount desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();

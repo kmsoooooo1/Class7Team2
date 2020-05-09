@@ -21,9 +21,6 @@ public class GoodsDTO {
 	private String content;
 	private int g_view_count;
 	private Date date;
-	
-	
-	
 
 	public int getNum() {
 		return num;

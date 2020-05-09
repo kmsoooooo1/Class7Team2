@@ -1,5 +1,6 @@
 package team2.goods.action;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,7 @@ public class GoodsDetailAction implements Action{
 		List<GoodsDTO> detailList = gdao.getGoodsDetailList(g_code);
 		
 		request.setAttribute("detailList", detailList);
-		
-		
+
 		ActionForward forward = new ActionForward();
 		forward.setPath("./goods/goods_detail.jsp");
 		forward.setRedirect(false);

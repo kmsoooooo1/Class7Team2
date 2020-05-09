@@ -20,8 +20,7 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<%
-		
-		
+
 		String id = (String) session.getAttribute("id");
 		if(id == null){
 			id = "";
@@ -29,37 +28,30 @@
 		
 		// GoodsDetailAction 객체에서 저장된 정보를 저장
 		List<GoodsDTO> detailList = (List<GoodsDTO>) request.getAttribute("detailList");
-	
-
-	for(int i=0; i<detailList.size(); i++){
-
-		GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
-	
+		
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
-		String newformat_price_origin = formatter.format(goodsDetail.getG_price_origin());
-		String newformat_mileage = formatter.format(goodsDetail.getG_mileage());
-		String newformat_price_sale = formatter.format(goodsDetail.getG_price_sale());
-	
-	
-		// 상품에 대한 정보를 쿠키에 담기
-		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
+		String newformat_price_origin = formatter.format(detailList.get(0).getG_price_origin());
+		String newformat_mileage = formatter.format(detailList.get(0).getG_mileage());
+		String newformat_price_sale = formatter.format(detailList.get(0).getG_price_sale());
 		
 		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
 		int price = 0;
 		
 		// 할인율이 있으면
-		if(goodsDetail.getG_discount_rate() != 0){
-			price = goodsDetail.getG_price_sale();
+		if(detailList.get(0).getG_discount_rate() != 0){
+			price = detailList.get(0).getG_price_sale();
 			// 할인율이 없으면
 		}else{
-			price = goodsDetail.getG_price_origin();
+			price = detailList.get(0).getG_price_origin();
 		}
 		
-		Cookie cook = new Cookie("item"+goodsDetail.getG_code(), URLEncoder.encode(
+		// 상품에 대한 정보를 쿠키에 담기
+		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
+		Cookie cook = new Cookie("item"+detailList.get(0).getG_code(), URLEncoder.encode(
 				
-				  "<tr> <td> <a href='./goodsDetail.go?g_code="+goodsDetail.getG_code()+"'> <img src='./upload/multiupload/"+goodsDetail.getG_thumbnail()+"' width='150' height='150'></a> </td>" 
-				+ "<td>"+ goodsDetail.getG_name()+"</td>"
+				  "<tr> <td> <a href='./goodsDetail.go?g_code="+detailList.get(0).getG_code()+"'> <img src='./upload/multiupload/"+detailList.get(0).getG_thumbnail()+"' width='150' height='150'></a> </td>" 
+				+ "<td>"+ detailList.get(0).getG_name()+"</td>"
 				+ "<td>"+ price +"</td>"
 				+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
 				+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
@@ -67,46 +59,38 @@
 				+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>","UTF-8")); 
 		cook.setMaxAge(60*60); // 한시간 유지
 		response.addCookie(cook);
-		
-	
-		
-		
-		
+
 	%>
-	
-	
-	
+
 	<!-- Main Content -->
 	<form action="" method="post" name="fr">
 	
 		<!-- 상품 기본 정보 파트 -->
 	   <div id="menu0">
-	      <!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
-	      <input type="hidden" name="product_code" value="<%=goodsDetail.getG_code()%>">
-	      <input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=goodsDetail.getG_price_origin()%>">
-	      <input type="hidden" id="g_price_sale" name="g_price_sale" value="<%=goodsDetail.getG_price_sale()%>">
-		  <input type="hidden" id="g_discount_rate" name="g_discount_rate" value="<%=goodsDetail.getG_discount_rate()%>">
-		  <input type="hidden" id="g_mileage" name="g_mileage" value="<%=goodsDetail.getG_mileage()%>">
-		  <input type="hidden" id="g_name" name="g_name" value="<%=goodsDetail.getG_name()%>">
-		  <input type="hidden" id="g_option_price" name="g_option_price" value="<%=goodsDetail.getG_option_price()%>">
+			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
+			<input type="hidden" name="product_code" value="<%=detailList.get(0).getG_code()%>">
+			<input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=detailList.get(0).getG_price_origin()%>">
+			<input type="hidden" id="g_price_sale" name="g_price_sale" value="<%=detailList.get(0).getG_price_sale()%>">
+			<input type="hidden" id="g_discount_rate" name="g_discount_rate" value="<%=detailList.get(0).getG_discount_rate()%>">
+			<input type="hidden" id="g_mileage" name="g_mileage" value="<%=detailList.get(0).getG_mileage()%>">
+			<input type="hidden" id="g_name" name="g_name" value="<%=detailList.get(0).getG_name()%>">
 		  
-		  
-		    <!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
+			<!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
 			<input type="hidden" id="selectedValues" name="selectedValues" value="">
 			
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 		  
-		   <table border="0">
+			<table border="0">
 		     <tr>
-		     	<td> <img src="./upload/multiupload/<%=goodsDetail.getG_thumbnail()%>" width="500" height="500"> </td>
+		     	<td> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </td>
 		        <td>
 		        	<!-- 상품명 -->
-		        	<%if(goodsDetail.getG_amount() == 0){%>
+		        	<%if(detailList.get(0).getG_amount() == 0){%>
 		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
-		        	  <h4> <%=goodsDetail.getG_name() %> </h4>
+		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
 		        	<%}else{ %>
-		        	  <h4> <%=goodsDetail.getG_name() %> </h4>
+		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
 		        	<%} %>    
 		        	
 		        	<hr>
@@ -117,8 +101,8 @@
 		        	    <td> 판매가 </td>
 		        	    <td>
 		        	       <%=newformat_price_origin%>원 
-		        	       <%if(goodsDetail.getG_discount_rate() != 0){ //할인율 있으면 %>
-		        	          <%=goodsDetail.getG_discount_rate() %>% OFF
+		        	       <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
+		        	          <%=detailList.get(0).getG_discount_rate() %>% OFF
 		        	       <%} %>   
 		        	    </td>
 		        	  </tr>
@@ -128,10 +112,10 @@
 		        	    <td> <%=newformat_mileage%>원 </td>
 		        	  </tr>
 		        	  
-		        	  <%if(goodsDetail.getG_discount_rate() != 0){ //할인율 있으면 %>
+		        	  <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
 		        	  <tr>
 		        	     <td> 할인판매가 </td>
-		        	     <td> <%=newformat_price_sale%>원 (<%=goodsDetail.getG_discount_rate() %>% 할인율) </td>
+		        	     <td> <%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate() %>% 할인율) </td>
 		        	  </tr>
 		        	  <%} %>
 		        	</table>
@@ -139,39 +123,26 @@
 		        	<hr>
 		        	
 		        	<!-- 옵션을 셀렉트박스로 가져오기 -->
-		        	<%if(! goodsDetail.getG_option().equals("")){ %>
+		        	<%if(!detailList.get(0).getG_option().equals("")){ %>
 		        	옵션선택	
 			        	<select>
 			        		<option value="default">-[필수] 선택하시오-</option>
 			        		<option value="default">------------------------------</option>
-<%--  			        		<%if(! goodsDetail.getG_option().equals("")){  --%>
-<%--  			        				String[] option = goodsDetail.getG_option().split(",");		 --%>
-			        				
-<%--			        				//System.out.println(Arrays.toString(a));		 --%>
-<%-- 		        				for(String str: option){		 --%>
- <%--			        		%>  --%>
-			        			<option id="option" value="option">
-			        			<%=goodsDetail.getG_option() %> 
-			        			<%if(goodsDetail.getG_amount() == 0){ %>
+  			        		<option id="option" value="option">
+			        			<%=detailList.get(0).getG_option() %> 
+			        			<%if(detailList.get(0).getG_amount() == 0){ %>
 			        			   [품절] 
 			        			<%} %>
-			        			</option>
-<%-- 			        		<%	 --%>
-<%-- 			        				}  		--%>
-<%-- 			        			}				--%>
-<%-- 			        		%> --%>
+		        			</option>
+			        		
 			        	</select>
 		        	<%} %>
-		        	
-		        	
-		        	
 		        	
 		        	<hr>
 		        	
 		        	<!-- 배송(일반배송, 선택배송) 구분 -->
-		        	<!-- 일반 배송일 때, -->
-		        	<%if(goodsDetail.getG_delivery().equals("일반배송") &&  goodsDetail.getG_option() == null){ %>
-		        	<!-- 일반배송+ 옵션 없는 경우----------------------------------------------- -->
+		        	<!-- 일반 배송이고 옵션이 없는 경우 -->
+		        	<%if(detailList.get(0).getG_delivery().equals("일반배송") && detailList.get(0).getG_option().equals("")){ %>
 		        	<table border="1">
 		        	<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
 		        	  <tr>
@@ -181,14 +152,31 @@
 		        	  </tr>
 		        	  <!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
 					  <!-- <tbody id="final_product_info_table"></tbody> -->
-					  <tr>
-					  	<td>
-					  		<%=goodsDetail.getG_name()%> <br>
-					  		[옵션:일반배송]
-					  	</td>
-					  	<td>상품수</td>
-					  	<td>총 가격</td>
-					  </tr>
+					  <%
+						for(int i=0; i<detailList.size(); i++){
+							GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
+					  %>
+						  <tr>
+							  	<td>
+							  		<%=goodsDetail.getG_name()%>
+							  	</td>
+							  	<!-- 상품 수량 -->
+							  	<td>
+							  		<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>" name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1 maxlength="3" size="3" >
+							  		<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus("<%=goodsDetail.getG_delivery()%>");'>
+							  		<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus("<%=goodsDetail.getG_delivery()%>");'>
+							  		<input type="button" id="deleteCell" name="deleteCell" value="x">
+							  	</td>
+							  	<!-- 상품 판매가(할인율 있을때와 없을때와 -->
+							  	<%if(goodsDetail.getG_discount_rate() != 0) {%>
+							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_sale())%>원</td>
+							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_sale()%>">
+							  	<%} else {%>
+							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_origin())%>원</td>
+							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_origin()%>">
+							  	<%}%>
+						 </tr>
+					 <%}%>
 						
 						<tr>
 							<td colspan="3"> TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) </td>
@@ -198,10 +186,8 @@
 		        	
 		    
 		        	<!-- 일반 배송이고 옵션이 있는 경우 --------------------------------------------->
-		        	<%}else if(goodsDetail.getG_delivery().equals("일반배송") && goodsDetail.getG_option() != null){ %>
-		        		<!-- 일반배송+옵션(+추가 금액 없음) -->
+		        	<%}else if(detailList.get(0).getG_delivery().equals("일반배송") && !detailList.get(0).getG_option().equals("")){ %>
 						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
-						
 						 <table border="1">
 							<tr>
 								<td> 상품명 </td>
@@ -214,9 +200,7 @@
 								<td></td>
 								<td></td>
 								<td></td>
-							
 							</tr>
-
 
 							<tr>
 								<td colspan="3"> TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) </td>
@@ -259,17 +243,17 @@
 		        	
 		        	<hr>
 		        	
-		        	<%if(goodsDetail.getG_amount() == 0){ %>
+		        	<%if(detailList.get(0).getG_amount() == 0){ %>
 		        	    <span> 품절 </span>
 		        	    <button type="button"> 관심상품 </button>
 					    <br>
-					    <button type="button"> 카카오톡 상담 </button>
+					    <button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 		        	<%}else{ %>
 		        	    <button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
 						<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
 						<button type="button"> 관심상품 </button>
 						<br>
-						<button type="button"> 카카오톡 상담 </button>
+						<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 		        	<%} %>
 		        
 		        </td>
@@ -308,10 +292,8 @@
 			</ul>
 		</div>
 	
-		<p> <%=goodsDetail.getContent()%> </p>
+		<p> <%=detailList.get(0).getContent()%> </p>
 	</div>
-	
-	<%} // for문 닫음%>
 	
 	<br>
 	<hr>
@@ -534,7 +516,7 @@
 	var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
 	var g_mileage = document.getElementById('g_mileage').value;				//적립금
 
-	
+
 	//주문 전 수량 변경시 함수(키보드로 입력시)----------------------------------------------------------
 	function amountChange(delivery_method){
 		
@@ -606,6 +588,11 @@
 	//사용자가 '+'를 눌렸을시
 	function plus(delivery_method){
 		
+		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
+		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
+		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
+		var g_mileage = document.getElementById('g_mileage').value;				//적립금
+		
 		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
 		
 		//delivery_method 인수로 들어온 값에 따라 new_g_amount 값 바꾸기
@@ -623,7 +610,6 @@
 			//final_total_amount 태그 제어
 			final_total_amount += Number("1");
 			$('#final_total_amount').text(final_total_amount);
-			
 			
 			//만약 할인율(g_discount_rate)이 0이 아니면
 			if(g_discount_rate != 0) {
@@ -651,6 +637,8 @@
 			}
 			//할인율이 0이면
 			else{
+				
+				alert(g_price_origin);
 				//계산된 값 span 태그에 넣기
 				total_price += Number(g_price_origin);
 				
@@ -858,11 +846,15 @@
         var offset = $("#menu" + seq).offset();
         $('html, body').animate({scrollTop : offset.top}, 300);
     }
+							  	
+	// 카카오 채팅 상담 -----------------------------------------------------------------------------------
+	function kakaoChat() {
+		var popupX = (window.screen.width / 6) - (200 / 2); 
+		var popupY = (window.screen.height / 4) - (300 / 2);  
+		window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
+	}
 	
 	
 </script>
-
-
-
 
 </html>
