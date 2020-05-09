@@ -162,7 +162,7 @@
 							  	</td>
 							  	<!-- 상품 수량 -->
 							  	<td>
-							  		<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>" name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1 maxlength="3" size="3" >
+							  		<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>" name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1 maxlength="3" size="3" onkeyup='amountChange("<%=goodsDetail.getG_delivery()%>");'>
 							  		<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus("<%=goodsDetail.getG_delivery()%>");'>
 							  		<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus("<%=goodsDetail.getG_delivery()%>");'>
 							  		<!-- <input type="button" id="deleteCell" name="deleteCell" value="x" onclick='delCell(this,"<%=goodsDetail.getG_delivery()%>");'>  -->
