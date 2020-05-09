@@ -311,7 +311,7 @@
 		<p> <%=goodsDetail.getContent()%> </p>
 	</div>
 	
-	<%} %>
+	<%} // for문 닫음%>
 	
 	<br>
 	<hr>
