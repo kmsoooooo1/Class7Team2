@@ -165,23 +165,32 @@
 							  		<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>" name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1 maxlength="3" size="3" >
 							  		<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus("<%=goodsDetail.getG_delivery()%>");'>
 							  		<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus("<%=goodsDetail.getG_delivery()%>");'>
-							  		<input type="button" id="deleteCell" name="deleteCell" value="x">
+							  		<!-- <input type="button" id="deleteCell" name="deleteCell" value="x" onclick='delCell(this,"<%=goodsDetail.getG_delivery()%>");'>  -->
 							  	</td>
 							  	<!-- 상품 판매가(할인율 있을때와 없을때와 -->
 							  	<%if(goodsDetail.getG_discount_rate() != 0) {%>
-							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_sale())%>원</td>
+							  		<td>
+							  			<span id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_sale())%>원</span>
+							  			<br>
+							  			(적 <span id="total_product_mileage_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_mileage())%>원</span>)
+							  		</td>
 							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_sale()%>">
-							  	<%} else {%>
-							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_origin())%>원</td>
+							  		
+							  	<%} else { // 할인율 없을 때%>
+							  		<td>
+							  			<span id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_origin())%>원</span>
+							  			<br>
+							  			(적 <span id="total_product_mileage_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_mileage())%>원</span>)
+							  		</td>
 							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_origin()%>">
 							  	<%}%>
 						 </tr>
-					 <%}%>
+					
 						
 						<tr>
 							<td colspan="3"> TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) </td>
 						</tr>
-		        	
+		        	<%} // for문 닫기 %>
 		        	</table>
 		        	
 		    
@@ -398,17 +407,6 @@
 	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
 	
 	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
-	
-	
-	// 일반 배송(배송방법 없음) + 옵션선택 있는 경우------------------------------------------------
-	// 필요한 데이터 : 상품수, 가격, TOTAL
-	
-	
-
-
-
-
-	
 	
 	
 	
@@ -638,7 +636,7 @@
 			//할인율이 0이면
 			else{
 				
-				alert(g_price_origin);
+				
 				//계산된 값 span 태그에 넣기
 				total_price += Number(g_price_origin);
 				
@@ -665,6 +663,12 @@
 	
 	//사용자가 '-'를 눌렸을시
 	function minus(delivery_method){
+		
+		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
+		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
+		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
+		var g_mileage = document.getElementById('g_mileage').value;				//적립금
+		
 		
 		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
 		
@@ -733,6 +737,12 @@
 	
 	// 사용자가 상품정보 제거했을 시----------------------------------------------
 	function delCell(obj, delivery_method){
+		
+		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
+		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
+		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
+		var g_mileage = document.getElementById('g_mileage').value;				//적립금
+		
 		
 		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
 		
