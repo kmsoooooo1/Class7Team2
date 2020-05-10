@@ -656,75 +656,46 @@
 		//delivery_method 인수로 들어온 값에 따라 new_g_amount 값 바꾸기
 		var new_g_amount = document.getElementById('g_amount_' + delivery_method).value;	//사용자가 새로 수정하는 수량
 		
-		//여기부터 다시 하기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
+		
 		//만약 할인율(a_discount_rate)이 0이 아니면
 		if(g_discount_rate != 0){
 			//계산된 값 span 태그에 넣기, 단 옵션이 고속버스 일때는 14000을 따로 더해야한다.
+			if(delivery_method == '고속버스'){
+				total_price = Number((g_price_sale * new_g_amount) + 14000);
+			}else{
+				total_price = Number(g_price_sale * new_g_amount);
+			}
+			
+			//각 tr의 총 가격 span 태그에 값 넣기
+			document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			//input hidden 값에 수정된 총 가격 넣기
+			$('#total_product_price_' + delivery_method + "_input").val(total_price);
+			
+			//최종 마일리지 계산하기 
+			final_mileage = g_mileage * new_g_amount;
+			//계산된 마일리지 span 태그에 넣기
+			document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			
 		}
-		
-		
-		
-		//사용자가 키보드로 input에 0보다 작은수를 입력했을시
-		if(new_g_amount < 1) {
-			alert("상품의 최소 구매량은 1개입니다.");
-			new_g_amount = parseInt("1");
-			$("#g_amount_" + delivery_method).val(new_g_amount);
-		}else{
-			//final_total_amount 태그 제어
-			final_total_amount = Number(new_g_amount);
-			$('#final_total_amount').text(final_total_amount);
+		//할인율이 0이면
+		else{
+			//계산된 값 span 태그에 넣기, 단 옵션이 고속버스 일때는 14000을 따로 더해야한다.
+			if(delivery_method == '고속버스'){
+				total_price = Number((g_price_origin * new_g_amount) + 14000);
+			}else{
+				total_price = Number(g_price_origin * new_g_amount);
+			}
 			
-			//만약 할인율(g_discount_rate)이 0이 아니면
-			if(g_discount_rate != 0){
-				
-				//계산된 값 span 태그에 넣기
-				total_price += Number(g_price_sale);
-				
-				//각 tr의 총 가격 span 태그에 값 넣기
-				document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-				//input hidden 값에 수정된 총 가격 넣기
-				$('#total_product_price_' + delivery_method + "_input").val(total_price);
-				
-				//최종 마일리지 계산하기 
-				final_mileage = g_mileage * new_g_amount;
-				
-				//계산된 마일리지 span 태그에 넣기
-				document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-				
-				
-				//final_total_price 태그 제어
-				//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 저장하기, 만약 처음이면 0에 추가하기
-				final_total_price += Number(g_price_sale);
-				
-				//태그에 추가하기
-				$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-				
-			}
-			// 할인율 0이면
-			else{
-				//계산된 값 span 태그에 넣기
-				total_price += Number(g_price_origin);
-				
-				//각 tr의 총 가격 span 태그에 값 넣기
-				document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-				//input hidden 값에 수정된 총 가격 넣기
-				$('#total_product_price_' + delivery_method + "_input").val(total_price);	
-				
-				//최종 마일리지 계산하기 
-				final_mileage = g_mileage * new_g_amount;
-				//계산된 마일리지 span 태그에 넣기
-				document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-				
-				
-				
-				//final_total_price 태그 제어
-				//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 저장하기, 만약 처음이면 0에 추가하기
-				final_total_price += Number(g_price_origin);
-				//태그에 추가하기
-				$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-				
-			}
+			//각 tr의 총 가격 span 태그에 값 넣기
+			document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			//input hidden 값에 수정된 총 가격 넣기
+			$('#total_product_price_' + delivery_method + "_input").val(total_price);	
+			
+			//최종 마일리지 계산하기 
+			final_mileage = g_mileage * new_g_amount;
+			//계산된 마일리지 span 태그에 넣기
+			document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			
 		}
 		
 	}
