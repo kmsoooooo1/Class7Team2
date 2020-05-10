@@ -122,23 +122,6 @@
 		        	
 		        	<hr>
 		        	
-		        	<!-- 옵션을 셀렉트박스로 가져오기 -->
-		        	<%if(!detailList.get(0).getG_option().equals("")){ %>
-		        	옵션선택	
-			        	<select>
-			        		<option value="default">-[필수] 선택하시오-</option>
-			        		<option value="default">------------------------------</option>
-  			        		<option id="option" value="option">
-			        			<%=detailList.get(0).getG_option() %> 
-			        			<%if(detailList.get(0).getG_amount() == 0){ %>
-			        			   [품절] 
-			        			<%} %>
-		        			</option>
-			        		
-			        	</select>
-		        	<%} %>
-		        	
-		        	<hr>
 		        	
 		        	<!-- 배송(일반배송, 선택배송) 구분 -->
 		        	<!-- 일반 배송이고 옵션이 없는 경우 -->
@@ -204,6 +187,31 @@
 		    
 		        	<!-- 일반 배송이고 옵션이 있는 경우 --------------------------------------------->
 		        	<%}else if(detailList.get(0).getG_delivery().equals("일반배송") && !detailList.get(0).getG_option().equals("")){ %>
+						<!-- 옵션을 셀렉트박스로 가져오기 -->
+		        
+			        	옵션선택	
+				        	<select>
+				        		<option value="default">-[필수] 선택하시오-</option>
+				        		<option value="default">------------------------------</option>
+				        		
+				        	<%for(int i=0; i<detailList.size(); i++){ 
+				        		GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
+				        	%>
+	  			        		<option id="option" value="option">
+				        			<%=goodsDetail.getG_option() %> 
+				        			<%if(goodsDetail.getG_amount() == 0){ %>
+				        			   [품절] 
+				        			<%} %>
+				        			<%if(goodsDetail.getG_option_price() != 0){ %>
+				        				(+<%=formatter.format(goodsDetail.getG_option_price())%>원)
+				        			<%} %>
+			        			</option>
+				        	<%} //for문 닫음 %>	
+				        	</select>
+			        	
+			        	
+			        	<hr>
+						
 						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
 						 <table border="1">
 							<tr>
