@@ -318,7 +318,6 @@ public class GoodsDAO {
 			
 			// 상품이 있을때마다
 			while(rs.next()){
-				System.out.println("99999");
 				GoodsDTO gdto = new GoodsDTO();
 				
 				gdto.setCategory(rs.getString("category"));
