@@ -554,6 +554,81 @@
 		//추가된 배송방법 selectedArray에 추가하기
 		selectedArray.push(delivery_method);
 		
+		//----- 키보드로 주문수량 변경시 모든 옵션의 총 수량 제어 ---------------------------------------------------
+		
+		//사용자가 수량 input 태그에 마우스를 클릭했을시 입력되어있던 수량을 저장하기
+		$('#g_amount_' + delivery_method).on('focusin', function(){
+			//console.log("저장된 value : " + $(this).val());
+			
+			//사용자가 키보드로 입력하기 전 수량
+			$(this).data('val', $(this).val()); 
+ 		});
+		
+		//사용자가 수량 input 태그에 키보드로 새로운 수량을 입력했을시
+		$('#g_amount_' + delivery_method).on('change', function(){
+			final_total_amount = document.getElementById('final_total_amount').innerHTML; //총 수량 (span 태그 안에 있는 값) 가져오기
+			final_total_amount = Number(final_total_amount); //문자열을 숫자로 형변환
+			
+			var previousAmount = $(this).data('val'); 	//사용자가 키보드로 입력하기 전 수량
+		    var currentAmount = $(this).val();			//사용자가 키보드로 입력 한 수량
+			
+		  //사용자가 키보드로 input에 0보다 작은수를 입력했을시
+		  if(currentAmount < 1){
+			  alert("상품의 최소 구매량은 1개입니다.");
+			  currentAmount = parseInt("1");
+			  $("#g_amount_" + delivery_method).val(currentAmount);
+		  }else{
+			//변경 전 수량이 변경 후 수량보다 클때
+			if(previousAmount > currentAmount){
+				//final_total_amount 태그 제어
+				final_total_amount -= (previousAmount - currentAmount);
+				
+				//만약 할인율이 0이 아니면
+				if(g_discount_rate != 0){
+					//final_total_price 태그 제어
+		   			final_total_price -= (g_price_sale * (previousAmount - currentAmount));
+
+					//태그에 추가하기
+					$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+				}
+				//할인율이 0이면
+				else{
+					//final_total_price 태그 제어
+		   			final_total_price -= (g_price_origin * (previousAmount - currentAmount));
+
+					//태그에 추가하기
+					$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+				}
+				
+			}
+			//변경 전 수량이 변경 후 수량보다 작을때
+			else if(previousAmount < currentAmount){
+				//final_total_amount 태그 제어
+				final_total_amount += (currentAmount - previousAmount);
+				
+				//만약 할인율이 0이 아니면
+				if(g_discount_rate != 0){
+					//final_total_price 태그 제어
+		   			final_total_price += (g_price_sale * (currentAmount - previousAmount));
+
+					//태그에 추가하기
+					$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+				}
+				//할인율이 0이면
+				else{
+					//final_total_price 태그 제어
+		   			final_total_price += (g_price_origin * (currentAmount - previousAmount));
+
+					//태그에 추가하기
+					$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+				}
+			}
+			
+		  }
+		    
+		  $('#final_total_amount').text(final_total_amount);
+		    
+		});
 		
 	}
 
@@ -566,7 +641,7 @@
 	var g_mileage = document.getElementById('g_mileage').value;				//적립금
 
 
-	//주문 전 수량 변경시 함수(키보드로 입력시)----------------------------------------------------------
+	//주문수량 키보드로 변경시 tr한줄의 총 금액과 마일리지 및 모든 옵션의 총 금액 제어 ----------------------------------------------------------
 	function amountChange(delivery_method){
 		
 		var delivery_method = document.getElementById('delivery_method').value;	//배송방법
@@ -580,6 +655,15 @@
 	
 		//delivery_method 인수로 들어온 값에 따라 new_g_amount 값 바꾸기
 		var new_g_amount = document.getElementById('g_amount_' + delivery_method).value;	//사용자가 새로 수정하는 수량
+		
+		//여기부터 다시 하기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
+		//만약 할인율(a_discount_rate)이 0이 아니면
+		if(g_discount_rate != 0){
+			//계산된 값 span 태그에 넣기, 단 옵션이 고속버스 일때는 14000을 따로 더해야한다.
+			
+		}
+		
+		
 		
 		//사용자가 키보드로 input에 0보다 작은수를 입력했을시
 		if(new_g_amount < 1) {
