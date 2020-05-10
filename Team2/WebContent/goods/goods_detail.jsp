@@ -191,19 +191,14 @@
 						<!-- 옵션을 셀렉트박스로 가져오기 -->
 		        
 			        	옵션선택	
-				        	<select>
+				        	<select name="option" id="option">
 				        		<option value="default">-[필수] 선택하시오-</option>
 				        		<option value="default">------------------------------</option>
-				        		<!-- 상품 옵션값들 나타내기 -->
-				        		
-				        		<c:forEach var="list" items="${detailList}">
-				        			 <option>${list.g_option} <br></option>
-					        	</c:forEach>
-				        		
-				        	
+<!-- 				        		상품 옵션값들 나타내기 -->
+				        		<option>test</option>
 				        	</select>
-			        	
-			        	
+			        		
+			        		
 			        	<hr>
 						
 						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
