@@ -3,6 +3,7 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -193,26 +194,10 @@
 				        	<select>
 				        		<option value="default">-[필수] 선택하시오-</option>
 				        		<option value="default">------------------------------</option>
+				        		<!-- 상품 옵션값들 나타내기 -->
 				        		
-				        	
-					        	<%for(int i=0; i<detailList.size(); i++){ 
-					        		GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
-					        		
-					        		
-					        	%>
-					        	
-				        			<%=goodsDetail.getG_option() %> 
-				        			<%if(goodsDetail.getG_amount() == 0){ %>
-				        			   [품절] 
-				        			<%} %>
-				        			<%if(goodsDetail.getG_option_price() != 0){ %>
-				        				(+<%=formatter.format(goodsDetail.getG_option_price())%>원)
-				        			<%} %>
-			        			
-				        		<%} //for문 닫음 %>	
-				        		
-				        		<c:forEach>
-				        			<option></option>
+				        		<c:forEach var="list" items="${detailList}">
+				        			 <option>${list.g_option} <br></option>
 					        	</c:forEach>
 				        		
 				        	
