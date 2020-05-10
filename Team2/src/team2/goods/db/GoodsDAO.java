@@ -276,17 +276,25 @@ public class GoodsDAO {
 
 			if(category.equals("먹이") && sub_category.equals("all")){
 				
-				sql="select * from team2_goods where category='먹이' group by g_code order by num desc";
+				sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,max(g_amount) as g_amount,"
+						+ "g_price_origin,g_discount_rate,g_price_sale,g_mileage,g_delivery,g_option,content,g_view_count,"
+						+ "date from team2_goods where category='먹이' group by g_code order by num desc";
 				
 			}else if(category.equals("먹이") && sub_category != null){
 				
-				sql="select * from team2_goods where category='먹이' and sub_category=? group by g_code order by num desc";
+				sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,max(g_amount) as g_amount,"
+						+ "g_price_origin,g_discount_rate,g_price_sale,g_mileage,g_delivery,g_option,content,g_view_count,"
+						+ "date from team2_goods where category='먹이' and sub_category=?' group by g_code order by num desc";
 				
 			}else if(category.equals("사육용품") && sub_category.equals("all")){
-				sql="select * from team2_goods where category='사육용품' group by g_code order by num desc";
+				sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,max(g_amount) as g_amount,"
+						+ "g_price_origin,g_discount_rate,g_price_sale,g_mileage,g_delivery,g_option,content,g_view_count,"
+						+ "date from team2_goods where category='사육용품' group by g_code order by num desc";
 				
 			}else{
-				sql="select * from team2_goods where category='사육용품' and sub_category=? group by g_code order by num desc";
+				sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,max(g_amount) as g_amount,"
+						+ "g_price_origin,g_discount_rate,g_price_sale,g_mileage,g_delivery,g_option,content,g_view_count,"
+						+ "date from team2_goods where category='사육용품' and sub_category=? group by g_code order by num desc";
 				
 			} 
 			
