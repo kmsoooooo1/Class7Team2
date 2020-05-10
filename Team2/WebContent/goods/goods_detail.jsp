@@ -194,10 +194,13 @@
 				        		<option value="default">-[필수] 선택하시오-</option>
 				        		<option value="default">------------------------------</option>
 				        		
-				        	<%for(int i=0; i<detailList.size(); i++){ 
-				        		GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
-				        	%>
-	  			        		<option id="option" value="option">
+				        	
+					        	<%for(int i=0; i<detailList.size(); i++){ 
+					        		GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
+					        		
+					        		
+					        	%>
+					        	
 				        			<%=goodsDetail.getG_option() %> 
 				        			<%if(goodsDetail.getG_amount() == 0){ %>
 				        			   [품절] 
@@ -205,8 +208,14 @@
 				        			<%if(goodsDetail.getG_option_price() != 0){ %>
 				        				(+<%=formatter.format(goodsDetail.getG_option_price())%>원)
 				        			<%} %>
-			        			</option>
-				        	<%} //for문 닫음 %>	
+			        			
+				        		<%} //for문 닫음 %>	
+				        		
+				        		<c:forEach>
+				        			<option></option>
+					        	</c:forEach>
+				        		
+				        	
 				        	</select>
 			        	
 			        	
