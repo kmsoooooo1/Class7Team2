@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
+
+import team2.board.db.ProductDTO;
 
 public class GoodsDAO {
 
@@ -284,15 +287,15 @@ public class GoodsDAO {
 			else if(category.equals("먹이")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+						+ "max(g_amount) as g_amount from team2_goods where category='먹이' ");
 				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num desc");
+					SQL.append("group by g_code order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
-					SQL.append("AND sub_category = ? order by num desc");
+					SQL.append("AND sub_category = ? group by g_code order by num desc");
 				}
 			}
 			// sub_category_index는 메뉴에서 다루지 않음.
@@ -441,7 +444,36 @@ public class GoodsDAO {
 		return detailList;
 	}//getGoodsDetail(g_code)
 	
-	
+	public List<ProductDTO> getKeyword(String keyword){
+		List<ProductDTO> list = new ArrayList<>();
+		
+		sql = "select g_code, category, sub_category, sub_category_index, g_name, g_thumbnail from team2_goods where g_name like '%?%'";
+		ProductDTO dto = null;
+		
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				dto = new ProductDTO(rs.getString("g_code"));
+				dto.setCategory(rs.getString("category"));
+				dto.setSub_category(rs.getString("sub_category"));
+				dto.setSub_category_idx(rs.getString("sub_category_index"));
+				dto.setName(rs.getString("g_name"));
+				dto.setImg_src(rs.getString("g_thumbnail"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	
 	

@@ -21,33 +21,45 @@
 	
 	String product = request.getParameter("product");
 	String cate = request.getParameter("cate");
-	String animal_kind = request.getParameter("animal_kind");
+	String kind = request.getParameter("kind");
+	
+// 	String keyword = request.getParameter("keyword");
 	
 	List<ProductDTO> list = null;
 	GoodsDAO gdao = new GoodsDAO();
 	AnimalDAO adao = new AnimalDAO();
 	if(product==null){
 		//	전체상품 검색
-		list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));
+// 		if(keyword==""){
+			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));
+// 		}else{
+			
+// 		}
 	}else if(product.equals("ANIMAL")){
 		//	animal 검색
 		if(cate==null){
 			list = PDAO.getProduct(null, adao.getAnimalList("all", "", ""));
-		}else if(cate!=null && animal_kind==null){
+		}else if(cate!=null && kind==null){
 			list = PDAO.getProduct(null, adao.getAnimalList(cate, "all", ""));
-		}else if(cate!= null && animal_kind!=null){
-			list = PDAO.getProduct(null, adao.getAnimalList(cate, animal_kind, "all"));
+		}else if(cate!= null && kind!=null){
+			list = PDAO.getProduct(null, adao.getAnimalList(cate, kind, "all"));
 		}
 	}else if(product.equals("GOODS")){
 		//	goods 검색
-		list = PDAO.getProduct(gdao.GoodsList("all", "", ""),null);
+		if(cate==null){
+			list = PDAO.getProduct(gdao.GoodsList("all", "", ""),null);
+		}else if(cate!=null && kind==null){
+			list = PDAO.getProduct(gdao.GoodsList(cate, "all", ""), null);
+		}else if(cate!=null && kind!=null){
+			list = PDAO.getProduct(gdao.GoodsList(cate, kind, "all"), null);
+		}
 	}
 	gdao.closeDB();
 	adao.closeDB();
 	
 	System.out.println("product : " + product);
 	System.out.println("cate : " + cate);
-	System.out.println("animal_kind : " + animal_kind);
+	System.out.println("kind : " + kind);
 	
 	String[] cList = {};
 		
@@ -79,19 +91,23 @@
 		  }%>
 		</select>
 		<%
-		  if(product!=null && product.equals("ANIMAL") && cate!=null){
+		  if(product!=null && cate!=null){
 		  	if(cate.equals("파충류")){
 		  		cList = cset.ANIMAL_R;
 		  	}else if(cate.equals("양서류")){
 		  		cList = cset.ANIMAL_A;
+		  	}else if(cate.equals("먹이")){
+		  		cList = cset.GOODS_F;
+		  	}else if(cate.equals("사육용품")){
+		  		cList = cset.GOODS_B;
 		  	}
 		  }
 		  %>
-		  	<select name="animal_kind" onchange="return aChange();">
+		  	<select name="kind" onchange="return kChange();">
 		  		<option value="-">전체</option>
   		<%if(cList.length>0){
   			for(String str:cList){ %>
-  			<option value=<%=str %> <%if(animal_kind!=null && str.equals(animal_kind)){ %> selected="selected" <%} %>><%=str %></option>
+  			<option value=<%=str %> <%if(kind!=null && str.equals(kind)){ %> selected="selected" <%} %>><%=str %></option>
   		<%	}
 		  } %>
 		  	</select>
@@ -131,41 +147,38 @@
 <script type="text/javascript">
 	var Product = document.fr.product;
 	var Cate = document.fr.cate;
-	var Animal = document.fr.animal_kind;
+	var kind = document.fr.kind;
 <%if(product==null){%>
 	Cate.style.display = "none";
-	Animal.style.display = "none";
+	kind.style.display = "none";
 <%}%>
 <%if(cate==null){%>
-	Animal.style.display = "none";
-<%}%>
-<%if(product!=null && product.equals("GOODS")){%>
-	Animal.style.display = "none";
+	kind.style.display = "none";
 <%}%>
 	
 	function pChange(){
 		if(Product.value=="-"){
-			Product.value= "all";
+			Product.value= "";
 			Cate.value = "";
-			Animal.value = "";
+			kind.value = "";
 		}else{
 			Cate.value = "";
-			Animal.value = "";
+			kind.value = "";
 		}
 		document.fr.submit();
 	}
 	function cChange(){
 		if(Cate.value=="-"){
 			Cate.value = "";
-			Animal.value = "";
+			kind.value = "";
 		}else{
-			Animal.value="";
+			kind.value="";
 		}
 		document.fr.submit();
 	}
-	function aChange(){
-		if(Animal.value=="-"){
-			Animal.value="";
+	function kChange(){
+		if(kind.value=="-"){
+			kind.value="";
 		}
 		document.fr.submit();
 	}

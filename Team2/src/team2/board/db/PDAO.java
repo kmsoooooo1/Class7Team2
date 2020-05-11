@@ -26,4 +26,8 @@ public class PDAO {
 		return list;
 	}
 	
+//	public static List<ProductDTO> getProduct(List<ProductDTO>... list){
+//		
+//	}
+	
 }
