@@ -19,11 +19,11 @@
   text-decoration: none;
 }
 
-#header_menu li a:hover, .dropdown:hover .dropbtn {
+ .dropdown a:hover, .dropdown:hover .dropbtn {
   background-color: red;
 }
 
-#header_menu li.dropdown {
+ .dropdown {
   display: inline-block;
 }
 
