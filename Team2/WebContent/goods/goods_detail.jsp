@@ -87,6 +87,7 @@
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 		  
+		  
 			<table border="0">
 		     <tr>
 		     	<td> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </td>
@@ -125,7 +126,9 @@
 <!--  							} -->
 <!--  						} -->
 <%-- 					%> --%>
-					
+				
+					<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
+				
 					<h4> <%=detailList.get(0).getG_name() %> </h4>
 				
 		        	<hr>
@@ -486,7 +489,7 @@
 <script type="text/javascript">
 
 	//상품의 배송방법이 일반배송이고 옵션이 있는경우
-	if($('#g_delivery').val() == '일반배송' && $('#g_option').val()) { 
+	//if($('#g_delivery').val() == '일반배송' && $('#g_option').val()) { 
 
 		var total_price; //추가되는 tr의 총 판매가
 		var final_total_price = 0; // 선택배송이고, 최종 total 판매가 계산하기 위한 변수
@@ -508,6 +511,8 @@
 		
 		var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
 		
+		
+		// 사용자가 옵션을 선택했을 시-----------------------------------------------------------------
 		function changeOptionMethod(){
 			
 			var option_method = document.getElementById('option_method').value; // 선택한 옵션
@@ -516,7 +521,7 @@
 			var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
 			var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
 			var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
-			var g_option_price = document.getElementById('g_option_price').innerHTML;
+			//var g_option_price = document.getElementById('g_option_price').innerHTML;
 			
 			
 			// 만약 추가 가격이 있는 옵션을 선택하면 판매가격에 g_option_price에 저장된 값 저장하기
@@ -563,7 +568,7 @@
 	
 		}
 	
-	}
+	//}
 	
 	
 	//사용자가 배송방법을 선택했을시-------------------------------------------
