@@ -132,7 +132,7 @@ public class MemberFrontController extends HttpServlet{
 		// 회원 목록페이지 이동	
 		}else if(command.equals("/MemberList.me")){
 			System.out.println("/MemberList.me 주소 호출");
-			action = new MemberInfoAction();
+			action = new MemberListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
