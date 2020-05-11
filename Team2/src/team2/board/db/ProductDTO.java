@@ -16,6 +16,11 @@ public class ProductDTO {
 	private String name;
 	private String img_src;
 	
+	public ProductDTO(String p_code) {
+		// TODO Auto-generated constructor stub
+		this.p_code = p_code;
+		getProduct(p_code);
+	}
 	
 	public String getP_code() {
 		return p_code;
@@ -63,19 +68,11 @@ public class ProductDTO {
 
 	public void setImg_src(String img_src) {
 		this.img_src = img_src;
-	}
-
-	public ProductDTO(String p_code) {
-		// TODO Auto-generated constructor stub
-		this.p_code = p_code;
-		getProduct(p_code);
-	}
+	}	
 	
 	private void getProduct(String p_code){
 		char c = p_code.charAt(0);
-		System.out.println("c : " + c);
 		if(c=='a'){
-			System.out.println("Animals 검색");
 			AnimalDAO dao = new AnimalDAO();
 			AnimalDTO dto = dao.getAnimalDetail(p_code);
 			dao.closeDB();
@@ -87,7 +84,6 @@ public class ProductDTO {
 				this.img_src = dto.getA_thumbnail();
 			}
 		}else if(c=='g'){
-			System.out.println("Goods 검색");
 			GoodsDAO dao = new GoodsDAO();
 			List<GoodsDTO> list= dao.getGoodsDetailList(p_code);
 			GoodsDTO dto = list.get(0);
