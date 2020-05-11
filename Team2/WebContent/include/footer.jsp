@@ -5,33 +5,51 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
 </head>
 <body>
-<div id="footer_inner">
-	<hr>
-	<div class="footer_nav_wrap">
-		<ul>
-			<li>회사소개</li>
-			<li>이용약관</li>
-			<li>개인정보취급방침</li>
-			<li>이용안내</li>
-			<li>제휴문의</li>
-		</ul>
-		<ul>
-			<li>Instagram</li>
-			<li>Facebook</li>
-			<li>Youtube</li>
-		</ul>
-	</div>
-	<div>
-		<ul>
-			<li>COMPANY Team2</li>
-			<li>ADDRESS 부산광역시 부산진구 </li>
-			<li>TEL. 010-0000-0000</li>
-			<li>CONTACT kmsoooooo1@gmail.com</li>
-		</ul>
-		COPYRIGHT Team2 ALL RIGHTS RESERVED.
-	</div>
-</div>
+<footer id="footer">
+ <ul class="intro">
+  <li><a href="#">회사소개</a></li>
+  <li><a href="#">이용약관</a></li>
+  <li><a href="#">개인정보취급방침</a></li>
+  <li><a href="#">이용안내</a></li>
+  <li><a href="#">제휴문의</a></li>
+ </ul>
+ <ul class="icons">
+  <li>
+   <a href="https://www.instagram.com/accounts/login/?hl=ko" target="_blank">
+    <i class="fa fa-instagram" style="font-size: 24px"></i>
+   </a>
+  </li>
+  <li> 
+   <a href="https://ko-kr.facebook.com/" target="_blank">
+    <i class="fa fa-facebook-official" style="font-size: 24px"></i>
+   </a>
+  </li>
+  <li>
+   <a href="https://www.youtube.com/" target="_blank">
+    <i class="fa fa-youtube-play" style="font-size: 24px"></i>
+   </a>
+  </li>
+  <li>
+   <a href="https://twitter.com/?lang=ko" target="_blank">
+    <i class="fa fa-twitter" style="font-size: 24px"></i>
+   </a>
+  </li>
+ </ul>
+<div>
+ <ul class="copyright">
+  <li>COMPANY Team2</li>
+  <li>ADDRESS 부산광역시 부산진구 </li>
+  <li>TEL. 010-0000-0000</li>
+  <li>CONTACT kmsoooooo1@gmail.com</li>
+ </ul>
+	COPYRIGHT Team2 ALL RIGHTS RESERVED.
+ </div>
+ </footer>
+ 
 </body>
 </html>
