@@ -5,31 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 로그인페이지</title>
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
 </head>
 <body>
 
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-
-	<h2> 회원 로그인 </h2>
-	<fieldset>
-		<legend>로그인</legend>
-		<form action="./MemberLoginAction.me" method="post">
-			<table border="1">
-				<tr>
-				 <td>아이디</td><td><input type="text" name="id"></td>
-				</tr>
-				<tr>
-				 <td>비밀번호</td><td><input type="password" name="pass"></td>
-				</tr>
-			</table>
+	 <form action="./MemberLoginAction.me" method="post" class="box">
+	  <h1>로그인</h1>
+	   <input type="text" name="id" placeholder="아이디">
+	   <input type="password" name="pass" placeholder="비밀번호">
 			<input type="submit" value="로그인">
 			<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me'">
 			<input type="button" value="아이디 찾기" onclick="location.href='./MemberIDFind.me'">
 				/
 			<input type="button" value="비밀번호 찾기" onclick="location.href='./MemberPWFind.me'">
 		</form>
-	</fieldset>
+	
 	
 	
 	<!-- FOOTER -->
