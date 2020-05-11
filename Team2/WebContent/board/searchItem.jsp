@@ -40,7 +40,7 @@
 		}
 	}else if(product.equals("GOODS")){
 		//	goods 검색
-		list = PDAO.getProduct(gdao.GoodsList(cate, "", ""),null);
+		list = PDAO.getProduct(gdao.GoodsList("all", "", ""),null);
 	}
 	gdao.closeDB();
 	adao.closeDB();
