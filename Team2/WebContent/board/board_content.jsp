@@ -130,7 +130,7 @@
 						작성일자 : <%=dto.getC_regdate() %>	
 					
 					
-					<button onclick="deleteComment(<%=cnt%>);">삭제</button>
+					<button onclick="deleteComment(<%=dto.getC_idx()%>);">삭제</button>
 				<%if(id2!=null && id2.equals(dto.getC_id())){ %>
 					<button onclick="updateComment(<%=cnt %>)">수정</button>
 				<%} %>
