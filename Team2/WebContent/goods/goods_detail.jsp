@@ -89,12 +89,31 @@
 		     	<td> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </td>
 		        <td>
 		        	<!-- 상품명 -->
-		        	<%if(detailList.get(0).getG_amount() == 0){%>
-		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
-		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
-		        	<%}else{ %>
-		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
-		        	<%} %>    
+<%-- 		        	<%if(detailList.get(0).getG_amount() == 0){%> --%>
+<!-- 		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span> -->
+<%-- 		        	  <h4> <%=detailList.get(0).getG_name() %> </h4> --%>
+<%-- 		        	<%}else{ %> --%>
+<%-- 		        	  <h4> <%=detailList.get(0).getG_name() %> </h4> --%>
+<%-- 		        	<%} %>     --%>
+
+					<%
+					for(int i=0; i<detailList.size(); i++){
+						GoodsDTO gdto = detailList.get(i);
+						
+						if(gdto.getG_amount() == 0){ 
+					%>
+						<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
+						<h4> <%=detailList.get(0).getG_name() %> </h4>
+					<%
+						}else{
+					%>
+						<h4> <%=detailList.get(0).getG_name() %> </h4>
+					<% 		
+						} 
+					}	
+					%>
+		        	
+		        	
 		        	
 		        	<hr>
 		        	
@@ -193,15 +212,26 @@
 						<!-- 옵션을 셀렉트박스로 가져오기 -->
 		        		<!-- 미완성!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 			        	옵션선택	
-				        	<select name="option" id="option">
-				        		<option value="default">-[필수] 선택하시오-</option>
-				        		<option value="default">------------------------------</option>
-<!-- 				        		상품 옵션값들 나타내기 -->
-				        		<option>test</option>
-				        	</select>
-			        		
-			        		
-			        	<hr>
+				        <!-- 상품 옵션값들 나타내기 -->
+
+						  <select>
+						  	<option value="default">-[필수] 선택하시오-</option>
+				        	<option value="default">------------------------------</option>
+			        		<c:forEach var="detailList" items="${detailList }">
+			        			
+			        			<option value="${detailList.g_option}">
+			        			${detailList.g_option} 
+			        			  <c:if test="${detailList.g_amount eq 0}">
+			        			    [품절]
+			        			  </c:if>  
+			        			  <c:if test="${detailList.g_option_price ne 0}">
+			        			    (+${detailList.g_option_price}원)
+			        			  </c:if>
+			        			</option>
+			        		  
+			        		</c:forEach>
+
+				      <hr>
 						
 						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
 						 <table border="1">

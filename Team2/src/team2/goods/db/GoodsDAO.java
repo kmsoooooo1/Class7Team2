@@ -284,7 +284,7 @@ public class GoodsDAO {
 				
 				sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,max(g_amount) as g_amount,"
 						+ "g_price_origin,g_discount_rate,g_price_sale,g_mileage,g_delivery,g_option,content,g_view_count,"
-						+ "date from team2_goods where category='먹이' and sub_category=?' group by g_code order by num desc";
+						+ "date from team2_goods where category='먹이' and sub_category=? group by g_code order by num desc";
 				
 			}else if(category.equals("사육용품") && sub_category.equals("all")){
 				sql="select num,category,sub_category,sub_category_index,g_name,g_code,g_thumbnail,max(g_amount) as g_amount,"
@@ -382,12 +382,12 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
-			sql="select * from team2_goods where g_code = ? order by g_amount desc";
+			sql="select * from team2_goods where g_code = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				GoodsDTO gdto = new GoodsDTO();
 				
 				gdto = new GoodsDTO();
