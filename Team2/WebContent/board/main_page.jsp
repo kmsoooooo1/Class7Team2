@@ -12,9 +12,9 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
-	<ul>
-		<li><a href="./aHospital.bo">동물병원정보</a></li>
-	</ul>
+<!-- 	<ul> -->
+<!-- 		<li><a href="./aHospital.bo">동물병원정보</a></li> -->
+<!-- 	</ul> header.jsp 로 위치 이동 -->
 	
 	<hr>
 	
