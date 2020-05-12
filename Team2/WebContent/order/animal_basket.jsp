@@ -70,9 +70,15 @@
 			<td> <input type="checkbox"> </td>
 			
 			<!-- 상품 이미지 -->
-			<td>
-				<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-			</td>
+			<%if(first_letter == 'a'){%>
+				<td>
+					<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+				</td>
+			<%} else if(first_letter == 'g') {%>
+				<td>
+					<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+				</td>
+			<%}%>
 			
 			<!-- 상품정보 (옵션이 있을때와 없을때) -->
 			<%if(bkdto.getB_option().equals("")){%>
@@ -203,25 +209,25 @@
 				<%
 					for (int i = 0; i < basketList.size(); i++) {
 						BasketDTO bkdto = (BasketDTO) basketList.get(i);
-						AnimalDTO adto = (AnimalDTO) productInfoList.get(i);
+						ProductDTO pdto = (ProductDTO) productInfoList.get(i);
 									
 						if(bkdto.getB_delivery_method().equals("고속버스")){
 							final_delivery_fee += 14000;
 						}					
 						
 						//할인율이 있을때
-						if(adto.getA_discount_rate() != 0){
+						if(pdto.getProduct_discount_rate() != 0){
 							//tr한줄의 총 금액이 5만원보다 적을때
-							if((bkdto.getB_amount() * adto.getA_price_sale()) < 50000){
+							if((bkdto.getB_amount() * pdto.getProduct_price_sale()) < 50000){
 								final_delivery_fee += 3000;
 							}else{
 								final_delivery_fee += 0;
 							}
 						}
 						//할인율이 없을때
-						else if(adto.getA_discount_rate() == 0){
+						else if(pdto.getProduct_discount_rate() == 0){
 							//tr한줄의 총 금액이 5만원보다 적을때
-							if((bkdto.getB_amount() * adto.getA_price_origin()) < 50000){
+							if((bkdto.getB_amount() * pdto.getProduct_price_origin()) < 50000){
 								final_delivery_fee += 3000;
 							}else{
 								final_delivery_fee += 0;
