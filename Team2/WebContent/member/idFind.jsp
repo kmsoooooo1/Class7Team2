@@ -12,10 +12,9 @@
 	<!-- Header -->
 <header> <jsp:include page="/include/header.jsp" /> </header>
 
-아이디 찾기
 <div class="contents">
  <form action="./MemberIDFindAction.me" method="post" class="box">
-  <h2>ID FIND</h2>
+  <h2>아이디 찾기</h2>
    <label>가입하신 이메일 주소를 입력해주세요</label><br>
    <input type="text" name="email" placeholder="Email">
    <input type="submit" class="submit" value="아이디 찾기">

@@ -5,17 +5,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>비밀번호 찾기 페이지</title>
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<fieldset><legend>비밀번호 찾기</legend>
- <form action="./MemberPWFindAction.me" method="post">
-  <label>이메일을 입력하세요</label><br>
-   <input type="email" name="email"><br>
-  <label>아이디</label>
-   <input type="text" name="id"><br>
-   <input type="submit" class="btn" value="비밀번호 찾기">
+	<!-- Header -->
+<header> <jsp:include page="/include/header.jsp" /> </header>
+
+<div class="contents">
+ <form action="./MemberPWFindAction.me" method="post" class="box">
+  <h2>비밀번호 찾기</h2>
+  <label>가입하신 이메일 주소를 입력해주세요</label>
+   <input type="text" name="email" placeholder="Email"><br>
+  <label>아이디를 입력해주세요</label>
+   <input type="text" name="id" placeholder="ID">
+   <input type="submit" value="비밀번호 찾기">
    <input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
  </form>
-</fieldset>
+</div>
+
+	<!-- FOOTER -->
+<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+
 </body>
 </html>

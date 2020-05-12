@@ -9,6 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+	<!-- Header -->
+<header> <jsp:include page="/include/header.jsp" /> </header>
+
 <%
 	String id=request.getParameter("id");
 %>
@@ -23,5 +26,9 @@
    <input type="button" value="변경 취소" onclick="location.href='./MemberLogin.me';" class="btn">
  </form> 
 </div>
+
+	<!-- FOOTER -->
+<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+
 </body>
 </html>
