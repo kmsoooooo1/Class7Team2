@@ -127,8 +127,8 @@
 <!--  						} -->
 <%-- 					%> --%>
 				
-					<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
-				
+					
+					
 					<h4> <%=detailList.get(0).getG_name() %> </h4>
 				
 		        	<hr>
@@ -237,7 +237,7 @@
 				        			<option value="${detailList.g_option}" disabled>
 					        			  ${detailList.g_option} 
 					        			  <c:if test="${detailList.g_option_price ne 0}">
-					        			    (+<span id="g_option_price">${detailList.g_option_price}</span>원)
+					        			    (+<span id="g_option_price_method">${detailList.g_option_price}</span>원)
 					        			  </c:if>
 					        			  [품절]
 				        			</option>
@@ -247,13 +247,14 @@
 				        			<option value="${detailList.g_option}">
 					        			  ${detailList.g_option} 
 					        			  <c:if test="${detailList.g_option_price ne 0}">
-					        			    (+<span id="g_option_price">${detailList.g_option_price}</span>원)
+					        			    (+<span id="g_option_price_method">${detailList.g_option_price}</span>원)
 					        			  </c:if>
 				        			</option>
 			        			 </c:if>  
 			        		  
 			        		</c:forEach>
 						</select>
+						
 				      <hr>
 						
 						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
@@ -488,87 +489,30 @@
 </body>
 <script type="text/javascript">
 
-	//상품의 배송방법이 일반배송이고 옵션이 있는경우
-	//if($('#g_delivery').val() == '일반배송' && $('#g_option').val()) { 
+//선택배송인경우
+//if($('#g_delivery').val() == '선택배송') { 
 
-		var total_price; //추가되는 tr의 총 판매가
-		var final_total_price = 0; // 선택배송이고, 최종 total 판매가 계산하기 위한 변수
-		
-		// 일반배송이고, 최종 total 판매가 계산하기 위한 변수
-		if(<%=detailList.get(0).getG_discount_rate() != 0%>){
-			var final_total_price_normal = <%=detailList.get(0).getG_price_sale()%>;   
-		}else{
-			var final_total_price_normal = <%=detailList.get(0).getG_price_origin()%>;
-		}
-		 
-		var final_total_amount = 0; //최종 total 수량 계산하기 위한 변수
-		
-		var count = 0; //사용자가 배송방법을 추가하거나 없앨때 늘어나고 줄어드는 변수
-		
-		var selectedValues = ""; //사용자가 선택한 배송방법들을 차례대로 담는 변수
-		
-		var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
-		
-		var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
-		
-		
-		// 사용자가 옵션을 선택했을 시-----------------------------------------------------------------
-		function changeOptionMethod(){
-			
-			var option_method = document.getElementById('option_method').value; // 선택한 옵션
-			
-			var g_name = document.getElementById('g_name').value; // 상품명
-			var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
-			var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
-			var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
-			//var g_option_price = document.getElementById('g_option_price').innerHTML;
-			
-			
-			// 만약 추가 가격이 있는 옵션을 선택하면 판매가격에 g_option_price에 저장된 값 저장하기
-			
-			
-			
-			var objRow;
-			objRow = document.all["final_product_info_table_option"].insertRow();
-			
-			//사용자가 올바른 옵션을 선택 하지 않았을시
-			if(option_method == null){
-				document.getElementById("final_product_info_table_option").style.display = "none";
-			}
-			//사용자가 올바른 옵션을 선택했을시 새로운 cell 추가하기
-			else {
-				//상품명 - 첫번째 td(cell) 항목
-				var objCell_name = objRow.insertCell();
-				objCell_name.innerHTML = "<span id='objCell_name'>" + g_name + "</span> <br>" + "<span id='option_method_option'>[옵션:" + option_method + "]</span>";
-				
-				//상품수 - 두번째 td(cell) 항목
-				var objCell_amount = objRow.insertCell();
-				objCell_amount.innerHTML = "<input type='text' id='g_amount_" + option_method + "' name='g_amount_" + option_method + "' value='1' maxlength='3' size='3' onkeyup='amountOptionChange(" + "\"" + option_method + "\"" + ");'>" 
-											+ " <input type='button' id='amountPlus' name='amountPlus' value='+' onclick='plusOption(" + "\"" + option_method + "\"" + ");'> " 
-											+ " <input type='button' id='amountMinus' name='amountMinus' value='-' onclick='minusOption(" + "\"" + option_method + "\"" + ");'> "
-											+ " <input type='button' id='deleteCell' name='deleteCell' value='x' onclick='delOptionCell(this, " + "\"" + option_method + "\"" + ");'> ";		
-				
-				//가격, 적립금 - 세번째 td(cell) 항목
-				var objCell_price = objRow.insertCell();
-				//만약 적립금이 0이 아니면
-				if(g_discount_rate != 0){
-					objCell_price.innerHTML = "<span id='total_product_price_" + option_method + "' >" 
-											+ g_price_sale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
-											+ "(적 " + "<span id='total_product_mileage_" + option_method + "'>" + g_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원</span>" + ")"
-											+ "<input type='hidden' id='total_product_price_" + option_method + "_input" + "' name='total_product_price_" + option_method + "_input' value=" + g_price_sale + ">";
-				}
-				//만약 적립금이 0이면
-				else{
-					objCell_price.innerHTML = "<span id='total_product_price_" + option_method + "'>" 
-											+ g_price_origin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
-											+ "(적 " + "<span id='total_product_mileage_" + option_method + "'>" + g_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원</span>" + ")"
-											+ "<input type='hidden' id='total_product_price_" + option_method + "_input" + "' name='total_product_price_" + option_method + "_input' value=" + g_price_origin + ">";
-				}
-			}
+	var total_price; //추가되는 tr의 총 판매가
+	var final_total_price = 0; // 선택배송이고, 최종 total 판매가 계산하기 위한 변수
 	
-		}
+	// 일반배송이고, 최종 total 판매가 계산하기 위한 변수
+	if(<%=detailList.get(0).getG_discount_rate() != 0%>){
+		var final_total_price_normal = <%=detailList.get(0).getG_price_sale()%>;   
+	}else{
+		var final_total_price_normal = <%=detailList.get(0).getG_price_origin()%>;
+	}
+	 
+	var final_total_amount = 0; //최종 total 수량 계산하기 위한 변수
 	
-	//}
+	var count = 0; //사용자가 배송방법을 추가하거나 없앨때 늘어나고 줄어드는 변수
+	
+	var selectedValues = ""; //사용자가 선택한 배송방법들을 차례대로 담는 변수
+	
+	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
+	
+	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
+	
+
 	
 	
 	//사용자가 배송방법을 선택했을시-------------------------------------------
@@ -740,7 +684,86 @@
 		    
 		});
 		
-	}
+	} // changeDeliMethod()
+	
+//} //선택배송인경우
+
+
+
+	
+	
+
+	
+	// 사용자가 옵션을 선택했을 시-----------------------------------------------------------------
+	function changeOptionMethod(){
+		
+		var option_method = document.getElementById('option_method').value; // 선택한 옵션
+		
+		var g_name = document.getElementById('g_name').value; // 상품명
+		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
+		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
+		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
+		//var g_option_price = document.getElementById('g_option_price').innerHTML;
+		
+		
+		
+		// 만약 추가 가격이 있는 옵션을 선택하면 판매가격에 g_option_price에 저장된 값 저장하기
+		
+		
+		
+		
+		
+		var g_mileage = document.getElementById('g_mileage').value;				//적립금
+		
+		var objRow;
+		objRow = document.all["final_product_info_table_option"].insertRow();
+		
+		//사용자가 올바른 옵션을 선택 하지 않았을시
+		if(option_method == null){
+			document.getElementById("final_product_info_table_option").style.display = "none";
+		}
+		//사용자가 올바른 옵션을 선택했을시 새로운 cell 추가하기
+		else {
+			//상품명 - 첫번째 td(cell) 항목
+			var objCell_name = objRow.insertCell();
+			objCell_name.innerHTML = "<span id='objCell_name'>" + g_name + "</span> <br>" + "<span id='option_method_option'>[옵션:" + option_method + "]</span>";
+			
+			//상품수 - 두번째 td(cell) 항목
+			var objCell_amount = objRow.insertCell();
+			objCell_amount.innerHTML = "<input type='text' id='g_amount_" + option_method + "' name='g_amount_" + option_method + "' value='1' maxlength='3' size='3' onkeyup='amountOptionChange(" + "\"" + option_method + "\"" + ");'>" 
+										+ " <input type='button' id='amountPlus' name='amountPlus' value='+' onclick='plusOption(" + "\"" + option_method + "\"" + ");'> " 
+										+ " <input type='button' id='amountMinus' name='amountMinus' value='-' onclick='minusOption(" + "\"" + option_method + "\"" + ");'> "
+										+ " <input type='button' id='deleteCell' name='deleteCell' value='x' onclick='delOptionCell(this, " + "\"" + option_method + "\"" + ");'> ";		
+			
+			//가격, 적립금 - 세번째 td(cell) 항목
+			var objCell_price = objRow.insertCell();
+			//만약 적립금이 0이 아니면
+			if(g_discount_rate != 0){
+				objCell_price.innerHTML = "<span id='total_product_price_" + option_method + "' >" 
+										+ g_price_sale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
+										+ "(적 " + "<span id='total_product_mileage_" + option_method + "'>" + g_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원</span>" + ")"
+										+ "<input type='hidden' id='total_product_price_" + option_method + "_input" + "' name='total_product_price_" + option_method + "_input' value=" + g_price_sale + ">"
+										+ "<input type='hidden' id='g_option_price_method_" + g_option_price_method + "_input" + "' name='g_option_price_method_" + g_option_price_method + "_input' value=" + g_price_sale + ">";
+			}
+			//만약 적립금이 0이면
+			else{
+				objCell_price.innerHTML = "<span id='g_option_price_method_" + g_option_price_method + "'>" 
+										+ g_price_origin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
+										+ "(적 " + "<span id='total_product_mileage_" + option_method + "'>" + g_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원</span>" + ")"
+										+ "<input type='hidden' id='total_product_price_" + option_method + "_input" + "' name='total_product_price_" + option_method + "_input' value=" + g_price_origin + ">"
+										+ "<input type='hidden' id='g_option_price_method_" + g_option_price_method + "_input" + "' name='g_option_price_method_" + g_option_price_method + "_input' value=" + g_price_origin + ">";
+			}
+		}
+	
+		
+		
+		
+		
+		
+	} // changeOptionMethod()
+	
+	
+	
 
 	//주문수량 변경 시-----------------------------------------------------------------------------
 	var delivery_method = document.getElementById('delivery_method').value;	//배송방법

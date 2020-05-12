@@ -18,6 +18,9 @@
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
 		String g_code = request.getParameter("g_code");
+	
+		
+		
 		
 		// GoodsListAction 객체에서 저장된 정보를 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>)request.getAttribute("goodsList");
@@ -75,6 +78,7 @@
 					String newformat_price_origin = formatter.format(gdto.getG_price_origin());
 					String newformat_price_sale = formatter.format(gdto.getG_price_sale());
 				
+					
 			%>
 			<td colspan="2">
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="300" height="300"> </a><br>

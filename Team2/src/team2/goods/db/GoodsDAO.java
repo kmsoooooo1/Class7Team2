@@ -400,13 +400,15 @@ public class GoodsDAO {
 	public List<GoodsDTO> getGoodsDetailList(String g_code){
 		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
 		
-		try {
+	try {
 			con = getConnection();
 			
 			sql="select * from team2_goods where g_code = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
+			
+			
 			
 			while(rs.next()){
 				GoodsDTO gdto = new GoodsDTO();
