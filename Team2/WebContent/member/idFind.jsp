@@ -7,13 +7,23 @@
 <title>아이디찾기 페이지</title>
 </head>
 <body>
-<fieldset><legend>아이디 찾기</legend>
-<form action="./MemberIDFindAction.me" method="post">
-<label>가입하신 이메일 주소를 입력해주세요</label><br>
-<input type="text" name="email"><br>
-<input type="submit" class="btn" value="아이디 찾기">
-<input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
-</form>
-</fieldset>
+	<!-- Header -->
+<header> <jsp:include page="/include/header.jsp" /> </header>
+
+아이디 찾기
+<div class="contents">
+ <form action="./MemberIDFindAction.me" method="post">
+  <h2>ID FIND</h2>
+   <label>가입하신 이메일 주소를 입력해주세요</label><br>
+   <input type="text" name="email">
+   <input type="submit" class="btn" value="아이디 찾기">
+   <input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
+ </form>
+</div>
+
+
+	<!-- FOOTER -->
+<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+
 </body>
 </html>
