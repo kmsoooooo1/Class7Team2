@@ -21,7 +21,7 @@
    <input type="hidden" name="id" value="<%=id %>">
    <input type="submit" value="비밀번호 변경">
    <input type="button" value="변경 취소" onclick="location.href='./MemberLogin.me';" class="btn">
- </form>
+ </form> 
 </div>
 </body>
 </html>
