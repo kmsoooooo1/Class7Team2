@@ -18,6 +18,12 @@
 	<%
 		List basketList = (List) request.getAttribute("basketList");
 		List animalList = (List) request.getAttribute("animalList");
+		
+		//###,###,###원 표기하기 위해서 format 바꾸기
+		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
+		
+		int final_total_price = 0; 	//총 상품금액
+		int final_delivery_fee = 0; //총 배송비
 	%>
 
 	<!-- Header -->
@@ -42,9 +48,9 @@
 			for (int i = 0; i < basketList.size(); i++) {
 				BasketDTO bkdto = (BasketDTO) basketList.get(i);
 				AnimalDTO adto = (AnimalDTO) animalList.get(i);
-				
-				//###,###,###원 표기하기 위해서 format 바꾸기
-				DecimalFormat formatter = new DecimalFormat("#,###,###,###");
+			
+				//총 상품금액 계산
+				final_total_price += (bkdto.getB_amount() * adto.getA_price_sale());
 		%>
 		<tr>
 			<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
@@ -181,9 +187,51 @@
 			<td>결제 예정 금액</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
+		
+			<!-- 총 상품금액 -->
+			<td>
+				<span><%=formatter.format(final_total_price)%></span>원 
+			</td>
+			
+			<!-- 총 배송비 -->
+			<td>
+				<%
+					for (int i = 0; i < basketList.size(); i++) {
+						BasketDTO bkdto = (BasketDTO) basketList.get(i);
+						AnimalDTO adto = (AnimalDTO) animalList.get(i);
+									
+						if(bkdto.getB_delivery_method().equals("고속버스")){
+							final_delivery_fee += 14000;
+						}					
+						
+						//할인율이 있을때
+						if(adto.getA_discount_rate() != 0){
+							//tr한줄의 총 금액이 5만원보다 적을때
+							if((bkdto.getB_amount() * adto.getA_price_sale()) < 50000){
+								final_delivery_fee += 3000;
+							}else{
+								final_delivery_fee += 0;
+							}
+						}
+						//할인율이 없을때
+						else if(adto.getA_discount_rate() == 0){
+							//tr한줄의 총 금액이 5만원보다 적을때
+							if((bkdto.getB_amount() * adto.getA_price_origin()) < 50000){
+								final_delivery_fee += 3000;
+							}else{
+								final_delivery_fee += 0;
+							}
+						}
+					}
+				%>
+				<span>+<%=formatter.format(final_delivery_fee)%></span>원
+			</td>
+			
+			<!-- 결제 에정 금액 -->
+			<td>
+				<span>=<%=formatter.format(final_total_price + final_delivery_fee)%></span>원
+			</td>
+			
 		</tr>
 	</table>
 	<br>
@@ -222,13 +270,12 @@
 
 <script type="text/javascript">
 
-// 	//장바구니 리스트 가져오기
-// 	var basketList = [];
-// 	<c:forEach items="${basketList}" var="basketList">
-// 		basketList.push("${basketList}");
-// 	</c:forEach>
+	//장바구니 리스트 가져오기
+	var basketList = [];
+	<c:forEach items="${basketList}" var="basketList">
+		basketList.push("${basketList}");
+	</c:forEach>
 
-	
 	//수량 수정했을때 호출되어야하는 함수
 	function amountAjax(id_number){
 		//DB에 접근하여 해당코드와 동일한 데이터 수량 수정하기
@@ -244,6 +291,11 @@
 			}
 		});
 	}
+	
+	//총 상품금액 나타내게 하는 함수
+	function changeTotalAmount(id_number){
+		var total_product_price = document.getElementById('total_product_price' + id_number + '_input').value;
+	}
 
 	//사용자가 키보드로 수량을 수정했을시
 	function amountChange(id_number){
@@ -257,15 +309,17 @@
 			$("#b_amount" + id_number).val(new_amount);
 		} else{
 			//DB에 들어가서 수량 수정하는 함수 호출
-			amountAjax(id_number);
+			amountAjax(id_number);	
 		}
 		
+		//업데이트된 총 상품금액 나타내게 하는 함수
+		changeTotalAmount(id_number);
 	}
 
 	//사용자가 '+'를 눌렸을시
 	function plus(id_number){
 		
-		var new_amount = parseInt($("#b_amount" + id_number).val()); //사용자가 새로 수정하는 수량
+		var new_amount = parseInt($("#b_amount" + id_number).val()); 	//사용자가 새로 수정하는 수량
 		
 		//사용자가 수량 999에서 +를 눌렀을시
 		if(new_amount == 999) {
@@ -279,12 +333,14 @@
 			//DB에 들어가서 수량 수정하는 함수 호출
 			amountAjax(id_number);
 		}
+		//업데이트된 총 상품금액 나타내게 하는 함수
+		changeTotalAmount(id_number);
 	}
 	
 	//사용자가 '-'를 눌렸을시
 	function minus(id_number){
-
-		var new_amount = parseInt($("#b_amount" + id_number).val()); //사용자가 새로 수정하는 수량
+		
+		var new_amount = parseInt($("#b_amount" + id_number).val()); 	//사용자가 새로 수정하는 수량
 
 		//사용자가 수량 1에서 -를 눌렸을시
 		if(new_amount == 1) {
@@ -298,6 +354,8 @@
 			//DB에 들어가서 수량 수정하는 함수 호출
 			amountAjax(id_number);
 		}
+		//업데이트된 총 상품금액 나타내게 하는 함수
+		changeTotalAmount(id_number);
 	}
 	
 	//사용자가 상품정보를 제거했을시
@@ -322,7 +380,6 @@
 			return false;
 		}
 	}
-	
-	
+
 </script>
 </html>
