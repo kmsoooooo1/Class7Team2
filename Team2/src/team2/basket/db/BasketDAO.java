@@ -64,7 +64,7 @@ public class BasketDAO {
 						+ "where id=? and b_code=? and b_option=?";
 				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, bkdto.getB_amount());
+				pstmt.setInt(1, bkdto.getB_amount());
 				pstmt.setString(2, bkdto.getId());
 				pstmt.setString(3, bkdto.getB_code());
 				pstmt.setString(4, bkdto.getB_option());
@@ -105,7 +105,7 @@ public class BasketDAO {
 			pstmt.setInt(1, b_num);
 			pstmt.setString(2, bkdto.getId());
 			pstmt.setString(3, bkdto.getB_code());
-			pstmt.setString(4, bkdto.getB_amount());
+			pstmt.setInt(4, bkdto.getB_amount());
 			pstmt.setString(5, bkdto.getB_option());
 			pstmt.setString(6, bkdto.getB_delivery_method());
 			pstmt.executeUpdate();
@@ -143,7 +143,7 @@ public class BasketDAO {
 				bkdto.setB_num(rs.getInt("b_num"));
 				bkdto.setId(rs.getString("id"));
 				bkdto.setB_code(rs.getString("b_code"));
-				bkdto.setB_amount(rs.getString("b_amount"));
+				bkdto.setB_amount(rs.getInt("b_amount"));
 				bkdto.setB_option(rs.getString("b_option"));
 				bkdto.setB_delivery_method(rs.getString("b_delivery_method"));
 				
@@ -188,29 +188,46 @@ public class BasketDAO {
 	
 	
 	//장바구니 수량 수정하는 함수
-	public void modiAmount(String b_code, String b_option, String b_delivery_method, int new_amount) {
+	public void modiAmount(BasketDTO bdto) {
 		try {
 			con = getConnection();
 			sql="select * from team2_basket where b_code = ? and b_option = ? and b_delivery_method = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, b_code);
-			pstmt.setString(2, b_option);
-			pstmt.setString(3, b_delivery_method);
+			pstmt.setString(1, bdto.getB_code());
+			pstmt.setString(2, bdto.getB_option());
+			pstmt.setString(3, bdto.getB_delivery_method());
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				//상품이 존재하면
 				sql="update team2_basket set b_amount = ? where b_code = ? and b_option = ? and b_delivery_method = ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, new_amount);
-				pstmt.setString(2, b_code);
-				pstmt.setString(3, b_option);
-				pstmt.setString(4, b_delivery_method);
+				pstmt.setInt(1, bdto.getB_amount());
+				pstmt.setString(2, bdto.getB_code());
+				pstmt.setString(3, bdto.getB_option());
+				pstmt.setString(4, bdto.getB_delivery_method());
 				pstmt.executeUpdate();
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			closeDB();
+		}
+	}
+	
+	//장바구니 정보 삭제하는 함수
+	public void deleteBasket(BasketDTO bdto){
+		try {
+			con = getConnection();
+			sql = "delete from team2_basket where b_code = ? and b_option = ? and b_delivery_method = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bdto.getB_code());
+			pstmt.setString(2, bdto.getB_option());
+			pstmt.setString(3, bdto.getB_delivery_method());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
 			closeDB();
 		}
 	}

@@ -76,18 +76,18 @@
 			
 			<!-- 판매가(적립금) -->
 			<%if(adto.getA_discount_rate() != 0){%>
-				<td><%=formatter.format(adto.getA_price_sale())%>원 <br> (<%=formatter.format(adto.getA_mileage() * Integer.parseInt(bkdto.getB_amount()))%>원)</td>
+				<td><%=formatter.format(adto.getA_price_sale())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(adto.getA_mileage() * bkdto.getB_amount())%>원</span>)</td>
 			<%} else{%>
-				<td><%=formatter.format(adto.getA_price_origin())%>원 <br> (<%=formatter.format(adto.getA_mileage() * Integer.parseInt(bkdto.getB_amount()))%>원)</td>
+				<td> <%=formatter.format(adto.getA_price_origin())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(adto.getA_mileage() * bkdto.getB_amount())%>원</span>) </td>
 			<%}%>
 			
 			<!-- 수량 -->
 			<td>
 				<!-- 장바구니 수량  -->
-				<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3">개
+				<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
 				<!-- 수량 +/- 버튼 -->
 				<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'>
-				<input type="button" id="amountMinus" name="amountMinus" value="-"> <br>
+				<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
 			</td>
 			
 			<!-- 배송방법(고속버스 일때와 아닐때 -->
@@ -103,21 +103,21 @@
 				합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
 			-->
 			<%if(adto.getA_discount_rate() != 0){%>
-				<%if(adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount()) >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%if(adto.getA_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 배송비 무료 </td>
-				<%}else if(adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount()) >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(adto.getA_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 14,000원 </td>
-				<%}else if(adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount()) < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(adto.getA_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 17,000원 </td>
 				<%} else {%>
 					<td> 3,000원 </td>
 				<%}%>
 			<%} else{%>
-				<%if(adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount()) >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%if(adto.getA_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 배송비 무료 </td>
-				<%}else if(adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount()) >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(adto.getA_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 14,000원 </td>
-				<%}else if(adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount()) < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(adto.getA_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 17,000원 </td>
 				<%} else {%>
 					<td> 3,000원 </td>
@@ -130,25 +130,25 @@
 			<%if(adto.getA_discount_rate() != 0){%>
 				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
 					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount()) + Integer.parseInt("14000"))%></span>원
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
 					</td>
 				<%} else {%>
 					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount()))%></span>원
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_sale() * Integer.parseInt(bkdto.getB_amount())%>">
+						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_sale() * bkdto.getB_amount())%>원</span>
+						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_sale() * bkdto.getB_amount()%>">
 					</td>
 				<%}%>
 			<%} else{%>
 				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
 					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount()) + Integer.parseInt("14000"))%></span>원
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(adto.getA_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
 					</td>
 				<%} else {%>
 					<td>
-						<span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount()))%></span>원
-						<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_origin() * Integer.parseInt(bkdto.getB_amount())%>">
+						<span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_origin() * (bkdto.getB_amount()))%>원</span>
+						<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_origin() * bkdto.getB_amount()%>">
 					</td>
 				<%}%>
 			<%}%>
@@ -156,7 +156,7 @@
 			<td>
 				<input type="button" value="주문하기"> <br> 
 				<input type="button" value="관심상품 등록"> <br> 
-				<input type="button" value="삭제"> <br>
+				<input type="button" value="삭제" onclick='deleteCell(this, <%=i%>);'> <br>
 			</td>
 		</tr>
 
@@ -217,29 +217,55 @@
 
 	<!-- Footer -->
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
+	
 </body>
 
 <script type="text/javascript">
+
+// 	//장바구니 리스트 가져오기
+// 	var basketList = [];
+// 	<c:forEach items="${basketList}" var="basketList">
+// 		basketList.push("${basketList}");
+// 	</c:forEach>
+
 	
-	//증가함수 클릭시
+	//수량 수정했을때 호출되어야하는 함수
+	function amountAjax(id_number){
+		//DB에 접근하여 해당코드와 동일한 데이터 수량 수정하기
+		$.ajax({
+			type:'get',
+			url:'./BasketModify.ba',
+			data:'b_amount='+$('#b_amount'+id_number).val() + '&b_code='+$('#b_code'+id_number).val()+'&b_option='+$('#b_option'+id_number).val()+'&b_delivery_method='+$('#b_delivery_method'+id_number).val(),
+			dataType: 'html',
+			success:function(data) {
+   				window.location.reload(); //현재 페이지 새로고침
+   			},error:function(request,status,error){
+			 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			}
+		});
+	}
+
+	//사용자가 키보드로 수량을 수정했을시
+	function amountChange(id_number){
+		
+		var new_amount = parseInt($("#b_amount" + id_number).val()); 	//사용자가 새로 수정하는 수량
+		
+		//사용자가 키보드로 input에 0보다 작은수를 입력했을시
+		if(new_amount < 1) {
+			alert("상품의 최소 구매량은 1개입니다.");
+			new_amount = parseInt("1");
+			$("#b_amount" + id_number).val(new_amount);
+		} else{
+			//DB에 들어가서 수량 수정하는 함수 호출
+			amountAjax(id_number);
+		}
+		
+	}
+
+	//사용자가 '+'를 눌렸을시
 	function plus(id_number){
 		
-		var total_price = Number($('#total_product_price' + id_number + '_input').val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
-		
 		var new_amount = parseInt($("#b_amount" + id_number).val()); //사용자가 새로 수정하는 수량
-		
-		var b_price_sale = document.getElementById('b_price_sale' + id_number).value; 		//현재 tr열의 할인된 판매가
-		var b_price_origin = document.getElementById('b_price_origin' + id_number).value; 	//현재 tr열의 판매가
-		var b_discount_rate = document.getElementById('b_discount_rate' + id_number).value; //현재 tr열의 할인율
-		var b_mileage = document.getElementById('b_mileage' + id_number).value;				//현재 tr열의 적립금
-		
-		//만약 할인율이 있으면 b_price_sale로 쓰고 없으면 b_price_origin으로 쓰기
-		var new_b_price;
-		if(b_mileage != 0){
-			new_b_price = b_price_sale;
-		}else {
-			new_b_price = b_price_origin;
-		}
 		
 		//사용자가 수량 999에서 +를 눌렀을시
 		if(new_amount == 999) {
@@ -250,31 +276,52 @@
 			new_amount++;
 			$("#b_amount" + id_number).val(new_amount);
 			
-			//만약 할인율이(b_discount_rate)이 0이 아니면
-			if(b_discount_rate != 0){
-				
-			}
+			//DB에 들어가서 수량 수정하는 함수 호출
+			amountAjax(id_number);
 		}
 	}
 	
-	//감소함수 클릭시
-	$("#amountMinus").click(function(){
-		
-		var b_code = $('#b_code').val();
-		var b_option = $('#b_option').val();
-		var b_delivery_method = $('#b_delivery_method').val();
-		
-		var new_amount = parseInt($("#b_amount_" + b_code + b_option + b_delivery_method).val());
-		
+	//사용자가 '-'를 눌렸을시
+	function minus(id_number){
+
+		var new_amount = parseInt($("#b_amount" + id_number).val()); //사용자가 새로 수정하는 수량
+
+		//사용자가 수량 1에서 -를 눌렸을시
 		if(new_amount == 1) {
 			alert("상품의 최소 구매량은 1개입니다.");
-			new_amount = parseInt("1");
-			$("#b_amount_"+ b_code + b_option + b_delivery_method).val(new_amount);
-		}else {
-			new_amount -= 1;
-			$("#b_amount_"+ b_code + b_option + b_delivery_method).val(new_amount);
+			new_a_amount = parseInt("1");
+			$("#b_amount" + id_number).val(new_amount);
+		} else {
+			new_amount--;
+			$("#b_amount" + id_number).val(new_amount);
+			
+			//DB에 들어가서 수량 수정하는 함수 호출
+			amountAjax(id_number);
 		}
-	});
+	}
+	
+	//사용자가 상품정보를 제거했을시
+	function deleteCell(obj, id_number){
+		//삭제 여부 물어보기
+		var checkDelete = confirm("상품을 삭제 하시겠습니까?");
+		if(checkDelete){
+			//DB에 접근하여 해당코드와 동일한 데이터 삭제하기
+			$.ajax({
+				type:'get',
+				url:'./BasketDelete.ba',
+				data:'b_code='+$('#b_code'+id_number).val()+'&b_option='+$('#b_option'+id_number).val()+'&b_delivery_method='+$('#b_delivery_method'+id_number).val(),
+				dataType: 'html',
+				success:function(data) {
+	   				alert("삭제하였습니다.");
+	   				window.location.reload(); //현재 페이지 새로고침
+	   			},error:function(request,status,error){
+				 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+				}
+			});
+		} else {
+			return false;
+		}
+	}
 	
 	
 </script>

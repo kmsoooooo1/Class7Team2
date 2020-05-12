@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import team2.basket.db.BasketDAO;
 import team2.basket.db.BasketDTO;
 
-public class BasketModiAction implements Action{
+public class BasketDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -25,21 +25,18 @@ public class BasketModiAction implements Action{
 			return forward;
 		}
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		//넘어온 값 BasketDTO 객체에 저장하기
 		BasketDTO bdto = new BasketDTO();
 		
-		bdto.setB_amount(Integer.parseInt(request.getParameter("b_amount")));
 		bdto.setB_code(request.getParameter("b_code"));
 		bdto.setB_option(request.getParameter("b_option"));
 		bdto.setB_delivery_method(request.getParameter("b_delivery_method"));
 		
-		//BasketDAO() 객체 생성
 		BasketDAO bdao = new BasketDAO();
-		
-		//수정할 메서드 불러오기
-		bdao.modiAmount(bdto);
-		
+		bdao.deleteBasket(bdto);
+
 		return null;
 	}
-	
 }
