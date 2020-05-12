@@ -59,10 +59,8 @@
 		
 <%	if(!(c<1)){ %>
 		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
-<%		if(p_code==null){ %>
-			<button type="button" onclick="">상품검색</button><br>
-<%		}else{
-		
+<%		if(p_code!=null){
+					
 			ProductDTO dto = new ProductDTO(p_code);
 			System.out.println(dto);
 %>

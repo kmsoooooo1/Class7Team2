@@ -18,7 +18,11 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
-	
+	String c_str = request.getParameter("C");
+	int c = 0;
+	if(c_str != null){
+		c = Integer.parseInt(c_str);
+	}
 	String product = request.getParameter("product");
 	String cate = request.getParameter("cate");
 	String kind = request.getParameter("kind");
@@ -127,7 +131,7 @@
 					</tr>
 			<%if(list.size()>0){ 
 				for(ProductDTO dto:list){%>
-					<tr>
+					<tr onclick="choice('<%=dto.getP_code()%>');">
 						<td><%=dto.getP_code() %></td>
 						<td><img src="./upload/multiupload/<%=dto.getImg_src() %>" alt="" width="100" height="100"></td>
 						<td><%=dto.getName() %></td>
@@ -191,6 +195,10 @@
 		kind.value = "";
 		
 		document.fr.submit();
+	}
+	function choice(p_code){
+		opener.location.href='./Insert.bo?C=<%=c%>&CODE='+p_code;
+		window.close();
 	}
 	
 </script>
