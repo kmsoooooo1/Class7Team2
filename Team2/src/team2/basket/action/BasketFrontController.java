@@ -77,6 +77,15 @@ public class BasketFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		//장바구니에서 상품을 삭제했을시(Ajax)
+		else if(command.equals("/BasketDelete.ba")){
+			action = new BasketDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		
 		// 페이지 이동 처리
