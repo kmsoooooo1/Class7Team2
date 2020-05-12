@@ -12,7 +12,6 @@ public class BasketAddAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		
 		// 로그인 정보 없을 시 로그인페이지로 이동
 		HttpSession session = request.getSession();
 		
@@ -57,7 +56,7 @@ public class BasketAddAction implements Action {
 		for(int i=0; i<splitSelectedValues.length; i++){
 			bkdto.setId(id);
 			bkdto.setB_code(b_code);
-			bkdto.setB_amount(splitSelectedAmounts[i]);
+			bkdto.setB_amount(Integer.parseInt(splitSelectedAmounts[i]));
 			bkdto.setB_option(b_option);
 			bkdto.setB_delivery_method(splitSelectedValues[i]);
 			
