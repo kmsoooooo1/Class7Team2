@@ -1,5 +1,11 @@
 @CHARSET "UTF-8";
 /* footer */
+
+body{
+	margin: 0;
+	padding: 0;
+}
+
 #footer {
 		background-color: #333;
 		text-align: center;
@@ -24,6 +30,7 @@
 				line-height: 1em;
 				margin-left: 1em;
 				padding-left: 1em;
+				margin-top: 40px;
 			}
 
 	
