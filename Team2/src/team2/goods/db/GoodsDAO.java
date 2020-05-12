@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,13 @@ import javax.sql.DataSource;
 
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
 
+import team2.board.db.ProductDTO;
+
 public class GoodsDAO {
 
 	Connection con = null;
 	PreparedStatement pstmt = null;
+	Statement stmt;
 	ResultSet rs = null;
 	String sql = "";
 	
@@ -42,7 +46,7 @@ public class GoodsDAO {
 				pstmt.close();
 			if (con != null)
 				con.close();
-			
+			if(stmt!=null)stmt.close();
 			System.out.println(" 자원해제 완료 ");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -441,7 +445,35 @@ public class GoodsDAO {
 		return detailList;
 	}//getGoodsDetail(g_code)
 	
-	
+	public List<ProductDTO> searchKeyword(String keyword){
+		List<ProductDTO> list = new ArrayList<>();
+		
+		sql = "select g_code, category, sub_category, sub_category_index, g_name, g_thumbnail from team2_goods where g_name like '%" + keyword +"%'";
+		ProductDTO dto = null;
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				dto = new ProductDTO(rs.getString("g_code"));
+				dto.setCategory(rs.getString("category"));
+				dto.setSub_category(rs.getString("sub_category"));
+				dto.setSub_category_idx(rs.getString("sub_category_index"));
+				dto.setName(rs.getString("g_name"));
+				dto.setImg_src(rs.getString("g_thumbnail"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	
 	

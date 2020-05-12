@@ -9,7 +9,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animals_detail.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title> 테스트 </title>
@@ -63,10 +65,12 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
-	<form action="" method="post" name="fr"> 
-		
+	
+	 
+	<div class="container">
 		<!-- 상품 기본 정보 파트 ------------------------------------------------------------------------------------------ -->
-		<div id="menu0">
+	<div id="menu0" class="menu">
+		<form action="" method="post" name="fr">	
 			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율, 모프, 적립금  -->
 			<input type="hidden" name="product_code" value="<%=animalDetail.getA_code()%>">
 			<input type="hidden" id="a_price_origin" name="a_price_origin" value="<%=animalDetail.getA_price_origin()%>">
@@ -81,13 +85,12 @@
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 		
-			<table border="0">
-				<tr>
-					<td> <img src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>" width="500" height="500"> </td>
-					<td>
+			<div class="info_table">
+					<div class="info_img"> <img src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>" style="width:100%"> </div>
+					<div class="info_desc">
 						<!-- 종 이름 -->
 						<%if(animalDetail.getA_amount() == 0){%>
-							<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
+							<span> SOLD OUT </span>
 							<h4> <%=animalDetail.getA_morph()%> </h4>
 						<%}else{%>
 							<h4> <%=animalDetail.getA_morph()%> </h4>
@@ -157,17 +160,17 @@
 							<br>
 							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
 						<%}%>
-					</td>
-				</tr>
-			</table>
-		</div>
+				</div>
+			</div>
+		</form>
+	</div>
 
-		<br>
-		<hr>
-	</form>
+	<br>
+	<hr>
+	
 	
 	<!-- 상품 관련 상품들 파트 ------------------------------------------------------------------------------------------ -->
-	<div id="menu2">
+	<div id="menu2" class="menu">
 		<div>
 			RECOMMEND ITEMS <br>
 			본 상품의 구매자 분들은 아래 상품들도 함께 구매하셨습니다.
@@ -178,34 +181,34 @@
 	<hr>
 		
 	<!-- 상품 상세 정보 파트 ------------------------------------------------------------------------------------------ -->
-	<div id="menu1">
+	<div id="menu1" class="menu">
 		<!-- 소메뉴 -->
-		<div>
-			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
-				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+		<div class="move_wrap">
+			<ul class="move_ul">
+				<li class="move_list"><button class="move_btn" onclick="menuMove('0')"> 기본 정보 </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('1')"> 디테일 정보 </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('2')"> 추천 상품 </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('3')"> REVIEW </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('4')"> Q & A </button></li>
 			</ul>
 		</div>
 	
-		<p> <%=animalDetail.getContent()%> </p>
+		<div class="info_detail"> <%=animalDetail.getContent()%> </div>
 	</div>
 	
 	<br>
 	<hr>
 
 	<!-- 상품 REVIEW 파트 -------------------------------------------------------------------------------------------->
-	<div id="menu3">
+	<div id="menu3" class="menu">
 		<!-- 소메뉴 -->
-		<div>
-			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
-				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+		<div class="move_wrap">
+			<ul class="move_ul">
+				<li class="move_list"><button class="move_btn" onclick="menuMove('0')"> 기본 정보 </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('1')"> 디테일 정보 </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('2')"> 추천 상품 </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('3')"> REVIEW </button></li>
+				<li class="move_list"><button class="move_btn" onclick="menuMove('4')"> Q & A </button></li>
 			</ul>
 		</div>
 		
@@ -219,8 +222,14 @@
 		
 	%>
 		
-		<table border="1">
-			<tr>
+		<table class="board_wrap">
+			<colgroup>
+				<col width="10%">
+				<col width="40%">
+				<col width="40%">
+				<col width="10%">
+			</colgroup>
+			<tr class="board_tr">
 				<th>글쓴이</th>
 				<th>제목</th>
 				<th>작성일자</th>
@@ -228,7 +237,7 @@
 			</tr>
 		<%if(bList.size()>0){
 			for(BoardDTO dto : bList){%>
-			<tr>
+			<tr class="board_tr">
 				<td> 
 					<%=dto.getB_writer() %>
 				</td> 
@@ -244,7 +253,7 @@
 			</tr>
 		<%	}
 		  }else{ %>
-		  	<tr>
+		  	<tr class="board_tr">
 		  		<td colspan='4'>작성된 글이 없습니다.</td>
 		  	</tr>
 	  	<%} %>
@@ -257,15 +266,15 @@
 	<hr>
 	
 	<!-- 상품 Q&A 파트 ------------------------------------------------------------------------------------------ -->
-	<div id="menu4">
+	<div id="menu4" class="menu">
 		<!-- 소메뉴 -->
-		<div>
-			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
-				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+		<div class="move_wrap">
+			<ul class="move_ul">
+				<li class="move_list"> <button class="move_btn" onclick="menuMove('0')"> 기본 정보 </button> </li>
+				<li class="move_list"> <button class="move_btn" onclick="menuMove('1')"> 디테일 정보 </button> </li>
+				<li class="move_list"> <button class="move_btn" onclick="menuMove('2')"> 추천 상품 </button> </li>
+				<li class="move_list"> <button class="move_btn" onclick="menuMove('3')"> REVIEW </button> </li>
+				<li class="move_list"> <button class="move_btn" onclick="menuMove('4')"> Q & A </button> </li>
 			</ul>
 		</div>
 	
@@ -277,8 +286,14 @@
 		bdao.closeDB();
 	%>
 		
-		<table border="1">
-			<tr>
+		<table class="board_wrap">
+			<colgroup>
+				<col width="10%">
+				<col width="40%">
+				<col width="40%">
+				<col width="10%">
+			</colgroup>
+			<tr class="board_tr">
 				<th>제목 </th>
 				<th>작성자</th>
 				<th>작성일</th>
@@ -288,7 +303,7 @@
 		if(bList.size()>0){
 			for(BoardDTO dto:bList){
 		%>
-			<tr>
+			<tr class="board_tr">
 				<td><%=dto.getB_title() %></td>
 				<td><%=dto.getB_writer() %></td>
 				<td><%=dto.getB_reg_date() %></td>
@@ -299,7 +314,7 @@
 			}
 		}else{
 		%>
-			<tr>
+			<tr class="board_tr">
 				<td colspan="4">작성된 글이 없습니다.</td>
 			</tr>
 		<%
@@ -310,6 +325,7 @@
 		<button type="button">모두보기</button>
 	</div>
 	
+	</div>
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
