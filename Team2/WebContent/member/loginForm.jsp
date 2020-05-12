@@ -21,12 +21,9 @@
 			<input type="password" name="pass" placeholder="PASSWORD">
 			
 			<input type="submit" value="로그인">
-			<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me'"
-					class="btn">
-			<input type="button" value="아이디 찾기" onclick="location.href='./MemberIDFind.me'"
-					class="btn">
-			<input type="button" value="비밀번호 찾기" onclick="location.href='./MemberPWFind.me'"
-					class="btn">
+			<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me'" class="btn">
+			<input type="button" value="아이디 찾기" onclick="location.href='./MemberIDFind.me'" class="btn">
+			<input type="button" value="비밀번호 찾기" onclick="location.href='./MemberPWFind.me'" class="btn">
 		</form>
 		</div>
 	
