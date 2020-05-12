@@ -20,6 +20,7 @@ public class GoodsDAO {
 
 	Connection con = null;
 	PreparedStatement pstmt = null;
+	Statement stmt;
 	ResultSet rs = null;
 	String sql = "";
 	
@@ -45,7 +46,7 @@ public class GoodsDAO {
 				pstmt.close();
 			if (con != null)
 				con.close();
-			
+			if(stmt!=null)stmt.close();
 			System.out.println(" 자원해제 완료 ");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -444,18 +445,17 @@ public class GoodsDAO {
 		return detailList;
 	}//getGoodsDetail(g_code)
 	
-	public List<ProductDTO> getKeyword(String keyword){
+	public List<ProductDTO> searchKeyword(String keyword){
 		List<ProductDTO> list = new ArrayList<>();
 		
-		sql = "select g_code, category, sub_category, sub_category_index, g_name, g_thumbnail from team2_goods where g_name like '%?%'";
+		sql = "select g_code, category, sub_category, sub_category_index, g_name, g_thumbnail from team2_goods where g_name like '%" + keyword +"%'";
 		ProductDTO dto = null;
 		
 		try {
 			con = getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, keyword);
+			stmt = con.createStatement();
 			
-			rs = pstmt.executeQuery();
+			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
 				dto = new ProductDTO(rs.getString("g_code"));

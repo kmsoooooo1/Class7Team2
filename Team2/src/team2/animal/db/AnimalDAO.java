@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import team2.board.db.ProductDTO;
+
 public class AnimalDAO {
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
+	Statement stmt;
 	ResultSet rs = null;
 	String sql = "";
 	
@@ -35,6 +39,7 @@ public class AnimalDAO {
 				pstmt.close();
 			if (con != null)
 				con.close();
+			if(stmt!=null)stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -233,6 +238,34 @@ public class AnimalDAO {
 		return adto;
 	}
 
+	public List<ProductDTO> searchKeyword(String keyword){
+		
+		List<ProductDTO> list = new ArrayList<>();
+		String sql = "select * from team2_animals where a_morph like '%" + keyword +"%'";
+		System.out.println(sql);
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				ProductDTO dto = new ProductDTO(rs.getString("a_code"));
+				dto.setCategory(rs.getString("category"));
+				dto.setSub_category(rs.getString("sub_category"));
+				dto.setSub_category_idx(rs.getString("sub_category_index"));
+				dto.setName(rs.getString("a_morph"));
+				dto.setImg_src(rs.getString("a_thumbnail"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 	

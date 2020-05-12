@@ -26,8 +26,15 @@ public class PDAO {
 		return list;
 	}
 	
-//	public static List<ProductDTO> getProduct(List<ProductDTO>... list){
-//		
-//	}
+	public static List<ProductDTO> getProduct(List<ProductDTO>... lists){
+		
+		List<ProductDTO> result = new ArrayList<>();
+		
+		for(List<ProductDTO> list : lists){
+			result.addAll(list);
+		}
+		
+		return result;
+	}
 	
 }

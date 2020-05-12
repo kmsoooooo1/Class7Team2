@@ -23,18 +23,18 @@
 	String cate = request.getParameter("cate");
 	String kind = request.getParameter("kind");
 	
-// 	String keyword = request.getParameter("keyword");
+	String keyword = request.getParameter("keyword");
 	
-	List<ProductDTO> list = null;
+	List<ProductDTO> list = new ArrayList<>();
 	GoodsDAO gdao = new GoodsDAO();
 	AnimalDAO adao = new AnimalDAO();
 	if(product==null){
-		//	전체상품 검색
-// 		if(keyword==""){
-			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));
-// 		}else{
-			
-// 		}
+		if(keyword==null || keyword.equals("")){
+			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));	
+		}else{
+			list = PDAO.getProduct(adao.searchKeyword(keyword),gdao.searchKeyword(keyword));
+			 
+		}
 	}else if(product.equals("ANIMAL")){
 		//	animal 검색
 		if(cate==null){
@@ -60,6 +60,7 @@
 	System.out.println("product : " + product);
 	System.out.println("cate : " + cate);
 	System.out.println("kind : " + kind);
+	System.out.println("keyword : " + keyword);
 	
 	String[] cList = {};
 		
@@ -111,7 +112,8 @@
   		<%	}
 		  } %>
 		  	</select>
-			<input type="text" name="keyword" ><input type="submit" value="Search">
+		  	<input hidden="hidden">
+			<input type="text" name="keyword" ><button type="button" onclick="return getkeyword();">search</button>
 		</form>
 			<div class="search_list">
 				<table>
@@ -182,6 +184,15 @@
 		}
 		document.fr.submit();
 	}
+	
+	function getkeyword(){
+		Product.value= "";
+		Cate.value = "";
+		kind.value = "";
+		
+		document.fr.submit();
+	}
+	
 </script>
 
 </html>
