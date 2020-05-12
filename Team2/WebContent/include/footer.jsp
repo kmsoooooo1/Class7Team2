@@ -12,9 +12,9 @@
 <body>
 <footer id="footer">
  <ul class="intro">
-  <li><a href="#">회사소개</a></li>
-  <li><a href="#">이용약관</a></li>
-  <li><a href="#">개인정보취급방침</a></li>
+  <li><a href="./company/Company.me">회사소개</a></li>
+  <li><a href="./company/Agreement.me">이용약관</a></li>
+  <li><a href="./company/Privacy.me">개인정보취급방침</a></li>
   <li><a href="#">이용안내</a></li>
   <li><a href="#">제휴문의</a></li>
  </ul>
