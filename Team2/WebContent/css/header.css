@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-#header_menu ul {
+#header_menu .sub_menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -8,11 +8,11 @@
   width: 100%;
 }
 
-#header_menu li {
+#header_menu .dropdown {
   float: left;
 }
 
- li a, .dropbtn {
+ .dropdown a, .dropbtn {
   display: inline-block;
   color: white;
   text-align: center;

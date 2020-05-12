@@ -1,10 +1,4 @@
 @CHARSET "UTF-8";
-/* body { */
-/* 	margin: 0; */
-/* 	padding: 0; */
-/* 	font-family: sans-serif; */
-/* 	background: #34495e; */
-/* } */
 
 * {
 	margin: 0;
@@ -25,7 +19,7 @@
 	top: 50%; 
 	left: 50%; 
 	transform: translate(-50%,-50%);
-	background: #f8f8f8;
+	background: #fbfbfb;
 	text-align: center; 
 }
 
@@ -45,7 +39,7 @@
 	padding: 14px 10px;
 	width: 200px;
 	outline: none;
-	color: white;
+	color: black;
 	border-radius: 30px;
 	transition: 0.25s;
 }
