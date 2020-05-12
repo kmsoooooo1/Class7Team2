@@ -197,7 +197,7 @@
 		document.fr.submit();
 	}
 	function choice(p_code){
-		opener.location.href='./Insert.bo?C=<%=c%>&CODE='+p_code;
+		opener.location.href='${pageContext.request.contextPath}/Insert.bo?C=<%=c%>&CODE='+p_code;
 		window.close();
 	}
 	
