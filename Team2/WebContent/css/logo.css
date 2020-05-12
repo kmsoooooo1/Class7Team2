@@ -5,10 +5,10 @@
 	color: white;
 	font-size: 4rem;
 	letter-spacing: 3px;
-	background-image: url("../img/gal.jpg"); 
+	background-image: url("../img/gala.jpg"); 
 	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;	
+	background-clip: text; 
+	-webkit-text-fill-color: transparent;	 
 	animation: animate 3s linear infinite;
 }
 
