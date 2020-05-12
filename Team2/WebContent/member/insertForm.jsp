@@ -6,6 +6,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>회원 가입 </title>
+
+<style type="text/css">
+
+fieldset, legend {
+	margin: auto;
+	text-align: center;
+}
+ 
+table, td {
+	border: 1px solid;
+}
+
+table {
+	height: 100px;
+	margin: auto;
+	text-align: center;
+}
+
+td{
+	text-align: left;
+}
+
+</style>
+
+
 <script>
 	//submit을 눌렀을 때 호출되는 함수
 	//유효성 검사를 위한 함수
@@ -125,12 +150,13 @@
 		
 	}
 </script>
+
 </head>
 <body>
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 
-	<h2>회원가입 페이지</h2>
+	<h2 class="join_title">회원가입 페이지</h2>
 	
 	<fieldset>
 		<legend>회 원 가 입</legend>
