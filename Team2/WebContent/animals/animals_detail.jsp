@@ -758,22 +758,22 @@
 		}
 		//배송방법을 선택했을시
 		else {
-			var isBasket = confirm("장바구니에 담으시겠습니까?");
-			if(isBasket) {
-				//submit 되기 전에 최종 입력한 수량들을 selectedAmount input hidden value에 차례대로 넣기
-				//selectedAmounts += ($('#a_amount_' + delivery_method).val() + ",");
-				
-				for(var i=0; i<count; i++){
-					//selectedArray[i] -> 선택된 배송방법의 value들
-					selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ",")
-				}
-				
-				//추가된 values 변수를 태그에 담기
-				$("#selectedAmounts").val(selectedAmounts);
-				
-				document.fr.action="./BasketAdd.ba";
-				document.fr.submit();
-			} else {
+					
+			for(var i=0; i<count; i++){
+				//selectedArray[i] -> 선택된 배송방법의 value들
+				selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ",")
+			}
+			
+			//추가된 values 변수를 태그에 담기
+			$("#selectedAmounts").val(selectedAmounts);
+			
+			document.fr.action="./BasketAdd.ba";
+			document.fr.submit();
+			
+			var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
+			if(goBasket){
+				location.href="./BasketList.ba";
+			}else if(!goBasket){
 				return false;
 			}
 		}

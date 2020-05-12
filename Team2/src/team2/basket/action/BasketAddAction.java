@@ -64,9 +64,11 @@ public class BasketAddAction implements Action {
 			bkdao.basketAdd(bkdto);
 		}
 		
-		forward.setPath("./BasketList.ba");
-		forward.setRedirect(true);
-		return forward;
+//		forward.setPath("./BasketList.ba");
+//		forward.setRedirect(true);
+//		return forward;
+		
+		return null;
 	}
 
 }

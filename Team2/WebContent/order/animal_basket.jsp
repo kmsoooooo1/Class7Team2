@@ -1,3 +1,4 @@
+<%@page import="team2.product.db.ProductDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
@@ -17,7 +18,7 @@
 
 	<%
 		List basketList = (List) request.getAttribute("basketList");
-		List animalList = (List) request.getAttribute("animalList");
+		List productInfoList = (List) request.getAttribute("productInfoList");
 		
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
@@ -31,6 +32,7 @@
 
 
 	<!-- 장바구니 테이블 생성 -->
+	CART
 	<table border="1">
 		<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 		<tr>
@@ -47,44 +49,47 @@
 		<%
 			for (int i = 0; i < basketList.size(); i++) {
 				BasketDTO bkdto = (BasketDTO) basketList.get(i);
-				AnimalDTO adto = (AnimalDTO) animalList.get(i);
-			
+				ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+				
 				//총 상품금액 계산
-				final_total_price += (bkdto.getB_amount() * adto.getA_price_sale());
+				final_total_price += (bkdto.getB_amount() * pdto.getProduct_price_sale());
+				
+				//b_code 값들 중에 맨 앞글자 따오기
+				char first_letter = bkdto.getB_code().charAt(0);
 		%>
 		<tr>
 			<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
 			<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
 			<input type="hidden" id="b_delivery_method<%=i%>" name="b_delivery_method<%=i%>" value="<%=bkdto.getB_delivery_method()%>">
-			<input type="hidden" id="b_price_origin<%=i%>" name="b_price_origin<%=i%>" value="<%=adto.getA_price_origin()%>">
-			<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=adto.getA_price_sale()%>">
-			<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=adto.getA_mileage()%>">
-			<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=adto.getA_discount_rate()%>">
+			<input type="hidden" id="b_price_origin<%=i%>" name="b_price_origin<%=i%>" value="<%=pdto.getProduct_price_origin()%>">
+			<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
+			<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
+			<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
 			
 			<!-- 체크박스 -->
 			<td> <input type="checkbox"> </td>
 			
 			<!-- 상품 이미지 -->
 			<td>
-				<a href='./AnimalsDetail.an?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="100" height="100"> </a>
+				<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
 			</td>
 			
 			<!-- 상품정보 (옵션이 있을때와 없을때) -->
 			<%if(bkdto.getB_option().equals("")){%>
 				<td>
-					<%=adto.getA_morph()%>
+					<a href='./AnimalDetail.an?product_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
 				</td>
 			<%}else{%>
 				<td>
-					<%=adto.getA_morph() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
+					<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
 				</td>
 			<%}%>
 			
 			<!-- 판매가(적립금) -->
-			<%if(adto.getA_discount_rate() != 0){%>
-				<td><%=formatter.format(adto.getA_price_sale())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(adto.getA_mileage() * bkdto.getB_amount())%>원</span>)</td>
+			<%if(pdto.getProduct_discount_rate() != 0){%>
+				<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
 			<%} else{%>
-				<td> <%=formatter.format(adto.getA_price_origin())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(adto.getA_mileage() * bkdto.getB_amount())%>원</span>) </td>
+				<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
 			<%}%>
 			
 			<!-- 수량 -->
@@ -108,22 +113,22 @@
 				합계가 50,000원 이상인데 배송방법이 고속버스이면 14000원 표시
 				합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
 			-->
-			<%if(adto.getA_discount_rate() != 0){%>
-				<%if(adto.getA_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+			<%if(pdto.getProduct_discount_rate() != 0){%>
+				<%if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 배송비 무료 </td>
-				<%}else if(adto.getA_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 14,000원 </td>
-				<%}else if(adto.getA_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 17,000원 </td>
 				<%} else {%>
 					<td> 3,000원 </td>
 				<%}%>
 			<%} else{%>
-				<%if(adto.getA_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 배송비 무료 </td>
-				<%}else if(adto.getA_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 14,000원 </td>
-				<%}else if(adto.getA_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+				<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
 					<td> 17,000원 </td>
 				<%} else {%>
 					<td> 3,000원 </td>
@@ -133,28 +138,28 @@
 			<!-- 합계
 				(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
 				(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
-			<%if(adto.getA_discount_rate() != 0){%>
+			<%if(pdto.getProduct_discount_rate() != 0){%>
 				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
 					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
 					</td>
 				<%} else {%>
 					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_sale() * bkdto.getB_amount())%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_sale() * bkdto.getB_amount()%>">
+						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * bkdto.getB_amount())%>원</span>
+						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * bkdto.getB_amount()%>">
 					</td>
 				<%}%>
 			<%} else{%>
 				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
 					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(adto.getA_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
 					</td>
 				<%} else {%>
 					<td>
-						<span id="total_product_price<%=i%>"> <%= formatter.format(adto.getA_price_origin() * (bkdto.getB_amount()))%>원</span>
-						<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=adto.getA_price_origin() * bkdto.getB_amount()%>">
+						<span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()))%>원</span>
+						<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_origin() * bkdto.getB_amount()%>">
 					</td>
 				<%}%>
 			<%}%>
@@ -198,7 +203,7 @@
 				<%
 					for (int i = 0; i < basketList.size(); i++) {
 						BasketDTO bkdto = (BasketDTO) basketList.get(i);
-						AnimalDTO adto = (AnimalDTO) animalList.get(i);
+						AnimalDTO adto = (AnimalDTO) productInfoList.get(i);
 									
 						if(bkdto.getB_delivery_method().equals("고속버스")){
 							final_delivery_fee += 14000;
@@ -370,7 +375,6 @@
 				data:'b_code='+$('#b_code'+id_number).val()+'&b_option='+$('#b_option'+id_number).val()+'&b_delivery_method='+$('#b_delivery_method'+id_number).val(),
 				dataType: 'html',
 				success:function(data) {
-	   				alert("삭제하였습니다.");
 	   				window.location.reload(); //현재 페이지 새로고침
 	   			},error:function(request,status,error){
 				 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);

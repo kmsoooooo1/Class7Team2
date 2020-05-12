@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import team2.animal.db.AnimalDTO;
+import team2.product.db.ProductDTO;
 
 public class BasketDAO {
 	
@@ -135,9 +135,11 @@ public class BasketDAO {
 	
 	// getBasketList(id)
 	public Vector getBasketList(String id){
+		
 		Vector vec = new Vector();
-		//동물정보 저장
-		ArrayList animalList = new ArrayList();
+		
+		//상품(동물 + 물건)정보 저장
+		ArrayList productInfoList = new ArrayList();
 		//장바구니 정보 저장
 		ArrayList basketList = new ArrayList();
 		
@@ -161,37 +163,52 @@ public class BasketDAO {
 				bkdto.setB_amount(rs.getInt("b_amount"));
 				bkdto.setB_option(rs.getString("b_option"));
 				bkdto.setB_delivery_method(rs.getString("b_delivery_method"));
+				basketList.add(bkdto); // 장바구니 하나의 정보를 리스트 한칸에 저장
 				
-				// 장바구니 하나의 정보를 리스트 한칸에 저장
-				basketList.add(bkdto);
+				//b_code 값들 중에 맨 앞글자 따오기
+				char first_letter = rs.getString("b_code").charAt(0);
 				
-				// 각각의 장바구니에 해당하는 상품 정보 저장
-
-				sql ="select * from team2_animals where a_code=?";
-				
-				pstmt2 = con.prepareStatement(sql);
-				
-				pstmt2.setString(1, bkdto.getB_code());
-				
-				rs2 = pstmt2.executeQuery();
-				
-				if(rs2.next()){
+				//만약 b_code의 앞에 한글자가 a이면 동물 DB로 들어가기
+				if(first_letter == 'a'){
+					// 각각의 장바구니에 해당하는 상품 정보 저장
+					sql ="select * from team2_animals where a_code = ?";
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, bkdto.getB_code());
+					rs2 = pstmt2.executeQuery();
 					
-					AnimalDTO adto = new AnimalDTO();
+					if(rs2.next()){
+						ProductDTO pdto = new ProductDTO();
+						pdto.setProduct_thumbnail(rs2.getString("a_thumbnail"));	
+						pdto.setProduct_name(rs2.getString("a_morph"));
+						pdto.setProduct_price_sale(rs2.getInt("a_price_sale"));
+						pdto.setProduct_mileage(rs2.getInt("a_mileage"));
+						pdto.setProduct_discount_rate(rs2.getInt("a_discount_rate"));
+						pdto.setProduct_price_origin(rs2.getInt("a_price_origin"));
+						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
+					}
+				}
+				//만약 b_code의 앞에 한글자가 g이면 상품 DB로 들어가기
+				else if(first_letter == 'g'){
+					// 각각의 장바구니에 해당하는 상품 정보 저장
+					sql ="select * from team2_goods where g_code = ?";	
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, bkdto.getB_code());
+					rs2 = pstmt2.executeQuery();
 					
-					adto.setA_thumbnail(rs2.getString("a_thumbnail"));
-					adto.setA_morph(rs2.getString("a_morph"));
-					adto.setA_price_sale(rs2.getInt("a_price_sale"));
-					adto.setA_mileage(rs2.getInt("a_mileage"));
-					adto.setA_discount_rate(rs2.getInt("a_discount_rate"));
-					adto.setA_price_origin(rs2.getInt("a_price_origin"));
-					
-					// 상품정보 하나를 리스트 한칸에 저장
-					animalList.add(adto);
+					if(rs2.next()){	
+						ProductDTO pdto = new ProductDTO();
+						pdto.setProduct_thumbnail(rs2.getString("g_thumbnail"));
+						pdto.setProduct_name(rs2.getString("g_name"));
+						pdto.setProduct_price_sale(rs2.getInt("g_price_sale"));
+						pdto.setProduct_mileage(rs2.getInt("g_mileage"));
+						pdto.setProduct_discount_rate(rs2.getInt("g_discount_rate"));
+						pdto.setProduct_price_origin(rs2.getInt("g_price_origin"));
+						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
+					}
 				}
 			}
 			vec.add(0, basketList);
-			vec.add(1, animalList);
+			vec.add(1, productInfoList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
