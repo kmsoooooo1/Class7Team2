@@ -11,8 +11,10 @@
 <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
 </head>
 <body>
-   <div> 
+   <div class="title_center"> 
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
+   </div>
+      <div>
       <%
          request.setCharacterEncoding("UTF-8");
          
@@ -36,8 +38,8 @@
    <a href="./BoardList.bo?category=1">상품후기</a>
    <a href="./BoardList.bo?category=2">QnA</a>
    
-   <!-- 메인 메뉴 -->
-   <header id="header_menu">
+   <!-- 메인 메뉴 --> 
+   <nav id="nav_menu"> 
       <ul class="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
@@ -83,7 +85,7 @@
          </li>
          <li class="dropdown"> <a href="./aHospital.bo" class="dropbtn"> 동물병원 정보</a> </li>
       </ul>
-   </header>
+   </nav>
    
 </body>
 

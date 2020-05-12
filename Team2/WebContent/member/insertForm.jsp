@@ -154,7 +154,7 @@ td{
 </head>
 <body>
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 
 	<h2 class="join_title">회원가입 페이지</h2>
 	
@@ -466,7 +466,7 @@ td{
 	
 
 <!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 </body>
 
 <!-- 비밀번호 유효성 검사 -->

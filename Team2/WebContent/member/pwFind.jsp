@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- Header -->
-<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 
 <div class="contents">
  <form action="./MemberPWFindAction.me" method="post" class="box">
@@ -25,7 +25,7 @@
 </div>
 
 	<!-- FOOTER -->
-<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 
 </body>
 </html>
