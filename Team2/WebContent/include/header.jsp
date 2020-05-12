@@ -14,7 +14,7 @@
    <div class="title_center"> 
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
    </div>
-      <div>
+      <div class="title_right">
       <%
          request.setCharacterEncoding("UTF-8");
          
@@ -32,12 +32,12 @@
          <a href="./MemberPage.me"> 마이 페이지 </a>
          <a href="./MemberLogout.me"> 로그아웃 </a>
       <% } %> 
-   </div>
-   
+    </div>
+   <div class="title_center">
    <a href="./BoardList.bo?category=0">공지사항</a>
    <a href="./BoardList.bo?category=1">상품후기</a>
    <a href="./BoardList.bo?category=2">QnA</a>
-   
+   </div>
    <!-- 메인 메뉴 --> 
    <nav id="nav_menu"> 
       <ul class="sub_menu">

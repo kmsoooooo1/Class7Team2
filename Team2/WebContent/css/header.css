@@ -4,9 +4,15 @@
 	text-align: center;
 }
 
-#nav_menu {
+.title_right {
+	text-align: right;
+}
+
+.sub_menu {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
+	allgn-items: center;
 	
 }
 
