@@ -102,9 +102,6 @@
 			%>
 				<script type="text/javascript">
 				
-
-
- 
 					img_files.push("<%=files[i]%>");
 				</script>
 			

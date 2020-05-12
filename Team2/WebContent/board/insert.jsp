@@ -75,7 +75,6 @@
 			formData.append('files', sel_files[index]);
 		}
 
-		
 		$.ajax({
 			type : "POST",
 			enctype : 'multipart/form-data',
@@ -93,6 +92,7 @@
 	          }    
 			//전송실패 미구현
 		});
+		
 	
 	};
 	
