@@ -7,34 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
-	<!-- Main Content -->
-<!-- 	<ul> -->
-<!-- 		<li><a href="./aHospital.bo">동물병원정보</a></li> -->
-<!-- 	</ul> header.jsp 로 위치 이동 -->
-	
-	<hr>
-	
-	<!-- 신상품 리스트 -->
-	- 신상품 
-	
-	<!-- 파충류 리스트 -->
-	- 파충류
-	
-	<!-- 양서류 리스트 -->
-	- 양서류
-	
-	<!-- 상품 리스트 -->
-	- 상품
-	
-	
-	<hr>
+	<img src="./company/회사소개.jpg">
 	
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>	
-
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	
 </body>
 </html>

@@ -16,10 +16,18 @@
 	</script>
 </head>
 <body>
+
+	<!-- Header -->
+<header> <jsp:include page="/include/header.jsp" /> </header>
+	
 	<h1>WebContent/board/hospital.jsp</h1>
 	<div id="map" style="width:800px;height:600px;"></div>
 	<ul id="spaceList">
 	</ul>
+
+		<!-- FOOTER -->
+<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+
 </body>
 <script type="text/javascript">
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

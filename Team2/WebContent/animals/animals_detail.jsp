@@ -330,9 +330,7 @@
 	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
 	
 	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
-	
-	var test;
-	
+
 	function changeDeliMethod(){
 		
 		var delivery_method = document.getElementById('delivery_method').value;	//배송방법
@@ -346,15 +344,26 @@
 		if(delivery_method == '고속버스'){
 			//할인율이 있으면
 			if(a_discount_rate != 0){
-				a_price_sale = parseInt(a_price_sale) + parseInt(14000);
+				a_price_sale_option = parseInt(a_price_sale) + parseInt(14000);
 			}
 			//없으면
 			else{
-				a_price_origin = parseInt(a_price_origin) + parseInt(14000);
+				a_price_origin_option = parseInt(a_price_origin) + parseInt(14000);
 			}	
 		}
+		//만약 고속버스가 아니면 원판매가 그대로 a_price_sale_option에 저장
+		else{
+			//할인율이 있으면
+			if(a_discount_rate != 0){
+				a_price_sale_option = parseInt(a_price_sale);
+			}
+			//없으면
+			else{
+				a_price_origin_option = parseInt(a_price_origin);
+			}
+		}
 		
-		var a_mileage = document.getElementById('a_mileage').value;				//적립금
+		var a_mileage = document.getElementById('a_mileage').value;		//적립금
 		
 		var objRow;
 		objRow = document.all["final_product_info_table"].insertRow();
@@ -381,16 +390,16 @@
 				//만약 적립금이 0이 아니면
 				if(a_discount_rate != 0){
 					objCell_price.innerHTML = "<span id='total_product_price_" + delivery_method + "' >" 
-											+ a_price_sale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
+											+ a_price_sale_option.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
 											+ "(적 " + "<span id='total_product_mileage_" + delivery_method + "'>" + a_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원</span>" + ")"
-											+ "<input type='hidden' id='total_product_price_" + delivery_method + "_input" + "' name='total_product_price_" + delivery_method + "_input' value=" + a_price_sale + ">";
+											+ "<input type='hidden' id='total_product_price_" + delivery_method + "_input" + "' name='total_product_price_" + delivery_method + "_input' value=" + a_price_sale_option + ">";
 				}
 				//만약 적립금이 0이면
 				else{
 					objCell_price.innerHTML = "<span id='total_product_price_" + delivery_method + "'>" 
-											+ a_price_origin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
+											+ a_price_origin_option.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원 </span> <br>" 
 											+ "(적 " + "<span id='total_product_mileage_" + delivery_method + "'>" + a_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원</span>" + ")"
-											+ "<input type='hidden' id='total_product_price_" + delivery_method + "_input" + "' name='total_product_price_" + delivery_method + "_input' value=" + a_price_origin + ">";
+											+ "<input type='hidden' id='total_product_price_" + delivery_method + "_input" + "' name='total_product_price_" + delivery_method + "_input' value=" + a_price_origin_option + ">";
 				}
 		}
 		
@@ -455,17 +464,11 @@
 			   		if(a_discount_rate != 0){
 			   			//final_total_price 태그 제어
 			   			final_total_price -= (a_price_sale * (previousAmount - currentAmount));
-
-						//태그에 추가하기
-						$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			   		}
 			   		//할인율이 0이면
 			   		else{
 			   			//final_total_price 태그 제어
 			   			final_total_price -= (a_price_origin * (previousAmount - currentAmount));
-
-						//태그에 추가하기
-						$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			   		}
 			   	} 
 			   	//변경 전 수량이 변경 후 수량보다 작을때
@@ -476,22 +479,18 @@
 			   		//만약 할인율이 0이 아니면
 			   		if(a_discount_rate != 0){
 			   			//final_total_price 태그 제어
-			   			final_total_price += (a_price_sale * (currentAmount - previousAmount));
-
-						//태그에 추가하기
-						$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						final_total_price += (a_price_sale * (currentAmount - previousAmount)); 			
 			   		}
 			   		//할인율이 0이면
 			   		else{
 			   			//final_total_price 태그 제어
 			   			final_total_price += (a_price_origin * (currentAmount - previousAmount));
-
-						//태그에 추가하기
-						$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			   		}
 			   	}
 			}
 		    
+			//태그에 추가하기
+			$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			$('#final_total_amount').text(final_total_amount);
     
 		});
@@ -560,7 +559,7 @@
 	//사용자가 '+'를 눌렸을시
 	function plus(delivery_method){
 		
-		var total_price = Number($('#total_product_price_' + delivery_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
+		var total_price = Number($('#total_product_price_' + delivery_method + '_input').val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
 
 		//delivery_method 인수로 들어온 값에 따라 new_a_amount 값 바꾸기
 		var new_a_amount = document.getElementById('a_amount_' + delivery_method).value;	//사용자가 새로 수정하는 수량
