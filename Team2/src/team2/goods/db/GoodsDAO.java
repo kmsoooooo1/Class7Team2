@@ -284,15 +284,15 @@ public class GoodsDAO {
 			else if(category.equals("먹이")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+						+ "max(g_amount) as g_amount from team2_goods where category='먹이' ");
 				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num desc");
+					SQL.append("group by g_code order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
-					SQL.append("AND sub_category = ? order by num desc");
+					SQL.append("AND sub_category = ? group by g_code order by num desc");
 				}
 			}
 			// sub_category_index는 메뉴에서 다루지 않음.
