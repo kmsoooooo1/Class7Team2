@@ -5,10 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/logo.css" rel="stylesheet">
 </head>
 <body>
-	<h1 class="title_logo">GALAPAGOS</h1>
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
+	<img src="./company/회사소개.jpg">
+	
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	
 </body>
 </html>
