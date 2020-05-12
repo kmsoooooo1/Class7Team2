@@ -183,9 +183,29 @@ public class MemberFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/recentView.me")){
+		}
+		// 최근 본 상품 페이지
+		else if(command.equals("/recentView.me")){
 			forward = new ActionForward();
 			forward.setPath("./member/recentView.jsp");
+			forward.setRedirect(false);
+		}
+		// 회사 소개 페이지
+		else if(command.equals("/Company.me")){
+			forward = new ActionForward();
+			forward.setPath("./company/company.jsp");
+			forward.setRedirect(false);
+		}
+		// 이용약관 페이지
+		else if(command.equals("/Agreement.me")){
+			forward =new ActionForward();
+			forward.setPath("./company/agreement.jsp");
+			forward.setRedirect(false);
+		}
+		// 개인정보 취급 방침 페이지
+		else if(command.equals("/Privacy.me")){
+			forward = new ActionForward();
+			forward.setPath("./company/privacy.jsp");
 			forward.setRedirect(false);
 		}
 		
