@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/logo.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
 </head>
 <body>
    <header class="title_center"> 
