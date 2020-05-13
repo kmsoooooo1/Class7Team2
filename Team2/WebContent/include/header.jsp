@@ -11,9 +11,9 @@
 <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
 </head>
 <body>
-   <div class="title_center"> 
+   <header class="title_center"> 
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
-   </div>
+   </header>
       <div class="title_right">
       <%
          request.setCharacterEncoding("UTF-8");

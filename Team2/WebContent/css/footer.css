@@ -9,7 +9,8 @@ body{
 #footer {
 		background-color: #333;
 		text-align: center;
-		width: 100%;
+		width: 80%;
+		margin: 0 auto;
 		height: 260px;
 	}
 
