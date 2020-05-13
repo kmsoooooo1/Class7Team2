@@ -8,7 +8,9 @@ public class cSet {
 	public static final String[] ANIMAL = {"파충류","양서류"};
 	public static final String[] ANIMAL_R = {"도마뱀", "뱀", "거북"};
 	public static final String[] ANIMAL_A = {"프로그", "살라맨더", "팩맨"};
-	public static final String[] GOODS = {"먹이","사육장","수족관","장식/그릇","램프","바닥재","온/습도","보조용품"};
+	public static final String[] GOODS = {"먹이","사육용품"};
+	public static final String[] GOODS_F = {"생먹이", "냉동먹이", "인공사료", "칼슘/약품"};
+	public static final String[] GOODS_B = {"사육장","수족관", "장식/그릇", "램프", "바닥재", "온/습도 관련", "보조용품"};
 	
 	
 	//	Category index

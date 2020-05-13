@@ -5,10 +5,10 @@
 	color: white;
 	font-size: 4rem;
 	letter-spacing: 3px;
-	background: url("https://lh3.googleusercontent.com/proxy/EhEBwKzSQXZBzhpvk7TXkGtomUU7osQusyjLrufyI2cscQ9FNTOMdduzGLK0clbDxXJhL1eB39iitXXgh7FBs28ukALfkNpHkLyxS47iaY0mpk5y5btVx8jBvLMlPYOoUAV0_rXB9qaxyPeLq-kadAvzzLPJqFAKwuOaNA-PIwqrPm6Jz-0IqYjalABP1M0qxMMmMExZvbU0KPH2wtuHy7o7");
+	background-image: url("../img/gala.jpg"); 
 	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;	
+	background-clip: text; 
+	-webkit-text-fill-color: transparent;	 
 	animation: animate 3s linear infinite;
 }
 
