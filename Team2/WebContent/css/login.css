@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.contents {
+	width: 100%;
+	height: 600px;
+	font-family: sans-serif;
+	background: white;
+}
+
+.box {
+	width: 500px; 
+	padding: 40px;
+	position: absolute;
+	top: 50%; 
+	left: 50%; 
+	transform: translate(-50%,-50%);
+	background: #fbfbfb;
+	text-align: center; 
+}
+
+.box h2 {
+	color: black;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+.box input[type = "text"],.box input[type = "password"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: black;
+	border-radius: 30px;
+	transition: 0.25s;
+}
+
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+	width: 280px;
+	border-color: #2ecc71;
+}
+
+.box input[type = "submit"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	color: black;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+.box inputp[type = "submit"]:hover{
+	background: #2ecc71;
+}
+
+.btn {
+	display: block;
+	font-size: 20px;
+	padding: 5px 10px;
+	color: white;
+	width: 100%;
+	background: #34495e;
+	cursor: pointer;
+}
+
+.btn:HOVER {
+	animation: shake 0.6s infinite;
+}
+
+@keyframes shake {
+	0%{
+		transform: translate(0px,0px) rotate(0deg);
+	}
+	25%{
+		transform: translate(1px,1px) rotate(1deg);
+	}
+	50%{
+		transform: translate(-1px,-1px) rotate(-1deg);
+	}
+	75%{
+		transform: translate(2px,-1px) rotate(2deg);
+	}
+	100%{
+		transform: translate(-1px,-1px) rotate(-1deg);
+	}
+}

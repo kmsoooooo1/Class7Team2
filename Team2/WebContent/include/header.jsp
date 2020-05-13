@@ -38,7 +38,7 @@
    
    <!-- 메인 메뉴 -->
    <header id="header_menu">
-      <ul>
+      <ul class="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>

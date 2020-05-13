@@ -33,6 +33,8 @@
 		<!-- 관리자 멤버 파트 -->
 		<div>
 			<h4> 멤버 파트 </h4>
+			<a href="./MemberList.me">회원 리스트 보기</a>
+			<a href="https://center-pf.kakao.com/_iLxlxexb/chats">카카오 상담 내역보기</a>
 		</div>
 	</div>
 	

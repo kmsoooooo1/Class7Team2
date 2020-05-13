@@ -15,10 +15,10 @@
  
 </head>
 <body>
-	<!-- Header -->
-	 <jsp:include page="/include/header.jsp" /> 
+
+	 <jsp:include page="/include/header.jsp" />
 	
-	<!-- Main Content -->
+
 	<h1>WebContent/board/board_review.jsp</h1>
 	
 	<%
