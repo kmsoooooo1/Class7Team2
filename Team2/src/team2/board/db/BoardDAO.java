@@ -247,26 +247,30 @@ public class BoardDAO {
 	// BoardDTO getBoard(int num)
 
 	//updateBoard()
-	public void updateBoard(BoardDTO bdto) {
+	public int updateBoard(BoardDTO bdto) {
+		int chk = -1;
 		
 		try {
-			sql = "update team2_board set b_category=?,b_title=?,b_content=? where b_idx=?";
+			sql = "update team2_board set b_category=?,b_title=?,b_content=?, b_file=? where b_idx=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bdto.getB_category());
 			pstmt.setString(2, bdto.getB_title());
 			pstmt.setString(3, bdto.getB_content());
-			pstmt.setInt(4, bdto.getB_idx());
+			pstmt.setString(4, bdto.getB_file());
+			pstmt.setInt(5, bdto.getB_idx());
 			
-			pstmt.executeUpdate();
+			chk = pstmt.executeUpdate();
 			
 			System.out.println("Content 수정 완료! ");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Content 수정 실패@@@");
+			chk = 0;
 		}
 		
+		return chk;
 	}
 	//updateBoard()
 	
