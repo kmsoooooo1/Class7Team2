@@ -62,6 +62,7 @@ ul{
 		}
 		.info_desc{
 			width:480px;
+			margin:0;
 			float:left;
 		}
 		
@@ -78,6 +79,7 @@ ul{
 		}
 		.info_desc{
 			width:100%;
+			margin:0;
 			float:left;
 		}
 		
@@ -145,8 +147,8 @@ ul{
 	width:80%;
 	margin: 10px auto;
 	text-align: left;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	border-top: 2px solid #aaa;
+	border-bottom: 2px solid #aaa;
 	font-size: 0.8em;
 }
 .detail_td{
@@ -157,11 +159,36 @@ ul{
 	width: 80%;
 	margin: 10px auto;
 	text-align: left;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	border-top: 2px solid #aaa;
+	border-bottom: 2px solid #aaa;
 	font-size: 0.8em;	
 }
 .selected_td{
 	padding: 1.2em 0 1.2em 0.8em;
 }
 
+.selected_th{
+	border-bottom: 1px solid #aaa;
+}
+.selected_td_last{
+	border-top: 2px solid #aaa;
+}
+
+.detail_select{
+	width: 80%;
+	height: 40px;
+	margin: 20px auto;
+	text-align: left;
+	font-size: 0.8em;
+	padding-left: 0.8em;
+}
+.detail_select_title{
+	display:inline-block;
+	line-height:40px;
+	width:35%;
+}
+.detail_select_input{
+	width:60%;
+	height:100%;
+	padding-left: 0.5em;
+}

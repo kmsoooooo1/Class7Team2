@@ -11,7 +11,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animals_detail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/product_detail.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title> 테스트 </title>
@@ -118,8 +118,9 @@
 							<%}%>
 						</table>
 						<!-- 배송방법 -->
-						배송방법
-							<select id="delivery_method" name="delivery_method" onchange="changeDeliMethod();">
+						<div class="detail_select">
+							<span class="detail_select_title">배송방법</span>
+							<select class="detail_select_input" id="delivery_method" name="delivery_method" onchange="changeDeliMethod();">
 								<option value= "" selected disabled> -[필수]배송방법을 선택해 주세요 - </option>
 								<option disabled> --------------- </option>
 								<option value="일반포장"> 일반포장 </option>
@@ -128,6 +129,7 @@
 								<option value="고속버스"> 고속버스택배 (+14,000원) </option>
 								<option value="매장방문"> 매장방문수령 </option>				
 							</select>
+						</div>
 						<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
 						<table class="selected_table">
 						
@@ -136,7 +138,7 @@
 								<col width="40%">
 								<col width="30%">
 							</colgroup>
-							<tr class="selected_tr">
+							<tr class="selected_tr selected_th">
 								<td class="selected_td"> 상품명 </td>
 								<td class="selected_td"> 상품수 </td>
 								<td class="selected_td"> 가격 </td>
@@ -145,7 +147,7 @@
 							<tbody id="final_product_info_table"></tbody>
 
 							<tr class="selected_tr">
-								<td class="selected_td" colspan="3"> 
+								<td class="selected_td selected_td_last" colspan="3"> 
 									TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) 
 								</td>
 							</tr>
