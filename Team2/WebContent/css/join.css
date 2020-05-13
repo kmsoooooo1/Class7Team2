@@ -12,8 +12,7 @@
 .box{
 	background-color: rgb(0,0,0,0.5);
 	width: 900px;
-	margin: auto;
-	
+	margin: 0 auto;
 }
 
 form{
@@ -38,8 +37,8 @@ form{
 	cursor: pointer;
 }
 
-.btn:HOVER {
-	animation: shake 0.6s infinite;
+.btn_submit{
+	margin-left: 350px;
 }
 
 .id,#pass,#user_pass_confirm,#name,#phone,#zipcode,#addr1,#addr2,#email {
@@ -55,10 +54,18 @@ form{
 
 #agreep{
 	color: white;
+	text-align: center;
+	width: 100%;
 }	
 
 #passp{
 	color: white;
 }
 
+.div_text{
+	margin-left: 70px;
+}
 
+.textarea{
+	text-align: center;
+}
