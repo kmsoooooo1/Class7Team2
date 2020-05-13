@@ -768,14 +768,16 @@
 			$("#selectedAmounts").val(selectedAmounts);
 			
 			document.fr.action="./BasketAdd.ba";
-			document.fr.submit();
+			//document.fr.submit();
 			
 			var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
 			if(goBasket){
 				location.href="./BasketList.ba";
 			}else if(!goBasket){
+				alert("테스트");
 				return false;
 			}
+			
 		}
 	}
 	
