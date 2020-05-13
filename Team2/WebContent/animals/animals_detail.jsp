@@ -95,30 +95,28 @@
 						<%}else{%>
 							<h4> <%=animalDetail.getA_morph()%> </h4>
 						<%}%>
-						<hr>
 						<!-- 판매가, 적립금, 할인판매가 -->
-						<table border="1">
-							<tr>
-								<td> 판매가 </td>
-								<td> 
+						<table class="detail_table">
+							<tr class="detail_tr">
+								<td class="detail_td"> 판매가 </td>
+								<td class="detail_td"> 
 									<%=newformat_price_origin%>원 
 									<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
 										<%=animalDetail.getA_discount_rate()%>% OFF 
 									<%}%> 
 								</td> 
 							</tr>
-							<tr>
-								<td> 적립금 </td>
-								<td> <%=newformat_mileage%>원 </td>
+							<tr class="detail_tr">
+								<td class="detail_td"> 적립금 </td>
+								<td class="detail_td"> <%=newformat_mileage%>원 </td>
 							</tr>
 							<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
-							<tr>
-								<td> 할인판매가  </td>
-								<td> <%=newformat_price_sale%>원 (<%=animalDetail.getA_discount_rate()%>% 할인율) </td>
+							<tr class="detail_tr">
+								<td class="detail_td"> 할인판매가  </td>
+								<td class="detail_td"> <%=newformat_price_sale%>원 (<%=animalDetail.getA_discount_rate()%>% 할인율) </td>
 							</tr>
 							<%}%>
-						</table> 
-						<hr>
+						</table>
 						<!-- 배송방법 -->
 						배송방법
 							<select id="delivery_method" name="delivery_method" onchange="changeDeliMethod();">
@@ -129,25 +127,29 @@
 								<option value="지하철"> 지하철택배(착불) </option>
 								<option value="고속버스"> 고속버스택배 (+14,000원) </option>
 								<option value="매장방문"> 매장방문수령 </option>				
-							</select>  
-						<hr>
+							</select>
 						<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
-						<table border="1">
-							<tr>
-								<td> 상품명 </td>
-								<td> 상품수 </td>
-								<td> 가격 </td>
+						<table class="selected_table">
+						
+							<colgroup>
+								<col width="30%">
+								<col width="40%">
+								<col width="30%">
+							</colgroup>
+							<tr class="selected_tr">
+								<td class="selected_td"> 상품명 </td>
+								<td class="selected_td"> 상품수 </td>
+								<td class="selected_td"> 가격 </td>
 							</tr>
 							<!-- 옵션을 선택했을시 최종 상품 정보 나타내기 -->
 							<tbody id="final_product_info_table"></tbody>
 
-							<tr>
-								<td colspan="3"> 
+							<tr class="selected_tr">
+								<td class="selected_td" colspan="3"> 
 									TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) 
 								</td>
 							</tr>
 						</table>
-						<hr>
 						<%if(animalDetail.getA_amount() == 0){%>
 							<span> 품절 </span>
 							<button type="button"> 관심상품 </button>
