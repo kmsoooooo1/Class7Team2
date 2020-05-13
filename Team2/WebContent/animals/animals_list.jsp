@@ -8,6 +8,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/animals_detail.css" rel="stylesheet">
+<style>
+.a_btn {
+	background-color: white;
+	color: black;
+	border: 2px solid #e7e7e7;
+	text-align: center;
+	padding: 5px 21px;
+	font-size: 16px;
+	margin: 0 auto;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.a_btn:hover {
+	background-color: #e7e7e7;
+}
+
+</style>
 </head>
 <body>
 
@@ -24,18 +43,21 @@
 	%>
 
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
 	
 	<div>
-		<ul>
-			<li> <a href="./AnimalList.an?category=파충류"> 전체보기 </a> </li>
-			<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a> </li>
-			<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> </li>
-			<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a> </li>
-			<li> <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a> </li>
-		</ul>
+	 <input type="button" value="전체보기" class="a_btn"
+	 	onclick="location.href='./AnimalList.an?category=파충류'">
+	 <input type="button" value="리자드/모니터" class="a_btn" 
+	 	onclick="location.href='./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터'">
+	 <input type="button" value="레오파드/게코" class="a_btn" 
+	 	onclick="location.href='./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코'">
+	 <input type="button" value="크레스티드 게코" class="a_btn" 
+	 	onclick="location.href='./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코'">
+	 <input type="button" value="카멜레온" class="a_btn" 
+	 	onclick="location.href='./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온'">
 	</div>
 	
 	<span> Total <%=animalList.size()%> items</span> 
@@ -88,7 +110,7 @@
 	</table>
 	
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 	
 </body>
 </html>
