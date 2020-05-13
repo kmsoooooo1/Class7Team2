@@ -11,51 +11,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/boardList.css" rel="stylesheet">
 
- <style type="text/css">
-  ul{ list-style: none;}
-  li{ float:left;
-  	  font-style: normal;
-  	}
- 
- </style>
- 
+
+
 </head>
 <body>
-	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
-	<!-- Main Content -->
+
+	<jsp:include page="/include/header.jsp" />
+
 	<h1>WebContent/board/board_notice.jsp</h1>
 	
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		
+		//페이지번호 & 카테고리번호
 		String pageNum = (String)request.getAttribute("pageNum");
+		int c = (int)request.getAttribute("c");
 	%>
 	
-		 <h2><a href="./Insert.bo"> 글 쓰기 (스마트에디터)  </a></h2>
+		 <h2><a href="./Insert.bo"> 글 쓰기   </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
 	
-	<table border="1">
-	  <tr>
-	    <td>번호</td>
-	    <td>제목</td>
-	    <td>작성자</td>
-	    <td>날짜</td>
-	    <td>조회수</td>
-	    <td>IP</td>
-	  </tr>
-	  
+<div class="board">
+	<div class="list-div">
+	<table class="list">
+		<colgroup>
+			<col width="10%" />
+			<col width="60%" />
+			<col width="10%" />
+			<col width="12%" />
+			<col width="8%" />
+		</colgroup>
+		<thead>
+		  <tr>
+		    <th>번호</th>
+		    <th>제목</th>
+		    <th>작성자</th>
+		    <th>작성일</th>
+		    <th>조회수</th>
+		  </tr>
+	  	</thead>
 	  <%
-	    for(int i=0;i<boardList.size();i++){ 
+	    for(int i=0; i<boardList.size(); i++){ 
              BoardDTO bdto = (BoardDTO) boardList.get(i);
 	  %>
-	
+		<tbody>
 		  <tr>
 		    <td><%=bdto.getB_idx() %></td>
-		    <td>
+		    <td class="title">
 		    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
 		    	<%=bdto.getB_title() %>
 		    	</a>
@@ -64,31 +70,34 @@
 		    <td><%=bdto.getB_writer() %></td>
 		    <td><%=bdto.getB_reg_date() %></td>
 		    <td><%=bdto.getB_view() %></td>
-		    <td><%=bdto.getIp_addr() %></td>
 		  </tr>
+		 </tbody>
 	  <% } %>
 	
 	</table>
+	</div>
 	
-	<ul class="btn-group paging">
+	<div class="paging-div">
+	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
-	<li>
-		<a href='<c:url value="./notice.bo?pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">[이전]</i></a>	
-	</li>
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">◀</i></a>	
+		</li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageNum}"/>'><i class="fa">${pageNum }</i></a>
+		</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">▶</i></a>
+		</li>
 	</c:if>
-	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
-	<li>
-		<a href='<c:url value="./notice.bo?pageNum=${pageNum}"/>'><i class="fa">[${pageNum }]</i></a>
-	</li>
-	</c:forEach>
-	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	<li>
-		<a href='<c:url value="./notice.bo?pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">[다음]</i></a>
-	</li>
-	</c:if>
-
 	</ul>
+	</div>
+	
+</div>
 
-x
 </body>
 </html>
