@@ -35,10 +35,11 @@ form{
 	color: white;
 	background: #34495e;
 	cursor: pointer;
+	margin-left: 30px;
 }
 
 .btn_submit{
-	margin-left: 350px;
+	margin-left: 300px;
 }
 
 .id,#pass,#user_pass_confirm,#name,#phone,#zipcode,#addr1,#addr2,#email {
