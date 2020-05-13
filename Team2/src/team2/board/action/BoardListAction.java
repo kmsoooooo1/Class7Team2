@@ -72,7 +72,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("pageNum", pageNum);
 		
 		//카테고리별 전송 값
-		request.setAttribute("category", c);		
+		request.setAttribute("c", c);		
 		
 		ActionForward forward = new ActionForward();
 		

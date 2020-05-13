@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 <!-- 
 	   로그인한 사용자의 경우 사용자 ID를 출력,
 	   로그인X 사용자의 경우 로그인페이지로 이동 	   
@@ -320,6 +320,6 @@
 </div>
 </div>	
 <!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 </body>
 </html>

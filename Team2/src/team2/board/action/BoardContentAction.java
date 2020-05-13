@@ -28,7 +28,6 @@ public class BoardContentAction implements Action {
 		BoardDAO bdao = new BoardDAO();
 		
 		bdao.updateView(num);
-		
 		BoardDTO bdto = bdao.getBoard(num);
 		
 		request.setAttribute("bdto", bdto);

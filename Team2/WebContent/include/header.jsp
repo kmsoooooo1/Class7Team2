@@ -7,12 +7,11 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/logo.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
 </head>
 <body>
-   <div> 
-      <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
+      <div class="top_menu">
+      <ul>
       <%
          request.setCharacterEncoding("UTF-8");
          
@@ -21,23 +20,26 @@
          
          if(id == null){   
       %>
-         <a href="./MemberJoin.me"> 회원가입 </a>
-         <a href="./MemberLogin.me"> 로그인 </a>
+        <li> <a href="./MemberJoin.me"> 회원가입 </a></li>
+        <li> <a href="./MemberLogin.me"> 로그인 </a></li>
       <% }else if(id.equals("admin")) { %>
-         <a href="./Main.ad"> 관리자 페이지 </a>
-         <a href="./MemberLogout.me"> 로그아웃 </a>
+        <li> <a href="./Main.ad"> 관리자 페이지 </a></li>
+        <li> <a href="./MemberLogout.me"> 로그아웃 </a></li>
       <% }else{ %>
-         <a href="./MemberPage.me"> 마이 페이지 </a>
-         <a href="./MemberLogout.me"> 로그아웃 </a>
+        <li> <a href="./MemberPage.me"> 마이 페이지 </a></li>
+        <li> <a href="./MemberLogout.me"> 로그아웃 </a></li>
       <% } %> 
-   </div>
-   
-   <a href="./BoardList.bo?category=0">공지사항</a>
-   <a href="./BoardList.bo?category=1">상품후기</a>
-   <a href="./BoardList.bo?category=2">QnA</a>
-   
-   <!-- 메인 메뉴 -->
-   <header id="header_menu">
+   <li><a href="./BoardList.bo?category=0">공지사항</a></li>
+   <li><a href="./BoardList.bo?category=1">상품후기</a></li>
+   <li><a href="./BoardList.bo?category=2">QnA</a></li>
+   	  </ul>
+    </div>
+    
+    <div id="logo">
+      <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
+    </div>  
+   <!-- 메인 메뉴 --> 
+   <nav id="nav_menu"> 
       <ul class="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
@@ -83,7 +85,7 @@
          </li>
          <li class="dropdown"> <a href="./aHospital.bo" class="dropbtn"> 동물병원 정보</a> </li>
       </ul>
-   </header>
+   </nav>
    
 </body>
 

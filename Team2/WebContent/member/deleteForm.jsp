@@ -16,7 +16,7 @@
    %>   
    
    <!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
    
 <fieldset>
     <legend>회원 탈퇴하기</legend>
@@ -29,7 +29,7 @@
 
 
 <!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 
 </body>
 </html>
