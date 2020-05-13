@@ -184,6 +184,7 @@ public class BasketDAO {
 						pdto.setProduct_mileage(rs2.getInt("a_mileage"));
 						pdto.setProduct_discount_rate(rs2.getInt("a_discount_rate"));
 						pdto.setProduct_price_origin(rs2.getInt("a_price_origin"));
+						pdto.setProduct_amount(rs2.getInt("a_amount"));
 						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
 					}
 				}
@@ -203,6 +204,7 @@ public class BasketDAO {
 						pdto.setProduct_mileage(rs2.getInt("g_mileage"));
 						pdto.setProduct_discount_rate(rs2.getInt("g_discount_rate"));
 						pdto.setProduct_price_origin(rs2.getInt("g_price_origin"));
+						pdto.setProduct_amount(rs2.getInt("g_amount"));
 						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
 					}
 				}

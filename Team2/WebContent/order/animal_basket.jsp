@@ -36,7 +36,7 @@
 	<table border="1">
 		<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 		<tr>
-			<td> <input type="checkbox"> </td>
+			<td> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </td>
 			<td>이미지</td>
 			<td>상품정보</td>
 			<td>판매가<br>(적립예정)</td>
@@ -44,7 +44,7 @@
 			<td>배송구분</td>
 			<td>배송비</td>
 			<td>합계</td>
-			<td>선택</td>
+			<td>주문관리</td>
 		</tr>
 		<%
 			for (int i = 0; i < basketList.size(); i++) {
@@ -65,31 +65,57 @@
 			<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
 			<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
 			<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
+			<input type="hidden" id="b_amount_<%=i%>_DB" name="b_amount_<%=i%>_DB" value="<%=pdto.getProduct_amount()%>">
 			
 			<!-- 체크박스 -->
-			<td> <input type="checkbox"> </td>
+			<td> <input type="checkbox" id="chkBox<%=i%>" value="<%=i%>" onclick="chkBoxValue('<%=i%>');"> </td>
 			
 			<!-- 상품 이미지 -->
+			<!-- 상품이 동물일때 -->
 			<%if(first_letter == 'a'){%>
 				<td>
-					<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<!-- 만약 해당상품의 재고가 없으면 soldout 표시뜨게 하기 -->
+					<%if(pdto.getProduct_amount() == 0) {%>
+						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="https://cdn.imweb.me/upload/58364fef00b40.jpg" width="100" height="100" style="opacity: 0.5; position: absolute; background-color: white;"> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<%} else {%>
+						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<%}%>
 				</td>
+				
+				<!-- 상품정보 (옵션이 있을때와 없을때) -->
+				<%if(bkdto.getB_option().equals("")){%>
+					<td>
+						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
+					</td>
+				<%}else{%>
+					<td>
+						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
+					</td>
+				<%}%>
+			<!-- 상품이 물건일때 -->
 			<%} else if(first_letter == 'g') {%>
 				<td>
-					<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<!-- 만약 해당상품의 재고가 없으면 soldout 표시뜨게 하기 -->
+					<%if(pdto.getProduct_amount() == 0) {%>
+						<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="https://cdn.imweb.me/upload/58364fef00b40.jpg" width="100" height="100" style="opacity: 0.5; position: absolute; background-color: white;"> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<%} else {%>
+						<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<%}%>
 				</td>
+				
+				<!-- 상품정보 (옵션이 있을때와 없을때) -->
+				<%if(bkdto.getB_option().equals("")){%>
+					<td>
+						<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
+					</td>
+				<%}else{%>
+					<td>
+						<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
+					</td>
+				<%}%>
 			<%}%>
 			
-			<!-- 상품정보 (옵션이 있을때와 없을때) -->
-			<%if(bkdto.getB_option().equals("")){%>
-				<td>
-					<a href='./AnimalDetail.an?product_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
-				</td>
-			<%}else{%>
-				<td>
-					<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
-				</td>
-			<%}%>
+			
 			
 			<!-- 판매가(적립금) -->
 			<%if(pdto.getProduct_discount_rate() != 0){%>
@@ -171,9 +197,7 @@
 			<%}%>
 			
 			<td>
-				<input type="button" value="주문하기"> <br> 
-				<input type="button" value="관심상품 등록"> <br> 
-				<input type="button" value="삭제" onclick='deleteCell(this, <%=i%>);'> <br>
+				<input type="button" value="삭제하기" onclick='deleteCell(this, <%=i%>);'> <br>
 			</td>
 		</tr>
 
@@ -181,16 +205,11 @@
 			}
 		%>
 	</table>
-
-	<p>할인 적용 금액은 주문서작성의 결제예정금액에서 확인 가능합니다.</p>
+	<input type="button" id="deleteSoldout" value="품절삭제" onclick="deleteSoldout();">
+	<input type="button" value="선택삭제">
+	
 	<hr>
-	<input type="button" value="삭제하기">
-	<input type="button" value="관심상품등록">
-	<input type="button" value="상품 조르기">
-	<input type="button" value="장바구니 비우기">
-	<input type="button" value="견적서 출력">
-	<br>
-	<br>
+	
 	<table border="1">
 		<tr>
 			<td>총 상품금액</td>
@@ -281,11 +300,53 @@
 
 <script type="text/javascript">
 
+	//장바구니 페이지가 처음 로딩되었을때 세팅하기
+	$(document).ready(function(){
+		
+		//전체체크박스 제어
+		$("#chkBoxAll").prop('checked', true);
+	
+		var check = $("#chkBoxAll").is(":checked"); //최상위 체크박스 체크여부
+		//만약 최상위 체크박스가 체크되어있으면 전체 선택
+		if(check){
+			$("input[type='checkbox']").prop('checked', true);
+		}
+		//만약 최상위 체크박스가 체크되어있으면 전체 해제
+		else{
+			$("input[type='checkbox']").prop('checked', false);
+		}
+
+	});
+
 	//장바구니 리스트 가져오기
 	var basketList = [];
 	<c:forEach items="${basketList}" var="basketList">
 		basketList.push("${basketList}");
-	</c:forEach>
+	</c:forEach>	
+	
+	//체크박스 제어 ----------------------------------------------------------------------------------------------------
+	
+	//사용자가 최상위 체크박스를 선택했을시 모든 체크박스 선택되게 하는 함수
+	$("#chkBoxAll").click(function(){
+		var check = $(this).is(":checked");
+		//만약 최상위 체크박스가 체크되어있으면 전체 선택
+		if(check){
+			$("input[type='checkbox']").prop('checked', true);
+		}
+		//만약 최상위 체크박스가 체크되어있으면 전체 해제
+		else{
+			$("input[type='checkbox']").prop('checked', false);
+		}
+	});
+	
+	//사용자가 추가된 체크박스를 클릭했을시
+	function chkBoxValue(id_number) {
+		//체크된 체크박스 value 가져오기
+	    alert($('#chkBox' + id_number).val());
+	}
+	
+	
+	//정보 수정 제어 --------------------------------------------------------------------------------------------------
 
 	//수량 수정했을때 호출되어야하는 함수
 	function amountAjax(id_number){
@@ -330,22 +391,27 @@
 	//사용자가 '+'를 눌렸을시
 	function plus(id_number){
 		
-		var new_amount = parseInt($("#b_amount" + id_number).val()); 	//사용자가 새로 수정하는 수량
-		
-		//사용자가 수량 999에서 +를 눌렀을시
-		if(new_amount == 999) {
-			alert("상품의 최대 구매량은 999개입니다.");
-			new_amount = parseInt("999");
-			$("#b_amount" + id_number).val(new_amount);
-		} else {
-			new_amount++;
-			$("#b_amount" + id_number).val(new_amount);
+		//현재 상품의 수량이 0이면 재고부족 alert 띄우기
+		if($('#b_amount_' + id_number + '_DB').val() == 0){
+			alert("재고가 부족합니다.");
+		} else{
+			var new_amount = parseInt($("#b_amount" + id_number).val()); 	//사용자가 새로 수정하는 수량
 			
-			//DB에 들어가서 수량 수정하는 함수 호출
-			amountAjax(id_number);
+			//사용자가 수량 999에서 +를 눌렀을시
+			if(new_amount == 999) {
+				alert("상품의 최대 구매량은 999개입니다.");
+				new_amount = parseInt("999");
+				$("#b_amount" + id_number).val(new_amount);
+			} else {
+				new_amount++;
+				$("#b_amount" + id_number).val(new_amount);
+				
+				//DB에 들어가서 수량 수정하는 함수 호출
+				amountAjax(id_number);
+			}
+			//업데이트된 총 상품금액 나타내게 하는 함수
+			changeTotalAmount(id_number);
 		}
-		//업데이트된 총 상품금액 나타내게 하는 함수
-		changeTotalAmount(id_number);
 	}
 	
 	//사용자가 '-'를 눌렸을시
@@ -391,5 +457,46 @@
 		}
 	}
 
+	//사용자가 품절삭제 버튼을 눌렸을때 호출되는 함수
+	function deleteSoldout() {
+		
+		for(var i=0; i<basketList.length; i++){
+		
+			var checkAmount = $('#b_amount_' + i + '_DB').val(); //DB에 들어가있는 실제 재고량
+			
+			//재고량이 0이면 해당 상품 장바구니에서 삭제 시키기
+			if(checkAmount == 0){
+				(function(i) {
+					$.ajax({
+						type:'get',
+						url:'./BasketDelete.ba',
+						data:'b_code='+$('#b_code'+i).val()+'&b_option='+$('#b_option'+i).val()+'&b_delivery_method='+$('#b_delivery_method'+i).val(),
+						dataType: 'html',
+						async: false,
+						success:function(data) {
+			   				
+			   			},error:function(request,status,error){
+						 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+						}
+					});
+				})(i);
+			}
+		}
+		window.location.reload(); //현재 페이지 새로고침
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 </html>
