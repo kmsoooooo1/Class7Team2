@@ -18,7 +18,7 @@
 <body>
 
 	<!-- Header -->
-<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
 	<h1>WebContent/board/hospital.jsp</h1>
 	<div id="map" style="width:800px;height:600px;"></div>
@@ -26,7 +26,7 @@
 	</ul>
 
 		<!-- FOOTER -->
-<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 
 </body>
 <script type="text/javascript">

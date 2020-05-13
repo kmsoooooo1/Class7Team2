@@ -1,5 +1,22 @@
 @CHARSET "UTF-8";
-#header_menu .sub_menu {
+
+.title_center {
+	text-align: center;
+}
+
+.title_right {
+	text-align: right;
+}
+
+.sub_menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	allgn-items: center;
+	
+}
+
+#nav_menu .sub_menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -8,7 +25,7 @@
   width: 100%;
 }
 
-#header_menu .dropdown {
+#nav_menu .dropdown {
   float: left;
 }
 

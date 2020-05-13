@@ -11,9 +11,9 @@
 <body>
 
 	<!-- Header -->
-<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 
-	
+	 
 		<div class="contents">
 		<form action="./MemberLoginAction.me" method="post" class="box">
 		 <h2>MEMBER LOGIN</h2>
@@ -28,7 +28,7 @@
 		</div>
 	
 	<!-- FOOTER -->
-<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 	
 </body>
 </html>
