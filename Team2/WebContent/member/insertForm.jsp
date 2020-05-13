@@ -4,67 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>회원 가입 </title>
-
-<style type="text/css">
-	*{
-		margin: 0;
-		padding: 0;
-	}
-	
-	.body{
-		background-position: center;
-		background-size: cover;
-		font-family: sans-serif;
-		margin-top: 40px;
-	}
-	
-	.regform{
-		width: 800px;
-		background-color: rgd(0,0,0,6);
-		margin: auto;
-		color: #FFFFFF;
-		padding: 10px 0px 10px 0px;
-		text-align: center;
-		border-radius: 15px 15px 0px 0px;
-	}
-	
-	.main{
-		background-color: rgb(0,0,0,0.5);
-		width: 800px;
-		margin: auto;
-	}
-	form{
-		padding: 10px;
-	}
-	
-	.name{
-		margin-left: 25px;
-		margin-top: 30px;
-		width: 125px;
-		color: white;
-		font-size: 18px;
-		font-weight: 700;
-	}
-	
-	.id,#pass,#user_pass_confirm,#name,#phone,#zipcode,#addr1,#addr2,#email {
-		position: relative;
-		left: 200px;
-		top: -37px;
-		line-height: 40px;
-		border-radius: 6px;
-		padding: 0 22px;
-		font-size: 16px;
-	}	
-	
-	#agreep{
-		color: white;
-		
-	}	
-	
-</style>
-
 
 <script>
 	//submit을 눌렀을 때 호출되는 함수
@@ -191,8 +133,8 @@
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
 	
-	<div class="body">
-		<div class="main">
+	<div class="contents">
+		<div class="box">
 		<!-- 회원가입 -->
 		<form action="./MemberJoinAction.me" method="post" name="joinform" id="joinform"
 			onsubmit="return !!(check() & send(this))">
@@ -204,10 +146,10 @@
 		 	<h2 class="name">아이디</h2>
 		 	<div>
 			 <input type="text" class="id" name="id" size="20" maxlength=30 onfocus="func()"/>
-			 <input type="button" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" /><br>
+			 <input type="button" class="btn" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" /><br>
 			</div>
 			 <h2 class="name">비밀번호</h2>
-			<input type="password" id="pass" name="pass" class="inputTypeText" onkeyup="checkValidPW()"> (영문/숫자 조합, 8자리 이상) &nbsp; <span id="pwConstraintMsg"></span><br>
+			<p id="passp"><input type="password" id="pass" name="pass" class="inputTypeText" onkeyup="checkValidPW()"> (영문/숫자 조합, 8자리 이상) &nbsp; <span id="pwConstraintMsg"></span><p><br>
 			
 			<h2 class="name">비밀번호 확인</h2> 
 			<input type="password" id="user_pass_confirm" name="user_pass_confirm" onkeyup="checkSamePW()" class="inputTypeText"> &nbsp; <span id="pwConfirmMsg"></span><br>
@@ -408,8 +350,8 @@
             </textarea><br>
   	   <p id="agreep"><input type="checkbox" name="agree"/> 약관에 동의합니다</p>
 
-		<input type="submit" value="회원가입" class="btn btn-primary"/> 
-		<input type="button" value="취소"  class="btn btn-primary" onclick="javascript:history.back();"/>
+		<input type="submit" value="회원가입" class="btn"/> 
+		<input type="button" value="취소"  class="btn" onclick="javascript:history.back();"/>
 	   </form>	
 		</div>
 		
