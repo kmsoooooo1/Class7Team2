@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/hospital.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
 <title>Insert title here</title>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/kakao/kakao.js"></script>
 <!-- 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d008964a68ee4b1fba3fe111db8b5b6b"></script> -->
@@ -176,6 +177,9 @@
 	        infowindow.open(map, marker);
 	    });
 	}
+	
+	
+	
 	
 	
 </script>
