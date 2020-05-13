@@ -1,26 +1,34 @@
 @CHARSET "UTF-8";
 
+/* * { */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* } */
 
 .contents {
-	width: 100%;
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
 	height: 600px;
 	font-family: sans-serif;
-	background: white;
+	background-image: url("../img/join.jpg");
 }
 
 .box {
 	width: 500px; 
 	padding: 50px;
-	position: absolute;
+	position: relative;
+	background-position: center;
 	top: 50%; 
-	left: 50%; 
+	left: 50%;
+	border: 1px solid;
 	transform: translate(-50%,-50%);
-	background: #fbfbfb;
+	background-color: rgb(0,0,0,0.5);
 	text-align: center; 
 }
 
 .box h2 {
-	color: black;
+	color: white;
 	text-transform: uppercase;
 	font-weight: 500;
 }
@@ -35,9 +43,9 @@
 	padding: 20px 20px;
 	width: 200px;
 	outline: none;
-	color: black;
+	color: white;
 	border-radius: 30px;
-	transition: 0.25s;
+	transition: 1s;
 }
 
 .box input[type = "text"]:focus,.box input[type = "password"]:focus{
@@ -54,9 +62,9 @@
 	border: 2px solid #2ecc71;
 	padding: 14px 40px;
 	outline: none;
-	color: black;
+	color: white;
 	border-radius: 24px;
-	transition: 0.25s;
+	transition: 1s;
 	cursor: pointer;
 }
 

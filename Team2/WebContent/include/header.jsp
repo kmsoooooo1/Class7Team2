@@ -7,13 +7,12 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/logo.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
 </head>
 <body>
-   <div class="title_center"> 
+   <header class="title_center"> 
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
-   </div>
+   </header>
       <div class="title_right">
       <%
          request.setCharacterEncoding("UTF-8");
