@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+
+.board{
+	width:60%;
+}
+a{text-decoration: none;}
+a:HOVER, a:ACTIVE, a:FOCUS {text-decoration: underline;}
+em{font-style: normal;}
+
+.wrap{
+	width: 900px;
+	height: 600px;
+	margin: 0 auto;
+	border : 1px solid #aaa;
+}
+
+.wrap h1{
+	padding: 10px 0 4px;
+	border-bottom: 1px solid #aaa;
+}
+
+.img-col {
+	height : 95%;
+}
+
+.img-col ul{
+	list-style: none;
+	margin-left: auto;
+ 	margin-right: auto;
+}
+.img-col li{
+	float:left;
+	display : inline-block;
+	padding: 10px 8px;
+	border-bottom: 1px solid #aaa;
+}
+
+.thumb img{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+
+}
+
+/* 페이징  */
+.paging-div {
+	width:100%;
+	display : inline-block;
+	text-align: center;
+	margin:0 auto;
+}
+
+ul.paging {
+	display:table;
+	margin-left: auto;
+ 	margin-right: auto;
+	text-align: center;
+	list-style:none;
+}
+
+ul.paging li {
+	float:left;
+	display : inline-block;
+	text-align: center;
+}
+ul:AFTER {
+	display: block;
+	content: "";
+	clear: both;
+}
+ul.paging li a {
+	padding:4px;
+	margin-right:3px;
+	width:15px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+
+ul.paging li a:LINK {
+	text-decoration: none;
+}
+
+ul.paging li a:hover, ul.paging li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+
+i.fa{
+	font-style: normal;
+}
