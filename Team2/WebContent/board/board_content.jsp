@@ -46,6 +46,7 @@
 		<tr>
 			<td>카테고리</td><td><%=bdto.getB_category() %></td>
 			<td>제목</td><td><%=bdto.getB_title() %></td>
+			<td>상품명</td><td><%=bdto.getB_p_code() %></td>
 		</tr>
 	
 		<tr>
