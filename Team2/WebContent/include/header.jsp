@@ -10,10 +10,8 @@
 <link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
 </head>
 <body>
-   <header class="title_center"> 
-      <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
-   </header>
-      <div class="title_right">
+      <div class="top_menu">
+      <ul>
       <%
          request.setCharacterEncoding("UTF-8");
          
@@ -22,21 +20,24 @@
          
          if(id == null){   
       %>
-         <a href="./MemberJoin.me"> 회원가입 </a>
-         <a href="./MemberLogin.me"> 로그인 </a>
+        <li> <a href="./MemberJoin.me"> 회원가입 </a></li>
+        <li> <a href="./MemberLogin.me"> 로그인 </a></li>
       <% }else if(id.equals("admin")) { %>
-         <a href="./Main.ad"> 관리자 페이지 </a>
-         <a href="./MemberLogout.me"> 로그아웃 </a>
+        <li> <a href="./Main.ad"> 관리자 페이지 </a></li>
+        <li> <a href="./MemberLogout.me"> 로그아웃 </a></li>
       <% }else{ %>
-         <a href="./MemberPage.me"> 마이 페이지 </a>
-         <a href="./MemberLogout.me"> 로그아웃 </a>
+        <li> <a href="./MemberPage.me"> 마이 페이지 </a></li>
+        <li> <a href="./MemberLogout.me"> 로그아웃 </a></li>
       <% } %> 
+   <li><a href="./BoardList.bo?category=0">공지사항</a></li>
+   <li><a href="./BoardList.bo?category=1">상품후기</a></li>
+   <li><a href="./BoardList.bo?category=2">QnA</a></li>
+   	  </ul>
     </div>
-   <div class="title_center">
-   <a href="./BoardList.bo?category=0">공지사항</a>
-   <a href="./BoardList.bo?category=1">상품후기</a>
-   <a href="./BoardList.bo?category=2">QnA</a>
-   </div>
+    
+    <div id="logo">
+      <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
+    </div>  
    <!-- 메인 메뉴 --> 
    <nav id="nav_menu"> 
       <ul class="sub_menu">

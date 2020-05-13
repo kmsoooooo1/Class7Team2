@@ -30,12 +30,24 @@ body{
 
 /* HEADER_START */
 
-.title_center {
-	text-align: center;
+
+.top_menu{
+	width: 100%;
+	float: left;
 }
 
-.title_right {
-	text-align: right;
+.top_menu ul{
+	list-style: none;/* 목록 앞의 모양 제거  */
+}
+
+.top_menu li{
+	float: left;/* 메뉴 각 항목들을 가로로 */
+	margin-left: 20px;
+}
+
+#logo {
+	text-align: center;
+	margin: 0 auto;
 }
 
 .sub_menu {
