@@ -24,6 +24,7 @@
 	
 <div class="body">
 
+<<<<<<< HEAD
 	<div class="main">
 		<div class="desc_wrap">
 			<span class="title">동물병원 정보</span>
@@ -39,6 +40,9 @@
 </div>
 
 	<!-- FOOTER -->
+=======
+		<!-- FOOTER -->
+>>>>>>> refs/heads/master
 	<jsp:include page="/include/footer.jsp"/>
 
 </body>
