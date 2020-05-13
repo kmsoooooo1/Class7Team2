@@ -168,7 +168,8 @@
 			<input type="text" name="addr2" id="addr2" size="40">
 			<h2 class="name">이메일</h2>
 			<input type="email" id="email" name="email"><br></br>
-            <textarea cols="107" rows="14" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
+			<div class="div_text">
+            <textarea cols="107" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
 
 제1조(목적 등)
 
@@ -347,11 +348,13 @@
 
  
 본 약관은 2005. 7. 18. 부터 적용하고, 2004. 10. 11.부터 적용되던 종전의 약관은 본 약관으로 대체합니다. 
-            </textarea><br>
+            </textarea>
+       </div>
   	   <p id="agreep"><input type="checkbox" name="agree"/> 약관에 동의합니다</p>
-
+		<div class="btn_submit">
 		<input type="submit" value="회원가입" class="btn"/> 
 		<input type="button" value="취소"  class="btn" onclick="javascript:history.back();"/>
+		</div>
 	   </form>	
 		</div>
 		
