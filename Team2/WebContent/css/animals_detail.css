@@ -40,7 +40,7 @@ ul{
 #menu0{
 	background-color: #CCC;
 }
-
+	
 .info_table{
 	margin: 10px auto;
 }
@@ -49,6 +49,29 @@ ul{
 	height: 480px;
 	float:left;
 }
+
+@media screen and (max-width: 480px) {
+		
+		.info_table{
+			margin: 10px auto;
+		}
+		.info_img{
+			width: 480px;
+			height: 480px;
+			float:left;
+		}
+	}
+	@media screen and (max-width: 736px) {
+		.info_table{
+			margin: 10px auto;
+		}
+		.info_img{
+			width: 480px;
+			height: 480px;
+			float:left;
+		}
+	}
+
 .info_desc{
 	width:480px;
 	float:right;
