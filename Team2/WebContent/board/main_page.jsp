@@ -9,7 +9,7 @@
 <body>
 
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
 <!-- 	<ul> -->
@@ -34,7 +34,7 @@
 	<hr>
 	
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>	
+	<jsp:include page="/include/footer.jsp"/>	
 
 </body>
 </html>

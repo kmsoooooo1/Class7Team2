@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+#spaceList{
+	padding: 0;
+	list-style:none;
+	float:left;
+	overflow: hidden;
+	width: 600px;
+}
+
+#map{
+	width: 600px;
+	height: 600px;
+	float:left;
+}
+
+	@media screen and (max-width: 480px) {
+		#map{
+			width: 100%;
+			height: 400px;
+			float:none;
+		}
+	}
+	@media screen and (max-width: 736px) {
+		#map{
+			width: 100%;
+			height: 400px;
+			float:none;
+		}
+	}
+
+.content_wrap:after{
+	display:block;
+	content:"";
+	clear: both;
+}
+.list_div:hover{
+	cursor: pointer;
+}
+.h_list{
+	display:inline-block;
+	width:100%;
+}
+.list_div{
+	display:inline-block;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+.place_name{
+	height:30px;
+	display:inline-block;
+	width: 60%;
+	font-size:1em;
+}
+.phone{
+	height:30px;
+	display:inline-block;
+	width: 40%;
+	font-size:0.8em;
+}
+.address_name{
+	height:30px;
+	padding-left:40%;
+	display:inline-block;
+	width: 100%;
+	font-size:0.8em;
+}
+.road_address_name{
+	height:30px;
+	padding-left:40%;
+	display:inline-block;
+	width: 100%;
+	font-size:0.8em;
+}

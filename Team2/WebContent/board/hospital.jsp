@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/hospital.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
 <title>Insert title here</title>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/kakao/kakao.js"></script>
 <!-- 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d008964a68ee4b1fba3fe111db8b5b6b"></script> -->
@@ -18,15 +20,30 @@
 <body>
 
 	<!-- Header -->
-<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
-	<h1>WebContent/board/hospital.jsp</h1>
-	<div id="map" style="width:800px;height:600px;"></div>
-	<ul id="spaceList">
-	</ul>
+<div class="body">
 
+<<<<<<< HEAD
+	<div class="main">
+		<div class="desc_wrap">
+			<span class="title">동물병원 정보</span>
+			<p class="desc">현재 위치 근처의 동물병원 검색 결과를 보여줍니다.</p>
+		</div>
+		<div class="content_wrap">
+			<div class="map" id="map"></div>
+			<ul id="spaceList">
+			</ul>
+		</div>
+	</div>
+		
+</div>
+
+	<!-- FOOTER -->
+=======
 		<!-- FOOTER -->
-<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+>>>>>>> refs/heads/master
+	<jsp:include page="/include/footer.jsp"/>
 
 </body>
 <script type="text/javascript">
@@ -106,9 +123,40 @@
 	        for (var i=0; i<data.length; i++) {
 	            displayMarker(data[i]);
 	            console.log(data[i]);
-	            var node = document.createElement("LI");                 // Create a <li> node
-	            var textnode = document.createTextNode(data[i].address_name+ ", " + data[i].phone);         // Create a text node
-	            node.appendChild(textnode);                              // Append the text to <li>
+	            var textnode;
+	            var node = document.createElement("li");	  									     		// Create a <li> node
+	            node.className = 'h_list';
+	            var div = document.createElement("div");
+	            div.className = 'list_div';
+	            
+	            var span = document.createElement("span");
+	            span.className = 'place_name';
+	            textnode = document.createTextNode(data[i].place_name);
+	            span.appendChild(textnode);
+	            div.appendChild(span);
+	            
+	            span = document.createElement("span");
+				span.className = 'phone';
+	            textnode = document.createTextNode(data[i].phone);
+	            span.appendChild(textnode);
+	            div.appendChild(span);
+	            
+	            
+	            span = document.createElement("span");
+	            span.className = 'address_name';
+	            textnode = document.createTextNode("구 주소 : "+data[i].address_name);
+	            span.appendChild(textnode);
+	            div.appendChild(span);
+	            
+	            span = document.createElement("span");
+	            span.className = 'road_address_name';
+	            textnode = document.createTextNode("도로명 주소 : "+data[i].road_address_name);
+	            span.appendChild(textnode);
+	            div.appendChild(span);
+	            div.setAttribute('onclick', "location.href='" + data[i].place_url +"';");
+	            
+	            node.appendChild(div);
+	                                        									// Append the text to <li>
 	            sList.appendChild(node);     // Append <li> to <ul> with id="myList"
 	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 	        }       
@@ -133,6 +181,9 @@
 	        infowindow.open(map, marker);
 	    });
 	}
+	
+	
+	
 	
 	
 </script>
