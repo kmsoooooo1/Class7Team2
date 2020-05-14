@@ -30,12 +30,19 @@ form{
 } 
 
 .btn {
-	font-size: 20px;
-	padding: 5px 10px;
+	border: 0;
+	background: none;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
 	color: white;
-	background: #34495e;
+	border-radius: 24px;
+	transition: 1s;
 	cursor: pointer;
-	margin-left: 30px;
+}
+
+.btn:HOVER{
+	background: #2ecc71;
 }
 
 .btn_submit{
