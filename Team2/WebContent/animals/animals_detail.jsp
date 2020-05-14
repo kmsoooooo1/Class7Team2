@@ -152,18 +152,19 @@
 								</td>
 							</tr>
 						</table>
+						<div class="btn_wrap">
+						<div class="top_btn_wrap">
 						<%if(animalDetail.getA_amount() == 0){%>
-							<span> 품절 </span>
-							<button type="button"> 관심상품 </button>
-							<br>
-							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
+							<span class="buy_btn"> 품절 </span>
+							<button class="fav_btn" type="button"> 관심상품 </button>
 						<%}else{%>
-							<button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
-							<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
-							<button type="button"> 관심상품 </button>
-							<br>
-							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
+							<button class="buy_btn" type="button" onclick="valueOrderChecked();">바로구매</button>
+							<button class="buy_btn" type="button" onclick="valueBasketChecked();">장바구니</button>
+							<button class="fav_btn" type="button">관심상품</button>
 						<%}%>
+						</div>
+							<button class="kakao_btn" type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
+						</div>
 				</div>
 			</div>
 		</form>
@@ -387,7 +388,8 @@
 		
 		var objRow;
 		objRow = document.all["final_product_info_table"].insertRow();
-
+		objRow.className = 'delivery_list';
+		
 		//사용자가 올바른 배송방법을 선택 하지 않았을시
 		if(delivery_method == null){
 			document.getElementById("final_product_info_table").style.display = "none";
@@ -396,17 +398,20 @@
 		else {
 			//모프 - 첫번째 td(cell) 항목
 			var objCell_morph = objRow.insertCell();
-			objCell_morph.innerHTML = "<span id='objCell_morph'>" + a_morph + "</span> <br>" + "<span id='delivery_method_option'>[옵션:" + delivery_method + "]</span>";
+			objCell_morph.className='selected_td';
+			objCell_morph.innerHTML = "<span id='objCell_morph' class='a_morph'>" + a_morph + "</span> <br>" + "<span id='delivery_method_option'>[옵션:" + delivery_method + "]</span>";
 			
 			//상품수 - 두번째 td(cell) 항목
 			var objCell_amount = objRow.insertCell();
-			objCell_amount.innerHTML = "<input type='text' id='a_amount_" + delivery_method + "' name='a_amount_" + delivery_method + "' value='1' maxlength='3' size='3' onkeyup='amountChange(" + "\"" + delivery_method + "\"" + ");'>" 
-										+ " <input type='button' id='amountPlus' name='amountPlus' value='+' onclick='plus(" + "\"" + delivery_method + "\"" + ");'> " 
-										+ " <input type='button' id='amountMinus' name='amountMinus' value='-' onclick='minus(" + "\"" + delivery_method + "\"" + ");'> "
-										+ " <input type='button' id='deleteCell' name='deleteCell' value='x' onclick='delCell(this, " + "\"" + delivery_method + "\"" + ");'> ";		
+			objCell_amount.className='selected_td';
+			objCell_amount.innerHTML = "<input type='text' class='a_amount' id='a_amount_" + delivery_method + "' name='a_amount_" + delivery_method + "' value='1' maxlength='3' size='3' onkeyup='amountChange(" + "\"" + delivery_method + "\"" + ");'>" 
+										+ "<input type='button' class='a_amount_btn' id='amountPlus' name='amountPlus' value='+' onclick='plus(" + "\"" + delivery_method + "\"" + ");'>" 
+										+ "<input type='button' class='a_amount_btn' id='amountMinus' name='amountMinus' value='-' onclick='minus(" + "\"" + delivery_method + "\"" + ");'>"
+										+ "<input type='button' class='a_amount_btn' id='deleteCell' name='deleteCell' value='x' onclick='delCell(this, " + "\"" + delivery_method + "\"" + ");'>";		
 			
 			//가격, 적립금 - 세번째 td(cell) 항목
 			var objCell_price = objRow.insertCell();
+			objCell_price.className='selected_td';
 				//만약 적립금이 0이 아니면
 				if(a_discount_rate != 0){
 					objCell_price.innerHTML = "<span id='total_product_price_" + delivery_method + "' >" 
