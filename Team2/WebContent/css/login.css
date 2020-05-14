@@ -53,6 +53,16 @@
 	border-color: #2ecc71;
 }
 
+input::placeholder {
+	color: white;
+}
+
+input:focus::-webkit-input-placeholder, 
+textarea:focus::-webkit-input-placeholder {
+	/* WebKit browsers */ color:transparent; 
+}
+
+
 .box input[type = "submit"]{
 	border: 0;
 	background: none;
@@ -68,7 +78,7 @@
 	cursor: pointer;
 }
 
-.box inputp[type = "submit"]:hover{
+.box input[type = "submit"]:hover{
 	background: #2ecc71;
 }
 
@@ -91,6 +101,7 @@
   margin: 0.625rem;
   border: none;
   border: 1px solid rgba(223,190,106,0.3);
+  border-radius: 24px;
 }
 
 .btn:hover {
