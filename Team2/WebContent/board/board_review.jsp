@@ -35,7 +35,7 @@
 		
 	%>
 	
-		 <h2><a href="./Insert.bo"> 글 쓰기  </a></h2>
+		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp','_blank','width=600,height=700',false);"> 글 쓰기  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
 
 <div class="board">
