@@ -12,53 +12,10 @@
 	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-	 <!-- 메인 슬라이드 배너  -->
-	<div class="slideshow-container">
-	 <div class="mySlides slide">
-	  <div class="numbertext">1 / 3</div>
-	   <img src="../img/RedEye.jpg" style="width: 100%">
-	  <div class="text">도마뱀</div>
-	 </div>
+<!-- 	<ul> -->
+<!-- 		<li><a href="./aHospital.bo">동물병원정보</a></li> -->
+<!-- 	</ul> header.jsp 로 위치 이동 -->
 	
-	 <div class="mySlides slide">
-	  <div class="numbertext">2 / 3</div>
-	   <img src="../img/turtle.jpg" style="width: 100%">
-	  <div class="text">거북이</div>
-	 </div>
-	
-	 <div class="mySlides slide">
-	  <div class="numbertext">3 / 3</div>
-	   <img src="../img/Flog.jpg" style="width: 100%">
-	  <div class="text">개구리</div>
-	 </div>
-	</div>
-	<div style="text-align: center;">
-	 <span class="dot"></span>
-	 <span class="dot"></span>
-	 <span class="dot"></span>
-	</div>
-	
- <script>
-	var slideIndex = 0;
-	showSlides();
-
-	function showSlides() {
- 	 var i;
- 	 var slides = document.getElementsByClassName("mySlides");
-  	var dots = document.getElementsByClassName("dot");
- 	 for (i = 0; i < slides.length; i++) {
-   	 slides[i].style.display = "none";  
- 	 }
- 	 slideIndex++;
- 	 if (slideIndex > slides.length) {slideIndex = 1}    
-  		for (i = 0; i < dots.length; i++) {
-    	dots[i].className = dots[i].className.replace(" active", "");
- 		 }
-  	slides[slideIndex-1].style.display = "block";  
-  	dots[slideIndex-1].className += " active";
-  	setTimeout(showSlides, 2000); // Change image every 2 seconds
-	}
- </script>
 	<hr>
 	
 	<!-- 신상품 리스트 -->
