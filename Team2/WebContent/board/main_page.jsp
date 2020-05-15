@@ -16,19 +16,19 @@
 	<div class="slideshow-container">
 	 <div class="mySlides slide">
 	  <div class="numbertext">1 / 3</div>
-	   <img src="../img/RedEye.jpg" style="width: 100%" height="100%">
+	   <img src="../img/RedEye.jpg" style="width: 100%">
 	  <div class="text">도마뱀</div>
 	 </div>
 	
 	 <div class="mySlides slide">
 	  <div class="numbertext">2 / 3</div>
-	   <img src="../img/turtle.jpg" style="width: 100%" height="100%">
+	   <img src="../img/turtle.jpg" style="width: 100%">
 	  <div class="text">거북이</div>
 	 </div>
 	
 	 <div class="mySlides slide">
 	  <div class="numbertext">3 / 3</div>
-	   <img src="../img/Flog.jpg" style="width: 100%" height="100%">
+	   <img src="../img/Flog.jpg" style="width: 100%">
 	  <div class="text">개구리</div>
 	 </div>
 	</div>
@@ -36,21 +36,6 @@
 	 <span class="dot"></span>
 	 <span class="dot"></span>
 	 <span class="dot"></span>
-	</div>
-	
-	<!-- 메인 4단 배너 -->
-	<div class="sec-banner1">
-	 <ul class="xans">
-	  <li><a href="#" alt="배너"><img class="banner_imagie" alt="배너"
-	  		rel="52-12" src="../img/turtleSet.png"></a></li>
-	  <li><a href="#" alt="배너"><img class="banner_imagie" alt="배너"
-	  		rel="53-12" src="../img/packSet.png"></a></li>
-	  <li><a href="#" alt="배너"><img class="banner_imagie" alt="배너"
-	  		rel="54-12" src="../img/reoSet.png"></a></li>
-	  <li><a href="#" alt="배너"><img class="banner_imagie" alt="배너"
-	  		rel="55-12" src="../img/snakeSet.png"></a></li>
-	 </ul>
-	
 	</div>
 	
  <script>
