@@ -1,3 +1,4 @@
+<%@page import="team2.board.action.cSet"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
@@ -10,33 +11,51 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
- 
 <link href="${pageContext.request.contextPath}/css/imgList.css" rel="stylesheet">
- 
+ <script type="text/javascript">
+
+function doAction(){
+	
+	alert("doAction");
+	
+	document.fr.submit();
+	
+};
+</script>	
 </head>
 <body>
-
 	 <jsp:include page="/include/header.jsp" />
 	
 
-	<h1>WebContent/board/board_review.jsp</h1>
+	<h1>상품 게시판</h1>
 	
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
-		
-		//페이징 필요 값
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
-		String pageNum = (String)request.getAttribute("pageNum");
 	
-		//카테고리별 필요 값
-		String category = request.getParameter("category");
-		String sub_category = request.getParameter("sub_category");
+		//페이지번호 & 카테고리번호
+		String pageNum = (String)request.getAttribute("pageNum");
+		String category = (String)request.getAttribute("category");
+		String search = (String)request.getAttribute("search");
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+		
 		
 	%>
 	
 		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp','_blank','width=600,height=700',false);"> 글 쓰기  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
+		 
+		<!-- 게시판 검색 -->		 
+		<form name="fr" id="fr" action="./BoardList.bo" method="POST">	
+			<input type="hidden" value="1" name="category">
+		
+			<input type="text" name="search" />
+			
+			<input type="button" onclick="doAction()" value="검색" />	
+		</form>
+		<!-- 게시판 검색 -->		
 
 <div class="board">
 	<div class="wrap">
@@ -84,15 +103,15 @@
 	<div class="paging-div">
 	<ul class="paging">
 		<li>
-			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">◀</i></a>	
+			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.startPage-1 }&search=${search}"/>'><i class="fa left">◀</i></a>	
 		</li>
 		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
 		<li>
-			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageNum}"/>'><i class="fa">${pageNum }</i></a>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageNum}&search=${search}"/>'><i class="fa">${pageNum }</i></a>
 		</li>
 		</c:forEach>
 		<li>
-			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">▶</i></a>
+			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.endPage+1 }&search=${search}"/>'><i class="fa right">▶</i></a>
 		</li>
 
 
