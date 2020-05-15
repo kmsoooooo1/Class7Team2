@@ -29,8 +29,8 @@
 	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-	<div class="container">
-	<div id="menu0" class="menu" >
+	
+	<div>
 	 <input type="button" value="전체보기" class="a_btn"
 	 	onclick="location.href='./AnimalList.an?category=파충류'">
 	 <input type="button" value="리자드/모니터" class="a_btn" 
@@ -43,12 +43,11 @@
 	 	onclick="location.href='./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온'">
 	</div>
 	
-	
 	<span> Total <%=animalList.size()%> items</span> 
 	
 	<hr>
-	<div class="info_table">
-	<table border="1" class="detail_table">
+	
+	<table border="1">
 		<%    
 	        int size = animalList.size();
 		    int col = 4;
@@ -57,7 +56,7 @@
 		
 			for (int a = 0; a < row; a++) {
 		%>
-		<tr class="detail_tr">
+		<tr>
 			<%
 				for (int i = 0; i <col; i++) {
 					AnimalDTO adto = animalList.get(num);
@@ -70,8 +69,6 @@
 			<td colspan="2">
   			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> <br> 
 		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <hr>
-		    </div>
-		    <div class="info_desc">
 		    <%if(adto.getA_discount_rate() != 0) { //만약 할인율이 있으면%>
 		    	<span style="text-decoration:line-through"> <%=newformat_price_origin%>원 </span> <br>
 		    	<span style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span> <br>
@@ -92,10 +89,9 @@
 			%>
 		</tr>
 		<%}%>
-	</div>
+	
 	</table>
-	</div>
-	</div>
+	
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	
