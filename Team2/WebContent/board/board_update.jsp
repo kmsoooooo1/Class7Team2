@@ -1,3 +1,4 @@
+<%@page import="team2.board.db.ProductDTO"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.io.FileInputStream"%>
 <%@page import="java.io.FileOutputStream"%>
@@ -20,14 +21,89 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
+var conPath = "<%=request.getContextPath()+"/upload/board"%>";
+var old_files = [];
+var img_files = [];
+
+	$(document).ready(function() {
+		$("#input_imgs").on("change", addFiles);
+		
+		if(old_files != ""){
+			alert("old_files : "+old_files);
+			for(var index=0; index<old_files.length; index++){
+				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteOldFiles("+index+")\" id=\"img_id_"+index+"\"><img src=" + conPath +"/"+old_files[index]+"  width='100' height='100' title='Click to remove'></a>";
+		 	   $(".imgs_wrap").append(html);
+			}
+		}
+	
+	});
+
+	function addFiles(e) {
+		
+		img_files = [];
+	
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		var index = 0;		
+        filesArr.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+                alert("확장자는 이미지파일만 가능합니다.");
+                return;
+            }
+	        
+	        img_files.push(f);
+	        
+	        alert("img_files" + img_files);
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='100' height='100' title='Click to remove'></a>";
+	        	$(".imgs_wrap").append(html);
+	            index++;
+            }
+            reader.readAsDataURL(f);
+            
+        });
+  	  
+	}
+    
+    function deleteFiles(index) {
+    	alert("index delete : "+img_files[index]);
+
+    	img_files.splice(index, 1);
+
+        var img_id = "#img_id_"+index;
+        $(img_id).remove(); 
+               
+    }
+    
+    function deleteOldFiles(index) {
+    	alert("index delete : "+old_files[index]);
+
+    	old_files.splice(index, 1);
+
+        var img_id = "#img_id_"+index;
+        $(img_id).remove(); 
+               
+    }
+
 	function save(){
 	    oEditors.getById["b_content"].exec("UPDATE_CONTENTS_FIELD", []);
 // 	    document.fr.submit();
 
+
 		var form = $('#fr')[0];
 		var formData = new FormData(form);
 		
+		if(old_files!=""){
+			for(var i=0; i < old_files.length; i++){
+				alert("test : " + old_files[i]);
+				formData.append('old', old_files[i]);
+			}
+		}
+	
 		for(var index=0; index < img_files.length; index++){
+			alert("test : " + img_files[index]);
 			formData.append('files', img_files[index]);
 		}
 		
@@ -41,17 +117,9 @@
             url : './BoardUpdateAction.bo',
             data : formData,
             success : function(result) {
-                if (result === -1) {
-                    alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-                    // 이후 동작 ...
-                } else if (result === -2) {
-                    alert('파일이 10MB를 초과하였습니다.');
-                    // 이후 동작 ...
-                } else {
-                    alert('이미지 업로드 성공');
-                    // 이후 동작 ...
-                }
-            },
+    			alert("글 등록에 성공하였습니다.");
+    			location.href="./BoardMain.bo";
+ 	        },
 		
 	        error: function(e) {
 	            alert("에러발생"+e);
@@ -61,48 +129,44 @@
 	
 	};
 	
-	var img_files = [];
 </script>
 </head>
 <body>
-	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
-	<!-- Main Content -->
-	<h1>WebContent/board/board_update.jsp</h1>
+
+	<h1> 게시판 수정 </h1>
 	
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = request.getParameter("pageNum");
 
-		//첨부된 파일 확인하여 불러오기
-		String files[] = bdto.getB_file().split(","); 
-// 		String p = request.getContextPath();
-// 		String p1 = p.replace('/', '\\');
- 		String AbsPath = request.getContextPath()+"upload//board";
- 		String realPath = "D:\\workspace_jsp\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Team2\\upload\\board";		
+		String p_code = bdto.getB_p_code();
+		String category = bdto.getB_category();
+		
+		
+		String files[] = null;
+		//DB에 저장된 파일 확인 후 불러오기		
+		if(bdto.getB_file()!=null){
+			files = bdto.getB_file().split(","); 
+		}
+		System.out.println("files.length 값 : "+files.length);
+		
+ 		ServletContext context = request.getServletContext();
+		String realPath = context.getRealPath("/upload/board/");
 
 		
-
 		for(int i=0; i<files.length; i++){
-			
-// 			if(files != null){
-// 				filereader = new FileReader(realPath+"/"+files[i]);
-// 					br = new BufferedReader(filereader);
-// 					data[i] = br.readLine();
-				
-// 			}
-			String filePath = AbsPath + "\\" + files[i];
-			
-			File data = new File(realPath+files[i]);
+
+			File upFile = new File(realPath+files[i]);
 		
-// 			System.out.println("data : " +data);
-			
-		    String fileList[] = data.list();
+			System.out.println("upFile : " +upFile);
+
 			%>
 				<script type="text/javascript">
 				
-					img_files.push("<%=files[i]%>");
+					old_files.push("<%=files[i]%>");
+					
 				</script>
 			
 			<%
@@ -118,7 +182,34 @@
 			글번호  <%=bdto.getB_idx() %> <br>
 			조회수 <%=bdto.getB_view()%> <br>
 			카테고리 <%=bdto.getB_category() %> <br>			
-			상품코드 <%=bdto.getB_p_code() %> <br>
+			
+				<%
+
+				if(!p_code.equals("null")){
+		%>
+			상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
+		<%		
+							
+					ProductDTO dto = new ProductDTO(p_code);
+					System.out.println(dto);
+		%>
+			<table>
+				<tr>
+					<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
+					<td><%=dto.getCategory() %></td>
+					<td><%=dto.getSub_category() %></td>
+					<td><%=dto.getSub_category_idx() %></td>
+					<td><%=dto.getName() %></td>
+				</tr>
+			</table>
+		<%
+			}else{
+				%>
+				상품코드 : <input type="text" name="b_p_code" value="상품코드 미입력" readonly="readonly"> <br>
+				<%	
+			}
+	
+			%>
 
 			제목 <input type="text" name="b_title" value="<%=bdto.getB_title()%>">
 
@@ -158,56 +249,6 @@
 
 <script type="text/javascript">
 	
-var conPath = "<%=request.getContextPath()+"/upload/board"%>";
-
-	$(document).ready(function() {
-		$("#input_imgs").on("change", addFiles);
-		alert("img_files : "+img_files);
-		for(var index=0; index<img_files.length; index++){
-			var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" id=\"img_id_"+index+"\"><img src=" + conPath +"/"+img_files[index]+"  width='100' height='100' title='Click to remove'></a>";
-	 	   $(".imgs_wrap").append(html);
-		}
-	
-	});
-
-	function addFiles(e) {
-	
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		var index = img_files.length+1;
-			
-        filesArr.forEach(function(f) {
-            if(!f.type.match("image.*")) {
-                alert("확장자는 이미지파일만 가능합니다.");
-                return;
-            }
-	        
-	        img_files.push(f);
-	        
-	        alert("img_files" + img_files);
-	        var reader = new FileReader();
-	        reader.onload = function(e) {
-                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='100' height='100' title='Click to remove'></a>";
-	        	$(".imgs_wrap").append(html);
-	            index++;
-            }
-            reader.readAsDataURL(f);
-            
-        });
-  	  
-	}
-    
-    function deleteFiles(index) {
-    	alert("index delete : "+img_files[index]);
-
-    	img_files.splice(index, 1);
-
-        var img_id = "#img_id_"+index;
-        $(img_id).remove(); 
-               
-    }
-
 
 
 /* --------------------------------------------------	 */
