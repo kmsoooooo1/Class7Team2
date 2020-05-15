@@ -107,7 +107,7 @@
 	%>
 	
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 
 	<h2>회원 정보 수정 페이지</h2>
 	
@@ -222,7 +222,7 @@
 	</fieldset>
 	
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 	
 </body>
 </html>

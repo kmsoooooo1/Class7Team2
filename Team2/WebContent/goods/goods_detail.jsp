@@ -12,6 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/product_detail.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>Insert title here</title>
@@ -69,10 +70,20 @@
 	%>
 
 	<!-- Main Content -->
+<<<<<<< HEAD
 	<form action="" method="post" name="fr">
 
+=======
+	
+	
+>>>>>>> refs/heads/master
 		<!-- 상품 기본 정보 파트 -->
+<<<<<<< HEAD
 		<div id="menu0">
+=======
+   <div id="menu0" class="menu">
+	   <form action="" method="post" name="fr">
+>>>>>>> refs/heads/master
 			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
 			<input type="hidden" name="product_code" value="<%=detailList.get(0).getG_code()%>"> 
 			<input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=detailList.get(0).getG_price_origin()%>"> 
@@ -89,6 +100,7 @@
 
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
+<<<<<<< HEAD
 
 
 			<table border="0">
@@ -96,6 +108,105 @@
 					<td><img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"></td>
 					<td>
 						<!-- 상품명(미완성@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@) -->
+=======
+		  
+			<div class="info_table">
+		     
+		     	<div class="info_img"> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </div>
+		        <div class="info_desc">
+		        	<!-- 상품명 -->
+		        	<%if(detailList.get(0).getG_amount() == 0){%>
+		        	  <span> SOLD OUT </span>
+		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
+		        	<%}else{ %>
+		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
+		        	<%} %>    
+		        	
+		        	<hr>
+		        	
+		        	<!-- 판매가, 적립금, 할인판매가 -->
+		        	<table class="detail_table">
+		        	  <tr class="detail_tr">
+		        	    <td class="detail_td"> 판매가 </td>
+		        	    <td class="detail_td">
+		        	       <%=newformat_price_origin%>원 
+		        	       <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
+		        	          <%=detailList.get(0).getG_discount_rate() %>% OFF
+		        	       <%} %>   
+		        	    </td>
+		        	  </tr>
+		        	  
+		        	  <tr class="detail_tr">
+		        	    <td class="detail_td"> 적립금 </td>
+		        	    <td class="detail_td"> <%=newformat_mileage%>원 </td>
+		        	  </tr>
+		        	  
+		        	  <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
+		        	  <tr class="detail_tr">
+		        	     <td class="detail_td"> 할인판매가 </td>
+		        	     <td class="detail_td"> <%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate() %>% 할인율) </td>
+		        	  </tr>
+		        	  <%} %>
+		        	</table>
+		        	
+		        	<hr>
+		        	
+		        	<!-- 옵션을 셀렉트박스로 가져오기 -->
+		        	<%if(!detailList.get(0).getG_option().equals("")){ %>
+		        	옵션선택	
+			        	<select>
+			        		<option value="default">-[필수] 선택하시오-</option>
+			        		<option value="default">------------------------------</option>
+  			        		<option id="option" value="option">
+			        			<%=detailList.get(0).getG_option() %> 
+			        			<%if(detailList.get(0).getG_amount() == 0){ %>
+			        			   [품절] 
+			        			<%} %>
+		        			</option>
+			        		
+			        	</select>
+		        	<%} %>
+		        	
+		        	<hr>
+		        	
+		        	<!-- 배송(일반배송, 선택배송) 구분 -->
+		        	<!-- 일반 배송이고 옵션이 없는 경우 -->
+		        	<%if(detailList.get(0).getG_delivery().equals("일반배송") && detailList.get(0).getG_option().equals("")){ %>
+		        	<table border="1">
+		        	<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
+		        	  <tr>
+		        	    <td> 상품명 </td>
+		        	    <td> 상품수 </td>
+		        	    <td> 가격 </td>
+		        	  </tr>
+		        	  <!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
+					  <!-- <tbody id="final_product_info_table"></tbody> -->
+					  <%
+						for(int i=0; i<detailList.size(); i++){
+							GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
+					  %>
+						  <tr>
+							  	<td>
+							  		<%=goodsDetail.getG_name()%>
+							  	</td>
+							  	<!-- 상품 수량 -->
+							  	<td>
+							  		<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>" name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1 maxlength="3" size="3" >
+							  		<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus("<%=goodsDetail.getG_delivery()%>");'>
+							  		<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus("<%=goodsDetail.getG_delivery()%>");'>
+							  		<input type="button" id="deleteCell" name="deleteCell" value="x">
+							  	</td>
+							  	<!-- 상품 판매가(할인율 있을때와 없을때와 -->
+							  	<%if(goodsDetail.getG_discount_rate() != 0) {%>
+							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_sale())%>원</td>
+							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_sale()%>">
+							  	<%} else {%>
+							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_origin())%>원</td>
+							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_origin()%>">
+							  	<%}%>
+						 </tr>
+					 <%}%>
+>>>>>>> refs/heads/master
 						
 							<%
 								if(g_amount == 0){
@@ -312,6 +423,7 @@
 								(<span id="final_total_amount"></span>개)
 							</td>
 						</tr>
+<<<<<<< HEAD
 
 					</table>
 				 <%
@@ -349,12 +461,43 @@
 		<br>
 		<hr>
 	</form>
+=======
+        	
+		        	</table>
+		        	
+		        	<%} %>
+		        	
+		        	<hr>
+		        	
+		        	<%if(detailList.get(0).getG_amount() == 0){ %>
+		        	    <span> 품절 </span>
+		        	    <button type="button"> 관심상품 </button>
+					    <br>
+					    <button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
+		        	<%}else{ %>
+		        	    <button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
+						<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
+						<button type="button"> 관심상품 </button>
+						<br>
+						<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
+		        	<%} %>
+		        
+		        </td>
+		     </div>
+		  </div>
+		  </form>
+	   </div>
+	   
+	   <br>
+	   <hr>
+	
+>>>>>>> refs/heads/master
 
 
 
 
 	<!-- 상품 관련 상품들 파트 ---------------------------------------------------------------------->
-	<div id="menu2">
+	<div id="menu2" class="menu">
 		<div>
 			RECOMMEND ITEMS <br> 본 상품의 구매자 분들은 아래 상품들도 함께 구매하셨습니다.
 		</div>
@@ -364,7 +507,7 @@
 	<hr>
 
 	<!-- 상품 상세 정보 파트 ----------------------------------------------------------------------------->
-	<div id="menu1">
+	<div id="menu1" class="menu">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
@@ -395,7 +538,7 @@
 	<hr>
 
 	<!-- 상품 REVIEW 파트 -------------------------------------------------------------------------------------------->
-	<div id="menu3">
+	<div id="menu3" class="menu">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
@@ -464,7 +607,7 @@
 	<hr>
 
 	<!-- 상품 Q&A 파트 ------------------------------------------------------------>
-	<div id="menu4">
+	<div id="menu4" class="menu">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
