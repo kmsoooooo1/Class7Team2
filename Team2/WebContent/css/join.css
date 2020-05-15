@@ -12,8 +12,7 @@
 .box{
 	background-color: rgb(0,0,0,0.5);
 	width: 900px;
-	margin: auto;
-	
+	margin: 0 auto;
 }
 
 form{
@@ -28,18 +27,26 @@ form{
 	font-size: 18px;
 	font-weight: 700;
 	margin-left: 25%;
-}
+} 
 
 .btn {
-	font-size: 20px;
-	padding: 5px 10px;
+	border: 0;
+	background: none;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
 	color: white;
-	background: #34495e;
+	border-radius: 24px;
+	transition: 1s;
 	cursor: pointer;
 }
 
-.btn:HOVER {
-	animation: shake 0.6s infinite;
+.btn:HOVER{
+	background: #2ecc71;
+}
+
+.btn_submit{
+	margin-left: 300px;
 }
 
 .id,#pass,#user_pass_confirm,#name,#phone,#zipcode,#addr1,#addr2,#email {
@@ -55,10 +62,18 @@ form{
 
 #agreep{
 	color: white;
+	text-align: center;
+	width: 100%;
 }	
 
 #passp{
 	color: white;
 }
 
+.div_text{
+	margin-left: 70px;
+}
 
+.textarea{
+	text-align: center;
+}
