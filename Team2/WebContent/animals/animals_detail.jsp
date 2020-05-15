@@ -5,158 +5,184 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<title> 테스트 </title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
+<title>테스트</title>
 </head>
 <body>
 
 	<%
 		String id = (String) session.getAttribute("id");
-		if(id == null){
+		if (id == null) {
 			id = "";
 		}
-	
+
 		//AnimalDetailAction 객체에서 저장된 정보를 저장 
 		AnimalDTO animalDetail = (AnimalDTO) request.getAttribute("animalDetail");
-	
+
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
 		String newformat_price_origin = formatter.format(animalDetail.getA_price_origin());
 		String newformat_mileage = formatter.format(animalDetail.getA_mileage());
 		String newformat_price_sale = formatter.format(animalDetail.getA_price_sale());
-		
-		
+
 		// 상품에 대한 정보를 쿠키에 담기
 		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
-		
+
 		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
 		int price = 0;
 		// 할인율이 있으면
-		if(animalDetail.getA_discount_rate() != 0){
+		if (animalDetail.getA_discount_rate() != 0) {
 			price = animalDetail.getA_price_sale();
 			// 할인율이 없으면
-		}else{
+		} else {
 			price = animalDetail.getA_price_origin();
 		}
-		
-		Cookie cook = new Cookie("item"+animalDetail.getA_code(), URLEncoder.encode(
-									
-									  "<tr> <td> <a href='./AnimalDetail.an?a_code="+animalDetail.getA_code()+"'> <img src='./upload/multiupload/"+animalDetail.getA_thumbnail()+"' width='150' height='150'></a> </td>" 
-									+ "<td>"+ animalDetail.getA_morph()+"</td>"
-									+ "<td>"+ price +"</td>"
-									+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
-									+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
-									+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
-									+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>","UTF-8")); 
-		cook.setMaxAge(60*60); // 한시간 유지
+
+		Cookie cook = new Cookie("item" + animalDetail.getA_code(), URLEncoder.encode(
+
+				"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
+						+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
+						+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph() + "</td>"
+						+ "<td>" + price + "</td>"
+						+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
+						+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
+						+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
+						+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
+				"UTF-8"));
+		cook.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook);
-	
 	%>
 
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
+
 	<!-- Main Content -->
-	<form action="" method="post" name="fr"> 
-		
+	<form action="" method="post" name="fr">
+
 		<!-- 상품 기본 정보 파트 ------------------------------------------------------------------------------------------ -->
 		<div id="menu0">
 			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율, 모프, 적립금  -->
-			<input type="hidden" name="product_code" value="<%=animalDetail.getA_code()%>">
-			<input type="hidden" id="a_price_origin" name="a_price_origin" value="<%=animalDetail.getA_price_origin()%>">
-			<input type="hidden" id="a_price_sale" name="a_price_sale" value="<%=animalDetail.getA_price_sale()%>">
-			<input type="hidden" id="a_discount_rate" name="a_discount_rate" value="<%=animalDetail.getA_discount_rate()%>">
-			<input type="hidden" id="a_morph" name="a_morph" value="<%=animalDetail.getA_morph()%>">
-			<input type="hidden" id="a_mileage" name="a_mileage" value="<%=animalDetail.getA_mileage()%>">
-			
+			<input type="hidden" name="product_code"
+				value="<%=animalDetail.getA_code()%>"> <input type="hidden"
+				id="a_price_origin" name="a_price_origin"
+				value="<%=animalDetail.getA_price_origin()%>"> <input
+				type="hidden" id="a_price_sale" name="a_price_sale"
+				value="<%=animalDetail.getA_price_sale()%>"> <input
+				type="hidden" id="a_discount_rate" name="a_discount_rate"
+				value="<%=animalDetail.getA_discount_rate()%>"> <input
+				type="hidden" id="a_morph" name="a_morph"
+				value="<%=animalDetail.getA_morph()%>"> <input type="hidden"
+				id="a_mileage" name="a_mileage"
+				value="<%=animalDetail.getA_mileage()%>">
+
 			<!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
-			<input type="hidden" id="selectedValues" name="selectedValues" value="">
-			
+			<input type="hidden" id="selectedValues" name="selectedValues"
+				value="">
+
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
-			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
-		
+			<input type="hidden" id="selectedAmounts" name="selectedAmounts"
+				value="">
+
 			<table border="0">
 				<tr>
-					<td> <img src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>" width="500" height="500"> </td>
+					<td><img
+						src="./upload/multiupload/<%=animalDetail.getA_thumbnail()%>"
+						width="500" height="500"></td>
 					<td>
-						<!-- 종 이름 -->
-						<%if(animalDetail.getA_amount() == 0){%>
-							<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
-							<h4> <%=animalDetail.getA_morph()%> </h4>
-						<%}else{%>
-							<h4> <%=animalDetail.getA_morph()%> </h4>
-						<%}%>
-						<hr>
-						<!-- 판매가, 적립금, 할인판매가 -->
+						<!-- 종 이름 --> <%
+ 	if (animalDetail.getA_amount() == 0) {
+ %> <span
+						style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;">
+							SOLD OUT </span>
+						<h4>
+							<%=animalDetail.getA_morph()%>
+						</h4> <%
+ 	} else {
+ %>
+						<h4>
+							<%=animalDetail.getA_morph()%>
+						</h4> <%
+ 	}
+ %>
+						<hr> <!-- 판매가, 적립금, 할인판매가 -->
 						<table border="1">
 							<tr>
-								<td> 판매가 </td>
-								<td> 
-									<%=newformat_price_origin%>원 
-									<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
-										<%=animalDetail.getA_discount_rate()%>% OFF 
-									<%}%> 
-								</td> 
+								<td>판매가</td>
+								<td><%=newformat_price_origin%>원 <%
+									if (animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면
+								%>
+									<%=animalDetail.getA_discount_rate()%>% OFF <%
+										}
+									%></td>
 							</tr>
 							<tr>
-								<td> 적립금 </td>
-								<td> <%=newformat_mileage%>원 </td>
+								<td>적립금</td>
+								<td><%=newformat_mileage%>원</td>
 							</tr>
-							<% if(animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면 %> 
+							<%
+								if (animalDetail.getA_discount_rate() != 0) {//만약 할인율이 있으면
+							%>
 							<tr>
-								<td> 할인판매가  </td>
-								<td> <%=newformat_price_sale%>원 (<%=animalDetail.getA_discount_rate()%>% 할인율) </td>
+								<td>할인판매가</td>
+								<td><%=newformat_price_sale%>원 (<%=animalDetail.getA_discount_rate()%>%
+									할인율)</td>
 							</tr>
-							<%}%>
-						</table> 
-						<hr>
-						<!-- 배송방법 -->
-						배송방법
-							<select id="delivery_method" name="delivery_method" onchange="changeDeliMethod();">
-								<option value= "" selected disabled> -[필수]배송방법을 선택해 주세요 - </option>
-								<option disabled> --------------- </option>
-								<option value="일반포장"> 일반포장 </option>
-								<option value="퀵서비스"> 퀵서비스(착불) </option>
-								<option value="지하철"> 지하철택배(착불) </option>
-								<option value="고속버스"> 고속버스택배 (+14,000원) </option>
-								<option value="매장방문"> 매장방문수령 </option>				
-							</select>  
-						<hr>
-						<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
+							<%
+								}
+							%>
+						</table>
+						<hr> <!-- 배송방법 --> 배송방법 <select id="delivery_method"
+						name="delivery_method" onchange="changeDeliMethod();">
+							<option value="" selected disabled>-[필수]배송방법을 선택해 주세요 -
+							</option>
+							<option disabled>---------------</option>
+							<option value="일반포장">일반포장</option>
+							<option value="퀵서비스">퀵서비스(착불)</option>
+							<option value="지하철">지하철택배(착불)</option>
+							<option value="고속버스">고속버스택배 (+14,000원)</option>
+							<option value="매장방문">매장방문수령</option>
+					</select>
+						<hr> <!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
 						<table border="1">
 							<tr>
-								<td> 상품명 </td>
-								<td> 상품수 </td>
-								<td> 가격 </td>
+								<td>상품명</td>
+								<td>상품수</td>
+								<td>가격</td>
 							</tr>
 							<!-- 옵션을 선택했을시 최종 상품 정보 나타내기 -->
 							<tbody id="final_product_info_table"></tbody>
 
 							<tr>
-								<td colspan="3"> 
-									TOTAL : <span id="final_total_price"></span>원 (<span id="final_total_amount"></span>개) 
+								<td colspan="3">TOTAL : <span id="final_total_price"></span>원
+									(<span id="final_total_amount"></span>개)
 								</td>
 							</tr>
 						</table>
-						<hr>
-						<%if(animalDetail.getA_amount() == 0){%>
-							<span> 품절 </span>
-							<button type="button"> 관심상품 </button>
-							<br>
-							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
-						<%}else{%>
-							<button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
-							<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
-							<button type="button"> 관심상품 </button>
-							<br>
-							<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
-						<%}%>
+						<hr> <%
+ 	if (animalDetail.getA_amount() == 0) {
+ %> <span> 품절
+					</span>
+						<button type="button">관심상품</button> <br>
+						<button type="button" onclick="kakaoChat();">카카오톡 상담</button> <%
+ 	} else {
+ %>
+						<button type="button">
+							<a href="javascript:valueOrderChecked()"> 바로구매 </a>
+						</button>
+						<button type="button">
+							<a href="javascript:valueBasketChecked()"> 장바구니 </a>
+						</button>
+						<button type="button">관심상품</button> <br>
+						<button type="button" onclick="kakaoChat();">카카오톡 상담</button> <%
+ 	}
+ %>
 					</td>
 				</tr>
 			</table>
@@ -165,34 +191,45 @@
 		<br>
 		<hr>
 	</form>
-	
+
 	<!-- 상품 관련 상품들 파트 ------------------------------------------------------------------------------------------ -->
 	<div id="menu2">
 		<div>
-			RECOMMEND ITEMS <br>
-			본 상품의 구매자 분들은 아래 상품들도 함께 구매하셨습니다.
+			RECOMMEND ITEMS <br> 본 상품의 구매자 분들은 아래 상품들도 함께 구매하셨습니다.
 		</div>
 	</div>
-	
+
 	<br>
 	<hr>
-		
+
 	<!-- 상품 상세 정보 파트 ------------------------------------------------------------------------------------------ -->
 	<div id="menu1">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
-				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('0')">기본 정보</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('1')">디테일 정보</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('2')">추천 상품</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('3')">REVIEW</button>
+				</li>
+				<li>
+					<button onclick="menuMove('4')">Q & A</button>
+				</li>
 			</ul>
 		</div>
-	
-		<p> <%=animalDetail.getContent()%> </p>
+
+		<p>
+			<%=animalDetail.getContent()%>
+		</p>
 	</div>
-	
+
 	<br>
 	<hr>
 
@@ -201,24 +238,31 @@
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
-				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('0')">기본 정보</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('1')">디테일 정보</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('2')">추천 상품</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('3')">REVIEW</button>
+				</li>
+				<li>
+					<button onclick="menuMove('4')">Q & A</button>
+				</li>
 			</ul>
 		</div>
-		
-		REVIEW <br>
-		상품의 사용후기를 적어주세요.
-		
-	<%
-	
-		BoardDAO bdao = new BoardDAO();
-		List<BoardDTO> bList = bdao.getPList(1, animalDetail.getA_code());
-		
-	%>
-		
+
+		REVIEW <br> 상품의 사용후기를 적어주세요.
+
+		<%
+			BoardDAO bdao = new BoardDAO();
+			List<BoardDTO> bList = bdao.getPList(1, animalDetail.getA_code());
+		%>
+
 		<table border="1">
 			<tr>
 				<th>글쓴이</th>
@@ -226,93 +270,103 @@
 				<th>작성일자</th>
 				<th>조회수</th>
 			</tr>
-		<%if(bList.size()>0){
-			for(BoardDTO dto : bList){%>
+			<%
+				if (bList.size() > 0) {
+					for (BoardDTO dto : bList) {
+			%>
 			<tr>
-				<td> 
-					<%=dto.getB_writer() %>
-				</td> 
-				<td>
-					<%=dto.getB_title() %>
-				</td>
-				<td>
-					<%=dto.getB_reg_date() %>
-				</td>
-				<td>
-					<%=dto.getB_view() %>
-				</td>
+				<td><%=dto.getB_writer()%></td>
+				<td><%=dto.getB_title()%></td>
+				<td><%=dto.getB_reg_date()%></td>
+				<td><%=dto.getB_view()%></td>
 			</tr>
-		<%	}
-		  }else{ %>
-		  	<tr>
-		  		<td colspan='4'>작성된 글이 없습니다.</td>
-		  	</tr>
-	  	<%} %>
+			<%
+				}
+				} else {
+			%>
+			<tr>
+				<td colspan='4'>작성된 글이 없습니다.</td>
+			</tr>
+			<%
+				}
+			%>
 		</table>
-		<button type="button" onclick="location.href='./Insert.bo?C=1&CODE=<%=animalDetail.getA_code() %>'"> 리뷰작성 </button>
-		<button type="button"> 모두보기 </button>
+		<button type="button"
+			onclick="location.href='./Insert.bo?C=1&CODE=<%=animalDetail.getA_code()%>'">
+			리뷰작성</button>
+		<button type="button">모두보기</button>
 	</div>
-	
+
 	<br>
 	<hr>
-	
+
 	<!-- 상품 Q&A 파트 ------------------------------------------------------------------------------------------ -->
 	<div id="menu4">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('0')"> 기본 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('1')"> 디테일 정보 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('2')"> 추천 상품 </button> </li>
-				<li style="float: left; margin-right: 10px;"> <button onclick="menuMove('3')"> REVIEW </button> </li>
-				<li> <button onclick="menuMove('4')"> Q & A </button> </li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('0')">기본 정보</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('1')">디테일 정보</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('2')">추천 상품</button>
+				</li>
+				<li style="float: left; margin-right: 10px;">
+					<button onclick="menuMove('3')">REVIEW</button>
+				</li>
+				<li>
+					<button onclick="menuMove('4')">Q & A</button>
+				</li>
 			</ul>
 		</div>
-	
-		Q & A <br>
-		상품에 대해 궁금한 점을 해결해 드립니다.
-		
-	<%	
-		bList = bdao.getPList(2, animalDetail.getA_code());
-		bdao.closeDB();
-	%>
-		
+
+		Q & A <br> 상품에 대해 궁금한 점을 해결해 드립니다.
+
+		<%
+			bList = bdao.getPList(2, animalDetail.getA_code());
+			bdao.closeDB();
+		%>
+
 		<table border="1">
 			<tr>
-				<th>제목 </th>
+				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-	<%
-		if(bList.size()>0){
-			for(BoardDTO dto:bList){
-		%>
+			<%
+				if (bList.size() > 0) {
+					for (BoardDTO dto : bList) {
+			%>
 			<tr>
-				<td><%=dto.getB_title() %></td>
-				<td><%=dto.getB_writer() %></td>
-				<td><%=dto.getB_reg_date() %></td>
-				<td><%=dto.getB_view() %></td>
+				<td><%=dto.getB_title()%></td>
+				<td><%=dto.getB_writer()%></td>
+				<td><%=dto.getB_reg_date()%></td>
+				<td><%=dto.getB_view()%></td>
 			</tr>
-		
-		<%
-			}
-		}else{
-		%>
+
+			<%
+				}
+				} else {
+			%>
 			<tr>
 				<td colspan="4">작성된 글이 없습니다.</td>
 			</tr>
-		<%
-		}
-	%>
+			<%
+				}
+			%>
 		</table>
-		<button type="button" onclick="location.href='./Insert.bo?C=2&CODE=<%=animalDetail.getA_code()%>'">상품문의하기</button>
+		<button type="button"
+			onclick="location.href='./Insert.bo?C=2&CODE=<%=animalDetail.getA_code()%>'">상품문의하기</button>
 		<button type="button">모두보기</button>
 	</div>
-	
-	
+
+
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
 
 </body>
 <script type="text/javascript">
