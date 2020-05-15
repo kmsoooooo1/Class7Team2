@@ -24,21 +24,6 @@ body {
 	text-align: center;
 }
 
-.detail_table {
-	width: 80%;
-	margin: 0 auto;
-	padding: 0;
-}
-
-.detail_td {
-	text-align: center;
-	padding: 0;
-}
-
-.detail_tr:NTH-CHILD(even){
-	background-color: #f2f2f2;
-}
-
 
 /* good/animal list sub 버튼 */
 .a_btn {

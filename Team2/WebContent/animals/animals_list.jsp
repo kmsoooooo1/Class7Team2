@@ -29,8 +29,8 @@
 	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-	
-	<div>
+	<div class="container">
+	<div class="menu">
 	 <input type="button" value="전체보기" class="a_btn"
 	 	onclick="location.href='./AnimalList.an?category=파충류'">
 	 <input type="button" value="리자드/모니터" class="a_btn" 
@@ -91,7 +91,7 @@
 		<%}%>
 	
 	</table>
-	
+	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	
