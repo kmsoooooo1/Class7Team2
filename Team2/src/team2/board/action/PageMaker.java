@@ -16,6 +16,7 @@ public class PageMaker {
 	}
 	public void setCri(Criteria cri) {
 		this.cri = cri;
+		CalcData();
 	}
 		
 	public int getTotalCount() {

@@ -6,27 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/css/animals_detail.css" rel="stylesheet">
-<style>
-.a_btn {
-	background-color: white;
-	color: black;
-	border: 2px solid #e7e7e7;
-	text-align: center;
-	padding: 5px 21px;
-	font-size: 16px;
-	margin: 0 auto;
-	transition-duration: 0.4s;
-	cursor: pointer;
-}
-
-.a_btn:hover {
-	background-color: #e7e7e7;
-}
-
-</style>
+<link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
 </head>
 <body>
 
@@ -46,8 +29,8 @@
 	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-	
-	<div>
+	<div class="container">
+	<div class="menu">
 	 <input type="button" value="전체보기" class="a_btn"
 	 	onclick="location.href='./AnimalList.an?category=파충류'">
 	 <input type="button" value="리자드/모니터" class="a_btn" 
@@ -108,7 +91,7 @@
 		<%}%>
 	
 	</table>
-	
+	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	

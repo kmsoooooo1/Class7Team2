@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
 </head>
 <body>
 	
@@ -29,27 +30,39 @@
 	<!-- Main Content -->
 	
 	<%if(category.equals("먹이")){ %>
-	<div>
-	   <ul>
-	      <li><a href="./GoodsList.go?category=먹이"> 전체보기 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a></li>
-	   </ul>
+	
+	<div class="container>
+	 <input type="button" value="전체보기" class="a_btn"
+	 	onclick="location.href='./GoodsList.go?category=먹이'">
+	 <input type="button" value="칼슘/약품" class="a_btn"
+	 	onclick="location.href='./GoodsList.go?category=먹이&sub_category=칼슘/약품"'">
+	 <input type="button" value="생먹이" class="a_btn"
+	 	onclick="location.href='./GoodsList.go?category=먹이&sub_category=생먹이'">
+	 <input type="button" value="냉동먹이" class="a_btn"
+	 	onclick="location.href='./GoodsList.go?category=먹이&sub_category=냉동먹이'">
+	 <input type="button" value="인공사료" class="a_btn"
+	 	onclick="location.href='./GoodsList.go?category=먹이&sub_category=인공사료'">	
 	</div>
+	
 	<%} else if(category.equals("사육용품")){ %>
+	
 	<div>
-	   <ul>
-	      <li><a href="./GoodsList.go?category=사육용품"> 전체보기 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=사육장"> 사육장 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=장식/그릇"> 장식/그릇 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=램프"> 램프 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=바닥재"> 바닥재 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=온/습도 관련"> 온/습도 관련 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=보조용품"> 보조용품 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=수족관"> 수족관 </a></li>
-	   </ul>
+	 <input type="button" value="전체보기" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=사육용품'">
+	 <input type="button" value="사육장" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=사육장'">
+	 <input type="button" value="장식/그릇" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=장식/그릇'">
+	 <input type="button" value="램프" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=램프'">
+	 <input type="button" value="바닥재" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=바닥재'">
+	 <input type="button" value="온/습도 관련" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=온/습도 관련'">
+	 <input type="button" value="보조용품" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=보조용품'">
+	 <input type="button" value="수족관" class="a_btn"
+	 		onclick="location.href='./GoodsList.go?category=먹이&sub_category=수족관'">
 	</div>
 	<%} %>
 	
