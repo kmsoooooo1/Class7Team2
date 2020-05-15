@@ -42,7 +42,7 @@ function doAction(){
 
 	%>
 	
-		 <h2><a href="./Insert.bo"> 글 쓰기   </a></h2>
+		<h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=2','_blank','width=500,height=400',false);"> 글 쓰기 (스마트에디터)  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
 
 	<!-- 게시판 검색 -->		 
