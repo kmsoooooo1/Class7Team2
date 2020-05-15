@@ -24,25 +24,26 @@
 	
 <div class="body">
 
-<<<<<<< HEAD
 	<div class="main">
+	
 		<div class="desc_wrap">
 			<span class="title">동물병원 정보</span>
 			<p class="desc">현재 위치 근처의 동물병원 검색 결과를 보여줍니다.</p>
 		</div>
 		<div class="content_wrap">
 			<div class="map" id="map"></div>
-			<ul id="spaceList">
-			</ul>
+			<div class="list">
+				<ul id="spaceList">
+				</ul>
+				<ul id="pageList">
+				</ul>
+			</div>
 		</div>
 	</div>
 		
 </div>
 
 	<!-- FOOTER -->
-=======
-		<!-- FOOTER -->
->>>>>>> refs/heads/master
 	<jsp:include page="/include/footer.jsp"/>
 
 </body>
@@ -56,8 +57,17 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	var ps = new kakao.maps.services.Places();
 	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
 	var ps = new kakao.maps.services.Places();
+	var pageList = document.getElementById('pageList');
+	
+	//	페이징 처리 함수
+	var pageNum = <%=request.getParameter("page")%>;
+	if(pageNum==null){
+		pageNum = 1;
+	}
+	var pageSize = 6;
+	
+	var dataList = [];
 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {
 	    
@@ -88,6 +98,67 @@
 	        
 	    displayMarker(locPosition, message);
 	}
+	
+	function outputList(){
+		
+		var startNum = (pageNum-1)*pageSize;
+		var endNum = pageNum*pageSize>dataList.length?dataList.length:pageNum*pageSize;
+		
+		var StartPage = 0;
+		var EndPage = dataList.length/pageSize;
+		
+		console.log(dataList);
+		
+		for(var i = startNum; i<endNum; i++){
+			
+			var textnode;
+	        var node = document.createElement("li");	  									     		// Create a <li> node
+	        node.className = 'h_list';
+	        var div = document.createElement("div");
+	        div.className = 'list_div';
+	        
+	        var span = document.createElement("span");
+	        span.className = 'place_name';
+	        textnode = document.createTextNode(dataList[i].place_name);
+	        span.appendChild(textnode);
+	        div.appendChild(span);
+	        
+	        span = document.createElement("span");
+				span.className = 'phone';
+	        textnode = document.createTextNode(dataList[i].phone);
+	        span.appendChild(textnode);
+	        div.appendChild(span);
+	        
+	        
+	        span = document.createElement("span");
+	        span.className = 'address_name';
+	        textnode = document.createTextNode("구 주소 : "+dataList[i].address_name);
+	        span.appendChild(textnode);
+	        div.appendChild(span);
+	        
+	        span = document.createElement("span");
+	        span.className = 'road_address_name';
+	        textnode = document.createTextNode("도로명 주소 : "+dataList[i].road_address_name);
+	        span.appendChild(textnode);
+	        div.appendChild(span);
+	        div.setAttribute('onclick', "location.href='" + dataList[i].place_url +"';");
+	        
+	        node.appendChild(div);
+	                                    									// Append the text to <li>
+	        sList.appendChild(node);     // Append <li> to <ul> with id="myList"
+		}
+		
+		for(var i = StartPage; i<EndPage; i++){
+			var textnode;
+			var node = document.createElement("li");
+			node.setAttribute('onclick', "location.href='./aHospital.bo?page="+(i+1)+"'");
+			textnode = document.createTextNode(i+1);
+			node.appendChild(textnode);
+			pageList.appendChild(node);
+		}
+		
+	}
+	
 	
 	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 	function displayMarker(locPosition, message) {
@@ -123,46 +194,16 @@
 	        for (var i=0; i<data.length; i++) {
 	            displayMarker(data[i]);
 	            console.log(data[i]);
-	            var textnode;
-	            var node = document.createElement("li");	  									     		// Create a <li> node
-	            node.className = 'h_list';
-	            var div = document.createElement("div");
-	            div.className = 'list_div';
-	            
-	            var span = document.createElement("span");
-	            span.className = 'place_name';
-	            textnode = document.createTextNode(data[i].place_name);
-	            span.appendChild(textnode);
-	            div.appendChild(span);
-	            
-	            span = document.createElement("span");
-				span.className = 'phone';
-	            textnode = document.createTextNode(data[i].phone);
-	            span.appendChild(textnode);
-	            div.appendChild(span);
-	            
-	            
-	            span = document.createElement("span");
-	            span.className = 'address_name';
-	            textnode = document.createTextNode("구 주소 : "+data[i].address_name);
-	            span.appendChild(textnode);
-	            div.appendChild(span);
-	            
-	            span = document.createElement("span");
-	            span.className = 'road_address_name';
-	            textnode = document.createTextNode("도로명 주소 : "+data[i].road_address_name);
-	            span.appendChild(textnode);
-	            div.appendChild(span);
-	            div.setAttribute('onclick', "location.href='" + data[i].place_url +"';");
-	            
-	            node.appendChild(div);
-	                                        									// Append the text to <li>
-	            sList.appendChild(node);     // Append <li> to <ul> with id="myList"
+
+	            dataList.push(data[i]);
+
 	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 	        }       
 
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 	        map.setBounds(bounds);
+	        
+	        outputList();
 	    } 
 	}
 	
@@ -181,8 +222,6 @@
 	        infowindow.open(map, marker);
 	    });
 	}
-	
-	
 	
 	
 	
