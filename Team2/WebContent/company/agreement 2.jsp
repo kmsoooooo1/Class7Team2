@@ -4,173 +4,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>회원 가입 </title>
+<title>Insert title here</title>
+<style type="text/css">
 
-<script>
-	//submit을 눌렀을 때 호출되는 함수
-	//유효성 검사를 위한 함수
-	function check() {  //전송될때 불러지는 함수.
-	
-	// ID 가져오는건 window.onload 안에서만 가져올 수 있으므로 forms는 안쓰는걸로 한다. ★★★★
-	var id1 = joinform.id.value;
-	var mobile = joinform.phone.value;
-	//var forms = document.getElementById("joinform");				
-		if ((joinform.name.value == "")
-				|| (joinform.name.value.length <= 1)) {
-					alert("이름을 제대로 입력해 주세요.");
-					joinform.name.focus();
-					return false;
-				}
-				if (id1.length == 0) {
-					alert("아이디를 입력하세요.");
-					joinform.id.focus();
-					return false;
-				}
-				if (mobile.length == 0) {
-					alert("휴대폰 번호를 입력하세요.");
-					joinform.phone.focus();
-					return false;
-				}
-				else if(joinform.email.value == ""){
-					alert("이메일을 입력해주세요.");
-					joinform.email.focus();
-					return false;
-				}
-				if ((joinform.pass.value == "") 
-				|| (!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val()))){
-					alert("비밀번호가 조건에 맞지 않습니다.");
-					joinform.pass.focus();
-					return false;
-				}
-				else if (!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#user_pass_confirm').val())){
-					alert("비밀번호 확인란을 다시 입력해주세요.");
-					joinform.user_pass_confirm.focus();
-					return false;
-				}
-				else if(document.joinform.pass.value != document.joinform.user_pass_confirm.value){
-					alert("비밀번호가 동일하지 않습니다.");
-					joinform.user_pass_confirm.focus();
-					return false;
-				}
-				
-		//이름을 한글 2자이상 입력받기
-		//정규식 객체 생성
-		//정규식(javascript, java, c#, php에서 모두 활용) 객체 생성
-		var regExp = /([가-힣]){2,}/g;  //가부터 힣까지 2글자 이상.
-		
-			if(!regExp.test(joinform.name.value)){
-				alert("이름은 한글 2자 이상입니다.");
-				return false;
-			}
 
-		//중복확인을 했는지 검사
-		//그리고 중복확인을하고나서도 포커스를 눌려서 아이디를 수정한경우를 막기 위한 코드이기도함
-						
-		if(joinform.idcheck.value == "false"){
-			alert("아이디 중복 검사를 하지 않으셨습니다.");
-			return false;
-		}	
-		return true;
-			
-		
-	}
+pre {
+	padding: 10px;
+	overflow: auto;
+	white-space: pre-wrap;
+}
 
-	function openConfirmId(joinform) {
-		var id1 = joinform.id.value;
-		var url = "./MemberIDCheckAction.me?id="
-				+ joinform.id.value;
 
-		if (id1.length == 0) {
-			alert("아이디를 입력하세요.");
-			joinform.id.focus();
-			return false;
-		}
-		
-		
-		//상식 정규식은 항상 슬러시 / 로 시작한다.
-
-		open(
-				url,
-				"confirm",
-				"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=200");
-		
-	}
-
-	//숫자 키만 입력받도록 하기 위해서 숫자 인지 아닌 지를 판별해서
-	//숫자가 아니면 이벤트가 발생하지 않은 것으로 해주는 함수
-	function gNumCheck() {
-		
-	//크롬에서는 event로 iE에서는 window.event로 event 객체를 생성		
-	var e = event || window.event;
-			
-	//누른 키값 가져오기
-	//크롬에서는 keyCode로 IE에서는 which로 받아온다.
-	//true(익스플로러)  false(크롬)
-	var key = ('which' in e)?  e.which:e.keyCode;
-		         	
-		if (key < 48 || key> 57) {  //숫자외의 키가 들어온다면
-		//IE에서 기본적으로 제공되는 이벤트 제거
-		if(e.preventDefault)
-		e.preventDefault();
-	     //그이외 브라우저에서 기본적으로 제공되는 이벤트 제거
-		else
-		e.returnValue=false;
-		}
-	
-	}
-		
-	function func(){
-		//id에 (아이디입력창에) 포커스가 가면 수행되는 함수.
-		joinform.idcheck.value="false";
-		
-	}
-</script>
-
+</style>
 </head>
 <body>
 	<!-- Header -->
-	<jsp:include page="/include/header.jsp" />
-	
-	<div class="contents">
-		<div class="box">
-		<!-- 회원가입 -->
-		<form action="./MemberJoinAction.me" method="post" name="joinform" id="joinform"
-			onsubmit="return !!(check() & send(this))">
-			
-			<h2 class="name">Member Join</h2>
-		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
-			  중복체크를하고나면 true로 변경. 단 다시 아이디 체크박스를 누르면 false로 변경!-->
-			<input type="hidden" name="idcheck" value="false" />
-			
-			 <input type="text" class="id" name="id" placeholder="아이디" size="20" maxlength=30 onfocus="func()"/>
-			 <input type="button" class="btn" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" /><br>
-			
-			<input type="password" id="pass" name="pass" placeholder="비밀번호(영문/숫자 조합, 8자리 이상)" class="inputTypeText" onkeyup="checkValidPW()"> <br> <span id="pwConstraintMsg"></span><br>
-			
-			<input type="password" id="user_pass_confirm" name="user_pass_confirm" placeholder="비밀번호 확인" onkeyup="checkSamePW()" class="inputTypeText"> <br> <span id="pwConfirmMsg"></span><br>
-			
-			<input type="text" id="name" name="name" placeholder="이름" size="20"><br>
-			
-			<!-- 눌렸을때 호출되는 gNumCheck()메서드 등록  -->
-			<input type="text" id="phone" name="phone" placeholder="전화번호" onkeypress="gNumCheck()" size="24" /><br>
-			
-			<input type="text" name="zipcode" id="zipcode" placeholder="우편번호" size="7" readonly>
-				<input type="button" class="btn" value="주소찾기" onclick="DaumPostcode()"><br>
-			
-			<input type="text" name="addr1" id="addr1" placeholder="주소" size="40" readonly><br>
-			
-			<input type="text" name="addr2" id="addr2" placeholder="상세주소" size="40"><br>
-			
-			<input type="email" id="email" name="email" placeholder="이메일"><br></br>
-			<div class="div_text">
-            <textarea cols="107" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+
+
+<h1> AGREEMENT </h1>
+<fieldset>
+<pre>
 
 제1조(목적 등)
 
  
-① Community (www.j'sD&NBox.co.kr) 서비스 약관(이하 "본 약관"이라 합니다)은 이용자가 ㈜ www_pilot(이하 "Community"이라 합니다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 합니다)를 이용함에 있 어 이용자와 "Community"의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+① Community (www.j'sD&NBox.co.kr) 서비스 약관(이하 "본 약관"이라 합니다)은 이용자가 ㈜ www_pilot(이하 "Community"이라 합니다)에서 제공하는 
+인터넷 관련 서비스(이하 "서비스"라 합니다)를 이용함에 있 어 이용자와 "Community"의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
  
 ② 이용자가 되고자 하는 자가 "Community"이 정한 소정의 절차를 거쳐서 "등록하기" 단추를 누르면 본 약관에 동의하는 것 으로 간주합니다. 본 약관에 정하는 이외의 이용자와 "Community"의 권리, 의무 및 책임사항에 관해서는 전기통신사업법 기 타 대한민국의 관련 법령과 상관습에 의합니다. 
  
@@ -344,126 +204,11 @@
 
  
 본 약관은 2005. 7. 18. 부터 적용하고, 2004. 10. 11.부터 적용되던 종전의 약관은 본 약관으로 대체합니다. 
-            </textarea>
-       </div>
-  	   <p id="agreep"><input type="checkbox" name="agree"/> 약관에 동의합니다</p>
-		<div class="btn_submit">
-		<input type="submit" value="회원가입" class="btn"/> 
-		<input type="button" value="취소"  class="btn" onclick="javascript:history.back();"/>
-		</div>
-	   </form>	
-		</div>
-		
-		<!-- ----- DAUM 우편번호 API 시작 ----- -->
-<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
-  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-</div>
-
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-    // 우편번호 찾기 화면을 넣을 element
-    var element_wrap = document.getElementById('wrap');
-    function foldDaumPostcode() {
-        // iframe을 넣은 element를 안보이게 한다.
-        element_wrap.style.display = 'none';
-    }
-    function DaumPostcode() {
-        // 현재 scroll 위치를 저장해놓는다.
-        var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullAddr = data.address; // 최종 주소 변수
-                var extraAddr = ''; // 조합형 주소 변수
-                // 기본 주소가 도로명 타입일때 조합한다.
-                if(data.addressType === 'R'){
-                    //법정동명이 있을 경우 추가한다.
-                    if(data.bname !== ''){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있을 경우 추가한다.
-                    if(data.buildingName !== ''){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                }
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('addr1').value = fullAddr;
-                // iframe을 넣은 element를 안보이게 한다.
-                // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
-                element_wrap.style.display = 'none';
-                // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
-                document.body.scrollTop = currentScroll;
-                
-                $('#addr2').focus();
-            },
-            // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
-            onresize : function(size) {
-                element_wrap.style.height = size.height+'px';
-            },
-            width : '100%',
-            height : '100%'
-        }).open();
-    }
-</script> 
-<!-- ----- DAUM 우편번호 API 종료----- -->
-
-</div>	
-<!-- FOOTER -->
-<jsp:include page="/include/footer.jsp"/>
+	</pre>
+	</fieldset>
 	
-
+	<!-- FOOTER -->
+	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	
 </body>
-
-<!-- 비밀번호 유효성 검사 -->
-<script type="text/javascript">
-
-var passCheck;
-var passDoubleCheck;
-
-//비밀번호 유효성검사 함수
-function checkValidPW() {
-	//비밀번호 조건에 부합하지 않으면
-	if(!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val())){            
-        $('#pwConstraintMsg').text('사용 할 수 없는 비밀번호 입니다.').css({'color':'red', 'font-size':12});
-        $('#pass').val($('#pass').val()).focus();
-        passCheck = false;
-    } 
-	//비밀번호 조건에 부합한다면
-	else if(/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val())) {
-    	$('#pwConstraintMsg').text('사용가능한 비밀번호 입니다.').css({'color':'green', 'font-size':12});
-    	passCheck = true;
-    }
-}
-
-//비밀번호와 비밀번호확인란이 같은지 검사하는 함수
-function checkSamePW() {
-	//비밀번호와 비밀번호확인란이 같지 않으면
-	if(document.joinform.pass.value != document.joinform.user_pass_confirm.value ){
-		$('#pwConfirmMsg').text(' 비밀번호가 다릅니다.').css({'color':'red', 'font-size':12});
-		$('#user_pass_confirm').val($('#user_pass_confirm').val()).focus();
-		passDoubleCheck = false;
-    }
-	//비밀번호와 비밀번호확인란이 같으면
-	else {
-    	$('#pwConfirmMsg').text('비밀번호가 일치합니다.').css({'color':'green', 'font-size':12});	
-    	passDoubleCheck = true;
-    }
-}
-
-// 약관 동의 체크 안됬을 시
-function send(f){
-   if(f.agree.checked==true){
-      return true;
-   }else{
-      alert("약관에 동의한 후 회원가입이 가능합니다");
-      return false;
-   }
-}
-</script>
-
 </html>
