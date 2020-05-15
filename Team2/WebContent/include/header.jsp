@@ -35,6 +35,7 @@
    <a href="./BoardList.bo?category=0">공지사항</a>
    <a href="./BoardList.bo?category=1">상품후기</a>
    <a href="./BoardList.bo?category=2">QnA</a>
+   <a href="./AdminBoard.bo">게시판 관리자 (임시)</a>
    
    <!-- 메인 메뉴 -->
    <header id="header_menu">
