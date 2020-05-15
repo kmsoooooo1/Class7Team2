@@ -19,16 +19,21 @@ public class GoodsDetailAction implements Action{
 		
 		GoodsDAO gdao = new GoodsDAO();
 		
+		
 		// 상품 페이지 조회수 1업하는 함수 호출
 		gdao.updateGoodsViewCount(g_code);
 		
 		// 상품 세부정보 가져오기
 		List<GoodsDTO> detailList = gdao.getGoodsDetailList(g_code);
 		
+		gdao = new GoodsDAO();
 		
+		int g_amount = gdao.getG_amount(g_code);
 		
 		request.setAttribute("detailList", detailList);
-
+		
+		request.setAttribute("g_amount", g_amount);
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./goods/goods_detail.jsp");
 		forward.setRedirect(false);

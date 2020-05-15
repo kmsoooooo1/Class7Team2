@@ -395,6 +395,32 @@ public class GoodsDAO {
 		}
 	}//updateGoodsViewCount(g_code)
 	
+	public int getG_amount(String g_code){
+		int result = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql="select sum(g_amount) from team2_goods  where g_code = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, g_code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getInt("sum(g_amount)");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return result;
+	} 
+	
+	
 	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
 	// 수정 필요
 	public List<GoodsDTO> getGoodsDetailList(String g_code){
