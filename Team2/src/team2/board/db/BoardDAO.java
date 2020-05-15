@@ -169,7 +169,7 @@ public class BoardDAO {
 					boardList.add(bdto);
 				}
 			
-			System.out.println("게시판 글 arraylist로 저장 완료 : " + boardList);
+			System.out.println("getBoardList(cSet cset, Criteria cri) 성공");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
