@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+.contents{
+	background-image:url(../img/join.jpg);
+	background-position: center;
+	background-size: cover;
+	font-family: sans-serif;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.box{
+	background-color: rgb(0,0,0,0.5);
+	width: 900px;
+	margin: 0 auto;
+}
+
+form{
+	padding: 0;
+}
+
+.name{
+	margin-left: 25px;
+	margin-top: 15px;
+	width: 125px;
+	color: white;
+	font-size: 18px;
+	font-weight: 700;
+	margin-left: 25%;
+} 
+
+.btn {
+	border: 0;
+	background: none;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 1s;
+	cursor: pointer;
+}
+
+.btn:HOVER{
+	background: #2ecc71;
+}
+
+.btn_submit{
+	margin-left: 300px;
+}
+
+.id,#pass,#user_pass_confirm,#name,#phone,#zipcode,#addr1,#addr2,#email {
+	margin-top: 10px;
+	margin-left: 25%;
+	left: 200px;
+	top: -37px;
+	line-height: 40px;
+	border-radius: 30px;
+	padding: 0 22px;
+	font-size: 16px;
+}	
+
+#agreep{
+	color: white;
+	text-align: center;
+	width: 100%;
+}	
+
+#passp{
+	color: white;
+}
+
+.div_text{
+	margin-left: 70px;
+}
+
+.textarea{
+	text-align: center;
+}
