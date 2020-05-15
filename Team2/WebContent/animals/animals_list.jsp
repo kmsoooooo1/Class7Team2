@@ -47,7 +47,7 @@
 	<span> Total <%=animalList.size()%> items</span> 
 	
 	<hr>
-	
+	<div class="info_table">
 	<table border="1" class="detail_table">
 		<%    
 	        int size = animalList.size();
@@ -67,11 +67,11 @@
 					String newformat_price_sale = formatter.format(adto.getA_price_sale());
 			%>
 			
-			<td colspan="2" class="detail_td">
+			<td colspan="2">
   			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> <br> 
 		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <hr>
-		   
-		    
+		    </div>
+		    <div class="info_desc">
 		    <%if(adto.getA_discount_rate() != 0) { //만약 할인율이 있으면%>
 		    	<span style="text-decoration:line-through"> <%=newformat_price_origin%>원 </span> <br>
 		    	<span style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span> <br>
@@ -89,11 +89,13 @@
 			   num++;  
 			   if(size <= num) break;
 			 }			
-			%> 
+			%>
 		</tr>
 		<%}%>
+	</div>
 	</table>
-	
+	</div>
+	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	
