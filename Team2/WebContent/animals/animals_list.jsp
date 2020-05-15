@@ -6,27 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/css/animals_detail.css" rel="stylesheet">
-<style>
-.a_btn {
-	background-color: white;
-	color: black;
-	border: 2px solid #e7e7e7;
-	text-align: center;
-	padding: 5px 21px;
-	font-size: 16px;
-	margin: 0 auto;
-	transition-duration: 0.4s;
-	cursor: pointer;
-}
-
-.a_btn:hover {
-	background-color: #e7e7e7;
-}
-
-</style>
+<link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
 </head>
 <body>
 
@@ -46,8 +29,8 @@
 	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-	
-	<div>
+	<div class="container">
+	<div id="menu0" class="menu" >
 	 <input type="button" value="전체보기" class="a_btn"
 	 	onclick="location.href='./AnimalList.an?category=파충류'">
 	 <input type="button" value="리자드/모니터" class="a_btn" 
@@ -60,11 +43,12 @@
 	 	onclick="location.href='./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온'">
 	</div>
 	
+	
 	<span> Total <%=animalList.size()%> items</span> 
 	
 	<hr>
 	
-	<table border="1">
+	<table border="1" class="detail_table">
 		<%    
 	        int size = animalList.size();
 		    int col = 4;
@@ -73,7 +57,7 @@
 		
 			for (int a = 0; a < row; a++) {
 		%>
-		<tr>
+		<tr class="detail_tr">
 			<%
 				for (int i = 0; i <col; i++) {
 					AnimalDTO adto = animalList.get(num);
@@ -83,9 +67,11 @@
 					String newformat_price_sale = formatter.format(adto.getA_price_sale());
 			%>
 			
-			<td colspan="2">
+			<td colspan="2" class="detail_td">
   			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> <br> 
 		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <hr>
+		   
+		    
 		    <%if(adto.getA_discount_rate() != 0) { //만약 할인율이 있으면%>
 		    	<span style="text-decoration:line-through"> <%=newformat_price_origin%>원 </span> <br>
 		    	<span style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span> <br>
@@ -103,10 +89,9 @@
 			   num++;  
 			   if(size <= num) break;
 			 }			
-			%>
+			%> 
 		</tr>
 		<%}%>
-	
 	</table>
 	
 	<!-- FOOTER -->
