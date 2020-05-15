@@ -12,10 +12,7 @@
 	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-<!-- 	<ul> -->
-<!-- 		<li><a href="./aHospital.bo">동물병원정보</a></li> -->
-<!-- 	</ul> header.jsp 로 위치 이동 -->
-	
+
 	<hr>
 	
 	<!-- 신상품 리스트 -->
