@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/product_detail.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>Insert title here</title>
@@ -63,10 +64,11 @@
 	%>
 
 	<!-- Main Content -->
-	<form action="" method="post" name="fr">
+	
 	
 		<!-- 상품 기본 정보 파트 -->
-	   <div id="menu0">
+   <div id="menu0" class="menu">
+	   <form action="" method="post" name="fr">
 			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
 			<input type="hidden" name="product_code" value="<%=detailList.get(0).getG_code()%>">
 			<input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=detailList.get(0).getG_price_origin()%>">
@@ -81,13 +83,13 @@
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 		  
-			<table border="0">
-		     <tr>
-		     	<td> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </td>
-		        <td>
+			<div class="info_table">
+		     
+		     	<div class="info_img"> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </div>
+		        <div class="info_desc">
 		        	<!-- 상품명 -->
 		        	<%if(detailList.get(0).getG_amount() == 0){%>
-		        	  <span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
+		        	  <span> SOLD OUT </span>
 		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
 		        	<%}else{ %>
 		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
@@ -96,10 +98,10 @@
 		        	<hr>
 		        	
 		        	<!-- 판매가, 적립금, 할인판매가 -->
-		        	<table border="1">
-		        	  <tr>
-		        	    <td> 판매가 </td>
-		        	    <td>
+		        	<table class="detail_table">
+		        	  <tr class="detail_tr">
+		        	    <td class="detail_td"> 판매가 </td>
+		        	    <td class="detail_td">
 		        	       <%=newformat_price_origin%>원 
 		        	       <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
 		        	          <%=detailList.get(0).getG_discount_rate() %>% OFF
@@ -107,15 +109,15 @@
 		        	    </td>
 		        	  </tr>
 		        	  
-		        	  <tr>
-		        	    <td> 적립금 </td>
-		        	    <td> <%=newformat_mileage%>원 </td>
+		        	  <tr class="detail_tr">
+		        	    <td class="detail_td"> 적립금 </td>
+		        	    <td class="detail_td"> <%=newformat_mileage%>원 </td>
 		        	  </tr>
 		        	  
 		        	  <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
-		        	  <tr>
-		        	     <td> 할인판매가 </td>
-		        	     <td> <%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate() %>% 할인율) </td>
+		        	  <tr class="detail_tr">
+		        	     <td class="detail_td"> 할인판매가 </td>
+		        	     <td class="detail_td"> <%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate() %>% 할인율) </td>
 		        	  </tr>
 		        	  <%} %>
 		        	</table>
@@ -257,19 +259,20 @@
 		        	<%} %>
 		        
 		        </td>
-		     </tr>
-		  </table>
+		     </div>
+		  </div>
+		  </form>
 	   </div>
 	   
 	   <br>
 	   <hr>
-	</form>
+	
 
 
 	
 	
 	<!-- 상품 관련 상품들 파트 ---------------------------------------------------------------------->
-	<div id="menu2">
+	<div id="menu2" class="menu">
 		<div>
 			RECOMMEND ITEMS <br>
 			본 상품의 구매자 분들은 아래 상품들도 함께 구매하셨습니다.
@@ -280,7 +283,7 @@
 	<hr>
 	
 	<!-- 상품 상세 정보 파트 ----------------------------------------------------------------------------->
-	<div id="menu1">
+	<div id="menu1" class="menu">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
@@ -299,7 +302,7 @@
 	<hr>
 	
 	<!-- 상품 REVIEW 파트 -------------------------------------------------------------------------------------------->
-	<div id="menu3">
+	<div id="menu3" class="menu">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">
@@ -335,7 +338,7 @@
 	<hr>
 	
 	<!-- 상품 Q&A 파트 ------------------------------------------------------------>
-	<div id="menu4">
+	<div id="menu4" class="menu">
 		<!-- 소메뉴 -->
 		<div>
 			<ul style="list-style: none;">

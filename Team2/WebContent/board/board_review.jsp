@@ -44,7 +44,7 @@ function doAction(){
 		
 	%>
 	
-		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=1','_blank','width=500,height=400',false);"> 글 쓰기 (스마트에디터)  </a></h2>
+		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp','_blank','width=600,height=700',false);"> 글 쓰기  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
 		 
 		<!-- 게시판 검색 -->		 

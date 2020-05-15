@@ -4,32 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>회원 가입 </title>
-
-<style type="text/css">
-
-fieldset, legend {
-	margin: auto;
-	text-align: center;
-}
- 
-table, td {
-	border: 1px solid;
-}
-
-table {
-	height: 100px;
-	margin: auto;
-	text-align: center;
-}
-
-td{
-	text-align: left;
-}
-
-</style>
-
 
 <script>
 	//submit을 눌렀을 때 호출되는 함수
@@ -154,12 +131,10 @@ td{
 </head>
 <body>
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
-
-	<h2 class="join_title">회원가입 페이지</h2>
+	<jsp:include page="/include/header.jsp" />
 	
-	<fieldset>
-		<legend>회 원 가 입</legend>
+	<div class="contents">
+		<div class="box">
 		<!-- 회원가입 -->
 		<form action="./MemberJoinAction.me" method="post" name="joinform" id="joinform"
 			onsubmit="return !!(check() & send(this))">
@@ -167,48 +142,33 @@ td{
 		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
 			  중복체크를하고나면 true로 변경. 단 다시 아이디 체크박스를 누르면 false로 변경!-->
 			<input type="hidden" name="idcheck" value="false" />
+	
+		 	<h2 class="name">아이디</h2>
+		 	<div>
+			 <input type="text" class="id" name="id" size="20" maxlength=30 onfocus="func()"/>
+			 <input type="button" class="btn" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" /><br>
+			</div>
+			 <h2 class="name">비밀번호</h2>
+			<p id="passp"><input type="password" id="pass" name="pass" class="inputTypeText" onkeyup="checkValidPW()"> (영문/숫자 조합, 8자리 이상) &nbsp; <span id="pwConstraintMsg"></span><p><br>
 			
-		<table border="1">
-		<tr>
-		 	<td>아이디</td>
-			<td>
-			 <input type="text" name="id" size="20" maxlength=30 onfocus="func()"/>
-			 <input type="button" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" />
-			</td>
-		</tr>
-		<tr>
-			<td>비밀번호</td> <td> <input type="password" id="pass" name="pass" class="inputTypeText" onkeyup="checkValidPW()"> (영문/숫자 조합, 8자리 이상) &nbsp; <span id="pwConstraintMsg"></span> </td> 
-		</tr>
-		<tr>
-			<td>비밀번호 확인</td> <td> <input type="password" id="user_pass_confirm" name="user_pass_confirm" onkeyup="checkSamePW()" class="inputTypeText"> &nbsp; <span id="pwConfirmMsg"></span> </td>
-		</tr>
-		<tr>
-			<td>이름</td> <td><input type="text" name="name" size="20"></td>
-		</tr>
-		<tr>
-			<td>전화번호</td> 
+			<h2 class="name">비밀번호 확인</h2> 
+			<input type="password" id="user_pass_confirm" name="user_pass_confirm" onkeyup="checkSamePW()" class="inputTypeText"> &nbsp; <span id="pwConfirmMsg"></span><br>
+			
+			<h2 class="name">이름</h2>
+			<input type="text" id="name" name="name" size="20"><br>
+			<h2 class="name">전화번호</h2>
 			<!-- 눌렸을때 호출되는 gNumCheck()메서드 등록  -->
-			<td><input type="text" name="phone" onkeypress="gNumCheck()" size="24" />
-			</td>
-		</tr>
-		<tr>
-			<td>우편번호</td>
-			<td><input type="text" name="zipcode" id="zipcode" size="7" readonly>
+			<input type="text" id="phone" name="phone" onkeypress="gNumCheck()" size="24" />
+			<h2 class="name">우편번호</h2>
+			<input type="text" name="zipcode" id="zipcode" size="7" readonly>
 				<input type="button" value="주소찾기" onclick="DaumPostcode()">
-			</td>
-		</tr>
-		<tr>
-			<td>주소</td> <td><input type="text" name="addr1" id="addr1" size="40" readonly></td>
-		</tr>
-		<tr>
-			<td>상세주소</td> <td><input type="text" name="addr2" id="addr2" size="40"></td>
-		</tr>
-		<tr>
-			<td>이메일</td> <td><input type="email" name="email"></td>
-		</tr>
-		 <tr align="center" height="10"> 
-        <td colspan="2">
-            <textarea cols="85" rows="14" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
+			<h2 class="name">주소</h2>
+			<input type="text" name="addr1" id="addr1" size="40" readonly>
+			<h2 class="name">상세주소</h2>
+			<input type="text" name="addr2" id="addr2" size="40">
+			<h2 class="name">이메일</h2>
+			<input type="email" id="email" name="email"><br></br>
+            <textarea cols="107" rows="14" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
 
 제1조(목적 등)
 
@@ -387,20 +347,13 @@ td{
 
  
 본 약관은 2005. 7. 18. 부터 적용하고, 2004. 10. 11.부터 적용되던 종전의 약관은 본 약관으로 대체합니다. 
-            </textarea>
-        </td>
-    </tr>
-    <tr>
-       <td> <div style="text-align: center">
-  	   <input type="checkbox" name="agree"/> 약관에 동의합니다
-  </div>
-  		</td>
+            </textarea><br>
+  	   <p id="agreep"><input type="checkbox" name="agree"/> 약관에 동의합니다</p>
 
-    </tr>
-		</table>
-		<input type="submit" value="회원가입" class="btn btn-primary"/> 
-		<input type="button" value="취소"  class="btn btn-primary" onclick="javascript:history.back();"/>
-		
+		<input type="submit" value="회원가입" class="btn"/> 
+		<input type="button" value="취소"  class="btn" onclick="javascript:history.back();"/>
+	   </form>	
+		</div>
 		
 		<!-- ----- DAUM 우편번호 API 시작 ----- -->
 <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
@@ -459,14 +412,12 @@ td{
     }
 </script> 
 <!-- ----- DAUM 우편번호 API 종료----- -->
-		</form>	
-	</fieldset>
-	
-	
+
+</div>	
+<!-- FOOTER -->
+<jsp:include page="/include/footer.jsp"/>
 	
 
-<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 </body>
 
 <!-- 비밀번호 유효성 검사 -->
