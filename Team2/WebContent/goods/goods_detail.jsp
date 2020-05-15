@@ -70,20 +70,11 @@
 	%>
 
 	<!-- Main Content -->
-<<<<<<< HEAD
-	<form action="" method="post" name="fr">
 
-=======
-	
-	
->>>>>>> refs/heads/master
-		<!-- 상품 기본 정보 파트 -->
-<<<<<<< HEAD
-		<div id="menu0">
-=======
-   <div id="menu0" class="menu">
+	<div class="container">
+	<!-- 상품 기본 정보 파트 -->
+	<div id="menu0" class="menu">
 	   <form action="" method="post" name="fr">
->>>>>>> refs/heads/master
 			<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
 			<input type="hidden" name="product_code" value="<%=detailList.get(0).getG_code()%>"> 
 			<input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=detailList.get(0).getG_price_origin()%>"> 
@@ -100,172 +91,69 @@
 
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
-<<<<<<< HEAD
 
-
-			<table border="0">
-				<tr>
-					<td><img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"></td>
-					<td>
-						<!-- 상품명(미완성@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@) -->
-=======
-		  
 			<div class="info_table">
-		     
-		     	<div class="info_img"> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </div>
+			
+			
+				<div class="info_img"> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </div>
+		        
 		        <div class="info_desc">
-		        	<!-- 상품명 -->
-		        	<%if(detailList.get(0).getG_amount() == 0){%>
-		        	  <span> SOLD OUT </span>
-		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
-		        	<%}else{ %>
-		        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
-		        	<%} %>    
+	        	<!-- 상품명 -->
+	        	<%if(g_amount == 0){%>
+	        	  <span> SOLD OUT </span>
+	        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
+	        	<%}else{ %>
+	        	  <h4> <%=detailList.get(0).getG_name() %> </h4>
+	        	<%} %>    
+	        	
+	        	
+	        	
+	        	<!-- 판매가, 적립금, 할인판매가 -->
+	        	<table class="detail_table">
+	        	  <tr class="detail_tr">
+	        	    <td class="detail_td"> 판매가 </td>
+	        	    <td class="detail_td">
+	        	       <%=newformat_price_origin%>원 
+	        	       <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
+	        	          <%=detailList.get(0).getG_discount_rate() %>% OFF
+	        	       <%} %>   
+	        	    </td>
+	        	  </tr>
+	        	  
+	        	  <tr class="detail_tr">
+	        	    <td class="detail_td"> 적립금 </td>
+	        	    <td class="detail_td"> <%=newformat_mileage%>원 </td>
+	        	  </tr>
+	        	  
+	        	  <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
+	        	  <tr class="detail_tr">
+	        	     <td class="detail_td"> 할인판매가 </td>
+	        	     <td class="detail_td"> <%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate() %>% 할인율) </td>
+	        	  </tr>
+	        	  <%} %>
+	        	</table>
 		        	
-		        	<hr>
-		        	
-		        	<!-- 판매가, 적립금, 할인판매가 -->
-		        	<table class="detail_table">
-		        	  <tr class="detail_tr">
-		        	    <td class="detail_td"> 판매가 </td>
-		        	    <td class="detail_td">
-		        	       <%=newformat_price_origin%>원 
-		        	       <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
-		        	          <%=detailList.get(0).getG_discount_rate() %>% OFF
-		        	       <%} %>   
-		        	    </td>
-		        	  </tr>
-		        	  
-		        	  <tr class="detail_tr">
-		        	    <td class="detail_td"> 적립금 </td>
-		        	    <td class="detail_td"> <%=newformat_mileage%>원 </td>
-		        	  </tr>
-		        	  
-		        	  <%if(detailList.get(0).getG_discount_rate() != 0){ //할인율 있으면 %>
-		        	  <tr class="detail_tr">
-		        	     <td class="detail_td"> 할인판매가 </td>
-		        	     <td class="detail_td"> <%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate() %>% 할인율) </td>
-		        	  </tr>
-		        	  <%} %>
-		        	</table>
-		        	
-		        	<hr>
-		        	
-		        	<!-- 옵션을 셀렉트박스로 가져오기 -->
-		        	<%if(!detailList.get(0).getG_option().equals("")){ %>
-		        	옵션선택	
-			        	<select>
-			        		<option value="default">-[필수] 선택하시오-</option>
-			        		<option value="default">------------------------------</option>
-  			        		<option id="option" value="option">
-			        			<%=detailList.get(0).getG_option() %> 
-			        			<%if(detailList.get(0).getG_amount() == 0){ %>
-			        			   [품절] 
-			        			<%} %>
-		        			</option>
-			        		
-			        	</select>
-		        	<%} %>
-		        	
-		        	<hr>
-		        	
-		        	<!-- 배송(일반배송, 선택배송) 구분 -->
-		        	<!-- 일반 배송이고 옵션이 없는 경우 -->
-		        	<%if(detailList.get(0).getG_delivery().equals("일반배송") && detailList.get(0).getG_option().equals("")){ %>
-		        	<table border="1">
-		        	<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
-		        	  <tr>
-		        	    <td> 상품명 </td>
-		        	    <td> 상품수 </td>
-		        	    <td> 가격 </td>
-		        	  </tr>
-		        	  <!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
-					  <!-- <tbody id="final_product_info_table"></tbody> -->
-					  <%
-						for(int i=0; i<detailList.size(); i++){
-							GoodsDTO goodsDetail = (GoodsDTO)detailList.get(i);
-					  %>
-						  <tr>
-							  	<td>
-							  		<%=goodsDetail.getG_name()%>
-							  	</td>
-							  	<!-- 상품 수량 -->
-							  	<td>
-							  		<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>" name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1 maxlength="3" size="3" >
-							  		<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus("<%=goodsDetail.getG_delivery()%>");'>
-							  		<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus("<%=goodsDetail.getG_delivery()%>");'>
-							  		<input type="button" id="deleteCell" name="deleteCell" value="x">
-							  	</td>
-							  	<!-- 상품 판매가(할인율 있을때와 없을때와 -->
-							  	<%if(goodsDetail.getG_discount_rate() != 0) {%>
-							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_sale())%>원</td>
-							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_sale()%>">
-							  	<%} else {%>
-							  		<td id="total_product_price_<%=goodsDetail.getG_delivery()%>"><%=formatter.format(goodsDetail.getG_price_origin())%>원</td>
-							  		<input type="hidden" id="total_product_price_<%=goodsDetail.getG_delivery()%>_input" value="<%=goodsDetail.getG_price_origin()%>">
-							  	<%}%>
-						 </tr>
-					 <%}%>
->>>>>>> refs/heads/master
-						
-							<%
-								if(g_amount == 0){
-							%>
-							
-							<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
-							<%
-								}
-							%>
-							<h4><%=detailList.get(0).getG_name()%></h4>
-
-						<hr>
-						
-						<!-- 판매가, 적립금, 할인판매가 -->
-						<table border="1">
-							<tr>
-								<td>판매가</td>
-								<td>
-									<%=newformat_price_origin%>원
-								<%
-									if (detailList.get(0).getG_discount_rate() != 0) { //할인율 있으면
-								%>
-									<%=detailList.get(0).getG_discount_rate()%>% OFF 
-								<%
-									}
-								%>
-								</td>
-							</tr>
-
-							<tr>
-								<td>적립금</td>
-								<td><%=newformat_mileage%>원</td>
-							</tr>
-
-							<%
-								if (detailList.get(0).getG_discount_rate() != 0) { //할인율 있으면
-							%>
-							<tr>
-								<td>할인판매가</td>
-								<td><%=newformat_price_sale%>원 (<%=detailList.get(0).getG_discount_rate()%>%할인율)</td>
-							</tr>
-							<%
-								}
-							%>
-						</table>
-
-						<hr> 
+		    
+		 
 						
 				<!-- 배송(일반배송, 선택배송) 구분 --> 
 				<!-- 일반 배송이고 옵션이 없는 경우 --> 
 				<%
 					if (detailList.get(0).getG_delivery().equals("일반배송") && detailList.get(0).getG_option().equals("")) {
 				%>
-						<table border="1">
+						<table class="selected_table">
+						
+							<colgroup>
+								<col width="30%">
+								<col width="40%">
+								<col width="30%">
+							</colgroup>
+							
 							<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
-							<tr>
-								<td>상품명</td>
-								<td>상품수</td>
-								<td>가격</td>
+							<tr class="selected_tr selected_th">
+								<td class="selected_td">상품명</td>
+								<td class="selected_td">상품수</td>
+								<td class="selected_td">가격</td>
 							</tr>
 							<!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
 							<!-- <tbody id="final_product_info_table"></tbody> -->
@@ -311,16 +199,18 @@
 							<%
 								if (goodsDetail.getG_discount_rate() != 0) {
 							%>
-							<tr>
-								<td colspan="3">TOTAL : <span id="final_total_price_normal"><%=formatter.format(goodsDetail.getG_price_sale())%></span>원
+							<tr class="selected_tr">
+								<td class="selected_td selected_td_last" colspan="3">TOTAL : 
+									<span id="final_total_price_normal"><%=formatter.format(goodsDetail.getG_price_sale())%></span>원
 									(<span id="final_total_amount_normal">1</span>개)
 								</td>
 							</tr>
 							<%
 								} else {
 							%>
-							<tr>
-								<td colspan="3">TOTAL : <span id="final_total_price_normal"><%=formatter.format(goodsDetail.getG_price_origin())%></span>원
+							<tr class="selected_tr">
+								<td class="selected_td selected_td_last" colspan="3">TOTAL : 
+									<span id="final_total_price_normal"><%=formatter.format(goodsDetail.getG_price_origin())%></span>원
 									(<span id="final_total_amount_normal">1</span>개)
 								</td>
 							</tr>
@@ -328,10 +218,10 @@
 								}
 							%>
 
-							<%
-								} // for문 닫기
-							%>
-						</table> 
+						<%
+							} // for문 닫기
+						%>
+					</table> 
 						
 				<!-- 일반 배송이고 옵션이 있는 경우 --------------------------------------------->
 				<%
@@ -373,20 +263,27 @@
  					} //추가가격 히든값으로 가져가기
  				%>
 
-						<hr> 
+						
 						
 						<!-- 옵션 선택 시, 주문현황 나오게 하기 -->
-						<table border="1">
-							<tr>
-								<td>상품명</td>
-								<td>상품수</td>
-								<td>가격</td>
+						<table class="selected_table">
+							<colgroup>
+								<col width="30%">
+								<col width="40%">
+								<col width="30%">
+							</colgroup>
+							
+							<tr class="selected_tr selected_th">
+								<td class="selected_td">상품명</td>
+								<td class="selected_td">상품수</td>
+								<td class="selected_td">가격</td>
 							</tr>
 							<!-- 옵션을 선택했을시 최종 상품 정보 나타내기 -->
 							<tbody id="final_product_info_table_option"></tbody>
 
-							<tr>
-								<td colspan="3">TOTAL : <span id="final_total_price"></span>원
+							<tr class="selected_tr">
+								<td class="selected_td selected_td_last" colspan="3">TOTAL : 
+									<span id="final_total_price"></span>원
 									(<span id="final_total_amount"></span>개)
 								</td>
 							</tr>
@@ -395,8 +292,10 @@
 					} else {
 				%> 
 					<!-- 선택 배송일 때, --> 
-					배송방법 
-					<select id="delivery_method" name="delivery_method" onchange="changeDeliMethod();">
+				<div class="detail_select">
+					<span class="detail_select_title">배송방법 </span>
+					<select class="detail_select_input" id="delivery_method" name="delivery_method"
+					 onchange="changeDeliMethod();">
 						<option value="" selected disabled>-[필수]배송방법을 선택해 주세요 -</option>
 						<option disabled>---------------</option>
 						<option value="일반포장">일반포장</option>
@@ -405,97 +304,69 @@
 						<option value="고속버스">고속버스택배 (+14,000원)</option>
 						<option value="매장방문">매장방문수령</option>
 					</select>
-
-					<hr>
-
-					<table border="1">
-						<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
-						<tr>
-							<td>상품명</td>
-							<td>상품수</td>
-							<td>가격</td>
-						</tr>
-						<!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
-						<tbody id="final_product_info_table"></tbody>
-
-						<tr>
-							<td colspan="3">TOTAL : <span id="final_total_price"></span>원
-								(<span id="final_total_amount"></span>개)
-							</td>
-						</tr>
-<<<<<<< HEAD
-
-					</table>
-				 <%
-				 	} // 배송, 옵션에 따른 주문 테이블 제어 끝
-				 %>
-
-					<hr> 
+				</div>
 					
-					<%
-						if (g_amount == 0) {
-					%> 
-						<span> 품절 </span>
-						<button type="button">관심상품</button> <br>
-						<button type="button" onclick="kakaoChat();">카카오톡 상담</button> 
-					<%
-						} else {
-					%>
-						<button type="button">
-							<a href="javascript:valueOrderChecked()"> 바로구매 </a>
-						</button>
-						<button type="button">
-							<a href="javascript:valueBasketChecked()"> 장바구니 </a>
-						</button>
-						<button type="button">관심상품</button> <br>
-						<button type="button" onclick="kakaoChat();">카카오톡 상담</button> 
-					<%
-					 	}
-					 %>
+				<table class="selected_table">
+					<colgroup>
+							<col width="30%">
+							<col width="40%">
+							<col width="30%">
+					</colgroup>
+						
+					<!-- 옵션 선택시 상품 정보 및 구매정보 자동으로 올라가는 부분 -->
+					<tr class="selected_tr selected_th">
+						<td class="selected_td">상품명</td>
+						<td class="selected_td">상품수</td>
+						<td class="selected_td">가격</td>
+					</tr>
+					<!-- 옵션이 default이 아니면 최종 상품 정보 나타내기 -->
+					<tbody id="final_product_info_table"></tbody>
 
-					</td>
-				</tr>
-			</table>
-		</div>
+					<tr class="selected_tr">
+						<td class="selected_td selected_td_last" colspan="3">TOTAL : <span id="final_total_price"></span>원
+							(<span id="final_total_amount"></span>개)
+						</td>
+					</tr>
+				</table>
+				<%
+				 	} // 배송, 옵션에 따른 주문 테이블 제어 끝
+				%>
 
-		<br>
-		<hr>
-	</form>
-=======
-        	
-		        	</table>
-		        	
-		        	<%} %>
-		        	
-		        	<hr>
-		        	
-		        	<%if(detailList.get(0).getG_amount() == 0){ %>
-		        	    <span> 품절 </span>
-		        	    <button type="button"> 관심상품 </button>
-					    <br>
-					    <button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
-		        	<%}else{ %>
-		        	    <button type="button"> <a href="javascript:valueOrderChecked()"> 바로구매 </a> </button>
-						<button type="button"> <a href="javascript:valueBasketChecked()"> 장바구니 </a> </button>
-						<button type="button"> 관심상품 </button>
-						<br>
-						<button type="button" onclick="kakaoChat();"> 카카오톡 상담 </button>
-		        	<%} %>
-		        
-		        </td>
-		     </div>
-		  </div>
-		  </form>
-	   </div>
-	   
-	   <br>
-	   <hr>
+				
+				 
+				<div class="btn_wrap">
+					<div class="top_btn_wrap">
+						<%
+							if (g_amount == 0) {
+						%> 
+							<span class="buy_btn"> 품절 </span>
+							<button class="fav_btn" type="button">관심상품</button> 
+						<%
+							} else {
+						%>
+							<button class="buy_btn" type="button"
+								onclick="valueOrderChecked();">바로구매 </button>
+							<button class="buy_btn" type="button"
+								onclick="valueBasketChecked();"> 장바구니 </button>
+							<button class="fav_btn" type="button">관심상품</button>
+							
+						<%
+						 	}
+						%>	
+						</div>
+						<button class="kakao_btn" type="button" onclick="kakaoChat();">카카오톡 상담</button> 
+						
+				</div>
+				</div>
+			</div>
+		</form>
+	</div>
 	
->>>>>>> refs/heads/master
+	<br>
+	<hr>
 
 
-
-
+        
 	<!-- 상품 관련 상품들 파트 ---------------------------------------------------------------------->
 	<div id="menu2" class="menu">
 		<div>
@@ -509,29 +380,29 @@
 	<!-- 상품 상세 정보 파트 ----------------------------------------------------------------------------->
 	<div id="menu1" class="menu">
 		<!-- 소메뉴 -->
-		<div>
-			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('0')">기본 정보</button>
+		<div class="move_wrap">
+			<ul class="move_ul">
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('0')">기본 정보</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('1')">디테일 정보</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('1')">디테일 정보</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('2')">추천 상품</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('2')">추천 상품</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('3')">REVIEW</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('3')">REVIEW</button>
 				</li>
-				<li>
-					<button onclick="menuMove('4')">Q & A</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('4')">Q & A</button>
 				</li>
 			</ul>
 		</div>
 
-		<p>
+		<div class="info_detail">
 			<%=detailList.get(0).getContent()%>
-		</p>
+		</div>
 	</div>
 
 	<br>
@@ -540,22 +411,22 @@
 	<!-- 상품 REVIEW 파트 -------------------------------------------------------------------------------------------->
 	<div id="menu3" class="menu">
 		<!-- 소메뉴 -->
-		<div>
-			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('0')">기본 정보</button>
+		<div class="move_wrap">
+			<ul class="move_ul">
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('0')">기본 정보</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('1')">디테일 정보</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('1')">디테일 정보</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('2')">추천 상품</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('2')">추천 상품</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('3')">REVIEW</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('3')">REVIEW</button>
 				</li>
-				<li>
-					<button onclick="menuMove('4')">Q & A</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('4')">Q & A</button>
 				</li>
 			</ul>
 		</div>
@@ -567,8 +438,14 @@
 			List<BoardDTO> bList = bdao.getPList(1, detailList.get(0).getG_code());
 		%>
 
-		<table border="1">
-			<tr>
+		<table class="board_wrap">
+			<colgroup>
+					<col width="10%">
+					<col width="40%">
+					<col width="40%">
+					<col width="10%">
+			</colgroup>
+			<tr class="board_tr">
 				<th>글쓴이</th>
 				<th>제목</th>
 				<th>작성일자</th>
@@ -579,7 +456,7 @@
 				if (bList.size() > 0) {
 					for (BoardDTO dto : bList) {
 			%>
-			<tr>
+			<tr class="board_tr">
 				<td><%=dto.getB_writer()%></td>
 				<td><%=dto.getB_title()%></td>
 				<td><%=dto.getB_reg_date()%></td>
@@ -589,7 +466,7 @@
 					}	
 				} else {
 			%>
-			<tr>
+			<tr class="board_tr">
 				<td colspan='4'>작성된 글이 없습니다.</td>
 			</tr>
 			<%
@@ -609,22 +486,22 @@
 	<!-- 상품 Q&A 파트 ------------------------------------------------------------>
 	<div id="menu4" class="menu">
 		<!-- 소메뉴 -->
-		<div>
-			<ul style="list-style: none;">
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('0')">기본 정보</button>
+		<div class="move_wrap">
+			<ul class="move_ul">
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('0')">기본 정보</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('1')">디테일 정보</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('1')">디테일 정보</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('2')">추천 상품</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('2')">추천 상품</button>
 				</li>
-				<li style="float: left; margin-right: 10px;">
-					<button onclick="menuMove('3')">REVIEW</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('3')">REVIEW</button>
 				</li>
-				<li>
-					<button onclick="menuMove('4')">Q & A</button>
+				<li class="move_list">
+					<button class="move_btn" onclick="menuMove('4')">Q & A</button>
 				</li>
 			</ul>
 		</div>
@@ -635,8 +512,14 @@
 			bList = bdao.getPList(2, detailList.get(0).getG_code());
 			bdao.closeDB();
 		%>
-		<table border="1">
-			<tr>
+		<table class="board_wrap">
+			<colgroup>
+				<col width="10%">
+				<col width="40%">
+				<col width="40%">
+				<col width="10%">
+			</colgroup>
+			<tr class="board_tr">
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
@@ -647,7 +530,7 @@
 					for (BoardDTO dto : bList) {
 			%>
 
-			<tr>
+			<tr class="board_tr">
 				<td><%=dto.getB_title()%></td>
 				<td><%=dto.getB_writer()%></td>
 				<td><%=dto.getB_reg_date()%></td>
@@ -657,7 +540,7 @@
 					}
 				} else {
 			%>
-			<tr>
+			<tr class="board_tr">
 				<td colspan="4">작성된 글이 없습니다.</td>
 			</tr>
 			<%
@@ -669,7 +552,7 @@
 		<button type="button">모두보기</button>
 	</div>
 
-
+</div>
 
 
 	<!-- FOOTER -->

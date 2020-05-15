@@ -46,54 +46,54 @@
 	<div>
 	   <ul>
 	      <li><a href="./GoodsList.go?category=사육용품"> 전체보기 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=사육장"> 사육장 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=사육장&sub_category_index=유리/테라리움">유리/테라리움</a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=사육장&sub_category_index=플라스틱">플라스틱</a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=유리/테라리움">유리/테라리움</a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=플라스틱">플라스틱</a></li>
 	      	</ul>
 	      </li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=장식/그릇"> 장식/그릇 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇"> 장식/그릇 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=장식/그릇&sub_category_index=장식"> 장식 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=장식/그릇&sub_category_index=은신처"> 은신처 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=장식/그릇&sub_category_index=물/먹이그릇"> 물/먹이그릇 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=장식"> 장식 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=은신처"> 은신처 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=물/먹이그릇"> 물/먹이그릇 </a></li>
 	      	</ul>
 	      </li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=램프"> 램프 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=램프"> 램프 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=램프&sub_category_index=UVB/스팟"> UVB/스팟 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=램프&sub_category_index=소켓"> 소켓 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=램프&sub_category_index=악세사리"> 악세사리 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=UVB/스팟"> UVB/스팟 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=소켓"> 소켓 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=악세사리"> 악세사리 </a></li>
 	      	</ul>
 	      </li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=바닥재"> 바닥재 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=바닥재"> 바닥재 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=바닥재&sub_category_index=건계"> 건계 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=바닥재&sub_category_index=습계"> 습계 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=건계"> 건계 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=습계"> 습계 </a></li>
 	      	</ul>
 	      </li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=온/습도 관련"> 온/습도 관련 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련"> 온/습도 관련 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=온/습도 관련&sub_category_index=온습도계"> 온습도계 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=온/습도 관련&sub_category_index=온도조절기"> 온도조절기 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=온/습도 관련&sub_category_index=습도조절기"> 습도조절기 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온습도계"> 온습도계 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온도조절기"> 온도조절기 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=습도조절기"> 습도조절기 </a></li>
 	      	</ul>
 	      </li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=보조용품"> 보조용품 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품"> 보조용품 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=보조용품&sub_category_index=위생/청소"> 위생/청소 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=보조용품&sub_category_index=안전/치료"> 안전/치료 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=보조용품&sub_category_index=브리딩"> 브리딩 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=보조용품&sub_category_index=기타"> 기타 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=위생/청소"> 위생/청소 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=안전/치료"> 안전/치료 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=브리딩"> 브리딩 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=기타"> 기타 </a></li>
 	      	</ul>
 	      </li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=수족관"> 수족관 </a>
+	      <li><a href="./GoodsList.go?category=사육용품&sub_category=수족관"> 수족관 </a>
 	      	<ul>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=수족관&sub_category_index=수질안정제"> 수질안정제 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=수족관&sub_category_index=여과기"> 여과기 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=수족관&sub_category_index=히터기"> 히터기 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=수족관&sub_category_index=거북이육지"> 거북이육지 </a></li>
-	      		<li><a href="./GoodsList.go?category=먹이&sub_category=수족관&sub_category_index=기타"> 기타 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=수질안정제"> 수질안정제 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=여과기"> 여과기 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=히터기"> 히터기 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=거북이육지"> 거북이육지 </a></li>
+	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타"> 기타 </a></li>
 	      	</ul>
 	      </li>
 	   </ul>
