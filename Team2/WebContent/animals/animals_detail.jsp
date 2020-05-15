@@ -559,7 +559,7 @@
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 						
 						//final_total_price 태그 제어
-			   			final_total_price = (a_price_sale * final_total_amount);
+			   			final_total_price = (a_price_sale * final_total_amount); 
 			   		}
 			   		//할인율이 0이면
 			   		else{
