@@ -36,6 +36,11 @@ body{
 	margin: 0 auto;
 }
 
+img {
+	max-width: 100%;
+	height: 50vh; 
+}
+
 /* Caption text */
 .text {
 	color: #f2f2f2;
@@ -93,10 +98,6 @@ body{
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
-
-
-
-
 
 
 /* HEADER_START */
@@ -189,6 +190,20 @@ body{
 		width: 100%;
 		height: 260px;
 	}
+	
+/* 메인 4단 배너 */	
+.sec-banner1 {
+	width: 80%;
+	margin: 70px auto 0;
+}	
+
+div {
+	display: block;
+} 
+
+.xans {
+	
+}	
 
 /* footer_intro */
 
