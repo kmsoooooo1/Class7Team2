@@ -82,7 +82,6 @@
 					String newformat_price_origin = formatter.format(adto.getA_price_origin());
 					String newformat_price_sale = formatter.format(adto.getA_price_sale());
 			%>
-			
 			<td colspan="2">
   			<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> <br> 
 		    <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%> </a> <hr>
