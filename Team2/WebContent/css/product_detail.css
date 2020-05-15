@@ -21,21 +21,6 @@ ul{
 	margin: 0 auto;
 	text-align: center;
 }
-
-	@media screen and (max-width: 480px) {
-		.menu{
-			width: 100%;
-			margin: 0 auto;
-			text-align: center;
-		}
-	}
-	@media screen and (max-width: 736px) {
-		.menu{
-			width: 100%;
-			margin: 0 auto;
-			text-align: center;
-		}
-	}
 .info_table{
 	width: 1200px;
 	margin: 10px auto;
@@ -51,7 +36,7 @@ ul{
 	float:left;
 }
 
-@media screen and (max-width: 480px) {
+	@media screen and (max-width: 480px) {
 		.info_table{
 			width: 100%;
 			margin: 0;
@@ -64,6 +49,11 @@ ul{
 			width:480px;
 			margin:0;
 			float:left;
+		}
+		.menu{
+			width: 100%;
+			margin: 0 auto;
+			text-align: center;
 		}
 		
 	}
@@ -81,6 +71,11 @@ ul{
 			width:100%;
 			margin:0;
 			float:left;
+		}
+		.menu{
+			width: 100%;
+			margin: 0 auto;
+			text-align: center;
 		}
 		
 	}

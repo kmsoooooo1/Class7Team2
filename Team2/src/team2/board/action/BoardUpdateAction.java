@@ -39,6 +39,8 @@ public class BoardUpdateAction implements Action {
 
 		//	DB업로드 할 파일명 변수
 		String b_file = "";
+		
+		String old_file = "";
 		//	받아올 request 변수
 		Map<String, String> board = new HashMap<>();
 
@@ -71,6 +73,19 @@ public class BoardUpdateAction implements Action {
 					
 					//	HashMap을 이용해 Collection에 항목 추가
 					board.put(item.getFieldName(), item.getString("utf-8"));
+					
+					
+					
+					if(item.getFieldName().equals("old")) {
+						
+						String old_name = item.getString("utf-8");
+						
+				        if(old_file == ""){
+				        	old_file = old_name;
+						}else{
+							old_file +="," + old_name;
+						}
+					}
 					
 				}else {
 					//	  type="file"
@@ -112,7 +127,15 @@ public class BoardUpdateAction implements Action {
 			}
 		}
 		
-		System.out.println(board.toString());
+		System.out.println("board : " + board.toString());
+		System.out.println("old_file : " + old_file);
+		
+		String update_file = "";
+		if(old_file!=""){
+			update_file = old_file+","+b_file;
+		}else{
+			update_file = b_file;
+		}
 		
 		//	dto 생성 및 설정
 		BoardDTO dto = new BoardDTO();
@@ -122,7 +145,7 @@ public class BoardUpdateAction implements Action {
 		dto.setB_writer(id);
 		dto.setB_content(board.get("b_content"));
 		dto.setIp_addr(request.getRemoteAddr());
-		dto.setB_file(b_file);
+		dto.setB_file(update_file);
 		dto.setB_p_code(board.get("b_p_code"));
 		
 		BoardDAO dao = new BoardDAO();
