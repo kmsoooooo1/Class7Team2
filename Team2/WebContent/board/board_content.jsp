@@ -1,3 +1,4 @@
+<%@page import="team2.board.db.ProductDTO"%>
 <%@page import="java.io.File"%>
 <%@page import="team2.board.db.CommentDTO"%>
 <%@page import="java.util.List"%>
@@ -20,13 +21,8 @@
 </style>
 </head>
 <body>
-	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
-	<!-- Main Content -->
-
-	<h1>WebContent/board/board_content.jsp</h1>
-	
+ <jsp:include page="/include/header.jsp" /> 
+ 
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
@@ -35,27 +31,52 @@
 		CommentDAO cdao = new CommentDAO();
 		List<CommentDTO> list = cdao.getList(Integer.parseInt(num));
 		cdao.closeDB();
-		if(bdto!=null){			
+
+		String p_code = bdto.getB_p_code();
+		String category = bdto.getB_category();
 	%>
-	
-	<table border ="1">
-		<tr>
-			<td>글번호</td><td><%=bdto.getB_idx() %></td>
-			<td>조회수</td><td><%=bdto.getB_view() %></td>
-		</tr>
-		<tr>
-			<td>카테고리</td><td><%=bdto.getB_category() %></td>
-			<td>제목</td><td><%=bdto.getB_title() %></td>
-		</tr>
-	
-		<tr>
-			<td>내용</td><td colspan="3" height=400 width=500><%=bdto.getB_content() %></td>
-	
-		</tr>
 		
-		<tr>
-			<td>첨부파일</td>
-			<td>
+		
+	글번호 <%=bdto.getB_idx() %><br>
+	제목 <%=bdto.getB_title() %><br>
+	조회수 <%=bdto.getB_view() %> <br>
+	카테고리 <%=category %> <br>
+
+	<%
+		if(category.equals("Review")){	
+			if(!p_code.equals("null")){
+	%>
+		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
+	<%		
+						
+				ProductDTO dto = new ProductDTO(p_code);
+				System.out.println(dto);
+	%>
+		<table>
+			<tr>
+				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
+				<td><%=dto.getCategory() %></td>
+				<td><%=dto.getSub_category() %></td>
+				<td><%=dto.getSub_category_idx() %></td>
+				<td><%=dto.getName() %></td>
+			</tr>
+		</table>
+	<%
+		}else{
+			%>
+			상품코드 : <input type="text" name="b_p_code" value="상품코드 미입력" readonly="readonly"> <br>
+			<%	
+		}
+	}
+		%>
+
+		
+			내용 <br>
+			<textarea name="ir1" id="ir1" rows="10" cols="100" readonly><%=bdto.getB_content() %></textarea>
+			
+			<br>
+			첨부파일
+
 			<%String files[] = bdto.getB_file().split(","); %>
 			<c:set var="files" value="<%=files %>" />
 			<c:set var="getContextPath" value="<%=request.getContextPath()%>" />
@@ -64,9 +85,8 @@
 			<a href="${getContextPath}/downloadAction.bo?file=${file} ">
  			${file}</a>
 			 </c:forEach>
-			 </td>
-		</tr>
-		
+
+	<table>
 		<tr>
 			<td colspan="4">
 				<input type="button" value="수정"
@@ -81,7 +101,7 @@
 			</td>
 		</tr>
 	</table>
-	<%} %>
+
 	<div class="comment_wrap">
 	<div>
 		<form name="fr" action="./InsertCommentAction.bo?num=<%=num %>&pageNum=<%=pageNum %>" method="post">

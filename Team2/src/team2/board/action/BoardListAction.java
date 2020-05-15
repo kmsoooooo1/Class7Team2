@@ -13,12 +13,17 @@ public class BoardListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("@@@ BoardNoticeAction_excute() 호출! @@@");
+		System.out.println("@@@ BoardListAction_excute() 호출! @@@");
+		
+		request.setCharacterEncoding("UTF-8");
 		
 		BoardDAO bdao = new BoardDAO();
 		
-		//카테고리 분류 값
 		int c = Integer.parseInt(request.getParameter("category"));
+		
+		String search = (String) request.getParameter("search");
+		
+		System.out.println("category : "+c+"/search : "+search);
 		
 		cSet cset = new cSet();
 		
@@ -30,7 +35,15 @@ public class BoardListAction implements Action {
 		System.out.println(cset);
 		
 		//total 게시판 글 수
-		int total = bdao.getBoardCount(cset);
+		int total = 0;
+		if(search == null){
+			total = bdao.getBoardCount(cset);
+			session.setAttribute("search", search);
+		}else{
+			total = bdao.serachCount(cset, search);
+			session.setAttribute("search", search);
+			request.setAttribute("search", search);
+		}
 		
 		//  ----페이징 처리-----
 		
@@ -41,7 +54,12 @@ public class BoardListAction implements Action {
 		
 		int currentPage = Integer.parseInt(pageNum);
 		
-		int pageSize = 5;
+		int pageSize = 10;
+		if(c==1){
+			pageSize = 8;
+		}else{
+			pageSize = 10;
+		}
 		
 		Criteria cri = new Criteria();
 		
@@ -56,15 +74,17 @@ public class BoardListAction implements Action {
 		System.out.println(pageMaker.getEndPage());
 		
 		// ----페이징 처리-----
+		
+		ArrayList<BoardDTO> boardList = null;
 
-		ArrayList<BoardDTO> boardList = bdao.getBoardList(cset,cri);
+		boardList = bdao.getBoardList(cset, cri);
+		
+		if(search!=null){
+			boardList = bdao.searchTitle(cset, search, cri);
+		}
 		//bdao 자원 해제
 		bdao.closeDB();
-		
-		System.out.println("cri : " +cri);
-		System.out.println("pageMaker : " +pageMaker);
-		System.out.println("pageNum : " +pageNum);
-		
+
 		//boardList + 페이징처리 값 전송
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("cri", cri);
@@ -72,9 +92,10 @@ public class BoardListAction implements Action {
 		request.setAttribute("pageNum", pageNum);
 		
 		//카테고리별 전송 값
-		request.setAttribute("category", c);		
+		request.setAttribute("c", cset.getC());		
 		
 		ActionForward forward = new ActionForward();
+	
 		
 		//카테고리별 view 이동
 		if(cset.getC()==0){

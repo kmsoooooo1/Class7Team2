@@ -5,15 +5,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>아이디찾기 페이지</title>
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<fieldset><legend>아이디 찾기</legend>
-<form action="./MemberIDFindAction.me" method="post">
-<label>가입하신 이메일 주소를 입력해주세요</label><br>
-<input type="text" name="email"><br>
-<input type="submit" class="btn" value="아이디 찾기">
-<input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
-</form>
-</fieldset>
+	<!-- Header -->
+	<jsp:include page="/include/header.jsp" />
+
+<div class="contents">
+ <form action="./MemberIDFindAction.me" method="post" class="box">
+  <h2>아이디 찾기</h2>
+   <label>가입하신 이메일 주소를 입력해주세요</label><br>
+   <input type="text" name="email" placeholder="Email">
+   <input type="submit" class="submit" value="아이디 찾기">
+   <input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
+ </form>
+</div>
+
+
+	<!-- FOOTER -->
+	<jsp:include page="/include/footer.jsp"/>
+
 </body>
 </html>

@@ -7,14 +7,14 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/basic.css">
 </head>
 <body>
 <footer id="footer">
  <ul class="intro">
-  <li><a href="#">회사소개</a></li>
-  <li><a href="#">이용약관</a></li>
-  <li><a href="#">개인정보취급방침</a></li>
+  <li><a href="./Company.me">회사소개</a></li>
+  <li><a href="./Agreement.me">이용약관</a></li>
+  <li><a href="./Privacy.me">개인정보취급방침</a></li>
   <li><a href="#">이용안내</a></li>
   <li><a href="#">제휴문의</a></li>
  </ul>

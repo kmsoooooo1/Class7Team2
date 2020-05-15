@@ -1,1 +1,113 @@
 @CHARSET "UTF-8";
+
+/* * { */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* } */
+
+.contents {
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+	height: 600px;
+	font-family: sans-serif;
+	background-image: url("../img/join.jpg");
+}
+
+.box {
+	width: 50%; 
+	padding: 10px;
+	position: relative;
+	background-position: center;
+	top: 50%; 
+	left: 50%;
+	border: 1px solid;
+	transform: translate(-50%,-50%);
+	background-color: rgb(0,0,0,0.5);
+	text-align: center; 
+}
+
+.box h2 {
+	color: white;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.box input[type = "text"],.box input[type = "password"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 20px 20px;
+	width: 50%;
+	outline: none;
+	color: white;
+	border-radius: 30px;
+	transition: 1s;
+	font-size: 100%;
+}
+
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+	width: 80%;
+	border-color: #2ecc71;
+}
+
+input::placeholder {
+	color: white;
+}
+
+input:focus::-webkit-input-placeholder, 
+textarea:focus::-webkit-input-placeholder {
+	/* WebKit browsers */ color:transparent; 
+}
+
+
+.box input[type = "submit"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 1s;
+	cursor: pointer;
+}
+
+.box input[type = "submit"]:hover{
+	background: #2ecc71;
+}
+
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 9px 40px 10px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0.625rem;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+  border-radius: 24px;
+}
+
+.btn:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}

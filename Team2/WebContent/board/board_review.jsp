@@ -1,3 +1,4 @@
+<%@page import="team2.board.action.cSet"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
@@ -10,103 +11,113 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
- <style type="text/css">
-  ul{ list-style: none;}
-  li{ float:left;
-  	  font-style: normal;
-  	}
- 
- </style>
+<link href="${pageContext.request.contextPath}/css/imgList.css" rel="stylesheet">
+ <script type="text/javascript">
+
+function doAction(){
+	
+	alert("doAction");
+	
+	document.fr.submit();
+	
+};
+</script>	
 </head>
 <body>
-	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	 <jsp:include page="/include/header.jsp" />
 	
-	<!-- Main Content -->
-	<h1>WebContent/board/board_review.jsp</h1>
+
+	<h1>상품 게시판</h1>
 	
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
-		
-		//페이징 필요 값
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
-		String pageNum = (String)request.getAttribute("pageNum");
 	
-		//카테고리별 필요 값
-		String category = request.getParameter("category");
-		String sub_category = request.getParameter("sub_category");
+		//페이지번호 & 카테고리번호
+		String pageNum = (String)request.getAttribute("pageNum");
+		String category = (String)request.getAttribute("category");
+		String search = (String)request.getAttribute("search");
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+		
 		
 	%>
 	
-		 <h2><a href="./Insert.bo"> 글 쓰기 (스마트에디터)  </a></h2>
+		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=1','_blank','width=500,height=400',false);"> 글 쓰기 (스마트에디터)  </a></h2>
 		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
-	
-	<table border="1">
-	  <tr>
-	    <td>번호</td>
-	    <td>제목</td>
-	    <td>작성자</td>
-	    <td>사진</td>
-	    <td>날짜</td>
-	    <td>조회수</td>
-	    <td>IP</td>
-	  </tr>
-	  
-	  <%
-	    for(int i=0;i<boardList.size();i++){ 
-             BoardDTO bdto = (BoardDTO) boardList.get(i);
-             
-             String image = bdto.getB_file();
-             
-             if(image == null){
-            	 image = "no.jpg";
-             }
-             
-        	 String array[] = image.split(",");
-        	 
-             String conPath = request.getContextPath()+"/upload/board";
+		 
+		<!-- 게시판 검색 -->		 
+		<form name="fr" id="fr" action="./BoardList.bo" method="POST">	
+			<input type="hidden" value="1" name="category">
+		
+			<input type="text" name="search" />
+			
+			<input type="button" onclick="doAction()" value="검색" />	
+		</form>
+		<!-- 게시판 검색 -->		
 
-             String imgPath = conPath+"\\"+array[0];
-             
-       
-	  %>
-		  <tr>
-		    <td><%=bdto.getB_idx() %></td>
-		    <td><%=bdto.getB_title() %></td>
-		    
-		    <td><%=bdto.getB_writer() %></td>
-		    <td>
-		     <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-		    	<img src="<%=imgPath %>" width=180 height=150>
-		    	</a>
-		    </td>
-		    <td><%=bdto.getB_reg_date() %></td>
-		    <td><%=bdto.getB_view() %></td>
-		    <td><%=bdto.getIp_addr() %></td>
-		  </tr>
+<div class="board">
+	<div class="wrap">
+	<div class="img-col">	
+		<ul>
+		  <%
+		    for(int i=0;i<boardList.size();i++){ 
+	             BoardDTO bdto = (BoardDTO) boardList.get(i);
+	             
+	             String image = bdto.getB_file();
+	             
+	             if(image == null){
+	            	 image = "no.jpg";
+	             }
+	             
+	        	 String array[] = image.split(",");
+	        	 
+	             String conPath = request.getContextPath()+"/upload/board";
+	
+	             String imgPath = conPath+"\\"+array[0];
+	             
+	       
+		  %>
+
+		    <li>
+		   		<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+		    		<span class="thumb">
+				    	<img src="<%=imgPath %>" width=180 height=150>
+					  	<br><em><%=bdto.getB_title() %></em>
+			    	</span>
+			    </a>
+			    <p>
+			        작성자 <%=bdto.getB_writer() %>   
+			    <br>
+				
+			        조회수 <%=bdto.getB_view() %>
+			    </p>
+		    </li>
 	  <% } %>
 	
-	</table>
+		</ul>
+	</div>
+	</div>
 	
-		<ul class="btn-group paging">
-	<c:if test="${pageMaker.prev }">
-	<li>
-		<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">[이전]</i></a>	
-	</li>
-	</c:if>
-	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
-	<li>
-		<a href='<c:url value="./BoardList.bo?category=${category}&pageNum=${pageNum}"/>'><i class="fa">[${pageNum }]</i></a>
-	</li>
-	</c:forEach>
-	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	<li>
-		<a href='<c:url value="./BoardList.bo?category=${category }&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">[다음]</i></a>
-	</li>
-	</c:if>
+	<div class="paging-div">
+	<ul class="paging">
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.startPage-1 }&search=${search}"/>'><i class="fa left">◀</i></a>	
+		</li>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageNum}&search=${search}"/>'><i class="fa">${pageNum }</i></a>
+		</li>
+		</c:forEach>
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.endPage+1 }&search=${search}"/>'><i class="fa right">▶</i></a>
+		</li>
+
 
 	</ul>
+	</div>
 
+</div>
 </body>
 </html>
