@@ -408,8 +408,6 @@ public class GoodsDAO {
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
 			
-			
-			
 			while(rs.next()){
 				GoodsDTO gdto = new GoodsDTO();
 				
