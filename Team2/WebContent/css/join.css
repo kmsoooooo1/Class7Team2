@@ -16,7 +16,7 @@
 }
 
 .box {
-	width: 60%; 
+	width: 80%;
 	padding: 10px;
 	position: relative;
 	background-position: center;
@@ -46,7 +46,7 @@
 	text-align: center;
 	border: 2px solid #3498db;
 	padding: 20px 20px;
-	width: 35%;
+	width: 30%;
 	height: 5px;
 	outline: none;
 	color: white;
@@ -56,7 +56,7 @@
 }
 
 .box input[type = "text"]:focus,.box input[type = "password"]:focus,.box input[type="email"]:focus{
-	width: 40%;
+	width: 35%;
 	border-color: #2ecc71;
 }
 
@@ -93,22 +93,20 @@ textarea:focus::-webkit-input-placeholder {
   display: inline-block;
   background: transparent;
   text-transform: uppercase;
+  height: 30px;
   font-weight: 500;
   font-style: normal;
   font-size: 0.625rem;
   letter-spacing: 0.3em;
   color: rgba(223,190,106,0.7);
   border-radius: 0;
-  padding: 9px 40px 10px;
   transition: all 0.7s ease-out;
   background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
   background-position: 1% 50%;
   background-size: 300% 300%;
   text-decoration: none;
-  margin: 0.625rem;
-  border: none;
-  border: 1px solid rgba(223,190,106,0.8);
   border-radius: 24px;
+  border: 2px solid;
 }
 
 .btn:hover {
@@ -119,7 +117,7 @@ textarea:focus::-webkit-input-placeholder {
 }
 
 .btn{
-	margin-right: -140px;
+	margin-right: -69px;
 }
 
 

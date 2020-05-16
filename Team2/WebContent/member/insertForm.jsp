@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>회원 가입 </title>
 
@@ -165,7 +166,7 @@
 			
 			<input type="email" id="email" name="email" placeholder="이메일"><br></br>
 			<div class="div_text">
-            <textarea cols="107" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
+            <textarea  cols="36" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
 
 제1조(목적 등)
 
@@ -348,7 +349,7 @@
        </div>
   	   <p id="agreep"><input type="checkbox" name="agree"/> 약관에 동의합니다</p>
 		
-		<input type="submit" value="회원가입" class="btn"/> 
+		<input type="submit" value="회원가입" /> 
 		<input type="button" value="취소"  class="btn_reset" onclick="javascript:history.back();"/>
 	   
 	   </form>	
