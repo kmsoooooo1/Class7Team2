@@ -25,31 +25,15 @@
 		if (id == null) {
 			id = "";
 		}
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 		//AnimalDetailAction 객체에서 저장된 정보를 저장 
 		AnimalDTO animalDetail = (AnimalDTO) request.getAttribute("animalDetail");
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
 		String newformat_price_origin = formatter.format(animalDetail.getA_price_origin());
 		String newformat_mileage = formatter.format(animalDetail.getA_mileage());
 		String newformat_price_sale = formatter.format(animalDetail.getA_price_sale());
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 		// 상품에 대한 정보를 쿠키에 담기
 		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
 		int price = 0;
 		// 할인율이 있으면
@@ -59,13 +43,7 @@
 		} else {
 			price = animalDetail.getA_price_origin();
 		}
-<<<<<<< HEAD
-
 		Cookie cook = new Cookie("item" + animalDetail.getA_code(), URLEncoder.encode(
-
-=======
-		Cookie cook = new Cookie("item" + animalDetail.getA_code(), URLEncoder.encode(
->>>>>>> refs/heads/Park_Harim
 				"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
 						+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
 						+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph() + "</td>"
@@ -504,6 +482,7 @@
 		
 		//final_total_price 태그 제어
 		total_price = $('#total_product_price_' + delivery_method + '_input').val(); //하나의 tr(배송)의 총 판매가
+		
 		//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 저장하기, 만약 처음이면 0에 추가하기
 		final_total_price += Number(total_price);
 		//태그에 추가하기
@@ -537,28 +516,6 @@
 		
 		//사용자가 수량 input 태그에 키보드로 새로운 수량을 입력했을시
 		$('#a_amount_' + delivery_method).on('change', function(){
-			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
-			if(delivery_method == '고속버스'){
-				//할인율이 있으면
-				if(a_discount_rate != 0){
-					a_price_sale_option = parseInt(a_price_sale) + parseInt(14000);
-				}
-				//없으면
-				else{
-					a_price_origin_option = parseInt(a_price_origin) + parseInt(14000);
-				}	
-			}
-			//만약 고속버스가 아니면 원판매가 그대로 a_price_sale_option에 저장
-			else{
-				//할인율이 있으면
-				if(a_discount_rate != 0){
-					a_price_sale_option = parseInt(a_price_sale);
-				}
-				//없으면
-				else{
-					a_price_origin_option = parseInt(a_price_origin);
-				}
-			}
 			
 			var previousAmount = $(this).data('val'); 	//사용자가 키보드로 입력하기 전 수량
 		    var currentAmount = $(this).val();			//사용자가 키보드로 입력 한 수량
@@ -576,7 +533,6 @@
 			   		if(a_discount_rate != 0){
 			   			
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-<<<<<<< HEAD
 			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
 						if(delivery_method == '고속버스'){
 							total_price = Number(a_price_sale * currentAmount) + Number(14000); 
@@ -594,24 +550,11 @@
 						
 						//final_total_price 태그 제어
 			   			final_total_price = (a_price_sale * final_total_amount); 
-=======
-			   			total_price = Number(a_price_sale_option * currentAmount); 
-						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-						
-						//최종 마일리지 계산하기 
-						final_mileage = a_mileage * currentAmount;
-						//계산된 마일리지 span 태그에 넣기
-						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-						
-						//final_total_price 태그 제어
-			   			final_total_price -= (a_price_sale * (previousAmount - currentAmount));
->>>>>>> refs/heads/Park_Harim
 			   		}
 			   		//할인율이 0이면
 			   		else{
 			   			
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-<<<<<<< HEAD
 			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
 						if(delivery_method == '고속버스'){
 							total_price = Number(a_price_origin * currentAmount) + Number(14000); 
@@ -621,10 +564,6 @@
 						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 						//input hidden 값에 수정된 총 가격 넣기
 						$('#total_product_price_' + delivery_method + "_input").val(total_price);
-=======
-			   			total_price = Number(a_price_origin_option * currentAmount); 
-						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
->>>>>>> refs/heads/Park_Harim
 						
 						//최종 마일리지 계산하기 
 						final_mileage = a_mileage * currentAmount;
@@ -644,7 +583,6 @@
 			   		if(a_discount_rate != 0){
 			   			
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-<<<<<<< HEAD
 			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
 						if(delivery_method == '고속버스'){
 							total_price = Number(a_price_sale * currentAmount) + Number(14000); 
@@ -654,10 +592,6 @@
 						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 						//input hidden 값에 수정된 총 가격 넣기
 						$('#total_product_price_' + delivery_method + "_input").val(total_price);
-=======
-			   			total_price = Number(a_price_sale_option * currentAmount); 
-						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
->>>>>>> refs/heads/Park_Harim
 						
 						//최종 마일리지 계산하기 
 						final_mileage = a_mileage * currentAmount;
@@ -671,7 +605,6 @@
 			   		else{
 			   			
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-<<<<<<< HEAD
 			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
 						if(delivery_method == '고속버스'){
 							total_price = Number(a_price_origin * currentAmount) + Number(14000); 
@@ -681,10 +614,6 @@
 						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 						//input hidden 값에 수정된 총 가격 넣기
 						$('#total_product_price_' + delivery_method + "_input").val(total_price);
-=======
-			   			total_price = Number(a_price_origin_option * currentAmount); 
-						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
->>>>>>> refs/heads/Park_Harim
 						
 						//최종 마일리지 계산하기 
 						final_mileage = a_mileage * currentAmount;
@@ -711,10 +640,6 @@
 	var a_discount_rate = document.getElementById('a_discount_rate').value;	//할인율
 	var a_price_sale = document.getElementById('a_price_sale').value;		//할인된 판매가
 	var a_mileage = document.getElementById('a_mileage').value;				//적립금
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 	//사용자가 '+'를 눌렸을시
 	function plus(delivery_method){
 		
