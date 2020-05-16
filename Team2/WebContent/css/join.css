@@ -5,6 +5,7 @@
 /* 	padding: 0; */
 /* } */
 
+/* 회원가입 */
 .contents {
 	text-align: center;
 	width: 80%;
@@ -14,7 +15,7 @@
 	background-image: url("../img/join.jpg");
 	background-repeat: no-repeat;
 }
-
+	
 .box {
 	width: 80%;
 	padding: 10px;
@@ -27,9 +28,6 @@
 	background-color: rgb(0,0,0,0.5);
 	text-align: center;
     height: 93%;
-}
-
-#id_div{
 }
 
 .name {
@@ -123,4 +121,23 @@ textarea:focus::-webkit-input-placeholder {
 
 #agreep{
 	color: white;
+}
+
+/* 아이디체크 */
+.contents1 input[type = "button"],.contents1 input[type="submit"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	border-radius: 24px;
+	transition: 1s;
+	cursor: pointer;
+}
+
+.contents1 input[type = "button"]:hover,.contents1 input[type="submit"]:hover{
+	background: #2ecc71;
 }

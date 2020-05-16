@@ -24,11 +24,6 @@
 					joinform.name.focus();
 					return false;
 				}
-				if (id1.length == 0) {
-					alert("아이디를 입력하세요.");
-					joinform.id.focus();
-					return false;
-				}
 				if (mobile.length == 0) {
 					alert("휴대폰 번호를 입력하세요.");
 					joinform.phone.focus();
@@ -82,9 +77,14 @@
 		var id1 = joinform.id.value;
 		var url = "./MemberIDCheckAction.me?id="
 				+ joinform.id.value;
-
+		var idcheck = /^[a-z0-9+]{4,12}$/;
+		
 		if (id1.length == 0) {
 			alert("아이디를 입력하세요.");
+			joinform.id.focus();
+			return false;
+		}else if(!idcheck.test(id1)){
+			alert("아이디는 소문자/숫자 4~12자리로 입력하세요.");
 			joinform.id.focus();
 			return false;
 		}
