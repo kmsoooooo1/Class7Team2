@@ -549,7 +549,12 @@
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 						
 						//final_total_price 태그 제어
-			   			final_total_price = (a_price_sale * final_total_amount); 
+						//만약 html 페이지에 a_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('a_amount_고속버스')){
+			   				final_total_price = (a_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (a_price_sale * final_total_amount); 	
+			   			}
 			   		}
 			   		//할인율이 0이면
 			   		else{
@@ -570,8 +575,13 @@
 						//계산된 마일리지 span 태그에 넣기
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			   			
-			   			//final_total_price 태그 제어
-			   			final_total_price = (a_price_origin * final_total_amount);
+						//final_total_price 태그 제어
+						//만약 html 페이지에 a_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('a_amount_고속버스')){
+			   				final_total_price = (a_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (a_price_sale * final_total_amount); 	
+			   			}
 			   		}
 			   	} 
 			   	//변경 전 수량이 변경 후 수량보다 작을때
@@ -599,7 +609,12 @@
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			   			
 			   			//final_total_price 태그 제어
-						final_total_price = (a_price_sale * final_total_amount); 			
+			   			//만약 html 페이지에 a_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('a_amount_고속버스')){
+			   				final_total_price = (a_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (a_price_sale * final_total_amount); 	
+			   			}
 			   		}
 			   		//할인율이 0이면
 			   		else{
@@ -620,8 +635,13 @@
 						//계산된 마일리지 span 태그에 넣기
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			   			
-			   			//final_total_price 태그 제어
-			   			final_total_price = (a_price_origin * final_total_amount);
+						//final_total_price 태그 제어
+						//만약 html 페이지에 a_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('a_amount_고속버스')){
+			   				final_total_price = (a_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (a_price_sale * final_total_amount); 	
+			   			}
 			   		}
 			   	}
 			}
