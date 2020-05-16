@@ -299,6 +299,7 @@
 </body>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
 	//장바구니 페이지가 처음 로딩되었을때 세팅하기
 	$(document).ready(function(){
@@ -318,6 +319,24 @@
 
 	});
 
+=======
+	//장바구니 페이지가 처음 로딩되었을때 세팅하기
+	$(document).ready(function(){
+		
+		//전체체크박스 제어
+		$("#chkBoxAll").prop('checked', true);
+	
+		var check = $("#chkBoxAll").is(":checked"); //최상위 체크박스 체크여부
+		//만약 최상위 체크박스가 체크되어있으면 전체 선택
+		if(check){
+			$("input[type='checkbox']").prop('checked', true);
+		}
+		//만약 최상위 체크박스가 체크되어있으면 전체 해제
+		else{
+			$("input[type='checkbox']").prop('checked', false);
+		}
+	});
+>>>>>>> refs/heads/Park_Harim
 	//장바구니 리스트 가져오기
 	var basketList = [];
 	<c:forEach items="${basketList}" var="basketList">
@@ -347,7 +366,10 @@
 	
 	
 	//정보 수정 제어 --------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/Park_Harim
 	//수량 수정했을때 호출되어야하는 함수
 	function amountAjax(id_number){
 		//DB에 접근하여 해당코드와 동일한 데이터 수량 수정하기
@@ -368,7 +390,6 @@
 	function changeTotalAmount(id_number){
 		var total_product_price = document.getElementById('total_product_price' + id_number + '_input').value;
 	}
-
 	//사용자가 키보드로 수량을 수정했을시
 	function amountChange(id_number){
 		
@@ -387,7 +408,6 @@
 		//업데이트된 총 상품금액 나타내게 하는 함수
 		changeTotalAmount(id_number);
 	}
-
 	//사용자가 '+'를 눌렸을시
 	function plus(id_number){
 		
@@ -418,7 +438,6 @@
 	function minus(id_number){
 		
 		var new_amount = parseInt($("#b_amount" + id_number).val()); 	//사용자가 새로 수정하는 수량
-
 		//사용자가 수량 1에서 -를 눌렸을시
 		if(new_amount == 1) {
 			alert("상품의 최소 구매량은 1개입니다.");
@@ -456,7 +475,10 @@
 			return false;
 		}
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/Park_Harim
 	//사용자가 품절삭제 버튼을 눌렸을때 호출되는 함수
 	function deleteSoldout() {
 		
