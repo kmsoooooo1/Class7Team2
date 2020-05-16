@@ -482,7 +482,6 @@
 		
 		//final_total_price 태그 제어
 		total_price = $('#total_product_price_' + delivery_method + '_input').val(); //하나의 tr(배송)의 총 판매가
-		
 		//새롭게 추가되는 total_price를 전에 추가되었던 final_total_price에 저장하기, 만약 처음이면 0에 추가하기
 		final_total_price += Number(total_price);
 		//태그에 추가하기
