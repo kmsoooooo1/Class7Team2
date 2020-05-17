@@ -92,9 +92,8 @@
 			<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 
+			
 			<div class="info_table">
-			
-			
 				<div class="info_img"> <img src="./upload/multiupload/<%=detailList.get(0).getG_thumbnail()%>" width="500" height="500"> </div>
 		        
 		        <div class="info_desc">
@@ -229,32 +228,34 @@
 				%>
 						<!-- 일반 배송이고 옵션이 있는 경우 --------------------------------------------->
 						<!-- 옵션을 셀렉트박스로 가져오기 --> 
-						옵션선택 
-						<!-- 상품 옵션값들 나타내기 --> 
-						<select id="option_method" name="option_method" onchange="changeOptionMethod();">
-							<option value="" selected disabled>-[필수] 선택하시오-</option>
-							<option disabled>------------------------------</option>
-							<c:forEach var="detailList" items="${detailList}">
-								<c:if test="${detailList.g_amount eq 0}">
-								<option value="${detailList.g_option}" disabled>
-									${detailList.g_option}
-									<c:if test="${detailList.g_option_price ne 0}">
-				        			    (+ ${detailList.g_option_price} 원)
-				        			</c:if> 
-				        			[품절]
-								</option>
-								</c:if>
-
-								<c:if test="${detailList.g_amount ne 0}">
-									<option value="${detailList.g_option}">
+						<div class="detail_select">
+							<span class="detail_select_title">옵션선택 </span>
+							<!-- 상품 옵션값들 나타내기 --> 
+							<select id="option_method" name="option_method" onchange="changeOptionMethod();">
+								<option value="" selected disabled>-[필수] 선택하시오-</option>
+								<option disabled>------------------------------</option>
+								<c:forEach var="detailList" items="${detailList}">
+									<c:if test="${detailList.g_amount eq 0}">
+									<option value="${detailList.g_option}" disabled>
 										${detailList.g_option}
 										<c:if test="${detailList.g_option_price ne 0}">
 					        			    (+ ${detailList.g_option_price} 원)
-					        			</c:if>
+					        			</c:if> 
+					        			[품절]
 									</option>
-								</c:if>
-							</c:forEach>
-						</select>
+									</c:if>
+	
+									<c:if test="${detailList.g_amount ne 0}">
+										<option value="${detailList.g_option}">
+											${detailList.g_option}
+											<c:if test="${detailList.g_option_price ne 0}">
+						        			    (+ ${detailList.g_option_price} 원)
+						        			</c:if>
+										</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
 				<%
 				 	for (int i = 0; i < detailList.size(); i++) {
 				 			GoodsDTO gdto = detailList.get(i);
@@ -331,8 +332,6 @@
 				 	} // 배송, 옵션에 따른 주문 테이블 제어 끝
 				%>
 
-				
-				 
 				<div class="btn_wrap">
 					<div class="top_btn_wrap">
 						<%
@@ -701,32 +700,6 @@
 		//사용자가 수량 input 태그에 키보드로 새로운 수량을 입력했을시
 		$('#g_amount_' + delivery_method).on('change', function(){
 			
-			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
-			if(delivery_method == '고속버스'){
-				//할인율이 있으면
-				if(g_discount_rate != 0){
-					g_price_sale_option = parseInt(g_price_sale) + parseInt(14000);
-				}
-				//없으면
-				else{
-					g_price_origin_option = parseInt(g_price_origin) + parseInt(14000);
-				}	
-			}
-			//만약 고속버스가 아니면 원판매가 그대로 g_price_sale_option에 저장
-			else{
-				//할인율이 있으면
-				if(g_discount_rate != 0){
-					g_price_sale_option = parseInt(g_price_sale);
-				}
-				//없으면
-				else{
-					g_price_origin_option = parseInt(g_price_origin);
-				}
-			}
-			
-			final_total_amount = document.getElementById('final_total_amount').innerHTML; //총 수량 (span 태그 안에 있는 값) 가져오기
-			final_total_amount = Number(final_total_amount); //문자열을 숫자로 형변환
-			
 			var previousAmount = $(this).data('val'); 	//사용자가 키보드로 입력하기 전 수량
 		    var currentAmount = $(this).val();			//사용자가 키보드로 입력 한 수량
 
@@ -744,8 +717,15 @@
 					//만약 할인율이 0이 아니면
 			   		if(g_discount_rate != 0){
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-			   			total_price = Number(g_price_sale_option * currentAmount); 
+			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
+			   			if(delivery_method == '고속버스'){
+							total_price = Number(g_price_sale * currentAmount) + Number(14000); 
+						}else {
+							total_price = Number(g_price_sale * currentAmount); 
+						}
 						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+						//input hidden 값에 수정된 총 가격 넣기
+						$('#total_product_price_' + delivery_method + "_input").val(total_price);
 						
 						//최종 마일리지 계산하기 
 						final_mileage = g_mileage * currentAmount;
@@ -753,13 +733,26 @@
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 						
 			   			//final_total_price 태그 제어
-			   			final_total_price -= (g_price_sale * (previousAmount - currentAmount));
+						//만약 html 페이지에 g_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('g_amount_고속버스')){
+			   				final_total_price = (g_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (g_price_sale * final_total_amount); 	
+			   			}
 			   		}
 			   		//할인율이 0이면
 			   		else{
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-			   			total_price = Number(g_price_origin_option * currentAmount); 
+			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
+						if(delivery_method == '고속버스'){
+							total_price = Number(g_price_origin * currentAmount) + Number(14000); 
+						}else {
+							total_price = Number(g_price_origin * currentAmount); 
+						} 
 						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+						//input hidden 값에 수정된 총 가격 넣기
+						$('#total_product_price_' + delivery_method + "_input").val(total_price);
+						
 						
 						//최종 마일리지 계산하기 
 						final_mileage = g_mileage * currentAmount;
@@ -767,7 +760,12 @@
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			   			
 			   			//final_total_price 태그 제어
-			   			final_total_price -= (g_price_origin * (previousAmount - currentAmount));
+						//만약 html 페이지에 g_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('g_amount_고속버스')){
+			   				final_total_price = (g_price_origin * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (g_price_origin * final_total_amount); 	
+			   			}
 			   		}
 			   	} 
 			   	//변경 전 수량이 변경 후 수량보다 작을때
@@ -777,23 +775,43 @@
 					
 			   		//만약 할인율이 0이 아니면
 			   		if(g_discount_rate != 0){
-			   		//각 tr의 총 가격 span 태그에 값 넣기
-			   			total_price = Number(g_price_sale_option * currentAmount); 
-						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			   			//각 tr의 총 가격 span 태그에 값 넣기
+			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
+						if(delivery_method == '고속버스'){
+							total_price = Number(g_price_sale * currentAmount) + Number(14000); 
+						}else {
+							total_price = Number(g_price_sale * currentAmount); 
+						}
+			   			document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+			   			//input hidden 값에 수정된 총 가격 넣기
+						$('#total_product_price_' + delivery_method + "_input").val(total_price);
 						
+			   			
 						//최종 마일리지 계산하기 
 						final_mileage = g_mileage * currentAmount;
 						//계산된 마일리지 span 태그에 넣기
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			   			
 						//final_total_price 태그 제어
-						final_total_price += (g_price_sale * (currentAmount - previousAmount)); 			
+						//만약 html 페이지에 a_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('g_amount_고속버스')){
+			   				final_total_price = (g_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (g_price_sale * final_total_amount); 	
+			   			}			
 			   		}
 			   		//할인율이 0이면
 			   		else{
 			   			//각 tr의 총 가격 span 태그에 값 넣기
-			   			total_price = Number(g_price_origin_option * currentAmount); 
+			   			//만약 배송방법을 고속버스로 추가하면 판매가격에 +14000 추가한 값 저장하기
+						if(delivery_method == '고속버스'){
+							total_price = Number(g_price_origin * currentAmount) + Number(14000); 
+						}else {
+							total_price = Number(g_price_origin * currentAmount); 
+						}
 						document.getElementById("total_product_price_" + delivery_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+						//input hidden 값에 수정된 총 가격 넣기
+						$('#total_product_price_' + delivery_method + "_input").val(total_price);
 						
 						//최종 마일리지 계산하기 
 						final_mileage = g_mileage * currentAmount;
@@ -801,13 +819,16 @@
 						document.getElementById("total_product_mileage_" + delivery_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 			   			
 			   			//final_total_price 태그 제어
-			   			final_total_price += (g_price_origin * (currentAmount - previousAmount));
+						//만약 html 페이지에 a_amount_고속버스 라는 id를 가진 요소가 있으면 총 금액에 14000원 추가해서 final 태그에 넣기 
+			   			if(document.getElementById('g_amount_고속버스')){
+			   				final_total_price = (g_price_sale * final_total_amount) + Number(14000);
+			   			}else {
+			   				final_total_price = (g_price_sale * final_total_amount); 	
+			   			}
 			   		}
 			   	}
 			}
-			//input hidden 값에 수정된 총 가격 넣기
-			$('#total_product_price_' + delivery_method + "_input").val(total_price);
-		    
+			
 			//태그에 추가하기
 			$('#final_total_price').text(final_total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			$('#final_total_amount').text(final_total_amount);
@@ -1098,72 +1119,6 @@
 			
 		}
 	} //amountChange()
-	
-	
-	//주문수량 키보드로 변경시 tr한줄의 총 금액과 마일리지 및 모든 옵션의 총 금액 제어 ----------------------------------------------------------
-	//옵션선택일 때
-// 	function amountOptionChange(option_method){
-		
-// 		var option_method = document.getElementById('option_method').value;	//배송방법
-// 		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
-// 		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
-// 		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
-// 		var g_mileage = document.getElementById('g_mileage').value;				//적립금
-// 		var g_option_price = document.getElementById('option_price_' + option_method).value;	//옵션별 판매가
-		
-// 		var total_price = Number($('#total_product_price_' + option_method + "_input").val()); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
-	
-// 		//option_method 인수로 들어온 값에 따라 new_g_amount 값 바꾸기
-// 		var new_g_amount = document.getElementById('g_amount_' + option_method).value;	//사용자가 새로 수정하는 수량
-// 		//alert(new_g_amount); //수량이 제대로 안담김
-		
-// 		//만약 할인율(a_discount_rate)이 0이 아니면
-// 		if(g_discount_rate != 0){
-// 			//계산된 값 span 태그에 넣기, 단 옵션 추가가격이 있는경우 그 추가가격을 따로 더해야한다.
-// 			if(g_option_price != 0){
-// 				total_price = (Number(g_price_sale) +  Number(g_option_price)) * new_g_amount;
-				
-// 			}else{
-// 				total_price =  Number(g_price_sale) * Number(new_g_amount);
-// 			}
-		
-// 			//각 tr의 총 가격 span 태그에 값 넣기
-// 			document.getElementById("total_product_price_" + option_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-// 			//input hidden 값에 수정된 총 가격 넣기
-// 			$('#total_product_price_' + option_method + "_input").val(total_price);
-			
-// 			//최종 마일리지 계산하기 
-// 			final_mileage = g_mileage * new_g_amount;
-// 			//계산된 마일리지 span 태그에 넣기
-// 			document.getElementById("total_product_mileage_" + option_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-			
-// 		}
-// 		//할인율이 0이면
-// 		else{
-// 			alert(g_option_price);
-// 			// Number((g_price_origin + Number(g_option_price)) * new_g_amount)
-// 			//계산된 값 span 태그에 넣기, 단 옵션 추가가격이 있는경우 그 추가가격을 따로 더해야한다.
-// 			if(g_option_price != 0){
-// 				total_price = (Number(g_price_origin) +  Number(g_option_price)) * new_g_amount;
-				
-// 			}else{
-// 				total_price =  Number(g_price_origin * new_g_amount);
-// 			}
-// 			alert(total_price);
-// 			//각 tr의 총 가격 span 태그에 값 넣기
-// 			document.getElementById("total_product_price_" + option_method).innerHTML = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-// 			//input hidden 값에 수정된 총 가격 넣기
-// 			$('#total_product_price_' + option_method + "_input").val(total_price);
-			
-// 			//최종 마일리지 계산하기 
-// 			final_mileage = g_mileage * new_g_amount;
-// 			//계산된 마일리지 span 태그에 넣기
-// 			document.getElementById("total_product_mileage_" + option_method).innerHTML = final_mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
-			
-			
-			
-// 		}
-// 	}
 	
 	
 	//사용자가 '+'를 눌렸을시---------------------------------------------------------------------------
@@ -1671,6 +1626,34 @@
 			}else if(!goBasket){
 				window.location.reload(); //현재 페이지 새로고침
 			}
+		}
+		
+		//만약 옵션을 선택하지 않았다면
+		if(document.getElementById("option_method").value == ""){
+			alert("필수옵션을 선택해주세요");
+			document.fr.option_method.focus();
+			return false;
+		}
+		//옵션을 선택했을시
+		else{
+			for(var i=0; i<count; i++){
+				//selectedArray[i] -> 선택된 배송방법의 value들
+				selectedAmounts += ($('#g_amount_' + selectedArray[i]).val() + ",")
+			}
+			
+			//추가된 values 변수를 태그에 담기
+			$("#selectedAmounts").val(selectedAmounts);
+			
+			document.fr.action="./BasketAdd.ba";
+			document.fr.submit();
+			
+			var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
+			if(goBasket){
+				location.href="./BasketList.ba";
+			}else if(!goBasket){
+				window.location.reload(); //현재 페이지 새로고침
+			}
+			
 		}
 	}
 	
