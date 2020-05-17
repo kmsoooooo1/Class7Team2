@@ -16,18 +16,17 @@
 	
 	<!-- Main Content -->
 	<!-- 메인슬라이드 -->
-  	<div class="swiper-container">
+  	<div class="swiper-container first">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
-      <div class="swiper-slide">Slide 10</div>
+      <div class="swiper-slide">
+       <img src="../img/t1.png">
+      </div>
+      <div class="swiper-slide">
+       <img src="../img/t2.png">
+      </div>
+      <div class="swiper-slide">
+       <img src="../img/t3.png">
+      </div>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
@@ -41,10 +40,7 @@
 
   <!-- Initialize Swiper -->
   <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      slidesPerGroup: 3,
+    var swiper = new Swiper('.first', {
       loop: true,
       loopFillGroupWithBlank: true,
       pagination: {
@@ -57,13 +53,65 @@
       },
     });
   </script>
-  
+  <hr>
+  <!-- 신상품 리스트 -->
+  <div>
+  <div class="swiper-container second">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0133.jpg"></div>
+		<div class="swiper-slide"><img src="https://biketago.com/img/p/0501.jpg"></div>
+		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0506.jpg"></div>
+		<div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0619.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0491.jpg"></div>
+		<div class="swiper-slide"><img src="https://biketago.com/img/p/0473.jpg"></div>
+		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0275.jpg"></div>
+		<div class="swiper-slide"><img src="https://biketago.com/img/p/0790.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0114.jpg"></div>
+		<div class="swiper-slide"><img src="https://biketago.com/img/p/0343.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0236.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0784.jpg"></div>
+		<div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0229.jpg"></div>
+		<div class="swiper-slide"><img src="https://biketago.com/img/p/0197.jpg"></div>
+		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0565.jpg"></div>
+	</div>
+	</div>
+	<!-- 네비게이션 -->
+	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+
+	<!-- 페이징 -->
+	<div class="swiper-pagination"></div>
+</div>
+<div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
+  <script>
+   new Swiper('.second', {
+		
+		slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+		spaceBetween : 30, // 슬라이드간 간격
+		slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		loopFillGroupWithBlank : true,
+
+		loop : true, // 무한 반복
+
+		pagination : { // 페이징
+			el : '.swiper-pagination',
+			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+		},
+		navigation : { // 네비게이션
+			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+		},
+	}); 
+  </script>
   <div class="row">
   <div class="leftcolumn">
     <div class="card">
       <h2>반려동물</h2>
       <h5>이달의 반려동물 인기 순위입니다.</h5>
-      <div class="fakeimg" style="height:200px;"><img src="../img/banner.png"></div>
+<!--       <div class="fakeimg" style="height:200px;"><img src="../img/banner.png"></div> -->
       <p>갈라파고스에서...</p>
       <p>여러분이 애지중지하게 키운 반려동물의 사진을 올려주세요</p>
     </div>
@@ -96,8 +144,7 @@
   	
 	<hr>
 	
-	<!-- 신상품 리스트 -->
-	- 신상품 
+	
 	
 	<!-- 파충류 리스트 -->
 	- 파충류
