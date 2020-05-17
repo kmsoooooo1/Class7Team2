@@ -114,7 +114,17 @@
   </servlet-mapping>
   <!-- 장바구니 -->
   
+  <!-- 상품 구매 -->
+  <servlet>
+     <servlet-name>OrderFrontController</servlet-name>
+     <servlet-class>team2.order.action.OrderFrontController</servlet-class>
+  </servlet>
   
+  <servlet-mapping>
+     <servlet-name>OrderFrontController</servlet-name>
+     <url-pattern>*.or</url-pattern>
+  </servlet-mapping>
+  <!-- 상품 구매 -->
   
   
   
