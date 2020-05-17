@@ -299,27 +299,6 @@
 </body>
 
 <script type="text/javascript">
-<<<<<<< HEAD
-
-	//장바구니 페이지가 처음 로딩되었을때 세팅하기
-	$(document).ready(function(){
-		
-		//전체체크박스 제어
-		$("#chkBoxAll").prop('checked', true);
-	
-		var check = $("#chkBoxAll").is(":checked"); //최상위 체크박스 체크여부
-		//만약 최상위 체크박스가 체크되어있으면 전체 선택
-		if(check){
-			$("input[type='checkbox']").prop('checked', true);
-		}
-		//만약 최상위 체크박스가 체크되어있으면 전체 해제
-		else{
-			$("input[type='checkbox']").prop('checked', false);
-		}
-
-	});
-
-=======
 	//장바구니 페이지가 처음 로딩되었을때 세팅하기
 	$(document).ready(function(){
 		
@@ -336,7 +315,6 @@
 			$("input[type='checkbox']").prop('checked', false);
 		}
 	});
->>>>>>> refs/heads/Park_Harim
 	//장바구니 리스트 가져오기
 	var basketList = [];
 	<c:forEach items="${basketList}" var="basketList">
@@ -366,10 +344,6 @@
 	
 	
 	//정보 수정 제어 --------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 	//수량 수정했을때 호출되어야하는 함수
 	function amountAjax(id_number){
 		//DB에 접근하여 해당코드와 동일한 데이터 수량 수정하기
@@ -475,10 +449,6 @@
 			return false;
 		}
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/Park_Harim
 	//사용자가 품절삭제 버튼을 눌렸을때 호출되는 함수
 	function deleteSoldout() {
 		
