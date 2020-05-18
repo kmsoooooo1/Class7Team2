@@ -169,7 +169,7 @@ public class BoardDAO {
 					boardList.add(bdto);
 				}
 			
-			System.out.println("게시판 글 arraylist로 저장 완료 : " + boardList);
+			System.out.println("getBoardList(cSet cset, Criteria cri) 성공");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -337,6 +337,75 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<BoardDTO> searchBoard(String sql) {
+		
+		ArrayList<BoardDTO> searchList = new ArrayList();
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				BoardDTO dto = new BoardDTO();
+				dto.setB_idx(rs.getInt("b_idx"));
+				dto.setB_category(rs.getString("b_category"));
+				dto.setB_title(rs.getString("b_title"));
+				dto.setB_writer(rs.getString("b_writer"));
+				dto.setB_content(rs.getString("b_content"));
+				dto.setB_ref(rs.getInt("b_ref"));
+				dto.setB_like(rs.getInt("b_like"));
+				dto.setB_view(rs.getInt("b_view"));
+				dto.setB_reg_date(rs.getDate("b_reg_date"));
+				dto.setIp_addr(rs.getString("ip_addr"));
+				dto.setB_file(rs.getString("b_file"));
+				dto.setB_p_code(rs.getString("b_p_code"));
+				
+				searchList.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return searchList;
+		
+	}
+
+	public ArrayList<BoardDTO> searchTitle(cSet cset, String search, Criteria cri) {		
+		
+		sql = "select * from team2_board where b_category='"+cset.getCategory()+"' and b_title like '%"+search+"%' order by b_idx desc limit "+cri.getPageStart()+","+cri.getPerpageNum()+"";
+			
+		System.out.println("searchTitle : "+sql);
+		
+		return searchBoard(sql);
+		
+	}
+
+	public int serachCount(cSet cset, String search) {
+		int total = 0;
+		
+		try {
+			sql = "select count(*) from team2_board where b_category=? and b_title like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cset.getCategory());
+			pstmt.setString(2, '%'+search+'%');
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				total = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return total;
 	}
 		
 		

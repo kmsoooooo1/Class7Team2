@@ -14,7 +14,7 @@
 	<jsp:include page="/include/header.jsp" />
 
 	 
-		<div class="contents">
+		<div class="contents"> 
 		<form action="./MemberLoginAction.me" method="post" class="box">
 		 <h2>MEMBER LOGIN</h2>
 			<input type="text" name="id" placeholder="ID">
@@ -31,4 +31,3 @@
 	<jsp:include page="/include/footer.jsp"/>
 	
 </body>
-</html>
