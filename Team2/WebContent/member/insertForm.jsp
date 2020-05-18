@@ -138,36 +138,32 @@
 		<!-- 회원가입 -->
 		<form action="./MemberJoinAction.me" method="post" name="joinform" id="joinform"
 			onsubmit="return !!(check() & send(this))">
-		
+			
+			<h2 class="name">Member Join</h2>
 		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
 			  중복체크를하고나면 true로 변경. 단 다시 아이디 체크박스를 누르면 false로 변경!-->
 			<input type="hidden" name="idcheck" value="false" />
-	
-		 	<h2 class="name">아이디</h2>
-		 	<div>
-			 <input type="text" class="id" name="id" size="20" maxlength=30 onfocus="func()"/>
+			
+			 <input type="text" class="id" name="id" placeholder="아이디" size="20" maxlength=30 onfocus="func()"/>
 			 <input type="button" class="btn" name="confirm_id" value="중복확인" onclick="openConfirmId(this.form)" /><br>
-			</div>
-			 <h2 class="name">비밀번호</h2>
-			<p id="passp"><input type="password" id="pass" name="pass" class="inputTypeText" onkeyup="checkValidPW()"> (영문/숫자 조합, 8자리 이상) &nbsp; <span id="pwConstraintMsg"></span><p><br>
 			
-			<h2 class="name">비밀번호 확인</h2> 
-			<input type="password" id="user_pass_confirm" name="user_pass_confirm" onkeyup="checkSamePW()" class="inputTypeText"> &nbsp; <span id="pwConfirmMsg"></span><br>
+			<input type="password" id="pass" name="pass" placeholder="비밀번호(영문/숫자 조합, 8자리 이상)" class="inputTypeText" onkeyup="checkValidPW()"> <br> <span id="pwConstraintMsg"></span><br>
 			
-			<h2 class="name">이름</h2>
-			<input type="text" id="name" name="name" size="20"><br>
-			<h2 class="name">전화번호</h2>
+			<input type="password" id="user_pass_confirm" name="user_pass_confirm" placeholder="비밀번호 확인" onkeyup="checkSamePW()" class="inputTypeText"> <br> <span id="pwConfirmMsg"></span><br>
+			
+			<input type="text" id="name" name="name" placeholder="이름" size="20"><br>
+			
 			<!-- 눌렸을때 호출되는 gNumCheck()메서드 등록  -->
-			<input type="text" id="phone" name="phone" onkeypress="gNumCheck()" size="24" />
-			<h2 class="name">우편번호</h2>
-			<input type="text" name="zipcode" id="zipcode" size="7" readonly>
-				<input type="button" value="주소찾기" onclick="DaumPostcode()">
-			<h2 class="name">주소</h2>
-			<input type="text" name="addr1" id="addr1" size="40" readonly>
-			<h2 class="name">상세주소</h2>
-			<input type="text" name="addr2" id="addr2" size="40">
-			<h2 class="name">이메일</h2>
-			<input type="email" id="email" name="email"><br></br>
+			<input type="text" id="phone" name="phone" placeholder="전화번호" onkeypress="gNumCheck()" size="24" /><br>
+			
+			<input type="text" name="zipcode" id="zipcode" placeholder="우편번호" size="7" readonly>
+				<input type="button" class="btn" value="주소찾기" onclick="DaumPostcode()"><br>
+			
+			<input type="text" name="addr1" id="addr1" placeholder="주소" size="40" readonly><br>
+			
+			<input type="text" name="addr2" id="addr2" placeholder="상세주소" size="40"><br>
+			
+			<input type="email" id="email" name="email" placeholder="이메일"><br></br>
 			<div class="div_text">
             <textarea cols="107" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
 
@@ -351,10 +347,10 @@
             </textarea>
        </div>
   	   <p id="agreep"><input type="checkbox" name="agree"/> 약관에 동의합니다</p>
-		<div class="btn_submit">
+		
 		<input type="submit" value="회원가입" class="btn"/> 
-		<input type="button" value="취소"  class="btn" onclick="javascript:history.back();"/>
-		</div>
+		<input type="button" value="취소"  class="btn_reset" onclick="javascript:history.back();"/>
+	   
 	   </form>	
 		</div>
 		

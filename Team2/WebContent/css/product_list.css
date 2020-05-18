@@ -3,27 +3,107 @@
 * {
 	box-sizing: border-box;
 }
-
-hr {
-	margin: 0;
+ul{
+	list-style: none;
+	padding: 0;
+	margin:0;
 }
-
 body {
 	margin: 0;
 	padding: 0;
 }
 
+
 .container {
 	width: 100%;
 	text-align: center;
 }
+.a_amount{
+	display: inline-block;
+	width: 80%;
+	text-align: right;
+	margin: 0.8em auto;
+}
 
 .menu {
 	width: 80%;
-	margin: 0 auto;
+	margin: 1.2em auto;
 	text-align: center;
 }
+.ul_wrap{
+	width: 80%;
+	margin:0 auto;
+}
+.ul_wrap li{
+	width:25%;
+	height:380px;
+	float:left;
+	border: 1px solid #ccc;
+}
+.ul_wrap:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+.list_img{
+	width: 80%;
+	height: auto;
+	max-height: 18em;
+	margin: 0 auto;
+}
 
+/* 페이징 처리 */
+
+#pageList{
+	list-style: none;
+	margin: 2em auto;
+	padding: 0;
+	width: max-content;
+}
+
+#pageList li{
+	font-size: 0.8em;
+	color: #888;
+	font-weight: bold;
+	float:left;
+	display:inline-block;
+	width: 2.5em;
+	height: 2.5em;
+	line-height: 2.5em;
+	border:1px solid #ccc;
+}
+#pageList li:hover{
+	background-color: #ccc;
+	cursor: pointer;
+}
+#pageList li:FIRST-CHILD{
+	margin-left: 0;
+}
+#pageList:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+
+		@media screen and (max-width: 480px) {
+			.ul_wrap{
+				width: 100%;
+			}
+			.ul_wrap li{
+				width: 50%;
+				height:300px;
+			}
+			
+		}
+		@media screen and (max-width: 736px) {
+			.ul_wrap{
+				width: 100%;
+			}
+			.ul_wrap li{
+				width: 50%;
+				height:300px;
+			}
+		}
 
 /* good/animal list sub 버튼 */
 .a_btn {
