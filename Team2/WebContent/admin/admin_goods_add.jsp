@@ -88,7 +88,7 @@
 		  
 		  <tr>
 		     <td> 옵션 </td>
-		     <td> <input type="text" name="g_option"> </td>
+		     <td> <input type="text" name="g_option" placeholder="옵션 없으면 빈칸"> </td>
 		  </tr>
 		  
 		 <!-- 추가가격이 없으면 0 입력 -->

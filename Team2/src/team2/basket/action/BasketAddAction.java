@@ -1,5 +1,7 @@
 package team2.basket.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -64,9 +66,11 @@ public class BasketAddAction implements Action {
 			bkdao.basketAdd(bkdto);
 		}
 		
-		forward.setPath("./BasketList.ba");
-		forward.setRedirect(true);
-		return forward;
+//		forward.setPath("./BasketList.ba");
+//		forward.setRedirect(true);
+//		return forward;
+		
+		return null;
 	}
 
 }
