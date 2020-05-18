@@ -36,29 +36,76 @@
   </div> 
  <hr>
   <!-- 신상품 리스트 -->
+  <div class="newlist">
   <div class="swiper-container second">
+  <h2>신상품 리스트</h2>
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0133.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0501.jpg"></div>
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0506.jpg"></div>
-		<div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0619.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0491.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0473.jpg"></div>
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0275.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0790.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0114.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0343.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0236.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0784.jpg"></div>
-		<div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0229.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0197.jpg"></div>
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0565.jpg"></div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-10">
+		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=150">
+		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=11">
+		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=200">
+		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-10">
+		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=150">
+		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=11">
+		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=200">
+		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-10">
+		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=150">
+		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=11">
+		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=200">
+		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		
 	</div>
 	<!-- 페이징 -->
 	<div class="swiper-pagination"></div>
 </div>
-<div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
-
+</div>
   <!-- Swiper JS -->
   <script src="${pageContext.request.contextPath}/js/swiper/swiper.min.js"></script>
 
@@ -83,7 +130,11 @@
 		slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
 		spaceBetween : 30, // 슬라이드간 간격
 		slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-
+		centeredSlides: true,
+		autoplay: { // 자동 슬라이드
+        delay: 3000, // 넘어가는 시간
+        disableOnInteraction: false,
+      	},
 		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
 		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
 		loopFillGroupWithBlank : true,
