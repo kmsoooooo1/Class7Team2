@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css?ver=2" rel="stylesheet">
 </head>
 <body>
+<div class="h-group">
+<div class="header">
       <div class="top_menu">
       <ul>
       <%
@@ -86,7 +88,8 @@
          <li class="dropdown"> <a href="./aHospital.bo" class="dropbtn"> 동물병원 정보</a> </li>
       </ul>
    </nav>
-   
+   </div>
+   </div>
 </body>
 
 </html>
