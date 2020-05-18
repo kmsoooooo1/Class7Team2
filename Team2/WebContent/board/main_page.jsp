@@ -60,17 +60,47 @@
 		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg" style="width: 100%; height: 100%">
 		 </a>
 		</div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0491.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0473.jpg"></div>
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0275.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0790.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0114.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0343.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0236.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0784.jpg"></div>
-		<div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0229.jpg"></div>
-		<div class="swiper-slide"><img src="https://biketago.com/img/p/0197.jpg"></div>
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0565.jpg"></div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-10">
+		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=150">
+		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=11">
+		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=200">
+		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-10">
+		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=150">
+		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=11">
+		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=200">
+		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg" style="width: 100%; height: 100%">
+		 </a>
+		</div>
+		
 	</div>
 	<!-- 페이징 -->
 	<div class="swiper-pagination"></div>
