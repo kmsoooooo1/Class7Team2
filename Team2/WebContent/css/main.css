@@ -23,6 +23,12 @@
       margin-right: auto;
     }
   
+  	.newlist {
+  		width: 80%;
+  		margin: 0 auto;
+  		padding: 0;
+  	}
+  
     .swiper-slide {
       text-align: center;
       font-size: 18px;

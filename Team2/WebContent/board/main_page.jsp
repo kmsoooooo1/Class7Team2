@@ -36,6 +36,7 @@
   </div> 
  <hr>
   <!-- 신상품 리스트 -->
+  <div class="newlist">
   <div class="swiper-container second">
   <h2>신상품 리스트</h2>
 	<div class="swiper-wrapper">
@@ -74,8 +75,7 @@
 	<!-- 페이징 -->
 	<div class="swiper-pagination"></div>
 </div>
-<div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
-
+</div>
   <!-- Swiper JS -->
   <script src="${pageContext.request.contextPath}/js/swiper/swiper.min.js"></script>
 
@@ -100,11 +100,10 @@
 		slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
 		spaceBetween : 30, // 슬라이드간 간격
 		slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-		spaceBetween: 30,
       
 		centeredSlides: true,
 		autoplay: { // 자동 슬라이드
-        delay: 3000,
+        delay: 3000, // 넘어가는 시간
         disableOnInteraction: false,
       	},
 		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
