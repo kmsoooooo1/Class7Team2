@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/main.css" rel="stylesheet">
-<link href="../css/swiper.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/swiper.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,43 +19,23 @@
   	<div class="swiper-container first">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-       <img src="../img/t1.png">
+       <img src="${pageContext.request.contextPath}/img/t1.png">
       </div>
       <div class="swiper-slide">
-       <img src="../img/t2.png">
+       <img src="${pageContext.request.contextPath}/img/t2.png">
       </div>
       <div class="swiper-slide">
-       <img src="../img/t3.png">
+       <img src="${pageContext.request.contextPath}/img/t3.png">
       </div>
     </div>
-    <!-- Add Pagination -->
+    <!-- 페이징 -->
     <div class="swiper-pagination"></div>
-    <!-- Add Arrows -->
+    <!-- 네비게이션 버튼 -->
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
-  </div>
-
-  <!-- Swiper JS -->
-  <script src="../js/swiper/swiper.min.js"></script>
-
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper('.first', {
-      loop: true,
-      loopFillGroupWithBlank: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  </script>
-  <hr>
+  </div> 
+ <hr>
   <!-- 신상품 리스트 -->
-  <div>
   <div class="swiper-container second">
 	<div class="swiper-wrapper">
 		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0133.jpg"></div>
@@ -74,17 +54,31 @@
 		<div class="swiper-slide"><img src="https://biketago.com/img/p/0197.jpg"></div>
 		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0565.jpg"></div>
 	</div>
-	</div>
-	<!-- 네비게이션 -->
-	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
-
 	<!-- 페이징 -->
 	<div class="swiper-pagination"></div>
 </div>
 <div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
+
+  <!-- Swiper JS -->
+  <script src="${pageContext.request.contextPath}/js/swiper/swiper.min.js"></script>
+
+  <!-- Initialize Swiper -->
   <script>
-   new Swiper('.second', {
+  	// swiper-container first
+    var swiper = new Swiper('.first', {
+      loop: true,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+   // swiper-container second  
+    new Swiper('.second', {
 		
 		slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
 		spaceBetween : 30, // 슬라이드간 간격
@@ -100,10 +94,7 @@
 			el : '.swiper-pagination',
 			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
 		},
-		navigation : { // 네비게이션
-			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
-		},
+		
 	}); 
   </script>
   <div class="row">
