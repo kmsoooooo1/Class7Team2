@@ -33,10 +33,10 @@ public class BasketListAction implements Action {
 		
 		// 해당 정보를 request에 저장
 		ArrayList basketList = (ArrayList)vec.get(0);
-		ArrayList animalList = (ArrayList)vec.get(1);
+		ArrayList productInfoList = (ArrayList)vec.get(1); //상품(동물 + 물건)정보 저장
 		
 		request.setAttribute("basketList", basketList);
-		request.setAttribute("animalList", animalList);
+		request.setAttribute("productInfoList", productInfoList);
 		
 		forward.setPath("./order/animal_basket.jsp");
 		forward.setRedirect(false);

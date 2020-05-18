@@ -19,7 +19,7 @@ public class GoodsListAction implements Action{
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
-		
+	
 		if(sub_category == null){
 			// 유저가 먹이나 사육용품만 선택했을 시 sub_category에는 all을 넣어서 모든 먹이 또는 사육용품을 가지고 온다
 			sub_category = "all";
