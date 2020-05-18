@@ -38,7 +38,11 @@
   <!-- 신상품 리스트 -->
   <div class="swiper-container second">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0133.jpg"></div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-10">
+		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg">
+		 </a>
+		</div>
 		<div class="swiper-slide"><img src="https://biketago.com/img/p/0501.jpg"></div>
 		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0506.jpg"></div>
 		<div class="swiper-slide"><img src="http://superkts.dothome.co.kr/img/p2/0619.jpg"></div>
