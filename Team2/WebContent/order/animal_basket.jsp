@@ -29,13 +29,12 @@
 
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-
-
+	
 	<!-- 장바구니 테이블 생성 -->
 	CART
-	<form action="" method="post" name="fr"> 
+	<form action="./OrderStarSelected.or" method="post" name="fr"> 
 	
-		<input type="hidden" id="seletedCodes" name="seletedCodes" value="">
+		<input type="hidden" id="selectedCodes" name="seletedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
@@ -582,6 +581,8 @@
 	//사용자가 선택한상품 주문하기를 눌렀을때 호출되는 함수
 	function orderSelected(){
 		
+		alert("테스트");
+		
 		//만약 장바구니가 비어있으면 alert 뜨게 하기
 		if(basketList.length == 0){
 			alert("장바구니가 비어있습니다.");
@@ -596,12 +597,12 @@
 		}
 		
 		//추가된 values 변수를 태그에 담기
-		$('#seletedCodes').val(selectedCodes);
-		$('#selectedOptions').val(selectedOptions);
-		$('#selectedDeliveryMethods').val(selectedDeliveryMethods);
-
-		document.fr.action="./OrderStarSelected.or";
-		document.fr.submit();
+		document.getElementById("selectedCodes").value = selectedCodes;
+		document.getElementById("selectedOptions").value = selectedOptions;
+		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
+		
+ 		//document.fr.action="./OrderStarSelected.or";
+ 		document.fr.submit();
 		
 		//var selectedInfoArray = [];
 		

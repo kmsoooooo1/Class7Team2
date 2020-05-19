@@ -69,11 +69,9 @@ public class OrderStarSelectedAction implements Action {
 		
 		//request.setAttribute("memberDTO", mdto);
 		
-		//forward.setPath("./order/product_buy.jsp");
-		//forward.setRedirect(false); //forwarding 해야한다.
-		//return forward;
-		
-		return null;
+		forward.setPath("./order/product_buy.jsp");
+		forward.setRedirect(false); //forwarding 해야한다.
+		return forward;
 	}
 
 }
