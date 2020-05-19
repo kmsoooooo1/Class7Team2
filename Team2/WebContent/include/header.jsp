@@ -108,7 +108,7 @@
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
    <!-- 메인 메뉴 --> 
-   <nav id="nav_menu"> 
+   <nav id="nav_menu" class="nav_menu"> 
       <ul class="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
@@ -164,6 +164,20 @@ function kakaoChat() {
 	var popupX = (window.screen.width / 6) - (200 / 2); 
 	var popupY = (window.screen.height / 4) - (300 / 2);  
 	window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
+}
+
+
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("nav_menu");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
 }
 </script>
 </html>
