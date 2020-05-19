@@ -97,7 +97,9 @@
 		<div class="contents">
 		<div class="box">
 		<form action="./MemberUpdateAction.me" method="post" name="joinform"
-			onsubmit="return check()">
+			onsubmit="return check()">	
+			
+			<h2 class="name">Member Update</h2>
 		
 		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
 			  중복체크를하고나면 true로 변경. 단 다시 아이디 체크박스를 누르면 false로 변경!-->
