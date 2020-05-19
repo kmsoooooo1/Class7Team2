@@ -85,7 +85,7 @@
             data : formData,
             success : function(result) {
     			alert("글 등록에 성공하였습니다.");
-    			location.href="./BoardMain.bo";
+    			location.href="./BoardList.bo?category=0";
             },
 		
 	        error: function(e) {
@@ -141,7 +141,7 @@
 		</select><br>
 		
 <%	if(!(c<1)){ %>
-		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
+		상품코드  <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
 <%		if(p_code!=null){
 					
 			ProductDTO dto = new ProductDTO(p_code);
@@ -178,6 +178,7 @@
             <img id="img"/>
         </div>
 
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 
 <script type="text/javascript">
