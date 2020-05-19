@@ -141,3 +141,14 @@ textarea:focus::-webkit-input-placeholder {
 .contents1 input[type = "button"]:hover,.contents1 input[type="submit"]:hover{
 	background: #2ecc71;
 }
+
+
+/* updateForm */
+.update_span{
+	color: white;
+	font-size: 20px;
+}
+
+
+
+
