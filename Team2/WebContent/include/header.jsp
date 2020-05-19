@@ -45,12 +45,22 @@
                		<i class="fas fa-search"><span>&nbsp&nbsp검색</span></i>
                	</a>
                </li>
+               <li>
+               	<a href="#h-group">
+               		<i class="fas fa-angle-double-up"><span>&nbsp&nbsp맨위로</span></i>
+               	</a>
+               </li>
+               <li>
+               	<a href="#copyright">
+               		<i class="fas fa-angle-double-down"><span>&nbsp&nbsp맨아래로</span></i>
+               	</a>
+               </li>
             </ul>
          </nav>
       </aside>
 <!-- side 퀵바 -->
 
-<div class="h-group">
+<div class="h-group" id="h-group">
 <div class="header">
       <div class="top_menu">
       <ul>
