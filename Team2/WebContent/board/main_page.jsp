@@ -46,17 +46,17 @@
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=150">
+		 <a href="./AnimalDetail.an?a_code=a-150">
 		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=11">
+		 <a href="./AnimalDetail.an?a_code=a-11">
 		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=200">
+		 <a href="./AnimalDetail.an?a_code=a-200">
 		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
 		 </a>
 		</div>
@@ -66,17 +66,17 @@
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=150">
+		 <a href="./AnimalDetail.an?a_code=a-150">
 		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=11">
+		 <a href="./AnimalDetail.an?a_code=a-11">
 		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=200">
+		 <a href="./AnimalDetail.an?a_code=a-200">
 		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
 		 </a>
 		</div>
@@ -86,17 +86,17 @@
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=150">
+		 <a href="./AnimalDetail.an?a_code=a-150">
 		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=11">
+		 <a href="./AnimalDetail.an?a_code=a-11">
 		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
 		 </a>
 		</div>
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=200">
+		 <a href="./AnimalDetail.an?a_code=a-200">
 		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
 		 </a>
 		</div>
@@ -109,7 +109,7 @@
   <!-- Swiper JS -->
   <script src="${pageContext.request.contextPath}/js/swiper/swiper.min.js"></script>
 
-  <!-- Initialize Swiper -->
+  <!-- Swiper first,second -->
   <script>
   	// swiper-container first
     var swiper = new Swiper('.first', {

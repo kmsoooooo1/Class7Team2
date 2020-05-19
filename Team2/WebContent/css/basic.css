@@ -58,13 +58,13 @@ body{
 
 .top_menu i {
 	color: black;
-	font-size: 40px;
+	font-size: 30px;
 }
 
 .top_menu i span {
 	display: block;
 	font-size: 15px;
-	margin-top: 6px;
+	margin-top: 4px;
 }
 
 
@@ -84,7 +84,7 @@ body{
 	
 }
 .h-group {
-	height: 170px;
+	height: 220px;
 	
 }
 

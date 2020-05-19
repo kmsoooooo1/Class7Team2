@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -33,19 +34,24 @@
 	<!-- Main Content -->
 	
 	<%if(category.equals("먹이")){ %>
-	<div>
-	   <ul>
-	      <li><a href="./GoodsList.go?category=먹이"> 전체보기 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a></li>
-	   </ul>
+	<div class="container">
+	   <div class="menu">
+	   	<input type="button" value="전체보기" class="a_btn"
+	   		onclick="location.href='./GoodsList.go?category=먹이'">
+	   	<input type="button" value="칼슘/약품" class="a_btn"
+	   		onclick="location.href='./GoodsList.go?category=먹이&sub_category=칼슘/약품'">
+	   	<input type="button" value="생먹이" class="a_btn"
+	   		onclick="location.href='./GoodsList.go?category=먹이&sub_category=생먹이'">
+	   	<input type="button" value="냉동먹이" class="a_btn"
+	   		onclick="location.href='./GoodsList.go?category=먹이&sub_category=냉동먹이'">
+	   	<input type="button" value="인공사료" class="a_btn"
+	   		onclick="location.href='./GoodsList.go?category=먹이&sub_category=인공사료'">
 	</div>
 	<%} else if(category.equals("사육용품")){ %>
-	<div>
-	   <ul>
-	      <li><a href="./GoodsList.go?category=사육용품"> 전체보기 </a></li>
+	<div class="container">
+	   <div class="menu">
+	    <input type="button" value="전체보기" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품'">
 	      <li><a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
 	      	<ul>
 	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=유리/테라리움">유리/테라리움</a></li>
@@ -96,7 +102,7 @@
 	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타"> 기타 </a></li>
 	      	</ul>
 	      </li>
-	   </ul>
+	   </div>
 	</div>
 	<%} %>
 	
