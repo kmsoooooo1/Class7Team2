@@ -66,6 +66,8 @@ public class OrderStarSelectedAction implements Action {
 			vec.add(temp_array);
 		}
 		
+		System.out.println(vec);
+		
 		Vector basketInfoList = new Vector();
 		
 		ArrayList basketList = new ArrayList();
