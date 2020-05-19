@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+.member_h3{
+	width: 100%;
+	float: left;
+}
+
+.member_top_menu{
+	margin-left: 10%;
+}
+
+.memberupdate_div{
+	float: right;
+}
+
+.member_top_menu ul{
+	list-style: none;
+}
+
+.member_top_menu li{
+	float: left;
+	margin-left: 10px;
+}
+
+.welcome_div{
+	margin-left: 50px;
+}
+
+.member_div{
+	width: 60%;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.top_div{
+    width: 100%;
+	display: inline-block;
+}
+
+.top_div2,.top_div2 b{
+	margin-left: 15px;
+}
+
+.logo_div{
+	float: left;
+}
+
+.member_btn{
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-color: #e7e7e7;
+  border-radius: 20px;
+}
+
+.member_btn:HOVER {
+	background: #e7e7e7;
+}
+
+.myshop_benefit_group_image_tag{
+	width: 100px;
+	border-radius: 50%;
+	border: 5px solid gray;
+}

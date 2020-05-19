@@ -7,35 +7,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link href="${pageContext.request.contextPath}/css/mypage.css?ver=2" rel="stylesheet">
 <title>마이 페이지</title>
 <style type="text/css">
-
-.member_top_menu{
-	width: 100%;
-	float: left;	
-}
-
-.member_top_menu ul{
-	list-style: none;
-}
-
-.member_top_menu li{
-	float: left;
-	margin-left: 20px;
-}
-
-.member_div{
-	width: 80%;
-	margin: 0 auto;
-	padding: 0;
-}
 
 
 </style>
 </head>
 <body>
 <!-- Header -->
-	<jsp:include page="/include/header.jsp" />
+<jsp:include page="/include/header.jsp" />
 <!-- 
 	   로그인한 사용자의 경우 사용자 ID를 출력,
 	   로그인X 사용자의 경우 로그인페이지로 이동 	   
@@ -54,30 +37,24 @@
 	   MemberDTO mdto = mdao.getMember(id);
 	   String name = mdto.getName();
 	 %>
-<!-- 회원 이미지 -->	 
+	 
  <div class="member_div">
-	 <h3>마이쇼핑</h3>
-  <div>
-   <div>
-    <img src="//img.echosting.cafe24.com/skin/base_ko_KR/member/img_member_default.gif" alt
-    onerror="this.src='//img.echosting.cafe24.com/skin/base/member/img_member_default.gif';"
+ <h3 class="member_h3">마이쇼핑</h3>
+	 <!-- 회원 수정,탈퇴 버튼 -->
+  <div class="memberupdate_div">
+  <button type="button" class="member_btn" onclick="location.href='./MemberUpdate.me'"><i class='fas fa-user-plus'></i>&nbsp회원정보수정 </button>
+  <button type="button" class="member_btn" onclick="location.href='./MemberDelete.me'"><i class="fas fa-user-slash"></i>&nbsp회원 탈퇴 </button>
+   
+  </div>
+<!-- 회원 이미지 -->	 
+   <div class="top_div">
+   <div class="logo_div">
+    <img src="//img.echosting.cafe24.com/skin/base_ko_KR/member/img_member_default.gif" 
     class="myshop_benefit_group_image_tag"> 
    </div>
- 
-  <!-- 회원 정보 -->   
-  <div>
-    <span><%=name %></span>
-    <span>
-     <img src="" alt="" class="myshop_benefit_group_icon_tag"> 
-    </span>
-     <span>1%바로 적립</span>
-   </div>
-  </div> 
-  
-  <!-- 회원 이미지 끝 -->
-  <div>
-   <div>
-    <p>
+   <div class="member_top_menu">
+   	<div class="welcome_div">
+   	 <p>
     	환영합니다.   
     <b>
     <span>
@@ -86,32 +63,32 @@
     </b>
     	회원님!
     </p>
-    
-    <div class="member_top_menu">
+    </div>
     <ul>
      <!-- 주문조회 -->
-     <li><a href="./OrderList.or">주문내역</a></li>
+     <li><button type="button" class="member_btn"><i class="far fa-calendar-alt"></i>&nbsp주문 내역</button></li>
      <!-- 장바구니 -->
-     <li><a href="./BasketList.ba">장바구니
-     	  <span class="count">
-     	  <span class="">0</span>
-     	  </span>
-     	 </a>
-     </li>
+     <li><button type="button" class="member_btn"><i class="fas fa-cart-plus"></i>&nbsp장바구니</button></li>
 	 <!-- 관심상품 -->
-	 <li><a href="#">관심상품
-	 	  <span class="count">
-	 	  <span class="">0</span>
-	 	  </span>
-	 	 </a>
-	 </li>
+	 <li><button type="button" class="member_btn"><i class="fas fa-heart"></i>&nbsp관심상품</button></li>
 	 <!-- 최근 본 상품 -->
-	 <li><a href="./recentView.me">최근 본 상품</a></li>
+	 <li><button type="button" class="member_btn"><i class="fas fa-history"></i>&nbsp최근 본 상품</button></li>
 	 <!-- 내가쓴글 -->
-	 <li><a href="./BoardList.bo?category=1">내 게시글</a></li>
+	 <li><button type="button" class="member_btn"><i class="fas fa-user-edit"></i>&nbsp내 게시글</button></li>
     </ul>
    </div>
    </div>
+ 
+  <!-- 회원 정보 -->
+  <div class="top_div2">   
+    <span><b><%=name %></b></span>
+    <span><br>
+    </span>
+     <span>1%바로 적립</span>
+   </div>
+  
+  <!-- 회원 이미지 끝 -->
+   
    
    <div>
     <ul>
@@ -165,11 +142,7 @@
     </ul>
    </div>
    
-   <!-- 회원 수정,탈퇴 버튼 -->
-   <div>
-    <a href="./MemberUpdate.me">회원정보 수정</a>
-    <a href="./MemberDelete.me">회원 탈퇴</a>
-   </div>
+   
    <div>
     <h3>회원님의 혜택정보</h3>
    <div>
