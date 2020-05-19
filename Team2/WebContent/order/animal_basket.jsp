@@ -32,7 +32,7 @@
 	
 	<!-- 장바구니 테이블 생성 -->
 	CART
-	<form action="./OrderStarSelected.or" method="post" name="fr"> 
+	<form action="" method="post" name="fr"> 
 	
 		<input type="hidden" id="selectedCodes" name="seletedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
@@ -581,8 +581,6 @@
 	//사용자가 선택한상품 주문하기를 눌렀을때 호출되는 함수
 	function orderSelected(){
 		
-		alert("테스트");
-		
 		//만약 장바구니가 비어있으면 alert 뜨게 하기
 		if(basketList.length == 0){
 			alert("장바구니가 비어있습니다.");
@@ -590,10 +588,13 @@
 		
 		//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
 		for(var i=0; i<basketList.length; i++){
-			//selectedCodes 안에 사용자가 선택한 codes들 담기
-			selectedCodes += ($('#b_code'+i).val() + ",");
-			selectedOptions += ($('#b_option'+i).val() + ",");
-			selectedDeliveryMethods += ($('#b_delivery_method'+i).val() + ",");
+			//각열의 체크박스가 체크되어 있으면 true 아니면 false
+			if(document.getElementById('chkBox'+i).checked){
+				//selectedCodes 안에 사용자가 선택한 codes들 담기
+				selectedCodes += ($('#b_code'+i).val() + ", ");
+				selectedOptions += ($('#b_option'+i).val() + ", ");
+				selectedDeliveryMethods += ($('#b_delivery_method'+i).val() + ", ");
+			} 
 		}
 		
 		//추가된 values 변수를 태그에 담기
@@ -601,7 +602,7 @@
 		document.getElementById("selectedOptions").value = selectedOptions;
 		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
 		
- 		//document.fr.action="./OrderStarSelected.or";
+ 		document.fr.action="./OrderStarSelected.or";
  		document.fr.submit();
 		
 		//var selectedInfoArray = [];

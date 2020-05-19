@@ -40,27 +40,33 @@ public class BasketAddAction implements Action {
 		String selectedAmounts = request.getParameter("selectedAmounts");
 		
 		//옵션(b_option)
-		String b_option = request.getParameter("option");
+		String selectedOptions = request.getParameter("selectedOptions");
 		//동물페이지에서는 옵션이 없기 때문에 상품페이지에서 관리하면된다. 여기서는 DB에 임의적으로 넣어야 하기 때문에 적는거다.
-		if(request.getParameter("option") == null){
-			b_option = ""; //빈 공백 값을 넣는다.
+		if(request.getParameter("selectedOptions") == null){
+			selectedOptions = ""; //빈 공백 값을 넣는다.
 		}
 	
 		//배송방법(b_delivery_method)
 		//사용자가 추가한 배송방법 리스트 가지고 오기
 		String selectedValues = request.getParameter("selectedValues");
+
+		System.out.println(b_code);
+		System.out.println(selectedAmounts);
+		System.out.println(selectedOptions);
+		System.out.println(selectedValues);
 		
 		// split()을 이용해 ','를 기준으로 문자열을 자른다.
         // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 		String splitSelectedValues[] = selectedValues.split(",");
 		String splitSelectedAmounts[] = selectedAmounts.split(",");
+		String splitSelectedOptions[] = selectedOptions.split(",");
 		
-		for(int i=0; i<splitSelectedValues.length; i++){
+		for(int i=0; i<splitSelectedAmounts.length-1; i++){
 			bkdto.setId(id);
 			bkdto.setB_code(b_code);
-			bkdto.setB_amount(Integer.parseInt(splitSelectedAmounts[i]));
-			bkdto.setB_option(b_option);
-			bkdto.setB_delivery_method(splitSelectedValues[i]);
+			bkdto.setB_amount(Integer.parseInt(splitSelectedAmounts[i].trim()));
+			bkdto.setB_option(splitSelectedOptions[i].trim());
+			bkdto.setB_delivery_method(splitSelectedValues[i].trim());
 			
 			//추가하기
 			bkdao.basketAdd(bkdto);
@@ -74,3 +80,4 @@ public class BasketAddAction implements Action {
 	}
 
 }
+
