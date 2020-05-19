@@ -33,241 +33,257 @@
 
 	<!-- 장바구니 테이블 생성 -->
 	CART
-	<table border="1">
-		<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
-		<tr>
-			<td> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </td>
-			<td>이미지</td>
-			<td>상품정보</td>
-			<td>판매가<br>(적립예정)</td>
-			<td>수량</td>
-			<td>배송구분</td>
-			<td>배송비</td>
-			<td>합계</td>
-			<td>주문관리</td>
-		</tr>
-		<%
-			for (int i = 0; i < basketList.size(); i++) {
-				BasketDTO bkdto = (BasketDTO) basketList.get(i);
-				ProductDTO pdto = (ProductDTO) productInfoList.get(i);
-				
-				//총 상품금액 계산
-				final_total_price += (bkdto.getB_amount() * pdto.getProduct_price_sale());
-				
-				//b_code 값들 중에 맨 앞글자 따오기
-				char first_letter = bkdto.getB_code().charAt(0);
-		%>
-		<tr>
-			<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
-			<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
-			<input type="hidden" id="b_delivery_method<%=i%>" name="b_delivery_method<%=i%>" value="<%=bkdto.getB_delivery_method()%>">
-			<input type="hidden" id="b_price_origin<%=i%>" name="b_price_origin<%=i%>" value="<%=pdto.getProduct_price_origin()%>">
-			<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
-			<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
-			<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
-			<input type="hidden" id="b_amount_<%=i%>_DB" name="b_amount_<%=i%>_DB" value="<%=pdto.getProduct_amount()%>">
-			
-			<!-- 체크박스 -->
-			<td> <input type="checkbox" id="chkBox<%=i%>" value="<%=i%>"> </td>
-			
-			<!-- 상품 이미지 -->
-			<!-- 상품이 동물일때 -->
-			<%if(first_letter == 'a'){%>
-				<td>
-					<!-- 만약 해당상품의 재고가 없으면 soldout 표시뜨게 하기 -->
-					<%if(pdto.getProduct_amount() == 0) {%>
-						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="https://cdn.imweb.me/upload/58364fef00b40.jpg" width="100" height="100" style="opacity: 0.5; position: absolute; background-color: white;"> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-					<%} else {%>
-						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-					<%}%>
-				</td>
-				
-				<!-- 상품정보 (옵션이 있을때와 없을때) -->
-				<%if(bkdto.getB_option().equals("")){%>
-					<td>
-						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
-					</td>
-				<%}else{%>
-					<td>
-						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
-					</td>
-				<%}%>
-			<!-- 상품이 물건일때 -->
-			<%} else if(first_letter == 'g') {%>
-				<td>
-					<!-- 만약 해당상품의 재고가 없으면 soldout 표시뜨게 하기 -->
-					<%if(pdto.getProduct_amount() == 0) {%>
-						<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="https://cdn.imweb.me/upload/58364fef00b40.jpg" width="100" height="100" style="opacity: 0.5; position: absolute; background-color: white;"> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-					<%} else {%>
-						<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-					<%}%>
-				</td>
-				
-				<!-- 상품정보 (옵션이 있을때와 없을때) -->
-				<%if(bkdto.getB_option().equals("")){%>
-					<td>
-						<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
-					</td>
-				<%}else{%>
-					<td>
-						<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
-					</td>
-				<%}%>
-			<%}%>
-			
-			
-			
-			<!-- 판매가(적립금) -->
-			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
-			<%} else{%>
-				<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
-			<%}%>
-			
-			<!-- 수량 -->
-			<td>
-				<!-- 장바구니 수량  -->
-				<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
-				<!-- 수량 +/- 버튼 -->
-				<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'>
-				<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
-			</td>
-			
-			<!-- 배송방법(고속버스 일때와 아닐때 -->
-			<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
-				<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%> <br>(+14,000원)</td>
-			<%} else {%>
-				<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%></td>
-			<%}%>
-			
-			<!-- 배송비 
-				만약 합계가 50,000원 이상이면 배송비 무료, 이하이면 배송비 3,000원 
-				합계가 50,000원 이상인데 배송방법이 고속버스이면 14000원 표시
-				합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
-			-->
-			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<%if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 배송비 무료 </td>
-				<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 14,000원 </td>
-				<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 17,000원 </td>
-				<%} else {%>
-					<td> 3,000원 </td>
-				<%}%>
-			<%} else{%>
-				<%if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 배송비 무료 </td>
-				<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 14,000원 </td>
-				<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 17,000원 </td>
-				<%} else {%>
-					<td> 3,000원 </td>
-				<%}%>
-			<%}%>
-			
-			<!-- 합계
-				(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
-				(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
-			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
-					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
-					</td>
-				<%} else {%>
-					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * bkdto.getB_amount())%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * bkdto.getB_amount()%>">
-					</td>
-				<%}%>
-			<%} else{%>
-				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
-					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
-					</td>
-				<%} else {%>
-					<td>
-						<span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()))%>원</span>
-						<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_origin() * bkdto.getB_amount()%>">
-					</td>
-				<%}%>
-			<%}%>
-			
-			<td>
-				<input type="button" value="삭제하기" onclick='deleteCell(this, <%=i%>);'> <br>
-			</td>
-		</tr>
-
-		<%
-			}
-		%>
-	</table>
-	<input type="button" id="deleteSoldout" value="품절삭제" onclick="deleteSoldout();">
-	<input type="button" id="deleteSelected" value="선택삭제" onclick="deleteSelected();">
+	<form action="" method="post" name="fr"> 
 	
-	<hr>
-	
-	<table border="1">
-		<tr>
-			<td>총 상품금액</td>
-			<td>총 배송비</td>
-			<td>결제 예정 금액</td>
-		</tr>
-		<tr>
+		<input type="hidden" id="seletedCodes" name="seletedCodes" value="">
+		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
+		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
-			<!-- 총 상품금액 -->
-			<td>
-				<span><%=formatter.format(final_total_price)%></span>원 
-			</td>
+		<table border="1">
+			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
+			<tr>
+				<td> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </td>
+				<td>이미지</td>
+				<td>상품정보</td>
+				<td>판매가<br>(적립예정)</td>
+				<td>수량</td>
+				<td>배송구분</td>
+				<td>배송비</td>
+				<td>합계</td>
+				<td>주문관리</td>
+			</tr>
+			<%
+				if(basketList.size() == 0){
 			
-			<!-- 총 배송비 -->
-			<td>
-				<%
-					for (int i = 0; i < basketList.size(); i++) {
-						BasketDTO bkdto = (BasketDTO) basketList.get(i);
-						ProductDTO pdto = (ProductDTO) productInfoList.get(i);
-									
-						if(bkdto.getB_delivery_method().equals("고속버스")){
-							final_delivery_fee += 14000;
-						}					
-						
-						//할인율이 있을때
-						if(pdto.getProduct_discount_rate() != 0){
-							//tr한줄의 총 금액이 5만원보다 적을때
-							if((bkdto.getB_amount() * pdto.getProduct_price_sale()) < 50000){
-								final_delivery_fee += 3000;
-							}else{
-								final_delivery_fee += 0;
+			%>
+				<tr>
+					<td colspan="9"> 장바구니가 비어있습니다. </td>
+				</tr>
+			<%
+				}
+				for (int i = 0; i < basketList.size(); i++) {
+					BasketDTO bkdto = (BasketDTO) basketList.get(i);
+					ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+					
+					//총 상품금액 계산
+					final_total_price += (bkdto.getB_amount() * pdto.getProduct_price_sale());
+					
+					//b_code 값들 중에 맨 앞글자 따오기
+					char first_letter = bkdto.getB_code().charAt(0);
+			%>
+			<tr>
+				<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
+				<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
+				<input type="hidden" id="b_delivery_method<%=i%>" name="b_delivery_method<%=i%>" value="<%=bkdto.getB_delivery_method()%>">
+				<input type="hidden" id="b_price_origin<%=i%>" name="b_price_origin<%=i%>" value="<%=pdto.getProduct_price_origin()%>">
+				<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
+				<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
+				<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
+				<input type="hidden" id="b_amount_<%=i%>_DB" name="b_amount_<%=i%>_DB" value="<%=pdto.getProduct_amount()%>">
+				
+				<!-- 체크박스 -->
+				<td> <input type="checkbox" id="chkBox<%=i%>" value="<%=i%>"> </td>
+				
+				<!-- 상품 이미지 -->
+				<!-- 상품이 동물일때 -->
+				<%if(first_letter == 'a'){%>
+					<td>
+						<!-- 만약 해당상품의 재고가 없으면 soldout 표시뜨게 하기 -->
+						<%if(pdto.getProduct_amount() == 0) {%>
+							<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="https://cdn.imweb.me/upload/58364fef00b40.jpg" width="100" height="100" style="opacity: 0.5; position: absolute; background-color: white;"> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+						<%} else {%>
+							<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+						<%}%>
+					</td>
+					
+					<!-- 상품정보 (옵션이 있을때와 없을때) -->
+					<%if(bkdto.getB_option().equals("")){%>
+						<td>
+							<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
+						</td>
+					<%}else{%>
+						<td>
+							<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
+						</td>
+					<%}%>
+				<!-- 상품이 물건일때 -->
+				<%} else if(first_letter == 'g') {%>
+					<td>
+						<!-- 만약 해당상품의 재고가 없으면 soldout 표시뜨게 하기 -->
+						<%if(pdto.getProduct_amount() == 0) {%>
+							<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="https://cdn.imweb.me/upload/58364fef00b40.jpg" width="100" height="100" style="opacity: 0.5; position: absolute; background-color: white;"> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+						<%} else {%>
+							<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+						<%}%>
+					</td>
+					
+					<!-- 상품정보 (옵션이 있을때와 없을때) -->
+					<%if(bkdto.getB_option().equals("")){%>
+						<td>
+							<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
+						</td>
+					<%}else{%>
+						<td>
+							<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
+						</td>
+					<%}%>
+				<%}%>
+				
+				
+				
+				<!-- 판매가(적립금) -->
+				<%if(pdto.getProduct_discount_rate() != 0){%>
+					<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
+				<%} else{%>
+					<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
+				<%}%>
+				
+				<!-- 수량 -->
+				<td>
+					<!-- 장바구니 수량  -->
+					<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
+					<!-- 수량 +/- 버튼 -->
+					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'>
+					<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
+				</td>
+				
+				<!-- 배송방법(고속버스 일때와 아닐때 -->
+				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
+					<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%> <br>(+14,000원)</td>
+				<%} else {%>
+					<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%></td>
+				<%}%>
+				
+				<!-- 배송비 
+					만약 합계가 50,000원 이상이면 배송비 무료, 이하이면 배송비 3,000원 
+					합계가 50,000원 이상인데 배송방법이 고속버스이면 14000원 표시
+					합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
+				-->
+				<%if(pdto.getProduct_discount_rate() != 0){%>
+					<%if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 배송비 무료 </td>
+					<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 14,000원 </td>
+					<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 17,000원 </td>
+					<%} else {%>
+						<td> 3,000원 </td>
+					<%}%>
+				<%} else{%>
+					<%if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 배송비 무료 </td>
+					<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 14,000원 </td>
+					<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 17,000원 </td>
+					<%} else {%>
+						<td> 3,000원 </td>
+					<%}%>
+				<%}%>
+				
+				<!-- 합계
+					(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
+					(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
+				<%if(pdto.getProduct_discount_rate() != 0){%>
+					<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
+						<td>
+							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						</td>
+					<%} else {%>
+						<td>
+							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * bkdto.getB_amount())%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * bkdto.getB_amount()%>">
+						</td>
+					<%}%>
+				<%} else{%>
+					<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
+						<td>
+							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						</td>
+					<%} else {%>
+						<td>
+							<span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()))%>원</span>
+							<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_origin() * bkdto.getB_amount()%>">
+						</td>
+					<%}%>
+				<%}%>
+				
+				<td>
+					<input type="button" value="삭제하기" onclick='deleteCell(this, <%=i%>);'> <br>
+				</td>
+			</tr>
+	
+			<%
+				}
+			%>
+		</table>
+		<button type="button" onclick="deleteSoldout()"> 품절삭제 </button>
+		<button type="button" onclick="deleteSelected()"> 선택삭제 </button>
+		
+		<hr>
+		
+		<table border="1">
+			<tr>
+				<td>총 상품금액</td>
+				<td>총 배송비</td>
+				<td>결제 예정 금액</td>
+			</tr>
+			<tr>
+			
+				<!-- 총 상품금액 -->
+				<td>
+					<span><%=formatter.format(final_total_price)%></span>원 
+				</td>
+				
+				<!-- 총 배송비 -->
+				<td>
+					<%
+						for (int i = 0; i < basketList.size(); i++) {
+							BasketDTO bkdto = (BasketDTO) basketList.get(i);
+							ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+										
+							if(bkdto.getB_delivery_method().equals("고속버스")){
+								final_delivery_fee += 14000;
+							}					
+							
+							//할인율이 있을때
+							if(pdto.getProduct_discount_rate() != 0){
+								//tr한줄의 총 금액이 5만원보다 적을때
+								if((bkdto.getB_amount() * pdto.getProduct_price_sale()) < 50000){
+									final_delivery_fee += 3000;
+								}else{
+									final_delivery_fee += 0;
+								}
+							}
+							//할인율이 없을때
+							else if(pdto.getProduct_discount_rate() == 0){
+								//tr한줄의 총 금액이 5만원보다 적을때
+								if((bkdto.getB_amount() * pdto.getProduct_price_origin()) < 50000){
+									final_delivery_fee += 3000;
+								}else{
+									final_delivery_fee += 0;
+								}
 							}
 						}
-						//할인율이 없을때
-						else if(pdto.getProduct_discount_rate() == 0){
-							//tr한줄의 총 금액이 5만원보다 적을때
-							if((bkdto.getB_amount() * pdto.getProduct_price_origin()) < 50000){
-								final_delivery_fee += 3000;
-							}else{
-								final_delivery_fee += 0;
-							}
-						}
-					}
-				%>
-				<span>+<%=formatter.format(final_delivery_fee)%></span>원
-			</td>
-			
-			<!-- 결제 에정 금액 -->
-			<td>
-				<span>=<%=formatter.format(final_total_price + final_delivery_fee)%></span>원
-			</td>
-			
-		</tr>
-	</table>
-	<br>
-	<input type="button" value="전체상품주문" onclick="orderAll();">
-	<input type="button" value="선택상품주문" onclick="orderSelected();">
-	<input type="button" value="쇼핑계속하기">
+					%>
+					<span>+<%=formatter.format(final_delivery_fee)%></span>원
+				</td>
+				
+				<!-- 결제 에정 금액 -->
+				<td>
+					<span>=<%=formatter.format(final_total_price + final_delivery_fee)%></span>원
+				</td>
+				
+			</tr>
+		</table>
+		<br>
+		<button type="button" onclick="orderAll();"> 전체상품주문 </button>
+		<button type="button" onclick="orderSelected();"> 선택상품주문 </button>
+		<input type="button" value="쇼핑계속하기">
+	</form>
+	
 	<br>
 
 	<table border="1">
@@ -449,59 +465,91 @@
 	
 	//사용자가 품절삭제 버튼을 눌렸을때 호출되는 함수
 	function deleteSoldout() {
-		//장바구니에 담긴 모든 상품 한번 훑어보기
-		for(var i=0; i<basketList.length; i++){
 		
-			var checkAmount = $('#b_amount_' + i + '_DB').val(); //DB에 들어가있는 실제 재고량
-			
-			//재고량이 0이면 해당 상품 장바구니에서 삭제 시키기
-			if(checkAmount == 0){
-				(function(i) {
-					$.ajax({
-						type:'get',
-						url:'./BasketDelete.ba',
-						data:'b_code='+$('#b_code'+i).val()+'&b_option='+$('#b_option'+i).val()+'&b_delivery_method='+$('#b_delivery_method'+i).val(),
-						dataType: 'html',
-						async: false,
-						success:function(data) {
-
-			   			},error:function(request,status,error){
-						 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-						}
-					});
-				})(i);
-			}
+		//만약 장바구니가 비어있으면 alert 뜨게 하기
+		if(basketList.length == 0){
+			alert("장바구니가 비어있습니다.");
 		}
-		window.location.reload(); //현재 페이지 새로고침	
+		
+		//사용자에게 삭제 여부 물어보기
+		var checkDelete = confirm("품절상품을 삭제하시겠습니까?");
+		
+		if(checkDelete){
+			//장바구니에 담긴 모든 상품 한번 훑어보기
+			for(var i=0; i<basketList.length; i++){
+			
+				var checkAmount = $('#b_amount_' + i + '_DB').val(); //DB에 들어가있는 실제 재고량
+				
+				//재고량이 0이면 해당 상품 장바구니에서 삭제 시키기
+				if(checkAmount == 0){
+					(function(i) {
+						$.ajax({
+							type:'get',
+							url:'./BasketDelete.ba',
+							data:'b_code='+$('#b_code'+i).val()+'&b_option='+$('#b_option'+i).val()+'&b_delivery_method='+$('#b_delivery_method'+i).val(),
+							dataType: 'html',
+							async: false,
+							success:function(data) {
+
+				   			},error:function(request,status,error){
+							 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+							}
+						});
+					})(i);
+				}
+			}
+			window.location.reload(); //현재 페이지 새로고침	
+		}else{
+			return false;
+		}
 	}
 	
 	//사용자가 선택삭제 버튼을 눌렸을때 호출되는 함수
-	function deleteSelected() { 
-		//장바구니에 담긴 모든 상품 한번 훑어보기
-		for(var i=0; i<basketList.length; i++){
-			//각열의 체크박스가 체크되어 있으면 true 아니면 false
-			if(document.getElementById('chkBox'+i).checked){
-				(function(i) {
-					$.ajax({
-						type:'get',
-						url:'./BasketDelete.ba',
-						data:'b_code='+$('#b_code'+i).val()+'&b_option='+$('#b_option'+i).val()+'&b_delivery_method='+$('#b_delivery_method'+i).val(),
-						dataType: 'html',
-						async: false,
-						success:function(data) {
-			   				alert("선택하신 상품을 장바구니에서 삭제하였습니다.");
-			   			},error:function(request,status,error){
-						 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-						}
-					});
-				})(i);
-			}
+	function deleteSelected() {
+		
+		//만약 장바구니가 비어있으면 alert 뜨게 하기
+		if(basketList.length == 0){
+			alert("장바구니가 비어있습니다.");
 		}
-		window.location.reload(); //현재 페이지 새로고침	
+		
+		//사용자에게 삭제 여부 물어보기
+		var checkDelete = confirm("선택한 상품을 삭제하시겠습니까?");
+		
+		if(checkDelete){
+			//장바구니에 담긴 모든 상품 한번 훑어보기
+			for(var i=0; i<basketList.length; i++){
+				//각열의 체크박스가 체크되어 있으면 true 아니면 false
+				if(document.getElementById('chkBox'+i).checked){
+					(function(i) {
+						$.ajax({
+							type:'get',
+							url:'./BasketDelete.ba',
+							data:'b_code='+$('#b_code'+i).val()+'&b_option='+$('#b_option'+i).val()+'&b_delivery_method='+$('#b_delivery_method'+i).val(),
+							dataType: 'html',
+							async: false,
+							success:function(data) {
+				   				
+				   			},error:function(request,status,error){
+							 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+							}
+						});
+					})(i);
+				}
+			}
+			window.location.reload(); //현재 페이지 새로고침	
+		}else{
+			return false;
+		}
 	}
 	
 	//사용자가 전체상품 주문하기를 눌렸을때 호출되는 함수
 	function orderAll() {
+		
+		//만약 장바구니가 비어있으면 alert 뜨게 하기
+		if(basketList.length == 0){
+			alert("장바구니가 비어있습니다.");
+		}
+		
 		//장바구니에 담긴 모든 상품 한번 훑어보기
 		for(var i=0; i<basketList.length; i++){
 			
@@ -527,42 +575,67 @@
 		}
 	}
 	
+	var selectedCodes = ""; 			//사용자가 장바구니에서 선택한 상품 코드들 차례대로 담는 변수
+	var selectedOptions = ""; 			//사용자가 장바구니에서 선택한 상품 옵션들 차례대로 담는 변수
+	var selectedDeliveryMethods = ""; 	//사용자가 장바구니에서 선택한 상품 배송방법 차례대로 담는 변수
+	
 	//사용자가 선택한상품 주문하기를 눌렀을때 호출되는 함수
 	function orderSelected(){
 		
-		var selectedInfoArray = [];
+		//만약 장바구니가 비어있으면 alert 뜨게 하기
+		if(basketList.length == 0){
+			alert("장바구니가 비어있습니다.");
+		}
+		
+		//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
+		for(var i=0; i<basketList.length; i++){
+			//selectedCodes 안에 사용자가 선택한 codes들 담기
+			selectedCodes += ($('#b_code'+i).val() + ",");
+			selectedOptions += ($('#b_option'+i).val() + ",");
+			selectedDeliveryMethods += ($('#b_delivery_method'+i).val() + ",");
+		}
+		
+		//추가된 values 변수를 태그에 담기
+		$('#seletedCodes').val(selectedCodes);
+		$('#selectedOptions').val(selectedOptions);
+		$('#selectedDeliveryMethods').val(selectedDeliveryMethods);
+
+		document.fr.action="./OrderStarSelected.or";
+		document.fr.submit();
+		
+		//var selectedInfoArray = [];
 		
 		//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 객체에 담기
-		for(var i=0; i<basketList.length; i++){
-			//각열의 체크박스가 체크되어 있으면 true 아니면 false
-			if(document.getElementById('chkBox'+i).checked){
+// 		for(var i=0; i<basketList.length; i++){
+// 			//각열의 체크박스가 체크되어 있으면 true 아니면 false
+// 			if(document.getElementById('chkBox'+i).checked){
 				
-				var selectedData = {
-						b_code : $('#b_code'+i).val(),
-						b_option : $('#b_option'+i).val(),
-						b_delivery_method : $('#b_delivery_method'+i).val()
-				};		
+// 				var selectedData = {
+// 						b_code : $('#b_code'+i).val(),
+// 						b_option : $('#b_option'+i).val(),
+// 						b_delivery_method : $('#b_delivery_method'+i).val()
+// 				};		
 				
-				selectedInfoArray.push(selectedData); //selectedInfoArray 배열에 selectedData 오브젝트를 담는다.
+// 				selectedInfoArray.push(selectedData); //selectedInfoArray 배열에 selectedData 오브젝트를 담는다.
 				
-				var jsonData = JSON.stringify(selectedInfoArray);
-			    jQuery.ajaxSettings.traditional = true;
+// 				var jsonData = JSON.stringify(selectedInfoArray);
+// 			    jQuery.ajaxSettings.traditional = true;
 
-			    $.ajax({
-			    	url: './OrderStarSelected.or',
-			    	type: 'post',
-			    	data: {"jsonData" : jsonData},
-			    	dataType: 'json',
-			    	success:function(data) {
-		   				alert("성공");
-		   			},error:function(request,status,error){
-					 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-					}
-			    });
+// 			    $.ajax({
+// 			    	url: './OrderStarSelected.or',
+// 			    	type: 'post',
+// 			    	data: {"jsonData" : jsonData},
+// 			    	dataType: 'json',
+// 			    	success:function(data) {
+// 		   				alert("성공");
+// 		   			},error:function(request,status,error){
+// 					 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+// 					}
+// 			    });
 				
-				//location.href='./OrderStarSelected.or' + '?selectedInfoArray=' + selectedInfoArray;
-			}
-		}
+// 				//location.href='./OrderStarSelected.or' + '?selectedInfoArray=' + selectedInfoArray;
+// 			}
+// 		}
 	}
 	
 

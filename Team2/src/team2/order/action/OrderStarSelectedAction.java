@@ -4,9 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 public class OrderStarSelectedAction implements Action {
 	
 	@Override
@@ -23,12 +20,33 @@ public class OrderStarSelectedAction implements Action {
 			return forward;
 		}
 		
-		String jsonData = request.getParameter("jsonData");
+		System.out.println("테스트");
 		
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonData);
-		
-		System.out.println(jsonObject.get("b_code"));
+//		request.setCharacterEncoding("UTF-8");
+//		
+//		ProductDTO pdto = new ProductDTO();
+//		
+//		//넘어온 코드들
+//		String seletedCodes = request.getParameter("seletedCodes");
+//		
+//		//넘어온 옵션들
+//		String selectedOptions = request.getParameter("selectedOptions");
+//		if(selectedOptions == null){
+//			selectedOptions = "";
+//		}
+//		
+//		//넘어온 배송방법들
+//		String selectedDeliveryMethods = request.getParameter("selectedDeliveryMethods");
+//		
+//		// split()을 이용해 ','를 기준으로 문자열을 자른다.
+//        // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
+//		String splitSeletedCodes[] = seletedCodes.split(",");
+//		String splitSelectedOptions[] = selectedOptions.split(",");
+//		String splitSelectedDeliveryMethods[] = selectedDeliveryMethods.split(",");
+//		
+//		System.out.println(seletedCodes);
+//		System.out.println(selectedOptions);
+//		System.out.println(selectedDeliveryMethods);
 		
 		//장바구니 안에 있는 상품정보 가져오기 --------------------------------
 		//BasketDAO bdao = new BasketDAO();

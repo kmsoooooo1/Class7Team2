@@ -62,6 +62,7 @@ public class OrderFrontController extends HttpServlet{
 		}
 		// 장바구니(사용자가 선택한 상품들) -> 구매하기 전 사용자 정보 입력 페이지로 이동
 		else if(command.equals("/OrderStarSelected.or")){
+			System.out.println("테스트");
 			action = new OrderStarSelectedAction();
 			try {
 				forward = action.execute(request, response);
