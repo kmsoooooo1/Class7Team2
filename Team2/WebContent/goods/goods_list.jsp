@@ -52,65 +52,70 @@
 	   <div class="menu">
 	    <input type="button" value="전체보기" class="a_btn"
 	    	onclick="location.href='./GoodsList.go?category=사육용품'">
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=유리/테라리움">유리/테라리움</a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=플라스틱">플라스틱</a></li>
-	      	</ul>
-	      </li>
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇"> 장식/그릇 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=장식"> 장식 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=은신처"> 은신처 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=물/먹이그릇"> 물/먹이그릇 </a></li>
-	      	</ul>
-	      </li>
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=램프"> 램프 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=UVB/스팟"> UVB/스팟 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=소켓"> 소켓 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=악세사리"> 악세사리 </a></li>
-	      	</ul>
-	      </li>
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=바닥재"> 바닥재 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=건계"> 건계 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=습계"> 습계 </a></li>
-	      	</ul>
-	      </li>
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련"> 온/습도 관련 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온습도계"> 온습도계 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온도조절기"> 온도조절기 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=습도조절기"> 습도조절기 </a></li>
-	      	</ul>
-	      </li>
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품"> 보조용품 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=위생/청소"> 위생/청소 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=안전/치료"> 안전/치료 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=브리딩"> 브리딩 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=기타"> 기타 </a></li>
-	      	</ul>
-	      </li>
-	      <li><a href="./GoodsList.go?category=사육용품&sub_category=수족관"> 수족관 </a>
-	      	<ul>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=수질안정제"> 수질안정제 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=여과기"> 여과기 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=히터기"> 히터기 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=거북이육지"> 거북이육지 </a></li>
-	      		<li><a href="./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타"> 기타 </a></li>
-	      	</ul>
-	      </li>
+	    <input type="button" value="*사육장" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">	
+	    <input type="button" value="유리/테라리움" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=유리/테라리움'">
+	    <input type="button" value="플라스틱" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=플라스틱'">
+	    <input type="button" value="*장식/그릇" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
+	    <input type="button" value="장식" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=장식'">
+	    <input type="button" value="은신처" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=은신처'">
+	    <input type="button" value="물/먹이그릇" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=물/먹이그릇'">
+	    <input type="button" value="*램프" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
+	    <input type="button" value="UVB/스팟" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=UVB/스팟'">
+	    <input type="button" value="소켓" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=소켓'">
+	    <input type="button" value="악세사리" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=악세사리'">
+	    <input type="button" value="*바닥재" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
+	    <input type="button" value="건계" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=건계'">
+	    <input type="button" value="습계" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=습계'">
+	    <input type="button" value="*온/습도 관련" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
+	    <input type="button" value="온습도계" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온습도계'">
+	    <input type="button" value="온도조절기" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온도조절기'">
+	    <input type="button" value="습도조절기" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=습도조절기'">
+	    <input type="button" value="*보조용품" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
+	    <input type="button" value="위생/청소" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=위생/청소'">
+	    <input type="button" value="안전/치료" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=안전/치료'">
+	    <input type="button" value="브리딩" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=브리딩'">
+	    <input type="button" value="기타" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=기타'">
+	    <input type="button" value="*수족관" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
+	    <input type="button" value="수질안정제" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=수질안정제'">
+	    <input type="button" value="여과기" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=여과기'">
+	    <input type="button" value="히터기" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=히터기'">
+	    <input type="button" value="거북이육지" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=거북이육지'">
+	    <input type="button" value="기타" class="a_btn"
+	    	onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타'">
 	   </div>
-	</div>
+	
 	<%} %>
 	
 	<span> Total <%=goodsList.size() %> items </span>
-	
-	<hr>
-	
-	<table border="1">
+	<ul class="ul_wrap">
 		<%
 			int size = goodsList.size();
 			int col = 4;
@@ -119,7 +124,6 @@
 			
 			for(int a = 0; a < row; a++){
 		%>
-		<tr>
 			<%
 				for(int i=0; i<col; i++){
 					GoodsDTO gdto = goodsList.get(num);
@@ -130,7 +134,8 @@
 				
 					
 			%>
-			<td colspan="2">
+			<li>
+			<div class="list_wrap">
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="300" height="300"> </a><br>
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a> 
 				<hr>
@@ -145,19 +150,23 @@
 				<%if(gdto.getG_amount() == 0){ %>
 					<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
 				<%} %>
-
-				
-			</td>
+				</div>
+			</li>	
 			<%
 				num ++;
 				if(size <= num) break;
 				
 				}
 			%>
-		</tr>
+		
 		<%} %>
-	</table>
-	
+	</ul>
+	<ul id="pageList">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	</div>
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
