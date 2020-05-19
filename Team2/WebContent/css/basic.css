@@ -278,4 +278,61 @@ body{
 
 		}
 /* FOOTER_END */
+
+/* sidebar */
+@CHARSET "UTF-8";
+
+.fixed{
+   position: fixed;
+   right: -180px; 
+   z-index: 9999;
+   /* 평상시 브라우저 기준으로 우측 밖에 숨겨둠 */
+}
+.fixed:HOVER{
+   right: 0;
+   /* 마우스 오버시 다시 나오도록 거리값을 0으로 지정 */
+   transition:1.5s;
+   z-index: 9999;
+}
+
+#quick{border-left: 20px solid #9da99f;
+   background-color: #616e6c;
+   width: 200px; 
+   height: 100%;
+   padding: 1em 1em;
+   box-sizing: border-box;
+   /* 요소의 크기에 패딩값*+테두리두께)을 포함 */
+   /* z-index: 9999; 겹치는 요소끼리는 값이 클수록 위에 올라옴*/
+}
+
+#quick:HOVER{
+   border-left: 20px solid black;
+}
+
+#quick ul{/* border: 1px solid; */
+      list-style: none;/* 목록앞의 모양 제거 */
+      padding: 0;} /* 목록 안의 왼쪽 여백 제거 */
+#quick li{/* border: 1px solid red; */
+   margin-bottom: 6px;
+   }
+
+#quick a:LINK, #quick a:VISITED {
+   color: #fff;
+   text-decoration: none;
+}
+
+#quick a:HOVER, #quick a:ACTIVE {
+   color: #ff0;
+}
+
+i{
+	font-size: 20px;
+}
+
+#quick li{
+	margin-bottom: 15px;
+}
+
+
+/* sidebar 끝*/
 		
