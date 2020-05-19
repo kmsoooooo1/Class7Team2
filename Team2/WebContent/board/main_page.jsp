@@ -129,8 +129,8 @@
         //파라미터
         speed: 400,
         spaceBetween: 30,
-        slidesPerColumn: 2,
-        slidesPerView: 3,
+        slidesPerColumn: 3,
+        slidesPerView: 4,
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
