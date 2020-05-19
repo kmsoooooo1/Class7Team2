@@ -5,7 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 가입 </title>
+<link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<title>회원 정보 수정 </title>
 <script>
 	//submit을 눌렀을 때 호출되는 함수
 	//유효성 검사를 위한 함수
@@ -15,22 +18,22 @@
 	var id1 = joinform.id.value;
 	var mobile = joinform.phone.value;
 	//var forms = document.getElementById("joinform");				
-		if ((joinform.name.value == "")
-				|| (joinform.name.value.length <= 1)) {
-					alert("이름을 제대로 입력해 주세요.");
-					joinform.name.focus();
-					return false;
-				}
-				if (id1.length == 0) {
-					alert("아이디를 입력하세요.");
-					joinform.id.focus();
-					return false;
-				}
-				if (mobile.length == 0) {
-					alert("휴대폰 번호를 입력하세요.");
-					joinform.phone.focus();
-					return false;
-				}
+	if ((joinform.name.value == "")
+			|| (joinform.name.value.length <= 1)) {
+				alert("이름을 제대로 입력해 주세요.");
+				joinform.name.focus();
+				return false;
+			}
+			if (mobile.length == 0) {
+				alert("휴대폰 번호를 입력하세요.");
+				joinform.phone.focus();
+				return false;
+			}
+			else if(joinform.email.value == ""){
+				alert("이메일을 입력해주세요.");
+				joinform.email.focus();
+				return false;
+			}
 
 		//이름을 한글 2자이상 입력받기
 		//정규식 객체 생성
@@ -43,26 +46,7 @@
 			}
 
 
-	function openConfirmId(joinform) {
-		var id1 = joinform.id.value;
-		var url = "./MemberIDCheckAction.me?id="
-				+ joinform.id.value;
-
-		if (id1.length == 0) {
-			alert("아이디를 입력하세요.");
-			joinform.id.focus();
-			return false;
-		}
-		
-		
-		//상식 정규식은 항상 슬러시 / 로 시작한다.
-
-		open(
-				url,
-				"confirm",
-				"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=200");
-		
-	}
+	
 
 	//숫자 키만 입력받도록 하기 위해서 숫자 인지 아닌 지를 판별해서
 	//숫자가 아니면 이벤트가 발생하지 않은 것으로 해주는 함수
@@ -109,55 +93,45 @@
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
 
-	<h2>회원 정보 수정 페이지</h2>
 	
-	<fieldset>
-		<legend>회 원 정 보 수 정 </legend>
-		<!-- 회원가입 -->
+		<div class="contents">
+		<div class="box">
 		<form action="./MemberUpdateAction.me" method="post" name="joinform"
-			onsubmit="return check()">
+			onsubmit="return check()">	
+			
+			<h2 class="name">Member Update</h2>
 		
 		<!-- 중복체크를 하기위해서 히든을 이용해서 변수선언. 초기에 false선언
 			  중복체크를하고나면 true로 변경. 단 다시 아이디 체크박스를 누르면 false로 변경!-->
 			<input type="hidden" name="idcheck" value="false" />
 			
-		<table border="1">
-		<tr>
-		 	<td>아이디</td>
-			<td>
-			 <input type="text" name="id" size="20" maxlength=30 value="<%=mdto.getId() %>" readonly onfocus="func()"/>
-			</td>
-		</tr>
-		<tr>
-			<td>비밀번호</td> <td><input type="password" name="pass" required></td>
-		</tr>
-		<tr>
-			<td>이름</td> <td><input type="text" name="name" value="<%=mdto.getName() %>" size="20"></td>
-		</tr>
-		<tr>
-			<td>전화번호</td> 
+			<span class="update_span">아이디</span><br>
+			<input type="text" class="id" name="id" value="<%=mdto.getId() %>" size="20" maxlength=30 readonly/><br>
+			
+			<span class="update_span">비밀번호</span><br>
+			<input type="password" id="pass" name="pass"  class="inputTypeText"><br>
+			
+			<span class="update_span">이름</span><br>
+			<input type="text" id="name" name="name" value="<%=mdto.getName() %>" size="20"><br>
+			
 			<!-- 눌렸을때 호출되는 gNumCheck()메서드 등록  -->
-			<td><input type="text" name="phone" value="<%=mdto.getPhone() %>" onkeypress="gNumCheck()" size="24" />
-			</td>
-		</tr>
-		<tr>
-			<td>우편번호</td>
-			<td><input type="text" name="zipcode" id="zipcode" size="7" value="<%=mdto.getZipcode() %>" readonly>
-				<input type="button" value="주소찾기" onclick="DaumPostcode()">
-			</td>
-		</tr>
-		<tr>
-			<td>주소</td> <td><input type="text" value="<%=mdto.getAddr1() %>" name="addr1" id="addr1" size="40" readonly></td>
-		</tr>
-		<tr>
-			<td>상세주소</td> <td><input type="text" value="<%=mdto.getAddr2() %>" name="addr2" id="addr2" size="40"></td>
-		</tr>
-		<tr>
-			<td>이메일</td> <td><input type="email" value="<%=mdto.getEmail() %>" name="email"></td>
-		</tr>
-		</table>
+			<span class="update_span">전화번호</span><br>
+			<input type="text" id="phone" name="phone" value="<%=mdto.getPhone() %>" onkeypress="gNumCheck()" size="24" /><br>
+			
+			<span class="update_span">우편번호</span><br>
+			<input type="text" name="zipcode" id="zipcode" value="<%=mdto.getZipcode() %>" size="7" readonly>
+				<input type="button" class="btn" value="주소찾기" onclick="DaumPostcode()"><br>
+				
+			<span class="update_span">주소</span><br>
+			<input type="text" name="addr1" id="addr1" value="<%=mdto.getAddr1() %>" size="40" readonly><br>
+			
+			<span class="update_span">상세주소</span><br>
+			<input type="text" name="addr2" id="addr2" value="<%=mdto.getAddr2() %>" size="40"><br>
+			
+			<span class="update_span">이메일</span><br>
+			<input type="email" id="email" name="email" value="<%=mdto.getEmail() %>"><br></br>
 		<input type="submit" value="회원정보 수정">
-		<input type="reset" value="취소">
+		<input type="reset" class="btn_reset" value="취소">
 		
 		<!-- ----- DAUM 우편번호 API 시작 ----- -->
 <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
@@ -212,15 +186,13 @@
             },
             width : '100%',
             height : '100%'
-        }).embed(element_wrap);
-        // iframe을 넣은 element를 보이게 한다.
-        element_wrap.style.display = 'block';
-    } 
+        }).open();
+    
 </script> 
 <!-- ----- DAUM 우편번호 API 종료----- -->
 		</form>	
-	</fieldset>
-	
+	</div>
+	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	

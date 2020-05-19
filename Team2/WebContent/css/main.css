@@ -51,7 +51,7 @@
 
 	/*2칼럼 스와이퍼*/
 	.second {
-      height: 640px;
+      height: 500px;
 	}
 	.second .swiper-slide {
       display: flex;
