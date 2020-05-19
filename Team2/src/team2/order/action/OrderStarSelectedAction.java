@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import team2.basket.db.BasketDAO;
+import team2.basket.db.BasketDTO;
 import team2.member.db.MemberDAO;
 import team2.member.db.MemberDTO;
-import team2.product.db.ProductDTO;
 
 public class OrderStarSelectedAction implements Action {
 	
@@ -48,27 +48,38 @@ public class OrderStarSelectedAction implements Action {
 		String splitSelectedOptions[] = selectedOptions.split(",");
 		String splitSelectedDeliveryMethods[] = selectedDeliveryMethods.split(",");
 		
-		ProductDTO pdto = new ProductDTO();
-		
-		ArrayList productInfoArray = new ArrayList();
-		
-		for(int i=0; i<splitSeletedCodes.length-1; i++){
-			pdto.setProduct_code(splitSeletedCodes[i].trim());
-			pdto.setProduct_option(splitSelectedOptions[i].trim());
-			pdto.setProduct_delivery(splitSelectedDeliveryMethods[i].trim());
-
-			productInfoArray.add(pdto);
-		}
+		BasketDTO bdto = new BasketDTO();
 		
 		//장바구니 안에 있는 상품정보 가져오기 --------------------------------
 		BasketDAO bdao = new BasketDAO();
 		
-		//장바구니 리스트를 가져와서 저장
-		Vector vec = bdao.getBasketList(id);
+		Vector temp_array = new Vector();
 		
-		// 해당 정보를 request에 저장
-		ArrayList basketList = (ArrayList)vec.get(0);
-		ArrayList productInfoList = (ArrayList)vec.get(1); //상품(동물 + 물건)정보 저장
+		Vector vec = new Vector();
+		
+		for(int i=0; i<splitSeletedCodes.length-1; i++){
+			bdto.setB_code(splitSeletedCodes[i].trim());
+			bdto.setB_option(splitSelectedOptions[i].trim());
+			bdto.setB_delivery_method(splitSelectedDeliveryMethods[i].trim());
+
+			temp_array = bdao.getBasketList(id, bdto);
+			vec.add(temp_array);
+		}
+		
+		Vector basketInfoList = new Vector();
+		
+		ArrayList basketList = new ArrayList();
+		ArrayList productInfoList = new ArrayList();
+		
+		for(int i=0; i<splitSeletedCodes.length-1; i++){
+			basketInfoList = (Vector) vec.get(i);
+			
+			basketList.add(basketInfoList.get(0));
+			productInfoList.add(basketInfoList.get(1));
+		}
+		
+		System.out.println(basketList);
+		System.out.println(productInfoList);
 		
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("productInfoList", productInfoList);

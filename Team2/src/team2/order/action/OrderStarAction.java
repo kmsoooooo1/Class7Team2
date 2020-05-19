@@ -37,6 +37,9 @@ public class OrderStarAction implements Action {
 		ArrayList basketList = (ArrayList)vec.get(0);
 		ArrayList productInfoList = (ArrayList)vec.get(1); //상품(동물 + 물건)정보 저장
 		
+		System.out.println(basketList);
+		System.out.println(productInfoList);
+		
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("productInfoList", productInfoList);
 		

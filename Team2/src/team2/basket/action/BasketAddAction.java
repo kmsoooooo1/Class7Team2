@@ -49,11 +49,6 @@ public class BasketAddAction implements Action {
 		//배송방법(b_delivery_method)
 		//사용자가 추가한 배송방법 리스트 가지고 오기
 		String selectedValues = request.getParameter("selectedValues");
-
-		System.out.println(b_code);
-		System.out.println(selectedAmounts);
-		System.out.println(selectedOptions);
-		System.out.println(selectedValues);
 		
 		// split()을 이용해 ','를 기준으로 문자열을 자른다.
         // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
