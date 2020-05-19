@@ -401,6 +401,7 @@
 	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
 	
 	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
+	
 	function changeDeliMethod(){
 		
 		var delivery_method = document.getElementById('delivery_method').value;	//배송방법
