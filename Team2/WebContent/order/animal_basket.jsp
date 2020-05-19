@@ -266,7 +266,7 @@
 	</table>
 	<br>
 	<input type="button" value="전체상품주문" onclick="orderAll();">
-	<input type="button" value="선택상품주문">
+	<input type="button" value="선택상품주문" onclick="orderSelected();">
 	<input type="button" value="쇼핑계속하기">
 	<br>
 
@@ -523,6 +523,44 @@
 			else{
 				//구매 전 정보 입력창으로 이동하기
 				location.href='./OrderStar.or';
+			}
+		}
+	}
+	
+	//사용자가 선택한상품 주문하기를 눌렀을때 호출되는 함수
+	function orderSelected(){
+		
+		var selectedInfoArray = [];
+		
+		//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 객체에 담기
+		for(var i=0; i<basketList.length; i++){
+			//각열의 체크박스가 체크되어 있으면 true 아니면 false
+			if(document.getElementById('chkBox'+i).checked){
+				
+				var selectedData = {
+						b_code : $('#b_code'+i).val(),
+						b_option : $('#b_option'+i).val(),
+						b_delivery_method : $('#b_delivery_method'+i).val()
+				};		
+				
+				selectedInfoArray.push(selectedData); //selectedInfoArray 배열에 selectedData 오브젝트를 담는다.
+				
+				var jsonData = JSON.stringify(selectedInfoArray);
+			    jQuery.ajaxSettings.traditional = true;
+
+			    $.ajax({
+			    	url: './OrderStarSelected.or',
+			    	type: 'post',
+			    	data: {"jsonData" : jsonData},
+			    	dataType: 'json',
+			    	success:function(data) {
+		   				alert("성공");
+		   			},error:function(request,status,error){
+					 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+					}
+			    });
+				
+				//location.href='./OrderStarSelected.or' + '?selectedInfoArray=' + selectedInfoArray;
 			}
 		}
 	}

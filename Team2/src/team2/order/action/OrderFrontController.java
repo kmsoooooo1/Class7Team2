@@ -51,7 +51,7 @@ public class OrderFrontController extends HttpServlet{
 		ActionForward forward = null;
 		Action action = null;
 		
-		// 장바구니 -> 구매하기 전 사용자 정보 입력 페이지로 이동
+		// 장바구니(모든상품) -> 구매하기 전 사용자 정보 입력 페이지로 이동
 		if(command.equals("/OrderStar.or")){
 			action = new OrderStarAction();
 			try {
@@ -60,7 +60,15 @@ public class OrderFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		
+		// 장바구니(사용자가 선택한 상품들) -> 구매하기 전 사용자 정보 입력 페이지로 이동
+		else if(command.equals("/OrderStarSelected.or")){
+			action = new OrderStarSelectedAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 페이지 이동 처리
 		if (forward != null) {
