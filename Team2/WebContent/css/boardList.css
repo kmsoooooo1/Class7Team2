@@ -1,14 +1,40 @@
 @CHARSET "UTF-8";
 
-.board{
-	width:60%;
+* {
+	box-sizing: border-box;
+	margin : 0;
+	padding : 0;
 }
+
+.board{
+	width: 80%;
+	margin: 1.2em auto;
+	text-align: center;
+}
+
+.top{
+	height : 100px;
+}
+
+.boardname{
+	float: left;
+	margin:20px;
+}
+
+#fr{
+	float:right;
+	margin:20px;
+}
+
+.list a{text-decoration: none;}
+.list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}
+
 
 table.list {
     border-collapse: collapse;
     text-align: center;
     line-height: 1.5;
-    border-left: 1px solid #ccc;
+/*     border-left: 1px solid #ccc; */
     margin: 20px 10px;
 }
 
@@ -16,16 +42,16 @@ table.list thead th {
     padding: 7px;
     font-weight: bold;
     border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+/*     border-right: 1px solid #ccc; */
     border-bottom: 2px solid #c00;
-    background: #dcdcd1;
+    background: #eeeee8;
 }
 table.list tbody th {
     width: 150px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
-    border-right: 1px solid #ccc;
+/*     border-right: 1px solid #ccc; */
     border-bottom: 1px solid #ccc;
     background: #ececec;
 }
@@ -33,7 +59,7 @@ table.list td {
     width: 350px;
     padding: 7px;
     vertical-align: top;
-    border-right: 1px solid #ccc;
+/*     border-right: 1px solid #ccc; */
     border-bottom: 1px solid #ccc;
 }
 
@@ -52,6 +78,17 @@ table.list td.title {
 	text-align: center;
 	margin:0 auto;
 }
+
+.bottom{
+	height: 60px;
+}
+
+
+.button{
+	text-align:right;
+}	
+
+
 
 /* 페이징  */
 ul.paging {
