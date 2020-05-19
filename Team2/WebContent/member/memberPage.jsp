@@ -8,6 +8,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마이 페이지</title>
+<style type="text/css">
+.member_top_menu{
+	width: 100%;
+	float: left;	
+}
+
+.member_top_menu ul{
+	list-style: none;
+}
+
+.member_top_menu li{
+	float: left;
+	margin-left: 20px;
+}
+
+
+</style>
 </head>
 <body>
 <!-- Header -->
@@ -30,6 +47,7 @@
 	   MemberDTO mdto = mdao.getMember(id);
 	   String name = mdto.getName();
 	 %>
+	 <h3>마이쇼핑</h3>
 <!-- 회원 이미지 -->	 
  <div>
   <div>
@@ -41,15 +59,11 @@
  
   <!-- 회원 정보 -->   
   <div>
-   <span>
     <span><%=name %></span>
-   </span>
-   <span>
     <span>
      <img src="" alt="" class="myshop_benefit_group_icon_tag"> 
     </span>
      <span>1%바로 적립</span>
-    </span>
    </div>
   </div> 
   
@@ -66,6 +80,7 @@
     	회원님!
     </p>
     
+    <div class="member_top_menu">
     <ul>
      <!-- 주문조회 -->
      <li><a href="./OrderList.or">주문내역</a></li>
@@ -88,6 +103,7 @@
 	 <!-- 내가쓴글 -->
 	 <li><a href="./BoardList.bo?category=1">내 게시글</a></li>
     </ul>
+   </div>
    </div>
    
    <div>
