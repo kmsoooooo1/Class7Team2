@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>WebContent/admin/admin_goods_list.jsp/</h1>
+
 	
 	<%
 		//GoodsListAction 객체에서 저장된 정보 저장

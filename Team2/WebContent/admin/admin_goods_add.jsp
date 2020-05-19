@@ -81,7 +81,7 @@
 		  <tr>
 		    <td> 배송 방법</td>
 		    <td>
-		      <input type="radio" name="g_delivery" value="일반배송" checked="checked"> 일반배송
+		      <input type="radio" name="g_delivery" value="일반포장" checked="checked"> 일반포장
 		      <input type="radio" name="g_delivery" value="선택배송"> 선택배송
 		    </td>
 		  </tr>
