@@ -25,8 +25,6 @@ function doAction(){
 <body>
 	<jsp:include page="/include/header.jsp" />
 
-	<h1>QnA 게시판</h1>
-
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 		Criteria cri = (Criteria)request.getAttribute("cri");
@@ -40,10 +38,14 @@ function doAction(){
 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 
 	%>
+<div class="board">	
 	
-		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=2','_blank','width=500,height=400',false);"> 글 쓰기 (스마트에디터)  </a></h2>
-		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
-	
+	<div class="top">
+		<div class="boardname">
+		 <h2>
+			Q&A
+		 </h2>
+		</div>
 	<!-- 게시판 검색 -->		 
 		<form name="fr" id="fr" action="./BoardList.bo" method="POST">	
 			<input type="hidden" value="2" name="category">
@@ -53,8 +55,8 @@ function doAction(){
 			<input type="button" onclick="doAction()" value="검색" />	
 		</form>
 		<!-- 게시판 검색 -->		
-	
-<div class="board">
+	</div>
+
 	<div class="list-div">
 	<table class="list">
 		<colgroup>
@@ -96,7 +98,10 @@ function doAction(){
 	</table>
 	</div>
 	
-	<div class="paging-div">
+	<div class="bottom">
+		<div class="button">
+		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=0','_blank','width=500,height=400',false);">
+		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
 		<li>
@@ -115,8 +120,9 @@ function doAction(){
 	</c:if>
 	</ul>
 	</div>
-	
+		
 </div>
 
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 </html>
