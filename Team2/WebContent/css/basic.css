@@ -5,6 +5,12 @@ body{
 	padding: 0;
 }
 
+.header{
+	position: fixed;
+	z-index: 30;
+	width: 100%;
+}
+
 /* LOGO_START */
 .title_logo {
 	font-family: "Anton", sans-serif;
@@ -45,9 +51,29 @@ body{
 	margin-left: 20px;
 }
 
+.top_menu a {
+	padding: 0 13px;
+	text-decoration: none;	
+}
+
+.top_menu i {
+	color: black;
+	font-size: 40px;
+}
+
+.top_menu i span {
+	display: block;
+	font-size: 15px;
+	margin-top: 6px;
+}
+
+
+
+
 #logo {
 	text-align: center;
 	margin: 0 auto;
+	background-color: white;
 }
 
 .sub_menu {
@@ -55,6 +81,10 @@ body{
 	flex-direction: row;
 	justify-content: center;
 	allgn-items: center;
+	
+}
+.h-group {
+	height: 170px;
 	
 }
 

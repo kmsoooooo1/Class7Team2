@@ -7,9 +7,12 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/basic.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/basic.css?ver=2" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
+<div class="h-group">
+<div class="header">
       <div class="top_menu">
       <ul>
       <%
@@ -20,18 +23,45 @@
          
          if(id == null){   
       %>
-        <li> <a href="./MemberJoin.me"> 회원가입 </a></li>
-        <li> <a href="./MemberLogin.me"> 로그인 </a></li>
+        <li> <a href="./MemberJoin.me">
+    		  <i class='fas fa-user-edit'><span>회원가입 </span></i>    
+         	 </a>
+        </li>
+        <li> <a href="./MemberLogin.me">
+    		  <i class='fas fa-sign-in-alt'><span>로그인</span></i>    
+          	 </a>
+        </li>
       <% }else if(id.equals("admin")) { %>
-        <li> <a href="./Main.ad"> 관리자 페이지 </a></li>
-        <li> <a href="./MemberLogout.me"> 로그아웃 </a></li>
+        <li> <a href="./Main.ad">
+    		  <i class='fas fa-users-cog'><span>관리자 페이지</span></i>    
+         	 </a>
+        </li>
+        <li> <a href="./MemberLogout.me">
+        	  <i class='fas fa-sign-out-alt'><span>로그아웃</span></i> 
+         	 </a>
+        </li>
       <% }else{ %>
-        <li> <a href="./MemberPage.me"> 마이 페이지 </a></li>
-        <li> <a href="./MemberLogout.me"> 로그아웃 </a></li>
+        <li> <a href="./MemberPage.me">
+        	  <i class='fas fa-user-cog'><span>마이 페이지</span></i>
+        	 </a>
+        </li>
+        <li> <a href="./MemberLogout.me">
+   			  <i class='fas fa-sign-out-alt'><span>로그아웃</span></i> 	    
+         	 </a>
+        </li>
       <% } %> 
-   <li><a href="./BoardList.bo?category=0">공지사항</a></li>
-   <li><a href="./BoardList.bo?category=1">상품후기</a></li>
-   <li><a href="./BoardList.bo?category=2">QnA</a></li>
+   <li><a href="./BoardList.bo?category=0">
+        <i class='far fa-bell'><span>공지사항</span></i>
+       </a>
+   </li>
+   <li><a href="./BoardList.bo?category=1">
+ 		<i class='far fa-edit'><span>상품후기</span></i>  
+   	   </a>
+   </li>
+   <li><a href="./BoardList.bo?category=2">
+   		<i class='far fa-comments'><span>QnA</span></i>
+   	   </a>
+   </li>
    	  </ul>
     </div>
     
@@ -86,7 +116,8 @@
          <li class="dropdown"> <a href="./aHospital.bo" class="dropbtn"> 동물병원 정보</a> </li>
       </ul>
    </nav>
-   
+   </div>
+   </div>
 </body>
 
 </html>

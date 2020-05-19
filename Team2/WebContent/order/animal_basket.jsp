@@ -68,7 +68,7 @@
 			<input type="hidden" id="b_amount_<%=i%>_DB" name="b_amount_<%=i%>_DB" value="<%=pdto.getProduct_amount()%>">
 			
 			<!-- 체크박스 -->
-			<td> <input type="checkbox" id="chkBox<%=i%>" value="<%=i%>" onclick="chkBoxValue('<%=i%>');"> </td>
+			<td> <input type="checkbox" id="chkBox<%=i%>" value="<%=i%>"> </td>
 			
 			<!-- 상품 이미지 -->
 			<!-- 상품이 동물일때 -->
@@ -119,9 +119,9 @@
 			
 			<!-- 판매가(적립금) -->
 			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
+				<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
 			<%} else{%>
-				<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (<span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
+				<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
 			<%}%>
 			
 			<!-- 수량 -->
@@ -206,7 +206,7 @@
 		%>
 	</table>
 	<input type="button" id="deleteSoldout" value="품절삭제" onclick="deleteSoldout();">
-	<input type="button" value="선택삭제">
+	<input type="button" id="deleteSelected" value="선택삭제" onclick="deleteSelected();">
 	
 	<hr>
 	
@@ -265,7 +265,7 @@
 		</tr>
 	</table>
 	<br>
-	<input type="button" value="전체상품주문">
+	<input type="button" value="전체상품주문" onclick="orderAll();">
 	<input type="button" value="선택상품주문">
 	<input type="button" value="쇼핑계속하기">
 	<br>
@@ -299,6 +299,7 @@
 </body>
 
 <script type="text/javascript">
+
 	//장바구니 페이지가 처음 로딩되었을때 세팅하기
 	$(document).ready(function(){
 		
@@ -315,6 +316,7 @@
 			$("input[type='checkbox']").prop('checked', false);
 		}
 	});
+	
 	//장바구니 리스트 가져오기
 	var basketList = [];
 	<c:forEach items="${basketList}" var="basketList">
@@ -335,13 +337,6 @@
 			$("input[type='checkbox']").prop('checked', false);
 		}
 	});
-	
-	//사용자가 추가된 체크박스를 클릭했을시
-	function chkBoxValue(id_number) {
-		//체크된 체크박스 value 가져오기
-	    alert($('#chkBox' + id_number).val());
-	}
-	
 	
 	//정보 수정 제어 --------------------------------------------------------------------------------------------------
 	//수량 수정했을때 호출되어야하는 함수
@@ -364,6 +359,7 @@
 	function changeTotalAmount(id_number){
 		var total_product_price = document.getElementById('total_product_price' + id_number + '_input').value;
 	}
+	
 	//사용자가 키보드로 수량을 수정했을시
 	function amountChange(id_number){
 		
@@ -382,6 +378,7 @@
 		//업데이트된 총 상품금액 나타내게 하는 함수
 		changeTotalAmount(id_number);
 	}
+	
 	//사용자가 '+'를 눌렸을시
 	function plus(id_number){
 		
@@ -449,9 +446,10 @@
 			return false;
 		}
 	}
+	
 	//사용자가 품절삭제 버튼을 눌렸을때 호출되는 함수
 	function deleteSoldout() {
-		
+		//장바구니에 담긴 모든 상품 한번 훑어보기
 		for(var i=0; i<basketList.length; i++){
 		
 			var checkAmount = $('#b_amount_' + i + '_DB').val(); //DB에 들어가있는 실제 재고량
@@ -466,7 +464,7 @@
 						dataType: 'html',
 						async: false,
 						success:function(data) {
-			   				
+
 			   			},error:function(request,status,error){
 						 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 						}
@@ -474,21 +472,62 @@
 				})(i);
 			}
 		}
-		window.location.reload(); //현재 페이지 새로고침
-		
+		window.location.reload(); //현재 페이지 새로고침	
 	}
 	
+	//사용자가 선택삭제 버튼을 눌렸을때 호출되는 함수
+	function deleteSelected() { 
+		//장바구니에 담긴 모든 상품 한번 훑어보기
+		for(var i=0; i<basketList.length; i++){
+			//각열의 체크박스가 체크되어 있으면 true 아니면 false
+			if(document.getElementById('chkBox'+i).checked){
+				(function(i) {
+					$.ajax({
+						type:'get',
+						url:'./BasketDelete.ba',
+						data:'b_code='+$('#b_code'+i).val()+'&b_option='+$('#b_option'+i).val()+'&b_delivery_method='+$('#b_delivery_method'+i).val(),
+						dataType: 'html',
+						async: false,
+						success:function(data) {
+			   				alert("선택하신 상품을 장바구니에서 삭제하였습니다.");
+			   			},error:function(request,status,error){
+						 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+						}
+					});
+				})(i);
+			}
+		}
+		window.location.reload(); //현재 페이지 새로고침	
+	}
 	
+	//사용자가 전체상품 주문하기를 눌렸을때 호출되는 함수
+	function orderAll() {
+		//장바구니에 담긴 모든 상품 한번 훑어보기
+		for(var i=0; i<basketList.length; i++){
+			
+			var checkAmount = $('#b_amount_' + i + '_DB').val(); //DB에 들어가있는 실제 재고량
+			//재고량이 0이면 해당 상품 장바구니에서 삭제 시키기
+			if(checkAmount == 0){
+				var checkSoldout = confirm("선택하신 제품들 중 품절 등의 사유로 주문이 불가합니다. \n주문불가 상품을 제외하고 상품을 주문하시겠습니까?");
+				if(checkSoldout){
+					//품절된 상품이 있는지 없는지 체크하고 있으면 품절상품 자동으로 삭제
+					deleteSoldout();
+					//구매 전 정보 입력창으로 이동하기
+					location.href='./OrderStar.or';
+				}
+				else{
+					return false;
+				}
+				return false;
+			}
+			else{
+				//구매 전 정보 입력창으로 이동하기
+				location.href='./OrderStar.or';
+			}
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 </script>
 </html>

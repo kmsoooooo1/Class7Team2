@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv= "Content-Type" content ="text/html; charset=UTF-8">
-
+<link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
 <title> 아이디 중복체크 페이지</title>
   <script>
       //현재 창을 열게 해준 창의 joinform.MEMBER_ID에게 id값을 넘겨주고 현재창을 닫는 함수
@@ -27,19 +27,21 @@
          opener.document.joinform.idcheck.value="true";        
          self.close();
         }
+      
+      
     </script>
 
 
 </head>
 <body>
-
+<div class="contents1">
     <!-- 아이디가 중복되었을 때의 화면 만들기 -->
 
    <%if (check){ %>
      <table width ="360" border = "0">
          <tr align = "center">
            <td height = "30">
-             <font size ="2"><%=id %>는 사용 중입니다. </font >
+             <font size ="3"><%=id %>는 사용 중입니다. </font >
            </td >
             </tr >
      
@@ -49,10 +51,10 @@
             <table width ="360" border="0">
                  <tr >
                       <td align = "center">
-                            <font size ="2">아이디를 입력하세요</font>
+                            <font size ="3">다른 아이디를 입력하세요.</font>
                       <p>
-                            <input type ="text" size="20" maxlength= "20" name ="id"/>
-                            <input type ="submit" value= "중복확인" />
+                            <input type ="text" size="20" maxlength= "20" name ="id" value="<%=id %>" />
+                            <input type ="submit" value= "중복확인"/>
                       </p>
                       </td >
                  </tr >
@@ -63,12 +65,12 @@
      <% }else{ %>
      <table width ="360" border="0">
             <td align = "center">
-            <font size ="2">입력하신 <%= id %> 는 사용가능한 아이디 입니다.</font>
+            <font size ="3">입력하신 <%= id %> 는 사용가능한 아이디 입니다.</font>
             <br /><br />
             <input type ="button" value="닫기" onclick = "windowclose()"/>  <!-- 눌렸을 때 windowclose () 실행 -->
    </table >
   <% } %>
 
-
+</div>
 </body>
 </html>
