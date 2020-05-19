@@ -34,7 +34,7 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
   </div> 
- <hr>
+ 
   <!-- 신상품 리스트 -->
   <div class="newlist">
   <div class="swiper-container second">
