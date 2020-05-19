@@ -5,10 +5,15 @@ body{
 	padding: 0;
 }
 
-.header{
-	position: fixed;
-	z-index: 30;
-	width: 100%;
+.nav_menu{
+  	background: #555;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 /* LOGO_START */
