@@ -26,9 +26,6 @@ function doAction(){
 <body>
 	 <jsp:include page="/include/header.jsp" />
 	
-
-	<h1>상품 게시판</h1>
-	
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 		Criteria cri = (Criteria)request.getAttribute("cri");
@@ -41,12 +38,19 @@ function doAction(){
 		
 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 		
-		
 	%>
-	
-		 <h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=1','_blank','width=500,height=400',false);"> 글 쓰기 (스마트에디터)  </a></h2>
-		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
+<div class="board">
 		 
+		 <div class="jump"></div>
+		 
+		 
+		 <div class="top">
+		 	<div class="boardname">
+			 <h2>
+				상품 후기
+			 </h2>
+			</div>
+	
 		<!-- 게시판 검색 -->		 
 		<form name="fr" id="fr" action="./BoardList.bo" method="POST">	
 			<input type="hidden" value="1" name="category">
@@ -56,11 +60,11 @@ function doAction(){
 			<input type="button" onclick="doAction()" value="검색" />	
 		</form>
 		<!-- 게시판 검색 -->		
+		</div>
 
-<div class="board">
-	<div class="wrap">
-	<div class="img-col">	
-		<ul>
+
+	<div class="wrap">	
+		<ul class="ul_list">
 		  <%
 		    for(int i=0;i<boardList.size();i++){ 
 	             BoardDTO bdto = (BoardDTO) boardList.get(i);
@@ -80,44 +84,56 @@ function doAction(){
 	       
 		  %>
 
-		    <li>
-		   		<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-		    		<span class="thumb">
-				    	<img src="<%=imgPath %>" width=180 height=150>
-					  	<br><em><%=bdto.getB_title() %></em>
-			    	</span>
-			    </a>
-			    <p>
-			        작성자 <%=bdto.getB_writer() %>   
-			    <br>
-				
-			        조회수 <%=bdto.getB_view() %>
-			    </p>
+		    <li class="li_list">
+		   		<ul>
+		   			<li class="imgli">
+			   		<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+			    		<span class="thumb">
+					    	<img src="<%=imgPath %>" width=220 height=180>
+				    	</span>
+				    </a>
+				    </li>
+				    <li class="desc">
+				    	<h4 class="subject">
+				    	<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+				    	<%=bdto.getB_title() %></a></h4>
+				    	
+				    	<div class="info">
+				     	<span class="writer">작성자 <%=bdto.getB_writer() %></span>   
+				       	<span class="view">조회 <%=bdto.getB_view() %></span>
+				       	</div>
+				    </li>
+			    </ul>
 		    </li>
 	  <% } %>
 	
 		</ul>
 	</div>
-	</div>
 	
-	<div class="paging-div">
+	<div class="bottom">
+		<div class="button">
+		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=1','_blank','width=500,height=400',false);">
+		</div>
 	<ul class="paging">
+		<c:if test="${pageMaker.prev }">
 		<li>
 			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.startPage-1 }&search=${search}"/>'><i class="fa left">◀</i></a>	
 		</li>
+		</c:if>
 		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
 		<li>
 			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageNum}&search=${search}"/>'><i class="fa">${pageNum }</i></a>
 		</li>
 		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 		<li>
 			<a href='<c:url value="./BoardList.bo?category=${c }&pageNum=${pageMaker.endPage+1 }&search=${search}"/>'><i class="fa right">▶</i></a>
 		</li>
-
-
+		</c:if>
 	</ul>
-	</div>
-
+	</div> 
 </div>
+	
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 </html>

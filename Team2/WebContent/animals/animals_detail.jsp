@@ -859,7 +859,7 @@
 					
 			for(var i=0; i<count; i++){
 				//selectedArray[i] -> 선택된 배송방법의 value들
-				selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ",")
+				selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ",");
 			}
 			
 			//추가된 values 변수를 태그에 담기
