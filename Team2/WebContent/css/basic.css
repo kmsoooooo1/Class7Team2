@@ -51,6 +51,25 @@ body{
 	margin-left: 20px;
 }
 
+.top_menu a {
+	padding: 0 13px;
+	text-decoration: none;	
+}
+
+.top_menu i {
+	color: black;
+	font-size: 40px;
+}
+
+.top_menu i span {
+	display: block;
+	font-size: 15px;
+	margin-top: 6px;
+}
+
+
+
+
 #logo {
 	text-align: center;
 	margin: 0 auto;
