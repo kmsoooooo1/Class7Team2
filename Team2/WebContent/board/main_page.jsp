@@ -10,7 +10,7 @@
 <link href="${pageContext.request.contextPath}/css/swiper.min.css" rel="stylesheet">
 </head>
 <body>
-
+	
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
 	

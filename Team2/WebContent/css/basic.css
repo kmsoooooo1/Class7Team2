@@ -299,7 +299,7 @@ body{
    background-color: #616e6c;
    width: 200px; 
    height: 100%;
-   padding: 1em 2em;
+   padding: 1em 1em;
    box-sizing: border-box;
    /* 요소의 크기에 패딩값*+테두리두께)을 포함 */
    /* z-index: 9999; 겹치는 요소끼리는 값이 클수록 위에 올라옴*/
@@ -324,4 +324,15 @@ body{
 #quick a:HOVER, #quick a:ACTIVE {
    color: #ff0;
 }
+
+i{
+	font-size: 20px;
+}
+
+#quick li{
+	margin-bottom: 15px;
+}
+
+
+/* sidebar 끝*/
 		
