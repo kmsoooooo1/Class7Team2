@@ -22,7 +22,25 @@
       margin-left: auto;
       margin-right: auto;
     }
+  	
+  	.main-group {
+  		display: inline-grid;
+  		grid-template-columns: auto auto auto;
+  		padding: 10px;
+  	}
+  	
+  	.banner {
+  		padding: 20px;
+  		text-align: center;
+  		display: inline;
+  	}
   
+  	li {
+  		list-style: none;
+  	}
+  	
+  	
+  	
   	.newlist {
   		width: 80%;
   		margin: 0 auto;
