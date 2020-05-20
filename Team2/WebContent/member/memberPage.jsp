@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마이 페이지</title>
 <style type="text/css">
+
 .member_top_menu{
 	width: 100%;
 	float: left;	
@@ -21,6 +22,12 @@
 .member_top_menu li{
 	float: left;
 	margin-left: 20px;
+}
+
+.member_div{
+	width: 80%;
+	margin: 0 auto;
+	padding: 0;
 }
 
 
@@ -47,9 +54,9 @@
 	   MemberDTO mdto = mdao.getMember(id);
 	   String name = mdto.getName();
 	 %>
-	 <h3>마이쇼핑</h3>
 <!-- 회원 이미지 -->	 
- <div>
+ <div class="member_div">
+	 <h3>마이쇼핑</h3>
   <div>
    <div>
     <img src="//img.echosting.cafe24.com/skin/base_ko_KR/member/img_member_default.gif" alt

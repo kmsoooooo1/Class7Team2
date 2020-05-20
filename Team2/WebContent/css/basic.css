@@ -5,10 +5,15 @@ body{
 	padding: 0;
 }
 
-.header{
-	position: fixed;
-	z-index: 30;
-	width: 100%;
+.nav_menu{
+  	background: #555;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 /* LOGO_START */
@@ -266,6 +271,7 @@ body{
 
 			#footer {
 				padding: 4em 3em 2em 3em ;
+				height:auto;
 			}
 
 		}
@@ -274,6 +280,7 @@ body{
 
 			#footer {
 				padding: 3em 2em 1em 2em ;
+				height:auto;
 			}
 
 		}

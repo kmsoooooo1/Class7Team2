@@ -35,6 +35,39 @@
     <div class="swiper-button-prev"></div>
   </div> 
  
+ <!-- 메인 그룹 배너 1-->
+ <div class="main-group">
+ <div class="banner">
+  <ul>
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/navi.png"></a></li> 
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/turt.png"></a></li>
+  </ul>
+ </div>
+ <!-- 메인 그룹 중앙 배너 2 -->
+ <div class="swiper-container banner">
+  <div class="swiper-wrapper">
+   <div class="swiper-slide">
+    <img src="${pageContext.request.contextPath}/img/cBanner1.png">
+   </div>
+   <div class="swiper-slide">
+    <img src="${pageContext.request.contextPath}/img/cBanner2.png">
+   </div>
+  </div>
+  <!-- 페이징 -->
+    <div class="swiper-pagination"></div>
+    <!-- 네비게이션 버튼 -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+ </div> 
+  <!-- 메인 그룹 배너 3 -->
+  <div class="banner">
+   <ul>
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/gaeko.png"></a></li>
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/fl.png"></a></li>
+   </ul>
+  </div> 
+ </div>
+ 
   <!-- 신상품 리스트 -->
   <div class="newlist">
   <div class="swiper-container second">
@@ -100,6 +133,16 @@
 		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
 		 </a>
 		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-11">
+		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
+		 </a>
+		</div>
+		<div class="swiper-slide">
+		 <a href="./AnimalDetail.an?a_code=a-200">
+		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
+		 </a>
+		</div>
 		
 	</div>
 	<!-- 페이징 -->
@@ -122,6 +165,19 @@
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
+      },
+    });
+  	// swiper-container center
+    var swiper = new Swiper('.banner', {
+      loop: true,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.banner .swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.banner .swiper-button-next',
+        prevEl: '.banner .swiper-button-prev',
       },
     });
    // swiper-container second  
@@ -154,14 +210,14 @@
     <div class="card">
       <h2>반려동물</h2>
       <h5>이달의 반려동물 인기 순위입니다.</h5>
-<!--       <div class="fakeimg" style="height:200px;"><img src="../img/banner.png"></div> -->
+      <div class="fakeimg" style="height:200px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
       <p>갈라파고스에서...</p>
       <p>여러분이 애지중지하게 키운 반려동물의 사진을 올려주세요</p>
     </div>
     <div class="card">
       <h2>TITLE HEADING</h2>
       <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
+      <div class="fakeimg" style="height:200px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>
@@ -169,14 +225,14 @@
   <div class="rightcolumn">
     <div class="card">
       <h2>About Me</h2>
-      <div class="fakeimg" style="height:100px;">Image</div>
+      <div class="fakeimg" style="height:100px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
       <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
     </div>
     <div class="card">
-      <h3>Popular Post</h3>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
+      <h2>SET상품 리스트 Coming Soon</h2>
+      <div class="fakeimg"><p><img src="${pageContext.request.contextPath}/img/snakeSet.png"></p></div>
+      <div class="fakeimg"><p><img src="${pageContext.request.contextPath}/img/packSet.png"></p></div>
+      <div class="fakeimg"><p><img src="${pageContext.request.contextPath}/img/reoSet.png"></p></div>
     </div>
     <div class="card">
       <h3>Follow Me</h3>
