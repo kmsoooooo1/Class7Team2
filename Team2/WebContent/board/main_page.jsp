@@ -43,6 +43,16 @@
    <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/turt.png"></a></li>
   </ul>
  </div>
+
+  <!-- 메인 그룹 배너 3 -->
+  <div class="banner">
+   <ul>
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/gaeko.png"></a></li>
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/fl.png"></a></li>
+   </ul>
+  </div> 
+ </div>
+
  <!-- 메인 그룹 중앙 배너 2 -->
  <div class="swiper-container banner">
   <div class="swiper-wrapper">
@@ -59,14 +69,6 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
  </div> 
-  <!-- 메인 그룹 배너 3 -->
-  <div class="banner">
-   <ul>
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/gaeko.png"></a></li>
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/fl.png"></a></li>
-   </ul>
-  </div> 
- </div>
  
   <!-- 신상품 리스트 -->
   <div class="newlist">
@@ -167,7 +169,7 @@
         prevEl: '.swiper-button-prev',
       },
     });
-  	// swiper-container center
+  	// swiper-container banner
     var swiper = new Swiper('.banner', {
       loop: true,
       loopFillGroupWithBlank: true,
