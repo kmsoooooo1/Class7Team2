@@ -163,6 +163,7 @@
             </div>
          </li>
          <li class="dropdown"> <a href="./aHospital.bo" class="dropbtn"> 동물병원 정보</a> </li>
+         <li class="dropdown"> <a href="./CouponList.co" class="dropbtn"> 이벤트 </a> </li>
       </ul>
    </nav>
    </div>

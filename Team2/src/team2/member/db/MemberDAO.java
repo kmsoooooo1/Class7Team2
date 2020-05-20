@@ -79,7 +79,7 @@ public class MemberDAO {
 	public void insertMember(MemberDTO mdto){
 		try {
 			con = getConnection();
-			sql="insert into team2_member values(?,?,?,?,?,?,?,?,now())";
+			sql="insert into team2_member values(?,?,?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mdto.getId());
 			pstmt.setString(2, mdto.getPass());
@@ -89,6 +89,7 @@ public class MemberDAO {
 			pstmt.setString(6, mdto.getAddr1());
 			pstmt.setString(7, mdto.getAddr2());
 			pstmt.setString(8, mdto.getEmail());
+			pstmt.setInt(9, 0);
 			
 			pstmt.executeUpdate();
 			

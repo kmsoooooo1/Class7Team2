@@ -42,6 +42,13 @@
 			<h4> 게시판 파트 </h4>
 			<a href="./AdminBoard.bo">회원 리스트 보기</a>
 		</div>
+		
+		<!-- 관리자 쿠폰 파트 -->
+		<div>
+			<h4> 쿠폰 파트 </h4>
+			<a href="./CouponAdd.ac">새로운 쿠폰 등록하기</a>
+			<a href="#"> 쿠폰 리스트 보기 </a>
+		</div>
 	</div>
 	
 	<!-- FOOTER -->
