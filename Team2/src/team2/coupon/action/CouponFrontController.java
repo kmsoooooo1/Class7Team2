@@ -56,8 +56,15 @@ public class CouponFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		
-		
+		//일반 유저가 쿠폰을 발급받았을때 처리하기
+		else if(command.equals("/CouponAddMember.co")){
+			action = new AddCouponMemberAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 

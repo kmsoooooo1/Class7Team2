@@ -6,12 +6,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	
 	<%
 		List<CouponDTO> couponList = (List<CouponDTO>) request.getAttribute("couponList");
+		String id = (String) session.getAttribute("id");
+		if(id == null){
+			id = "";
+		}
 	%>
 	
 	<!-- Header -->
@@ -19,14 +24,16 @@
 	
 	<!-- Main Content -->
 	<div class="container">
+		<input type="hidden" id="id" name="id" value="<%=id%>"> 
 		<ul class="ul_wrap" style="text-align: center;">
 			<%	if(couponList.size() > 0){
 				for (int i = 0; i <couponList.size(); i++) {
 					CouponDTO cdto = couponList.get(i);
 			%>
+				<input type="hidden" id="co_num<%=i%>" name="co_num" value="<%=cdto.getNum()%>">
 				<li style="margin: 50px; list-style:none;">
 					<div class="list_wrap">
-		  				<img class="list_img" src="./upload/event/<%=cdto.getCo_image()%>" width="700" height="150">
+		  				<a href="javascript:void(0)" onclick="addCoupon(<%=i%>);"> <img class="list_img" src="./upload/event/<%=cdto.getCo_image()%>" width="700" height="150"> </a>
 					</div>
 				</li>
 			<%	}
@@ -44,4 +51,29 @@
 	<jsp:include page="/include/footer.jsp"/>
 
 </body>
+<script type="text/javascript">
+
+	function addCoupon(i){
+		//로그인된 상태면
+		if(document.getElementById('id').value){
+			//coupon_member DB에 접근하여 해당 num의 쿠폰 값을 저장하기
+			$.ajax({
+				type:'get',
+				url:'./CouponAddMember.co',
+				data:'c_num='+$('#co_num'+i).val(),
+				dataType: 'html',
+				success:function(data) {
+					alert("성공");
+	   			},error:function(request,status,error){
+				 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+				}
+			});
+		}
+		//로그인을 하지 않은 상태면
+		else{
+			alert("회원에게만 지급되는 쿠폰입니다. 로그인을 해주세요.");
+		}
+	}
+
+</script>
 </html>
