@@ -64,6 +64,7 @@ public class WishListFrontController extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
+	// 상품을 
 	
 	
 	

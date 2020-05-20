@@ -30,7 +30,11 @@ public class WishListAddAction implements Action{
 		WishlistDAO wldao = new WishlistDAO();
 		
 		// 동물 또는 상품 코드
-		String w_code = request.getParameter("product_code");
+		//String w_code = request.getParameter("product_code");
+		
+		// 값 넘겨줌
+		wldto.setId(id);
+		wldto.setW_code(request.getParameter("product_code"));
 		
 		
 		wldao.wishlistAdd(wldto);

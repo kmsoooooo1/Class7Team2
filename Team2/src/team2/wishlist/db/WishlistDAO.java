@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import team2.product.db.ProductDTO;
+
 public class WishlistDAO {
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -57,7 +59,7 @@ public class WishlistDAO {
 			
 			sql = "insert into team2_wishlist values(?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, wldto.getW_num());
+			pstmt.setInt(1, w_num);
 			pstmt.setString(2, wldto.getId());
 			pstmt.setString(3, wldto.getW_code());
 				
@@ -85,11 +87,11 @@ public class WishlistDAO {
 		
 		// 상품(동물 + 물건)정보 저장
 		ArrayList productInfoList = new ArrayList();
-		
 		// 관심상품 정보 저장
 		ArrayList  wishList = new ArrayList();
 		
-		
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
 		
 		try {
 			con = getConnection();
@@ -111,8 +113,48 @@ public class WishlistDAO {
 				
 				// w_code 값들 중에 맨 앞글자 따오기
 				char first_letter = rs.getString("w_code").charAt(0);
-			
+				
+				// 만약 w_code의 앞에 한글자가 a이면 동물 db로 들어가기
+				if(first_letter == 'a'){
+					// 각각의 관심상품에 해당하는 상품 정보 저장
+					sql="select * from team2_animals where a_code = ?";
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, wldto.getW_code());
+					rs2 = pstmt2.executeQuery();
+					
+					if(rs2.next()){
+						ProductDTO pdto = new ProductDTO();
+						pdto.setProduct_thumbnail(rs2.getString("a_thumbnail"));
+						pdto.setProduct_name(rs2.getString("a_morph"));
+						pdto.setProduct_price_sale(rs2.getInt("a_price_sale"));
+						pdto.setProduct_price_origin(rs2.getInt("a_price_origin"));
+						pdto.setProduct_discount_rate(rs2.getInt("a_discount_rate"));
+						
+						productInfoList.add(pdto);
+					}
+				}
+				//만약 w_code의 앞에 한글자가 g이면 상품db로 들어가기
+				else if(first_letter == 'g'){
+					// 각각의 장바구니에 해당하는 상품 정보 저장
+					sql = "select * from team2_goods where g_code = ?";
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, wldto.getW_code());
+					rs2 = pstmt2.executeQuery();
+					
+					if(rs2.next()){
+						ProductDTO pdto = new ProductDTO();
+						pdto.setProduct_thumbnail(rs2.getString("g_thumbnail"));
+						pdto.setProduct_name(rs2.getString("g_name"));
+						pdto.setProduct_price_sale(rs2.getInt("g_price_sale"));
+						pdto.setProduct_price_origin(rs2.getInt("g_price_origin"));
+						pdto.setProduct_discount_rate(rs2.getInt("g_discount_rate"));
+						
+						productInfoList.add(pdto);
+					}
+				}
 			}
+			vec.add(0, wishList);
+			vec.add(1, productInfoList);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -120,11 +162,8 @@ public class WishlistDAO {
 		}finally{
 			closeDB();
 		}
-		
-		
-		return null;
-	}
-	//getWishlist()
+		return vec;
+	}//getWishlist()
 	
 	
 	

@@ -92,7 +92,7 @@
      	 </a>
      </li>
 	 <!-- 관심상품 -->
-	 <li><a href="#">관심상품
+	 <li><a href="./WishList.wl">관심상품
 	 	  <span class="count">
 	 	  <span class="">0</span>
 	 	  </span>

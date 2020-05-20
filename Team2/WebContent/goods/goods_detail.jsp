@@ -94,6 +94,7 @@
 					value="<%=detailList.get(0).getG_delivery()%>"> <input
 					type="hidden" id="g_option" name="g_option"
 					value="<%=detailList.get(0).getG_option()%>">
+				<input type="hidden" name="num" value="<%=detailList.get(0).getNum()%>">	
 
 
 				<!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
