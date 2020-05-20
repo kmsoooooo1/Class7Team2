@@ -108,7 +108,7 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
-		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=0','_blank','width=500,height=400',false);">
+		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?C=0'">
 		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
