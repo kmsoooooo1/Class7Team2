@@ -48,41 +48,26 @@ public class OrderStarSelectedAction implements Action {
 		String splitSelectedOptions[] = selectedOptions.split(",");
 		String splitSelectedDeliveryMethods[] = selectedDeliveryMethods.split(",");
 		
-		BasketDTO bdto = new BasketDTO();
-		
 		//장바구니 안에 있는 상품정보 가져오기 --------------------------------
 		BasketDAO bdao = new BasketDAO();
 		
-		Vector temp_array = new Vector();
-		
-		Vector vec = new Vector();
+		ArrayList basketList_temp = new ArrayList();
 		
 		for(int i=0; i<splitSeletedCodes.length-1; i++){
+			BasketDTO bdto = new BasketDTO();
+			bdto.setId(id);
 			bdto.setB_code(splitSeletedCodes[i].trim());
 			bdto.setB_option(splitSelectedOptions[i].trim());
 			bdto.setB_delivery_method(splitSelectedDeliveryMethods[i].trim());
 
-			temp_array = bdao.getBasketList(id, bdto);
-			vec.add(temp_array);
+			basketList_temp.add(bdto);
 		}
 		
-		System.out.println(vec);
+		ArrayList all_list = bdao.getBasketList(id, basketList_temp);
 		
-		Vector basketInfoList = new Vector();
-		
-		ArrayList basketList = new ArrayList();
-		ArrayList productInfoList = new ArrayList();
-		
-		for(int i=0; i<splitSeletedCodes.length-1; i++){
-			basketInfoList = (Vector) vec.get(i);
-			
-			basketList.add(basketInfoList.get(0));
-			productInfoList.add(basketInfoList.get(1));
-		}
-		
-		System.out.println(basketList);
-		System.out.println(productInfoList);
-		
+		ArrayList basketList = (ArrayList) all_list.get(0);
+		ArrayList productInfoList = (ArrayList) all_list.get(1);
+
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("productInfoList", productInfoList);
 		
