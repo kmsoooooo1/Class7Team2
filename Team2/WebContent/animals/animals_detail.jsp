@@ -43,16 +43,17 @@
 		} else {
 			price = animalDetail.getA_price_origin();
 		}
-		Cookie cook = new Cookie("item" + animalDetail.getA_code(), URLEncoder.encode(
-				"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
-						+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
-						+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph() + "</td>"
-						+ "<td>" + price + "</td>"
-						+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
-						+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
-						+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
-						+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
-				"UTF-8"));
+		Cookie cook = new Cookie("item" + animalDetail.getA_code(),
+				URLEncoder.encode(
+						"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
+								+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
+								+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph()
+								+ "</td>" + "<td>" + price + "</td>"
+								+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
+								+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
+								+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
+								+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
+						"UTF-8"));
 		cook.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook);
 	%>
@@ -87,6 +88,9 @@
 
 				<!-- 사용자가 추가한 배송방법들의 수량들 예를 들어 일반배송의 수량(실시간으로 수정할수도 있으니)을 저장하는 input hidden -->
 				<input type="hidden" id="selectedAmounts" name="selectedAmounts"
+					value="">
+
+				<input type="hidden" id="selectedOptions" name="selectedOptions"
 					value="">
 
 				<div class="info_table">
@@ -401,6 +405,9 @@
 	var selectedAmounts = ""; //사용자가 선택한 배송방법의 수량들을 차례대로 담는 변수
 	
 	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
+	
+	var selectedOptions = ""; //사용자가 선택한 옵션들의 수량들을 차례대로 담는 변수
+	
 	function changeDeliMethod(){
 		
 		var delivery_method = document.getElementById('delivery_method').value;	//배송방법
@@ -495,9 +502,14 @@
 		$('#final_total_amount').text(final_total_amount);
 		
 		//사용자가 select option 에서 selected 한 값  input hidden value에 차례대로 넣기
-		 selectedValues += (delivery_method + ",");
+		selectedValues += (delivery_method + ",");
 		//추가된 values 변수를 태그에 담기
 		$("#selectedValues").val(selectedValues);
+		
+		//사용자가 select option 에서 selected 한 값 input hidden value에 차례대로 넣기
+		selectedOptions += (" , ");
+		//추가된 values 변수를 태그에 담기
+		$("#selectedOptions").val(selectedOptions);
 		
 		count += Number("1");
 		
@@ -859,7 +871,7 @@
 					
 			for(var i=0; i<count; i++){
 				//selectedArray[i] -> 선택된 배송방법의 value들
-				selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ",")
+				selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ", ");
 			}
 			
 			//추가된 values 변수를 태그에 담기

@@ -13,6 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/boardContent.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board/commentInsert.js"></script>
 <style>
 	.commentUpdate{
@@ -35,24 +36,48 @@
 		String p_code = bdto.getB_p_code();
 		String category = bdto.getB_category();
 	%>
-		
-		
-	글번호 <%=bdto.getB_idx() %><br>
-	제목 <%=bdto.getB_title() %><br>
-	조회수 <%=bdto.getB_view() %> <br>
-	카테고리 <%=category %> <br>
+			
+	<div class="board">
+	
+	<div class="top">
+		<div class="boardname">
+	 	<h2>
+	  		<%=bdto.getB_category() %>
+	 	</h2>
+		</div>	
+	</div>
+	
+	<table class="notice">
+		<tr>
+			<th class="thleft">제목</th> <td> <%=bdto.getB_title() %></td>
+		</tr>
+		<tr>
+			<th class="thleft">작성자</th> <td> <%=bdto.getB_writer() %></td>
+		</tr>
+		<tr class="etc">
+			<th colspan="2">
+				<ul>
+					<li class="date"> <span class="datespan">작성일</span> <span class="rightspan"> <%=bdto.getB_reg_date() %></span></li>
+					<li><span class="leftspan">조회</span> <span class="rightspan"> <%=bdto.getB_view() %></span></li>
+				</ul>
+			</th>
+		</tr>
+
 
 	<%
-		if(category.equals("Review")){	
+		if(category.equals("Review") && category.equals("QnA")){	
 			if(!p_code.equals("null")){
 	%>
-		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
+		<tr>
+			<th>상품 </th> 
+		
 	<%		
 						
 				ProductDTO dto = new ProductDTO(p_code);
 				System.out.println(dto);
 	%>
-		<table>
+		<td>
+		<table class="item">
 			<tr>
 				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
 				<td><%=dto.getCategory() %></td>
@@ -61,34 +86,40 @@
 				<td><%=dto.getName() %></td>
 			</tr>
 		</table>
+		</td>
 	<%
 		}else{
 			%>
-			상품코드 : <input type="text" name="b_p_code" value="상품코드 미입력" readonly="readonly"> <br>
+			<th>상품</th> <td> </td>
 			<%	
 		}
 	}
 		%>
-
-		
-			내용 <br>
-			<textarea name="ir1" id="ir1" rows="10" cols="100" readonly><%=bdto.getB_content() %></textarea>
+			</tr>
 			
-			<br>
-			첨부파일
-
-			<%String files[] = bdto.getB_file().split(","); %>
-			<c:set var="files" value="<%=files %>" />
-			<c:set var="getContextPath" value="<%=request.getContextPath()%>" />
-		
-			 <c:forEach var="file" items="${files}">
-			<a href="${getContextPath}/downloadAction.bo?file=${file} ">
- 			${file}</a>
-			 </c:forEach>
-
-	<table>
-		<tr>
-			<td colspan="4">
+			<tr>
+				<td colspan="2">
+					<div class="content"><%=bdto.getB_content() %></div>
+				</td>
+			</tr>
+			<tr>
+			<th>첨부파일</th>
+			<td>
+				<%String files[] = bdto.getB_file().split(","); %>
+				<c:set var="files" value="<%=files %>" />
+				<c:set var="getContextPath" value="<%=request.getContextPath()%>" />
+			
+				 <c:forEach var="file" items="${files}">
+				<a href="${getContextPath}/downloadAction.bo?file=${file} ">
+	 			${file}</a>
+				 </c:forEach>
+			</td>
+			</tr>
+	</table>
+	
+	<div class="bottom">
+			<div class="button">
+	
 				<input type="button" value="수정"
 					onclick="location.href='./BoardUpdate.bo?pageNum=<%=pageNum%>&num=<%=bdto.getB_idx()%>'">
 				<input type="button" value="삭제"
@@ -97,10 +128,11 @@
 					onclick="">
 				<input type="button" value="목록이동"
 					onclick="location.href='./BoardMain.bo'">
-			
-			</td>
-		</tr>
-	</table>
+			</div>
+	</div>	
+	
+	
+	</div> <!-- board div 끝 -->
 
 	<div class="comment_wrap">
 	<div>
@@ -171,7 +203,7 @@
 </div>
 		
 	
-
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 <script type="text/javascript">
 	function downFile(file){

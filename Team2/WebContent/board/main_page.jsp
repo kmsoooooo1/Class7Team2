@@ -35,27 +35,38 @@
     <div class="swiper-button-prev"></div>
   </div> 
  
- <!-- 메인 그룹 배너 -->
+ <!-- 메인 그룹 배너 1-->
+ <div class="main-group">
  <div class="banner">
   <ul>
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/navi.png"></a></li>
+   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/navi.png"></a></li> 
    <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/turt.png"></a></li>
+  </ul>
+ </div>
+ <!-- 메인 그룹 중앙 배너 2 -->
+ <div class="swiper-container banner">
+  <div class="swiper-wrapper">
+   <div class="swiper-slide">
+    <img src="${pageContext.request.contextPath}/img/cBanner1.png">
+   </div>
+   <div class="swiper-slide">
+    <img src="${pageContext.request.contextPath}/img/cBanner2.png">
+   </div>
+  </div>
+  <!-- 페이징 -->
+    <div class="swiper-pagination"></div>
+    <!-- 네비게이션 버튼 -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+ </div> 
+  <!-- 메인 그룹 배너 3 -->
+  <div class="banner">
+   <ul>
    <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/gaeko.png"></a></li>
    <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/fl.png"></a></li>
-  </ul>
- <div class="slide-wrap">
- 
- </div> 
+   </ul>
+  </div> 
  </div>
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
   <!-- 신상품 리스트 -->
   <div class="newlist">
@@ -154,6 +165,19 @@
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
+      },
+    });
+  	// swiper-container center
+    var swiper = new Swiper('.banner', {
+      loop: true,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.banner .swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.banner .swiper-button-next',
+        prevEl: '.banner .swiper-button-prev',
       },
     });
    // swiper-container second  
