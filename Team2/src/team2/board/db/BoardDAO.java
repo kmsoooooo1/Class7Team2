@@ -339,6 +339,24 @@ public class BoardDAO {
 		}
 	}
 
+	//관리자 삭제
+	public void deleteBoard(String chks) {
+		
+		int idx = Integer.parseInt(chks);
+		
+		try {
+			sql = "delete from team2_board where b_idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println(idx+" 삭제 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<BoardDTO> searchBoard(String sql) {
 		
 		ArrayList<BoardDTO> searchList = new ArrayList();

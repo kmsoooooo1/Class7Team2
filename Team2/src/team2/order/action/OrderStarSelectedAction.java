@@ -1,8 +1,16 @@
 package team2.order.action;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import team2.basket.db.BasketDAO;
+import team2.basket.db.BasketDTO;
+import team2.member.db.MemberDAO;
+import team2.member.db.MemberDTO;
 
 public class OrderStarSelectedAction implements Action {
 	
@@ -20,58 +28,60 @@ public class OrderStarSelectedAction implements Action {
 			return forward;
 		}
 		
-		System.out.println("테스트");
+		request.setCharacterEncoding("UTF-8");
 		
-//		request.setCharacterEncoding("UTF-8");
-//		
-//		ProductDTO pdto = new ProductDTO();
-//		
-//		//넘어온 코드들
-//		String seletedCodes = request.getParameter("seletedCodes");
-//		
-//		//넘어온 옵션들
-//		String selectedOptions = request.getParameter("selectedOptions");
-//		if(selectedOptions == null){
-//			selectedOptions = "";
-//		}
-//		
-//		//넘어온 배송방법들
-//		String selectedDeliveryMethods = request.getParameter("selectedDeliveryMethods");
-//		
-//		// split()을 이용해 ','를 기준으로 문자열을 자른다.
-//        // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
-//		String splitSeletedCodes[] = seletedCodes.split(",");
-//		String splitSelectedOptions[] = selectedOptions.split(",");
-//		String splitSelectedDeliveryMethods[] = selectedDeliveryMethods.split(",");
-//		
-//		System.out.println(seletedCodes);
-//		System.out.println(selectedOptions);
-//		System.out.println(selectedDeliveryMethods);
+		//넘어온 코드들
+		String selectedCodes = request.getParameter("seletedCodes");
+		
+		//넘어온 옵션들
+		String selectedOptions = request.getParameter("selectedOptions");
+		if(selectedOptions == null){
+			selectedOptions = "";
+		}
+		
+		//넘어온 배송방법들
+		String selectedDeliveryMethods = request.getParameter("selectedDeliveryMethods");
+		
+		// split()을 이용해 ','를 기준으로 문자열을 자른다.
+        // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
+		String splitSeletedCodes[] = selectedCodes.split(",");
+		String splitSelectedOptions[] = selectedOptions.split(",");
+		String splitSelectedDeliveryMethods[] = selectedDeliveryMethods.split(",");
 		
 		//장바구니 안에 있는 상품정보 가져오기 --------------------------------
-		//BasketDAO bdao = new BasketDAO();
+		BasketDAO bdao = new BasketDAO();
 		
-		//장바구니 리스트를 가져와서 저장
-		//Vector vec = bdao.getBasketList(id);
+		ArrayList basketList_temp = new ArrayList();
 		
-		// 해당 정보를 request에 저장
-		//ArrayList basketList = (ArrayList)vec.get(0);
-		//ArrayList productInfoList = (ArrayList)vec.get(1); //상품(동물 + 물건)정보 저장
+		for(int i=0; i<splitSeletedCodes.length-1; i++){
+			BasketDTO bdto = new BasketDTO();
+			bdto.setId(id);
+			bdto.setB_code(splitSeletedCodes[i].trim());
+			bdto.setB_option(splitSelectedOptions[i].trim());
+			bdto.setB_delivery_method(splitSelectedDeliveryMethods[i].trim());
+
+			basketList_temp.add(bdto);
+		}
 		
-		//request.setAttribute("basketList", basketList);
-		//request.setAttribute("productInfoList", productInfoList);
+		ArrayList all_list = bdao.getBasketList(id, basketList_temp);
+		
+		ArrayList basketList = (ArrayList) all_list.get(0);
+		ArrayList productInfoList = (ArrayList) all_list.get(1);
+
+		request.setAttribute("basketList", basketList);
+		request.setAttribute("productInfoList", productInfoList);
 		
 		//주문하는 사용자 정보 가져오기 ------------------------------------
-		//MemberDAO mdao = new MemberDAO();
+		MemberDAO mdao = new MemberDAO();
 		
 		//로그인 한 사용자의 정보
-		//MemberDTO mdto = mdao.getMember(id);
+		MemberDTO mdto = mdao.getMember(id);
 		
-		//request.setAttribute("memberDTO", mdto);
+		request.setAttribute("memberDTO", mdto);
 		
 		forward.setPath("./order/product_buy.jsp");
 		forward.setRedirect(false); //forwarding 해야한다.
-		return forward;
+		return forward;	
 	}
 
 }

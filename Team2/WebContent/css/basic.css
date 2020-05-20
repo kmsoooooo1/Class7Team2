@@ -271,6 +271,7 @@ body{
 
 			#footer {
 				padding: 4em 3em 2em 3em ;
+				height:auto;
 			}
 
 		}
@@ -279,6 +280,7 @@ body{
 
 			#footer {
 				padding: 3em 2em 1em 2em ;
+				height:auto;
 			}
 
 		}

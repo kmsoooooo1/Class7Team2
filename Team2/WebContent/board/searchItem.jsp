@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/searchItem.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -72,66 +73,84 @@
 	
 %>
 	<div id="container">
-		<div>
+		
+		<div class="page_title">
+			<span>상품검색</span>
+		</div>
+		<div class="inner">
 		<form name="fr" method="post">
-			<select name="product" onchange="return pChange();">
-				<option value="-">전체</option>
-				<option value="ANIMAL" <%if(product!=null && product.equals("ANIMAL")){ %> selected="selected" <%} %>>동물</option>
-				<option value="GOODS" <%if(product!=null && product.equals("GOODS")){ %> selected="selected" <%} %>>상품</option>
-			</select>
-		<%if(product!=null && !product.equals("-")){
-			if(product.equals("ANIMAL")){
-				cList = cset.ANIMAL;
-			}else if(product.equals("GOODS")){
-				cList = cset.GOODS;
-			}
-		}
-		%>
-		<select name="cate" onchange="return cChange();">
-			<option value="-">전체</option>
-		<%if(cList.length>0){
-			for(String str:cList){ %>
-			<option value=<%=str %> <%if(cate!=null && cate.equals(str)){ %> selected="selected" <%} %>><%=str %></option>		
-		<%	}
-		  }%>
-		</select>
-		<%
-		  if(product!=null && cate!=null){
-		  	if(cate.equals("파충류")){
-		  		cList = cset.ANIMAL_R;
-		  	}else if(cate.equals("양서류")){
-		  		cList = cset.ANIMAL_A;
-		  	}else if(cate.equals("먹이")){
-		  		cList = cset.GOODS_F;
-		  	}else if(cate.equals("사육용품")){
-		  		cList = cset.GOODS_B;
-		  	}
-		  }
-		  %>
-		  	<select name="kind" onchange="return kChange();">
-		  		<option value="-">전체</option>
-  		<%if(cList.length>0){
-  			for(String str:cList){ %>
-  			<option value=<%=str %> <%if(kind!=null && str.equals(kind)){ %> selected="selected" <%} %>><%=str %></option>
-  		<%	}
-		  } %>
-		  	</select>
-		  	<input hidden="hidden">
-			<input type="text" name="keyword" ><button type="button" onclick="return getkeyword();">search</button>
+			<div class="input_wrap_div">
+				<div class="select_div">
+					<select class="input_select" name="product" onchange="return pChange();">
+						<option value="-">전체</option>
+						<option value="ANIMAL" <%if(product!=null && product.equals("ANIMAL")){ %> selected="selected" <%} %>>동물</option>
+						<option value="GOODS" <%if(product!=null && product.equals("GOODS")){ %> selected="selected" <%} %>>상품</option>
+					</select>
+				<%if(product!=null && !product.equals("-")){
+					if(product.equals("ANIMAL")){
+						cList = cset.ANIMAL;
+					}else if(product.equals("GOODS")){
+						cList = cset.GOODS;
+					}
+				}
+				%>
+					<select class="input_select" name="cate" onchange="return cChange();">
+						<option value="-">전체</option>
+					<%if(cList.length>0){
+						for(String str:cList){ %>
+						<option value="<%=str %>" <%if(cate!=null && cate.equals(str)){ %> selected="selected" <%} %>><%=str %></option>		
+					<%	}
+					  }%>
+					</select>
+				<%
+				  if(product!=null && cate!=null){
+				  	if(cate.equals("파충류")){
+				  		cList = cset.ANIMAL_R;
+				  	}else if(cate.equals("양서류")){
+				  		cList = cset.ANIMAL_A;
+				  	}else if(cate.equals("먹이")){
+				  		cList = cset.GOODS_F;
+				  	}else if(cate.equals("사육용품")){
+				  		cList = cset.GOODS_B;
+				  	}
+				  }
+				  %>
+				  	<select class="input_select" name="kind" onchange="return kChange();">
+				  		<option value="-">전체</option>
+		  		<%if(cList.length>0){
+		  			for(String str:cList){ %>
+		  				<option value="<%=str %>" <%if(kind!=null && str.equals(kind)){ %> selected="selected" <%} %>><%=str %></option>
+		  		<%	}
+				  } %>
+				  	</select>
+			  	</div>
+			  	<input hidden="hidden">
+			  	<div class="keyword_div">
+					<input  class="input_text" type="text" name="keyword" ><button class="input_btn" type="button" onclick="return getkeyword();">search</button>
+				</div>
+			</div>
 		</form>
 			<div class="search_list">
-				<table>
+				<table class="list_table">
+				<colgroup>
+					<col width="10%">
+					<col width="15%">
+					<col width="30%">
+					<col width="15%">
+					<col width="15%">
+					<col width="15%">
+				</colgroup>
 					<tr>
 						<th>CODE</th>
 						<th>IMAGE</th>
 						<th>NAME</th>
 						<th>CATEGORY</th>
-						<th>SUB CATEGORY</th>					
+						<th>SUB<br>CATEGORY</th>					
 						<th>DETAIL</th>						
 					</tr>
 			<%if(list.size()>0){ 
 				for(ProductDTO dto:list){%>
-					<tr onclick="choice('<%=dto.getP_code()%>');">
+					<tr class="choice_tr" onclick="choice('<%=dto.getP_code()%>');">
 						<td><%=dto.getP_code() %></td>
 						<td><img src="./upload/multiupload/<%=dto.getImg_src() %>" alt="" width="100" height="100"></td>
 						<td><%=dto.getName() %></td>
@@ -149,6 +168,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/include/footer.jsp"/>
 </body>
 <script type="text/javascript">
 	var Product = document.fr.product;

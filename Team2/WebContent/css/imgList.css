@@ -8,36 +8,26 @@
 
 .board{
 	width: 80%;
+	margin: 0 auto;
 	text-align: center;
-	margin : 0 auto;
-}
-
-.jump{
-	height: 20px;
 }
 
 .top{
-	height : 100px;
+	height : 50px;
+	margin: 0 auto;
 }
 
 .boardname{
 	float: left;
-	margin:20px;
 }
 
 #fr{
 	float:right;
-	margin:20px;
 }
 
 
 .wrap a{text-decoration: none;}
 .wrap a:HOVER, .wrap a:ACTIVE, .wrap a:FOCUS {text-decoration: underline;}
-
-.wrap{
-	margin: 0 auto;
-	font-size: 14px;
-}
 
 .wrap h1{
 	padding: 10px 0 4px;
@@ -57,12 +47,14 @@
 }
 
 .ul_list .imgli{
-	height: 220px;
+	height: 200px;
+	width : 80%;
 	display : inline-block;
 }
 
 .ul_list .desc{
 	height: 150px;
+	width : 80%;
 	display : inline-block;
 	padding: 10px 8px;
 }
