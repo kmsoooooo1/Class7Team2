@@ -41,9 +41,6 @@ function doAction(){
 	%>
 <div class="board">
 		 
-		 <div class="jump"></div>
-		 
-		 
 		 <div class="top">
 		 	<div class="boardname">
 			 <h2>

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-* {
+*{
 	box-sizing: border-box;
 	margin : 0;
 	padding : 0;
@@ -8,22 +8,21 @@
 
 .board{
 	width: 80%;
-	margin: 1.2em auto;
+	margin: 0 auto;
 	text-align: center;
 }
 
 .top{
-	height : 100px;
+	height : 50px;
+	margin: 0 auto;
 }
 
 .boardname{
 	float: left;
-	margin:20px;
 }
 
 #fr{
 	float:right;
-	margin:20px;
 }
 
 .list a{text-decoration: none;}
@@ -31,34 +30,25 @@
 
 
 table.list {
+	width: 100%;
     border-collapse: collapse;
     text-align: center;
     line-height: 1.5;
 /*     border-left: 1px solid #ccc; */
-    margin: 20px 10px;
+/*     margin: 20px 10px; */
 }
 
 table.list thead th {
-    padding: 7px;
+	padding: 0.7em;
     font-weight: bold;
     border-top: 1px solid #ccc;
 /*     border-right: 1px solid #ccc; */
     border-bottom: 2px solid #c00;
     background: #eeeee8;
 }
-table.list tbody th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-/*     border-right: 1px solid #ccc; */
-    border-bottom: 1px solid #ccc;
-    background: #ececec;
-}
+
 table.list td {
-    width: 350px;
-    padding: 7px;
-    vertical-align: top;
+	padding: 0.7em;
 /*     border-right: 1px solid #ccc; */
     border-bottom: 1px solid #ccc;
 }

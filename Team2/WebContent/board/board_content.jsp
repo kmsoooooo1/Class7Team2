@@ -38,11 +38,15 @@
 	%>
 			
 	<div class="board">
-		<div class="title">
+	
+	<div class="top">
+		<div class="boardname">
 	 	<h2>
 	  		<%=bdto.getB_category() %>
 	 	</h2>
-	</div>	
+		</div>	
+	</div>
+	
 	<table class="notice">
 		<tr>
 			<th class="thleft">제목</th> <td> <%=bdto.getB_title() %></td>
@@ -51,12 +55,12 @@
 			<th class="thleft">작성자</th> <td> <%=bdto.getB_writer() %></td>
 		</tr>
 		<tr class="etc">
-			<td colspan="2">
+			<th colspan="2">
 				<ul>
 					<li class="date"> <span class="datespan">작성일</span> <span class="rightspan"> <%=bdto.getB_reg_date() %></span></li>
 					<li><span class="leftspan">조회</span> <span class="rightspan"> <%=bdto.getB_view() %></span></li>
 				</ul>
-			</td>
+			</th>
 		</tr>
 
 
@@ -113,6 +117,7 @@
 			</tr>
 	</table>
 	
+	<div class="bottom">
 			<div class="button">
 	
 				<input type="button" value="수정"
@@ -123,9 +128,11 @@
 					onclick="">
 				<input type="button" value="목록이동"
 					onclick="location.href='./BoardMain.bo'">
-		</div>
-		
-	</div>
+			</div>
+	</div>	
+	
+	
+	</div> <!-- board div 끝 -->
 
 	<div class="comment_wrap">
 	<div>
