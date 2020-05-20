@@ -15,9 +15,7 @@
 <script type="text/javascript">
 
 function doAction(){
-	
-	alert("doAction");
-	
+
 	document.fr.submit();
 	
 };
@@ -67,6 +65,7 @@ function doAction(){
 			<col width="15%" />
 			<col width="20%" />
 			<col width="10%" />
+
 		</colgroup>
 		<thead>
 		  <tr>
