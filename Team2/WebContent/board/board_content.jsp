@@ -55,6 +55,7 @@
 						<th>작성일</th><td class="table_td2"><%=bdto.getB_reg_date() %></td><th>조회수</th><td class="table_td2"><%=bdto.getB_view() %></td>
 					</tr>
 			
+<<<<<<< HEAD
 			
 				<%
 					if(category.equals("Review")){	
@@ -88,7 +89,45 @@
 				}
 					%>
 						</tr>
+=======
+	<div class="board">
+	
+	<div class="top">
+		<div class="boardname">
+	 	<h2>
+	  		<%=bdto.getB_category() %>
+	 	</h2>
+		</div>	
+	</div>
+	
+	<table class="notice">
+		<tr>
+			<th class="thleft">제목</th> <td> <%=bdto.getB_title() %></td>
+		</tr>
+		<tr>
+			<th class="thleft">작성자</th> <td> <%=bdto.getB_writer() %></td>
+		</tr>
+		<tr class="etc">
+			<th colspan="2">
+				<ul>
+					<li class="date"> <span class="datespan">작성일</span> <span class="rightspan"> <%=bdto.getB_reg_date() %></span></li>
+					<li><span class="leftspan">조회</span> <span class="rightspan"> <%=bdto.getB_view() %></span></li>
+				</ul>
+			</th>
+		</tr>
+
+
+	<%
+		if(category.equals("Review") && category.equals("QnA")){	
+			if(!p_code.equals("null")){
+	%>
+		<tr>
+			<th>상품 </th> 
+		
+	<%		
+>>>>>>> refs/heads/master
 						
+<<<<<<< HEAD
 						<tr>
 							<td colspan="4">
 								<div class="content"><%=bdto.getB_content() %></div>
@@ -148,6 +187,115 @@
 					System.out.println(list.toString());
 					int cnt = 0;
 					for(CommentDTO dto : list){ %>
+=======
+				ProductDTO dto = new ProductDTO(p_code);
+				System.out.println(dto);
+	%>
+		<td>
+		<table class="item">
+			<tr>
+				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
+				<td><%=dto.getCategory() %></td>
+				<td><%=dto.getSub_category() %></td>
+				<td><%=dto.getSub_category_idx() %></td>
+				<td><%=dto.getName() %></td>
+			</tr>
+		</table>
+		</td>
+	<%
+		}else{
+			%>
+			<th>상품</th> <td> </td>
+			<%	
+		}
+	}
+		%>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<div class="content"><%=bdto.getB_content() %></div>
+				</td>
+			</tr>
+			<tr>
+			<th>첨부파일</th>
+			<td>
+				<%String files[] = bdto.getB_file().split(","); %>
+				<c:set var="files" value="<%=files %>" />
+				<c:set var="getContextPath" value="<%=request.getContextPath()%>" />
+			
+				 <c:forEach var="file" items="${files}">
+				<a href="${getContextPath}/downloadAction.bo?file=${file} ">
+	 			${file}</a>
+				 </c:forEach>
+			</td>
+			</tr>
+	</table>
+	
+	<div class="bottom">
+			<div class="button">
+	
+				<input type="button" value="수정"
+					onclick="location.href='./BoardUpdate.bo?pageNum=<%=pageNum%>&num=<%=bdto.getB_idx()%>'">
+				<input type="button" value="삭제"
+					onclick="location.href='./BoardDelete.bo?num=<%=bdto.getB_idx()%>&category=<%=bdto.getB_category() %>'">
+				<input type="button" value="댓글"
+					onclick="">
+				<input type="button" value="목록이동"
+					onclick="location.href='./BoardMain.bo'">
+			</div>
+	</div>	
+	
+	
+	</div> <!-- board div 끝 -->
+
+	<div class="comment_wrap">
+	<div>
+		<form name="fr" action="./InsertCommentAction.bo?num=<%=num %>&pageNum=<%=pageNum %>" method="post">
+			<input type="hidden" name="c_category" value="board">
+			<input type="hidden" name="c_b_idx" value=<%=bdto.getB_idx()%>>
+			<textarea name="comment" 
+				<%if(id2!=null){ %>
+				placeholder="댓글을 입력해 주세요."
+				<%}else{ %>
+				placeholder="로그인이 필요합니다."
+				disabled="disabled"
+				<%} %>
+				></textarea>
+			<button type="button" onclick="return insertCommenctCheck()"
+				<%if(id2==null){ %>
+					disabled="disabled"
+				<%} %>
+			>등록</button>
+		</form>
+	</div>
+	<div>
+		<ul>	
+		<%if(list.size()>0){
+			System.out.println(list.toString());
+			int cnt = 0;
+			for(CommentDTO dto : list){ %>
+			
+			<li>
+				<div class="comment_wrap comment<%=dto.getC_idx()%>">
+						작성자 : <%=dto.getC_id() %><br>
+						댓글 
+						<div class="commentInfo comment<%=cnt%>info">
+							 <%=dto.getC_comment() %><br>
+						</div>
+						<div class="commentUpdate comment<%=cnt%>update">
+							<form name="updatefr" action="./updateCommentAction.bo" method="post">
+								<input type="hidden" name="num" value=<%=num%>>
+								<input type="hidden" name="pageNum" value=<%=pageNum%>>
+								<input type="hidden" name="cnum" value=<%=dto.getC_idx() %>>
+								<textarea name="comment"><%=dto.getC_comment()%></textarea>
+								<button type="button" type="button" onclick="return updateCommentCheck(<%=cnt%>)">수정</button>
+								<button type="button" type="button" onclick="updateCommentCancle(<%=cnt%>)">취소</button>
+							</form>
+						</div>
+						IP : <%=dto.getIp_addr() %><br>
+						작성일자 : <%=dto.getC_regdate() %>	
+>>>>>>> refs/heads/master
 					
 					<li>
 						<div class="comment_wrap comment<%=dto.getC_idx()%>">

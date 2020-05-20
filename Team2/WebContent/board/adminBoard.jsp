@@ -15,14 +15,19 @@
 <title>Insert title here</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<link href="${pageContext.request.contextPath}/css/boardList.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/boardAdmin.css" rel="stylesheet">
 <script type="text/javascript">
 
 function doAction(){
 	
-	alert("doAction");
-	
 	document.fr.submit();
+	
+};
+
+function doDelete(){
+	
+	alert("삭제");
+	document.fr2.submit();
 	
 };
 </script>	
@@ -44,11 +49,24 @@ function doAction(){
 	System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 	
 %>
-	<h1>admin page</h1>
+<div class="board">
 
+	<div class="top">
+		<div class="boardname">
+		 <h2>
+			게시판 관리
+		 </h2>
+		</div>
+	<!-- 게시판 검색 -->		 
 	<form name="fr" id="fr" action="./SearchBoard.bo" method="POST">	
-
-
+		
+		 <select name="pageSize">
+		 	<option value="10">페이지 수</option>
+		 	<option value="10">10</option>
+		 	<option value="20">20</option>
+		 	<option value="30">30</option>
+		 </select>
+		
 		<select name="category">
 			<%for(int i = 0; i<cSet.Category.length; i++){ %>
 				<option value=<%=i%> >
@@ -56,21 +74,23 @@ function doAction(){
 				</option>
 			<%} %>
 		</select>
-		
 		<input type="text" name="search" />
-		
 		<input type="button" onclick="doAction()" value="검색" />	
 	</form>
-
-<div class="board">
+	<!-- 게시판 검색 -->		 
+	</div>	
+		
 	<div class="list-div">
+	
+	<form name ="fr2" id="fr2" action="./BoardDelete.bo" method="post">
 	<table class="list">
 		<colgroup>
+			<col width="5%" />
+			<col width="40%" />
+			<col width="15%" />
+			<col width="20%" />
 			<col width="10%" />
-			<col width="60%" />
 			<col width="10%" />
-			<col width="12%" />
-			<col width="8%" />
 		</colgroup>
 		<thead>
 		  <tr>
@@ -79,6 +99,7 @@ function doAction(){
 		    <th>작성자</th>
 		    <th>작성일</th>
 		    <th>조회수</th>
+		    <th><input type="button" onclick="doDelete()" value="삭제" /></th>
 		  </tr>
 	  	</thead>
 	  <%
@@ -98,11 +119,14 @@ function doAction(){
 		    <td><%=bdto.getB_writer() %></td>
 		    <td><%=bdto.getB_reg_date() %></td>
 		    <td><%=bdto.getB_view() %></td>
+		    <td><input type="checkbox" name="chk" value="<%=bdto.getB_idx() %>"></td>
 		  </tr>
 		 </tbody>
 	  <% } }%>
 	
 	</table>
+	</form>
+	
 	</div>
 	
 	<div class="paging-div">
