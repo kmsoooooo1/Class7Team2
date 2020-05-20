@@ -32,26 +32,45 @@ public class boardDeleteAction implements Action {
 		}
 		
 		
-		//카테고리저장 해서 forward 처리
-		String category = (String)request.getParameter("category");
-		int num = Integer.parseInt(request.getParameter("num"));
-		String pageNum = request.getParameter("pageNum");
-		
 		BoardDAO bdao = new BoardDAO();
 		
-		bdao.deleteBoard(num);
+		cSet cset = new cSet();
+		
+		//관리자 복수 삭제
+		if(id.equals("admin")){
+			String [] chks = request.getParameterValues("chk");
+			
+			for(int i=0; i<chks.length; i++){
+				bdao.deleteBoard(chks[i]);
+			}
+		}else{
+			
+			//카테고리저장 해서 forward 처리
+			String category = (String)request.getParameter("category");
+			int num = Integer.parseInt(request.getParameter("num"));
+			String pageNum = request.getParameter("pageNum");
+		
+			bdao.deleteBoard(num);
+			
+			cset.setCategory(category);
+			System.out.println("c 값 @@@@@" +cset.getC());
+			
+		}
+		
 		
 		bdao.closeDB();
 		
-		//게시판페이지 이동
-		cSet cset = new cSet();
-		
-		cset.setCategory(category);
-		System.out.println("c 값 @@@@@" +cset.getC());
-		
-		
-		forward.setPath("./BoardList.bo?category="+cset.getC());
-		forward.setRedirect(true);
+		//게시판페이지 이동		
+		if(id.equals("admin")){
+			
+			forward.setPath("./AdminBoard.bo");
+			forward.setRedirect(true);
+			
+		}else{
+	
+			forward.setPath("./BoardList.bo?category="+cset.getC());
+			forward.setRedirect(true);
+		}
 				
 		return forward;
 	}

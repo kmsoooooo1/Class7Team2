@@ -22,6 +22,153 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
+
+	
+</script>
+</head>
+<body>
+	<jsp:include page="/include/header.jsp" />
+	
+	<%
+		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
+		String pageNum = request.getParameter("pageNum");
+
+		String p_code = bdto.getB_p_code();
+		String category = bdto.getB_category();
+		
+		cSet cset = new cSet();
+		
+		cset.setCategory(category);
+		
+		int c = cset.getC();
+		
+		String files[] = null;
+		//DB에 저장된 파일 확인 후 불러오기		
+		if(bdto.getB_file()!=null){
+			files = bdto.getB_file().split(","); 
+		}
+		System.out.println("files.length 값 : "+files.length);
+		
+ 		ServletContext context = request.getServletContext();
+		String realPath = context.getRealPath("/upload/board/");
+
+		
+		for(int i=0; i<files.length; i++){
+
+			File upFile = new File(realPath+files[i]);
+		
+			System.out.println("upFile : " +upFile);
+
+			%>
+				<script type="text/javascript">
+				
+					old_files.push("<%=files[i]%>");
+					
+				</script>
+			
+			<%
+		}
+		
+	%>
+<div class="board">
+
+	<div class="top">
+		<div class="boardname">
+	 	<h2>
+	  		게시물 수정
+	 	</h2>
+		</div>	
+	</div>
+	
+	<form name= "fr" id="fr" action="./BoardUpdateAction.bo" method="post">
+		<input type="hidden" name="num" value="<%=bdto.getB_idx() %>">	
+		<input type="hidden" name="pageNum" value="<%=pageNum %>">	
+		<input type="hidden" name="b_category" value="<%=bdto.getB_category() %>">	
+	<table class="notice">
+	
+	<tr>
+		<th class="thleft">글번호</th> <td><%=bdto.getB_idx() %></td> 
+	</tr>
+	<tr>
+		<th class="thleft">카테고리</th> <td><%=bdto.getB_category()%></td>			
+	</tr>	
+			<%
+
+				if(!p_code.equals("null")){
+			%>
+		<tr>
+			<th>상품 </th> 
+			<%		
+							
+					ProductDTO dto = new ProductDTO(p_code);
+					System.out.println(dto);
+			%>
+			<td>
+			<table class="item">
+				<tr>
+					<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
+					<td><%=dto.getCategory() %></td>
+					<td><%=dto.getSub_category() %></td>
+					<td><%=dto.getSub_category_idx() %></td>
+					<td><%=dto.getName() %></td>
+				</tr>
+			</table>
+			</td>
+		<%
+			}else{
+				%>
+				<th>상품</th> <td></td>
+				<%	
+			}
+	
+			%>
+			</tr>
+			
+			<tr>
+			
+				<th>제목</th> <td><input type="text" name="b_title" value="<%=bdto.getB_title()%>"></td>
+			</tr>
+			<tr>
+			<td colspan="2">
+			<textarea name="b_content" id="b_content">
+			<%=bdto.getB_content()%>
+			</textarea>
+			</td>
+			</tr>
+				
+		</table>
+		</form>
+				
+		<div class="bottom">
+				<div class="button">
+				<input type="button" value="이미지 첨부하기" onclick="filesumit()"> 
+				<input type="button" onclick="return save();" value="수정하기"/>			
+				<input type="button" value="뒤로가기"
+					onclick="location.href='javascript:history.back()'">
+				<input type="button" value="목록이동"
+					onclick="location.href='./BoardMain.bo'">
+				</div>
+		</div>
+	
+	<div class="inputfile">
+			<div class="input_wrap">
+			<input type="file" name="file[]" id="input_imgs" multiple><br>
+			
+			</div>
+			
+	        <div class="imgs_wrap">
+	            <img id="img"/>
+	        </div>
+			
+			<br>
+	</div>
+	
+	
+	</div> <!-- board div 끝 -->
+</body>
+
+<script type="text/javascript">
+	
 var conPath = "<%=request.getContextPath()+"/upload/board"%>";
 var old_files = [];
 var img_files = [];
@@ -121,7 +268,7 @@ var img_files = [];
             data : formData,
             success : function(result) {
     			alert("글 등록에 성공하였습니다.");
-    			location.href="./BoardMain.bo";
+    			location.href="./BoardList.bo?category=<%=c%>";
  	        },
 		
 	        error: function(e) {
@@ -131,144 +278,6 @@ var img_files = [];
 		});
 	
 	};
-	
-</script>
-</head>
-<body>
-	<jsp:include page="/include/header.jsp" />
-	
-	<%
-		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
-		String pageNum = request.getParameter("pageNum");
-
-		String p_code = bdto.getB_p_code();
-		String category = bdto.getB_category();
-		
-		
-		String files[] = null;
-		//DB에 저장된 파일 확인 후 불러오기		
-		if(bdto.getB_file()!=null){
-			files = bdto.getB_file().split(","); 
-		}
-		System.out.println("files.length 값 : "+files.length);
-		
- 		ServletContext context = request.getServletContext();
-		String realPath = context.getRealPath("/upload/board/");
-
-		
-		for(int i=0; i<files.length; i++){
-
-			File upFile = new File(realPath+files[i]);
-		
-			System.out.println("upFile : " +upFile);
-
-			%>
-				<script type="text/javascript">
-				
-					old_files.push("<%=files[i]%>");
-					
-				</script>
-			
-			<%
-		}
-		
-	%>
-
-	<div class="board">
-		<div class="title">
-	 	<h2>
-	  		게시글 수정
-	 	</h2>
-	</div>	
-	
-	<form name= "fr" id="fr" action="./BoardUpdateAction.bo" method="post">
-		<input type="hidden" name="num" value="<%=bdto.getB_idx() %>">	
-		<input type="hidden" name="pageNum" value="<%=pageNum %>">	
-		<input type="hidden" name="b_category" value="<%=bdto.getB_category() %>">	
-	<table class="notice">
-	
-	<tr>
-		<th class="thleft">글번호</th> <td><%=bdto.getB_idx() %></td> 
-	</tr>
-	<tr>
-		<th class="thleft">카테고리</th> <td><%=bdto.getB_category()%></td>			
-	</tr>	
-			<%
-
-				if(!p_code.equals("null")){
-			%>
-		<tr>
-			<th>상품 </th> 
-			<%		
-							
-					ProductDTO dto = new ProductDTO(p_code);
-					System.out.println(dto);
-			%>
-			<td>
-			<table class="item">
-				<tr>
-					<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
-					<td><%=dto.getCategory() %></td>
-					<td><%=dto.getSub_category() %></td>
-					<td><%=dto.getSub_category_idx() %></td>
-					<td><%=dto.getName() %></td>
-				</tr>
-			</table>
-			</td>
-		<%
-			}else{
-				%>
-				<th>상품</th> <td></td>
-				<%	
-			}
-	
-			%>
-			</tr>
-			
-			<tr>
-			
-				<th>제목</th> <td><input type="text" name="b_title" value="<%=bdto.getB_title()%>"></td>
-			</tr>
-			<tr>
-			<td colspan="2">
-			<textarea name="b_content" id="b_content" rows="20" cols="122">
-			<%=bdto.getB_content()%>
-			</textarea>
-			</td>
-			</tr>
-				
-		</table>
-		</form>
-				
-				<div class="button">
-				<input type="button" value="이미지 첨부하기" onclick="filesumit()"> 
-				<input type="button" onclick="return save();" value="수정하기"/>			
-				<input type="button" value="뒤로가기"
-					onclick="location.href='javascript:history.back()'">
-				<input type="button" value="목록이동"
-					onclick="location.href='./BoardMain.bo'">
-				</div>
-
-	
-	<div class="inputfile">
-			<div class="input_wrap">
-			<input type="file" name="file[]" id="input_imgs" multiple><br>
-			
-			</div>
-			
-	        <div class="imgs_wrap">
-	            <img id="img"/>
-	        </div>
-			
-			<br>
-	</div>
-	
-	
-	</div> <!-- board div 끝 -->
-</body>
-
-<script type="text/javascript">
-	
 
 
 /* --------------------------------------------------	 */

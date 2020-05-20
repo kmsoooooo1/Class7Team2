@@ -22,6 +22,8 @@ public class SearchBoardAction implements Action {
 		
 		String search = (String) request.getParameter("search");
 		
+		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		
 		System.out.println("category : "+c+"/search : "+search);
 		
 		cSet cset = new cSet();
@@ -47,11 +49,8 @@ public class SearchBoardAction implements Action {
 			
 			int currentPage = Integer.parseInt(pageNum);
 			
-			int pageSize = 10;
 			if(c==1){
 				pageSize = 8;
-			}else{
-				pageSize = 10;
 			}
 			
 			Criteria cri = new Criteria();
