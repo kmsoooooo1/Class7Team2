@@ -1,43 +1,70 @@
 @CHARSET "UTF-8";
 
-.board{
-	width:60%;
+* {
+	box-sizing: border-box;
+/* 	margin : 0; */
+/* 	padding : 0; */
 }
 
-table.list {
+.board{
+	width: 70%;
+	margin: 1.2em auto;
+	text-align: center;
+}
+
+.top{
+	height : 100px;
+}
+
+.boardname{
+	float: left;
+	margin:20px;
+}
+
+#fr{
+	float:right;
+	margin:20px;
+}
+
+.list a{text-decoration: none;}
+.list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}
+
+
+.list {
+	width: 100%;
     border-collapse: collapse;
     text-align: center;
     line-height: 1.5;
-    border-left: 1px solid #ccc;
+/*     border-left: 1px solid #ccc; */
     margin: 20px 10px;
 }
 
-table.list thead th {
+.list thead th {
     padding: 7px;
     font-weight: bold;
     border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 2px solid #c00;
-    background: #dcdcd1;
+/*     border-right: 1px solid #ccc; */
+    border-bottom: 2px solid #888;
+    font-size: 0.8em;
 }
-table.list tbody th {
+.list tbody th {
     width: 150px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
-    border-right: 1px solid #ccc;
+/*     border-right: 1px solid #ccc; */
     border-bottom: 1px solid #ccc;
     background: #ececec;
 }
-table.list td {
-    width: 350px;
+.list td {
+	font-size:0.8em;
     padding: 7px;
     vertical-align: top;
-    border-right: 1px solid #ccc;
+/*     border-right: 1px solid #ccc; */
     border-bottom: 1px solid #ccc;
 }
 
-table.list td.title {
+.list td.title {
 	text-align: left;
 }
 
@@ -53,8 +80,19 @@ table.list td.title {
 	margin:0 auto;
 }
 
+.bottom{
+	height: 60px;
+}
+
+
+.button{
+	text-align:right;
+}	
+
+
+
 /* 페이징  */
-ul.paging {
+.paging {
 	display:table;
 	margin-left: auto;
  	margin-right: auto;
@@ -62,17 +100,17 @@ ul.paging {
 	list-style:none;
 }
 
-ul.paging li {
+.paging li {
 	float:left;
 	display : inline-block;
 	text-align: center;
 }
-ul:AFTER {
+.paging:AFTER {
 	display: block;
 	content: "";
 	clear: both;
 }
-ul.paging li a {
+.paging li a {
 	padding:4px;
 	margin-right:3px;
 	width:15px;
@@ -83,16 +121,29 @@ ul.paging li a {
 	text-decoration:none;
 }
 
-ul.paging li a:LINK {
+.paging li a:LINK {
 	text-decoration: none;
 }
 
-ul.paging li a:hover, ul.paging li a:focus {
+.paging li a:hover, .paging li a:focus {
 	color:#fff;
 	border:1px solid #f40;
 	background-color:#f40;
 }
 
-i.fa{
+.fa{
 	font-style: normal;
 }
+
+	@media screen and (max-width: 480px) {
+		.board{
+			width: 100%;
+			margin:0;
+		}
+	}
+	@media screen and (max-width: 736px) {
+		.board{
+			width: 100%;
+			margin:0;
+		}
+	}

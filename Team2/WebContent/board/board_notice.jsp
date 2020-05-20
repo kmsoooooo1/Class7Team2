@@ -25,8 +25,6 @@ function doAction(){
 </head>
 <body>
 	<jsp:include page="/include/header.jsp" />
-
-	<h1>공지 게시판</h1>
 	
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
@@ -41,10 +39,14 @@ function doAction(){
 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 
 	%>
-	
-		<h2><a onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=0','_blank','width=500,height=400',false);"> 글 쓰기 (스마트에디터)  </a></h2>
-		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
+<div class="board">	
 
+	<div class="top">
+		<div class="boardname">
+		 <h2>
+			공지 사항
+		 </h2>
+		</div>
 	<!-- 게시판 검색 -->		 
 		<form name="fr" id="fr" action="./BoardList.bo" method="POST">	
 			<input type="hidden" value="0" name="category">
@@ -54,27 +56,29 @@ function doAction(){
 			<input type="button" onclick="doAction()" value="검색" />	
 		</form>
 		<!-- 게시판 검색 -->		
+	</div>
 	
-<div class="board">
+
 	<div class="list-div">
 	<table class="list">
 		<colgroup>
+			<col width="5%" />
+			<col width="40%" />
+			<col width="15%" />
+			<col width="20%" />
 			<col width="10%" />
-			<col width="60%" />
-			<col width="10%" />
-			<col width="12%" />
-			<col width="8%" />
 		</colgroup>
 		<thead>
 		  <tr>
-		    <th>번호</th>
+		    <th>No.</th>
 		    <th>제목</th>
-		    <th>작성자</th>
-		    <th>작성일</th>
-		    <th>조회수</th>
+		    <th>글쓴이</th>
+		    <th>날짜</th>
+		    <th>조회</th>
 		  </tr>
 	  	</thead>
 	  <%
+	  if(boardList.size()>0){
 	    for(int i=0; i<boardList.size(); i++){ 
              BoardDTO bdto = (BoardDTO) boardList.get(i);
 	  %>
@@ -92,12 +96,21 @@ function doAction(){
 		    <td><%=bdto.getB_view() %></td>
 		  </tr>
 		 </tbody>
-	  <% } %>
-	
+	  <% }
+	    }else{%>
+		<tr>
+		    <td colspan="5">
+		    	등록된 게시글이 없습니다.
+		    </td>
+		  </tr>
+	<%} %>
 	</table>
 	</div>
 	
-	<div class="paging-div">
+	<div class="bottom">
+		<div class="button">
+		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=0','_blank','width=500,height=400',false);">
+		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
 		<li>
@@ -118,6 +131,7 @@ function doAction(){
 	</div>
 	
 </div>
-
+	
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 </html>
