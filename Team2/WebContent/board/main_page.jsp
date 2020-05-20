@@ -35,41 +35,32 @@
     <div class="swiper-button-prev"></div>
   </div> 
  
- <!-- 메인 그룹 배너 1-->
- <div class="main-group">
- <div class="banner">
-  <ul>
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/navi.png"></a></li> 
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/turt.png"></a></li>
-  </ul>
- </div>
-
-  <!-- 메인 그룹 배너 3 -->
-  <div class="banner">
-   <ul>
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/gaeko.png"></a></li>
-   <li><a href="./aHospital.bo"><img src="${pageContext.request.contextPath}/img/fl.png"></a></li>
-   </ul>
-  </div> 
- </div>
-
- <!-- 메인 그룹 중앙 배너 2 -->
- <div class="swiper-container banner">
-  <div class="swiper-wrapper">
-   <div class="swiper-slide">
-    <img src="${pageContext.request.contextPath}/img/cBanner1.png">
-   </div>
-   <div class="swiper-slide">
-    <img src="${pageContext.request.contextPath}/img/cBanner2.png">
-   </div>
+ <!-- center_banner -->
+    
+ <div class="center_banner">
+  <div class="banner_img">
+   <a href="./aHospital.bo">
+    <img src="${pageContext.request.contextPath}/img/navi.png" alt="Navi" class="image">
+   </a>
+   <div class="overlay">동물병원 정보</div>
   </div>
-  <!-- 페이징 -->
-    <div class="swiper-pagination"></div>
-    <!-- 네비게이션 버튼 -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
- </div> 
- 
+  <div class="banner_img">
+   <img src="${pageContext.request.contextPath}/img/turt.png" alt="Turtle" class="image">
+    <div class="overlay">거북이</div>
+  </div>
+  <div class="banner_img">
+   <img src="${pageContext.request.contextPath}/img/gaeko.png" alt="Gaeko" class="image">
+    <div class="overlay">개코</div>
+  </div>
+  <div class="banner_img">
+   <img src="${pageContext.request.contextPath}/img/fl.png" alt="Flog" class="image">
+    <div class="overlay">개구리</div>
+  </div>
+  <div class="banner_img">
+   <img src="${pageContext.request.contextPath}/img/c2.jpg" alt="Flog" class="image">
+    <div class="overlay">대표 캐릭터</div>
+  </div>
+ </div>
   <!-- 신상품 리스트 -->
   <div class="newlist">
   <div class="swiper-container second">
@@ -145,7 +136,6 @@
 		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
 		 </a>
 		</div>
-		
 	</div>
 	<!-- 페이징 -->
 	<div class="swiper-pagination"></div>
@@ -167,19 +157,6 @@
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-      },
-    });
-  	// swiper-container banner
-    var swiper = new Swiper('.banner', {
-      loop: true,
-      loopFillGroupWithBlank: true,
-      pagination: {
-        el: '.banner .swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.banner .swiper-button-next',
-        prevEl: '.banner .swiper-button-prev',
       },
     });
    // swiper-container second  
@@ -207,8 +184,12 @@
 		
 	}); 
   </script>
+  
+  <div class="second_banner">
+   <img src="${pageContext.request.contextPath}/img/가게내부.png">
+  </div>
+  <br>  
   <div class="row">
-  <div class="leftcolumn">
     <div class="card">
       <h2>반려동물</h2>
       <h5>이달의 반려동물 인기 순위입니다.</h5>
@@ -216,6 +197,7 @@
       <p>갈라파고스에서...</p>
       <p>여러분이 애지중지하게 키운 반려동물의 사진을 올려주세요</p>
     </div>
+ 
     <div class="card">
       <h2>TITLE HEADING</h2>
       <h5>Title description, Sep 2, 2017</h5>
@@ -223,8 +205,7 @@
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>
-  </div>
-  <div class="rightcolumn">
+ 
     <div class="card">
       <h2>About Me</h2>
       <div class="fakeimg" style="height:100px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
@@ -240,7 +221,6 @@
       <h3>Follow Me</h3>
       <p>Some text..</p>
     </div>
-  </div>
 </div>
   	
 	<hr>
