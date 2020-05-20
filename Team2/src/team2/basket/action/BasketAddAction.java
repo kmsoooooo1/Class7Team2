@@ -45,6 +45,8 @@ public class BasketAddAction implements Action {
 		if(request.getParameter("selectedOptions") == null){
 			selectedOptions = ""; //빈 공백 값을 넣는다.
 		}
+		
+
 	
 		//배송방법(b_delivery_method)
 		//사용자가 추가한 배송방법 리스트 가지고 오기
