@@ -166,7 +166,25 @@ public class WishlistDAO {
 	}//getWishlist()
 	
 	
-	
+	//deleteWishList(wldto)
+	public void deleteWishList(WishlistDTO wldto){
+		try {
+			con = getConnection();
+			
+			sql = "delete from team2_wishlist where w_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, wldto.getW_code());
+			pstmt.executeUpdate();
+			
+			System.out.println("관심상품 삭제 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+	}
+	//deleteWishList(wldto)
 	
 	
 	

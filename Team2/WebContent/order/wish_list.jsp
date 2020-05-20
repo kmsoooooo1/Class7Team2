@@ -4,12 +4,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>Insert title here</title>
 </head>
@@ -41,8 +41,6 @@
 		
 		for(int a=0; a<row; a++){
 			
-	%>
-		<%
 			for(int i=0; i<col; i++){
 				WishlistDTO wldto = (WishlistDTO)wishList.get(num);
 				ProductDTO pdto = (ProductDTO)productInfoList.get(num);
@@ -56,19 +54,22 @@
 		
 		<li>
 		<div class="list_wrap">
-			<input type="checkbox" id="chkBox" name="chkBox" style="display: none;">
-			<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"><img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"></a>
-			<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"><%=pdto.getProduct_name()%></a> <br>
+			<input type="hidden" id="w_code" name="w_code" value="<%=wldto.getW_code()%>">
+			<input type="checkbox" id="chkBox" name="chkBox" style="display: none;"> 
+			<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"><img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"></a> 
+			<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"><%=pdto.getProduct_name()%></a>
 			<%if(pdto.getProduct_discount_rate() != 0){ //할인율 있으면%>
-				<span style="text-decoration: line-through;"><%=newformat_price_origin%></span>원 
-				<span style="color: #f0163a;"><%=newformat_price_sale%></span>원 
-				<%=newformat_discount_rate%>% 할인
+				<span style="text-decoration: line-through;"><%=newformat_price_origin%></span>원  
+				<span style="color: #f0163a;"><%=newformat_price_sale%></span>원  
+				<%=newformat_discount_rate%>% 할인 
 			<%}else{// 할인율 없으면 %>	
-				<%=newformat_price_origin%>원 	
-				<%=newformat_discount_rate%>% 할인
+				<%=newformat_price_origin%>원 
+				<%=newformat_discount_rate%>% 할인 
 			<%} %>
-		</div>
+			
 		
+		
+		</div>
 		</li>	
 		
 		<% 	
@@ -77,14 +78,17 @@
 				
 			}	
 		%>
-	<%} %>
+	
+	<%} //for문 닫음 %>
+	
 	</ul>
 	
-	<div id="btn1" name="btn1"> <button type="button" onclick="checkBoxOn();">편집</button> </div>
-	<div id="btn2" name="btn2" style="display: none;">
+	<div id="btn1"> <button type="button" onclick="checkBoxOn();">편집</button> </div>
+	<div id="btn2" style="display: none;">
 		<button onclick="dellChkBox();">삭제</button>
 		<button onclick="cancel();">취소</button>
 	</div>
+	
 	
 	
 	<ul id="pageList">
@@ -102,6 +106,11 @@
 </body>
 
 <script type="text/javascript">
+	// 관심상품 리스트 가져오기
+	var wishList = [];
+	<c:forEach items="${wishList}" var="wishList">
+		wishList.push("${wishList}");
+	</c:forEach>
 	
 	// 편집 버튼 클릭 시 체크박스 on
 	function checkBoxOn(){
@@ -112,7 +121,37 @@
 	}
 	
 	function dellChkBox(){
+		// 만약 관심상품이 없으면 alert뜨게 하기
+		if(wishList.length == 0){
+			alert("관심상품이 등록되어있지 않습니다.");
+		}
 		
+		// 사용자에게 삭제여부 물어보기
+		var checkDelete = confirm("선택한 상품을 삭제하시겠습니까?");
+		
+		if(checkDelete){
+			//관심상품에 담긴 모든 상품 불러오기
+			// 각 상품의 체크박스가 체크되어 있으면 true, 아니면 false
+			if(document.getElementById('chkBox').checked){
+				(function(i){
+					$.ajax({
+						type:'get',
+						url:'./WishListDelete.wl',
+						data: 'w_code='+$('#w_code').val(),
+						dataType: 'html',
+						async: false,
+						success:function(data){
+							
+						},error:function(request,status,error){
+							alert("code="+ request.status + ", message=" + request.responseText + ", error=" + error);
+						}
+					});
+				})(i);
+			}
+			window.location.reload(); //현재 페이지 새로고침
+		}else{
+			return false;
+		}
 	}
 	
 	function cancel(){

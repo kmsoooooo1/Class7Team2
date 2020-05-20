@@ -64,7 +64,17 @@ public class WishListFrontController extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-	// 상품을 
+	// 선택한 상품을 삭제했을 시(ajax)
+	else if(command.equals("/WishListDelete.wl")){
+		action = new WishListDeleteAction();
+		
+		try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
