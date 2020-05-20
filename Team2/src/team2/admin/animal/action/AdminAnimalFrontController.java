@@ -74,6 +74,14 @@ public class AdminAnimalFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/AnimalNew.aa")) {
+			action = new AnimalNewAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 

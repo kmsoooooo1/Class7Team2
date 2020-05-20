@@ -188,56 +188,151 @@
   <div class="second_banner">
    <img src="${pageContext.request.contextPath}/img/가게내부.png">
   </div>
-  <br>  
-  <div class="row">
-    <div class="card">
-      <h2>반려동물</h2>
-      <h5>이달의 반려동물 인기 순위입니다.</h5>
-      <div class="fakeimg" style="height:200px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
-      <p>갈라파고스에서...</p>
-      <p>여러분이 애지중지하게 키운 반려동물의 사진을 올려주세요</p>
-    </div>
  
-    <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg" style="height:200px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
- 
-    <div class="card">
-      <h2>About Me</h2>
-      <div class="fakeimg" style="height:100px;"><img src="${pageContext.request.contextPath}/img/banner.png"></div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-    </div>
-    <div class="card">
-      <h2>SET상품 리스트 Coming Soon</h2>
-      <div class="fakeimg"><p><img src="${pageContext.request.contextPath}/img/snakeSet.png"></p></div>
-      <div class="fakeimg"><p><img src="${pageContext.request.contextPath}/img/packSet.png"></p></div>
-      <div class="fakeimg"><p><img src="${pageContext.request.contextPath}/img/reoSet.png"></p></div>
-    </div>
-    <div class="card">
-      <h3>Follow Me</h3>
-      <p>Some text..</p>
-    </div>
+ <div id="body"> 
+ <div class="main">
+
+<h1>반려동물</h1>
+<hr>
+
+<h2>습성</h2>
+
+<div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> 전체보기</button>
+  <button class="btn" onclick="filterSelection('Lizard')"> 도마뱀</button>
+  <button class="btn" onclick="filterSelection('Turtle')"> 거북이</button>
+  <button class="btn" onclick="filterSelection('Flog')"> 개구리</button>
 </div>
-  	
-	<hr>
+
+<!-- Portfolio Gallery Grid -->
+<div class="row">
+  <div class="column Lizard">
+    <div class="content">
+      <img src="${pageContext.request.contextPath}/img/1.jpg" alt="Mountains" style="width:100%">
+      <h4>술라웨시 워터 스킨크</h4>
+      <p>악어와 닮은 생김새로 크로커다일 스킨크라도 불리는 스킨크입니다.<br>
+                    물을 좋아하지만 성격이 예민하고 겁이 많습니다.</p> 
+    </div>
+  </div>
+  <div class="column Lizard">
+    <div class="content">
+    <img src="${pageContext.request.contextPath}/img/2.jpg" alt="Mountains" alt="Lights" style="width:100%">
+      <h4>사바나 모니터 베이비</h4>
+      <p>지능이 매우 높고 순한종으로  애완파충류 중 강아지와 같은 입지를<br> 
+ 		  가지고있습니다. 특히 '개바나'라고도 불립니다.</p>
+    </div>
+  </div>
+  <div class="column Flog">
+    <div class="content">
+    <img src="${pageContext.request.contextPath}/img/3.jpg" alt="Mountains" alt="Nature" style="width:100%">
+      <h4>자이언트 픽시 프로그</h4>
+      <p>뭐든 잘먹는 식성과20cm까지 자라는 크기로 많은 매니아들이<br>
+       	  좋아하는 종이기도 합니다. 누구나 쉽게 키울수있는 귀여운 개구리입니다.</p>
+    </div>
+  </div>
+  
+  <div class="column Flog">
+    <div class="content">
+      <img src="${pageContext.request.contextPath}/img/4.jpg" alt="Mountains" alt="Car" style="width:100%">
+      <h4>브라운[탄]팩맨 베이비</h4>
+      <p>생김새가 게임 '팩맨'을 닮았다하여 팩맨이라고 불리는 개구리로<br>
+                    눈 앞에 보이는 먹이는 무엇이든 통채로 잡아먹는 모습이 매우 귀엽습니다.</p>
+    </div>
+  </div>
+  <div class="column Turtle">
+    <div class="content">
+    <img src="${pageContext.request.contextPath}/img/5.jpg" alt="Mountains" alt="Car" style="width:100%">
+      <h4>텍사스 테라핀</h4>
+      <p>용골이 큰 편이며 등갑은 어두운 갈색에서 밝은 갈색으로 나타납니다.<br>
+                    사료도 가리는것 없이 아주 잘먹습니다.</p>
+    </div>
+  </div>
+  <div class="column Flog">
+    <div class="content">
+    <img src="${pageContext.request.contextPath}/img/6.jpg" alt="Mountains" alt="Car" style="width:100%">
+      <h4>부쉬벨드 레인프록</h4>
+      <p>흔히 알려진 사막 비개구리와 유사한 종입니다. 평상시에는 흙 안쪽으로<br>
+                    숨어있다가, 비가 오면 나와 먹이활동을 하는 개구리입니다.</p>
+    </div>
+  </div>
+
+  <div class="column Lizard">
+    <div class="content">
+      <img src="${pageContext.request.contextPath}/img/7.jpg" alt="Mountains" alt="Car" style="width:100%">
+      <h4>메라우케 블루텅 스킨크(성체급)</h4>
+      <p>많은 매니아들이 즐겨 사육하는 블루텅 스킨크(메라우케)입니다.<br>
+      	  주로 곤충과 바나나를 즐겨 먹는 잡식성 파충류로 동물성 성분이 강한<br>
+      	  개사료를 잘먹습니다.</p>
+    </div>
+  </div>
+  <div class="column Turtle">
+    <div class="content">
+    <img src="${pageContext.request.contextPath}/img/8.jpg" alt="Mountains" alt="Car" style="width:100%">
+      <h4>화이트 레오파드 육지거북</h4>
+      <p>일반 레오파드 육지거북에 비해 체색이 밝으며, 스큠의 가장자리에서 퍼지는<br>
+      	  방사상의 검은선이 매력적인 개체들입니다.</p>
+    </div>
+  </div>
+  <div class="column Lizard">
+    <div class="content">
+    <img src="${pageContext.request.contextPath}/img/9.jpg" alt="Mountains" alt="Car" style="width:100%">
+      <h4>블러드 트렌슬루센트 비어디</h4>
+      <p>레오파드게코와 더불어 도마뱀 입문중으로 가장 많이 추천되는 종입니다.<br>
+      	  순해서 입문종으로 많이 추천되는 만큼 건강하고 사육난이도 또한 쉽습니다.</p>
+    </div>
+  </div>
+<!-- END GRID -->
+</div>
+
+<!-- END MAIN -->
+</div>
+</div>
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("column");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
 	
-	
-	
-	<!-- 파충류 리스트 -->
-	- 파충류
-	
-	<!-- 양서류 리스트 -->
-	- 양서류
-	
-	<!-- 상품 리스트 -->
-	- 상품
-	
-	
-	<hr>
 	
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>	

@@ -64,10 +64,6 @@
   	opacity: 1;
   }
   
-  
-  
-  
-  	
   	.newlist {
   		width: 80%;
   		margin: 0 auto;
@@ -111,41 +107,53 @@
 	}
 
 
+
+/* Center website */
+.main {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0;
+}
+
 .row {
-	margin: 0 auto;
-	padding: 0;
-	width: 80%;
-} 
-
-/* Fake image */
-.fakeimg {
-  width: 100%;
-  height: 100%;
+  margin: 10px -16px;
 }
 
-/* Add a card effect for articles */
-.card {
-  padding: 10px;
-  margin-top: 20px;
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
 }
 
-.card img {
-	padding: 0;
-	margin: 0 auto;
-	width: 100%;
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  display: none; /* Hide all elements by default */
 }
 
-/* Clear floats after the columns */
+/* Clear floats after rows */ 
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-  .swiper-container .second_banner {   
-    width: 100%;
-    padding: 0;
-  }
+/* Content */
+.content {
+  width: 100%;
+  background-color: white;
+  padding: 10px;
 }
+
+.content p {
+	width: 100%;
+	height: 100px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+
+
