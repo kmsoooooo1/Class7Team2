@@ -15,9 +15,7 @@
 <script type="text/javascript">
 
 function doAction(){
-	
-	alert("doAction");
-	
+
 	document.fr.submit();
 	
 };
@@ -67,6 +65,7 @@ function doAction(){
 			<col width="15%" />
 			<col width="20%" />
 			<col width="10%" />
+
 		</colgroup>
 		<thead>
 		  <tr>
@@ -109,7 +108,7 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
-		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=0','_blank','width=500,height=400',false);">
+		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?C=0'">
 		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">

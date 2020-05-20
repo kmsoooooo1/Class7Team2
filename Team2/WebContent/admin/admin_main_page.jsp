@@ -21,6 +21,7 @@
 			<h4> 동물 파트 </h4>
 			<a href="./AnimalList.aa?category=all"> 모든 동물 리스트 </a>
 			<a href="./AnimalAdd.aa">동물 추가하기</a>
+			<a href="./AnimalNew.aa">동물 신상리스트</a>
 		</div>
 		
 		<!-- 관리자 상품 파트 -->
@@ -35,6 +36,12 @@
 			<h4> 멤버 파트 </h4>
 			<a href="./MemberList.me">회원 리스트 보기</a>
 			<a href="https://center-pf.kakao.com/_iLxlxexb/chats">카카오 상담 내역보기</a>
+		</div>
+		
+		<!-- 관리자 게시판 파트 -->
+		<div>
+			<h4> 게시판 파트 </h4>
+			<a href="./AdminBoard.bo">회원 리스트 보기</a>
 		</div>
 	</div>
 	

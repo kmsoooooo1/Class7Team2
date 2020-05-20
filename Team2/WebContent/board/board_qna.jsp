@@ -1,3 +1,4 @@
+<%@page import="team2.board.action.cSet"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
@@ -34,6 +35,12 @@ function doAction(){
 		String pageNum = (String)request.getAttribute("pageNum");
 		String category = (String)request.getAttribute("category");
 		String search = (String)request.getAttribute("search");
+		
+		cSet cset = new cSet();
+		
+		cset.setCategory(category);
+		
+		int c = cset.getC();
 		
 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 
@@ -111,6 +118,7 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
+
 		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?c=2'">
 		</div>
 	<ul class="paging">
