@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/insert.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -64,7 +65,6 @@
     
 	function save(){
 	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-	    document.fr.b_category.disabled="";
 	    		
 // 		document.fr.submit();
 		
@@ -84,7 +84,7 @@
             data : formData,
             success : function(result) {
     			alert("글 등록에 성공하였습니다.");
-    			location.href="./BoardMain.bo";
+    			location.href="./BoardList.bo?category=0";
             },
 		
 	        error: function(e) {
@@ -125,58 +125,54 @@
 	
 	String p_code = request.getParameter("CODE");
 %>
-<h1><%=cSet.Category[c] %> 작성</h1>
-
-	<form name="fr" id="fr" action="./InsertAction.bo" method="post" enctype="multipart/form-data">
-		카테고리
-		<select name="b_category" disabled="disabled">
-			<%for(int i = 0; i<cSet.Category.length; i++){ %>
-				<option value=<%=cSet.Category[i] %> 
-				<%if(i==c){ %>
-					selected="selected"
-				<%} %>
-				><%=cSet.Category[i]%></option>
-			<%} %>
-		</select><br>
-		
-<%	if(!(c<1)){ %>
-		상품코드 : <input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
-<%		if(p_code!=null){
-					
-			ProductDTO dto = new ProductDTO(p_code);
-			System.out.println(dto);
-%>
-		<br>
-		<table>
-			<tr>
-				<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
-				<td><%=dto.getCategory() %></td>
-				<td><%=dto.getSub_category() %></td>
-				<td><%=dto.getSub_category_idx() %></td>
-				<td><%=dto.getName() %></td>
-			</tr>
-		</table>
-<%		}
-	} %>
-		글제목<input type="text" name="b_title"><br>
-		내용<textarea name="ir1" id="ir1" rows="10" cols="100">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
-		
-
-		
-		<input type="button" onclick="return save();" value="확인"/>
-		<button type="button" onclick="">목록으로</button>
-	</form>
-	
-		<div class="input_wrap">
-		첨부파일 (첫번째 사진이 썸네일) <br>
-		<input type="file" name="file[]" id="input_imgs" multiple="multiple"><br>
-		
-		</div>
-		
-        <div class="imgs_wrap">
-            <img id="img"/>
-        </div>
-
+	<div id="container">
+		<h1><%=cSet.Category[c] %></h1>
+		<span class="board_title"></span>
+		<form name="fr" id="fr" action="./InsertAction.bo" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="b_category" value=<%=cSet.Category[c] %>>
+	<%	if(c==1 || c==2 && p_code!=null){ %>
+			<div class="input_wrap">
+				<span class="board_title">상품코드</span>
+				<input type="text" name="b_p_code" value=<%=p_code %> readonly="readonly">
+		<%		if(p_code!=null){
+							
+					ProductDTO dto = new ProductDTO(p_code);
+					System.out.println(dto);
+		%>
+				<br>
+				<table>
+					<tr>
+						<td><img src="./upload/multiupload/<%=dto.getImg_src()%>" width="100" height="100"></td>
+						<td><%=dto.getCategory() %></td>
+						<td><%=dto.getSub_category() %></td>
+						<td><%=dto.getSub_category_idx() %></td>
+						<td><%=dto.getName() %></td>
+					</tr>
+				</table>
+			</div>
+	<%		}
+		} %>
+			<div class="input_wrap">
+				<span class="board_title">제목</span><input class="input_text" type="text" name="b_title"><br>
+			</div>
+			<div class="input_wrap">
+				<textarea name="ir1" id="ir1" style="width:100%;min-width:260px;">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
+			</div>
+			
+			<div class="input_wrap">
+				<span class="board_title">첨부파일</span>
+				<input type="file" name="file[]" id="input_imgs" multiple="multiple"><br>
+			</div>
+	        <div class="imgs_wrap">
+	            <img id="img"/>
+	        </div>
+	        <div class="input_wrap">
+				<input class="input_btn" type="button" onclick="return save();" value="등록하기"/>
+				<button class="input_btn" type="button" onclick="">목록으로</button>
+			</div>
+        </form>
+	</div>
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 
 <script type="text/javascript">
