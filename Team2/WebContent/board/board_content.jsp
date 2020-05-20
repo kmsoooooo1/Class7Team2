@@ -65,7 +65,7 @@
 
 
 	<%
-		if(category.equals("Review")){	
+		if(category.equals("Review") && category.equals("QnA")){	
 			if(!p_code.equals("null")){
 	%>
 		<tr>

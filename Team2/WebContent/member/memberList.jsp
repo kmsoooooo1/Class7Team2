@@ -9,6 +9,10 @@
 <title>회원 목록 페이지</title>
 </head>
 <body>
+
+	<!-- Header -->
+	<jsp:include page="/include/header.jsp" />
+
 <%
 		// 세션값 제어( 로그인,관리자 여부 )
 		String id = (String) session.getAttribute("id");
@@ -60,5 +64,8 @@
 	  
 	  <h2><a href="./MemberPage.me"> 마이페이지 이동 </a></h2>
 
+
+	<!-- Footer -->
+	<jsp:include page="/include/footer.jsp" />
 </body>
 </html>
