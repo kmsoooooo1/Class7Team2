@@ -386,7 +386,7 @@
 									if (g_amount == 0) {
 								%>
 								<span class="buy_btn"> 품절 </span>
-								<button class="fav_btn" type="button">관심상품</button>
+								<button class="fav_btn" type="button" onclick="wishlistChecked();">관심상품</button>
 								<%
 									} else {
 								%>
@@ -394,7 +394,7 @@
 									onclick="valueOrderChecked();">바로구매</button>
 								<button class="buy_btn" type="button"
 									onclick="valueBasketChecked();">장바구니</button>
-								<button class="fav_btn" type="button">관심상품</button>
+								<button class="fav_btn" type="button" onclick="wishlistChecked();">관심상품</button>
 
 								<%
 									}
@@ -1765,6 +1765,22 @@
 			}
 		}
 	}
+	
+	//관심상품 버튼을 클릭했을 시
+	function wishlistChecked(){
+	
+		document.fr.action="./WishListAdd.wl"; // db에 값 넣기
+		document.fr.submit();
+		
+		var goWishlist = confirm("관심상품에 등록되었습니다. \n관심상품으로 이동하시겠습니까?")
+		if(goWishlist){
+			location.href="./WishList.wl";
+		}else{
+			window.location.reload(); //현재 페이지 새로고침
+		}
+	
+	}
+	
 	
 	//소메뉴 눌렸을시 --------------------------------------------------------------
 	
