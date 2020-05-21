@@ -4,7 +4,10 @@
 	box-sizing: border-box;
 	margin : 0;
 	padding : 0;
+<<<<<<< HEAD
+=======
 }
+
 
 .board{
 	width: 80%;
@@ -47,16 +50,35 @@
 }
 
 .board table tr.etc ul{
+>>>>>>> refs/heads/master
 	list-style: none;
 }
 
 
+<<<<<<< HEAD
+#container{
+	width: 70%;
+	margin: 0 auto;
+=======
 .board table tr.etc li{
 	float: left;
 	width: 40%;
 	
+>>>>>>> refs/heads/master
 }
 
+<<<<<<< HEAD
+.table_wrap{
+	width: 100%;
+	margin: 20px 0;
+}
+
+.content_table{
+	width: 100%;
+	border-collapse: collapse;
+	border-top:2px solid #aaa;
+	border-bottom:2px solid #aaa;
+=======
 .board table tr.etc li.date .datespan{
 	width: 10%;
     background-color: #fff;
@@ -64,21 +86,42 @@
     font-weight: normal;
     letter-spacing: 1px;
     
+>>>>>>> refs/heads/master
 }
 
+<<<<<<< HEAD
+.content_tr{
+	height: 50px;
+	border-top:1px solid #aaa;
+	border-bottom:1px solid #aaa;
+}
+.product_tr{
+	border-bottom: 1px solid #aaa;
+=======
 .etc ul .rightspan{
     padding: 9px 10px 9px 15px;
+>>>>>>> refs/heads/master
 }
 
 .content{
+<<<<<<< HEAD
+	padding: 1.2em;
+	min-height: 300px;
+=======
 	overflow : hidden;
 	margin:0 auto;
 	width: 99%;
 	min-height: 200px;
 	padding : 10px;
 	font-size: 1.5em;
+>>>>>>> refs/heads/master
 }
 
+<<<<<<< HEAD
+.content_table tr th{
+	width: 15%;
+	font-size: 0.9em;
+=======
 .bottom{
 	width: 80%;
 	margin: 0 auto;
@@ -88,8 +131,22 @@
 .button{
 	margin: 0 auto;
 	min-height: 50px;
+>>>>>>> refs/heads/master
 }
+.table_td1{
+	width: 85%;
+	font-size: 0.8em;
+}
+.table_td2{
+	width: 35%;
+	font-size: 0.8em;
+}
+/* ===========      comment        ============ */
 
-.comment_wrap{
-	text-align: center;
-}
+
+
+
+
+
+
+
