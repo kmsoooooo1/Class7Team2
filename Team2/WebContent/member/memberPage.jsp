@@ -16,6 +16,7 @@
 </style>
 </head>
 <body>
+
 <!-- Header -->
 <jsp:include page="/include/header.jsp" />
 <!-- 
@@ -36,7 +37,7 @@
 	   MemberDTO mdto = mdao.getMember(id);
 	   String name = mdto.getName();
 	 %>
-	 
+ 
  <div class="member_div">
  <div class="content">
  <div>
