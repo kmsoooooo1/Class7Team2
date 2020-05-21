@@ -186,6 +186,7 @@ public class BasketDAO {
 						pdto.setProduct_discount_rate(rs2.getInt("a_discount_rate"));
 						pdto.setProduct_price_origin(rs2.getInt("a_price_origin"));
 						pdto.setProduct_amount(rs2.getInt("a_amount"));
+						pdto.setCategory(rs2.getString("category"));
 						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
 					}
 				}
@@ -208,6 +209,7 @@ public class BasketDAO {
 						pdto.setProduct_price_origin(rs2.getInt("g_price_origin"));
 						pdto.setProduct_amount(rs2.getInt("g_amount"));
 						pdto.setProduct_option_price(rs2.getInt("g_option_price"));
+						pdto.setCategory(rs2.getString("category"));
 						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
 					}
 				}

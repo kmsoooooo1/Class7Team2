@@ -12,6 +12,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<link href="${pageContext.request.contextPath}/css/order.css?ver=2" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -29,35 +31,52 @@
 
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
+	<div class="container">
+	<div class="contents">
 	<!-- 장바구니 테이블 생성 -->
-	CART
+	<div class="h2"><h2>CART</h2></div>
 	<form action="" method="post" name="fr"> 
 	
 		<input type="hidden" id="selectedCodes" name="seletedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
-		<table border="1">
+		<div class="orderListArea">
+		<div class="title">
+			<h3>일반 상품</h3>
+		</div>
+		<table border="1" class="list">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
+			<colgroup>
+				<col style="width:5%; ">
+				<col style="width:10%; ">
+				<col style="width:auto; ">
+				<col style="width:10%; ">
+				<col style="width:15%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+			</colgroup>
+			<thead>
 			<tr>
-				<td> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </td>
-				<td>이미지</td>
-				<td>상품정보</td>
-				<td>판매가<br>(적립예정)</td>
-				<td>수량</td>
-				<td>배송구분</td>
-				<td>배송비</td>
-				<td>합계</td>
-				<td>주문관리</td>
+				<th scope="col"> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </th>
+				<th scope="col">이미지</th>
+				<th scope="col">상품정보</td>
+				<th scope="col">판매가<br>(적립예정)</th>
+				<th scope="col">수량</th>
+				<th scope="col">배송구분</th>
+				<th scope="col">배송비</th>
+				<th scope="col">합계</th>
+				<th scope="col">주문관리</th>
 			</tr>
+			</thead>
 			<%
 				if(basketList.size() == 0){
 			
 			%>
-				<tr>
-					<td colspan="9"> 장바구니가 비어있습니다. </td>
-				</tr>
+				</table>
+				<p class="empty">장바구니가 비었습니다.</p>
 			<%
 				}
 				for (int i = 0; i < basketList.size(); i++) {
@@ -147,7 +166,7 @@
 					<!-- 장바구니 수량  --> 
 					<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
 					<!-- 수량 +/- 버튼 -->
-					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'>
+					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'> 
 					<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
 				</td>
 				
@@ -223,16 +242,18 @@
 				}
 			%>
 		</table>
-		<button type="button" onclick="deleteSoldout()"> 품절삭제 </button>
-		<button type="button" onclick="deleteSelected()"> 선택삭제 </button>
+		</div>
 		
-		<hr>
+		<div class="btn_div">
+		<button type="button" class="btn" onclick="deleteSoldout()"> 품절삭제 </button>
+		<button type="button" class="btn" onclick="deleteSelected()"> 선택삭제 </button>
+		</div>
 		
-		<table border="1">
+		<table border="1" class="list">
 			<tr>
-				<td>총 상품금액</td>
-				<td>총 배송비</td>
-				<td>결제 예정 금액</td>
+				<th>총 상품금액</th>
+				<th>총 배송비</th>
+				<th>결제 예정 금액</th>
 			</tr>
 			<tr>
 			
@@ -282,10 +303,11 @@
 				
 			</tr>
 		</table>
-		<br>
-		<button type="button" onclick="orderAll();"> 전체상품주문 </button>
-		<button type="button" onclick="orderSelected();"> 선택상품주문 </button>
-		<input type="button" value="쇼핑계속하기">
+		<div class="orderbtn_div">
+		<button type="button" class="order_btn" onclick="orderAll();"> 전체상품주문 </button>
+		<button type="button" class="order_btn" onclick="orderSelected();"> 선택상품주문 </button>
+		<input type="button" class="order_btn" value="쇼핑계속하기">
+		</div>
 	</form>
 	
 	<br>
@@ -311,8 +333,8 @@
 			</ol>
 		</td>
 	</table>
-
-
+	</div>
+	</div>
 	<!-- Footer -->
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
 	

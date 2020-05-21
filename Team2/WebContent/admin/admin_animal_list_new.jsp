@@ -15,19 +15,15 @@
 	<%
 		//AnimalListAction 객체에서 저장된 정보를 저장 
 		List<AnimalDTO> admin_animalList = (List<AnimalDTO>) request.getAttribute("admin_animalList");
-		String[] arr = new String[5];
 		
-		for(int i=0; i<admin_animalList.size(); i++){
-			AnimalDTO adto = admin_animalList.get(i);
-			
-			arr[i] = adto.getA_thumbnail();
-		}
+
 	%>
 	
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
+
 
 
 		
@@ -39,75 +35,15 @@
   <h2>신상품 리스트</h2>
 	<div class="swiper-wrapper">
 		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-10">
-		  <img src="./upload/multiupload/<%=arr[0]%>">
-		 </a>
+		
+			<%	for(int i=0; i<admin_animalList.size(); i++){
+				AnimalDTO adto = admin_animalList.get(i);
+			 %>
+			  <img src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width=100 height=100 />
+		
+			 <%	} %>
 		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-150">
-		   <img src="./upload/multiupload/<%=arr[1]%>">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		   <img src="./upload/multiupload/<%=arr[2]%>">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-10">
-		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-150">
-		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-10">
-		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-150">
-		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
+		 </div>
 	</div>
 
 	<!-- 페이징 -->

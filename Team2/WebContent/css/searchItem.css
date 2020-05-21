@@ -70,6 +70,9 @@
 .choice_tr{
 	border-bottom: 1px solid #aaa;
 }
+.choice_tr1{
+	border-bottom: 1px solid #aaa;
+}
 .choice_tr:hover{
 	cursor: pointer;
 }

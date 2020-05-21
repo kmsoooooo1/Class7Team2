@@ -1,6 +1,9 @@
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,9 +23,19 @@
 		if(sub_category_index == null){ 
 			sub_category_index = "";
 		}
+		
+		
 	
 		//AnimalListAction 객체에서 저장된 정보를 저장 
 		List<AnimalDTO> animalList = (List<AnimalDTO>) request.getAttribute("animalList");
+		
+		//paging 사용 객체
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		String pageNum = (String)request.getAttribute("pageNum");
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+	
 	%>
 
 	<!-- Header -->
@@ -79,11 +92,27 @@
 				</li>
 		<%} %>
 		</ul>
-		<ul id="pageList">
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-		</ul>
+
+	<div class="bottom">
+	<ul class="paging">
+		<c:if test="${pageMaker.prev }">
+		<li>
+			<a href='<c:url value="./AnimalList.an?category=${category }&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">◀</i></a>	
+		</li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li>
+			<a href='<c:url value="./AnimalList.an?category=${category}&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageNum}"/>'><i class="fa">${pageNum }</i></a>
+		</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<li>
+			<a href='<c:url value="./AnimalList.an?category=${category }&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">▶</i></a>
+		</li>
+		</c:if>
+	</ul>
+	</div> 
+	
 	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
