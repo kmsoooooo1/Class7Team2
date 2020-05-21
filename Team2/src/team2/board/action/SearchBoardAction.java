@@ -28,6 +28,8 @@ public class SearchBoardAction implements Action {
 		
 		cSet cset = new cSet();
 		
+		cset.setC(c);
+		
 		System.out.println("category : "+c+"/search : "+search);
 		
 		System.out.println("cset = "+cset);
@@ -35,10 +37,10 @@ public class SearchBoardAction implements Action {
 		//total 게시판 글 수
 		int total = bdao.serachCount(cset, search);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("category", c);
-		session.setAttribute("search", search);
-		session.setAttribute("pageSize", pageSize);
+//		HttpSession session = request.getSession();
+//		session.setAttribute("c", c);
+//		session.setAttribute("search", search);
+//		session.setAttribute("pageSize", pageSize);
 
 
 		//  ----페이징 처리-----
@@ -49,11 +51,7 @@ public class SearchBoardAction implements Action {
 			}
 			
 			int currentPage = Integer.parseInt(pageNum);
-			
-			if(c==1){
-				pageSize = 8;
-			}
-			
+						
 			Criteria cri = new Criteria();
 			
 			cri.setPage(currentPage);
@@ -78,6 +76,7 @@ public class SearchBoardAction implements Action {
 			request.setAttribute("cri", cri);
 			request.setAttribute("pageMaker", pageMaker);
 			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("pageSize", pageSize);
 		
 			//카테고리별 전송 값
 			request.setAttribute("c", cset.getC());	
