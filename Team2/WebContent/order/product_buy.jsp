@@ -336,7 +336,7 @@
 			
 			<!-- 총 할인 금액 -->
 			<td>
-				-0원
+				-<span id="total_discount_rate">0</span>원
 			</td>
 			
 			<!-- 결제 에정 금액 -->
@@ -424,7 +424,10 @@
 						</td>
 						
 						<!-- 쿠폰선택 버튼 -->
-						<td> <button type="button" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button></td>
+						<td> 
+							<button type="button" id="searchCouponBtn" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button>
+							<button type="button" id="cancelCouponBtn" onclick="cancelCoupon('<%=i%>');" style="display: none;"> 다시선택 </button>
+						</td>
 						
 						<!-- 쿠폰할인가  -->
 						<td> <span id="discount_rate<%=i%>">-0</span>원 </td>
@@ -756,10 +759,36 @@
 		document.getElementById("selectedOptions").value = selectedOptions;
 		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
 		
+		var total_discount_rate = document.getElementById("total_discount_rate").innerHTML;
+		
 		var num = i;
 		
-		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num, '_blank','width=800,height=700',false);
+		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate, '_blank','width=800,height=700',false);
     }
+    
+    //쿠폰 다시선택 버튼 눌렸을때
+    function cancelCoupon(i){
+    	
+    	//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
+		for(var j=0; j<basketList.length; j++){
+			//selectedCodes 안에 사용자가 선택한 codes들 담기
+			selectedCodes += ($('#b_code'+j).val() + ", ");
+			selectedOptions += ($('#b_option'+j).val() + ", ");
+			selectedDeliveryMethods += ($('#b_delivery_method'+j).val() + ", ");
+		}
+
+		//추가된 values 변수를 태그에 담기
+		document.getElementById("selectedCodes").value = selectedCodes;
+		document.getElementById("selectedOptions").value = selectedOptions;
+		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
+		
+		var total_discount_rate = document.getElementById("total_discount_rate").innerHTML;
+		
+		var num = i;
+		
+		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate, '_blank','width=800,height=700',false);
+    }
+    
     
     
 </script> 
