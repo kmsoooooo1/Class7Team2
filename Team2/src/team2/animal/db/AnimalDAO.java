@@ -325,6 +325,7 @@ public class AnimalDAO {
 		
 		try {
 			con = getConnection();
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, '%'+aset.getCategory());
 			pstmt.setString(2, '%'+aset.getSub_category());
