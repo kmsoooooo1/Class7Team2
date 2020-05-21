@@ -18,17 +18,17 @@ public class SearchBoardAction implements Action {
 		
 		BoardDAO bdao = new BoardDAO();
 		
+//		String category = (String)request.getParameter("b_category");
+
 		int c = Integer.parseInt(request.getParameter("category"));
 		
 		String search = (String) request.getParameter("search");
 		
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		
-		System.out.println("category : "+c+"/search : "+search);
-		
 		cSet cset = new cSet();
 		
-		cset.setC(c);
+		System.out.println("category : "+c+"/search : "+search);
 		
 		System.out.println("cset = "+cset);
 		
@@ -36,8 +36,9 @@ public class SearchBoardAction implements Action {
 		int total = bdao.serachCount(cset, search);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("category", cset.getC());
+		session.setAttribute("category", c);
 		session.setAttribute("search", search);
+		session.setAttribute("pageSize", pageSize);
 
 
 		//  ----페이징 처리-----
@@ -83,6 +84,7 @@ public class SearchBoardAction implements Action {
 			
 			//검색 search 값
 			request.setAttribute("search", search);
+			request.setAttribute("category", cset.getCategory());
 			
 			ActionForward forward = new ActionForward();
 
