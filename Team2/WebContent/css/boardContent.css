@@ -54,7 +54,37 @@
 }
 /* ===========      comment        ============ */
 
+.comment_total_wrap{
+	width: 100%;
+	background-color: #aaa;
+	padding:1em;
+	margin: 20px 0 40px;
+}
 
+.comment_insert_wrap{
+	width: 100%;
+	background-color: #bbb;
+	height: 80px;
+	margin-bottom: 20px;
+}
+
+.comment{
+	width: 95%;
+	height: 100%;
+	float:left;
+	resize: none;
+	padding: 0.8em;
+}
+.comment_btn{
+	width:5%;
+	height:100%;
+	float:left;
+}
+.comment_insert_wrap:after{
+	display:block;
+	content:"";
+	clear: both;
+}
 
 
 
