@@ -309,6 +309,17 @@ body{
   margin-left: 10px;
 }
 
+	@media screen and (max-width: 480px) {
+		#quick a{
+			font-size: 10px;
+		}
+	}
+	@media screen and (max-width: 736px) {
+		#quick a{
+			font-size: 10px;
+		}
+	}
+
 #quick a:HOVER {
   background-color: #000;
 }
