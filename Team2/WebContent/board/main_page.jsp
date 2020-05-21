@@ -184,11 +184,11 @@
 		
 	}); 
   </script>
-  
-  <div class="second_banner">
+ <div class="second_banner"> 
+  <div class="banner_img2">
    <img src="${pageContext.request.contextPath}/img/가게내부.png">
   </div>
- 
+ </div>
  <div id="body"> 
  <div class="main">
 
