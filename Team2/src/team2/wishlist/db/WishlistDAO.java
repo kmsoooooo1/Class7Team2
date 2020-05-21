@@ -42,31 +42,41 @@ public class WishlistDAO {
 	}
 	
 	//wishlistAdd(wldto)
-	public void wishlistAdd(WishlistDTO wldto){
+	public int wishlistAdd(WishlistDTO wldto){
+		int check = 0;
 		int w_num = 0;
 		
 		try {
 			con = getConnection();
 			
-			// w_num 계산
-			sql = "select max(w_num) from team2_wishlist";
+			sql = "select * from team2_wishlist where id=? and w_code=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, wldto.getId());
+			pstmt.setString(2, wldto.getW_code());
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
-				w_num = rs.getInt(1) + 1;
+				check = -1;
+			}else{
+				// w_num 계산
+				sql = "select max(w_num) from team2_wishlist";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					w_num = rs.getInt(1) + 1;
+				}
+				
+				sql = "insert into team2_wishlist values(?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, w_num);
+				pstmt.setString(2, wldto.getId());
+				pstmt.setString(3, wldto.getW_code());
+					
+				pstmt.executeUpdate();
+				
+				check = 1;
 			}
-			
-			sql = "insert into team2_wishlist values(?,?,?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, w_num);
-			pstmt.setString(2, wldto.getId());
-			pstmt.setString(3, wldto.getW_code());
-				
-			pstmt.executeUpdate();
-			
-			System.out.println("관심상품 등록 성공");
-				
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -76,7 +86,7 @@ public class WishlistDAO {
 			closeDB();
 		}
 		
-		
+		return check;
 	} //wishlistAdd(wldto)
 	
 	
@@ -183,8 +193,7 @@ public class WishlistDAO {
 		}finally{
 			closeDB();
 		}
-	}
-	//deleteWishList(wldto)
+	}//deleteWishList(wldto)
 	
 	
 	
