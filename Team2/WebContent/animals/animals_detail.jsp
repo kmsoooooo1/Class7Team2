@@ -65,11 +65,12 @@
 
 
 	<div class="container">
+		<input type="hidden" id="id" name="id" value="<%=id%>">
 		<!-- 상품 기본 정보 파트 ------------------------------------------------------------------------------------------ -->
 		<div id="menu0" class="menu">
 			<form action="" method="post" name="fr">
 				<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율, 모프, 적립금  -->
-				<input type="hidden" name="product_code"
+				<input type="hidden" id="product_code" name="product_code"
 					value="<%=animalDetail.getA_code()%>"> <input type="hidden"
 					id="a_price_origin" name="a_price_origin"
 					value="<%=animalDetail.getA_price_origin()%>"> <input
@@ -186,7 +187,7 @@
 									if (animalDetail.getA_amount() == 0) {
 								%>
 								<span class="buy_btn"> 품절 </span>
-								<button class="fav_btn" type="button">관심상품</button>
+								<button class="fav_btn" type="button" onclick="wishlistChecked();">관심상품</button>
 								<%
 									} else {
 								%>
@@ -194,7 +195,7 @@
 									onclick="valueOrderChecked();">바로구매</button>
 								<button class="buy_btn" type="button"
 									onclick="valueBasketChecked();">장바구니</button>
-								<button class="fav_btn" type="button">관심상품</button>
+								<button class="fav_btn" type="button" onclick="wishlistChecked();">관심상품</button>
 								<%
 									}
 								%>
@@ -406,6 +407,7 @@
 	
 	var selectedArray = new Array(); //사용자가 선택한 배송방법들을 담기 위한 Array 
 	
+	
 	var selectedOptions = ""; //사용자가 선택한 옵션들의 수량들을 차례대로 담는 변수
 	
 	function changeDeliMethod(){
@@ -502,7 +504,7 @@
 		$('#final_total_amount').text(final_total_amount);
 		
 		//사용자가 select option 에서 selected 한 값  input hidden value에 차례대로 넣기
-		selectedValues += (delivery_method + ",");
+		 selectedValues += (delivery_method + ",");
 		//추가된 values 변수를 태그에 담기
 		$("#selectedValues").val(selectedValues);
 		
@@ -909,6 +911,38 @@
 			}
 		}
 	}
+	
+	//관심상품 버튼 클릭 시
+	function wishlistChecked(){
+		//로그인 상태면
+		if(document.getElementById('id').value){
+			//관심상품 db에 먼저 접근하여 해당 상품코드 값 저장하기
+			$.ajax({
+				type:'get',
+				url:'./WishListAdd.wl',
+				data:'product_code='+$('#product_code').val(),
+				dataType:'html',
+				success: function(data){
+					if(data == 1){
+						var goWishlist = confirm("관심상품에 등록되었습니다. \n관심상품으로 이동하시겠습니까?")
+						if(goWishlist){
+							location.href="./WishList.wl";
+						}else{
+							window.location.reload(); //현재 페이지 새로고침
+						}
+					}else if(data == -1){
+						alert("이미 관심상품에 등록된 상품입니다.");
+					}
+				},error:function(request,status,error){
+					alert("code=" + request.status + " message=" + request.responseText +" error=" + error);
+				}
+			});
+
+		}else{
+			alert("로그인을 먼저 해주세요.");
+		}
+	}
+	
 	
 	//소메뉴 눌렸을시 ------------------------------------------------------------------------------------
 	

@@ -114,6 +114,18 @@
   </servlet-mapping>
   <!-- 장바구니 -->
   
+  <!-- 관심상품 -->
+  <servlet>
+     <servlet-name>WishListFrontController</servlet-name>
+     <servlet-class>team2.wishlist.action.WishListFrontController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>WishListFrontController</servlet-name>
+     <url-pattern>*.wl</url-pattern>
+  </servlet-mapping>	
+  <!-- 관심상품 -->
+  
   <!-- 상품 구매 -->
   <servlet>
      <servlet-name>OrderFrontController</servlet-name>

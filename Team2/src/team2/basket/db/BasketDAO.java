@@ -191,7 +191,7 @@ public class BasketDAO {
 				}
 				//만약 b_code의 앞에 한글자가 g이면 상품 DB로 들어가기
 				else if(first_letter == 'g'){
-					// 각각의 장바구니에 해당하는 상품 정보 저장
+					// 각각의 장바구니에 해당하는 상품 정보 저장	
 					sql ="select * from team2_goods where g_code = ? and g_option = ?";	
 					pstmt2 = con.prepareStatement(sql);
 					pstmt2.setString(1, bkdto.getB_code());
