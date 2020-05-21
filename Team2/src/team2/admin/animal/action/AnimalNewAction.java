@@ -21,6 +21,8 @@ public class AnimalNewAction implements Action {
 		
 		List<AnimalDTO> admin_animalList = adao.ImageNew();
 		
+		System.out.println("admin_animalList_size "+ admin_animalList.size());
+		
 		request.setAttribute("admin_animalList", admin_animalList); 
 		
 		ActionForward forward = new ActionForward();
