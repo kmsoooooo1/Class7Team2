@@ -153,7 +153,7 @@
 				<%}%>
 				
 				
-				
+			
 				<!-- 판매가(적립금) -->
 				<%if(pdto.getProduct_discount_rate() != 0){%>
 					<td><%=formatter.format(pdto.getProduct_price_sale() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
@@ -163,7 +163,7 @@
 				
 				<!-- 수량 -->
 				<td>
-					<!-- 장바구니 수량  -->
+					<!-- 장바구니 수량  --> 
 					<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
 					<!-- 수량 +/- 버튼 -->
 					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'> 

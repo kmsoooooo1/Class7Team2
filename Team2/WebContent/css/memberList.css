@@ -2,17 +2,19 @@
 
 *{
 	box-sizing: border-box;
+/* 	margin : 0; */
+/* 	padding : 0; */
 }
 
 .board{
-	min-height:460px;
-	width: 70%;
+
+	width: 80%;
 	margin: 1.2em auto;
 	text-align: center;
 }
 
 .top{
-	height : 50px;
+	height : 100%;
 	margin: 0 auto;
 }
 
@@ -20,9 +22,6 @@
 	float: left;
 }
 
-#fr{
-	float:right;
-}
 
 .list a{text-decoration: none;}
 .list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}
@@ -34,8 +33,7 @@
     border-collapse: collapse;
     text-align: center;
     line-height: 1.5;
-/*     border-left: 1px solid #ccc; */
-/*     margin: 20px 10px; */
+
 }
 
 
@@ -67,76 +65,25 @@
     border-bottom: 1px solid #ccc;
 }
 
-.list td.title {
-	text-align: left;
-}
-
 .list-div{
 	width:100%;
 	display : inline-block;
 	text-align: center;
 }
-.paging-div {
-	width:100%;
-	display : inline-block;
-	text-align: center;
-	margin:0 auto;
-}
+
 
 .bottom{
-	height: 60px;
+	height: 150px;
 }
 
 
 .button{
-	text-align:right;
+	text-align:center;
+	margin: 0;
+	padding: 0;
 }	
 
 
-
-/* 페이징  */
-.paging {
-	display:table;
-	margin-left: auto;
- 	margin-right: auto;
-	text-align: center;
-	list-style:none;
-}
-
-.paging li {
-	float:left;
-	display : inline-block;
-	text-align: center;
-}
-.paging:AFTER {
-	display: block;
-	content: "";
-	clear: both;
-}
-.paging li a {
-	padding:4px;
-	margin-right:3px;
-	width:15px;
-	color:#000;
-	font:bold 12px tahoma;
-	border:1px solid #eee;
-	text-align:center;
-	text-decoration:none;
-}
-
-.paging li a:LINK {
-	text-decoration: none;
-}
-
-.paging li a:hover, .paging li a:focus {
-	color:#fff;
-	border:1px solid #f40;
-	background-color:#f40;
-}
-
-.fa{
-	font-style: normal;
-}
 
 	@media screen and (max-width: 480px) {
 		.board{

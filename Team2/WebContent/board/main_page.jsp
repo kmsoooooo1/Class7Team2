@@ -1,3 +1,6 @@
+<%@page import="team2.animal.db.AnimalDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="team2.animal.db.AnimalDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +13,17 @@
 <link href="${pageContext.request.contextPath}/css/swiper.min.css" rel="stylesheet">
 </head>
 <body>
+<%
+	AnimalDAO adao = new AnimalDAO();
+	
+	String category = request.getParameter("category");
+	String sub_category = "";
+	String sub_category_index = "";
+	
+	List<AnimalDTO> admin_animalList = adao.ImageNew();
 
+	AnimalDTO adto = new AnimalDTO();
+%>
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
 	
@@ -26,6 +39,9 @@
       </div>
       <div class="swiper-slide">
        <img src="${pageContext.request.contextPath}/img/t3.png">
+      </div>
+      <div class="swiper-slide">
+       <img src="${pageContext.request.contextPath}/img/t4.png">
       </div>
     </div>
     <!-- 페이징 -->
@@ -45,20 +61,26 @@
    <div class="overlay">동물병원 정보</div>
   </div>
   <div class="banner_img">
-   <img src="${pageContext.request.contextPath}/img/turt.png" alt="Turtle" class="image">
+   <a href="./AnimalList.an?category=파충류&sub_category=거북">
+    <img src="${pageContext.request.contextPath}/img/turt.png" alt="Turtle" class="image">
+   </a>
     <div class="overlay">거북이</div>
   </div>
   <div class="banner_img">
-   <img src="${pageContext.request.contextPath}/img/gaeko.png" alt="Gaeko" class="image">
+   <a href="./AnimalList.an?category=파충류&sub_category=도마뱀">
+    <img src="${pageContext.request.contextPath}/img/gaeko.png" alt="Gaeko" class="image">
+   </a> 
     <div class="overlay">개코</div>
   </div>
   <div class="banner_img">
-   <img src="${pageContext.request.contextPath}/img/fl.png" alt="Flog" class="image">
+   <a href="./AnimalList.an?category=양서류">
+    <img src="${pageContext.request.contextPath}/img/fl.png" alt="Flog" class="image">
+   </a> 
     <div class="overlay">개구리</div>
   </div>
   <div class="banner_img">
    <img src="${pageContext.request.contextPath}/img/c2.jpg" alt="Flog" class="image">
-    <div class="overlay">대표 캐릭터</div>
+    <div class="overlay">GALAPAGOS</div>
   </div>
  </div>
   <!-- 신상품 리스트 -->
@@ -66,76 +88,16 @@
   <div class="swiper-container second">
   <h2>신상품 리스트</h2>
 	<div class="swiper-wrapper">
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-10">
-		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-150">
-		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-10">
-		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-150">
-		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-10">
-		  <img src="${pageContext.request.contextPath}/img/그린 바실리스크1.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-150">
-		  <img src="${pageContext.request.contextPath}/img/베일드 카멜레온.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-11">
-		  <img src="${pageContext.request.contextPath}/img/주얼드 라세타.jpg">
-		 </a>
-		</div>
-		<div class="swiper-slide">
-		 <a href="./AnimalDetail.an?a_code=a-200">
-		  <img src="${pageContext.request.contextPath}/img/플레임 할리퀸.jpg">
-		 </a>
-		</div>
+		<%	for(int i=0; i<admin_animalList.size(); i++){
+			 adto = admin_animalList.get(i);
+		%>
+			<div class="swiper-slide">
+			 <a href="./AnimalDetail.an?a_code=<%=adto.getA_code()%>">
+			  <img src="${pageContext.request.contextPath}/img/<%=adto.getA_thumbnail()%>">
+			 </a>
+			</div>
+		<%} %>
+
 	</div>
 	<!-- 페이징 -->
 	<div class="swiper-pagination"></div>
