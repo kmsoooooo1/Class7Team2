@@ -1,107 +1,80 @@
 @CHARSET "UTF-8";
 
-*{
+* {
 	box-sizing: border-box;
-	margin : 0;
-	padding : 0;
+}
+ul{
+	list-style: none;
+}
+body {
+	margin: 0;
+	padding: 0;
 }
 
-.board{
-	width: 80%;
-	margin: 0 auto;
+
+
+
+.container {
 	text-align: center;
 }
 
+.ul_wrap{
+	width: 80%;
+	margin:0 auto;
+	padding:0;
+}
+.ul_wrap li{
+	width:25%;
+	height: 15em;
+	float:left;
+	border: 1px solid #ccc;
+}
+.ul_wrap:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+.list_img{
+	
+}
+
 .top{
-	height : 50px;
-	margin: 0 auto;
+	width:80%;
+	height: 32px;
+	margin:20px auto;
 }
 
 .boardname{
-	float: left;
+	width:40%;
+	float:left;
+	text-align: left;
+	padding-left: 1em;
+}
+.boardname span{
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.boardsearch{
+	width: 60%;
+	height: 100%;
+	text-align: right;
+	float:left;
+}
+.boardsearch input{
+	height:100%;
 }
 
-#fr{
-	float:right;
-}
 
-
-.wrap a{text-decoration: none;}
-.wrap a:HOVER, .wrap a:ACTIVE, .wrap a:FOCUS {text-decoration: underline;}
-
-.wrap h1{
-	padding: 10px 0 4px;
-	border-bottom: 1px solid #aaa;
-}
-
-.ul_list{
-	list-style: none;
-	margin-left: auto;
- 	margin-right: auto;
- 	border : 1px soild;
-}
-
-.li_list {
-	float: left;
-	width : 25%;
-}
-
-.ul_list .imgli{
-	height: 200px;
-	width : 80%;
-	display : inline-block;
-}
-
-.ul_list .desc{
-	height: 150px;
-	width : 80%;
-	display : inline-block;
-	padding: 10px 8px;
-}
-
-.thumb img{
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  height: 200px;
-
-}
-
-.subject{
+.top:after{
+	display:block;
+	content:"";
 	clear: both;
-    width: 210px;
-    min-height: 52px;
-    margin: 0 6px;
 }
-
-.writer{
-	float: left;
-}
-.view{
-	float: right;
-}
-
-		@media screen and (max-width: 480px) {
-			.ul_list{
-				width: 100%;
-			}
-			.li_list{
-				width: 50%;
-				height:300px;
-			}
-			
-		}
-		@media screen and (max-width: 736px) {
-			.ul_list{
-				width: 100%;
-			}
-			.li_list{
-				width: 50%;
-				height:300px;
-			}
-		}
-		
+	
 
 .bottom{
+	margin:50px auto 80px;
+	width: 80%;
 	height: 60px;
 }
 
@@ -109,7 +82,9 @@
 .button{
 	min-height: 10px;
 	text-align:right;
-}		
+}
+
+
 
 /* 페이징  */
 ul.paging {
