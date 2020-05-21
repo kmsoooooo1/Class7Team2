@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/WishList.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>Insert title here</title>
 </head>
@@ -25,13 +25,16 @@
 	%>
 	
 	<!-- 관심상품 리스트 생성 -->
-	<div class="container">
+	<section class="mypage-cont">
 	
+	<div class="contents">
+	
+	<div class="tab-btn">
 	Wish List
+	</div>
 	
-	<hr>
 	
-	<ul class="ul_wrap">
+	<ul class="n-list-row my-like" id="prd_list">
 	
 	<%
 		int size = productInfoList.size();
@@ -56,32 +59,48 @@
 		
 		%>
 		
-		<li>
-		<div class="list_wrap">
+		<li class="n-prd-row">
+<!-- 		<div class="list_wrap"> -->
 			<input type="hidden" id="w_code<%=num%>" name="w_code<%=num%>" value="<%=wldto.getW_code()%>">
-			<input type="checkbox" id="chkBox<%=num%>" name="chkBox" value="<%=num%>" style="display: none;"> 
-			<a 
-				<%if(first_letter == 'g'){ %>
-					href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"
-				<%}else if(first_letter == 'a'){ %>
-					href="./AnimalDetail.an?a_code=<%=wldto.getW_code()%>"
-				<%} %>
-			>
-				<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> 
-				<%=pdto.getProduct_name()%> <br>
-			</a>
-			<%if(pdto.getProduct_discount_rate() != 0){ //할인율 있으면%>
-				<span style="text-decoration: line-through;"><%=newformat_price_origin%></span>원  
-				<span style="color: #f0163a;"><%=newformat_price_sale%></span>원  
-				<%=newformat_discount_rate%>% 할인 
-			<%}else{// 할인율 없으면 %>	
-				<%=newformat_price_origin%>원 
-				<%=newformat_discount_rate%>% 할인 
+			<%if(first_letter == 'g'){ %>
+				<input type="checkbox" id="chkBox<%=num%>" name="chkBox" value="<%=num%>" style="display: none;"> 
+					<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>" class="img-block"><img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<ul class="info">
+						<li class="name"> <a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"><%=pdto.getProduct_name()%> <br></a> </li>
+					<%if(pdto.getProduct_discount_rate() != 0){ //할인율 있으면%>
+						<li class="price">
+							<del> <span style="text-decoration: line-through;"><%=newformat_price_origin%></span>원 </del>
+							<span style="color: #f0163a;"><%=newformat_price_sale%></span>원  
+							<em> <%=newformat_discount_rate%>% </em> 
+						</li>
+					<%}else{// 할인율 없으면 %>	
+						<li class="price">
+							<span> <%=newformat_price_origin%>원 </span> 
+							<em> <%=newformat_discount_rate%>% </em> 
+						</li>
+					<%} %>
+				</ul>
+			<%}else if(first_letter == 'a'){ %>
+				<input type="checkbox" id="chkBox<%=num%>" name="chkBox" value="<%=num%>" style="display: none;"> 
+					<a href="./AnimalDetail.an?a_code=<%=wldto.getW_code()%>"><img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<ul class="info">
+						<li class="name"> <a href="./AnimalDetail.an?a_code=<%=wldto.getW_code()%>"><%=pdto.getProduct_name()%> <br></a> </li>
+					<%if(pdto.getProduct_discount_rate() != 0){ //할인율 있으면%>
+						<li class="price">
+							<del> <span style="text-decoration: line-through;"><%=newformat_price_origin%></span>원 </del>  
+							<span style="color: #f0163a;"><%=newformat_price_sale%></span>원  
+							<em> <%=newformat_discount_rate%>% </em> 
+						</li>
+					<%}else{// 할인율 없으면 %>	
+						<li class="price">
+							<span> <%=newformat_price_origin%>원 </span> 
+							<em> <%=newformat_discount_rate%>% </em> 
+						</li>
+					<%} %>
+				</ul>
 			<%} %>
-			
 		
-		
-		</div>
+<!-- 		</div> -->
 		</li>	
 		
 		<% 	
@@ -108,7 +127,9 @@
 		<li>2</li>
 		<li>3</li>
 	</ul>
+	
 	</div>
+	</section>
 	
 	
 	<!-- Footer -->
