@@ -120,25 +120,16 @@
 		</div>
 		
 		<div class="comment_total_wrap">
-			<div class="comment_insert_wrap">
-				<form name="fr" action="./InsertCommentAction.bo?num=<%=num %>&pageNum=<%=pageNum %>" method="post">
+			
+			<form name="fr" action="./InsertCommentAction.bo?num=<%=num %>&pageNum=<%=pageNum %>" method="post">
+				<div class="comment_insert_wrap">
 					<input type="hidden" name="c_category" value="board">
 					<input type="hidden" name="c_b_idx" value=<%=bdto.getB_idx()%>>
-					<textarea class="comment" name="comment" 
-						<%if(id2!=null){ %>
-						placeholder="댓글을 입력해 주세요."
-						<%}else{ %>
-						placeholder="로그인이 필요합니다."
-						disabled="disabled"
-						<%} %>
-						></textarea>
-						<button class="comment_btn" type="button" onclick="return insertCommenctCheck()"
-						<%if(id2==null){ %>
-							disabled="disabled"
-						<%} %>
-					>등록</button>
-				</form>
-			</div>
+					<textarea class="comment" name="comment"<%if(id2!=null){ %>placeholder="댓글을 입력해 주세요."<%}else{ %>placeholder="로그인이 필요합니다."disabled="disabled"<%} %>></textarea>
+					<button class="comment_btn" type="button" onclick="return insertCommenctCheck()"<%if(id2==null){ %>disabled="disabled"<%} %>>등록</button>
+				</div>
+			</form>
+			
 			<div class="comment_list_wrap">
 				<ul class="comment_list">	
 				<%if(list.size()>0){
@@ -146,31 +137,33 @@
 					int cnt = 0;
 					for(CommentDTO dto : list){ %>
 					
-					<li>
+					<li class="comment_list_li">
 						<div class="comment_wrap comment<%=dto.getC_idx()%>">
 							<div class="comment_writer">
-								작성자<%=dto.getC_id() %>
-								IP : <%=dto.getIp_addr() %>
-								작성일자 : <%=dto.getC_regdate() %>
+								<span class="comment_info_title">Comment By.</span><span class="comment_info_writer"><%=dto.getC_id() %></span>
+								<span class="comment_info_date"><%=dto.getC_regdate() %></span>
 							</div>
 							<div class="comment_content">
 								<div class="commentInfo comment<%=cnt%>info">
 									 <%=dto.getC_comment() %><br>
 								</div>
+							<form name="updatefr" action="./updateCommentAction.bo" method="post" style="height: 100%;">
 								<div class="commentUpdate comment<%=cnt%>update">
-									<form name="updatefr" action="./updateCommentAction.bo" method="post">
-										<input type="hidden" name="num" value=<%=num%>>
-										<input type="hidden" name="pageNum" value=<%=pageNum%>>
-										<input type="hidden" name="cnum" value=<%=dto.getC_idx() %>>
-										<textarea name="comment"><%=dto.getC_comment()%></textarea>
-										<div class="comment_update_btn1">
-											<button type="button" type="button" onclick="return updateCommentCheck(<%=cnt%>)">수정</button>
-											<button type="button" type="button" onclick="updateCommentCancle(<%=cnt%>)">취소</button>
-										</div>
-									</form>
+									<input type="hidden" name="num" value=<%=num%>>
+									<input type="hidden" name="pageNum" value=<%=pageNum%>>
+									<input type="hidden" name="cnum" value=<%=dto.getC_idx() %>>
+									<div class="comment_update_text_wrap">
+										<textarea class="update_comment" name="comment"><%=dto.getC_comment()%></textarea>
+									</div>
+									<div class="comment_update_btn_wrap2">
+										<button type="button" type="button" onclick="return updateCommentCheck(<%=cnt%>)">수정</button>
+										<button type="button" type="button" onclick="updateCommentCancle(<%=cnt%>)">취소</button>
+									</div>
 								</div>
+							</form>
 							<%if(id2!=null && id2.equals(dto.getC_id())){ %>
-								<div class="comment_update_btn2">
+								<div class="show_update_btn" onclick="showUpdate(<%=cnt%>);"></div>
+								<div class="comment_update_btn_wrap1 update_btn_wrap<%=cnt%>">
 									<button onclick="deleteComment(<%=dto.getC_idx()%>);">삭제</button>
 									<button onclick="updateComment(<%=cnt %>)">수정</button>
 								</div>
@@ -184,7 +177,7 @@
 				  }else{ %>
 				  		<li>
 				  			<div class="content_wrap">
-				  			작성된 댓글이 없습니다.
+				  				<div class="no_content_list">작성된 댓글이 없습니다.</div>
 				  			</div>
 				  		</li>
 			  <%  } %>
@@ -206,6 +199,7 @@
 	function updateComment(c_idx){
  		document.getElementsByClassName('comment'+c_idx+'info')[0].style.display = "none";
  		document.getElementsByClassName('comment'+c_idx+'update')[0].style.display = "block";
+ 		showUpdate(c_idx);
 	}
 	
 	function updateCommentCancle(c_idx){
@@ -218,6 +212,15 @@
 			location.href="./deleteCommentAction.bo?num=<%=num%>&pageNum=<%=pageNum%>&cnum="+c_idx;
 		}
 	}
+	function showUpdate(cnt){
+		var update_wrap = document.getElementsByClassName('update_btn_wrap'+cnt)[0];
+		if(update_wrap.style.display=="block"){
+			update_wrap.style.display = "none";
+		}else{
+			update_wrap.style.display = "block";
+		}
+	}
+	
 	
 
 </script>
