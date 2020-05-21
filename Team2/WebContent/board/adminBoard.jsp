@@ -8,6 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +19,14 @@
 
 <link href="${pageContext.request.contextPath}/css/boardAdmin.css" rel="stylesheet">
 <script type="text/javascript">
+
+function doList(selectObject){
+	
+	var chk = selectObject.value;
+			
+	document.fr.submit();
+	
+};
 
 function doAction(){
 	
@@ -46,7 +56,20 @@ function doDelete(){
 	String category = (String)request.getAttribute("category");
 	String search = (String)request.getAttribute("search");
 	
-	System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+	int c = 0;
+	int pageSize = 10;
+	
+	try{
+		 c = (int)request.getAttribute("c");
+		 pageSize = (int)request.getAttribute("pageSize");
+	}catch(Exception e){
+		System.out.println(e);
+	}
+		
+	
+// 	System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+	System.out.println("category : " +category+"/search : "+search);
+
 	
 %>
 <div class="board">
@@ -60,16 +83,25 @@ function doDelete(){
 	<!-- 게시판 검색 -->		 
 	<form name="fr" id="fr" action="./SearchBoard.bo" method="POST">	
 		
-		 <select name="pageSize">
-		 	<option value="10">페이지 수</option>
-		 	<option value="10">10</option>
-		 	<option value="20">20</option>
-		 	<option value="30">30</option>
-		 </select>
-		
-		<select name="category">
+		 <select name="pageSize" onchange="doList(this)">
+		 	<option value="10"
+				<c:if test="${pageSize eq 10}">selected </c:if>> 10</option>
+		 	<option value="5"
+		 		<c:if test="${pageSize eq 5}">selected </c:if>>5</option>
+		 	<option value="7"
+		 		<c:if test="${pageSize eq 7}">selected </c:if>>7</option>
+		 	<option value="20"
+		 		<c:if test="${pageSize eq 20}">selected </c:if>>20</option>
+		 </select>	
+		 
+		 <c:set var="ca_cset" value="<%=c%>" />
+		 
+		<select name="category" id="test">
 			<%for(int i = 0; i<cSet.Category.length; i++){ %>
-				<option value=<%=i%> >
+			<c:set var="ca_val" value="<%=i%>" />
+				<option value=<%=i%> 
+				<c:if test="${ca_val eq ca_cset}">selected</c:if>>
+
 				<%=cSet.Category[i]%>
 				</option>
 			<%} %>
@@ -138,7 +170,7 @@ function doDelete(){
 		</c:if>
 		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
 		<li>
-			<a href='<c:url value="./SearchBoard.bo?category=${c}&pageNum=${pageNum}&search=${search}"/>'><i class="fa">${pageNum }</i></a>
+			<a href='<c:url value="./SearchBoard.bo?category=${c}&pageNum=${pageNum}&search=${search}&pageSize=${pageSize }"/>'><i class="fa">${pageNum }</i></a>
 		</li>
 		</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">

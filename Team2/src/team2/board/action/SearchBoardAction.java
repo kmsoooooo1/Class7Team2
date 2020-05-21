@@ -18,26 +18,29 @@ public class SearchBoardAction implements Action {
 		
 		BoardDAO bdao = new BoardDAO();
 		
+//		String category = (String)request.getParameter("b_category");
+
 		int c = Integer.parseInt(request.getParameter("category"));
 		
 		String search = (String) request.getParameter("search");
 		
 		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		
-		System.out.println("category : "+c+"/search : "+search);
-		
 		cSet cset = new cSet();
 		
 		cset.setC(c);
+		
+		System.out.println("category : "+c+"/search : "+search);
 		
 		System.out.println("cset = "+cset);
 		
 		//total 게시판 글 수
 		int total = bdao.serachCount(cset, search);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("category", cset.getC());
-		session.setAttribute("search", search);
+//		HttpSession session = request.getSession();
+//		session.setAttribute("c", c);
+//		session.setAttribute("search", search);
+//		session.setAttribute("pageSize", pageSize);
 
 
 		//  ----페이징 처리-----
@@ -48,11 +51,7 @@ public class SearchBoardAction implements Action {
 			}
 			
 			int currentPage = Integer.parseInt(pageNum);
-			
-			if(c==1){
-				pageSize = 8;
-			}
-			
+						
 			Criteria cri = new Criteria();
 			
 			cri.setPage(currentPage);
@@ -77,12 +76,14 @@ public class SearchBoardAction implements Action {
 			request.setAttribute("cri", cri);
 			request.setAttribute("pageMaker", pageMaker);
 			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("pageSize", pageSize);
 		
 			//카테고리별 전송 값
 			request.setAttribute("c", cset.getC());	
 			
 			//검색 search 값
 			request.setAttribute("search", search);
+			request.setAttribute("category", cset.getCategory());
 			
 			ActionForward forward = new ActionForward();
 

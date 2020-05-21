@@ -10,93 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/insert.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-
-
-	$(document).ready(function() {
-		$("#input_imgs").on("change", handleImgsFileSelect);
-				
-	}); 
-	
-	function fileUploadAction() {
-		alert("fileUploadAction");
-		$("#input_imgs").trigger('click');
-	}
-	
-	function handleImgsFileSelect(e) {
-       
-        sel_files = [];
-        $(".imgs_wrap").empty();
-
-        var files = e.target.files;
-        var filesArr = Array.prototype.slice.call(files);
-        
-        var index = 0;
-        filesArr.forEach(function(f) {
-            if(!f.type.match("image.*")) {
-                alert("확장자는 이미지파일만 가능합니다.");
-                return;
-            }
-
-            sel_files.push(f);
-
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='100' height='100' title='Click to remove'></a>";
-                $(".imgs_wrap").append(html);
-                index++;
-
-            }
-            reader.readAsDataURL(f);
-            
-        });
-    }
-	
-    function deleteImageAction(index) {
-    	alert("index delete : "+sel_files[index]);
-
-        sel_files.splice(index, 1);
-
-        var img_id = "#img_id_"+index;
-        $(img_id).remove(); 
-               
-    }
-    
-	function save(){
-	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-	    		
-// 		document.fr.submit();
-		
-		var form = $('#fr')[0];
-		var formData = new FormData(form);
-		
-		for(var index=0; index < sel_files.length; index++){
-			formData.append('files', sel_files[index]);
-		}
-
-		$.ajax({
-			type : "POST",
-			enctype : 'multipart/form-data',
-            processData : false,
-            contentType : false,
-            url : './InsertAction.bo',
-            data : formData,
-            success : function(result) {
-    			alert("글 등록에 성공하였습니다.");
-    			location.href="./BoardList.bo?category=0";
-            },
-		
-	        error: function(e) {
-	            alert("에러발생"+e);
-	          }    
-			//전송실패 미구현
-		});
-		
-	
-	};
-
-	
-	
+<script type="text/javascript">	
 </script>
 </head>
 <body>
@@ -161,7 +75,14 @@
 			
 			<div class="input_wrap">
 				<span class="board_title">첨부파일</span>
+				<input type="button" value="이미지 첨부하기" onclick="filesumit()"> 
+		
+			<!-- 첨부파일 버튼 숨김 -->
+			<div class="hidden_file">	
 				<input type="file" name="file[]" id="input_imgs" multiple="multiple"><br>
+			</div>
+			<!-- 첨부파일 버튼 숨김 -->
+		
 			</div>
 	        <div class="imgs_wrap">
 	            <img id="img"/>
@@ -176,90 +97,91 @@
 </body>
 
 <script type="text/javascript">
-var sel_files = []; // 파일을 담을 배열
 
-$(document).ready(function() {
-	$("#input_imgs").on("change", handleImgsFileSelect);
-			
-}); 
+var img_files = []; //추가할 파일
 
-function fileUploadAction() {
-	alert("fileUploadAction");
-	$("#input_imgs").trigger('click');
-}
-
-function handleImgsFileSelect(e) {
-   
-    sel_files = [];
-    $(".imgs_wrap").empty();
-
-    var files = e.target.files;
-    var filesArr = Array.prototype.slice.call(files);
-    
-    var index = 0;
-    filesArr.forEach(function(f) {
-        if(!f.type.match("image.*")) {
-            alert("확장자는 이미지파일만 가능합니다.");
-            return;
-        }
-
-        sel_files.push(f);
-
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='100' height='100' title='Click to remove'></a>";
-            $(".imgs_wrap").append(html);
-            index++;
-
-        }
-        reader.readAsDataURL(f);
-        
-    });
-}
-
-function deleteImageAction(index) {
-	alert("index delete : "+sel_files[index]);
-
-    sel_files.splice(index, 1);
-
-    var img_id = "#img_id_"+index;
-    $(img_id).remove(); 
-           
-}
-
-function save(){
-    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-    document.fr.b_category.disabled="";
-    		
-//		document.fr.submit();
+	$(document).ready(function() {
+		$("#input_imgs").on("change", addFiles);
+				
+	}); 
 	
-	var form = $('#fr')[0];
-	var formData = new FormData(form);
-	
-	for(var index=0; index < sel_files.length; index++){
-		formData.append('files', sel_files[index]);
+	function filesumit() {
+		$("#input_imgs").trigger('click');
 	}
-
-	$.ajax({
-		type : "POST",
-		enctype : 'multipart/form-data',
-        processData : false,
-        contentType : false,
-        url : './InsertAction.bo',
-        data : formData,
-        success : function(result) {
-			alert("글 등록에 성공하였습니다.");
-			location.href="./BoardList.bo?category=<%=c%>";
-        },
 	
-        error: function(e) {
-            alert("에러발생"+e);
-          }    
-		//전송실패 미구현
-	});
+	//파일 추가
+	function addFiles(e) {
+		
+		img_files = [];
 	
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		var index = 0;		
+	    filesArr.forEach(function(f) {
+	        if(!f.type.match("image.*")) {
+	            alert("확장자는 이미지파일만 가능합니다.");
+	            return;
+	        }
+	        
+	        img_files.push(f);
 
-};
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" ><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' id=\"img_id_"+index+"\"></a>";
+	        	$(".imgs_wrap").append(html);
+	            index++;
+	        }
+	        reader.readAsDataURL(f);
+	        
+	    });
+		  
+	}
+	
+	//추가할 파일 삭제
+	function deleteFiles(index) {
+		alert("index delete : "+img_files[index]);
+	
+		img_files.splice(index, 1);
+	
+	    var img_id = "#img_id_"+index;
+	    $(img_id).remove(); 
+	           
+	}
+	
+	function save(){
+	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+	    		
+	//		document.fr.submit();
+		
+		var form = $('#fr')[0];
+		var formData = new FormData(form);
+		
+		for(var index=0; index < img_files.length; index++){
+			formData.append('files', img_files[index]);
+		}
+	
+		$.ajax({
+			type : "POST",
+			enctype : 'multipart/form-data',
+	        processData : false,
+	        contentType : false,
+	        url : './InsertAction.bo',
+	        data : formData,
+	        success : function(result) {
+				alert("글 등록에 성공하였습니다.");
+				location.href="./BoardList.bo?category=<%=c%>";
+	        },
+		
+	        error: function(e) {
+	            alert("에러발생"+e);
+	          }    
+			//전송실패 미구현
+		});
+		
+	
+	};
+
 
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
