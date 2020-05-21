@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/memberList.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,9 +21,40 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
-	<table border="1">
-		<tr>
-		   <th></th>
+ <div class="board">
+	
+  <div class="top">
+   <div class="boardname">
+    <h2>
+     	모든 상품 리스트
+    </h2>
+   </div>
+   <div class="list-div">
+	<table class="list">
+	 <colgroup> 
+	  <col width="2%" />	
+	  <col width="4%" />	
+	  <col width="5%" />	
+	  <col width="7%" />	
+	  <col width="8%" />	
+	  <col width="7%" />	
+	  <col width="5%" />	
+	  <col width="3%" />	
+	  <col width="4%" />	
+	  <col width="4%" />	
+	  <col width="6%" />	
+	  <col width="4%" />	
+	  <col width="5%" />	
+	  <col width="3%" />	
+	  <col width="5%" />	
+	  <col width="4%" />	
+	  <col width="5%" />
+	  <col width="4%" />
+	  <col width="4%" />
+	 </colgroup>
+	 <thead>
+	  <tr> 	
+		   <th>No.</th>
 		   <th>썸네일</th>
 		   <th>카테고리</th>
 		   <th>서브 카테고리</th>
@@ -41,13 +73,14 @@
 		   <th>등록일자</th>
 		   <th>수정하기</th>
 		   <th>삭제하기</th>
-		</tr>
-		
+	  </tr>
+	 </thead>
+	
 		<%
 			for(int i=0; i<goodsList.size(); i++){
 				GoodsDTO gdto = goodsList.get(i);
 		%>
-		
+	   <tbody>
 		<tr>
 		   <td><%=gdto.getNum() %></td>
 		   <td><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="50" height="50"></td>
@@ -69,12 +102,14 @@
 		   <td><a href="./GoodsModify.ag?num=<%=gdto.getNum()%>"><button type="button"> 수정 </button></a></td>
 		   <td><a href="./GoodsDeleteAction.ag?num=<%=gdto.getNum()%>"><button type="button"> 삭제 </button></a></td>
 		</tr>
-		
+	   </tbody>
 		<%} %>
 		
 	</table>
-	
+	</div>	
 	<a href="./GoodsAdd.ag"><button>상품 추가하기</button></a>
+  </div>
+ </div>
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
 </body>
