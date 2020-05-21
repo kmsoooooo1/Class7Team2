@@ -68,3 +68,8 @@ body{
 			width: 80%;
 		}
 	}
+
+
+.hidden_file{
+	display: none;
+}	
