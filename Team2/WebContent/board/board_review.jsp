@@ -73,17 +73,15 @@ function doAction(){
 			String imgPath = conPath+"\\"+array[0];
 	%>
 		    <li class="li_list">
-		   		<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-				    	<img class="list_img" src="<%=imgPath %>" width=220 height=180>
-			    </a>
+		   		<img class="list_img" src="<%=imgPath %>" onclick="location.href='./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>'">
 		    	<div class="subject">
 		    		<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
 		    			<%=bdto.getB_title() %>
 		    		</a>
 		    	</div>
 		    	<div class="info">
-			     	<span class="writer">작성자 <%=bdto.getB_writer() %></span>   
-			       	<span class="view">조회 <%=bdto.getB_view() %></span>
+			     	<span class="writer"><%=bdto.getB_writer() %></span>
+			       	<span class="view">조회 : <%=bdto.getB_view() %></span>
 		       	</div>
 				
 		    </li>
