@@ -186,12 +186,13 @@ public class BasketDAO {
 						pdto.setProduct_discount_rate(rs2.getInt("a_discount_rate"));
 						pdto.setProduct_price_origin(rs2.getInt("a_price_origin"));
 						pdto.setProduct_amount(rs2.getInt("a_amount"));
+						pdto.setCategory(rs2.getString("category"));
 						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
 					}
 				}
 				//만약 b_code의 앞에 한글자가 g이면 상품 DB로 들어가기
 				else if(first_letter == 'g'){
-					// 각각의 장바구니에 해당하는 상품 정보 저장
+					// 각각의 장바구니에 해당하는 상품 정보 저장	
 					sql ="select * from team2_goods where g_code = ? and g_option = ?";	
 					pstmt2 = con.prepareStatement(sql);
 					pstmt2.setString(1, bkdto.getB_code());
@@ -208,6 +209,7 @@ public class BasketDAO {
 						pdto.setProduct_price_origin(rs2.getInt("g_price_origin"));
 						pdto.setProduct_amount(rs2.getInt("g_amount"));
 						pdto.setProduct_option_price(rs2.getInt("g_option_price"));
+						pdto.setCategory(rs2.getString("category"));
 						productInfoList.add(pdto); // 상품정보 하나를 리스트 한칸에 저장
 					}
 				}

@@ -11,6 +11,7 @@ public class MemberDTO {
 	private String addr1;
 	private String addr2;
 	private String email;
+	private int mileage;
 	private Date reg_date;
 	
 	public String getId() {
@@ -61,19 +62,23 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public int getMileage() {
+		return mileage;
+	}
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}
 	public Date getReg_date() {
 		return reg_date;
 	}
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
-	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pass=" + pass + ", name=" + name + ", phone=" + phone + ", zipcode=" + zipcode
-				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", email=" + email + ", reg_date=" + reg_date + "]";
+				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", email=" + email + ", mileage=" + mileage + ", reg_date="
+				+ reg_date + "]";
 	}
-	
-	
-	
 }

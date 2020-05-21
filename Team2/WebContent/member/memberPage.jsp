@@ -16,6 +16,7 @@
 </style>
 </head>
 <body>
+
 <!-- Header -->
 <jsp:include page="/include/header.jsp" />
 <!-- 
@@ -36,7 +37,7 @@
 	   MemberDTO mdto = mdao.getMember(id);
 	   String name = mdto.getName();
 	 %>
-	 
+ 
  <div class="member_div">
  <div class="content">
  <div>
@@ -77,7 +78,7 @@
      <!-- 장바구니 -->
      <li><a href="./BasketList.ba">장바구니</a></li>
 	 <!-- 관심상품 -->
-	 <li><a href="#">관심상품</a></li>
+	 <li><a href="./WishList.wl">관심상품</a></li>
 	 <!-- 최근 본 상품 -->
 	 <li><a href="./recentView.me">최근 본 상품</a></li>
 	 <!-- 내가쓴글 -->

@@ -37,6 +37,10 @@
 	<!-- 구매 테이블 생성 -->
 	Order / Payment  주문/결제
 	<table border="1">
+		<input type="hidden" id="selectedCodes" name="selectedCodes" value="">
+		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
+		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
+	
 		<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 		<tr>
 			<td>이미지</td>
@@ -66,6 +70,7 @@
 			<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
 			<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
 			<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
+			<input type="hidden" id="b_category<%=i%>" name="b_category<%=i%>" value="<%=pdto.getCategory()%>">
 			
 			<!-- 상품 이미지 -->
 			<!-- 상품이 동물일때 -->
@@ -349,7 +354,87 @@
 	<table border="1">
 		<tr>
 			<td> 보유 쿠폰 할인 </td>
-			<td> <button type="button"> 쿠폰 조회/적용 </button> (쿠폰 허용 상품 / 일부 쿠폰 제외) </td>
+			<td> 
+				<button type="button" onclick="toggleCoupons();"> 쿠폰 조회 </button> (쿠폰 허용 상품 / 일부 쿠폰 제외) 
+			
+				<table border="1" id="couponsTable" style="display:none; width: 100%; height: 150px; overflow: scroll;">
+					<tr>
+						<th>이미지</th>
+						<th>상품명</th>
+						<th>판매가</th>
+						<th>수량</th>				
+						<th>쿠폰선택</th>
+						<th>쿠폰할인</th>						
+					</tr>
+					<%
+						for (int i = 0; i < basketList.size(); i++) {
+							BasketDTO bkdto = (BasketDTO) basketList.get(i);
+							ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+							
+							//b_code 값들 중에 맨 앞글자 따오기
+							char first_letter = bkdto.getB_code().charAt(0);
+					%>
+					<tr class="choice_tr">
+						<!-- 상품 이미지 -->
+						<!-- 상품이 동물일때 -->
+						<%if(first_letter == 'a'){%>
+							<td>
+								<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="80" height="80">
+							</td>
+							
+							<!-- 상품정보 (옵션이 있을때와 없을때) -->
+							<%if(bkdto.getB_option().equals("")){%>
+								<td>
+									<%=pdto.getProduct_name()%>
+								</td>
+							<%}else{%>
+								<td>
+									<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
+								</td>
+							<%}%>
+						<!-- 상품이 물건일때 -->
+						<%} else if(first_letter == 'g') {%>
+							<td>
+								<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100">
+							</td>
+							
+							<!-- 상품정보 (옵션이 있을때와 없을때) -->
+							<%if(bkdto.getB_option().equals("")){%>
+								<td>
+									<%=pdto.getProduct_name()%>
+								</td>
+							<%}else{%>
+								<td>
+									<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
+								</td>
+							<%}%>
+						<%}%>
+						
+						<!-- 판매가(적립금) -->
+						<%if(pdto.getProduct_discount_rate() != 0){%>
+							<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
+						<%} else{%>
+							<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
+						<%}%>
+						
+						<!-- 수량 -->
+						<td>
+							<!-- 장바구니 수량  -->
+							<span id="b_amount<%=i%>" name="b_amount<%=i%>"><%=bkdto.getB_amount()%></span>개
+						</td>
+						
+						<!-- 쿠폰선택 버튼 -->
+						<td> <button type="button" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button></td>
+						
+						<!-- 쿠폰할인가  -->
+						<td> <span id="discount_rate<%=i%>">-0</span>원 </td>
+						
+					</tr>
+					<%
+						}
+					%>
+				</table>
+			</td>
 		</tr>
 		<tr>
 			<td> 보유 적립금 사용 </td>
@@ -514,12 +599,23 @@
 
 <script type="text/javascript">
 
+	//장바구니 리스트 가져오기
+	var basketList = [];
+	<c:forEach items="${basketList}" var="basketList">
+		basketList.push("${basketList}");
+	</c:forEach>
+	
+	var selectedCodes = ""; 			
+	var selectedOptions = ""; 			
+	var selectedDeliveryMethods = ""; 	
+
     // 우편번호 찾기 화면을 넣을 element
     var element_wrap = document.getElementById('wrap');
     function foldDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_wrap.style.display = 'none';
     }
+    
     function DaumPostcode() {
         // 현재 scroll 위치를 저장해놓는다.
         var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
@@ -637,6 +733,32 @@
     		//눌려진 상태에서 체크했을때
     		$("input[name='chkThirdAgree']").prop("checked", false);
     	}
+    }
+    
+    //쿠폰조회 버튼 눌렸을때
+    function toggleCoupons(){
+    	document.getElementById("couponsTable").style.display="";
+    }
+    
+    //쿠폰조회 버튼 눌렸을시
+    function searchCoupon(i){
+
+    	//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
+		for(var j=0; j<basketList.length; j++){
+			//selectedCodes 안에 사용자가 선택한 codes들 담기
+			selectedCodes += ($('#b_code'+j).val() + ", ");
+			selectedOptions += ($('#b_option'+j).val() + ", ");
+			selectedDeliveryMethods += ($('#b_delivery_method'+j).val() + ", ");
+		}
+
+		//추가된 values 변수를 태그에 담기
+		document.getElementById("selectedCodes").value = selectedCodes;
+		document.getElementById("selectedOptions").value = selectedOptions;
+		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
+		
+		var num = i;
+		
+		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num, '_blank','width=800,height=700',false);
     }
     
     

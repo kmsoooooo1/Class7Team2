@@ -9,41 +9,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link href="${pageContext.request.contextPath}/css/mypage.css?ver=2" rel="stylesheet">
 <title>최근 본 상품</title>
 <style type="text/css">
-.recent_div{
-	text-align: center;
-}
-
-.recent_table{
-	width: 40%;
-	margin: auto;
-}
-
-.recent_h3{
-	text-align: center;
-}
-
-img{
-}
-
-
 </style>
 </head>
 <body>
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
-	<h3 class="recent_h3">RECENTLY VIEWED</h3>
+<div class="member_div">
+ <div class="content">
+	<h3 class="recent_h3">최근 본 상품</h3>
 	
 <div class="recent_div">
-<table border="1" class="recent_table">
+  <h3>
+  <a href="./recentView.me" class="seemore">더보기>></a>
+  </h3>
+  <div class="contents">
+  <table border="1" summary>
+  <caption>최근 본 상품</caption>
+  <colgroup>
+    	<col style="width: 100px;">
+    	<col style="width: auto;">
+    	<col style="width: 220px;">
+    	<col style="width: 140px;">
+    	<col style="width: 210px;">
+    </colgroup>
+  	<thead>
 	<tr>
-		<td>이미지</td>
-		<td>상품명</td>
-		<td>판매가</td>
-		<td>옵션정보</td>
-		<td>주문</td>
+		<th scope="col">이미지</th>
+		<th scope="col">상품명</th>
+		<th scope="col">판매가</th>
+		<th scope="col">옵션정보</th>
+		<th scope="col">주문</th>
 	</tr>
+	</thead>
+	<tbody>
 		<%
 		// 쿠키 얻어오기
 		Cookie[] cook = request.getCookies();
@@ -51,30 +53,31 @@ img{
 			for(int i=0; i<cook.length; i++){
 				
 			// 전송된 쿠키 이름 얻어오기
-			String name = cook[i].getName();
+			String name1 = cook[i].getName();
 			// 쿠키 이름에 item이 포함되어 있다면
-			if(name.indexOf("item")!= -1){
+			if(name1.indexOf("item")!= -1){
 		
 			// 해당 value얻어오기
 			String value = cook[i].getValue();
 			
 			String item = URLDecoder.decode(value, "UTF-8");
-			out.println(item + "<br>");
+			out.println(item);
 		
 			}
-			}
-		}else{
-				%>
-				<tr>
-					<td>최근에 본 상품이 없습니다.</td>
-				</tr>
-				<%
 		}
-		%>
-</table>
+				%>
+	</tbody>
+	</table>
+	<%
+		}else{
+	%>
+				<p class=""> 최근 본 상품이 없습니다.</p>
+		<%} %>
+ </div>
+ </div>
+
 </div>
-
-
+</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	
