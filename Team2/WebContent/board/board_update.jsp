@@ -22,14 +22,36 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
+var conPath = "<%=request.getContextPath()+"/upload/board"%>";
+//img저장 경로
+var old_files = []; //DB에 저장된 파일
+var img_files = []; //추가할 파일
 
+	$(document).ready(function() {
+		$("#input_imgs").on("change", addFiles);
+		
+		if(old_files != ""){
+//			alert("old_files : "+old_files);
+			for(var index=0; index<old_files.length; index++){
+				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteOldFiles("+index+")\" ><img src=" + conPath +"/"+old_files[index]+"  width='150' height='120' id=\"img_id_"+index+"\"></a>";
+		 	   $(".imgs_wrap").append(html);
+			}
+		}
+	
+	});
 	
 </script>
 </head>
 <body>
 	<jsp:include page="/include/header.jsp" />
-	
-	<%
+<%
+	String id2 = (String)session.getAttribute("id");
+	if(id2==null){%>
+		<script type="text/javascript">
+			alert("로그인이 필요한 페이지입니다.");
+			history.back();
+		</script>	
+<%	}
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = request.getParameter("pageNum");
 
@@ -169,27 +191,13 @@
 
 <script type="text/javascript">
 	
-var conPath = "<%=request.getContextPath()+"/upload/board"%>";
-var old_files = [];
-var img_files = [];
 
-	$(document).ready(function() {
-		$("#input_imgs").on("change", addFiles);
-		
-		if(old_files != ""){
-// 			alert("old_files : "+old_files);
-			for(var index=0; index<old_files.length; index++){
-				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteOldFiles("+index+")\" ><img src=" + conPath +"/"+old_files[index]+"  width='150' height='120' id=\"img_id_"+index+"\"></a>";
-		 	   $(".imgs_wrap").append(html);
-			}
-		}
-	
-	});
 	
 	function filesumit() {
 		$("#input_imgs").trigger('click');
 	}
 
+	//파일 추가
 	function addFiles(e) {
 		
 		img_files = [];
@@ -200,7 +208,7 @@ var img_files = [];
 		var index = 0;		
         filesArr.forEach(function(f) {
             if(!f.type.match("image.*")) {
-                alert("확장자는 이미지파일만 가능합니다.");
+//                 alert("확장자는 이미지파일만 가능합니다.");
                 return;
             }
 	        
@@ -219,8 +227,9 @@ var img_files = [];
   	  
 	}
     
+	//추가할 파일 삭제
     function deleteFiles(index) {
-    	alert("index delete : "+img_files[index]);
+//     	alert("index delete : "+img_files[index]);
 
     	img_files.splice(index, 1);
 
@@ -229,6 +238,7 @@ var img_files = [];
                
     }
     
+	//저장된 파일 삭제
     function deleteOldFiles(index) {
     	alert("index delete : "+old_files[index]);
 
@@ -249,13 +259,13 @@ var img_files = [];
 		
 		if(old_files!=""){
 			for(var i=0; i < old_files.length; i++){
-				alert("test : " + old_files[i]);
+// 				alert("test : " + old_files[i]);
 				formData.append('old', old_files[i]);
 			}
 		}
 	
 		for(var index=0; index < img_files.length; index++){
-			alert("test : " + img_files[index]);
+// 			alert("test : " + img_files[index]);
 			formData.append('files', img_files[index]);
 		}
 		
