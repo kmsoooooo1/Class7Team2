@@ -21,6 +21,7 @@
 			<h4> 동물 파트 </h4>
 			<a href="./AnimalList.aa?category=all"> 모든 동물 리스트 </a>
 			<a href="./AnimalAdd.aa">동물 추가하기</a>
+			<a href="./AnimalNew.aa">동물 신상리스트</a>
 		</div>
 		
 		<!-- 관리자 상품 파트 -->
