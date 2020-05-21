@@ -23,14 +23,15 @@
 <script type="text/javascript">
 
 var conPath = "<%=request.getContextPath()+"/upload/board"%>";
-var old_files = [];
-var img_files = [];
+//img저장 경로
+var old_files = []; //DB에 저장된 파일
+var img_files = []; //추가할 파일
 
 	$(document).ready(function() {
 		$("#input_imgs").on("change", addFiles);
 		
 		if(old_files != ""){
-// 			alert("old_files : "+old_files);
+//			alert("old_files : "+old_files);
 			for(var index=0; index<old_files.length; index++){
 				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteOldFiles("+index+")\" ><img src=" + conPath +"/"+old_files[index]+"  width='150' height='120' id=\"img_id_"+index+"\"></a>";
 		 	   $(".imgs_wrap").append(html);
@@ -39,111 +40,29 @@ var img_files = [];
 	
 	});
 	
-	function filesumit() {
-		$("#input_imgs").trigger('click');
-	}
-
-	function addFiles(e) {
-		
-		img_files = [];
-	
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		var index = 0;		
-        filesArr.forEach(function(f) {
-            if(!f.type.match("image.*")) {
-                alert("확장자는 이미지파일만 가능합니다.");
-                return;
-            }
-	        
-	        img_files.push(f);
-	        
-// 	        alert("img_files" + img_files);
-	        var reader = new FileReader();
-	        reader.onload = function(e) {
-                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" ><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' id=\"img_id_"+index+"\"></a>";
-	        	$(".imgs_wrap").append(html);
-	            index++;
-            }
-            reader.readAsDataURL(f);
-            
-        });
-  	  
-	}
-    
-    function deleteFiles(index) {
-    	alert("index delete : "+img_files[index]);
-
-    	img_files.splice(index, 1);
-
-        var img_id = "#img_id_"+index;
-        $(img_id).remove(); 
-               
-    }
-    
-    function deleteOldFiles(index) {
-    	alert("index delete : "+old_files[index]);
-
-    	old_files.splice(index, 1);
-
-        var img_id = "#img_id_"+index;
-        $(img_id).remove(); 
-               
-    }
-
-	function save(){
-	    oEditors.getById["b_content"].exec("UPDATE_CONTENTS_FIELD", []);
-// 	    document.fr.submit();
-
-
-		var form = $('#fr')[0];
-		var formData = new FormData(form);
-		
-		if(old_files!=""){
-			for(var i=0; i < old_files.length; i++){
-				alert("test : " + old_files[i]);
-				formData.append('old', old_files[i]);
-			}
-		}
-	
-		for(var index=0; index < img_files.length; index++){
-			alert("test : " + img_files[index]);
-			formData.append('files', img_files[index]);
-		}
-		
-		$.ajax({
-			type : "POST",
-			enctype : 'multipart/form-data',
-            processData : false,
-            contentType : false,
-            url : './BoardUpdateAction.bo',
-            data : formData,
-            success : function(result) {
-    			alert("글 등록에 성공하였습니다.");
-    			location.href="./BoardMain.bo";
- 	        },
-		
-	        error: function(e) {
-	            alert("에러발생"+e);
-	          }    
-			//전송실패 미구현
-		});
-	
-	};
-	
 </script>
 </head>
 <body>
 	<jsp:include page="/include/header.jsp" />
-	
-	<%
+<%
+	String id2 = (String)session.getAttribute("id");
+	if(id2==null){%>
+		<script type="text/javascript">
+			alert("로그인이 필요한 페이지입니다.");
+			history.back();
+		</script>	
+<%	}
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = request.getParameter("pageNum");
 
 		String p_code = bdto.getB_p_code();
 		String category = bdto.getB_category();
 		
+		cSet cset = new cSet();
+		
+		cset.setCategory(category);
+		
+		int c = cset.getC();
 		
 		String files[] = null;
 		//DB에 저장된 파일 확인 후 불러오기		
@@ -173,13 +92,15 @@ var img_files = [];
 		}
 		
 	%>
+<div class="board">
 
-	<div class="board">
-		<div class="title">
+	<div class="top">
+		<div class="boardname">
 	 	<h2>
-	  		게시글 수정
+	  		게시물 수정
 	 	</h2>
-	</div>	
+		</div>	
+	</div>
 	
 	<form name= "fr" id="fr" action="./BoardUpdateAction.bo" method="post">
 		<input type="hidden" name="num" value="<%=bdto.getB_idx() %>">	
@@ -231,7 +152,7 @@ var img_files = [];
 			</tr>
 			<tr>
 			<td colspan="2">
-			<textarea name="b_content" id="b_content" rows="20" cols="122">
+			<textarea name="b_content" id="b_content">
 			<%=bdto.getB_content()%>
 			</textarea>
 			</td>
@@ -240,6 +161,7 @@ var img_files = [];
 		</table>
 		</form>
 				
+		<div class="bottom">
 				<div class="button">
 				<input type="button" value="이미지 첨부하기" onclick="filesumit()"> 
 				<input type="button" onclick="return save();" value="수정하기"/>			
@@ -248,7 +170,7 @@ var img_files = [];
 				<input type="button" value="목록이동"
 					onclick="location.href='./BoardMain.bo'">
 				</div>
-
+		</div>
 	
 	<div class="inputfile">
 			<div class="input_wrap">
@@ -269,6 +191,103 @@ var img_files = [];
 
 <script type="text/javascript">
 	
+
+	
+	function filesumit() {
+		$("#input_imgs").trigger('click');
+	}
+
+	//파일 추가
+	function addFiles(e) {
+		
+		img_files = [];
+	
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		var index = 0;		
+        filesArr.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+//                 alert("확장자는 이미지파일만 가능합니다.");
+                return;
+            }
+	        
+	        img_files.push(f);
+	        
+// 	        alert("img_files" + img_files);
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" ><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' id=\"img_id_"+index+"\"></a>";
+	        	$(".imgs_wrap").append(html);
+	            index++;
+            }
+            reader.readAsDataURL(f);
+            
+        });
+  	  
+	}
+    
+	//추가할 파일 삭제
+    function deleteFiles(index) {
+//     	alert("index delete : "+img_files[index]);
+
+    	img_files.splice(index, 1);
+
+        var img_id = "#img_id_"+index;
+        $(img_id).remove(); 
+               
+    }
+    
+	//저장된 파일 삭제
+    function deleteOldFiles(index) {
+    	alert("index delete : "+old_files[index]);
+
+    	old_files.splice(index, 1);
+
+        var img_id = "#img_id_"+index;
+        $(img_id).remove(); 
+               
+    }
+
+	function save(){
+	    oEditors.getById["b_content"].exec("UPDATE_CONTENTS_FIELD", []);
+// 	    document.fr.submit();
+
+
+		var form = $('#fr')[0];
+		var formData = new FormData(form);
+		
+		if(old_files!=""){
+			for(var i=0; i < old_files.length; i++){
+// 				alert("test : " + old_files[i]);
+				formData.append('old', old_files[i]);
+			}
+		}
+	
+		for(var index=0; index < img_files.length; index++){
+// 			alert("test : " + img_files[index]);
+			formData.append('files', img_files[index]);
+		}
+		
+		$.ajax({
+			type : "POST",
+			enctype : 'multipart/form-data',
+            processData : false,
+            contentType : false,
+            url : './BoardUpdateAction.bo',
+            data : formData,
+            success : function(result) {
+    			alert("글 등록에 성공하였습니다.");
+    			location.href="./BoardList.bo?category=<%=c%>";
+ 	        },
+		
+	        error: function(e) {
+	            alert("에러발생"+e);
+	          }    
+			//전송실패 미구현
+		});
+	
+	};
 
 
 /* --------------------------------------------------	 */

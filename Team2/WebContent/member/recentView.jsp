@@ -8,13 +8,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>최근 본 상품</title>
+<style type="text/css">
+.recent_div{
+	text-align: center;
+}
+
+.recent_table{
+	width: 40%;
+	margin: auto;
+}
+
+.recent_h3{
+	text-align: center;
+}
+
+img{
+}
+
+
+</style>
 </head>
 <body>
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
-	<h3>RECENTLY VIEWED</h3>
-<table border="1">
+	<h3 class="recent_h3">RECENTLY VIEWED</h3>
+	
+<div class="recent_div">
+<table border="1" class="recent_table">
 	<tr>
 		<td>이미지</td>
 		<td>상품명</td>
@@ -40,17 +62,18 @@
 			out.println(item + "<br>");
 		
 			}
-		}
-		
+			}
 		}else{
 				%>
 				<tr>
-					<td colspan="5">최근에 본 상품이 없습니다.</td>
+					<td>최근에 본 상품이 없습니다.</td>
 				</tr>
 				<%
 		}
 		%>
 </table>
+</div>
+
 
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>

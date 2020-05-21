@@ -5,10 +5,15 @@ body{
 	padding: 0;
 }
 
-.header{
-	position: fixed;
-	z-index: 30;
-	width: 100%;
+.nav_menu{
+  	background: #555;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 /* LOGO_START */
@@ -266,6 +271,7 @@ body{
 
 			#footer {
 				padding: 4em 3em 2em 3em ;
+				height:auto;
 			}
 
 		}
@@ -274,65 +280,177 @@ body{
 
 			#footer {
 				padding: 3em 2em 1em 2em ;
+				height:auto;
 			}
 
 		}
 /* FOOTER_END */
 
 /* sidebar */
-@CHARSET "UTF-8";
 
-.fixed{
-   position: fixed;
-   right: -180px; 
-   z-index: 9999;
-   /* 평상시 브라우저 기준으로 우측 밖에 숨겨둠 */
-}
-.fixed:HOVER{
-   right: 0;
-   /* 마우스 오버시 다시 나오도록 거리값을 0으로 지정 */
-   transition:1.5s;
-   z-index: 9999;
+#quick{
+  position: fixed;
+  top: 55%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right : 5%;  
 }
 
-#quick{border-left: 20px solid #9da99f;
-   background-color: #616e6c;
-   width: 200px; 
-   height: 100%;
-   padding: 1em 1em;
-   box-sizing: border-box;
-   /* 요소의 크기에 패딩값*+테두리두께)을 포함 */
-   /* z-index: 9999; 겹치는 요소끼리는 값이 클수록 위에 올라옴*/
+#quick a{
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+  border-radius : 50%;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
 
-#quick:HOVER{
-   border-left: 20px solid black;
+#quick a:HOVER {
+  background-color: #000;
 }
 
-#quick ul{/* border: 1px solid; */
-      list-style: none;/* 목록앞의 모양 제거 */
-      padding: 0;} /* 목록 안의 왼쪽 여백 제거 */
-#quick li{/* border: 1px solid red; */
-   margin-bottom: 6px;
-   }
-
-#quick a:LINK, #quick a:VISITED {
-   color: #fff;
-   text-decoration: none;
+.basket_quick{
+  background: #3B5998;
+  color: white;
 }
 
-#quick a:HOVER, #quick a:ACTIVE {
-   color: #ff0;
+.basket_quick:HOVER{
+	
 }
 
-i{
-	font-size: 20px;
+.recent_quick{
+  background: #55ACEE;
+  color: white;
 }
 
-#quick li{
-	margin-bottom: 15px;
+
+.kakao_quick{
+  background: #d6cd29;
+  color: white;
 }
 
+.interest_quick{
+  background: #ff0000;
+  color: white;
+}
+
+.up_quick, .down_quick{
+  background: #ff8000;
+  color: white;
+}
+
+.order_quick{
+  background: #00ff40;
+  color: white;
+}
+
+.search_quick{
+  background: #008000;
+  color: white;
+}
+
+.basket_quick span,.recent_quick span,.kakao_quick span,.order_quick span,.interest_quick span,.search_quick span,.up_quick span,.down_quick span{
+	position: absolute;
+	width: 100px;
+	color: #FFFFFF;
+	background: #000000;
+	height: 25px;
+	font-size: 14px;
+	line-height: 30px;
+	text-align: center;
+	display: none;
+	border-radius: 6px;
+}
+
+.basket_quick span:AFTER, .recent_quick span:AFTER, .kakao_quick span:AFTER,
+.order_quick span:AFTER, .interest_quick span:AFTER, .search_quick span:AFTER,
+.up_quick span:AFTER, .down_quick span:AFTER {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -8px;
+	width: 0;
+	height: 0;
+	border-top: 8px solid #000000;
+	border-right: 8px solid transparent;
+	border-left: 8px solid transparent;
+}
+
+.basket_quick:HOVER.basket_quick span{
+	display: block;
+	opacity: 0.8;
+	top: -3%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+
+.recent_quick:HOVER.recent_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 9%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+
+.kakao_quick:HOVER.kakao_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 21%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+.order_quick:HOVER.order_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 33%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+
+.interest_quick:HOVER.interest_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 45%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+
+.search_quick:HOVER.search_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 57%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+
+.up_quick:HOVER.up_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 69%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
+
+.down_quick:HOVER.down_quick span{
+	display: block;
+	opacity: 0.8;
+	top: 81%;
+	left: 95%;
+	margin-left: -76px;
+	z-index: 999;
+}
 
 /* sidebar 끝*/
 		

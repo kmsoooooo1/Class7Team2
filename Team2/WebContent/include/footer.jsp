@@ -41,7 +41,7 @@
   </li>
  </ul>
 <div>
- <ul class="copyright">
+ <ul class="copyright" id="copyright">
   <li>COMPANY Team2</li>
   <li>ADDRESS 부산광역시 부산진구 </li>
   <li>TEL. 010-0000-0000</li>

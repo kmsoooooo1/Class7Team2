@@ -15,9 +15,7 @@
 <script type="text/javascript">
 
 function doAction(){
-	
-	alert("doAction");
-	
+
 	document.fr.submit();
 	
 };
@@ -62,22 +60,24 @@ function doAction(){
 	<div class="list-div">
 	<table class="list">
 		<colgroup>
+			<col width="5%" />
+			<col width="40%" />
+			<col width="15%" />
+			<col width="20%" />
 			<col width="10%" />
-			<col width="60%" />
-			<col width="10%" />
-			<col width="12%" />
-			<col width="8%" />
+
 		</colgroup>
 		<thead>
 		  <tr>
-		    <th>번호</th>
+		    <th>No.</th>
 		    <th>제목</th>
-		    <th>작성자</th>
-		    <th>작성일</th>
-		    <th>조회수</th>
+		    <th>글쓴이</th>
+		    <th>날짜</th>
+		    <th>조회</th>
 		  </tr>
 	  	</thead>
 	  <%
+	  if(boardList.size()>0){
 	    for(int i=0; i<boardList.size(); i++){ 
              BoardDTO bdto = (BoardDTO) boardList.get(i);
 	  %>
@@ -95,14 +95,20 @@ function doAction(){
 		    <td><%=bdto.getB_view() %></td>
 		  </tr>
 		 </tbody>
-	  <% } %>
-	
+	  <% }
+	    }else{%>
+		<tr>
+		    <td colspan="5">
+		    	등록된 게시글이 없습니다.
+		    </td>
+		  </tr>
+	<%} %>
 	</table>
 	</div>
 	
 	<div class="bottom">
 		<div class="button">
-		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=0','_blank','width=500,height=400',false);">
+		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?C=0'">
 		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">

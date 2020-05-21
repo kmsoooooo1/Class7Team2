@@ -1,0 +1,459 @@
+@CHARSET "UTF-8";
+.member_div{
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+.fas{
+	display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.member_div, .content{
+    margin: 5px auto 50px;
+}
+
+.member_h3{
+	min-height: 30px;
+    margin: 0 0 20px;
+}
+
+.userRight{
+	display: table-cell;
+    position: relative;
+    padding: 0 0 0 5px;
+    width: 100%;
+    vertical-align: top;
+}
+
+.userButton{
+	display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.userButton a{
+	border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    display: inline-block;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    color: #666;
+    -o-transition: all 0.12s ease-in-out;
+    -ms-transition: all 0.12s ease-in-out;
+    -moz-transition: all 0.12s ease-in-out;
+    -webkit-transition: all 0.12s ease-in-out;
+    transition: all 0.12s ease-in-out;
+    text-decoration: none;
+}
+
+.userButton i{
+	margin-right: 4px;
+	font-size: 14px;
+    vertical-align: middle;
+}
+
+.userRight ul{
+	font-size: 0;
+	-webkit-font-smoothing: antialiased;
+	color: #353535;
+	font-family: "Nanum Gothic","Malgun Gothic","맑은 고딕","돋움","Dotum","Apple Gothic","Apple SD Gothic Neo",sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.userRight li{
+	padding-left: 0;
+	display: inline-block;
+    position: relative;
+    padding: 0 11px;
+}
+
+.userRight .quickButton ul li a{
+	display: inline-block;
+    font-size: 13px;
+    line-height: 40px;
+    color: #222;
+    font-weight: bold;
+}
+
+.quickButton{
+	margin-bottom: 7px;
+}
+
+.welcome{
+	color: #777;
+    font-size: 14px;
+    line-height: 1;
+    height: 14px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.welcome b{
+	color: #222;
+}
+
+.member_div{
+	width: 70%;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.top_div{
+    display: table;
+    width: 100%;
+    margin-bottom: 55px;
+    padding-top: 20px;
+}
+
+.user_left{
+	display: table-cell;
+    min-width: 170px;
+    vertical-align: top;
+    padding-top: 11px;
+}
+
+.userImage{
+	width: 110px;
+    height: 110px;
+    padding: 4px;
+    margin: 0 auto;
+    border: 1px solid #e1e1e1;
+    border-radius: 100%;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.userImage img{
+	width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.userInfo{
+	margin-top: 11px;
+    text-align: center;
+}
+
+.userInfo .userName{
+	display: block;
+    font-size: 15px;
+    line-height: 20px;
+    color: #222;
+    font-weight: bold;
+}
+
+.userInfo .groupName{
+	margin-top: 2px;
+    display: block;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #888;
+}
+
+.mileage_div{
+	display: table;
+    position: relative;
+    padding: 0 20px 20px 20px;
+    width: 100%;
+    border: 1px dashed #d5d5d5;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.mileage_div ul{
+	list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.mileage_div li{
+	display: inline-block;
+    margin-top: 20px;
+    height: 46px;
+    padding: 2px 43px 2px 0;
+    position: relative;
+    list-style: none;
+    border-right: 1px solid #e1e1e1;
+    margin-left: 5px;
+}
+
+
+.mileage_strong{
+	display: block;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1;
+    height: 14px;
+    color: #888;
+    font-weight: normal;
+}
+
+.mileage_strong2{
+	font-size: 12px;
+    line-height: 1;
+    height: 17px;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+.mileage_span{
+	font-size: 15px;
+    color: #222;
+    letter-spacing: -0.5px;
+    margin-right: 3px;
+}
+
+.mileage_span2{
+	font-size: 12px;
+    line-height: 1;
+    height: 17px;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+.mileage_div ul li a{
+	display: inline-block;
+    font-size: 12px;
+    margin-top: -4px;
+    margin-left: 7px;
+    padding: 3px 6px;
+    background: #555;
+    border: 1px solid #555;
+    border-radius: 3px;
+    vertical-align: middle;
+    color: #fff;
+}
+
+.myshop{
+	margin: 0;
+	padding: 0;
+}
+
+.benefit_div{
+	display: table;
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 20px 0;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.benefit_div h3{
+	display: table-cell;
+    width: 143px;
+    padding: 15px;
+    border-right: 1px solid #e1e1e1;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.benefit_contents{
+	display: table-cell;
+    padding: 3px 20px;
+    line-height: 1.7;
+    vertical-align: middle;
+}
+
+.benefit_contents p{
+	padding: 2.5px 0;
+}
+
+.benefit_span{
+	line-height: 1.7em;
+}
+
+.benefit_strong{
+	color: #e30d15;
+}
+
+strong{
+	font-weight: bold;
+}
+
+.order_div{
+	position: relative;
+    margin-bottom: 50px;
+}
+
+.order_div h3, .info_div h3, .recent_div h3, .board_div h3, .coupon_div h3{
+	position: relative;
+    padding: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.desc{
+	margin-left: 1px;
+    font-size: 11px;
+    color: #777;
+}
+
+.desc em{
+	font-style: italic;
+}
+
+.contents{
+	border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.contents tbody tr{
+	border-top: 1px solid #e1e1e1;
+}
+
+.contents td{
+	padding: 16px 10px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5;
+}
+
+.order_ul{
+	float: left;
+    padding: 20px 0;
+    width: 80%;
+    height: 110px;
+    border-right: 1px solid #e1e1e1;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.order_ul li{
+	position: relative;
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.order_ul a{
+	display: inline-block;
+    padding: 12px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.cs{
+	float: right;
+    padding: 22px 30px;
+    width: 20%;
+    height: 110px;
+    background: #f7f7f7;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.cs li{
+	display: block;
+    padding: 4px 0;
+    font-size: 0.75em;
+    color: #353535;
+}
+
+.order_span{
+	display: block;
+    padding: 10px 0 0;
+    font-weight: bold;
+}
+
+table{
+	width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+caption{
+	display: none;
+}
+
+colgroup{
+	display: table-column-group;
+}
+
+thead{
+	border-bottom: 1px solid #e1e1e1;
+    background: #f7f7f7;
+    font-size: 0.75em;
+    color: #353535;
+}
+
+tbody{
+	display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr{
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+thead th{
+	padding: 15px 0;
+}
+
+.empty{
+	padding: 55px 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    color: #888;
+}
+
+.seemore{
+	position: absolute;
+    bottom: 8px;
+    right: 0;
+    font-size: 12px;
+    font-weight: normal;
+    color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
