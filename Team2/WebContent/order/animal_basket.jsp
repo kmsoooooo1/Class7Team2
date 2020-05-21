@@ -42,9 +42,6 @@
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
 		<div class="orderListArea">
-		<div class="title">
-			<h3>일반 상품</h3>
-		</div>
 		<table border="1" class="list">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 			<colgroup>
@@ -94,6 +91,7 @@
 					//b_code 값들 중에 맨 앞글자 따오기
 					char first_letter = bkdto.getB_code().charAt(0);
 			%>
+			<tbody>
 			<tr>
 				<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
 				<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
@@ -241,6 +239,7 @@
 			<%
 				}
 			%>
+		</tbody>
 		</table>
 		</div>
 		

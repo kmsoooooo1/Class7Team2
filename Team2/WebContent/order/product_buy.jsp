@@ -14,6 +14,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<link href="${pageContext.request.contextPath}/css/order.css?ver=2" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -33,24 +35,38 @@
 	
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
+	<div class="container">
+	<div class="contents">
 	<!-- 구매 테이블 생성 -->
-	Order / Payment  주문/결제
-	<table border="1">
+	<div class="h2"><h2>CARTOrder / Payment  주문/결제</h2></div>
+	
+	
+	<table border="1" class="list">
 		<input type="hidden" id="selectedCodes" name="selectedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 	
 		<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
+		<colgroup>
+				<col style="width:10%; ">
+				<col style="width:auto; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+				<col style="width:15%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+		</colgroup>
+		<thead>
 		<tr>
-			<td>이미지</td>
-			<td>상품정보</td>
-			<td>판매가<br>(적립예정)</td>
-			<td>수량</td>
-			<td>배송구분</td>
-			<td>배송비</td>
-			<td>합계</td>
+			<th>이미지</th>
+			<th>상품정보</th>
+			<th>판매가<br>(적립예정)</th>
+			<th>수량</th>
+			<th>배송구분</th>
+			<th>배송비</th>
+			<th>합계</th>
 		</tr>
+		</thead>
 		<%
 			for (int i = 0; i < basketList.size(); i++) {
 				BasketDTO bkdto = (BasketDTO) basketList.get(i);
@@ -62,6 +78,7 @@
 				//b_code 값들 중에 맨 앞글자 따오기
 				char first_letter = bkdto.getB_code().charAt(0);
 		%>
+		<tbody>
 		<tr>
 			<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
 			<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
@@ -185,27 +202,31 @@
 				<%}%>
 			<%}%>
 		</tr>
-
 		<%
 			}
 		%>
+		</tbody>
 	</table>
 	
-	<hr>
-	
 	<!-- 사용자 정보 입력 테이블 -->
-	구매자 정보 	*필수입력사항
-	<table border="1">
+	<div class="orderArea">
+	<div class="title"><h3>구매자 정보</h3> <p>*필수입력사항</p></div>
+	<table border="1" class="orderlist">
+	<colgroup>
+		<col style="width:10%;">
+		<col style="width: auto;">
+	</colgroup>
+		<tbody class="addressform">
 		<tr>
-			<td> 구매하시는 분 </td>
-			<td> <input type="text" id="buyer_name" name="buyer_name" value="<%=memberDTO.getName()%>"> </td>
+			<th> 구매하시는 분 </th>
+			<td> <input type="text" id="buyer_name" name="buyer_name" placeholder size="15" value="<%=memberDTO.getName()%>"> </td>
 		</tr>
 		<tr>
-			<td> 주소 </td>
+			<th> 주소 </th>
 			<td> 
-				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" onclick="DaumPostcode();">주소검색</button> <br>
-				<input type="text" id="buyer_addr1" name="addr1" id="addr1" value="<%=memberDTO.getAddr1()%>" readonly> 기본주소 <br>
-				<input type="text" id="buyer_addr2" name="addr2" id="addr2" value="<%=memberDTO.getAddr2()%>"> 상세주소
+				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" onclick="DaumPostcode();">주소검색</button> <br>
+				<input type="text" id="buyer_addr1" name="addr1" id="addr1" placeholder size="40" value="<%=memberDTO.getAddr1()%>" readonly> <span>기본주소</span> <br>
+				<input type="text" id="buyer_addr2" name="addr2" id="addr2" placeholder size="40" value="<%=memberDTO.getAddr2()%>"> <span>상세주소</span>
 			</td>
 		</tr>
 				<!-- ----- DAUM 우편번호 API 시작 ----- -->
@@ -213,20 +234,20 @@
 				  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 				</div>
 		<tr>
-			<td> 휴대전화 </td>
+			<th> 휴대전화 </th>
 			<td> <input type="text" id="buyer_phone" name="buyer_phone" value="<%=memberDTO.getPhone()%>"> </td>
 		</tr>
 		
 		<tr>
-			<td> 전화번호 </td>
+			<th> 전화번호 </th>
 			<td> <input type="text" id="buyer_number" name="buyer_number" value="<%=memberDTO.getPhone()%>"> </td>
 		</tr>
 		
 		<tr>
-			<td> 이메일 </td>
+			<th> 이메일 </th>
 			<td> 
 				<input type="text" id="buyer_email" name="buyer_email" value="<%=memberDTO.getEmail().substring(0, memberDTO.getEmail().indexOf("@"))%>">@<input type="text" id="email_address_input" name="email_address_input" value="<%=memberDTO.getEmail().substring(memberDTO.getEmail().lastIndexOf("@")+1)%>">
-				<select name="email_address" onchange="changeEmail(this.value);"> 
+				<select name="email_address" class="emailSelect" onchange="changeEmail(this.value);"> 
 					<option value=""> - 이메일 선택 - </option>
 					<option value="naver.com"> naver.com </option>
 					<option value="daum.net"> daum.net </option>
@@ -236,32 +257,35 @@
 					<option value="직접입력" selected> 직접입력 </option>
 				</select> <br>
 				
-				- 이메일을 통해 주문처리과정을 보내드립니다.	 <br>
-				- 이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요
+				<span>- 이메일을 통해 주문처리과정을 보내드립니다.	</span> <br>
+				<span>- 이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요</span>
 			</td>
 		</tr>
+		</tbody>
 	</table>
+	</div>
 	
-	<br>
-	
-	수령자 정보		*필수입력사항
-	<table border="1">
-	
+	<div class="title"><h3>수령자 정보</h3> <p>*필수입력사항</p></div>
+	<table border="1" class="orderlist">
+	<colgroup>
+		<col style="width:10%;">
+		<col style="width: auto;">
+	</colgroup>
 		<tr>
-			<td> 배송지 선택 </td>
+			<th> 배송지 선택 </th>
 			<td> <label> <input type="checkbox" id="chkBoxInfo"> 구매자 정보와 동일 </label> </td>
 		</tr>
 		
 		<tr>
-			<td> 수령하시는 분 </td>
-			<td> <input type="text" id="rece_name" name="rece_name" value=""> </td>
+			<th> 수령하시는 분 </th>
+			<td> <input type="text" id="rece_name" name="rece_name" placeholder size="15" value=""> </td>
 		</tr>
 		<tr>
-			<td> 주소 </td>
+			<th> 주소 </th>
 			<td> 
-				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" value="" readonly> <button type="button" onclick="DaumPostcode();">주소검색</button> <br>
-				<input type="text" id="rece_addr1" name="addr1" id="addr1" value="" readonly> 기본주소 <br>
-				<input type="text" id="rece_addr2" name="addr2" id="addr2" value=""> 상세주소
+				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" placeholder size="6" value="" readonly> <button type="button" onclick="DaumPostcode();">주소검색</button> <br>
+				<input type="text" id="rece_addr1" name="addr1" id="addr1" placeholder size="40" value="" readonly> <span>기본주소</span> <br>
+				<input type="text" id="rece_addr2" name="addr2" id="addr2" placeholder size="40" value=""> <span>상세주소</span>
 			</td>
 		</tr>
 				<!-- ----- DAUM 우편번호 API 시작 ----- -->
@@ -269,29 +293,27 @@
 				  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 				</div>
 		<tr>
-			<td> 휴대전화 </td>
+			<th> 휴대전화 </th>
 			<td> <input type="text" id="rece_phone" name="rece_phone" value=> </td>
 		</tr>
 		
 		<tr>
-			<td> 전화번호 </td>
+			<th> 전화번호 </th>
 			<td> <input type="text" id="rece_number" name="rece_number" value=> </td>
 		</tr>
 		
 		<tr>
-			<td> 배송메세지 </td>
-			<td> <textarea rows="10" cols="100"></textarea> </td>
+			<th> 배송메세지 </th>
+			<td> <textarea rows="5" cols="100"></textarea> </td>
 		</tr>
 	</table>
 	
-	<hr>
-	
-	<table border="1">
+	<table border="1" class="list">
 		<tr>
-			<td>총 주문금액</td>
-			<td>총 배송비</td>
-			<td>총 할인</td>
-			<td>결제 예정 금액</td>
+			<th>총 주문금액</th>
+			<th>총 배송비</th>
+			<th>총 할인</th>
+			<th>결제 예정 금액</th>
 		</tr>
 		<tr>
 		
@@ -350,14 +372,15 @@
 	<hr>
 	
 	<!-- 쿠폰 및 적립금 조회 테이블 -->
-	Coupon / Discount 쿠폰/추가할인
-	<table border="1">
+	<div class="title"><h3>Coupon / Discount 쿠폰/추가할인</h3></div>
+	<table border="1" class="orderlist">
 		<tr>
 			<td> 보유 쿠폰 할인 </td>
 			<td> 
 				<button type="button" onclick="toggleCoupons();"> 쿠폰 조회 </button> (쿠폰 허용 상품 / 일부 쿠폰 제외) 
 			
-				<table border="1" id="couponsTable" style="display:none; width: 100%; height: 150px; overflow: scroll;">
+				<table border="1" class="list" id="couponsTable" style="display:none; width: 60%; float:right; height: 150px; overflow: scroll;">
+					<thead>
 					<tr>
 						<th>이미지</th>
 						<th>상품명</th>
@@ -366,6 +389,7 @@
 						<th>쿠폰선택</th>
 						<th>쿠폰할인</th>						
 					</tr>
+					</thead>
 					<%
 						for (int i = 0; i < basketList.size(); i++) {
 							BasketDTO bkdto = (BasketDTO) basketList.get(i);
@@ -590,7 +614,8 @@
 			</ol> 
 		</td>
 	</table>
-
+	</div>
+	</div>
 
 	<!-- Footer -->
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
