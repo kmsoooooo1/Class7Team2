@@ -27,6 +27,9 @@
       <div class="swiper-slide">
        <img src="${pageContext.request.contextPath}/img/t3.png">
       </div>
+      <div class="swiper-slide">
+       <img src="${pageContext.request.contextPath}/img/t4.png">
+      </div>
     </div>
     <!-- 페이징 -->
     <div class="swiper-pagination"></div>
@@ -45,20 +48,26 @@
    <div class="overlay">동물병원 정보</div>
   </div>
   <div class="banner_img">
-   <img src="${pageContext.request.contextPath}/img/turt.png" alt="Turtle" class="image">
+   <a href="./AnimalList.an?category=파충류&sub_category=거북">
+    <img src="${pageContext.request.contextPath}/img/turt.png" alt="Turtle" class="image">
+   </a>
     <div class="overlay">거북이</div>
   </div>
   <div class="banner_img">
-   <img src="${pageContext.request.contextPath}/img/gaeko.png" alt="Gaeko" class="image">
+   <a href="./AnimalList.an?category=파충류&sub_category=도마뱀">
+    <img src="${pageContext.request.contextPath}/img/gaeko.png" alt="Gaeko" class="image">
+   </a> 
     <div class="overlay">개코</div>
   </div>
   <div class="banner_img">
-   <img src="${pageContext.request.contextPath}/img/fl.png" alt="Flog" class="image">
+   <a href="./AnimalList.an?category=양서류">
+    <img src="${pageContext.request.contextPath}/img/fl.png" alt="Flog" class="image">
+   </a> 
     <div class="overlay">개구리</div>
   </div>
   <div class="banner_img">
    <img src="${pageContext.request.contextPath}/img/c2.jpg" alt="Flog" class="image">
-    <div class="overlay">대표 캐릭터</div>
+    <div class="overlay">GALAPAGOS</div>
   </div>
  </div>
   <!-- 신상품 리스트 -->

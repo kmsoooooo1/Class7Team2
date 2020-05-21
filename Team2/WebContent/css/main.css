@@ -23,6 +23,10 @@
       margin-right: auto;
     }
   	
+  	.first img {
+  		width: 100%;
+  	}
+  	
   	.center_banner {
   		width: 100%;
   		margin: 0;

@@ -77,7 +77,7 @@
 			      <td><%=mdto.getName() %></td>
 			      <td><%=mdto.getPhone() %></td>
 			      <td><%=mdto.getZipcode() %></td>
-			      <td class="addr"><%=mdto.getAddr1() %></td>
+			      <td><%=mdto.getAddr1() %></td>
 			      <td><%=mdto.getAddr2() %></td>
 			      <td><%=mdto.getEmail() %></td>
 			      <td><%=mdto.getReg_date() %></td>
