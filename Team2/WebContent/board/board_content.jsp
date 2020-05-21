@@ -177,7 +177,7 @@
 				  }else{ %>
 				  		<li>
 				  			<div class="content_wrap">
-				  			작성된 댓글이 없습니다.
+				  				<div class="no_content_list">작성된 댓글이 없습니다.</div>
 				  			</div>
 				  		</li>
 			  <%  } %>
