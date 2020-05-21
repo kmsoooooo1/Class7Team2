@@ -109,7 +109,7 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
-		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchItem.jsp?C=1','_blank','width=600,height=700',false);">
+		<input type="button" value="글 쓰기" onclick="window.open('${pageContext.request.contextPath}/board/searchCoupon.jsp?C=1','_blank','width=600,height=700',false);">
 		</div>
 	<ul class="paging">
 		<c:if test="${pageMaker.prev }">

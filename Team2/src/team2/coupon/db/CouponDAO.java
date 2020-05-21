@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -102,6 +103,64 @@ public class CouponDAO {
 			closeDB();
 		}
 		return couponsList;
+	}
+	
+	//멤버 쿠폰 리스트 가져오는 함수
+	public Vector getMemberCouponsList(String id){
+		
+		Vector vec = new Vector();
+		
+		//쿠폰 정보 저장
+		ArrayList couponInfoList = new ArrayList();
+		
+		//멤버 쿠폰 정보 저장
+		ArrayList memberCouponList = new ArrayList();
+		
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		
+		try {
+			con = getConnection();
+			sql = "select * from team2_coupon_member where id = ? order by num desc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				CouponMemberDTO cmdto = new CouponMemberDTO();
+				cmdto.setCo_num(rs.getInt("co_num"));
+				cmdto.setId(rs.getString("id"));
+				cmdto.setNum(rs.getInt("num"));
+				cmdto.setUsed(rs.getString("used"));
+				memberCouponList.add(cmdto);
+				
+				sql = "select * from team2_coupon_admin where num = ?";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1, cmdto.getNum());
+				rs2 = pstmt2.executeQuery();
+				
+				if(rs2.next()){
+					CouponDTO cdto = new CouponDTO();
+					cdto.setCo_endDate(rs2.getString("co_endDate"));
+					cdto.setCo_image(rs2.getString("co_image"));
+					cdto.setCo_name(rs2.getString("co_name"));
+					cdto.setCo_rate(rs2.getString("co_rate"));
+					cdto.setCo_startDate(rs2.getString("co_startDate"));
+					cdto.setCo_status(rs2.getString("co_status"));
+					cdto.setCo_target(rs2.getString("co_target"));
+					cdto.setNum(rs2.getInt("num"));
+					couponInfoList.add(cdto);
+				}
+			}
+			vec.add(0, memberCouponList);
+			vec.add(1, couponInfoList);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return vec;
 	}
 	
 	//일반 사용자가 쿠폰을 추가할때 호출하는 함수

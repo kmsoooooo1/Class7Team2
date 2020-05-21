@@ -63,7 +63,11 @@
 				data:'c_num='+$('#co_num'+i).val(),
 				dataType: 'html',
 				success:function(data) {
-					alert("성공");
+					if(data == -1){
+						alert("이미 발급받은 쿠폰입니다.");
+					}else if(data == 1){
+						alert("쿠폰이 발급되었습니다.");
+					}
 	   			},error:function(request,status,error){
 				 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 				}

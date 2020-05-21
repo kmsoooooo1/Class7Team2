@@ -80,73 +80,8 @@ CREATE TABLE `team2_basket` (
 
 LOCK TABLES `team2_basket` WRITE;
 /*!40000 ALTER TABLE `team2_basket` DISABLE KEYS */;
-INSERT INTO `team2_basket` VALUES (4,'coduo25','a-11',1,'','지하철'),(5,'coduo25','g-102',1,'8.5인치','일반포장'),(6,'coduo25','a-200',1,'','일반포장'),(7,'coduo25','a-200',1,'','퀵서비스');
+INSERT INTO `team2_basket` VALUES (4,'coduo25','a-11',1,'','지하철'),(5,'coduo25','g-102',1,'8.5인치','일반포장'),(6,'coduo25','a-200',1,'','일반포장'),(7,'coduo25','a-200',2,'','퀵서비스');
 /*!40000 ALTER TABLE `team2_basket` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `team2_board`
---
-
-DROP TABLE IF EXISTS `team2_board`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `team2_board` (
-  `b_idx` int(11) NOT NULL,
-  `b_category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `b_title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `b_writer` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `b_content` text COLLATE utf8_unicode_ci NOT NULL,
-  `b_ref` int(11) NOT NULL,
-  `b_like` int(11) DEFAULT '0',
-  `b_view` int(11) DEFAULT '0',
-  `b_reg_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `ip_addr` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `b_file` text COLLATE utf8_unicode_ci NOT NULL,
-  `b_p_code` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`b_idx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `team2_board`
---
-
-LOCK TABLES `team2_board` WRITE;
-/*!40000 ALTER TABLE `team2_board` DISABLE KEYS */;
-INSERT INTO `team2_board` VALUES (1,'Review','qqwf','coduo25','<img src=\"/Team2/upload/multiupload/20200515185134c72d3a34-8be4-4a46-8c6e-9566e4abc531.jpg\r\n\" title=\"12.jpg\"><br style=\"clear:both;\">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 qwef이 value 값을 지정하지 않으시면 됩니다.\r\n			\r\n			\r\n			',1,0,8,'2020-05-15 18:50:05','192.168.7.31','1589536361005.png,1589536361006.png,1589536361007.png,','g-101');
-/*!40000 ALTER TABLE `team2_board` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `team2_comment`
---
-
-DROP TABLE IF EXISTS `team2_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `team2_comment` (
-  `c_idx` int(11) NOT NULL,
-  `c_b_idx` int(11) NOT NULL,
-  `c_id` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `c_comment` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `c_like` int(11) DEFAULT '0',
-  `c_regdate` datetime DEFAULT CURRENT_TIMESTAMP,
-  `ip_addr` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`c_idx`),
-  KEY `cmt_id_fk` (`c_id`),
-  CONSTRAINT `cmt_id_fk` FOREIGN KEY (`c_id`) REFERENCES `team2_member` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `team2_comment`
---
-
-LOCK TABLES `team2_comment` WRITE;
-/*!40000 ALTER TABLE `team2_comment` DISABLE KEYS */;
-INSERT INTO `team2_comment` VALUES (1,1,'test','댓글입력',0,'2020-05-06 09:45:33','0:0:0:0:0:0:0:1'),(2,1,'test','댓글22222',0,'2020-05-06 10:15:39','0:0:0:0:0:0:0:1'),(3,1,'test','fdsasdf',0,'2020-05-06 14:01:35','0:0:0:0:0:0:0:1'),(4,1,'test','5555555555555',0,'2020-05-06 14:03:13','0:0:0:0:0:0:0:1'),(5,1,'test','ì½íì¸ ',0,'2020-05-06 15:45:55','0:0:0:0:0:0:0:1'),(6,1,'test','cccccccccc',0,'2020-05-06 16:33:32','0:0:0:0:0:0:0:1'),(7,1,'test','cccccccccc111',0,'2020-05-06 16:33:58','0:0:0:0:0:0:0:1'),(8,1,'test','cccccccccc1112222',0,'2020-05-06 16:34:34','0:0:0:0:0:0:0:1'),(9,1,'test','comment pageNum test',0,'2020-05-06 17:25:13','0:0:0:0:0:0:0:1'),(10,1,'test','comment pageNum test\r\në¬¸ìì°ë ê¸°',0,'2020-05-06 17:27:41','0:0:0:0:0:0:0:1'),(11,1,'test','comment pageNum test\r\në¬¸ìì°ë ê¸°2222',0,'2020-05-06 17:32:14','0:0:0:0:0:0:0:1'),(12,1,'test','comment pageNum test\r\në¬¸ìì°ë ê¸°22223333',0,'2020-05-06 17:32:52','0:0:0:0:0:0:0:1'),(13,1,'test','comment pageNum test\r\në¬¸ìì°ë ê¸°2222333344444',0,'2020-05-06 17:35:06','0:0:0:0:0:0:0:1'),(14,1,'test','comment pageNum test\r\në¬¸ìì°ë ê¸°222342222333344444',0,'2020-05-06 17:35:47','0:0:0:0:0:0:0:1');
-/*!40000 ALTER TABLE `team2_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -175,7 +110,7 @@ CREATE TABLE `team2_coupon_admin` (
 
 LOCK TABLES `team2_coupon_admin` WRITE;
 /*!40000 ALTER TABLE `team2_coupon_admin` DISABLE KEYS */;
-INSERT INTO `team2_coupon_admin` VALUES (2,'양서류','모든 양서류 특별 쿠폰 3,000원','3000','2020-05-20','2020-05-30','true','test_banner.jpg'),(3,'먹이','모든 먹이 특별 쿠폰 1,000원','1000','2020-05-20','2020-05-30','true','test_banner.jpg'),(4,'사육용품','모든 사육용품 특별 쿠폰 2,000원','2000','2020-05-20','2020-06-10','true','test_banner.jpg'),(5,'파충류','모든 파충류 특별 쿠폰 5,000원','5000','2020-05-20','2020-05-30','true','test_banner.jpg');
+INSERT INTO `team2_coupon_admin` VALUES (1,'양서류','모든 양서류 특별 쿠폰 3,000원','3000','2020-05-20','2020-05-30','true','test_banner.jpg'),(2,'먹이','모든 먹이 특별 쿠폰 1,000원','1000','2020-05-20','2020-05-30','true','test_banner.jpg'),(3,'사육용품','모든 사육용품 특별 쿠폰 2,000원','2000','2020-05-20','2020-06-10','true','test_banner.jpg'),(4,'파충류','모든 파충류 특별 쿠폰 5,000원','5000','2020-05-20','2020-05-30','true','test_banner.jpg');
 /*!40000 ALTER TABLE `team2_coupon_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,6 +123,9 @@ DROP TABLE IF EXISTS `team2_coupon_member`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team2_coupon_member` (
   `num` int(11) NOT NULL,
+  `id` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `co_num` int(11) DEFAULT NULL,
+  `used` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -198,6 +136,7 @@ CREATE TABLE `team2_coupon_member` (
 
 LOCK TABLES `team2_coupon_member` WRITE;
 /*!40000 ALTER TABLE `team2_coupon_member` DISABLE KEYS */;
+INSERT INTO `team2_coupon_member` VALUES (1,'coduo25',1,'NO'),(2,'coduo25',2,'NO'),(3,'coduo25',3,'NO'),(4,'coduo25',4,'NO');
 /*!40000 ALTER TABLE `team2_coupon_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +176,7 @@ CREATE TABLE `team2_goods` (
 
 LOCK TABLES `team2_goods` WRITE;
 /*!40000 ALTER TABLE `team2_goods` DISABLE KEYS */;
-INSERT INTO `team2_goods` VALUES (1,'사육용품','사육장','유리/테라리움','NOMOY 우드 렙타일 케이지 50cm(서랍형)','g-100','374f96c6effc1ee3895ad64ea8aac2be.jpg',150,70000,5,66500,1000,'일반배송','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',10,'2020-05-05'),(2,'먹이','칼슘/약품','-','엑소테라 칼슘 비타민D3 0%','g-101','e28add91001352c222f715598ff95077.jpg',0,6500,10,5850,100,'일반배송','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',28,'2020-05-05'),(3,'사육용품','램프','소켓','줄스 라이트 커버','g-102','db082d79ceb5136508d237d35cc338a3.jpg',0,25000,20,20000,400,'일반배송','5.5인치',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',71,'2020-05-05'),(4,'먹이','인공사료','-','테트라 렙토민 250ml','g-103','c86248059f920bb4f7c884608d598f5f.jpg',100,7500,10,6750,100,'일반배송','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',9,'2020-05-05'),(5,'먹이','칼슘/약품','-','렙칼 멀티 비타민','g-104','ccbdce702d8ee41c3a8e2be6cebd1663.jpg',200,23800,20,19040,300,'일반배송','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',21,'2020-05-05'),(7,'사육용품','온/습도 관련','온도조절기','test2','g-105','thumb-202020_500x500.jpg',100,10000,0,10000,100,'선택배송','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',26,'2020-05-05'),(8,'먹이','생먹이','-','test','g-106','thumb-202020_500x500.jpg',10,10,0,10,0,'일반배송','20cm',0,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : rest<br><br>\r\n				  <br>\r\n		   		',36,'2020-05-06'),(9,'먹이','생먹이','-','test','g-106','thumb-202020_500x500.jpg',0,10,0,10,0,'일반배송','40cm',2000,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : rest<br><br>\r\n				  <br>\r\n		   		',36,'2020-05-06'),(10,'먹이','생먹이','-','test','g-106','thumb-202020_500x500.jpg',20,10,0,10,0,'일반배송','60cm',4000,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : rest<br><br>\r\n				  <br>\r\n		   		',36,'2020-05-06'),(11,'사육용품','램프','소켓','줄스 라이트 커버','g-102','db082d79ceb5136508d237d35cc338a3.jpg',100,25000,20,20000,400,'일반배송','8.5인치',5000,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : <br><br>\r\n				  <br>\r\n		   		',67,'2020-05-06');
+INSERT INTO `team2_goods` VALUES (1,'사육용품','사육장','유리/테라리움','NOMOY 우드 렙타일 케이지 50cm(서랍형)','g-100','374f96c6effc1ee3895ad64ea8aac2be.jpg',150,70000,5,66500,1000,'일반포장','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',10,'2020-05-05'),(2,'먹이','칼슘/약품','-','엑소테라 칼슘 비타민D3 0%','g-101','e28add91001352c222f715598ff95077.jpg',0,6500,10,5850,100,'일반포장','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',28,'2020-05-05'),(3,'사육용품','램프','소켓','줄스 라이트 커버','g-102','db082d79ceb5136508d237d35cc338a3.jpg',0,25000,20,20000,400,'일반포장','5.5인치',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',71,'2020-05-05'),(4,'먹이','인공사료','-','테트라 렙토민 250ml','g-103','c86248059f920bb4f7c884608d598f5f.jpg',100,7500,10,6750,100,'일반포장','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',9,'2020-05-05'),(5,'먹이','칼슘/약품','-','렙칼 멀티 비타민','g-104','ccbdce702d8ee41c3a8e2be6cebd1663.jpg',200,23800,20,19040,300,'일반포장','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',21,'2020-05-05'),(7,'사육용품','온/습도 관련','온도조절기','test2','g-105','thumb-202020_500x500.jpg',100,10000,0,10000,100,'일반포장','',0,'		   		   <br>\r\n					<span style=\"font-weight: bold\"> 관련 동물(종) </span> :  \r\n				   <br>\r\n		   		',26,'2020-05-05'),(8,'먹이','생먹이','-','test','g-106','thumb-202020_500x500.jpg',10,10,0,10,0,'일반포장','20cm',0,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : rest<br><br>\r\n				  <br>\r\n		   		',36,'2020-05-06'),(9,'먹이','생먹이','-','test','g-106','thumb-202020_500x500.jpg',0,10,0,10,0,'일반포장','40cm',2000,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : rest<br><br>\r\n				  <br>\r\n		   		',36,'2020-05-06'),(10,'먹이','생먹이','-','test','g-106','thumb-202020_500x500.jpg',20,10,0,10,0,'일반포장','60cm',4000,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : rest<br><br>\r\n				  <br>\r\n		   		',36,'2020-05-06'),(11,'사육용품','램프','소켓','줄스 라이트 커버','g-102','db082d79ceb5136508d237d35cc338a3.jpg',100,25000,20,20000,400,'일반포장','8.5인치',5000,'<br>\r\n				<span style=\"font-weight: bold\"> 관련 동물(종) </span> : <br><br>\r\n				  <br>\r\n		   		',67,'2020-05-06');
 /*!40000 ALTER TABLE `team2_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-20 20:31:44
+-- Dump completed on 2020-05-21 16:31:22

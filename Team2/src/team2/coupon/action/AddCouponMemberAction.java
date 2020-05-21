@@ -1,8 +1,11 @@
 package team2.coupon.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import team2.coupon.db.CouponDAO;
 import team2.couponMember.db.CouponMemberDTO;
 
@@ -29,6 +32,10 @@ public class AddCouponMemberAction  implements Action{
 		CouponDAO cdao = new CouponDAO();
 		int check = cdao.insertCouponMember(cmdto);
 		
+		PrintWriter out = response.getWriter();
+
+		out.println(check);
+
 		return null;
 	}
 	
