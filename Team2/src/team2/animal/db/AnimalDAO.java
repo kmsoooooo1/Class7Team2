@@ -319,13 +319,12 @@ public class AnimalDAO {
 	public int getAnimalCount(aSet aset){
 		
 		int total = 0;
-		
-		
+			
 		sql = "select count(*) from team2_animals where category like ? "
 				+ "AND sub_category like ? AND sub_category_index like ?";
 		
 		try {
-
+			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, '%'+aset.getCategory());
 			pstmt.setString(2, '%'+aset.getSub_category());
@@ -343,9 +342,7 @@ public class AnimalDAO {
 		} finally {
 			closeDB();
 		}
-		
-		
-		
+
 		return total;
 		
 	}
@@ -355,7 +352,7 @@ public class AnimalDAO {
 		
 		List<AnimalDTO> animalList = new ArrayList<AnimalDTO>();
 		try {
-			
+			con = getConnection();
 			sql = "select * from team2_animals where category like ? "
 					+ "AND sub_category like ? AND sub_category_index like ? "
 					+ "order by num desc limit ?,?";
