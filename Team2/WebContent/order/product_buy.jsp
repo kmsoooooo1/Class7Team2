@@ -767,7 +767,7 @@
     }
     
     //쿠폰 다시선택 버튼 눌렸을때
-    function cancelCoupon(i){
+    function cancelCoupon(i){ 
     	
     	//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
 		for(var j=0; j<basketList.length; j++){
