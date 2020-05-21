@@ -174,4 +174,50 @@ tr{
 	margin-top: 50px;
 }
 
+.help{
+	margin: 20px 0;
+    border: 1px solid #e7e7e7;
+    line-height: 18px;
+    background: #fafafa;
+}
+
+.help h3{
+	padding: 10px 0 8px 12px;
+    border-bottom: 1px solid #e7e7e7;
+    color: #101010;
+    font-size: 15px;
+    
+}
+
+.inner{
+    padding: 5px 17px 23px;
+}
+
+.inner h4{
+	margin: 22px 0 -4px;
+    color: #404040;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.inner h4:FIRST-CHILD {
+	margin-top: 20px;
+}
+
+.inner ol{
+	margin: 15px 0 0 0;
+    font-size: 12px;
+}
+
+.inner ol li{
+	background-position: -484px 0;
+}
+
+
+
+
+
+
+
+
 
