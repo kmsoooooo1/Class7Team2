@@ -166,7 +166,7 @@
 					<!-- 장바구니 수량  -->
 					<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
 					<!-- 수량 +/- 버튼 -->
-					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'>
+					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'> 
 					<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
 				</td>
 				
