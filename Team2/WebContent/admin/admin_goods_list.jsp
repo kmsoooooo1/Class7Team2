@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${pageContext.request.contextPath}/css/memberList.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
@@ -18,7 +19,7 @@
 	%>
 	
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
  <div class="board">
@@ -26,7 +27,7 @@
   <div class="top">
    <div class="boardname">
     <h2>
-     	모든 상품 리스트
+     	전체 상품 리스트
     </h2>
    </div>
    <div class="list-div">
@@ -111,6 +112,6 @@
   </div>
  </div>
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 </body>
 </html>
