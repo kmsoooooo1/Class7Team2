@@ -187,7 +187,8 @@ function doDelete(){
 
 	
 	
-	
+	<!-- FOOTER -->
+	<jsp:include page="/include/footer.jsp"/>	
 
 </body>
 </html>

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/adminAdd.css?ver=2" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -15,14 +17,18 @@
 	
 	
 	<!-- Main Content -->
-	<h1>WebContent/admin/admin_goods_add.jsp</h1>
 	
+	<div class="container">
+	<div class="contents">
 	<h2> 관리자 사육용품 등록 페이지</h2>
-	
 	<form action="./GoodsAddAction.ag" method="post" name="fr" enctype="multipart/form-data">
-		<table border="1">
+		<table border="1" class="adminAdd">
+		  <colgroup>
+			  <col style="width:20%;">
+			  <col style="width: auto;">
+		  </colgroup>
 		  <tr>
-		   <td>카테고리</td>
+		   <th>카테고리</th>
 		   <td> 
 		     <!-- 상품 카테고리 -->
 		     <select name="category" onchange="categoryChange(this)">
@@ -42,28 +48,28 @@
 		  </tr>
 		  
 		  <tr> 
-		   <td>상품 이름</td>
+		   <th>상품 이름</th>
 		   <td><input type="text" name="g_name"></td>
 		  </tr>
 		  
 		  <tr>
-		   <td>상품 코드</td>
+		   <th>상품 코드</th>
 		   <td><input type="text" name="g_code"></td>
 		  </tr>
 		  
 		  <tr> 
-		   <td>상품 썸네일 이미지</td>
+		   <th>상품 썸네일 이미지</th>
 		   <td><input type="file" name="g_thumbnail"></td>
 		  </tr>
 		
 		  
 		  <tr> 
-		   <td>상품 개수</td>
+		   <th>상품 개수</th>
 		   <td><input type="text" name="g_amount"></td>
 		  </tr>
 		  
 		  <tr> 
-		   <td rowspan="3">상품 가격</td>
+		   <th rowspan="3">상품 가격</th>
 		   <td> 판매가(할인전) : <input type="text" id="g_price_origin_val" name="g_price_origin" value="" onkeyup="calMileage()">원 </td>
 		  </tr> 
 		  <tr>
@@ -74,12 +80,12 @@
 		  </tr>
 		
 		  <tr>
-			<td> 적립금 </td>
+			<th> 적립금 </th>
 			<td> <input  type="text" id="g_mileage_val" name="g_mileage">원 </td>
 		  </tr>
 		  
 		  <tr>
-		    <td> 배송 방법</td>
+		    <th> 배송 방법</th>
 		    <td>
 		      <input type="radio" name="g_delivery" value="일반포장" checked="checked"> 일반포장
 		      <input type="radio" name="g_delivery" value="선택배송"> 선택배송
@@ -87,13 +93,13 @@
 		  </tr>
 		  
 		  <tr>
-		     <td> 옵션 </td>
+		     <th> 옵션 </th>
 		     <td> <input type="text" name="g_option" placeholder="옵션 없으면 빈칸"> </td>
 		  </tr>
 		  
 		 <!-- 추가가격이 없으면 0 입력 -->
 		  <tr>
-		  	<td> 옵션 추가 가격 </td>
+		  	<th> 옵션 추가 가격 </th>
 		  	<td> <input type="text" name="g_option_price" placeholder="추가 가격이 없으면 0 입력"> </td>
 		  </tr>
 		  
@@ -116,7 +122,8 @@
 		  
 		</table>
 	</form>
-	
+	</div>
+	</div>
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
