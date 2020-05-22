@@ -17,12 +17,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<%
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
 		String g_code = request.getParameter("g_code");
+		if(sub_category == null){ 
+			sub_category = "";
+		}
 		if(sub_category_index == null){ 
 			sub_category_index = "";
 		}

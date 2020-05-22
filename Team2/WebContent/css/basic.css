@@ -43,7 +43,7 @@ body{
 
 
 .top_menu{
-	width: 100%;
+	width: 50%;
 	float: left;
 }
 
@@ -468,16 +468,27 @@ body{
 
 /* Notice-Rolling */
 
-.notice {
+.rolling_top_menu {
 	width: 80%;
+	
+}
+
+.notice {
+	width: 50%;
 	height: 50px;
 	overflow: hidden;
 	background-color: #fff;
 	text-align: right;
 	margin: 0;
 	padding: 0;
+	float: left;
 }
 
+.rolling_top_menu:after {
+	display: block;
+	content: "";
+	clear: both;
+}
 
 .rolling {
 	position: relative;
