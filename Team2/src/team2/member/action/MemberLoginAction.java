@@ -1,6 +1,8 @@
 package team2.member.action;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +21,13 @@ public class MemberLoginAction implements Action {
 		
 		MemberDAO mdao = new MemberDAO();
 		
-		int check = mdao.idCheck(id,pass);
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+				
+		Date time = new Date();
+				
+		String time_now = format.format(time);
+		
+		int check = mdao.idCheck(id,pass, time_now);
 		
 		if (check == 0) {
 			
