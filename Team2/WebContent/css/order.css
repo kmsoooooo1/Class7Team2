@@ -26,16 +26,17 @@ a{
     outline: none;
 }
 
-.title {
-	height: 38px;
-    margin: 20px 0 0;
-    border-bottom: 0;
-    line-height: 38px;
+.title h3{
+	display: inline-block;
+    vertical-align: middle;
+    color: #353535;
+    font-size: 15px;
 }
 
-.title h3{
-	color: #353535;
-    font-size: 11px;
+.title p{
+	margin: -30px 0 0;
+    color: #ff0000;
+    text-align: right;
 }
 
 table{
@@ -90,7 +91,6 @@ tr{
 
 .list th{
 	height: 44px;
-    line-height: 44px;
     font-weight: normal;
     background: #fff;
     vertical-align: middle;
@@ -154,7 +154,7 @@ tr{
     border: 1px solid #373737;
     border-bottom-color: #2f2f2f;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-    background: #393939;
+    background: #8c8c8c;
     padding: 0 1.0em;
     font-size: 12px;
     min-width: 125px;
@@ -165,7 +165,7 @@ tr{
 }
 
 .order_btn:HOVER {
-	background: #818181;
+	background: #6b6b6b;
 }
 
 
@@ -173,5 +173,129 @@ tr{
 	text-align: center;
 	margin-top: 50px;
 }
+
+.help{
+	margin: 20px 0;
+    border: 1px solid #e7e7e7;
+    line-height: 18px;
+    background: #fafafa;
+}
+
+.help h3{
+	padding: 10px 0 8px 12px;
+    border-bottom: 1px solid #e7e7e7;
+    color: #101010;
+    font-size: 15px;
+    
+}
+
+.inner{
+    padding: 5px 17px 23px;
+}
+
+.inner h4{
+	margin: 22px 0 -4px;
+    color: #404040;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.inner h4:FIRST-CHILD {
+	margin-top: 20px;
+}
+
+.inner ol{
+	margin: 15px 0 0 0;
+    font-size: 12px;
+}
+
+.inner ol li{
+	background-position: -484px 0;
+}
+
+.orderArea{
+	margin-top: 30px;
+}
+
+input[type="text"]{
+	height: 22px;
+    line-height: 24px;
+    padding: 2px 8px;
+    border: 1px solid #e7e7e7;
+}
+
+.orderlist{
+	margin-bottom: 30px;
+}
+
+.orderlist th{
+	padding: 12px 0 11px 18px;
+    border: 1px solid #e7e7e7;
+    border-bottom-width: 0;
+    color: #353535;
+    text-align: left;
+    font-weight: normal;
+    background-color: #fbfbfb;
+}
+
+.orderlist span{
+	font-size: 14px;
+	color: #8e8e8e;
+}
+
+.emailSelect{
+	height: 25px;
+}
+
+.orderstar_btn{
+	padding: 0 .95em;
+    min-width: 49px;
+    font-size: 11px;
+    height: 28px;
+    line-height: 27px;
+    font-weight: normal;
+    color: #666;
+    border: 1px solid #e3e3e3;
+    border-bottom-color: #c7c7c7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    background: #fff;
+}
+
+.orderlist span.payment{
+	font-size: 15px;
+	color: black;
+}
+
+.coupon_table{
+    margin: 0 0 1px;
+    border-top: 1px solid #e7e7e7;
+    color: #353535;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.coupon_table th{
+    font-weight: normal;
+    background: #fff;
+    vertical-align: middle;
+    background-color: #d1d1d1;
+    text-align: center;
+}
+
+.coupon_table th:FIRST-CHILD {
+	border-left: 0;
+}
+
+.coupon_table td{
+	padding: 9px 0;
+    border-top: 1px solid #e7e7e7;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+
+
+
 
 
