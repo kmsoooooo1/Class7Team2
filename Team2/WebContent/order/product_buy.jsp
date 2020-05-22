@@ -465,13 +465,13 @@
 		<tr>
 			<th> 보유 적립금 사용 </th>
 			<td> 
-				<input type="text" id="use_My_Mileage" value="0">원
+				<input type="text" id="use_My_Mileage" value="0" onclick="clickMyMileage();" onchange="changeMyMileage()">원
 				<label> 
 					<input type="checkbox" id="use_My_Mileage_Chkbox" onclick="useMyMileage();" > 
 					최대 사용 </label> (사용가능 적립금 <span id="limit_mileage" style="color: #09f; font-weight: bold;"><%=formatter.format(final_total_price * 0.07)%></span>원) 
-						<input type="hidden" id="limit_mileage"  name="limit_mileage" value=<%=final_total_price * 0.07%>>
+						<input type="hidden" id="limit_mileage_input"  name="limit_mileage" value=<%=final_total_price * 0.07%>>
 					총 보유 적립금 <span id="my_mileage" style="color: #f60; font-weight: bold;"><%=formatter.format(memberDTO.getMileage())%></span>원 <br>
-						<input type="hidden" id="my_mileage"  name="my_mileage" value=<%=memberDTO.getMileage()%>>
+						<input type="hidden" id="my_mileage_input"  name="my_mileage" value=<%=memberDTO.getMileage()%>>
 				<span>- 보유 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다.</span> 
 			</td>
 		</tr>
@@ -831,9 +831,134 @@
     //적립금 최대 사용 눌렸을시
     function useMyMileage(){
     	
+    	var chk = $('#use_My_Mileage_Chkbox').is(":checked");
     	
+    	//현재 내가 보여중인 마일리지
+    	var my_mileage =  Number(document.getElementById('my_mileage_input').value);
     	
-    	document.getElementById('use_My_Mileage').value = 2000;
+    	//사용가능 마일리지
+    	var limit_mileage = Number(document.getElementById('limit_mileage_input').value);
+    	
+    	//총 할인가
+    	var total_discount_rate = Number(document.getElementById('total_discount_rate').innerHTML);
+    	
+    	//input 안에 입력되어있던 값 가져오기
+		var pre_use_My_Mileage = Number(document.getElementById('use_My_Mileage').value);
+    	
+    	if(chk){
+    		//안눌려진 상태에서 체크했을때
+    		
+    		//보유 적립금이 사용가능 적립금 보다 많을때
+        	if(my_mileage > limit_mileage){
+        		//사용 가능 적립금이랑 같은 금액 사용하기
+        		document.getElementById('use_My_Mileage').value = limit_mileage;
+        		
+        		total_discount_rate += Number(limit_mileage.toFixed(0) - pre_use_My_Mileage);
+        		
+        		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+        	}
+        	//보유 적립금이 사용가능 적립금 보다 적을때
+        	else if(my_mileage <= limit_mileage){
+        		//보유 적립금 모두 사용하기
+        		document.getElementById('use_My_Mileage').value = my_mileage;
+        		
+				total_discount_rate += Number(my_mileage.toFixed(0) - pre_use_My_Mileage);
+        		
+        		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+
+        	}
+    		
+    		$('#use_My_Mileage_Chkbox').prop("checked", true);
+    		
+    	}else{
+    		//눌려진 상태에서 체크했을때
+    		document.getElementById('use_My_Mileage').value = 0;
+    		
+    		//보유 적립금이 사용가능 적립금 보다 많을때
+        	if(my_mileage > limit_mileage){
+		
+        		total_discount_rate -= Number(limit_mileage.toFixed(0) - pre_use_My_Mileage);
+        		
+        		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+        	}
+        	//보유 적립금이 사용가능 적립금 보다 적을때
+        	else if(my_mileage <= limit_mileage){
+
+        		total_discount_rate -= Number(my_mileage.toFixed(0));
+        		
+        		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+        	}
+
+    		$('#use_My_Mileage_Chkbox').prop("checked", false);
+
+    	}	
+    }
+    
+	//사용자가 적립금을 직접 입력하려고 input을 눌렸을때 
+    function clickMyMileage() {
+    	
+    	$('#use_My_Mileage_Chkbox').prop("checked", false);
+
+    	//총 할인가
+    	var total_discount_rate = Number(document.getElementById('total_discount_rate').innerHTML);
+    	
+    	//input 안에 입력되어있던 값 가져오기
+		var pre_use_My_Mileage = Number(document.getElementById('use_My_Mileage').value);
+    	
+		//총 할인가
+    	var total_discount_rate = Number(document.getElementById('total_discount_rate').innerHTML);
+		
+		//새로운 할인가
+		total_discount_rate -= pre_use_My_Mileage;
+		
+    	document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+    	
+    	//input 안에 빈 값넣기
+    	document.getElementById('use_My_Mileage').value = "";
+    	
+    	$('#use_My_Mileage').change(function(){
+    		
+    	});
+    }
+    
+	//사용자가 적립금을 입력할때 값을 총할인가에 저장하기
+	function changeMyMileage() {
+		//현재 내가 보여중인 마일리지
+       	var my_mileage =  Number(document.getElementById('my_mileage_input').value);
+       	
+       	//사용가능 마일리지
+       	var limit_mileage = Number(document.getElementById('limit_mileage_input').value);
+       	
+       	//총 할인가
+       	var total_discount_rate = Number(document.getElementById('total_discount_rate').innerHTML);
+       	
+       	//입력 되는 값
+       	var use_My_Mileage = Number(document.getElementById('use_My_Mileage').value);
+       	
+       	if(use_My_Mileage > my_mileage){
+       		alert("보유 적립금보다 높은 금액을 입력하셨습니다.");
+       		document.getElementById('use_My_Mileage').value = "";
+       		document.getElementById('use_My_Mileage').focus();
+       		
+       		total_discount_rate += Number(document.getElementById('use_My_Mileage').value);
+       	}
+       	
+       	else if(use_My_Mileage > limit_mileage){
+       		alert("최대 사용가능 적립금은 " + limit_mileage + " 입니다.");
+       		document.getElementById('use_My_Mileage').value = "";
+       		document.getElementById('use_My_Mileage').focus();	
+       		
+       		total_discount_rate += Number(document.getElementById('use_My_Mileage').value);
+       	}
+       	
+       	if(use_My_Mileage == ""){
+       		total_discount_rate += 0;
+       	}else {
+       		total_discount_rate += use_My_Mileage;
+       	}
+       
+       	document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+		
     }
     
     
