@@ -28,7 +28,7 @@
            		<i class="fas fa-shipping-fast"></i>
            		<span>주문 상품</span>
            	</a>
-           	<a href="#" class="interest_quick">
+           	<a href="./WishList.wl" class="interest_quick">
            		<i class="fas fa-heart"></i>
            		<span>관심 상품</span>
            	</a>
