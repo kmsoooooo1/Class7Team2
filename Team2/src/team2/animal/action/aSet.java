@@ -3,10 +3,6 @@ package team2.animal.action;
 import java.util.Arrays;
 
 public class aSet {
-	
-	public static final String[] Category = {"파충류","양서류"};
-	public static final String[] sub_Category = {"도마뱀", "뱀", "거북"};
-	public static final String[] sub_Category_index = {"프로그", "살라맨더", "팩맨"};
 
 	private String category;
 	private String sub_category;

@@ -320,18 +320,20 @@ public class AnimalDAO {
 		
 		int total = 0;
 			
-		sql = "select count(*) from team2_animals where category like ? "
-				+ "AND sub_category like ? AND sub_category_index like ?";
+		sql = "select count(*) from team2_animals where category='"+ aset.getCategory() +"'";
 		
 		try {
 			con = getConnection();
+			stmt = con.createStatement();
 			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, '%'+aset.getCategory());
-			pstmt.setString(2, '%'+aset.getSub_category());
-			pstmt.setString(3, '%'+aset.getSub_category_index());
+			if(aset.getSub_category()!=""){
+				sql = sql + " AND sub_category='" + aset.getSub_category() + "'";
+			}
+			if(aset.getSub_category_index()!=""){
+				sql = sql + " AND sub_category_index='" + aset.getSub_category_index() + "'";
+			}
 			
-			rs = pstmt.executeQuery();
+			rs = stmt.executeQuery(sql);
 			
 			if(rs.next()){
 				total = rs.getInt(1);
@@ -358,6 +360,11 @@ public class AnimalDAO {
 					+ "AND sub_category like ? AND sub_category_index like ? "
 					+ "order by num desc limit ?,?";
 		
+			System.out.println("Category : "+aset.getCategory());
+			System.out.println("SubCategory : "+aset.getSub_category());
+			System.out.println("SubCategory_idx : "+aset.getSub_category_index());
+			System.out.println("cri : "+cri);
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, '%'+aset.getCategory());
 			pstmt.setString(2, '%'+aset.getSub_category());

@@ -94,21 +94,21 @@
 		</ul>
 
 	<div class="bottom">
-	<ul class="paging">
+	<ul id="pageList">
 		<c:if test="${pageMaker.prev }">
-		<li>
-			<a href='<c:url value="./AnimalList.an?category=${category }&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">◀</i></a>	
+		<li onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.startPage-1 }'">
+			◀	
 		</li>
 		</c:if>
-		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
-		<li>
-			<a href='<c:url value="./AnimalList.an?category=${category}&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageNum}"/>'><i class="fa">${pageNum }</i></a>
-		</li>
-		</c:forEach>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+				<li onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageNum}'">
+					${pageNum }
+				</li>
+			</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		<li>
-			<a href='<c:url value="./AnimalList.an?category=${category }&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">▶</i></a>
-		</li>
+			<li onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.endPage+1 }'">
+				▶
+			</li>
 		</c:if>
 	</ul>
 	</div> 
