@@ -149,9 +149,9 @@
 		opener.document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
 		opener.document.getElementById("discount_rate" + num).innerHTML = document.getElementById("co_rate" + i).value;
 		
-		opener.document.getElementById('searchCouponBtn').style.display = "none";
+		opener.document.getElementById('searchCouponBtn' + num).style.display = "none";
 		
-		opener.document.getElementById('cancelCouponBtn').style.display = "";
+		opener.document.getElementById('cancelCouponBtn' + num).style.display = "";
 		
 		window.close();
 	}
