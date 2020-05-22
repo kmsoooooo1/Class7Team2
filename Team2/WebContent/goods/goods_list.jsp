@@ -63,7 +63,7 @@
 		<div class="menu">
 			<input type="button" value="전체보기" class="a_btn"
 			 	onclick="location.href='./GoodsList.go?category=사육용품'">
-	<%	if(sub_category!=null){
+	<%	if(sub_category!=""){
 			switch(sub_category){
 			case "사육장":%>
 				<input type="button" value="*사육장" class="a_btn"
@@ -142,22 +142,22 @@
 				<input type="button" value="기타" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타'">
 		<%	}
-	}else{%>
-		<input type="button" value="*사육장" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">
-		<input type="button" value="*장식/그릇" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
-		<input type="button" value="*램프" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
-		<input type="button" value="*바닥재" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
-		<input type="button" value="*온/습도 관련" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
-		<input type="button" value="*보조용품" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
-		<input type="button" value="*수족관" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
-<%	}
+		}else{%>
+			<input type="button" value="*사육장" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">
+			<input type="button" value="*장식/그릇" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
+			<input type="button" value="*램프" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
+			<input type="button" value="*바닥재" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
+			<input type="button" value="*온/습도 관련" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
+			<input type="button" value="*보조용품" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
+			<input type="button" value="*수족관" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
+<%		}
 			%>
 		</div>
 	<%} %>
