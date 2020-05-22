@@ -18,62 +18,28 @@ USE `team2_project`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `team2_dailypointcheck`
+-- Table structure for table `team2_wishlist`
 --
 
-DROP TABLE IF EXISTS `team2_dailypointcheck`;
+DROP TABLE IF EXISTS `team2_wishlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `team2_dailypointcheck` (
-  `num` int(11) NOT NULL,
+CREATE TABLE `team2_wishlist` (
+  `w_num` int(11) NOT NULL,
   `id` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `point` int(11) DEFAULT NULL,
-  `point_description` text COLLATE utf8_unicode_ci,
-  `date` date DEFAULT NULL,
-  PRIMARY KEY (`num`)
+  `w_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`w_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `team2_dailypointcheck`
+-- Dumping data for table `team2_wishlist`
 --
 
-LOCK TABLES `team2_dailypointcheck` WRITE;
-/*!40000 ALTER TABLE `team2_dailypointcheck` DISABLE KEYS */;
-INSERT INTO `team2_dailypointcheck` VALUES (1,'coduo27',2000,'회원가입','2020-05-22');
-/*!40000 ALTER TABLE `team2_dailypointcheck` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `team2_member`
---
-
-DROP TABLE IF EXISTS `team2_member`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `team2_member` (
-  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `pass` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `zipcode` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `addr1` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `addr2` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `mileage` int(11) DEFAULT NULL,
-  `reg_date` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `team2_member`
---
-
-LOCK TABLES `team2_member` WRITE;
-/*!40000 ALTER TABLE `team2_member` DISABLE KEYS */;
-INSERT INTO `team2_member` VALUES ('admin','1234','관리자','010',NULL,NULL,NULL,'coduo25@gmail.com',100,'2020-04-28 15:00:00'),('coduo25','1234','coduo25','01062419520','46294','부산광역시 금정구 금강로 225','208동 2104호','coduo250@gmail.com',12700,'2020-04-28 15:00:00'),('coduo26','Qwer1234','박정훈','01062419520','46294','부산 금정구 금강로 225 (장전동, 벽산블루밍디자인시티)','208동 2104호','coduo25@gmail.com',0,'2020-05-20 08:07:24'),('coduo27','qwer1234','박정훈','01062419520','46294','부산 금정구 금강로 225 (장전동, 벽산블루밍디자인시티)','208동 2104호','coduo25@gmail.com',2000,'2020-05-22 00:44:32'),('test','qwer1234','테스트','4141221111','','','','coduo25@gmail.com',100,'2020-05-03 04:03:32'),('test1','qwer1234','홍길동','4141221111','','','','1132@u.uyfg',0,'2020-05-03 04:04:34');
-/*!40000 ALTER TABLE `team2_member` ENABLE KEYS */;
+LOCK TABLES `team2_wishlist` WRITE;
+/*!40000 ALTER TABLE `team2_wishlist` DISABLE KEYS */;
+INSERT INTO `team2_wishlist` VALUES (1,'coduo25','a-200'),(6,'coduo25','a-100'),(8,'coduo25','g-105'),(9,'coduo25','g-106'),(10,'test','a-200'),(12,'test','a-100'),(13,'test','g-105'),(14,'test','g-100'),(15,'test','g-104'),(16,'test','g-106'),(17,'test','a-11'),(18,'coduo25','g-104'),(20,'coduo25','g-101'),(21,'coduo25','g-100'),(22,'coduo25','a-11'),(23,'admin','a-100');
+/*!40000 ALTER TABLE `team2_wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-22 10:08:05
+-- Dump completed on 2020-05-22 14:59:09
