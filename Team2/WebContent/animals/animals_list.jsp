@@ -72,7 +72,7 @@
 		%>
 		<div class="menu">
 			<input type="button" value="전체보기" class="a_btn"
-				onclick="location.href='./AnimalList.an?category=파충류sub_category=거북'"> <input
+				onclick="location.href='./AnimalList.an?category=파충류&sub_category=거북'"> <input
 				type="button" value="육지거북" class="a_btn"
 				onclick="location.href='./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북'">
 			<input type="button" value="수생/습지 거북" class="a_btn"
@@ -96,24 +96,38 @@
 			%>
 			<li>
 				<div class="list_wrap">
-					<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img
-						class="list_img"
-						src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300"
-						height="300">
-					</a> <br> <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'>
-						<%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%>
-					</a>
+
+					<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img class="list_img" src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> 
+					
+					<br> 
+					
+					<span class="product_detail" style="margin: 15px 40px 0 35px;">
+						<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>' style="text-decoration: none; color: black;">
+							<%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%>
+						</a>
+					</span>
+					
+					<br>
+					
 					<%
 						if (adto.getA_discount_rate() != 0) { //만약 할인율이 있으면
 					%>
-					<span style="text-decoration: line-through"> <%=newformat_price_origin%>원
-					</span> <br> <span style="color: #f0163a; font-weight: bold;">
-						할인판매가 : <%=newformat_price_sale%>원
-					</span> <br>
+
+					<span class="product_detail" style="text-decoration: line-through"> <%=newformat_price_origin%>원 <br> </span>
+				
+					<br> <br>
+				
+					<span class="product_detail" style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span> 
+						
+					<br>
 					<%
 						} else { //없으면
 					%>
-					<%=newformat_price_origin%>원 <br>
+					
+					<span class="product_detail">
+						<%=newformat_price_origin%>원 <br>
+					</span>
+					
 					<%
 						}
 					%>

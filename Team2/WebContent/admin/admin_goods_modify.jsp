@@ -116,7 +116,7 @@
 		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
-		   		<textarea name="ir1" id="ir1" rows="10" cols="100">
+		   		<textarea name="ir1" id="ir1" rows="10" cols="100" style="width: 500px;">
 		   		   <br>
 					<span style="font-weight: bold"> 관련 동물(종) </span> :  
 				   <br>

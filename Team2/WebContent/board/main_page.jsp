@@ -93,7 +93,7 @@
 		%>
 			<div class="swiper-slide">
 			 <a href="./AnimalDetail.an?a_code=<%=adto.getA_code()%>">
-			  <img src="${pageContext.request.contextPath}/img/<%=adto.getA_thumbnail()%>">
+			  <img src="${pageContext.request.contextPath}/upload/multiupload/<%=adto.getA_thumbnail()%>">
 			 </a>
 			</div>
 		<%} %>

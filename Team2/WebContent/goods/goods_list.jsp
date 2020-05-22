@@ -162,14 +162,14 @@
 		</div>
 	<%} %>
 	
-	<span> Total <%=goodsList.size() %> items </span>
+	<span class="a_amount"> Total <%=goodsList.size() %> items </span>
 	<ul class="ul_wrap">
 		<%
 			int size = goodsList.size();
 			int col = 4;
 			int row = (size/col) + (size%col>0? 1:0);
 			int num = 0;
-			
+
 			for(int a = 0; a < row; a++){
 		%>
 			<%
@@ -185,13 +185,29 @@
 			<li>
 			<div class="list_wrap">
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="300" height="300"> </a><br>
-				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a> 
-				<hr>
+				
+				<span class="product_detail" style="margin: 15px 40px 0 35px;">
+					<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a>	
+				</span>
+				
+				<br>
+				
 				<%if(gdto.getG_discount_rate() != 0){ // 만약 할인율 있으면 %>
-					<span style="text-decoration: line-through;"> <%=newformat_price_origin %>원 </span> <br>
-					<span style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale %>원 </span> <br>
+				
+				<span class="product_detail" style="text-decoration: line-through;"> <%=newformat_price_origin %>원 <br> </span> 
+				
+				<br> <br>
+				
+				<span class="product_detail" style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale %>원 </span> 
+				
+				<br>
+				
 				<%}else{ //할인 안하면 %>
+				
+				<span class="product_detail">
 					<%=newformat_price_origin %>원 <br>
+				</span>
+				
 				<%} %>
 				
 				<!-- 만약 수량이 0이면 soldout 문구 띄우기 -->
