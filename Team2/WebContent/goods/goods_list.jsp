@@ -5,6 +5,8 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -206,20 +208,20 @@
 		<%} %>
 	</ul>
 	<div class="bottom">
-	<ul class="paging">
+	<ul id="pageList">
 		<c:if test="${pageMaker.prev }">
-		<li>
-			<a href='<c:url value="./AnimalList.an?category=${category }&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">◀</i></a>	
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.startPage-1 }'">
+			◀	
 		</li>
 		</c:if>
 		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
-		<li>
-			<a href='<c:url value="./AnimalList.an?category=${category}&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageNum}"/>'><i class="fa">${pageNum }</i></a>
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageNum}'">
+			${pageNum }
 		</li>
 		</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		<li>
-			<a href='<c:url value="./AnimalList.an?category=${category }&sub_category=${sub_category}&sub_category_index=${sub_category_index}&pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">▶</i></a>
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.endPage+1 }'">
+			▶
 		</li>
 		</c:if>
 	</ul>

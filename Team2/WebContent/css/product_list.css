@@ -71,6 +71,7 @@ body {
 	line-height: 2.5em;
 	border:1px solid #ccc;
 }
+
 #pageList li:hover{
 	background-color: #ccc;
 	cursor: pointer;
