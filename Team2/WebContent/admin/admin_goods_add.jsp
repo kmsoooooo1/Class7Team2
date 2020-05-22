@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="${pageContext.request.contextPath}/css/adminAdd.css?ver=2" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/admin.css?ver=2" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -22,7 +22,7 @@
 	<div class="contents">
 	<h2> 관리자 사육용품 등록 페이지</h2>
 	<form action="./GoodsAddAction.ag" method="post" name="fr" enctype="multipart/form-data">
-		<table border="1" class="adminAdd">
+		<table border="1" class="admintable">
 		  <colgroup>
 			  <col style="width:20%;">
 			  <col style="width: auto;">
