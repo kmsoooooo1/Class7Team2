@@ -137,7 +137,7 @@ public class CouponDAO {
 				
 				sql = "select * from team2_coupon_admin where num = ?";
 				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setInt(1, cmdto.getNum());
+				pstmt2.setInt(1, cmdto.getCo_num());
 				rs2 = pstmt2.executeQuery();
 				
 				if(rs2.next()){
