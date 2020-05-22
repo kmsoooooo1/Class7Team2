@@ -1,8 +1,12 @@
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
 <%@page import="team2.admin.goods.action.GoodsDeleteAction"%>
 
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,6 +30,13 @@
 		
 		// GoodsListAction 객체에서 저장된 정보를 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>)request.getAttribute("goodsList");
+		
+		//paging 사용 객체
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		String pageNum = (String)request.getAttribute("pageNum");
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 	%>
 	
 	<!-- Header -->
@@ -196,11 +207,25 @@
 		
 		<%} %>
 	</ul>
+	<div class="bottom">
 	<ul id="pageList">
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
+		<c:if test="${pageMaker.prev }">
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.startPage-1 }'">
+			◀	
+		</li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageNum}'">
+			${pageNum }
+		</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.endPage+1 }'">
+			▶
+		</li>
+		</c:if>
 	</ul>
+	</div>
 	</div>
 	
 	<!-- FOOTER -->
