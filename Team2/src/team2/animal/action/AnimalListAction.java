@@ -22,32 +22,19 @@ public class AnimalListAction implements Action{
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
+		
 		if(sub_category == null) {
 			//만약 유저가 '파충류'나 '양서류'만 선택했을시 sub_category에는 All을 넣어서 모든 파충류 또는 양서류를 가지고 온다.
-//			sub_category = "all"; 
-			sub_category = ""; 
+			sub_category = "all"; 
 		}
 		if(sub_category_index == null) {
-//			sub_category_index = "all";
-		sub_category_index = "";
+			sub_category_index = "all";
 		}
-		
-		aSet aset = new aSet();
-		
-		aset.setCategory(category);
-		aset.setSub_category(sub_category);
-		aset.setSub_category_index(sub_category_index);
-		
-		System.out.println(aset.toString());
-		
+
 		//total 게시판 글 수
 		int total = 0;
-		total = adao.getAnimalCount(aset);
-		
-		System.out.println("total :  " + total);
 		
 		//  ----페이징 처리-----
-		
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
 			pageNum = "1";
@@ -65,21 +52,18 @@ public class AnimalListAction implements Action{
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(total);
 		
-		System.out.println(pageMaker.getStartPage());
-		System.out.println(pageMaker.getEndPage());
+//		System.out.println(pageMaker.getStartPage());
+//		System.out.println(pageMaker.getEndPage());
 		
 		// ----페이징 처리-----
 		
-//		List<AnimalDTO> animalList = adao.getAnimalList(category, sub_category, sub_category_index); 
-		List<AnimalDTO> animalList = adao.getAnimalPage(aset, cri);
-		
-		adao.closeDB();
+		List<AnimalDTO> animalList = adao.getAnimalList(category, sub_category, sub_category_index, cri); 
 		
 		//등록된 모든 상품의 정보를 가져와서 request 영역에 저장
 		request.setAttribute("animalList", animalList);
 		
 		//pageing
-		request.setAttribute("cri", cri);
+		//request.setAttribute("cri", cri);
 		request.setAttribute("pageMaker", pageMaker);
 		request.setAttribute("pageNum", pageNum);
 		
