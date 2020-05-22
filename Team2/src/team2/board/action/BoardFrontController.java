@@ -197,6 +197,10 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+//		else if(command.equals("/my.bo")){
+//			action = new myBoardAction();
+//			forward = action.execute(request, response);
+//		}
 		
 		//action
 		

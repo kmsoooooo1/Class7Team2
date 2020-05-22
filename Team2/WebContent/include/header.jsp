@@ -69,28 +69,13 @@
     </div>
     
     <div class="notice">
-    <div class="sub">
-	 <h2>dsa</h2>    
-    </div>
      <ul class="rolling">
-      <li>
-     	<a href="#">공지사항 내용2</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용2</a>  
-      </li>
-      <li>
-       <a href="#">공지사항 내용3</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용4</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용5</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용5</a>
-      </li>
+      <li><a href="#">공지사항 내용1</a></li>
+      <li><a href="#">공지사항 내용2</a></li>
+      <li><a href="#">공지사항 내용3</a></li>
+      <li><a href="#">공지사항 내용4</a></li>
+      <li><a href="#">공지사항 내용5</a></li>
+      <li><a href="#">공지사항 내용6</a></li>
      </ul>
     </div>
  
@@ -156,7 +141,7 @@ $(document).ready(function(){
 	var move = 0; // 초기값 설정
 	function noticeRolling(){ 
 		move += height; // 여기에서 += 이라는것은 move = move + height
-		$(".rolling").animate({"top":-move},600,function(){ // animate를 통해서
+		$(".rolling").animate({"top":-move},800,function(){ // animate를 통해서
 			//부드럽게 top값 올리기
 			if( move >= max ){ // if문을 통해 최대값보다 top값을 많이 올렸다면 다시
 				$(this).css("top",0); // 0으로 올려주고
