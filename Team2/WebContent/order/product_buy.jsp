@@ -379,7 +379,7 @@
 			<td> 
 				<button type="button" onclick="toggleCoupons();"> 쿠폰 조회 </button> (쿠폰 허용 상품 / 일부 쿠폰 제외) 
 			
-				<table border="1" class="list" id="couponsTable" style="display:none; width: 60%; float:right; height: 150px; overflow: scroll;">
+				<table border="1" id="couponsTable" style="display:none; width: 60%; height: 150px; overflow: scroll;">
 					<thead>
 					<tr>
 						<th>이미지</th>
