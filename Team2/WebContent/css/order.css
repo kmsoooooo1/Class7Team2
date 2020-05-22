@@ -236,7 +236,6 @@ input[type="text"]{
 .orderlist th{
 	padding: 12px 0 11px 18px;
     border: 1px solid #e7e7e7;
-    border-bottom-width: 0;
     color: #353535;
     text-align: left;
     font-weight: normal;
