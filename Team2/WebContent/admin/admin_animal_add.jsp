@@ -14,30 +14,13 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
- <div class="board">
-  <div class="top">
-   <div class="boardname">
-	<h2>
-		 관리자 동물등록 페이지
-	</h2>
-   </div>
-   <div class="list-div">	
+	
+	<h2> 관리자 동물등록 페이지 </h2>
+	
 	<form name="fr" action="./AnimalAddAction.aa" method="post" enctype="multipart/form-data"> 
-		<table class="list">
-	 <colgroup> 
-	  <col width="2%" />	
-	  <col width="4%" />	
-	  <col width="5%" />	
-	  <col width="7%" />	
-	  <col width="8%" />	
-	  <col width="7%" />	
-	  <col width="5%" />	
-	  <col width="5%" />	
-	  <col width="4%" />	
-	 </colgroup>
-	 <thead>		 
+		<table border="1">
 			<tr>
-				<th> 카테고리 </th>
+				<td> 카테고리 </td>
 				<td>
 					<!-- 동물 카테고리 -->
 					<select name="category" onchange="categoryChange(this)">
@@ -127,9 +110,7 @@
 			</tr>
 		</table>
 	</form>
-   </div>
-  </div>
- </div>
+	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
  
