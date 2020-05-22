@@ -34,9 +34,10 @@
 	  <col width="5%" />	
 	  <col width="5%" />	
 	  <col width="4%" />	
-	 </colgroup>		 
+	 </colgroup>
+	 <thead>		 
 			<tr>
-				<td> 카테고리 </td>
+				<th> 카테고리 </th>
 				<td>
 					<!-- 동물 카테고리 -->
 					<select name="category" onchange="categoryChange(this)">
