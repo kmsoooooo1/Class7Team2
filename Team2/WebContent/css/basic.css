@@ -465,4 +465,33 @@ body{
 }
 
 /* sidebar 끝*/
+
+/* Notice-Rolling */
+
+.notice {
+	width: 80%;
+	height: 50px;
+	overflow: hidden;
+	background-color: #fff;
+	text-align: right;
+}
+
+.sub h2{
+	width: 92%;
+}
+
+.rolling {
+	position: relative;
+	width: 100%;
+	height: 50px;
+}
+
+.rolling li {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	list-style: none;
+}
+
+
 		

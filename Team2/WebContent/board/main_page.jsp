@@ -222,8 +222,7 @@
     <div class="content">
       <img src="${pageContext.request.contextPath}/img/7.jpg" alt="Mountains" alt="Car" style="width:100%">
       <h4>메라우케 블루텅 스킨크(성체급)</h4>
-      <p>많은 매니아들이 즐겨 사육하는 블루텅 스킨크(메라우케)입니다.<br>
-      	  주로 곤충과 바나나를 즐겨 먹는 잡식성 파충류로 동물성 성분이 강한<br>
+      <p> 주로 곤충과 바나나를 즐겨 먹는 잡식성 파충류로 동물성 성분이 강한<br>
       	  개사료를 잘먹습니다.</p>
     </div>
   </div>
@@ -231,7 +230,7 @@
     <div class="content">
     <img src="${pageContext.request.contextPath}/img/8.jpg" alt="Mountains" alt="Car" style="width:100%">
       <h4>화이트 레오파드 육지거북</h4>
-      <p>일반 레오파드 육지거북에 비해 체색이 밝으며, 스큠의 가장자리에서 퍼지는<br>
+      <p>일반 개체에 비해 체색이 밝으며,스큠의 가장자리에서 퍼지는<br>
       	  방사상의 검은선이 매력적인 개체들입니다.</p>
     </div>
   </div>
@@ -239,8 +238,7 @@
     <div class="content">
     <img src="${pageContext.request.contextPath}/img/9.jpg" alt="Mountains" alt="Car" style="width:100%">
       <h4>블러드 트렌슬루센트 비어디</h4>
-      <p>레오파드게코와 더불어 도마뱀 입문중으로 가장 많이 추천되는 종입니다.<br>
-      	  순해서 입문종으로 많이 추천되는 만큼 건강하고 사육난이도 또한 쉽습니다.</p>
+      <p>순해서 입문종으로 많이 추천되는 만큼 건강하고 사육난이도 또한 쉽습니다.</p>
     </div>
   </div>
 <!-- END GRID -->
