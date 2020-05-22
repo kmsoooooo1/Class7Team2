@@ -16,6 +16,7 @@
 
 <div class="h-group" id="h-group">
 <div class="header">
+ <div class="rolling_top_menu">
       <div class="top_menu">
       <ul>
       <%
@@ -78,7 +79,7 @@
       <li><a href="#">공지사항 내용6</a></li>
      </ul>
     </div>
- 
+ </div>
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
