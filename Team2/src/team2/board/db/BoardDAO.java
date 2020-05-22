@@ -425,6 +425,37 @@ public class BoardDAO {
 		
 		return total;
 	}
+
+	public List<BoardDTO> getMyBoard(String id, int c) {
+		// TODO Auto-generated method stub
+		String sql = "select * from team2_board where b_writer='" + id + "' and b_category='"+ cSet.Category[c]+"'";
+		
+		return getList(sql);
+	}
+	
+	public int getWriterCount(String id, int c){
+		String sql = "select count(b_idx) from team2_board where b_writer='" + id + "' and category='" + cSet.Category[c] + "'";
+		
+		return getCount(sql);
+	}
+	
+	public int getCount(String sql){
+		
+		int result = 0;
+		
+		try {
+			rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 		
 		
 		
