@@ -74,14 +74,14 @@
 						<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>" class="name"><%=pdto.getProduct_name()%></a> <br>
 						<%if(pdto.getProduct_discount_rate() != 0){ //할인율 있으면%>
 							<div class="price">
-								<span style="text-decoration: line-through; color: gray;"><%=newformat_price_origin%></span>원 
-								<span style="color: black;"><%=newformat_price_sale%></span>원  
-								<span style="color: red;"><%=newformat_discount_rate%>%</span>
+								<span style="text-decoration: line-through; color: gray; font-size: 14px;"><%=newformat_price_origin%></span>원 
+								<span style="color: black; font-size: 14px;"><%=newformat_price_sale%></span>원  
+								<span style="color: red; font-size: 14px;"><%=newformat_discount_rate%>%</span>
 							</div>
 						<%}else{// 할인율 없으면 %>	
 							<div class="price">
-								<span style="color: black;"><%=newformat_price_origin%>원 </span>
-								<span style="color: red;"><%=newformat_discount_rate%>%</span> 
+								<span style="color: black; font-size: 14px;"><%=newformat_price_origin%>원 </span>
+								<span style="color: red; font-size: 14px;"><%=newformat_discount_rate%>%</span> 
 							</div>
 						<%} %>
 					</div>
@@ -98,14 +98,14 @@
 						<a href="./AnimalDetail.an?a_code=<%=wldto.getW_code()%>" class="name"><%=pdto.getProduct_name()%></a> <br>
 						<%if(pdto.getProduct_discount_rate() != 0){ //할인율 있으면%>
 							<div class="price">
-								<span style="text-decoration: line-through; color: gray;"><%=newformat_price_origin%></span>원 
-								<span style="color: black;"><%=newformat_price_sale%></span>원  
-								<span style="color: red;"><%=newformat_discount_rate%>%</span>
+								<span style="text-decoration: line-through; color: gray; font-size: 14px;"><%=newformat_price_origin%></span>원 
+								<span style="color: black; font-size: 14px;"><%=newformat_price_sale%></span>원  
+								<span style="color: red; font-size: 14px;"><%=newformat_discount_rate%>%</span>
 							</div>
 						<%}else{// 할인율 없으면 %>	
 							<div class="price">
-								<span style="color: black;"><%=newformat_price_origin%>원 </span>
-								<span style="color: red;"><%=newformat_discount_rate%>%</span> 
+								<span style="color: black; font-size: 14px;"><%=newformat_price_origin%>원 </span>
+								<span style="color: red; font-size: 14px;"><%=newformat_discount_rate%>%</span> 
 							</div>
 						<%} %>
 					</div>
