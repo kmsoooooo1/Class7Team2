@@ -38,7 +38,7 @@
 	<div class="container">
 	<div class="contents">
 	<!-- 구매 테이블 생성 -->
-	<div class="h2"><h2>CARTOrder / Payment  주문/결제</h2></div>
+	<div class="h2"><h2>CARTOrder / Payment  <span>주문/결제</span></h2></div>
 	
 	
 	<table border="1" class="list">
@@ -370,7 +370,7 @@
 	</table>
 	
 	<!-- 쿠폰 및 적립금 조회 테이블 -->
-	<div class="title"><h3>Coupon / Discount 쿠폰/추가할인</h3></div>
+	<div class="title"><h3>Coupon / Discount <span>쿠폰/추가할인</span></h3></div>
 	<table border="1" class="orderlist">
 		<tr>
 			<th> 보유 쿠폰 할인 </th>
@@ -472,7 +472,7 @@
 	</table>
 	
 	<!-- 결제 정보 테이블 -->
-	<div class="title"><h3>Payment info / Agreement 결제 정보/주문자 동의</h3></div>
+	<div class="title"><h3>Payment info / Agreement <span>결제 정보/주문자 동의</span></h3></div>
 	<table border="1" class="orderlist">
 	<colgroup>
 		<col style="width:10%;">
@@ -492,8 +492,8 @@
 		
 		<tr>
 			<th> 결제 안내 </th>
-			
-				<td id="신용카드"> 
+
+				<td id="신용카드" style="padding:15px;"> 
 					<select>
 						<option> 카드 선택 </option>
 						<option> 현대카드 </option>
@@ -513,7 +513,7 @@
 					</span>
 				</td>
 				
-				<td id="무통장입금" style="display:none;">
+				<td id="무통장입금" style="display:none; padding:15px;">
 					<select>
 						<option> ::: 선택해 주세요 ::: </option>
 						<option> 기업은행:2135159668464 주식회사갈라파고스 </option>
@@ -526,13 +526,13 @@
 					ATM 기기는 100원 단위 입금이 되지 않으므로 통장 및 카드로 계좌이체 해주셔야 합니다. 은행 창구에서도 1원 단위 입금이 가능합니다. 자세한 내용은 FAQ를 확인하여 주시기 바랍니다.</span>
 				</td>
 				
-				<td id="카카오페이" style="display:none">
+				<td id="카카오페이" style="display:none; padding:15px;">
 					<span>카카오페이 안내 <br>
 					카카오페이는 카카오톡에서 카드를 등록, 간단하게 비밀번호만으로 결제할 수 있는 빠르고 편리한 모바일 결제 서비스입니다. <br>
 					-지원 카드 : 모든 카드 등록/결제 가능</span>
 				</td>
 				
-				<td id="네이버페이" style="display:none">
+				<td id="네이버페이" style="display:none; padding:15px;">
 					<span>네이버페이 안내 </span><br>
 					<br>
 					<span>- 주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.	 <br>
@@ -547,20 +547,24 @@
 				주문자 동의 <br>
 				<label> <input type="checkbox" id="chkThirdAgreeAll" onclick="checkThirdAgreeAll();"> 전체 동의 </label> 
 			</th>
-			<td>
-				<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> 개인정보 제3자 제공 동의(필수) </label>
-				<p> 배송 등 거래를 위해 판매자에게 개인정보가 공유됩니다. <a href="javascript:void(0)" onclick="toggleThirdAgree();" return false;> <span id="thirdAgreeBtn"> 자세히 </span>  </a> </p>
+			<td style="padding: 15px;">
+				<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> <span class="payment">개인정보 제3자 제공 동의(필수)</span> </label><br>
+				<span class="payment"> 배송 등 거래를 위해 판매자에게 개인정보가 공유됩니다. <a href="javascript:void(0)" onclick="toggleThirdAgree();" return false;> <span id="thirdAgreeBtn"> 자세히 </span>  </a> </span><br>
 				
 					<div id="thirdAgreeDetail" style="display:none;  background-color: lightblue; width: 100%; height: 150px; overflow: scroll;">
-						갈라파고스의 회원계정으로 상품 및 서비스를 구매하고자 할 경우, 갈라파고스는 거래 당사자간 원활한 의사소통 및 배송, 상담 등 거래이행을 위하여 필요한 최소한의 개인정보만을 갈라파고스 입점업체 판매자 및 배송업체에 아래와 같이 공유하고 있습니다. <br>
-						1. 갈라파고스는 귀하께서 갈라파고스 입점업체 판매자로부터 상품 및 서비스를 구매하고자 할 경우, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 24조의 2(개인정보 공유동의 등)에 따라 아래와 같은 사항은 안내하고 동의를 받아 귀하의 개인정보를 판매자에게 공유합니다. "개인정보 제3자 공유 동의"를 체크하시면 개인정보 공유에 대해 동의한 것으로 간주합니다. <br>
-						2. 개인정보를 공유받는자 : 위클리웨어 <br>
-						3. 공유하는 개인정보 항목 <br>
-						- 구매자 정보: 성명, 전화번호, ID, 휴대전화 번호, 메일주소, 상품 구매정보 <br>
-						- 수령자 정보: 성명, 전화번호, 휴대전화 번호, 배송지 주소 <br>
-						4. 개인정보를 공유받는 자의 이용 목적 : 판매자와 구매자의 거래의 원활한 진행, 본인의사의 확인, 고객 상담 및 불만처리, 상품과 경품 배송을 위한 배송지 확인 등 <br>
-						5. 개인정보를 공유받는 자의 개인정보 보유 및 이용 기간 : 개인정보 수집 및 이용 목적 달성 시까지 보관합니다. <br>
-						6. 동의 거부 시 불이익 : 본 개인정보 공유에 동의하지 않으시는 경우, 동의를 거부할 수 있으며, 이 경우 거래가 제한됩니다. <br>
+						<div style="margin:10px;">
+						
+							갈라파고스의 회원계정으로 상품 및 서비스를 구매하고자 할 경우, 갈라파고스는 거래 당사자간 원활한 의사소통 및 배송, 상담 등 거래이행을 위하여 필요한 최소한의 개인정보만을 갈라파고스 입점업체 판매자 및 배송업체에 아래와 같이 공유하고 있습니다. <br> <br>s
+							1. 갈라파고스는 귀하께서 갈라파고스 입점업체 판매자로부터 상품 및 서비스를 구매하고자 할 경우, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 24조의 2(개인정보 공유동의 등)에 따라 아래와 같은 사항은 안내하고 동의를 받아 귀하의 개인정보를 판매자에게 공유합니다. "개인정보 제3자 공유 동의"를 체크하시면 개인정보 공유에 대해 동의한 것으로 간주합니다. <br>
+							2. 개인정보를 공유받는자 : 위클리웨어 <br>
+							3. 공유하는 개인정보 항목 <br> <br>
+							- 구매자 정보: 성명, 전화번호, ID, 휴대전화 번호, 메일주소, 상품 구매정보 <br>
+							- 수령자 정보: 성명, 전화번호, 휴대전화 번호, 배송지 주소 <br> <br>
+							4. 개인정보를 공유받는 자의 이용 목적 : 판매자와 구매자의 거래의 원활한 진행, 본인의사의 확인, 고객 상담 및 불만처리, 상품과 경품 배송을 위한 배송지 확인 등 <br>
+							5. 개인정보를 공유받는 자의 개인정보 보유 및 이용 기간 : 개인정보 수집 및 이용 목적 달성 시까지 보관합니다. <br>
+							6. 동의 거부 시 불이익 : 본 개인정보 공유에 동의하지 않으시는 경우, 동의를 거부할 수 있으며, 이 경우 거래가 제한됩니다. <br>
+							
+						</div>
 					</div>
 				
 				<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> 위 상품 정보 및 거래 조건을 확인하였으며, 구매 진행에 동의합니다.(필수) </label>
@@ -568,7 +572,7 @@
 		</tr>
 	</table>
 	
-	<input type="button" class="order_btn" value="PAYMENT(결제하기)">
+	<div class="payment_div"><input type="button" class="order_btn" value="PAYMENT(결제하기)"></div>
 	
 	<!-- 이용 안내 -->
 	<div class="help">
