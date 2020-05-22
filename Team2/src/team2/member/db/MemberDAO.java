@@ -103,6 +103,7 @@ public class MemberDAO {
 	
 	// idCheck(id,pass)
 	public int idCheck(String id, String pass){
+		int mileage = 0;
 		int check = -1;
 		try {
 			con = getConnection();
@@ -114,6 +115,23 @@ public class MemberDAO {
 			
 			if(rs.next()){
 				if(pass.equals(rs.getString("pass"))){
+					
+					sql = "select max(mileage) from team2_member where id = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, id);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()){
+						mileage = rs.getInt(1) + 100;
+					}
+					
+					sql = "update team2_member set mileage = ? where id = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, mileage);
+					pstmt.setString(2, id);
+					pstmt.executeUpdate();
+					
+					
 					check = 1;
 				}else{
 					check = 0;

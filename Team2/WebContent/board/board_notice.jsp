@@ -108,7 +108,7 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
-		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?C=0'">
+			<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?C=0'">
 		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
