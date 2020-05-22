@@ -66,7 +66,7 @@
 				<input type="checkbox" class="chkBox" id="chkBox<%=num%>" name="chkBox" value="<%=num%>" style="display: none;"> 
 				<label for="chkBox<%=num%>"></label>
 				
-					<div class="div_info"> 
+					<div class="div_info1"> 
 						<a href="./GoodsDetail.go?g_code=<%=wldto.getW_code()%>"><img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a> 
 					</div> 
 					
@@ -90,7 +90,7 @@
 				<input type="checkbox" class="chkBox" id="chkBox<%=num%>" name="chkBox" value="<%=num%>" style="display: none;"> 
 				<label for="chkBox<%=num%>"></label>
 				
-					<div class="div_info"> 
+					<div class="div_info1"> 
 						<a href="./AnimalDetail.an?a_code=<%=wldto.getW_code()%>"><img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
 					</div>
 					
@@ -127,12 +127,13 @@
 	
 	</ul>
 	
-	<div id="btn1"> <button type="button" onclick="checkBoxOn();">편집</button> </div>
-	<div id="btn2" style="display: none;">
-		<button onclick="dellChkBox();">삭제</button>
-		<button onclick="cancel();">취소</button>
+	<div class="div_btn">
+		<div id="btn1"> <button type="button" class="btns" onclick="checkBoxOn();">편집</button> </div>
+		<div id="btn2" style="display: none;">
+			<button class="btns" onclick="dellChkBox();">삭제</button>
+			<button class="btns" onclick="cancel();">취소</button>
+		</div>
 	</div>
-
 
 	
 	<ul id="pageList">
