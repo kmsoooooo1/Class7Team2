@@ -205,6 +205,7 @@
 		<%
 			}
 		%>
+			<input type="hidden" id="final_total_price" name="final_total_price" value="<%=final_total_price%>">
 		</tbody>
 	</table>
 	
@@ -224,7 +225,7 @@
 		<tr>
 			<th> 주소 </th>
 			<td> 
-				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode();">주소검색</button> <br>
+				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode('buyer');">주소검색</button> <br>
 				<input type="text" id="buyer_addr1" name="addr1" id="addr1" placeholder size="40" value="<%=memberDTO.getAddr1()%>" readonly> <span>기본주소</span> <br>
 				<input type="text" id="buyer_addr2" name="addr2" id="addr2" placeholder size="40" value="<%=memberDTO.getAddr2()%>"> <span>상세주소</span>
 			</td>
@@ -283,7 +284,7 @@
 		<tr>
 			<th> 주소 </th>
 			<td> 
-				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" placeholder size="6" value="" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode();">주소검색</button> <br>
+				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" placeholder size="6" value="" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode('rece');">주소검색</button> <br>
 				<input type="text" id="rece_addr1" name="addr1" id="addr1" placeholder size="40" value="" readonly> <span>기본주소</span> <br>
 				<input type="text" id="rece_addr2" name="addr2" id="addr2" placeholder size="40" value=""> <span>상세주소</span>
 			</td>
@@ -319,7 +320,7 @@
 		
 			<!-- 총 주문금액 -->
 			<td>
-				<span><%=formatter.format(final_total_price)%></span>원 
+				<span><%=formatter.format(final_total_price)%></span>원
 			</td>
 			
 			<!-- 총 배송비 -->
@@ -464,8 +465,13 @@
 		<tr>
 			<th> 보유 적립금 사용 </th>
 			<td> 
-				<input type="text" id="discount_price" value="0">원
-				<input type="checkbox" id="discount_price_chkbox"> <span>최대 사용 (사용가능 적립금 ~(총 구매금액의 7%만 사용가능)원) 총 보유 적립금 ~원</span> <br>
+				<input type="text" id="use_My_Mileage" value="0">원
+				<label> 
+					<input type="checkbox" id="use_My_Mileage_Chkbox" onclick="useMyMileage();" > 
+					최대 사용 </label> (사용가능 적립금 <span id="limit_mileage" style="color: #09f; font-weight: bold;"><%=formatter.format(final_total_price * 0.07)%></span>원) 
+						<input type="hidden" id="limit_mileage"  name="limit_mileage" value=<%=final_total_price * 0.07%>>
+					총 보유 적립금 <span id="my_mileage" style="color: #f60; font-weight: bold;"><%=formatter.format(memberDTO.getMileage())%></span>원 <br>
+						<input type="hidden" id="my_mileage"  name="my_mileage" value=<%=memberDTO.getMileage()%>>
 				<span>- 보유 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다.</span> 
 			</td>
 		</tr>
@@ -638,7 +644,7 @@
         element_wrap.style.display = 'none';
     }
     
-    function DaumPostcode() {
+    function DaumPostcode(string) {
         // 현재 scroll 위치를 저장해놓는다.
         var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
         new daum.Postcode({
@@ -662,15 +668,15 @@
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('addr1').value = fullAddr;
+                document.getElementById(string + '_zipcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById(string + '_addr1').value = fullAddr;
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
                 element_wrap.style.display = 'none';
                 // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
                 document.body.scrollTop = currentScroll;
                 
-                $('#addr2').focus();
+                $('#' + string + '_addr2').focus();
             },
             // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
             onresize : function(size) {
@@ -816,6 +822,14 @@
 		document.getElementById("discount_rate" + i).innerHTML = 0;
 		
 		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate, '_blank','width=800,height=700',false);
+    }
+    
+    //적립금 최대 사용 눌렸을시
+    function useMyMileage(){
+    	
+    	
+    	
+    	document.getElementById('use_My_Mileage').value = 2000;
     }
     
     
