@@ -224,7 +224,7 @@
 		<tr>
 			<th> 주소 </th>
 			<td> 
-				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" onclick="DaumPostcode();">주소검색</button> <br>
+				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode();">주소검색</button> <br>
 				<input type="text" id="buyer_addr1" name="addr1" id="addr1" placeholder size="40" value="<%=memberDTO.getAddr1()%>" readonly> <span>기본주소</span> <br>
 				<input type="text" id="buyer_addr2" name="addr2" id="addr2" placeholder size="40" value="<%=memberDTO.getAddr2()%>"> <span>상세주소</span>
 			</td>
@@ -283,7 +283,7 @@
 		<tr>
 			<th> 주소 </th>
 			<td> 
-				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" placeholder size="6" value="" readonly> <button type="button" onclick="DaumPostcode();">주소검색</button> <br>
+				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" placeholder size="6" value="" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode();">주소검색</button> <br>
 				<input type="text" id="rece_addr1" name="addr1" id="addr1" placeholder size="40" value="" readonly> <span>기본주소</span> <br>
 				<input type="text" id="rece_addr2" name="addr2" id="addr2" placeholder size="40" value=""> <span>상세주소</span>
 			</td>
@@ -369,17 +369,15 @@
 		</tr>
 	</table>
 	
-	<hr>
-	
 	<!-- 쿠폰 및 적립금 조회 테이블 -->
 	<div class="title"><h3>Coupon / Discount 쿠폰/추가할인</h3></div>
 	<table border="1" class="orderlist">
 		<tr>
-			<td> 보유 쿠폰 할인 </td>
+			<th> 보유 쿠폰 할인 </th>
 			<td> 
-				<button type="button" onclick="toggleCoupons();"> 쿠폰 조회 </button> (쿠폰 허용 상품 / 일부 쿠폰 제외) 
+				<button type="button" class="orderstar_btn" onclick="toggleCoupons();"> 쿠폰 조회 </button> <span>(쿠폰 허용 상품 / 일부 쿠폰 제외)</span>
 			
-				<table border="1" id="couponsTable" style="display:none; width: 60%; height: 150px; overflow: scroll;">
+				<table border="1" id="couponsTable" class="coupon_table" style="display:none; width: 80%; height: 150px; overflow: scroll;">
 					<thead>
 					<tr>
 						<th>이미지</th>
@@ -461,34 +459,36 @@
 			</td>
 		</tr>
 		<tr>
-			<td> 보유 적립금 사용 </td>
+			<th> 보유 적립금 사용 </th>
 			<td> 
 				<input type="text" id="discount_price" value="0">원
-				<input type="checkbox" id="discount_price_chkbox"> 최대 사용 (사용가능 적립금 ~(총 구매금액의 7%만 사용가능)원) 총 보유 적립금 ~원 <br>
-				- 보유 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다. 
+				<input type="checkbox" id="discount_price_chkbox"> <span>최대 사용 (사용가능 적립금 ~(총 구매금액의 7%만 사용가능)원) 총 보유 적립금 ~원</span> <br>
+				<span>- 보유 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다.</span> 
 			</td>
 		</tr>
 	</table>
 	
-	<hr>
-	
 	<!-- 결제 정보 테이블 -->
-	Payment info / Agreement 결제 정보/주문자 동의
-	<table border="1">
+	<div class="title"><h3>Payment info / Agreement 결제 정보/주문자 동의</h3></div>
+	<table border="1" class="orderlist">
+	<colgroup>
+		<col style="width:10%;">
+		<col style="width: auto;">
+	</colgroup>
 		<tr>
-			<td> 결제 수단 </td>
+			<th> 결제 수단 </th>
 			<td> 
-				<ul style="list-style:none;">
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="신용카드" checked onclick="div_show(this.value, '신용카드');"> 신용카드 </label> </li>
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="무통장입금" onclick="div_show(this.value, '무통장입금');"> 가상계좌(무통장입금) </label> </li>
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="카카오페이" onclick="div_show(this.value, '카카오페이');"> 카카오페이 </label> </li>
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="네이버페이" onclick="div_show(this.value, '네이버페이');"> 네이버페이 </label> </li>
+				<ul style="list-style:none; margin-bottom: 4%;">
+					<li style="float:left;"> <label> <input type="radio" name="payment" value="신용카드" checked onclick="div_show(this.value, '신용카드');"> <span class="payment">신용카드</span> </label> </li>
+					<li style="float:left;"> <label> <input type="radio" name="payment" value="무통장입금" onclick="div_show(this.value, '무통장입금');"> <span class="payment">가상계좌(무통장입금)</span> </label> </li>
+					<li style="float:left;"> <label> <input type="radio" name="payment" value="카카오페이" onclick="div_show(this.value, '카카오페이');"> <span class="payment">카카오페이</span> </label> </li>
+					<li style="float:left;"> <label> <input type="radio" name="payment" value="네이버페이" onclick="div_show(this.value, '네이버페이');"> <span class="payment">네이버페이</span> </label> </li>
 				</ul>
 			</td>
 		</tr>
 		
 		<tr>
-			<td> 결제 안내 </td>
+			<th> 결제 안내 </th>
 			
 				<td id="신용카드"> 
 					<select>
@@ -501,13 +501,13 @@
 						<option> 우리카드 </option>
 						<option> 삼성카드 </option>
 					</select>
-					<p>
+					<span><br>
 						※ 할부는 50,000원 이상만 가능합니다. <br> <br>
 						안전결제(ISP)? (국민카드/BC카드/우리카드) <br>
 						온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인정보를 입력하지 않고 고객님이 사전에 미리 설정한 안전결제(ISP) 비밀번호만 입력, 결제하도록 하여 개인정보 유출 및 카드 도용을 방지하는 서비스입니다. <br> <br>
 						안심 클릭 결제? (삼성/외환/롯데/현대/신한/시티/하나/NH/수협/전북/광주/산업은행/제주은행) <br>
 						온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인 정보를 입력하지 않고 고객님이 사전에 미리 설정한 전자 상거래용 안심 클릭 비밀번호를 입력하여 카드 사용자 본인 여부를 확인함으로써 온라인상에서의 카드 도용을 방지하는 서비스입니다. <br>
-					</p>
+					</span>
 				</td>
 				
 				<td id="무통장입금" style="display:none;">
@@ -515,42 +515,42 @@
 						<option> ::: 선택해 주세요 ::: </option>
 						<option> 기업은행:2135159668464 주식회사갈라파고스 </option>
 					</select>
-					<input type="text" value="<%=memberDTO.getName()%>" disabled> <br>
-					가상 계좌 안내계좌 유효 기간 2020년 05월 22일 23시 59분 59초 <br>
+					<input type="text" value="<%=memberDTO.getName()%>" style="text-align: center;" placeholder size="5" disabled> <br>
+					<span>가상 계좌 안내계좌 유효 기간 2020년 05월 22일 23시 59분 59초 <br>
 					가상계좌는 주문 시 고객님께 발급되는 일회성 계좌번호 이므로 입금자명이 다르더라도 입금 확인이 가능합니다. 
 					단, 선택하신 은행을 통해 결제 금액을 1원 단위까지 정확히 맞추셔야 합니다. 가상 계좌의 입금 유효 기간은 주문 후 2일 이내이며, 기간 초과 시 계좌번호는 소멸되어 입금되지 않습니다. 
 					구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상 계좌를 통한 재주문이 불가 합니다. 인터넷뱅킹, 텔레뱅킹, ATM/CD기계, 은행 창구 등에서 입금할 수 있습니다. <br>
-					ATM 기기는 100원 단위 입금이 되지 않으므로 통장 및 카드로 계좌이체 해주셔야 합니다. 은행 창구에서도 1원 단위 입금이 가능합니다. 자세한 내용은 FAQ를 확인하여 주시기 바랍니다.
+					ATM 기기는 100원 단위 입금이 되지 않으므로 통장 및 카드로 계좌이체 해주셔야 합니다. 은행 창구에서도 1원 단위 입금이 가능합니다. 자세한 내용은 FAQ를 확인하여 주시기 바랍니다.</span>
 				</td>
 				
 				<td id="카카오페이" style="display:none">
-					카카오페이 안내 <br>
+					<span>카카오페이 안내 <br>
 					카카오페이는 카카오톡에서 카드를 등록, 간단하게 비밀번호만으로 결제할 수 있는 빠르고 편리한 모바일 결제 서비스입니다. <br>
-					-지원 카드 : 모든 카드 등록/결제 가능
+					-지원 카드 : 모든 카드 등록/결제 가능</span>
 				</td>
 				
 				<td id="네이버페이" style="display:none">
-					네이버페이 안내 <br>
+					<span>네이버페이 안내 </span><br>
 					<br>
-					- 주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.	 <br>
+					<span>- 주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.	 <br>
 					- 네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행계좌 정보를 등록하여 네이버페이 비밀번호로 결제할 수 있는 간편결제 서비스입니다. <br>
 					- 결제 가능한 신용카드: 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티, 카카오뱅크 <br>
 					- 결제 가능한 은행: NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국, 미래에셋대우, 광주, 대구, 전북, 새마을금고, 제주은행, 신협, 하나은행, 케이뱅크, 카카오뱅크, 삼성증권 <br>
-					- 네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 별 무이자, 청구할인 혜택을 받을 수 있습니다.
+					- 네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 별 무이자, 청구할인 혜택을 받을 수 있습니다.</span>
 				</td>
 		</tr>
 		<tr>
-			<td> 
+			<th> 
 				주문자 동의 <br>
 				<label> <input type="checkbox" id="chkThirdAgreeAll" onclick="checkThirdAgreeAll();"> 전체 동의 </label> 
-			</td>
+			</th>
 			<td>
 				<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> 개인정보 제3자 제공 동의(필수) </label>
 				<p> 배송 등 거래를 위해 판매자에게 개인정보가 공유됩니다. <a href="javascript:void(0)" onclick="toggleThirdAgree();" return false;> <span id="thirdAgreeBtn"> 자세히 </span>  </a> </p>
 				
 					<div id="thirdAgreeDetail" style="display:none;  background-color: lightblue; width: 100%; height: 150px; overflow: scroll;">
-						무신사의 회원계정으로 상품 및 서비스를 구매하고자 할 경우, (주)무신사는 거래 당사자간 원활한 의사소통 및 배송, 상담 등 거래이행을 위하여 필요한 최소한의 개인정보만을 무신사 입점업체 판매자 및 배송업체에 아래와 같이 공유하고 있습니다. <br>
-						1. (주)무신사는 귀하께서 무신사 입점업체 판매자로부터 상품 및 서비스를 구매하고자 할 경우, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 24조의 2(개인정보 공유동의 등)에 따라 아래와 같은 사항은 안내하고 동의를 받아 귀하의 개인정보를 판매자에게 공유합니다. "개인정보 제3자 공유 동의"를 체크하시면 개인정보 공유에 대해 동의한 것으로 간주합니다. <br>
+						갈라파고스의 회원계정으로 상품 및 서비스를 구매하고자 할 경우, 갈라파고스는 거래 당사자간 원활한 의사소통 및 배송, 상담 등 거래이행을 위하여 필요한 최소한의 개인정보만을 갈라파고스 입점업체 판매자 및 배송업체에 아래와 같이 공유하고 있습니다. <br>
+						1. 갈라파고스는 귀하께서 갈라파고스 입점업체 판매자로부터 상품 및 서비스를 구매하고자 할 경우, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 24조의 2(개인정보 공유동의 등)에 따라 아래와 같은 사항은 안내하고 동의를 받아 귀하의 개인정보를 판매자에게 공유합니다. "개인정보 제3자 공유 동의"를 체크하시면 개인정보 공유에 대해 동의한 것으로 간주합니다. <br>
 						2. 개인정보를 공유받는자 : 위클리웨어 <br>
 						3. 공유하는 개인정보 항목 <br>
 						- 구매자 정보: 성명, 전화번호, ID, 휴대전화 번호, 메일주소, 상품 구매정보 <br>
@@ -565,33 +565,27 @@
 		</tr>
 	</table>
 	
-	<br>
-	
-	<input type="button" value="PAYMENT(결제하기)">
-	
-	<hr>
+	<input type="button" class="order_btn" value="PAYMENT(결제하기)">
 	
 	<!-- 이용 안내 -->
-	<table border="1">
-		<tr>
-			<td>이용안내</td>
-		</tr>
-		<td>
-			WindowXP 서비스팩2를 설치하신후 결제가 정상적인 단계로 처리되지 않는경우, 아래의 절차에 따라 해결하시기 바랍니다.<br>
+	<div class="help">
+		<h3>이용안내</h3>
+		<div class="inner">
+			<h4>WindowXP 서비스팩2를 설치하신후 결제가 정상적인 단계로 처리되지 않는경우, 아래의 절차에 따라 해결하시기 바랍니다.</h4>
 			<ol>
 				<li>안심클릭 결제모듈이 설치되지 않은 경우 ActiveX 수동설치</li>
 				<li>Service Pack 2에 대한 Microsoft사의 상세안내</li>
 				<li>결제보안을 위한 KCP Active-X가 자동설치되지 않을경우 수동설치하시기 바랍니다.</li>
 			</ol>
-			아래의 쇼핑몰일 경우에는 모든 브라우저 사용이 가능합니다.<br>
+			<h4>아래의 쇼핑몰일 경우에는 모든 브라우저 사용이 가능합니다.</h4>
 			<ol>
 				<li>KG이니시스, KCP, LG U+를 사용하는 쇼핑몰일 경우</li>
 				<li>결제가능브라우저 : 크롬,파이어폭스,사파리,오페라 브라우저에서 결제 가능 <br>
 					(단, window os 사용자에 한하며 리눅스/mac os 사용자는 사용불가)</li>
-				<li>최초 결제 시도시에는 플러그인을 추가 설치 후 반드시 브라우저 종료 후 재시작해야만 결제가 가능합니다. <br>
+				<li>최초 결제 시도시에는 플러그인을 추가 설치 후 반드시 브라우저 종료 후 재시작해야만 결제가 가능합니다.<br>
 					(무통장, 휴대폰결제 포함)</li>
 			</ol> 
-			세금계산서 발행 안내<br>
+			<h4>세금계산서 발행 안내</h4>
 			<ol>
 				<li>부가가치세법 제 54조에 의거하여 세금계산서는 배송완료일로부터 다음달 10일까지만 요청하실 수 있습니다.</li>
 				<li>세금계산서는 사업자만 신청하실 수 있습니다.</li>
@@ -599,12 +593,12 @@
 				<li>[세금계산서 신청]버튼을 눌러 세금계산서 신청양식을 작성한 후 팩스로 사업자등록증사본을 보내셔야 세금계산서 발생이 가능합니다.</li>
 				<li>[세금계산서 인쇄]버튼을 누르면 발행된 세금계산서를 인쇄하실 수 있습니다.</li>
 			</ol> 
-			부가가치세법 변경에 따른 신용카드매출전표 및 세금계산서 변경안내<br>
+			<h4>부가가치세법 변경에 따른 신용카드매출전표 및 세금계산서 변경안내</h4>
 			<ol>
 				<li>변경된 부가가치세법에 의거, 2004.7.1 이후 신용카드로 결제하신 주문에 대해서는 세금계산서 발행이 불가하며 신용카드매출전표로 부가가치세 신고를 하셔야 합니다.(부가가치세법 시행령 57조)</li>
 				<li>상기 부가가치세법 변경내용에 따라 신용카드 이외의 결제건에 대해서만 세금계산서 발행이 가능함을 양지하여 주시기 바랍니다.</li>
 			</ol> 
-			현금영수증 이용안내<br>
+			<h4>현금영수증 이용안내</h4>
 			<ol>
 				<li>현금영수증은 1원 이상의 현금성거래(무통장입금, 실시간계좌이체, 에스크로, 예치금)에 대해 발행이 됩니다.</li>
 				<li>현금영수증 발행 금액에는 배송비는 포함되고, 적립금사용액은 포함되지 않습니다.</li>
@@ -612,8 +606,8 @@
 				<li>현금영수증 발행 취소의 경우는 시간 제한이 없습니다. (국세청의 정책에 따라 변경 될 수 있습니다.)</li>
 				<li>현금영수증이나 세금계산서 중 하나만 발행 가능 합니다.</li>
 			</ol> 
-		</td>
-	</table>
+		</div>	
+	</div>
 	</div>
 	</div>
 

@@ -239,7 +239,7 @@ input[type="text"]{
 }
 
 .orderlist span{
-	font-size: 12px;
+	font-size: 14px;
 	color: #8e8e8e;
 }
 
@@ -247,15 +247,52 @@ input[type="text"]{
 	height: 25px;
 }
 
+.orderstar_btn{
+	padding: 0 .95em;
+    min-width: 49px;
+    font-size: 11px;
+    height: 28px;
+    line-height: 27px;
+    font-weight: normal;
+    color: #666;
+    border: 1px solid #e3e3e3;
+    border-bottom-color: #c7c7c7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    background: #fff;
+}
 
+.orderlist span.payment{
+	font-size: 15px;
+	color: black;
+}
 
+.coupon_table{
+    margin: 0 0 1px;
+    border-top: 1px solid #e7e7e7;
+    color: #353535;
+    font-size: 14px;
+    line-height: 1.5;
+}
 
+.coupon_table th{
+    font-weight: normal;
+    background: #fff;
+    vertical-align: middle;
+    background-color: #d1d1d1;
+    text-align: center;
+}
 
+.coupon_table th:FIRST-CHILD {
+	border-left: 0;
+}
 
-
-
-
-
+.coupon_table td{
+	padding: 9px 0;
+    border-top: 1px solid #e7e7e7;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
 
 
 
