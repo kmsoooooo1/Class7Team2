@@ -17,7 +17,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<%
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
