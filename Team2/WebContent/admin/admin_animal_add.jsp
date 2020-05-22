@@ -14,11 +14,27 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
-	
-	<h2> 관리자 동물등록 페이지 </h2>
-	
+ <div class="board">
+  <div class="top">
+   <div class="boardname">
+	<h2>
+		 관리자 동물등록 페이지
+	</h2>
+   </div>
+   <div class="list-div">	
 	<form name="fr" action="./AnimalAddAction.aa" method="post" enctype="multipart/form-data"> 
-		<table border="1">
+		<table class="list">
+	 <colgroup> 
+	  <col width="2%" />	
+	  <col width="4%" />	
+	  <col width="5%" />	
+	  <col width="7%" />	
+	  <col width="8%" />	
+	  <col width="7%" />	
+	  <col width="5%" />	
+	  <col width="5%" />	
+	  <col width="4%" />	
+	 </colgroup>		 
 			<tr>
 				<td> 카테고리 </td>
 				<td>
@@ -110,7 +126,9 @@
 			</tr>
 		</table>
 	</form>
-	
+   </div>
+  </div>
+ </div>
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
  
