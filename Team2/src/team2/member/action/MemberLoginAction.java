@@ -1,6 +1,8 @@
 package team2.member.action;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +21,13 @@ public class MemberLoginAction implements Action {
 		
 		MemberDAO mdao = new MemberDAO();
 		
-		int check = mdao.idCheck(id,pass);
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+				
+		Date time = new Date();
+				
+		String time_now = format.format(time);
+		
+		int check = mdao.idCheck(id,pass, time_now);
 		
 		if (check == 0) {
 			
@@ -50,6 +58,27 @@ public class MemberLoginAction implements Action {
 			out.print("  alert('아이디가 없습니다.'); ");
 			//out.print("  history.back(); ");
 			out.print(" location.href='./MemberLogin.me'; ");
+			out.print("</script>");
+			
+			out.close();
+
+			return null;
+
+		} else if (check == 1) {
+			// 응답정보의 타입을 html 형식으로 응답
+			response.setContentType("text/html; charset=UTF-8");
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("id", id);
+
+			// 출력객체를 생성(response객체의 정보를 가지고 생성)
+			PrintWriter out = response.getWriter();
+
+			// 자바스크립트를 통한 페이지 이동은 컨트롤러 없이 바로 이동 
+			out.print("<script>");
+			out.print("  alert('적립금 100원이 추가되었습니다.'); ");
+			out.print(" location.href='./Main.me'; ");
 			out.print("</script>");
 			
 			out.close();

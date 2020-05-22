@@ -87,8 +87,8 @@
 	        <div class="imgs_wrap">
 	            <img id="img"/>
 	        </div>
-	        <div class="input_wrap">
-				<input class="input_btn" type="button" onclick="return save();" value="등록하기"/>
+	        <div class="btn_wrap">
+				<button class="input_btn" type="button" onclick="return save();">등록하기</button>
 				<button class="input_btn" type="button" onclick="">목록으로</button>
 			</div>
         </form>

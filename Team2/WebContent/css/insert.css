@@ -21,6 +21,21 @@ body{
 	border-bottom:1px solid #ccc;
 }
 
+.btn_wrap{
+	width: 100%;
+	text-align: center;
+	height: 50px;
+	margin: 30px 0 50px;
+}
+
+.input_btn{
+	width: 10%;
+	height: 100%;
+}
+.input_btn:LAST-CHILD{
+	margin-left: 10px;
+}
+
 #ir1{
 	width:99%;
 	height: 400px;

@@ -42,9 +42,6 @@
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
 		<div class="orderListArea">
-		<div class="title">
-			<h3>일반 상품</h3>
-		</div>
 		<table border="1" class="list">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 			<colgroup>
@@ -94,6 +91,7 @@
 					//b_code 값들 중에 맨 앞글자 따오기
 					char first_letter = bkdto.getB_code().charAt(0);
 			%>
+			<tbody>
 			<tr>
 				<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
 				<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
@@ -241,6 +239,7 @@
 			<%
 				}
 			%>
+		</tbody>
 		</table>
 		</div>
 		
@@ -312,11 +311,10 @@
 	
 	<br>
 
-	<table border="1">
-		<tr>
-			<td>이용안내</td>
-		</tr>
-		<td>장바구니 이용안내<br>
+	<div class="help">
+		<h3>이용안내</h3>
+		<div class="inner">
+			<h4>장바구니 이용안내</h4>
 			<ol>
 				<li>해외배송 상품과 국내배송 상품은 함께 결제하실 수 없으니 장바구니 별로 따로 결제해 주시기 바랍니다.</li>
 				<li>해외배송 가능 상품의 경우 국내배송 장바구니에 담았다가 해외배송 장바구니로 이동하여 결제하실 수 있습니다.</li>
@@ -324,15 +322,16 @@
 				<li>[쇼핑계속하기] 버튼을 누르시면 쇼핑을 계속 하실 수 있습니다.</li>
 				<li>장바구니와 관심상품을 이용하여 원하시는 상품만 주문하거나 관심상품으로 등록하실 수 있습니다.</li>
 				<li>파일첨부 옵션은 동일상품을 장바구니에 추가할 경우 마지막에 업로드 한 파일로 교체됩니다.</li>
-			</ol> 무이자할부 이용안내<br>
+			</ol>
+			<h4>무이자할부 이용안내</h4>
 			<ol>
-				<li>상품별 무이자할부 혜택을 받으시려면 무이자할부 상품만 선택하여 [주문하기] 버튼을 눌러 주문/결제 하시면
-					됩니다.</li>
+				<li>상품별 무이자할부 혜택을 받으시려면 무이자할부 상품만 선택하여 [주문하기] 버튼을 눌러 주문/결제 하시면 됩니다.</li>
 				<li>[전체 상품 주문] 버튼을 누르시면 장바구니의 구분없이 선택된 모든 상품에 대한 주문/결제가 이루어집니다.</li>
 				<li>단, 전체 상품을 주문/결제하실 경우, 상품별 무이자할부 혜택을 받으실 수 없습니다.</li>
 			</ol>
-		</td>
-	</table>
+		</div>
+	</div>
+	
 	</div>
 	</div>
 	<!-- Footer -->

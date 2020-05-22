@@ -35,6 +35,8 @@
 		
 		String num = request.getParameter("num");
 		
+		String total_discount_rate = request.getParameter("total_discount_rate");
+		
 		//coupon DB 접근해서 리스트 가져오기
 		CouponDAO cdao = new CouponDAO();
 		
@@ -50,6 +52,7 @@
 	<div id="container">
 	
 		<input type="hidden" id="num" name="num" value="<%=num%>">
+		<input type="hidden" id="total_discount_rate" name="total_discount_rate" value="<%=total_discount_rate%>">
 		
 		<div class="page_title">
 			<span> Coupons </span>
@@ -137,7 +140,18 @@
 		
 		var num = document.getElementById('num').value;
 		
+		var total_discount_rate = document.getElementById('total_discount_rate').value;
+		
+		total_discount_rate = Number(total_discount_rate);
+		
+		total_discount_rate += Number(document.getElementById('co_rate' + i).value);
+		
+		opener.document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
 		opener.document.getElementById("discount_rate" + num).innerHTML = document.getElementById("co_rate" + i).value;
+		
+		opener.document.getElementById('searchCouponBtn').style.display = "none";
+		
+		opener.document.getElementById('cancelCouponBtn').style.display = "";
 		
 		window.close();
 	}
