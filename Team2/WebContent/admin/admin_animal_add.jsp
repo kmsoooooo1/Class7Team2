@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/order.css?ver=2" rel="stylesheet">
 </head>
 <body>
 
@@ -14,13 +16,29 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
-	
-	<h2> 관리자 동물등록 페이지 </h2>
-	
+ <div class="container">
+  <div class="contents">
+   <div class="h2"><h2> 관리자 동물등록 페이지 </h2></div>	
 	<form name="fr" action="./AnimalAddAction.aa" method="post" enctype="multipart/form-data"> 
-		<table border="1">
+	 <div class="orderListArea">
+	  <div class="title">
+	   <h3>관리자 등록</h3>
+	  </div>	
+		<table border="1" class="list">
+			<colgroup>
+			 <col style="width: 15%;" />
+			 <col style="width: 15%;" />
+			 <col style="width: 15%;" />
+			 <col style="width: 15%;" />
+			 <col style="width: 15%;" />
+			 <col style="width: auto;" />
+			 <col style="width: 15%;" />
+			 <col style="width: 15%;" />
+			 <col style="width: 15%;" />				
+			</colgroup>
+			<thead>
 			<tr>
-				<td> 카테고리 </td>
+				<th> 카테고리 </th>
 				<td>
 					<!-- 동물 카테고리 -->
 					<select name="category" onchange="categoryChange(this)">
@@ -38,12 +56,13 @@
 					</select>
 				</td>
 			</tr>
+			
 			<tr>
-				<td> 동물 모프 (종의 이름)  </td>
+				<th> 동물 모프 (종의 이름)  </th>
 				<td> <input type="text" name="a_morph"> </td>
 			</tr>
 			<tr>
-				<td> 동물 성별 </td>
+				<th> 동물 성별 </th>
 				<td> 
 					<select name="a_sex">
 						<option value="default"> 성별을 선택해주세요 </option>
@@ -54,26 +73,26 @@
 				</td>
 			</tr>
 			<tr>
-				<td> 
+				<th> 
 					동물 상태 <br>
 					(ex. 성체, 베이비, 해당사항 없으면 빈칸 유지)
-				</td>
+				</th>
 				<td> <input type="text" name="a_status"> </td>
 			</tr>
 			<tr>
-				<td> 동물 코드 </td>
+				<th> 동물 코드 </th>
 				<td> <input type="text" name="a_code"> </td>
 			</tr>
 			<tr>
-				<td> 동물 썸네일용 이미지 </td>
+				<th> 동물 썸네일용 이미지 </th>
 				<td> <input type="file" name="a_thumbnail"> </td>
 			</tr>
 			<tr>
-				<td> 동물 보유 수량 </td>
+				<th> 동물 보유 수량 </th>
 				<td> <input type="text" name="a_amount"> </td>
 			</tr>
 			<tr>
-				<td rowspan="3"> 동물 가격 </td>
+				<th rowspan="3"> 동물 가격 </th>
 				<td> 판매가(할인전) :  <input id="a_price_origin_val" type="text" name="a_price_origin" value="" onkeyup="calMileage()">원 </td>
 			</tr>
 			<tr>
@@ -83,11 +102,11 @@
 				<td> 판매가(할인후) :  <input id="a_price_sale_val" type="text" name="a_price_sale">원 </td>
 			</tr>
 			<tr>
-				<td> 적립금 </td>
+				<th> 적립금 </th>
 				<td> <input id="a_mileage_val" type="text" name="a_mileage">원 </td>
 			</tr>
 			<tr>
-				<td colspan="2"> 
+				<th colspan="2"> 
 					<textarea name="ir1" id="ir1" rows="10" cols="100">
 						<br>
 							<span style="font-weight: bold"> 학명 </span> : <br>
@@ -100,17 +119,20 @@
 							<span style="font-weight: bold"> 특징 </span> : <br><br>
 						<br>
 					</textarea> 
-				</td>
+				</th>
 			</tr>
 			<tr>
-				<td colspan="2"> 
+				<th colspan="2"> 
 					<input type="button" onclick="return save();" value="추가하기"/>
 					<button type="button">취소</button>
-				</td>
+				</th>
 			</tr>
+			</thead>
 		</table>
+	 </div>	
 	</form>
-	
+  </div>	
+ </div>
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
  
