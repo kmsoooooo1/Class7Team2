@@ -474,11 +474,10 @@ body{
 	overflow: hidden;
 	background-color: #fff;
 	text-align: right;
+	margin: 0;
+	padding: 0;
 }
 
-.sub h2{
-	width: 92%;
-}
 
 .rolling {
 	position: relative;
