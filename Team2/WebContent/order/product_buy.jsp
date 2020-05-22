@@ -425,8 +425,8 @@
 						
 						<!-- 쿠폰선택 버튼 -->
 						<td> 
-							<button type="button" id="searchCouponBtn" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button>
-							<button type="button" id="cancelCouponBtn" onclick="cancelCoupon('<%=i%>');" style="display: none;"> 다시선택 </button>
+							<button type="button" id="searchCouponBtn<%=i%>" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button>
+							<button type="button" id="cancelCouponBtn<%=i%>" onclick="cancelCoupon('<%=i%>');" style="display: none;"> 다시선택 </button>
 						</td>
 						
 						<!-- 쿠폰할인가  -->
@@ -782,9 +782,19 @@
 		document.getElementById("selectedOptions").value = selectedOptions;
 		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
 		
+		var previous_point = Number(document.getElementById("discount_rate" + i).innerHTML);
+		
+		var total_discount_rate = Number(document.getElementById("total_discount_rate").innerHTML);
+		
+		total_discount_rate -= previous_point;
+		
+		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
+		
 		var total_discount_rate = document.getElementById("total_discount_rate").innerHTML;
 		
 		var num = i;
+		
+		document.getElementById("discount_rate" + i).innerHTML = 0;
 		
 		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate, '_blank','width=800,height=700',false);
     }
