@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="${pageContext.request.contextPath}/css/adminAdd.css?ver=2" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/admin.css?ver=2" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -21,7 +21,7 @@
 	<div class="contents">
 	<h2> 관리자 동물등록 페이지 </h2>
 	<form name="fr" action="./AnimalAddAction.aa" method="post" enctype="multipart/form-data"> 
-		<table border="1" class="adminAdd">
+		<table border="1" class="admintable">
 			<colgroup>
 				<col style="width:20%;">
 				<col style="width: auto;">
@@ -189,7 +189,7 @@
 	//두번째 카테고리를 선택했을시
 	function sub_categoryChange(e){
 		var animal_Do = ["서서브 종을 선택해주세요", "리자드/모니터", "레오파드 게코", "크레스티드 게코", "카멜레온"]; 	//게코 도마뱀을 선택했을시 나오는 리스트
-		var animal_snake = ["서서브 종을 선택해주세요", "콘스네이크", "킹스네이크", "파이톤", "기타 애완뱀"];			//뱀을 선택했을시 나오는 리스트
+		var animal_snake = ["서서브 종을 선택해주세요", "콘/킹/소형뱀", "대형뱀"];			//뱀을 선택했을시 나오는 리스트
 		var animal_turtle = ["서서브 종을 선택해주세요", "육지거북 ", "수생/습지 거북"];	//거북을 선택했을시 나오는 리스트
 		var empty_sub_category_index = ["-"];	//관리자가 양서류를 선택했을시 나오는 empty 리스트
 		

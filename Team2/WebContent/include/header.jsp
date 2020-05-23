@@ -16,6 +16,7 @@
 
 <div class="h-group" id="h-group">
 <div class="header">
+ <div class="rolling_top_menu">
       <div class="top_menu">
       <ul>
       <%
@@ -69,31 +70,16 @@
     </div>
     
     <div class="notice">
-    <div class="sub">
-	 <h2>dsa</h2>    
-    </div>
      <ul class="rolling">
-      <li>
-     	<a href="#">공지사항 내용2</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용2</a>  
-      </li>
-      <li>
-       <a href="#">공지사항 내용3</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용4</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용5</a>
-      </li>
-      <li>
-       <a href="#">공지사항 내용5</a>
-      </li>
+      <li><a href="#">공지사항 내용1</a></li>
+      <li><a href="#">공지사항 내용2</a></li>
+      <li><a href="#">공지사항 내용3</a></li>
+      <li><a href="#">공지사항 내용4</a></li>
+      <li><a href="#">공지사항 내용5</a></li>
+      <li><a href="#">공지사항 내용6</a></li>
      </ul>
     </div>
- 
+ </div>
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
@@ -109,16 +95,26 @@
             </div>
           </li>
         
-         <li class="dropdown"> <a href="./AnimalList.an?category=파충류&sub_category=뱀" class="dropbtn"> 뱀 </a> </li>
+         <li class="dropdown"> <a href="./AnimalList.an?category=파충류&sub_category=뱀" class="dropbtn"> 뱀 </a>
+         	<div class="dropdown-content">
+               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=콘/킹/소형뱀"> 콘/킹/소형뱀 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=대형뱀"> 대형뱀 </a> 
+            </div>
+         </li>
          
-         <li class="dropdown"> <a href="./AnimalList.an?category=파충류&sub_category=거북" class="dropbtn"> 거북 </a> </li>
+         <li class="dropdown"> <a href="./AnimalList.an?category=파충류&sub_category=거북" class="dropbtn"> 거북 </a>
+         	<div class="dropdown-content">
+               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북"> 육지거북 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=수생/습지 거북"> 수생/습지 거북 </a> 
+            </div>
+         </li>
          
          
-         <li class="dropdown"> <a href="./AnimalList.an?category=양서류" class="dropbtn"> 양서류 </a>
+         <li class="dropdown"> <a href="#" class="dropbtn"> 양서류 </a>
             <div class="dropdown-content">
-                <a href="./AnimalList.an?category=양서류&sub_category=프로그"> 프로그 </a>
-                <a href="./AnimalList.an?category=양서류&sub_category=살라맨더"> 살라맨더 </a>
-                <a href="./AnimalList.an?category=양서류&sub_category=팩맨"> 팩맨 </a>
+                <a href="#"> 프로그 </a>
+                <a href="#"> 살라맨더 </a>
+                <a href="#"> 팩맨 </a>
             </div>
          </li>
          
@@ -156,7 +152,7 @@ $(document).ready(function(){
 	var move = 0; // 초기값 설정
 	function noticeRolling(){ 
 		move += height; // 여기에서 += 이라는것은 move = move + height
-		$(".rolling").animate({"top":-move},600,function(){ // animate를 통해서
+		$(".rolling").animate({"top":-move},800,function(){ // animate를 통해서
 			//부드럽게 top값 올리기
 			if( move >= max ){ // if문을 통해 최대값보다 top값을 많이 올렸다면 다시
 				$(this).css("top",0); // 0으로 올려주고

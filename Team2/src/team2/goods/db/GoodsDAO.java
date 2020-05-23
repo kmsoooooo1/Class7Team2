@@ -553,16 +553,20 @@ public class GoodsDAO {
 		
 		List<GoodsDTO> list = new ArrayList<>();
 		
-		sql = "select * from team2_goods where category='"+category+"'";
+		sql = "select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+				+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
+				+ "max(g_amount) as g_amount from team2_goods where category='"+category+"'";
 		if(sub_category!=""){
 			sql+=" and sub_category='"+sub_category+"'";
 		}
 		if(sub_category_idx!=""){
 			sql+=" and sub_category_index='"+sub_category_idx+"'";
 		}
-		sql+=" order by num desc limit " + cri.getPageStart() + ", " + cri.getPerpageNum();
+		sql+=" group by g_code order by num desc limit " + cri.getPageStart() + ", " + cri.getPerpageNum();
 		
 		try {
+			
+			System.out.println(sql);
 			con = getConnection();
 		
 			stmt = con.createStatement();

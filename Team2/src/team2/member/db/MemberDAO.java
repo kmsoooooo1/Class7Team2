@@ -284,6 +284,7 @@ public class MemberDAO {
 				mdto.setAddr1(rs.getString("addr1"));
 				mdto.setAddr2(rs.getString("addr2"));
 				mdto.setEmail(rs.getString("email"));
+				mdto.setMileage(rs.getInt("mileage"));
 				mdto.setReg_date(rs.getDate("reg_date"));
 			}
 			

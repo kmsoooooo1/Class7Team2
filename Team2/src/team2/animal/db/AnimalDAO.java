@@ -87,7 +87,7 @@ public class AnimalDAO {
 	}
 	
 	//동물 리스트 가져오는 함수 
-	public List<AnimalDTO> getAnimalList(String category, String sub_category, String sub_category_index) {
+	public List<AnimalDTO> getAnimalList(String category, String sub_category, String sub_category_index, Criteria cri) {
 		List<AnimalDTO> animalList = new ArrayList<AnimalDTO>();
 		try {
 			con = getConnection();
@@ -99,60 +99,52 @@ public class AnimalDAO {
 			
 			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 모든 동물을 부를때)
 			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
-				SQL.append("select * from team2_animals order by num desc");
+				SQL.append("select * from team2_animals order by num desc limit ?,?");
 			}
 			//만약 category가 파충류이면
 			else if(category.equals("파충류")){
 				SQL.append("select * from team2_animals where category = '파충류' ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num desc");
+					SQL.append("order by num desc limit ?,?");
 				}
 				//만약 sub_category가 있으면
 				else {
 					SQL.append("AND sub_category = ? ");
 					//만약 sub_category_index가 없으면
 					if(sub_category_index.equals("all")){
-						SQL.append("order by num desc");
+						SQL.append("order by num desc limit ?,?");
 					}
 					//만약 sub_category_index가 있으면
 					else {
-						SQL.append("AND sub_category_index = ? order by num desc");
+						SQL.append("AND sub_category_index = ? order by num desc limit ?,?");
 					}
-				}
-			}else if(category.equals("양서류")){
-				SQL.append("select * from team2_animals where category = '양서류'");
-				//만약 sub_category가 없으면	
-				if(sub_category.equals("all")) {
-					SQL.append("order by num");
-				}
-				//만약 sub_category가 있으면
-				else {
-					SQL.append("AND sub_category = ? order by num desc");
 				}
 			}
 			
 			pstmt = con.prepareStatement(SQL.toString());
-			
+			System.out.println(pstmt);
 			//?에 값 지정하기
 			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+				pstmt.setInt(1, cri.getPageStart());
+				pstmt.setInt(2, cri.getPerpageNum());
 			}
 			else if(category.equals("파충류")){
 				if(sub_category.equals("all")) {
+					pstmt.setInt(1, cri.getPageStart());
+					pstmt.setInt(2, cri.getPerpageNum());
 				}
 				else {
 					pstmt.setString(1, sub_category);
 					if(sub_category_index.equals("all")){
+						pstmt.setInt(2, cri.getPageStart());
+						pstmt.setInt(3, cri.getPerpageNum());
 					}
 					else {
 						pstmt.setString(2, sub_category_index);
+						pstmt.setInt(3, cri.getPageStart());
+						pstmt.setInt(4, cri.getPerpageNum());
 					}
-				}
-			}else if(category.equals("양서류")){
-				if(sub_category.equals("all")) {
-				}
-				else {
-					pstmt.setString(1, sub_category);
 				}
 			}
 			

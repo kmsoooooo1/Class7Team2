@@ -17,12 +17,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<%
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
 		String g_code = request.getParameter("g_code");
+		if(sub_category == null){ 
+			sub_category = "";
+		}
 		if(sub_category_index == null){ 
 			sub_category_index = "";
 		}
@@ -61,7 +63,7 @@
 		<div class="menu">
 			<input type="button" value="전체보기" class="a_btn"
 			 	onclick="location.href='./GoodsList.go?category=사육용품'">
-	<%	if(sub_category!=null){
+	<%	if(sub_category!=""){
 			switch(sub_category){
 			case "사육장":%>
 				<input type="button" value="*사육장" class="a_btn"
@@ -140,34 +142,34 @@
 				<input type="button" value="기타" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타'">
 		<%	}
-	}else{%>
-		<input type="button" value="*사육장" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">
-		<input type="button" value="*장식/그릇" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
-		<input type="button" value="*램프" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
-		<input type="button" value="*바닥재" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
-		<input type="button" value="*온/습도 관련" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
-		<input type="button" value="*보조용품" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
-		<input type="button" value="*수족관" class="a_btn"
-					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
-<%	}
+		}else{%>
+			<input type="button" value="*사육장" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">
+			<input type="button" value="*장식/그릇" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
+			<input type="button" value="*램프" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
+			<input type="button" value="*바닥재" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
+			<input type="button" value="*온/습도 관련" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
+			<input type="button" value="*보조용품" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
+			<input type="button" value="*수족관" class="a_btn"
+						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
+<%		}
 			%>
 		</div>
 	<%} %>
 	
-	<span> Total <%=goodsList.size() %> items </span>
+	<span class="a_amount"> Total <%=goodsList.size() %> items </span>
 	<ul class="ul_wrap">
 		<%
 			int size = goodsList.size();
 			int col = 4;
 			int row = (size/col) + (size%col>0? 1:0);
 			int num = 0;
-			
+
 			for(int a = 0; a < row; a++){
 		%>
 			<%
@@ -183,13 +185,29 @@
 			<li>
 			<div class="list_wrap">
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="300" height="300"> </a><br>
-				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a> 
-				<hr>
+				
+				<span class="product_detail" style="margin: 15px 40px 0 35px;">
+					<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a>	
+				</span>
+				
+				<br>
+				
 				<%if(gdto.getG_discount_rate() != 0){ // 만약 할인율 있으면 %>
-					<span style="text-decoration: line-through;"> <%=newformat_price_origin %>원 </span> <br>
-					<span style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale %>원 </span> <br>
+				
+				<span class="product_detail" style="text-decoration: line-through;"> <%=newformat_price_origin %>원 <br> </span> 
+				
+				<br> <br>
+				
+				<span class="product_detail" style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale %>원 </span> 
+				
+				<br>
+				
 				<%}else{ //할인 안하면 %>
+				
+				<span class="product_detail">
 					<%=newformat_price_origin %>원 <br>
+				</span>
+				
 				<%} %>
 				
 				<!-- 만약 수량이 0이면 soldout 문구 띄우기 -->
