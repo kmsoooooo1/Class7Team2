@@ -48,12 +48,6 @@ tr{
     border-color: inherit;
 }
 
-.admintable th{
-    font-weight: normal;
-    vertical-align: middle;
-    background-color: #e2e2e2;
-}
-
 input[type="text"]{
 	height: 22px;
     line-height: 24px;
@@ -87,8 +81,21 @@ span{
 	font-size: 14px;
 }
 
+.admintable th{
+    font-weight: normal;
+    vertical-align: middle;
+    background-color: #e2e2e2;
+}
+
+.admintable td{
+	text-align: center;
+	font-size: 16px;
+	
+}
+
 .admintable a{
 	margin-left: 5%;
+	text-decoration: none;
 }
 
 
