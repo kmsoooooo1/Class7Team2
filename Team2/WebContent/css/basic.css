@@ -40,6 +40,45 @@ body{
 }
 /* LOGO_END */
 
+/* Notice-Rolling START */
+
+.rolling_top_menu {
+	width: 80%;
+	
+}
+
+.notice {
+	width: 50%;
+	height: 50px;
+	overflow: hidden;
+	background-color: #fff;
+	text-align: right;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.rolling_top_menu:after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.rolling {
+	position: relative;
+	width: 100%;
+	height: 50px;
+}
+
+.rolling li {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	list-style: none;
+}
+/* Notice-Rolling END */
+
+
 /* HEADER_START */
 
 
@@ -463,42 +502,7 @@ body{
 
 /* sidebar 끝*/
 
-/* Notice-Rolling */
 
-.rolling_top_menu {
-	width: 80%;
-	
-}
-
-.notice {
-	width: 50%;
-	height: 50px;
-	overflow: hidden;
-	background-color: #fff;
-	text-align: right;
-	margin: 0;
-	padding: 0;
-	float: left;
-}
-
-.rolling_top_menu:after {
-	display: block;
-	content: "";
-	clear: both;
-}
-
-.rolling {
-	position: relative;
-	width: 100%;
-	height: 50px;
-}
-
-.rolling li {
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	list-style: none;
-}
 
 
 		
