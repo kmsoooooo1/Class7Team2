@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="team2.board.db.BoardDAO"%>
 <%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
 <%@page import="team2.board.db.BoardDTO"%>
@@ -72,34 +74,36 @@
    </li>
    	  </ul>
     </div>
-    
-    <%
-    ArrayList boardList = (ArrayList)request.getAttribute("boardList");
-    Criteria cri = (Criteria)request.getAttribute("cri");
-	PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
-	//페이지번호 & 카테고리번호
-	String pageNum = (String)request.getAttribute("pageNum");
-	String category = (String)request.getAttribute("category");
-	String search = (String)request.getAttribute("search");
+   <%
+		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		
+		//페이지번호 & 카테고리번호
+		String pageNum = (String)request.getAttribute("pageNum");
+		String category = (String)request.getAttribute("category");
+		String search = (String)request.getAttribute("search");
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+
+	%>
 	
-	System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
-    %>
-    
-    
     <div class="notice">
-     <ul class="rolling">
-     <%
-	  if(boardList.size()>0){
-	    for(int i=0; i<boardList.size(); i++){ 
+     <ul class="rolling"> 
+       <%
+	    for(int i=0;i<boardList.size();i++){ 
              BoardDTO bdto = (BoardDTO) boardList.get(i);
 	  %>
-      <li><a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-		    	<%=bdto.getB_title() %></a></li>
-		    	<%} %>
-		 <%} %>   	
+      <li>
+       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+		    	<%=bdto.getB_title() %>
+	   </a>
+	  </li>
+	    <%} %>
+	  
      </ul>
     </div>
- </div>
+   </div>
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
