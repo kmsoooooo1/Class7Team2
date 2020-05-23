@@ -31,13 +31,14 @@ input[type="checkbox"]{
     border: 0;
 }
 
-.adminAdd{
+.admintable{
 	table-layout: fixed;
     margin: 0 0 1px;
     border-top: 1px solid #e7e7e7;
     color: #353535;
     font-size: 14px;
     line-height: 1.5;
+    min-height: 400px;
 }
 
 
@@ -47,7 +48,7 @@ tr{
     border-color: inherit;
 }
 
-.adminAdd th{
+.admintable th{
     font-weight: normal;
     vertical-align: middle;
     background-color: #e2e2e2;
@@ -86,7 +87,9 @@ span{
 	font-size: 14px;
 }
 
-
+.admintable a{
+	margin-left: 5%;
+}
 
 
 

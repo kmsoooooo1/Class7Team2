@@ -110,11 +110,11 @@
          </li>
          
          
-         <li class="dropdown"> <a href="./AnimalList.an?category=양서류" class="dropbtn"> 양서류 </a>
+         <li class="dropdown"> <a href="#" class="dropbtn"> 양서류 </a>
             <div class="dropdown-content">
-                <a href="./AnimalList.an?category=양서류&sub_category=프로그"> 프로그 </a>
-                <a href="./AnimalList.an?category=양서류&sub_category=살라맨더"> 살라맨더 </a>
-                <a href="./AnimalList.an?category=양서류&sub_category=팩맨"> 팩맨 </a>
+                <a href="#"> 프로그 </a>
+                <a href="#"> 살라맨더 </a>
+                <a href="#"> 팩맨 </a>
             </div>
          </li>
          
