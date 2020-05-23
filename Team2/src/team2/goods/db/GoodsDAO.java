@@ -12,8 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
-
+import team2.board.action.Criteria;
 import team2.board.db.ProductDTO;
 
 public class GoodsDAO {
@@ -519,6 +518,91 @@ public class GoodsDAO {
 		return list;
 	}
 	
+	
+	public int getGoodsCount(String category, String sub_category, String sub_category_idx){
+		
+		int total = 0;
+		
+		sql = "select count(num) from team2_goods where category='" + category + "'";
+		if(sub_category!=""){
+			sql+=" and sub_category='"+sub_category+"'";
+		}
+		if(sub_category_idx!=""){
+			sql+=" and sub_category_index='"+sub_category_idx+"'";
+		}
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				total = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return total;
+	}
+
+	public List<GoodsDTO> GoodsPage(String category, String sub_category, String sub_category_idx, Criteria cri) {
+		
+		List<GoodsDTO> list = new ArrayList<>();
+		
+		sql = "select * from team2_goods where category='"+category+"'";
+		if(sub_category!=""){
+			sql+=" and sub_category='"+sub_category+"'";
+		}
+		if(sub_category_idx!=""){
+			sql+=" and sub_category_index='"+sub_category_idx+"'";
+		}
+		sql+=" order by num desc limit " + cri.getPageStart() + ", " + cri.getPerpageNum();
+		
+		try {
+			con = getConnection();
+		
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+		
+		
+			while(rs.next()){
+				GoodsDTO gdto = new GoodsDTO();
+				
+				gdto.setCategory(rs.getString("category"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setDate(rs.getDate("date"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setNum(rs.getInt("num"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
+				
+				list.add(gdto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		
+		return list;
+	}
 	
 	
 	

@@ -9,48 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/basic.css?ver=2" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<!-- side 퀵바 -->
- <aside id="quick" class="fixed">
-         <nav>
-            <ul>
-               <li>
-               	<a href="./BasketList.ba">
-               		<i class="fas fa-cart-plus"><span>&nbsp&nbsp장바구니</span></i>
-               	</a>
-               </li>
-               <li>
-               	<a href="./recentView.me">
-               		<i class="fas fa-history"><span>&nbsp&nbsp최근본상품</span></i>
-               	</a>
-               </li>
-               <li>
-               	<a href="#" onclick="kakaoChat();" class="kakao_btn">
-               		<i class="fas fa-comment-dots"><span>&nbsp&nbsp카톡 상담</span></i>
-               	</a>
-               </li>
-               <li>
-               	<a href="#">
-               		<i class="fas fa-shipping-fast"><span>&nbsp&nbsp배송 조회</span></i>
-               	</a>
-               </li>
-               <li>
-               	<a href="#">
-               		<i class="fas fa-heart"><span>&nbsp&nbsp관심상품</span></i>
-               	</a>
-               </li>
-               <li>
-               	<a href="#">
-               		<i class="fas fa-search"><span>&nbsp&nbsp검색</span></i>
-               	</a>
-               </li>
-            </ul>
-         </nav>
-      </aside>
-<!-- side 퀵바 -->
+<jsp:include page="/include/quick.jsp"/>
 
-<div class="h-group">
+<div class="h-group" id="h-group">
 <div class="header">
       <div class="top_menu">
       <ul>
@@ -104,11 +68,37 @@
    	  </ul>
     </div>
     
+    <div class="notice">
+    <div class="sub">
+	 <h2>dsa</h2>    
+    </div>
+     <ul class="rolling">
+      <li>
+     	<a href="#">공지사항 내용2</a>
+      </li>
+      <li>
+       <a href="#">공지사항 내용2</a>  
+      </li>
+      <li>
+       <a href="#">공지사항 내용3</a>
+      </li>
+      <li>
+       <a href="#">공지사항 내용4</a>
+      </li>
+      <li>
+       <a href="#">공지사항 내용5</a>
+      </li>
+      <li>
+       <a href="#">공지사항 내용5</a>
+      </li>
+     </ul>
+    </div>
+ 
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
    <!-- 메인 메뉴 --> 
-   <nav id="nav_menu"> 
+   <nav id="nav_menu" class="nav_menu"> 
       <ul class="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
@@ -153,17 +143,34 @@
             </div>
          </li>
          <li class="dropdown"> <a href="./aHospital.bo" class="dropbtn"> 동물병원 정보</a> </li>
+         <li class="dropdown"> <a href="./CouponList.co" class="dropbtn"> 이벤트 </a> </li>
       </ul>
    </nav>
    </div>
    </div>
-</body>
-<script type="text/javascript">
-//카카오 채팅 상담 -----------------------------------------------------------------------------------
-function kakaoChat() {
-	var popupX = (window.screen.width / 6) - (200 / 2); 
-	var popupY = (window.screen.height / 4) - (300 / 2);  
-	window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
-}
+<script>
+$(document).ready(function(){
+	var height =  $(".notice").height(); // 공지사항의 높이값을 구해주고
+	var num = $(".rolling li").length; // length로 공지사항의 개수를 알아볼수있음 
+	var max = height * num; 
+	var move = 0; // 초기값 설정
+	function noticeRolling(){ 
+		move += height; // 여기에서 += 이라는것은 move = move + height
+		$(".rolling").animate({"top":-move},600,function(){ // animate를 통해서
+			//부드럽게 top값 올리기
+			if( move >= max ){ // if문을 통해 최대값보다 top값을 많이 올렸다면 다시
+				$(this).css("top",0); // 0으로 올려주고
+				move = 0; // 초기값도 다시 0으로
+			};
+		});
+	};
+	// 자동롤링 답게 setInterval을 사용해서 1000 = 1초마다 함수 실행
+	noticeRollingOff = setInterval(noticeRolling,2000);
+	// 올리다 보면 마지막이 안보여서 clone을 통해 첫번째 li복사
+	$(".rolling").append($(".rolling li").first().clone());
+	
+});		
 </script>
+</body>
+
 </html>

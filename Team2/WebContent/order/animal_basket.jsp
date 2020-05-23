@@ -12,6 +12,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<link href="${pageContext.request.contextPath}/css/order.css?ver=2" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -29,35 +31,49 @@
 
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
-	
+	<div class="container">
+	<div class="contents">
 	<!-- 장바구니 테이블 생성 -->
-	CART
-	<form action="./OrderStarSelected.or" method="post" name="fr"> 
+	<div class="h2"><h2>CART</h2></div>
+	<form action="" method="post" name="fr"> 
 	
 		<input type="hidden" id="selectedCodes" name="seletedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
-		<table border="1">
+		<div class="orderListArea">
+		<table border="1" class="list">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
+			<colgroup>
+				<col style="width:5%; ">
+				<col style="width:10%; ">
+				<col style="width:auto; ">
+				<col style="width:10%; ">
+				<col style="width:15%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+				<col style="width:10%; ">
+			</colgroup>
+			<thead>
 			<tr>
-				<td> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </td>
-				<td>이미지</td>
-				<td>상품정보</td>
-				<td>판매가<br>(적립예정)</td>
-				<td>수량</td>
-				<td>배송구분</td>
-				<td>배송비</td>
-				<td>합계</td>
-				<td>주문관리</td>
+				<th scope="col"> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </th>
+				<th scope="col">이미지</th>
+				<th scope="col">상품정보</td>
+				<th scope="col">판매가<br>(적립예정)</th>
+				<th scope="col">수량</th>
+				<th scope="col">배송구분</th>
+				<th scope="col">배송비</th>
+				<th scope="col">합계</th>
+				<th scope="col">주문관리</th>
 			</tr>
+			</thead>
 			<%
 				if(basketList.size() == 0){
 			
 			%>
-				<tr>
-					<td colspan="9"> 장바구니가 비어있습니다. </td>
-				</tr>
+				</table>
+				<p class="empty">장바구니가 비었습니다.</p>
 			<%
 				}
 				for (int i = 0; i < basketList.size(); i++) {
@@ -65,11 +81,17 @@
 					ProductDTO pdto = (ProductDTO) productInfoList.get(i);
 					
 					//총 상품금액 계산
-					final_total_price += (bkdto.getB_amount() * pdto.getProduct_price_sale());
+					if(pdto.getProduct_discount_rate() != 0){
+						final_total_price += (bkdto.getB_amount() * (pdto.getProduct_price_sale() + pdto.getProduct_option_price()));
+					}else{
+						final_total_price += (bkdto.getB_amount() * (pdto.getProduct_price_origin() + pdto.getProduct_option_price()));						
+					}
+					
 					
 					//b_code 값들 중에 맨 앞글자 따오기
 					char first_letter = bkdto.getB_code().charAt(0);
 			%>
+			<tbody>
 			<tr>
 				<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
 				<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
@@ -142,7 +164,7 @@
 					<!-- 장바구니 수량  --> 
 					<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
 					<!-- 수량 +/- 버튼 -->
-					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'>
+					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'> 
 					<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
 				</td>
 				
@@ -186,8 +208,8 @@
 				<%if(pdto.getProduct_discount_rate() != 0){%>
 					<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
 						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
 						</td>
 					<%} else {%>
 						<td>
@@ -198,8 +220,8 @@
 				<%} else{%>
 					<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
 						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
 						</td>
 					<%} else {%>
 						<td>
@@ -217,17 +239,20 @@
 			<%
 				}
 			%>
+		</tbody>
 		</table>
-		<button type="button" onclick="deleteSoldout()"> 품절삭제 </button>
-		<button type="button" onclick="deleteSelected()"> 선택삭제 </button>
+		</div>
 		
-		<hr>
+		<div class="btn_div">
+		<button type="button" class="btn" onclick="deleteSoldout()"> 품절삭제 </button>
+		<button type="button" class="btn" onclick="deleteSelected()"> 선택삭제 </button>
+		</div>
 		
-		<table border="1">
+		<table border="1" class="list">
 			<tr>
-				<td>총 상품금액</td>
-				<td>총 배송비</td>
-				<td>결제 예정 금액</td>
+				<th>총 상품금액</th>
+				<th>총 배송비</th>
+				<th>결제 예정 금액</th>
 			</tr>
 			<tr>
 			
@@ -277,19 +302,19 @@
 				
 			</tr>
 		</table>
-		<br>
-		<button type="button" onclick="orderAll();"> 전체상품주문 </button>
-		<button type="button" onclick="orderSelected();"> 선택상품주문 </button>
-		<input type="button" value="쇼핑계속하기">
+		<div class="orderbtn_div">
+		<button type="button" class="order_btn" onclick="orderAll();"> 전체상품주문 </button>
+		<button type="button" class="order_btn" onclick="orderSelected();"> 선택상품주문 </button>
+		<input type="button" class="order_btn" value="쇼핑계속하기">
+		</div>
 	</form>
 	
 	<br>
 
-	<table border="1">
-		<tr>
-			<td>이용안내</td>
-		</tr>
-		<td>장바구니 이용안내<br>
+	<div class="help">
+		<h3>이용안내</h3>
+		<div class="inner">
+			<h4>장바구니 이용안내</h4>
 			<ol>
 				<li>해외배송 상품과 국내배송 상품은 함께 결제하실 수 없으니 장바구니 별로 따로 결제해 주시기 바랍니다.</li>
 				<li>해외배송 가능 상품의 경우 국내배송 장바구니에 담았다가 해외배송 장바구니로 이동하여 결제하실 수 있습니다.</li>
@@ -297,17 +322,18 @@
 				<li>[쇼핑계속하기] 버튼을 누르시면 쇼핑을 계속 하실 수 있습니다.</li>
 				<li>장바구니와 관심상품을 이용하여 원하시는 상품만 주문하거나 관심상품으로 등록하실 수 있습니다.</li>
 				<li>파일첨부 옵션은 동일상품을 장바구니에 추가할 경우 마지막에 업로드 한 파일로 교체됩니다.</li>
-			</ol> 무이자할부 이용안내<br>
+			</ol>
+			<h4>무이자할부 이용안내</h4>
 			<ol>
-				<li>상품별 무이자할부 혜택을 받으시려면 무이자할부 상품만 선택하여 [주문하기] 버튼을 눌러 주문/결제 하시면
-					됩니다.</li>
+				<li>상품별 무이자할부 혜택을 받으시려면 무이자할부 상품만 선택하여 [주문하기] 버튼을 눌러 주문/결제 하시면 됩니다.</li>
 				<li>[전체 상품 주문] 버튼을 누르시면 장바구니의 구분없이 선택된 모든 상품에 대한 주문/결제가 이루어집니다.</li>
 				<li>단, 전체 상품을 주문/결제하실 경우, 상품별 무이자할부 혜택을 받으실 수 없습니다.</li>
 			</ol>
-		</td>
-	</table>
-
-
+		</div>
+	</div>
+	
+	</div>
+	</div>
 	<!-- Footer -->
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
 	
@@ -581,8 +607,6 @@
 	//사용자가 선택한상품 주문하기를 눌렀을때 호출되는 함수
 	function orderSelected(){
 		
-		alert("테스트");
-		
 		//만약 장바구니가 비어있으면 alert 뜨게 하기
 		if(basketList.length == 0){
 			alert("장바구니가 비어있습니다.");
@@ -590,10 +614,13 @@
 		
 		//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
 		for(var i=0; i<basketList.length; i++){
-			//selectedCodes 안에 사용자가 선택한 codes들 담기
-			selectedCodes += ($('#b_code'+i).val() + ",");
-			selectedOptions += ($('#b_option'+i).val() + ",");
-			selectedDeliveryMethods += ($('#b_delivery_method'+i).val() + ",");
+			//각열의 체크박스가 체크되어 있으면 true 아니면 false
+			if(document.getElementById('chkBox'+i).checked){
+				//selectedCodes 안에 사용자가 선택한 codes들 담기
+				selectedCodes += ($('#b_code'+i).val() + ", ");
+				selectedOptions += ($('#b_option'+i).val() + ", ");
+				selectedDeliveryMethods += ($('#b_delivery_method'+i).val() + ", ");
+			} 
 		}
 		
 		//추가된 values 변수를 태그에 담기
@@ -601,42 +628,9 @@
 		document.getElementById("selectedOptions").value = selectedOptions;
 		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
 		
- 		//document.fr.action="./OrderStarSelected.or";
+ 		document.fr.action="./OrderStarSelected.or";
  		document.fr.submit();
-		
-		//var selectedInfoArray = [];
-		
-		//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 객체에 담기
-// 		for(var i=0; i<basketList.length; i++){
-// 			//각열의 체크박스가 체크되어 있으면 true 아니면 false
-// 			if(document.getElementById('chkBox'+i).checked){
-				
-// 				var selectedData = {
-// 						b_code : $('#b_code'+i).val(),
-// 						b_option : $('#b_option'+i).val(),
-// 						b_delivery_method : $('#b_delivery_method'+i).val()
-// 				};		
-				
-// 				selectedInfoArray.push(selectedData); //selectedInfoArray 배열에 selectedData 오브젝트를 담는다.
-				
-// 				var jsonData = JSON.stringify(selectedInfoArray);
-// 			    jQuery.ajaxSettings.traditional = true;
 
-// 			    $.ajax({
-// 			    	url: './OrderStarSelected.or',
-// 			    	type: 'post',
-// 			    	data: {"jsonData" : jsonData},
-// 			    	dataType: 'json',
-// 			    	success:function(data) {
-// 		   				alert("성공");
-// 		   			},error:function(request,status,error){
-// 					 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-// 					}
-// 			    });
-				
-// 				//location.href='./OrderStarSelected.or' + '?selectedInfoArray=' + selectedInfoArray;
-// 			}
-// 		}
 	}
 	
 

@@ -79,7 +79,7 @@ public class MemberDAO {
 	public void insertMember(MemberDTO mdto){
 		try {
 			con = getConnection();
-			sql="insert into team2_member values(?,?,?,?,?,?,?,?,now())";
+			sql="insert into team2_member values(?,?,?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mdto.getId());
 			pstmt.setString(2, mdto.getPass());
@@ -89,9 +89,9 @@ public class MemberDAO {
 			pstmt.setString(6, mdto.getAddr1());
 			pstmt.setString(7, mdto.getAddr2());
 			pstmt.setString(8, mdto.getEmail());
-			
+			pstmt.setInt(9, 2000);
 			pstmt.executeUpdate();
-			
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -100,9 +100,59 @@ public class MemberDAO {
 	}
 	// insertMember(mdto)
 	
+	// 회원가입시 +2000포인트 주는 함수
+	public int insertMemberPoint(MemberDTO mdto){
+		int check = 0;
+		int num = 0;
+		try {
+			con = getConnection();
+			sql="select * from team2_dailypointcheck where id = ? and point_description = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getId());
+			pstmt.setString(2, "회원가입");
+			
+			rs = pstmt.executeQuery();
+			
+			//포인트 Table에 회원가입으로 포인트를 받은적이 있으면
+			if(rs.next()){
+				check = -1;
+			}
+			//포인트를 받은적이 없으면
+			else{
+				sql = "select max(num) from team2_dailypointcheck";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					num = rs.getInt(1) + 1;
+				}
+				
+				sql = "insert into team2_dailypointcheck values(?, ?, ?, ?, now())";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.setString(2, mdto.getId());
+				pstmt.setInt(3, 2000);
+				pstmt.setString(4, "회원가입");
+				pstmt.executeUpdate();
+				check = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		return check;
+	}
+	
 	// idCheck(id,pass)
-	public int idCheck(String id, String pass){
+	public int idCheck(String id, String pass, String time_now){
+		int mileage = 0;
 		int check = -1;
+		int num = 0;
+		
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		String sql2 = "";
+		
 		try {
 			con = getConnection();
 			sql="select pass from team2_member where id=?";
@@ -111,17 +161,67 @@ public class MemberDAO {
 			
 			rs = pstmt.executeQuery();
 			
+			//Member DB에 아이디가 존재하면
 			if(rs.next()){
+				//아이디와 비밀번호가 같으면
 				if(pass.equals(rs.getString("pass"))){
-					check = 1;
+					
+					sql = "select * from team2_dailypointcheck where id = ? and point_description = ? and date = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, id);
+					pstmt.setString(2, "로그인");
+					pstmt.setString(3, time_now);
+					rs = pstmt.executeQuery();
+					
+					//team2_dailypointcheck DB에 같은날짜의 로그인 포인트가 있으면
+					if(rs.next()){
+						check = 2;
+					}
+					//team2_dailypointcheck DB에 같은날짜의 로그인 포인트가 없으면
+					else{
+						//team2_member 테이블에 mileage 추가
+						sql = "select max(mileage) from team2_member where id = ?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, id);
+						rs = pstmt.executeQuery();
+						
+						if(rs.next()){
+							mileage = rs.getInt(1) + 100;
+						}
+						
+						sql = "update team2_member set mileage = ? where id = ?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, mileage);
+						pstmt.setString(2, id);
+						pstmt.executeUpdate();
+					
+						//team2_dailypointcheck 테이블에 로그인 포인트 내용 추가
+						sql2 = "select max(num) from team2_dailypointcheck";
+						pstmt2 = con.prepareStatement(sql2);
+						rs2 = pstmt2.executeQuery();
+						
+						if(rs2.next()){
+							num = rs2.getInt(1) + 1;
+						}
+						
+						sql2 = "insert into team2_dailypointcheck values(?, ?, ?, ?, now())";
+						pstmt2 = con.prepareStatement(sql2);
+						pstmt2.setInt(1, num);
+						pstmt2.setString(2, id);
+						pstmt2.setInt(3, 100);
+						pstmt2.setString(4, "로그인");
+						pstmt2.executeUpdate();
+						
+						check = 1;
+					}
 				}else{
 					check = 0;
 				}
-			}else{
+			}
+			//아이디가 존재하지 않으면
+			else{			
 				check = -1;
 			}
-			
-			System.out.println("아이디 체크 완료 : "+check);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

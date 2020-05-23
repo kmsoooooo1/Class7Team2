@@ -73,28 +73,22 @@
 	<!-- Main Content -->
 
 	<div class="container">
+		<input type="hidden" id="id" name="id" value="<%=id%>">
 		<!-- 상품 기본 정보 파트 -->
 		<div id="menu0" class="menu">
 			<form action="" method="post" name="fr">
 
 				<!-- hidden 값들(코드, 오리지날 판매가, 할인된 판매가, 할인율  -->
-				<input type="hidden" name="product_code"
-					value="<%=detailList.get(0).getG_code()%>"> <input
-					type="hidden" id="g_price_origin" name="g_price_origin"
-					value="<%=detailList.get(0).getG_price_origin()%>"> <input
-					type="hidden" id="g_price_sale" name="g_price_sale"
-					value="<%=detailList.get(0).getG_price_sale()%>"> <input
-					type="hidden" id="g_discount_rate" name="g_discount_rate"
-					value="<%=detailList.get(0).getG_discount_rate()%>"> <input
-					type="hidden" id="g_mileage" name="g_mileage"
-					value="<%=detailList.get(0).getG_mileage()%>"> <input
-					type="hidden" id="g_name" name="g_name"
-					value="<%=detailList.get(0).getG_name()%>"> <input
-					type="hidden" id="g_delivery" name="g_delivery"
-					value="<%=detailList.get(0).getG_delivery()%>"> <input
-					type="hidden" id="g_option" name="g_option"
-					value="<%=detailList.get(0).getG_option()%>">
-				<input type="hidden" name="num" value="<%=detailList.get(0).getNum()%>">	
+				<input type="hidden" id="product_code" name="product_code" value="<%=detailList.get(0).getG_code()%>"> 
+				<input type="hidden" id="g_price_origin" name="g_price_origin" value="<%=detailList.get(0).getG_price_origin()%>"> 
+				<input type="hidden" id="g_price_sale" name="g_price_sale" value="<%=detailList.get(0).getG_price_sale()%>"> 
+				<input type="hidden" id="g_discount_rate" name="g_discount_rate" value="<%=detailList.get(0).getG_discount_rate()%>"> 
+				<input type="hidden" id="g_mileage" name="g_mileage" value="<%=detailList.get(0).getG_mileage()%>"> 
+				<input type="hidden" id="g_name" name="g_name" value="<%=detailList.get(0).getG_name()%>"> 
+				<input type="hidden" id="g_delivery" name="g_delivery" value="<%=detailList.get(0).getG_delivery()%>"> 
+				<input type="hidden" id="g_option" name="g_option" value="<%=detailList.get(0).getG_option()%>">
+				<input type="hidden" name="num" value="<%=detailList.get(0).getNum()%>">
+					
 
 
 				<!-- 사용자가 추가한 배송방법들의 value들을 모두 저장하는 input hidden -->
@@ -1769,17 +1763,34 @@
 	
 	//관심상품 버튼을 클릭했을 시
 	function wishlistChecked(){
+		// 로그인된 상태면
+		if(document.getElementById('id').value){
+			var product_code = document.getElementById('product_code').value;
+			//관심상품 db에 먼저 접근하여 해당 상품코드 값 저장하기
+			$.ajax({
+				type:'get',
+				url:'./WishListAdd.wl',
+				data:'product_code='+$('#product_code').val(),
+				dataType:'html',
+				success: function(data){
+					if(data == 1){
+						var goWishlist = confirm("관심상품에 등록되었습니다. \n관심상품으로 이동하시겠습니까?")
+						if(goWishlist){
+							location.href="./WishList.wl";
+						}else{
+							window.location.reload(); //현재 페이지 새로고침
+						}
+					}else if(data == -1){
+						alert("이미 관심상품에 등록된 상품입니다.");
+					}
+				},error: function(request,status,error){
+					alert("code=" + request.status + " message=" + request.responseText +" error=" + error);
+				}
+			});
 	
-		document.fr.action="./WishListAdd.wl"; // db에 값 넣기
-		document.fr.submit();
-		
-		var goWishlist = confirm("관심상품에 등록되었습니다. \n관심상품으로 이동하시겠습니까?")
-		if(goWishlist){
-			location.href="./WishList.wl";
 		}else{
-			window.location.reload(); //현재 페이지 새로고침
+			alert("로그인을 먼저 해주세요.");
 		}
-	
 	}
 	
 	

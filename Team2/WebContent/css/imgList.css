@@ -1,115 +1,125 @@
 @CHARSET "UTF-8";
 
-*{
+* {
 	box-sizing: border-box;
-	margin : 0;
-	padding : 0;
 }
-
-.board{
-	width: 80%;
-	text-align: center;
-	margin : 0 auto;
+a{
+	text-decoration: none;
 }
-
-.jump{
-	height: 20px;
-}
-
-.top{
-	height : 100px;
-}
-
-.boardname{
-	float: left;
-	margin:20px;
-}
-
-#fr{
-	float:right;
-	margin:20px;
-}
-
-
-.wrap a{text-decoration: none;}
-.wrap a:HOVER, .wrap a:ACTIVE, .wrap a:FOCUS {text-decoration: underline;}
-
-.wrap{
-	margin: 0 auto;
-	font-size: 14px;
-}
-
-.wrap h1{
-	padding: 10px 0 4px;
-	border-bottom: 1px solid #aaa;
-}
-
-.ul_list{
+ul{
 	list-style: none;
-	margin-left: auto;
- 	margin-right: auto;
- 	border : 1px soild;
+}
+body {
+	margin: 0;
+	padding: 0;
 }
 
-.li_list {
-	float: left;
-	width : 25%;
+.container {
+	text-align: center;
 }
 
-.ul_list .imgli{
-	height: 220px;
-	display : inline-block;
+.ul_wrap{
+	width: 80%;
+	margin:0 auto;
+	padding:0;
 }
-
-.ul_list .desc{
-	height: 150px;
-	display : inline-block;
-	padding: 10px 8px;
+.ul_wrap li{
+	margin: 30px 0 0;
+	width:25%;
+	height: 15em;
+	float:left;
 }
-
-.thumb img{
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  height: 200px;
-
+.ul_wrap:after{
+	display: block;
+	content:"";
+	clear: both;
 }
 
 .subject{
-	clear: both;
-    width: 210px;
-    min-height: 52px;
-    margin: 0 6px;
+	width: 100%;
+	height: 10%;
 }
 
+.info{
+	width: 100%;
+	height: 10%;
+}
+
+.list_img{
+	height: 80%;
+	width: auto;
+	max-width: 100%;
+}
+
+.subject a{
+	color: #333;
+	font-size: 0.8em;
+	font-weight: bold;
+	
+}
+
+.info span{
+	display: inline-block;
+}
 .writer{
-	float: left;
+	width: 40%;
+	text-align: right;
+	float:left;
+	font-size: 0.8em;
+	font-weight: bold;
 }
 .view{
+	width: 40%;
+	text-align: left;
+	color: #888;
 	float: right;
+	font-size: 0.6em;
+	font-weight: bold;
+}
+.info:after{
+	display: block;
+	content:"";
+	clear: both;
 }
 
-		@media screen and (max-width: 480px) {
-			.ul_list{
-				width: 100%;
-			}
-			.li_list{
-				width: 50%;
-				height:300px;
-			}
-			
-		}
-		@media screen and (max-width: 736px) {
-			.ul_list{
-				width: 100%;
-			}
-			.li_list{
-				width: 50%;
-				height:300px;
-			}
-		}
-		
+
+.top{
+	width:80%;
+	height: 32px;
+	margin:20px auto;
+}
+
+.boardname{
+	width:40%;
+	float:left;
+	text-align: left;
+	padding-left: 1em;
+}
+.boardname span{
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.boardsearch{
+	width: 60%;
+	height: 100%;
+	text-align: right;
+	float:left;
+}
+.boardsearch input{
+	height:100%;
+}
+
+
+.top:after{
+	display:block;
+	content:"";
+	clear: both;
+}
+	
 
 .bottom{
+	margin:50px auto 80px;
+	width: 80%;
 	height: 60px;
 }
 
@@ -117,7 +127,11 @@
 .button{
 	min-height: 10px;
 	text-align:right;
-}		
+}
+
+
+
+
 
 /* 페이징  */
 ul.paging {

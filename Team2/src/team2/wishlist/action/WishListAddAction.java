@@ -1,5 +1,7 @@
 package team2.wishlist.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,13 +18,6 @@ public class WishListAddAction implements Action{
 		HttpSession session = request.getSession();
 		
 		String id = (String)session.getAttribute("id");
-		ActionForward forward = new ActionForward();
-		
-		if(id == null){
-			forward.setPath("./MemberLogin.me");
-			forward.setRedirect(true);
-			return forward;
-		}
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -37,8 +32,11 @@ public class WishListAddAction implements Action{
 		wldto.setW_code(request.getParameter("product_code"));
 		
 		
-		wldao.wishlistAdd(wldto);
+		int check = wldao.wishlistAdd(wldto);
 		
+		PrintWriter out = response.getWriter();
+		
+		out.println(check);
 				
 		return null;
 	}
