@@ -37,7 +37,7 @@
 	<div class="h2"><h2>CART</h2></div>
 	<form action="" method="post" name="fr"> 
 	
-		<input type="hidden" id="selectedCodes" name="seletedCodes" value="">
+		<input type="hidden" id="selectedCodes" name="selectedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		

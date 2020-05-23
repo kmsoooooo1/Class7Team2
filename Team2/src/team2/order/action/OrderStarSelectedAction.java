@@ -31,7 +31,7 @@ public class OrderStarSelectedAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		
 		//넘어온 코드들
-		String selectedCodes = request.getParameter("seletedCodes");
+		String selectedCodes = request.getParameter("selectedCodes");
 		
 		//넘어온 옵션들
 		String selectedOptions = request.getParameter("selectedOptions");
