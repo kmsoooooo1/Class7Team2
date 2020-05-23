@@ -40,11 +40,17 @@ public class AnimalListAction implements Action{
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(total);
+		
 		
 		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category, sub_category_index, cri);
+		System.out.println("total : "+total);
+		total = admin_animalList.size();
+		pageMaker.setTotalCount(total);
 		
-		request.setAttribute("admin_animalList", admin_animalList); 
+		request.setAttribute("admin_animalList", admin_animalList);
+		request.setAttribute("cri", cri);
+		request.setAttribute("pageMaker", pageMaker);
+		request.setAttribute("pageNum", currentPage);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./admin/admin_animal_list.jsp");
