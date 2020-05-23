@@ -95,8 +95,8 @@
 		    <td> 배송 방법</td>
 		    <td>
 		      <input type="radio" name="g_delivery" value="일반배송"
-		      <%if(gdto.getG_delivery().equals("일반배송")){ %> checked <%} %>
-		      > 일반배송
+		      <%if(gdto.getG_delivery().equals("일반포장")){ %> checked <%} %>
+		      > 일반포장
 		      <input type="radio" name="g_delivery" value="선택배송"
 		      <%if(gdto.getG_delivery().equals("선택배송")){ %> checked <%} %>
 		      > 선택배송

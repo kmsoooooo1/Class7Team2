@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+*{
+	box-sizing: border-box;
+}
+
+body{
+	text-align: center;
+}
+
+#container{
+	width: 70%;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.input_wrap{
+	width: 100%;
+	margin:0 auto;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+}
+
+.btn_wrap{
+	width: 100%;
+	text-align: center;
+	height: 50px;
+	margin: 30px 0 50px;
+}
+
+.input_btn{
+	width: 10%;
+	height: 100%;
+}
+.input_btn:LAST-CHILD{
+	margin-left: 10px;
+}
+
+#ir1{
+	width:99%;
+	height: 400px;
+	min-width: 260px;
+}
+
+.input_wrap{
+	width: 100%;
+	padding: 1em 0;
+}
+
+.input_wrap:LAST-CHILD {
+	text-align: rigth;
+	border-bottom:none;
+}
+.board_title{
+	display:inline-block;
+	width: 15%;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding-left: 0.8em;
+}
+
+.input_text{
+	width: 50%;
+	height: 2em;
+	padding-left: 0.5em;
+}
+
+	@media screen and (max-width: 480px) {
+		#container{
+			width: 100%;
+			margin: 0;
+		}
+		.input_text{
+			width: 80%;
+		}
+	}
+	@media screen and (max-width: 736px) {
+		#container{
+			width: 100%;
+			margin: 0;
+		}
+		.input_text{
+			width: 80%;
+		}
+	}
+
+
+.hidden_file{
+	display: none;
+}	

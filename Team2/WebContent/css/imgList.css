@@ -1,0 +1,178 @@
+@CHARSET "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	text-align: center;
+}
+
+.ul_wrap{
+	width: 80%;
+	margin:0 auto;
+	padding:0;
+}
+.ul_wrap li{
+	margin: 30px 0 0;
+	width:25%;
+	height: 15em;
+	float:left;
+}
+.ul_wrap:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+
+.subject{
+	width: 100%;
+	height: 10%;
+}
+
+.info{
+	width: 100%;
+	height: 10%;
+}
+
+.list_img{
+	height: 80%;
+	width: auto;
+	max-width: 100%;
+}
+
+.subject a{
+	color: #333;
+	font-size: 0.8em;
+	font-weight: bold;
+	
+}
+
+.info span{
+	display: inline-block;
+}
+.writer{
+	width: 40%;
+	text-align: right;
+	float:left;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+.view{
+	width: 40%;
+	text-align: left;
+	color: #888;
+	float: right;
+	font-size: 0.6em;
+	font-weight: bold;
+}
+.info:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+
+
+.top{
+	width:80%;
+	height: 32px;
+	margin:20px auto;
+}
+
+.boardname{
+	width:40%;
+	float:left;
+	text-align: left;
+	padding-left: 1em;
+}
+.boardname span{
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.boardsearch{
+	width: 60%;
+	height: 100%;
+	text-align: right;
+	float:left;
+}
+.boardsearch input{
+	height:100%;
+}
+
+
+.top:after{
+	display:block;
+	content:"";
+	clear: both;
+}
+	
+
+.bottom{
+	margin:50px auto 80px;
+	width: 80%;
+	height: 60px;
+}
+
+
+.button{
+	min-height: 10px;
+	text-align:right;
+}
+
+
+
+
+
+/* 페이징  */
+ul.paging {
+	display:table;
+	margin-left: auto;
+ 	margin-right: auto;
+	text-align: center;
+	list-style:none;
+}
+
+ul.paging li {
+	float:left;
+	display : inline-block;
+	text-align: center;
+}
+ul:AFTER {
+	display: block;
+	content: "";
+	clear: both;
+}
+ul.paging li a {
+	padding:4px;
+	margin-right:3px;
+	width:15px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+
+ul.paging li a:LINK {
+	text-decoration: none;
+}
+
+ul.paging li a:hover, ul.paging li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+
+i.fa{
+	font-style: normal;
+}

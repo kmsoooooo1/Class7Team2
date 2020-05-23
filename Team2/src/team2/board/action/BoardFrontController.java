@@ -179,7 +179,28 @@ public class BoardFrontController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(command.equals("/AdminBoard.bo")){
+			System.out.println("/AdminBoard.bo 주소 처리");
+				
+			forward = new ActionForward();
+			forward.setPath("./board/adminBoard.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/SearchBoard.bo")){
+			System.out.println("/SearchBoard.bo 주소 처리");
+				
+			// 게시판 검색
+			action = new SearchBoardAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+//		else if(command.equals("/my.bo")){
+//			action = new myBoardAction();
+//			forward = action.execute(request, response);
+//		}
 		
 		//action
 		

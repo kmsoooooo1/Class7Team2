@@ -1,0 +1,176 @@
+@CHARSET "UTF-8";
+
+
+* {
+  box-sizing: border-box;
+}
+  html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: white;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+
+    }
+    .swiper-container {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  	
+  	.first img {
+  		width: 100%;
+  	}
+  	
+  	.center_banner {
+  		width: 100%;
+  		margin: 0;
+  		padding: 0;
+  		text-align: center;
+  	}
+  
+   .banner_img {
+  	width: 100%;
+  	display: inline-block;
+  	text-align: center;
+  	max-width: 300px;
+  	position: relative;
+  }
+  
+  .second_banner {
+  	width: 100%;
+  	margin: 0;
+  	padding: 0; 
+  	text-align: center;
+  }
+  
+  .banner_img2 img{
+   width: 80%;
+   margin: 0;
+   padding: 0;
+  }
+  
+  
+  .image {
+  	display: inline-block;
+  	width: 100%;
+  	height: auto;
+  }	
+  
+  .overlay {
+  	position: absolute;
+  	bottom: 0;
+  	background: rgb(0, 0, 0);
+  	background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  	color: #f1f1f1; 
+  	width: 100%;
+  	transition: .5s ease;
+  	opacity:0;
+  	color: white;
+  	font-size: 20px;
+  	padding: 20px;
+  	text-align: center;
+  }
+  
+  .banner_img:hover .overlay {
+  	opacity: 1;
+  }
+  
+  	.newlist {
+  		width: 80%;
+  		margin: 0 auto;
+  		padding: 0;
+  	}
+  
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      height: calc((100% - 30px) / 2);
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+	/*2칼럼 스와이퍼*/
+	.second {
+      height: 500px;
+	}
+	.second .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      height: 40%;
+	}
+	.second img {
+      width: 100%;
+      height: 100%;
+	}
+
+
+
+/* Center website */
+.main {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.row {
+  margin: 10px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  display: none; /* Hide all elements by default */
+}
+
+/* Clear floats after rows */ 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+}
+
+.content p {
+	width: 100%;
+	height: 80px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+
+

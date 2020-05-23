@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/adminAdd.css?ver=2" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -15,12 +17,17 @@
 	
 	<!-- Main Content -->
 	
+	<div class="container">
+	<div class="contents">
 	<h2> 관리자 동물등록 페이지 </h2>
-	
 	<form name="fr" action="./AnimalAddAction.aa" method="post" enctype="multipart/form-data"> 
-		<table border="1">
+		<table border="1" class="adminAdd">
+			<colgroup>
+				<col style="width:20%;">
+				<col style="width: auto;">
+			</colgroup>
 			<tr>
-				<td> 카테고리 </td>
+				<th> 카테고리 </th>
 				<td>
 					<!-- 동물 카테고리 -->
 					<select name="category" onchange="categoryChange(this)">
@@ -39,11 +46,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td> 동물 모프 (종의 이름)  </td>
+				<th> 동물 모프 (종의 이름)  </th>
 				<td> <input type="text" name="a_morph"> </td>
 			</tr>
 			<tr>
-				<td> 동물 성별 </td>
+				<th> 동물 성별 </th>
 				<td> 
 					<select name="a_sex">
 						<option value="default"> 성별을 선택해주세요 </option>
@@ -54,36 +61,36 @@
 				</td>
 			</tr>
 			<tr>
-				<td> 
+				<th> 
 					동물 상태 <br>
 					(ex. 성체, 베이비, 해당사항 없으면 빈칸 유지)
-				</td>
+				</th>
 				<td> <input type="text" name="a_status"> </td>
 			</tr>
 			<tr>
-				<td> 동물 코드 </td>
+				<th> 동물 코드 </th>
 				<td> <input type="text" name="a_code"> </td>
 			</tr>
 			<tr>
-				<td> 동물 썸네일용 이미지 </td>
+				<th> 동물 썸네일용 이미지 </th>
 				<td> <input type="file" name="a_thumbnail"> </td>
 			</tr>
 			<tr>
-				<td> 동물 보유 수량 </td>
+				<th> 동물 보유 수량 </th>
 				<td> <input type="text" name="a_amount"> </td>
 			</tr>
 			<tr>
-				<td rowspan="3"> 동물 가격 </td>
-				<td> 판매가(할인전) :  <input id="a_price_origin_val" type="text" name="a_price_origin" value="" onkeyup="calMileage()">원 </td>
+				<th rowspan="3"> 동물 가격 </th>
+				<td><span> 판매가(할인전) : </span> <input id="a_price_origin_val" type="text" name="a_price_origin" value="" onkeyup="calMileage()">원 </td>
 			</tr>
 			<tr>
-				<td> 할인율(없으면 0 기재) :  <input id="a_discount_rate_val" type="text" name="a_discount_rate" onkeyup="calDiscount()">%</td>
+				<td><span> 할인율(없으면 0 기재) : </span> <input id="a_discount_rate_val" type="text" name="a_discount_rate" onkeyup="calDiscount()">%</td>
 			</tr>
 			<tr>
-				<td> 판매가(할인후) :  <input id="a_price_sale_val" type="text" name="a_price_sale">원 </td>
+				<td><span> 판매가(할인후) : </span> <input id="a_price_sale_val" type="text" name="a_price_sale">원 </td>
 			</tr>
 			<tr>
-				<td> 적립금 </td>
+				<th> 적립금 </th>
 				<td> <input id="a_mileage_val" type="text" name="a_mileage">원 </td>
 			</tr>
 			<tr>
@@ -105,12 +112,13 @@
 			<tr>
 				<td colspan="2"> 
 					<input type="button" onclick="return save();" value="추가하기"/>
-					<button type="button">취소</button>
+					<button type="reset" value="취소">취소</button>
 				</td>
 			</tr>
 		</table>
 	</form>
-	
+	</div>
+	</div>
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
  
@@ -181,7 +189,7 @@
 	//두번째 카테고리를 선택했을시
 	function sub_categoryChange(e){
 		var animal_Do = ["서서브 종을 선택해주세요", "리자드/모니터", "레오파드 게코", "크레스티드 게코", "카멜레온"]; 	//게코 도마뱀을 선택했을시 나오는 리스트
-		var animal_snake = ["서서브 종을 선택해주세요", "콘스네이크", "킹스네이크", "파이톤", "기타 애완뱀"];			//뱀을 선택했을시 나오는 리스트
+		var animal_snake = ["서서브 종을 선택해주세요", "콘/킹/소형뱀", "대형뱀"];			//뱀을 선택했을시 나오는 리스트
 		var animal_turtle = ["서서브 종을 선택해주세요", "육지거북 ", "수생/습지 거북"];	//거북을 선택했을시 나오는 리스트
 		var empty_sub_category_index = ["-"];	//관리자가 양서류를 선택했을시 나오는 empty 리스트
 		

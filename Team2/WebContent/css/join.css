@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+/* * { */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* } */
+
+/* 회원가입 */
+.contents {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+	height: 1300px;
+	font-family: sans-serif;
+	background-image: url("../img/join.jpg");
+	background-repeat: no-repeat;
+}
+	
+.box {
+	width: 60%;
+	padding: 10px;
+	position: relative;
+	background-position: center;
+	top: 50%; 
+	left: 50%;
+	border: 1px solid;
+	transform: translate(-50%,-50%);
+	background-color: rgb(0,0,0,0.5);
+	text-align: center;
+    height: 93%;
+}
+
+.name {
+	color: white;
+	text-transform: uppercase;
+	font-weight: 800;
+	margin-right: 5%;
+}
+
+.box input[type = "text"],.box input[type = "password"],.box input[type="email"]{
+	border: 0;
+	background: none;
+	margin: 10px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 20px 20px;
+	width: 30%;
+	height: 5px;
+	outline: none;
+	color: white;
+	border-radius: 30px;
+	transition: 1s;
+	font-size: 100%;
+}
+
+.box input[type = "text"]:focus,.box input[type = "password"]:focus,.box input[type="email"]:focus{
+	width: 35%;
+	border-color: #2ecc71;
+}
+
+input::placeholder {
+	color: white;
+}
+
+input:focus::-webkit-input-placeholder, 
+textarea:focus::-webkit-input-placeholder {
+	/* WebKit browsers */ color:transparent; 
+}
+
+
+.box input[type = "submit"],.btn_reset{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 1s;
+	cursor: pointer;
+}
+
+.box input[type = "submit"]:hover,.btn_reset:HOVER{
+	background: #2ecc71;
+}
+
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase;
+  height: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  border-radius: 24px;
+  border: 2px solid;
+}
+
+.btn:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: white;
+  background-position: 99% 50%;
+}
+
+.btn{
+	margin-right: -69px;
+}
+
+
+#agreep{
+	color: white;
+}
+
+/* 아이디체크 */
+.contents1 input[type = "button"],.contents1 input[type="submit"]{
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	border-radius: 24px;
+	transition: 1s;
+	cursor: pointer;
+}
+
+.contents1 input[type = "button"]:hover,.contents1 input[type="submit"]:hover{
+	background: #2ecc71;
+}
+
+
+/* updateForm */
+.update_span{
+	color: white;
+	font-size: 20px;
+}
+
+
+
+

@@ -4,7 +4,7 @@ public class BasketDTO {
 	private int b_num;
 	private String id;
 	private String b_code;
-	private String b_amount;
+	private int b_amount;
 	private String b_option;
 	private String b_delivery_method;
 	
@@ -26,10 +26,10 @@ public class BasketDTO {
 	public void setB_code(String b_code) {
 		this.b_code = b_code;
 	}
-	public String getB_amount() {
+	public int getB_amount() {
 		return b_amount;
 	}
-	public void setB_amount(String b_amount) {
+	public void setB_amount(int b_amount) {
 		this.b_amount = b_amount;
 	}
 	public String getB_option() {

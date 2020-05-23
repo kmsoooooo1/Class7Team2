@@ -114,8 +114,52 @@
   </servlet-mapping>
   <!-- 장바구니 -->
   
+  <!-- 관심상품 -->
+  <servlet>
+     <servlet-name>WishListFrontController</servlet-name>
+     <servlet-class>team2.wishlist.action.WishListFrontController</servlet-class>
+  </servlet>
   
+  <servlet-mapping>
+     <servlet-name>WishListFrontController</servlet-name>
+     <url-pattern>*.wl</url-pattern>
+  </servlet-mapping>	
+  <!-- 관심상품 -->
   
+  <!-- 상품 구매 -->
+  <servlet>
+     <servlet-name>OrderFrontController</servlet-name>
+     <servlet-class>team2.order.action.OrderFrontController</servlet-class>
+  </servlet>
   
+  <servlet-mapping>
+     <servlet-name>OrderFrontController</servlet-name>
+     <url-pattern>*.or</url-pattern>
+  </servlet-mapping>
+  <!-- 상품 구매 -->
+  
+  <!-- 관리자 쿠폰 관리 페이지 -->
+  <servlet>
+     <servlet-name>AdminCouponFrontController</servlet-name>
+     <servlet-class>team2.admin.coupon.action.AdminCouponFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminCouponFrontController</servlet-name>
+     <url-pattern>*.ac</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 쿠폰 관리 페이지 -->
+  
+  <!-- 쿠폰 관리 페이지 -->
+  <servlet>
+     <servlet-name>CouponFrontController</servlet-name>
+     <servlet-class>team2.coupon.action.CouponFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>CouponFrontController</servlet-name>
+     <url-pattern>*.co</url-pattern>
+  </servlet-mapping>  
+  <!-- 쿠폰 관리 페이지 -->
   
 </web-app>

@@ -1,0 +1,99 @@
+@CHARSET "UTF-8";
+
+*{
+	box-sizing: border-box;
+/* 	margin : 0; */
+/* 	padding : 0; */
+}
+
+.board{
+
+	width: 80%;
+	margin: 1.2em auto;
+	text-align: center;
+}
+
+.top{
+	height : 100%;
+	margin: 0 auto;
+}
+
+.boardname{
+	float: left;
+}
+
+
+.list a{text-decoration: none;}
+.list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}
+
+
+
+.list {
+	width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 1.5;
+
+}
+
+
+
+.list thead th {
+    padding: 7px;
+    font-weight: bold;
+    border-top: 1px solid #ccc;
+/*     border-right: 1px solid #ccc; */
+    border-bottom: 2px solid #888;
+    font-size: 0.8em;
+}
+
+
+.list tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+/*     border-right: 1px solid #ccc; */
+    border-bottom: 1px solid #ccc;
+    background: #ececec;
+}
+.list td {
+	font-size:0.8em;
+    padding: 7px;
+    vertical-align: top;
+/*     border-right: 1px solid #ccc; */
+    border-bottom: 1px solid #ccc;
+}
+
+.list-div{
+	width:100%;
+	display : inline-block;
+	text-align: center;
+}
+
+
+.bottom{
+	height: 150px;
+}
+
+
+.button{
+	text-align:center;
+	margin: 0;
+	padding: 0;
+}	
+
+
+
+	@media screen and (max-width: 480px) {
+		.board{
+			width: 100%;
+			margin:0;
+		}
+	}
+	@media screen and (max-width: 736px) {
+		.board{
+			width: 100%;
+			margin:0;
+		}
+	}

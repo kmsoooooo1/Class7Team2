@@ -169,7 +169,7 @@ public class BoardDAO {
 					boardList.add(bdto);
 				}
 			
-			System.out.println("게시판 글 arraylist로 저장 완료 : " + boardList);
+			System.out.println("getBoardList(cSet cset, Criteria cri) 성공");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -247,26 +247,30 @@ public class BoardDAO {
 	// BoardDTO getBoard(int num)
 
 	//updateBoard()
-	public void updateBoard(BoardDTO bdto) {
+	public int updateBoard(BoardDTO bdto) {
+		int chk = -1;
 		
 		try {
-			sql = "update team2_board set b_category=?,b_title=?,b_content=? where b_idx=?";
+			sql = "update team2_board set b_category=?,b_title=?,b_content=?, b_file=? where b_idx=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bdto.getB_category());
 			pstmt.setString(2, bdto.getB_title());
 			pstmt.setString(3, bdto.getB_content());
-			pstmt.setInt(4, bdto.getB_idx());
+			pstmt.setString(4, bdto.getB_file());
+			pstmt.setInt(5, bdto.getB_idx());
 			
-			pstmt.executeUpdate();
+			chk = pstmt.executeUpdate();
 			
 			System.out.println("Content 수정 완료! ");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Content 수정 실패@@@");
+			chk = 0;
 		}
 		
+		return chk;
 	}
 	//updateBoard()
 	
@@ -334,6 +338,124 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}
+
+	//관리자 삭제
+	public void deleteBoard(String chks) {
+		
+		int idx = Integer.parseInt(chks);
+		
+		try {
+			sql = "delete from team2_board where b_idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println(idx+" 삭제 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<BoardDTO> searchBoard(String sql) {
+		
+		ArrayList<BoardDTO> searchList = new ArrayList();
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				BoardDTO dto = new BoardDTO();
+				dto.setB_idx(rs.getInt("b_idx"));
+				dto.setB_category(rs.getString("b_category"));
+				dto.setB_title(rs.getString("b_title"));
+				dto.setB_writer(rs.getString("b_writer"));
+				dto.setB_content(rs.getString("b_content"));
+				dto.setB_ref(rs.getInt("b_ref"));
+				dto.setB_like(rs.getInt("b_like"));
+				dto.setB_view(rs.getInt("b_view"));
+				dto.setB_reg_date(rs.getDate("b_reg_date"));
+				dto.setIp_addr(rs.getString("ip_addr"));
+				dto.setB_file(rs.getString("b_file"));
+				dto.setB_p_code(rs.getString("b_p_code"));
+				
+				searchList.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return searchList;
+		
+	}
+
+	public ArrayList<BoardDTO> searchTitle(cSet cset, String search, Criteria cri) {		
+		
+		sql = "select * from team2_board where b_category='"+cset.getCategory()+"' and b_title like '%"+search+"%' order by b_idx desc limit "+cri.getPageStart()+","+cri.getPerpageNum()+"";
+			
+		System.out.println("searchTitle : "+sql);
+		
+		return searchBoard(sql);
+		
+	}
+
+	public int serachCount(cSet cset, String search) {
+		int total = 0;
+		
+		try {
+			sql = "select count(*) from team2_board where b_category=? and b_title like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cset.getCategory());
+			pstmt.setString(2, '%'+search+'%');
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				total = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return total;
+	}
+
+	public List<BoardDTO> getMyBoard(String id, int c) {
+		// TODO Auto-generated method stub
+		String sql = "select * from team2_board where b_writer='" + id + "' and b_category='"+ cSet.Category[c]+"'";
+		
+		return getList(sql);
+	}
+	
+	public int getWriterCount(String id, int c){
+		String sql = "select count(b_idx) from team2_board where b_writer='" + id + "' and category='" + cSet.Category[c] + "'";
+		
+		return getCount(sql);
+	}
+	
+	public int getCount(String sql){
+		
+		int result = 0;
+		
+		try {
+			rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 		
 		
 		

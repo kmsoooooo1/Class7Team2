@@ -1,63 +1,169 @@
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
 <%@page import="team2.admin.goods.action.GoodsDeleteAction"%>
 
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/product_list.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<%
 		String category = request.getParameter("category");
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
 		String g_code = request.getParameter("g_code");
+		if(sub_category == null){ 
+			sub_category = "";
+		}
+		if(sub_category_index == null){ 
+			sub_category_index = "";
+		}
+		
 		
 		// GoodsListAction 객체에서 저장된 정보를 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>)request.getAttribute("goodsList");
+		
+		//paging 사용 객체
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		String pageNum = (String)request.getAttribute("pageNum");
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 	%>
 	
 	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
+	<jsp:include page="/include/header.jsp" />
 	
 	<!-- Main Content -->
-	
+	<div class="container">
 	<%if(category.equals("먹이")){ %>
-	<div>
-	   <ul>
-	      <li><a href="./GoodsList.go?category=먹이"> 전체보기 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a></li>
-	   </ul>
-	</div>
-	<%} else if(category.equals("사육용품")){ %>
-	<div>
-	   <ul>
-	      <li><a href="./GoodsList.go?category=사육용품"> 전체보기 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=사육장"> 사육장 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=장식/그릇"> 장식/그릇 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=램프"> 램프 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=바닥재"> 바닥재 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=온/습도 관련"> 온/습도 관련 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=보조용품"> 보조용품 </a></li>
-	      <li><a href="./GoodsList.go?category=먹이&sub_category=수족관"> 수족관 </a></li>
-	   </ul>
-	</div>
+		<div class="menu">
+			<input type="button" value="전체보기" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=먹이'">
+			<input type="button" value="칼슘/약품" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=먹이&sub_category=칼슘/약품'">
+			<input type="button" value="생먹이" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=먹이&sub_category=생먹이'">
+			<input type="button" value="냉동먹이" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=먹이&sub_category=냉동먹이'">
+			<input type="button" value="인공사료" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=먹이&sub_category=인공사료'">
+		</div>
+	<%}else if(category.equals("사육용품")){%>
+		<div class="menu">
+			<input type="button" value="전체보기" class="a_btn"
+			 	onclick="location.href='./GoodsList.go?category=사육용품'">
+	<%	if(sub_category!=null){
+			switch(sub_category){
+			case "사육장":%>
+				<input type="button" value="*사육장" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">	
+				<input type="button" value="유리/테라리움" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=유리/테라리움'">
+				<input type="button" value="플라스틱" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=플라스틱'">
+			<%
+				break;
+			case "장식/그릇":%>
+				<input type="button" value="*장식/그릇" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
+				<input type="button" value="장식" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=장식'">
+				<input type="button" value="은신처" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=은신처'">
+				<input type="button" value="물/먹이그릇" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=물/먹이그릇'">
+			<%
+				break;
+			case "램프":%>
+				<input type="button" value="*램프" class="a_btn"
+				onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
+				<input type="button" value="UVB/스팟" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=UVB/스팟'">
+				<input type="button" value="소켓" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=소켓'">
+				<input type="button" value="악세사리" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=악세사리'">
+			<%
+				break;
+			case "바닥재":%>
+				<input type="button" value="*바닥재" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
+				<input type="button" value="건계" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=건계'">
+				<input type="button" value="습계" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=습계'">
+			<%
+				break;
+			case "온/습도 관련":%>
+				<input type="button" value="*온/습도 관련" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
+				<input type="button" value="온습도계" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온습도계'">
+				<input type="button" value="온도조절기" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온도조절기'">
+				<input type="button" value="습도조절기" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=습도조절기'">
+			<%
+				break;
+			case "보조용품":%>
+				<input type="button" value="*보조용품" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
+				<input type="button" value="위생/청소" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=위생/청소'">
+				<input type="button" value="안전/치료" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=안전/치료'">
+				<input type="button" value="브리딩" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=브리딩'">
+				<input type="button" value="기타" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=기타'">
+			<%	break;
+			case "수족관":%>
+				<input type="button" value="*수족관" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
+				<input type="button" value="수질안정제" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=수질안정제'">
+				<input type="button" value="여과기" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=여과기'">
+				<input type="button" value="히터기" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=히터기'">
+				<input type="button" value="거북이육지" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=거북이육지'">
+				<input type="button" value="기타" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타'">
+		<%	}
+	}else{%>
+		<input type="button" value="*사육장" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">
+		<input type="button" value="*장식/그릇" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
+		<input type="button" value="*램프" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
+		<input type="button" value="*바닥재" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
+		<input type="button" value="*온/습도 관련" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
+		<input type="button" value="*보조용품" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
+		<input type="button" value="*수족관" class="a_btn"
+					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
+<%	}
+			%>
+		</div>
 	<%} %>
 	
 	<span> Total <%=goodsList.size() %> items </span>
-	
-	<hr>
-	
-	<table border="1">
+	<ul class="ul_wrap">
 		<%
 			int size = goodsList.size();
 			int col = 4;
@@ -66,7 +172,6 @@
 			
 			for(int a = 0; a < row; a++){
 		%>
-		<tr>
 			<%
 				for(int i=0; i<col; i++){
 					GoodsDTO gdto = goodsList.get(num);
@@ -75,8 +180,10 @@
 					String newformat_price_origin = formatter.format(gdto.getG_price_origin());
 					String newformat_price_sale = formatter.format(gdto.getG_price_sale());
 				
+					
 			%>
-			<td colspan="2">
+			<li>
+			<div class="list_wrap">
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><img src="./upload/multiupload/<%=gdto.getG_thumbnail()%>" width="300" height="300"> </a><br>
 				<a href='./GoodsDetail.go?g_code=<%=gdto.getG_code()%>'><%=gdto.getG_name() %></a> 
 				<hr>
@@ -91,22 +198,40 @@
 				<%if(gdto.getG_amount() == 0){ %>
 					<span style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;"> SOLD OUT </span>
 				<%} %>
-
-				
-			</td>
+				</div>
+			</li>	
 			<%
 				num ++;
 				if(size <= num) break;
 				
 				}
 			%>
-		</tr>
+		
 		<%} %>
-	</table>
-	
+	</ul>
+	<div class="bottom">
+	<ul id="pageList">
+		<c:if test="${pageMaker.prev }">
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.startPage-1 }'">
+			◀	
+		</li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageNum}'">
+			${pageNum }
+		</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<li onclick="location.href='./GoodsList.go?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.endPage+1 }'">
+			▶
+		</li>
+		</c:if>
+	</ul>
+	</div>
+	</div>
 	
 	<!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 	
 	
 </body>

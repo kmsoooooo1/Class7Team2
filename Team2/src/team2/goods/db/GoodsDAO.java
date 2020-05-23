@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +12,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
+import team2.board.action.Criteria;
+import team2.board.db.ProductDTO;
 
 public class GoodsDAO {
 
 	Connection con = null;
 	PreparedStatement pstmt = null;
+	Statement stmt;
 	ResultSet rs = null;
 	String sql = "";
 	
@@ -42,7 +45,7 @@ public class GoodsDAO {
 				pstmt.close();
 			if (con != null)
 				con.close();
-			
+			if(stmt!=null)stmt.close();
 			System.out.println(" 자원해제 완료 ");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -267,13 +270,15 @@ public class GoodsDAO {
 	// GoodsList(category, sub_category, sub_category_index)
 	public List<GoodsDTO> GoodsList(String category,String sub_category,String sub_category_index){
 		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
-		
-		//StringBuffer: 저장공간(메모리)
-		StringBuffer SQL = new StringBuffer();
+
 		
 		try {
+			
 			con = getConnection();
 
+			//StringBuffer: 저장공간(메모리)
+			StringBuffer SQL = new StringBuffer();
+			
 			//SQL buffer 안에 sql 구문 넣어주기
 			
 			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 상품을 부를때)
@@ -284,15 +289,15 @@ public class GoodsDAO {
 			else if(category.equals("먹이")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "max(g_amount) as g_amount from team2_goods where category='먹이' group by g_code ");
+						+ "max(g_amount) as g_amount from team2_goods where category='먹이' ");
 				
 				// 만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num desc");
+					SQL.append("group by g_code order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
-					SQL.append("AND sub_category = ? order by num desc");
+					SQL.append("AND sub_category = ? group by g_code order by num desc");
 				}
 			}
 			// sub_category_index는 메뉴에서 다루지 않음.
@@ -300,14 +305,23 @@ public class GoodsDAO {
 			else if(category.equals("사육용품")){
 				SQL.append("select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
 						+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
-						+ "max(g_amount) as g_amount from team2_goods where category='사육용품' group by g_code ");
+						+ "max(g_amount) as g_amount from team2_goods where category='사육용품' ");
 				//만약 sub_category가 없으면
 				if(sub_category.equals("all")) {
-					SQL.append("order by num desc");
+					SQL.append("group by g_code order by num desc");
 				}
 				//만약 sub_category가 있으면
 				else {
-					SQL.append("AND sub_category = ? order by num desc");
+					SQL.append("AND sub_category = ? ");
+					
+					//만약 sub_category_index가 없으면
+					if(sub_category_index.equals("all")){
+						SQL.append("group by g_code order by num desc");
+					}
+					//만약 sub_category_index가 있으면
+					else{
+						SQL.append("AND sub_category_index = ? group by g_code order by num desc");
+					}
 				}
 			}
 			
@@ -327,16 +341,22 @@ public class GoodsDAO {
 				}
 				else {
 					pstmt.setString(1, sub_category);
+					
+					if(sub_category_index.equals("all")){
+					}else{
+						pstmt.setString(2, sub_category_index);
+					}
 				}
 			}
 			
 			System.out.println(SQL);
 			
 			rs = pstmt.executeQuery();
+	
+			
 			
 			// 상품이 있을때마다
 			while(rs.next()){
-				
 				GoodsDTO gdto = new GoodsDTO();
 				
 				gdto.setCategory(rs.getString("category"));
@@ -359,10 +379,11 @@ public class GoodsDAO {
 				
 				goodsList.add(gdto);
 			}
-			System.out.println("사용자 사육용품&먹이 목록 저장 완료");
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}finally{
 			closeDB();
 		}
@@ -392,20 +413,46 @@ public class GoodsDAO {
 		}
 	}//updateGoodsViewCount(g_code)
 	
-	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
-	// 수정 필요
-	public List<GoodsDTO> getGoodsDetailList(String g_code){
-		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
+	public int getG_amount(String g_code){
+		int result = 0;
 		
 		try {
 			con = getConnection();
 			
-			sql="select * from team2_goods where g_code = ? order by g_amount desc";
+			sql="select sum(g_amount) from team2_goods  where g_code = ?";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, g_code);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
+				result = rs.getInt("sum(g_amount)");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return result;
+	} 
+	
+	
+	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
+	// 수정 필요
+	public List<GoodsDTO> getGoodsDetailList(String g_code){
+		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
+		
+	try {
+			con = getConnection();
+			
+			sql="select * from team2_goods where g_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, g_code);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
 				GoodsDTO gdto = new GoodsDTO();
 				
 				gdto = new GoodsDTO();
@@ -441,8 +488,125 @@ public class GoodsDAO {
 		return detailList;
 	}//getGoodsDetail(g_code)
 	
+	public List<ProductDTO> searchKeyword(String keyword){
+		List<ProductDTO> list = new ArrayList<>();
+		
+		sql = "select g_code, category, sub_category, sub_category_index, g_name, g_thumbnail from team2_goods where g_name like '%" + keyword +"%'";
+		ProductDTO dto = null;
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				dto = new ProductDTO(rs.getString("g_code"));
+				dto.setCategory(rs.getString("category"));
+				dto.setSub_category(rs.getString("sub_category"));
+				dto.setSub_category_idx(rs.getString("sub_category_index"));
+				dto.setName(rs.getString("g_name"));
+				dto.setImg_src(rs.getString("g_thumbnail"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	
+	public int getGoodsCount(String category, String sub_category, String sub_category_idx){
+		
+		int total = 0;
+		
+		sql = "select count(num) from team2_goods where category='" + category + "'";
+		if(sub_category!=""){
+			sql+=" and sub_category='"+sub_category+"'";
+		}
+		if(sub_category_idx!=""){
+			sql+=" and sub_category_index='"+sub_category_idx+"'";
+		}
+		
+		try {
+			con = getConnection();
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				total = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return total;
+	}
+
+	public List<GoodsDTO> GoodsPage(String category, String sub_category, String sub_category_idx, Criteria cri) {
+		
+		List<GoodsDTO> list = new ArrayList<>();
+		
+		sql = "select category,sub_category,sub_category_index,g_code,g_thumbnail,g_price_origin,g_discount_rate,"
+				+ "g_price_sale,content,date,g_mileage,g_name,g_view_count,num,g_delivery,group_concat(g_option) as g_option,"
+				+ "max(g_amount) as g_amount from team2_goods where category='"+category+"'";
+		if(sub_category!=""){
+			sql+=" and sub_category='"+sub_category+"'";
+		}
+		if(sub_category_idx!=""){
+			sql+=" and sub_category_index='"+sub_category_idx+"'";
+		}
+		sql+=" group by g_code order by num desc limit " + cri.getPageStart() + ", " + cri.getPerpageNum();
+		
+		try {
+			
+			System.out.println(sql);
+			con = getConnection();
+		
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+		
+		
+			while(rs.next()){
+				GoodsDTO gdto = new GoodsDTO();
+				
+				gdto.setCategory(rs.getString("category"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setDate(rs.getDate("date"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setNum(rs.getInt("num"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
+				
+				list.add(gdto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		
+		return list;
+	}
 	
 	
 	

@@ -1,3 +1,4 @@
+<%@page import="team2.board.action.cSet"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
@@ -10,75 +11,137 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/boardList.css" rel="stylesheet">
+<script type="text/javascript">
 
+function doAction(){
+	
+	alert("doAction");
+	
+	document.fr.submit();
+	
+};
+</script>	
 </head>
 <body>
-	<!-- Header -->
-<%-- 	<header> <jsp:include page="/include/header.jsp" /> </header> --%>
-	
-	<!-- Main Content -->
-	<h1>WebContent/board/board_qna.jsp</h1>
-	
+	<jsp:include page="/include/header.jsp" />
+
 	<%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		
+		//페이지번호 & 카테고리번호
 		String pageNum = (String)request.getAttribute("pageNum");
+		String category = (String)request.getAttribute("category");
+		String search = (String)request.getAttribute("search");
+		
+		cSet cset = new cSet();
+		
+		cset.setCategory(category);
+		
+		int c = cset.getC();
+		
+		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+
 	%>
+<div class="board">	
 	
-		 <h2><a href="./Insert.bo"> 글 쓰기 (스마트에디터)  </a></h2>
-		 <h2><a href="./BoardMain.bo"> 메인  </a></h2>
-	
-	<table border="1">
-	  <tr>
-	    <td>번호</td>
-	    <td>제목</td>
-	    <td>작성자</td>
-	    <td>날짜</td>
-	    <td>조회수</td>
-	    <td>IP</td>
-	  </tr>
+	<div class="top">
+		<div class="boardname">
+		 <h2>
+			Q&A
+		 </h2>
+		</div>
+	<!-- 게시판 검색 -->		 
+		<form name="fr" id="fr" action="./BoardList.bo" method="POST">	
+			<input type="hidden" value="2" name="category">
+
+			<input type="text" name="search" />
+			
+			<input type="button" onclick="doAction()" value="검색" />	
+		</form>
+		<!-- 게시판 검색 -->		
+	</div>
+
+	<div class="list-div">
+	<table class="list">
+		<colgroup>
+			<col width="5%" />
+			<col width="40%" />
+			<col width="15%" />
+			<col width="20%" />
+			<col width="10%" />
+		</colgroup>
+		<thead>
+		  <tr>
+		    <th>No.</th>
+		    <th>제목</th>
+		    <th>글쓴이</th>
+		    <th>날짜</th>
+		    <th>조회</th>
+		  </tr>
+	  	</thead>
+	  <%
+	  System.out.println("boardList : "+boardList);
+	  System.out.println("boardList.size() : "+boardList.size());
 	  
-  <%
-    for(int i=0;i<boardList.size();i++){ 
-            BoardDTO bdto = (BoardDTO) boardList.get(i);
-  %>
-	  <tr>
-	    <td><%=bdto.getB_idx() %></td>
-	    <td>
-	    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-	    	<%=bdto.getB_title() %>
-	    	</a>
-	    </td>
-	    
-	    <td><%=bdto.getB_writer() %></td>
-	    <td><%=bdto.getB_reg_date() %></td>
-	    <td><%=bdto.getB_view() %></td>
-	    <td><%=bdto.getIp_addr() %></td>
-	  </tr>
-  <% } %>
-	
+	  if(boardList.size()>0){
+	    for(int i=0; i<boardList.size(); i++){ 
+             BoardDTO bdto = (BoardDTO) boardList.get(i);
+             System.out.println("bdto : " + bdto);
+	  %>
+		<tbody>
+		  <tr>
+		    <td><%=bdto.getB_idx() %></td>
+		    <td class="title">
+		    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+		    	<%=bdto.getB_title() %>
+		    	</a>
+		    </td>
+		    
+		    <td><%=bdto.getB_writer() %></td>
+		    <td><%=bdto.getB_reg_date() %></td>
+		    <td><%=bdto.getB_view() %></td>
+		  </tr>
+		 </tbody>
+	  <% }
+	    }else{ %>
+		 <tr>
+		    <td colspan="5">
+		    	등록된 게시글이 없습니다.
+		    </td>
+		  </tr>
+	<%} %>
 	</table>
+	</div>
 	
-	<ul class="btn-group paging">
+	<div class="bottom">
+		<div class="button">
+
+		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?c=2'">
+		</div>
+	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
-	<li>
-		<a href='<c:url value="./notice.bo?pageNum=${pageMaker.startPage-1 }"/>'><i class="fa left">[이전]</i></a>	
-	</li>
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageMaker.startPage-1 }&search=${search}"/>'><i class="fa left">◀</i></a>	
+		</li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageNum}&search=${search}"/>'><i class="fa">${pageNum }</i></a>
+		</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<li>
+			<a href='<c:url value="./BoardList.bo?category=${c}&pageNum=${pageMaker.endPage+1 }&search=${search}"/>'><i class="fa right">▶</i></a>
+		</li>
 	</c:if>
-	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
-	<li>
-		<a href='<c:url value="./notice.bo?pageNum=${pageNum}"/>'><i class="fa">[${pageNum }]</i></a>
-	</li>
-	</c:forEach>
-	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	<li>
-		<a href='<c:url value="./notice.bo?pageNum=${pageMaker.endPage+1 }"/>'><i class="fa right">[다음]</i></a>
-	</li>
-	</c:if>
-
 	</ul>
+	</div>
+		
+</div>
 
-
+	<jsp:include page="/include/footer.jsp"/>	
 </body>
 </html>

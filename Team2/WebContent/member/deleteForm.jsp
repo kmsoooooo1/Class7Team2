@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원탈퇴</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
+<title>회원 탈퇴 페이지</title>
 </head>
 <body>
 <%
@@ -16,20 +18,21 @@
    %>   
    
    <!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
-   
-<fieldset>
-    <legend>회원 탈퇴하기</legend>
-     <form action="./MemberDeleteAction.me" method="post">
+	<jsp:include page="/include/header.jsp" />
+	
+	
+   <div class="contents">
+     <form action="./MemberDeleteAction.me" method="post" class="box">
+      <h2>MEMBER DELETE</h2>
      <input type="hidden" name="id" value="<%=id%>">
-           비밀번호 : <input type="password" name="pass">
+     <input type="password" name="pass" placeholder="PASSWORD">
        <input type="submit" value="탈퇴하기">
      </form>    
-   </fieldset>
+   </div>
 
 
 <!-- FOOTER -->
-	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
+	<jsp:include page="/include/footer.jsp"/>
 
 </body>
 </html>
