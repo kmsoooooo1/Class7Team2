@@ -7,6 +7,7 @@ body{
 
 .nav_menu{
   	background: #555;
+  	overflow: hidden;
 }
 
 .sticky {
@@ -81,13 +82,6 @@ body{
 	background-color: white;
 }
 
-.sub_menu {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	allgn-items: center;
-	
-}
 .h-group {
 	height: auto;
 	
@@ -97,9 +91,12 @@ body{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #333;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  allgn-items: center;
 }
 
 #nav_menu .dropdown {

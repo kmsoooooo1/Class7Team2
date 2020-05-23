@@ -85,7 +85,7 @@
     </div>  
    <!-- 메인 메뉴 --> 
    <nav id="nav_menu" class="nav_menu"> 
-      <ul class="sub_menu">
+      <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
@@ -165,7 +165,22 @@ $(document).ready(function(){
 	// 올리다 보면 마지막이 안보여서 clone을 통해 첫번째 li복사
 	$(".rolling").append($(".rolling li").first().clone());
 	
-});		
+});	
+
+//헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
+window.onscroll = function() {myFunction()};
+
+	var navbar = document.getElementById("sub_menu");
+	var sticky = navbar.offsetTop;
+
+	function myFunction() {
+  	if (window.pageYOffset >= sticky) {
+  	  navbar.classList.add("sticky")
+  	}else {
+  	  navbar.classList.remove("sticky");
+ 	}
+}
+
 </script>
 </body>
 
