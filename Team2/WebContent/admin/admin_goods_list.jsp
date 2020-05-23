@@ -1,3 +1,5 @@
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,6 +18,15 @@
 	<%
 		//GoodsListAction 객체에서 저장된 정보 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>) request.getAttribute("goodsList");
+	
+		//paging 사용 객체
+// 		Criteria cri = (Criteria)request.getAttribute("cri");
+// 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+// 		String pageNum = (String)request.getAttribute("pageNum");
+		
+// 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+	
+	
 	%>
 	
 	<!-- Header -->
@@ -111,7 +122,9 @@
 	<a href="./GoodsAdd.ag"><button>상품 추가하기</button></a>
   </div>
  </div>
-	<!-- FOOTER -->
-	<jsp:include page="/include/footer.jsp"/>
+ 
+ 
+  <!-- FOOTER -->
+  <jsp:include page="/include/footer.jsp"/>
 </body>
 </html>

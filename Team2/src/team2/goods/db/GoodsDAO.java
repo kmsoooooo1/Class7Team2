@@ -265,6 +265,56 @@ public class GoodsDAO {
 		}
 	}//deleteGoods(num)
 	
+//	//AdminGoodsPage(cri)
+//	public List<GoodsDTO> AdminGoodsPage(String category, Criteria cri){
+//		
+//		List<GoodsDTO> list = new ArrayList<>();
+//		
+//		try {
+//			con = getConnection();
+//			
+//			sql="select * from team2_goods where category ='" +category+ "' order by num desc limit " + cri.getPageStart() + ", " + cri.getPerpageNum();
+//			
+//			pstmt = con.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			
+//			while(rs.next()){
+//				GoodsDTO gdto = new GoodsDTO();
+//				
+//				gdto.setCategory(rs.getString("category"));
+//				gdto.setContent(rs.getString("content"));
+//				gdto.setDate(rs.getDate("date"));
+//				gdto.setG_amount(rs.getInt("g_amount"));
+//				gdto.setG_code(rs.getString("g_code"));
+//				gdto.setG_delivery(rs.getString("g_delivery"));
+//				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+//				gdto.setG_mileage(rs.getInt("g_mileage"));
+//				gdto.setG_name(rs.getString("g_name"));
+//				gdto.setG_option(rs.getString("g_option"));
+//				gdto.setG_option_price(rs.getInt("g_option_price"));
+//				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+//				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+//				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+//				gdto.setG_view_count(rs.getInt("g_view_count"));
+//				gdto.setNum(rs.getInt("num"));
+//				gdto.setSub_category(rs.getString("sub_category"));
+//				gdto.setSub_category_index(rs.getString("sub_category_index"));
+//				
+//				list.add(gdto);
+//			}
+//		
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally{
+//			closeDB();
+//		}
+//		
+//		return list;
+//		
+//	}//AdminGoodsPage(cri)
+	
+	
 	// 관리자 제어 끝 일반사용자 제어 시작
 	
 	// GoodsList(category, sub_category, sub_category_index)
@@ -440,7 +490,6 @@ public class GoodsDAO {
 	
 	
 	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
-	// 수정 필요
 	public List<GoodsDTO> getGoodsDetailList(String g_code){
 		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
 		

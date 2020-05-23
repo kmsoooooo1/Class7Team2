@@ -66,7 +66,7 @@
 	<%	if(sub_category!=""){
 			switch(sub_category){
 			case "사육장":%>
-				<input type="button" value="*사육장" class="a_btn"
+				<input type="button" value="사육장" class="a_btn"
 				onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">	
 				<input type="button" value="유리/테라리움" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장&sub_category_index=유리/테라리움'">
@@ -75,7 +75,7 @@
 			<%
 				break;
 			case "장식/그릇":%>
-				<input type="button" value="*장식/그릇" class="a_btn"
+				<input type="button" value="장식/그릇" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
 				<input type="button" value="장식" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇&sub_category_index=장식'">
@@ -86,7 +86,7 @@
 			<%
 				break;
 			case "램프":%>
-				<input type="button" value="*램프" class="a_btn"
+				<input type="button" value="램프" class="a_btn"
 				onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
 				<input type="button" value="UVB/스팟" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프&sub_category_index=UVB/스팟'">
@@ -97,7 +97,7 @@
 			<%
 				break;
 			case "바닥재":%>
-				<input type="button" value="*바닥재" class="a_btn"
+				<input type="button" value="바닥재" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
 				<input type="button" value="건계" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재&sub_category_index=건계'">
@@ -106,7 +106,7 @@
 			<%
 				break;
 			case "온/습도 관련":%>
-				<input type="button" value="*온/습도 관련" class="a_btn"
+				<input type="button" value="온/습도 관련" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
 				<input type="button" value="온습도계" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련&sub_category_index=온습도계'">
@@ -117,7 +117,7 @@
 			<%
 				break;
 			case "보조용품":%>
-				<input type="button" value="*보조용품" class="a_btn"
+				<input type="button" value="보조용품" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
 				<input type="button" value="위생/청소" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=위생/청소'">
@@ -129,7 +129,7 @@
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품&sub_category_index=기타'">
 			<%	break;
 			case "수족관":%>
-				<input type="button" value="*수족관" class="a_btn"
+				<input type="button" value="수족관" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
 				<input type="button" value="수질안정제" class="a_btn"
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=수질안정제'">
@@ -143,19 +143,19 @@
 					onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관&sub_category_index=기타'">
 		<%	}
 		}else{%>
-			<input type="button" value="*사육장" class="a_btn"
+			<input type="button" value="사육장" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=사육장'">
-			<input type="button" value="*장식/그릇" class="a_btn"
+			<input type="button" value="장식/그릇" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=장식/그릇'">
-			<input type="button" value="*램프" class="a_btn"
+			<input type="button" value="램프" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=램프'">
-			<input type="button" value="*바닥재" class="a_btn"
+			<input type="button" value="바닥재" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=바닥재'">
-			<input type="button" value="*온/습도 관련" class="a_btn"
+			<input type="button" value="온/습도 관련" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=온/습도 관련'">
-			<input type="button" value="*보조용품" class="a_btn"
+			<input type="button" value="보조용품" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=보조용품'">
-			<input type="button" value="*수족관" class="a_btn"
+			<input type="button" value="수족관" class="a_btn"
 						onclick="location.href='./GoodsList.go?category=사육용품&sub_category=수족관'">
 <%		}
 			%>

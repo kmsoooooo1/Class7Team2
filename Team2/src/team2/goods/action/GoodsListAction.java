@@ -44,7 +44,7 @@ public class GoodsListAction implements Action{
 			}
 			int currentPage = Integer.parseInt(pageNum);
 		
-			int pageSize = 8;
+			int pageSize = 12;
 			
 			Criteria cri = new Criteria();
 			

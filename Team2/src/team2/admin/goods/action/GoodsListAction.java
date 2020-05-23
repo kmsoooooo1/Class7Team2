@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import team2.board.action.Criteria;
+import team2.board.action.PageMaker;
 import team2.goods.db.GoodsDAO;
 import team2.goods.db.GoodsDTO;
 
@@ -17,8 +19,11 @@ public class GoodsListAction implements Action{
 		
 		
 		List<GoodsDTO> goodsList = gdao.getGoodsList();
+		//List<GoodsDTO> goodsList = gdao.AdminGoodsPage(category, cri);
 		
 		request.setAttribute("goodsList", goodsList);
+		
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./admin/admin_goods_list.jsp");
