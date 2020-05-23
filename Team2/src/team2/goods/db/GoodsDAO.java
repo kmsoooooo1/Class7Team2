@@ -117,7 +117,7 @@ public class GoodsDAO {
 		try {
 			con = getConnection();
 			
-			sql="SELECT * FROM team2_goods";
+			sql="SELECT * FROM team2_goods order by num desc";
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
