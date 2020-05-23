@@ -26,7 +26,7 @@
 		</colgroup>
 		<tr>
 			<th> 동물 파트 </th>
-			<td colspan="2"><a href="./AnimalList.aa?category=all"> 모든 동물 리스트 </a></td>
+			<td colspan="2"><a href="./AnimalList.aa?category=all">모든 동물 리스트</a></td>
 			<td colspan="2"><a href="./AnimalAdd.aa">동물 추가하기</a></td>
 			<td colspan="2"><a href="./AnimalNew.aa">동물 신상리스트</a></td>
 		</tr>

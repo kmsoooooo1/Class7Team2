@@ -5,7 +5,7 @@
 }
 
 .contents{
-	width: 40%;
+	width: 60%;
     margin: 5px auto 50px;
     min-height: 600px;
 }
@@ -96,8 +96,8 @@ span{
 .admintable a{
 	margin-left: 5%;
 	text-decoration: none;
+	color: black;
 }
-
 
 
 
