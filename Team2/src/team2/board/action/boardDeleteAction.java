@@ -20,6 +20,8 @@ public class boardDeleteAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		
+		
+		
 		if(id==null){
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -36,10 +38,11 @@ public class boardDeleteAction implements Action {
 		
 		cSet cset = new cSet();
 		
+		int check = 0;
+		
+		String [] chks = request.getParameterValues("chk");
 		//관리자 복수 삭제
-		if(id.equals("admin")){
-			String [] chks = request.getParameterValues("chk");
-			
+		if(id.equals("admin") && chks != null){
 			for(int i=0; i<chks.length; i++){
 				bdao.deleteBoard(chks[i]);
 			}
@@ -49,7 +52,22 @@ public class boardDeleteAction implements Action {
 			String category = (String)request.getParameter("category");
 			int num = Integer.parseInt(request.getParameter("num"));
 			String pageNum = request.getParameter("pageNum");
+			
+			check = bdao.idCheck(num, id);
 		
+			if(check != 1 ){
+				
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>");
+				out.print("alert('작성자가 다릅니다.');");
+				out.print("location.href=history.back()");
+				out.print("</script>");
+				out.close();
+				return null;
+				
+			}
+			
 			bdao.deleteBoard(num);
 			
 			cset.setCategory(category);
@@ -61,15 +79,16 @@ public class boardDeleteAction implements Action {
 		bdao.closeDB();
 		
 		//게시판페이지 이동		
-		if(id.equals("admin")){
+		if(id.equals("admin") && chks != null){
 			
 			forward.setPath("./AdminBoard.bo");
 			forward.setRedirect(true);
 			
 		}else{
-	
+			
 			forward.setPath("./BoardList.bo?category="+cset.getC());
 			forward.setRedirect(true);
+		
 		}
 				
 		return forward;
