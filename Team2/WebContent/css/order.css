@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+*{
+	box-sizing: border-box;
+}
+
 .container{
 	position: relative;
 }
@@ -20,7 +24,7 @@
     text-transform: uppercase;
 }
 
-a{
+.container a{
 	text-decoration: none;
     color: #000;
     outline: none;
@@ -42,14 +46,14 @@ a{
     font-size: 14px;
 }
 
-table{
+.container table{
     width: 100%;
     border: 0;
     border-spacing: 0;
     border-collapse: collapse;
 }
 
-input{
+.container input{
 	font-size: 100%;
     color: #353535;
     vertical-align: middle;
@@ -57,7 +61,7 @@ input{
     font-family: "Roboto","Arial","돋움","Dotum","Apple SD Gothic Neo","Apple Gothic",sans-serif;
 }
 
-input[type="checkbox"]{
+.container input[type="checkbox"]{
 	width: 13px;
     height: 13px;
     border: 0;
@@ -72,21 +76,21 @@ input[type="checkbox"]{
     line-height: 1.5;
 }
 
-colgroup{
+.container colgroup{
 	display: table-column-group;
 }
 
-col{
+.container col{
 	display: table-column;
 }
 
-thead{
+.container thead{
 	display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
 }
 
-tr{
+.container tr{
 	display: table-row;
     vertical-align: inherit;
     border-color: inherit;
@@ -220,7 +224,7 @@ tr{
 	margin-top: 30px;
 }
 
-input[type="text"]{
+.container input[type="text"]{
 	height: 22px;
     line-height: 24px;
     padding: 2px 8px;
