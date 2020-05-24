@@ -38,547 +38,553 @@
 	<div class="container">
 	<div class="contents">
 	<!-- 구매 테이블 생성 -->
-	<div class="h2"><h2>CARTOrder / Payment  <span>주문/결제</span></h2></div>
+	<div class="h2"><h2>CART Order / Payment  <span>주문/결제</span></h2></div>
 	
-	
-	<table border="1" class="list">
-		<input type="hidden" id="selectedCodes" name="selectedCodes" value="">
-		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
-		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
-	
-		<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
+	<form action="" method="post" name="fr">
+		<table border="1" class="list">
+			<input type="hidden" id="selectedCodes" name="selectedCodes" value="">
+			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
+			<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
+			<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
+		
+			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
+			<colgroup>
+					<col style="width:10%; ">
+					<col style="width:auto; ">
+					<col style="width:10%; ">
+					<col style="width:10%; ">
+					<col style="width:15%; ">
+					<col style="width:10%; ">
+					<col style="width:10%; ">
+			</colgroup>
+			<thead>
+			<tr>
+				<th>이미지</th>
+				<th>상품정보</th>
+				<th>판매가<br>(적립예정)</th>
+				<th>수량</th>
+				<th>배송구분</th>
+				<th>배송비</th>
+				<th>합계</th>
+			</tr>
+			</thead>
+			<%
+				for (int i = 0; i < basketList.size(); i++) {
+					BasketDTO bkdto = (BasketDTO) basketList.get(i);
+					ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+					
+					//총 상품금액 계산
+					final_total_price += (bkdto.getB_amount() * pdto.getProduct_price_sale());
+					
+					//b_code 값들 중에 맨 앞글자 따오기
+					char first_letter = bkdto.getB_code().charAt(0);
+			%>
+			<tbody>
+			<tr>
+				<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
+				<input type="hidden" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=bkdto.getB_amount()%>">
+				<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
+				<input type="hidden" id="b_delivery_method<%=i%>" name="b_delivery_method<%=i%>" value="<%=bkdto.getB_delivery_method()%>">
+				<input type="hidden" id="b_price_origin<%=i%>" name="b_price_origin<%=i%>" value="<%=pdto.getProduct_price_origin()%>">
+				<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
+				<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
+				<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
+				<input type="hidden" id="b_category<%=i%>" name="b_category<%=i%>" value="<%=pdto.getCategory()%>">
+				
+				<!-- 상품 이미지 -->
+				<!-- 상품이 동물일때 -->
+				<%if(first_letter == 'a'){%>
+					<td>
+						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					</td>
+					
+					<!-- 상품정보 (옵션이 있을때와 없을때) -->
+					<%if(bkdto.getB_option().equals("")){%>
+						<td>
+							<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
+						</td>
+					<%}else{%>
+						<td>
+							<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
+						</td>
+					<%}%>
+				<!-- 상품이 물건일때 -->
+				<%} else if(first_letter == 'g') {%>
+					<td>
+						<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					</td>
+					
+					<!-- 상품정보 (옵션이 있을때와 없을때) -->
+					<%if(bkdto.getB_option().equals("")){%>
+						<td>
+							<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
+						</td>
+					<%}else{%>
+						<td>
+							<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
+						</td>
+					<%}%>
+				<%}%>
+				
+				
+				
+				<!-- 판매가(적립금) -->
+				<%if(pdto.getProduct_discount_rate() != 0){%>
+					<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
+				<%} else{%>
+					<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
+				<%}%>
+				
+				<!-- 수량 -->
+				<td>
+					<!-- 장바구니 수량  -->
+					<span id="b_amount<%=i%>" name="b_amount<%=i%>"><%=bkdto.getB_amount()%></span>개
+				</td>
+				
+				<!-- 배송방법(고속버스 일때와 아닐때 -->
+				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
+					<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%> <br>(+14,000원)</td>
+				<%} else {%>
+					<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%></td>
+				<%}%>
+				
+				<!-- 배송비 
+					만약 합계가 50,000원 이상이면 배송비 무료, 이하이면 배송비 3,000원 
+					합계가 50,000원 이상인데 배송방법이 고속버스이면 14000원 표시
+					합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
+				-->
+				<%if(pdto.getProduct_discount_rate() != 0){%>
+					<%if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 배송비 무료 </td>
+					<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 14,000원 </td>
+					<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 17,000원 </td>
+					<%} else {%>
+						<td> 3,000원 </td>
+					<%}%>
+				<%} else{%>
+					<%if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 배송비 무료 </td>
+					<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 14,000원 </td>
+					<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
+						<td> 17,000원 </td>
+					<%} else {%>
+						<td> 3,000원 </td>
+					<%}%>
+				<%}%>
+				
+				<!-- 합계
+					(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
+					(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
+				<%if(pdto.getProduct_discount_rate() != 0){%>
+					<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
+						<td>
+							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						</td>
+					<%} else {%>
+						<td>
+							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * bkdto.getB_amount())%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * bkdto.getB_amount()%>">
+						</td>
+					<%}%>
+				<%} else{%>
+					<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
+						<td>
+							 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
+							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
+						</td>
+					<%} else {%>
+						<td>
+							<span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()))%>원</span>
+							<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_origin() * bkdto.getB_amount()%>">
+						</td>
+					<%}%>
+				<%}%>
+			</tr>
+			<%
+				}
+			%>
+				<input type="hidden" id="final_total_price" name="final_total_price" value="<%=final_total_price%>">
+			</tbody>
+		</table>
+		
+		<!-- 사용자 정보 입력 테이블 -->
+		<div class="orderArea">
+		<div class="title"><h3>구매자 정보</h3> <p>*필수입력사항</p></div>
+		<table border="1" class="orderlist">
 		<colgroup>
-				<col style="width:10%; ">
-				<col style="width:auto; ">
-				<col style="width:10%; ">
-				<col style="width:10%; ">
-				<col style="width:15%; ">
-				<col style="width:10%; ">
-				<col style="width:10%; ">
+			<col style="width:10%;">
+			<col style="width: auto;">
 		</colgroup>
-		<thead>
-		<tr>
-			<th>이미지</th>
-			<th>상품정보</th>
-			<th>판매가<br>(적립예정)</th>
-			<th>수량</th>
-			<th>배송구분</th>
-			<th>배송비</th>
-			<th>합계</th>
-		</tr>
-		</thead>
-		<%
-			for (int i = 0; i < basketList.size(); i++) {
-				BasketDTO bkdto = (BasketDTO) basketList.get(i);
-				ProductDTO pdto = (ProductDTO) productInfoList.get(i);
-				
-				//총 상품금액 계산
-				final_total_price += (bkdto.getB_amount() * pdto.getProduct_price_sale());
-				
-				//b_code 값들 중에 맨 앞글자 따오기
-				char first_letter = bkdto.getB_code().charAt(0);
-		%>
-		<tbody>
-		<tr>
-			<input type="hidden" id="b_code<%=i%>" name="b_code<%=i%>" value="<%=bkdto.getB_code()%>">
-			<input type="hidden" id="b_option<%=i%>" name="b_option<%=i%>" value="<%=bkdto.getB_option()%>">
-			<input type="hidden" id="b_delivery_method<%=i%>" name="b_delivery_method<%=i%>" value="<%=bkdto.getB_delivery_method()%>">
-			<input type="hidden" id="b_price_origin<%=i%>" name="b_price_origin<%=i%>" value="<%=pdto.getProduct_price_origin()%>">
-			<input type="hidden" id="b_price_sale<%=i%>" name="b_price_sale<%=i%>" value="<%=pdto.getProduct_price_sale()%>">
-			<input type="hidden" id="b_mileage<%=i%>" name="b_mileage<%=i%>" value="<%=pdto.getProduct_mileage()%>">
-			<input type="hidden" id="b_discount_rate<%=i%>" name="b_discount_rate<%=i%>" value="<%=pdto.getProduct_discount_rate()%>">
-			<input type="hidden" id="b_category<%=i%>" name="b_category<%=i%>" value="<%=pdto.getCategory()%>">
+			<tbody class="addressform">
+			<tr>
+				<th> 구매하시는 분 </th>
+				<td> <input type="text" id="buyer_name" name="buyer_name" placeholder size="15" value="<%=memberDTO.getName()%>"> </td>
+			</tr>
+			<tr>
+				<th> 주소 </th>
+				<td> 
+					<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode('buyer');">주소검색</button> <br>
+					<input type="text" id="buyer_addr1" name="addr1" id="addr1" placeholder size="40" value="<%=memberDTO.getAddr1()%>" readonly> <span>기본주소</span> <br>
+					<input type="text" id="buyer_addr2" name="addr2" id="addr2" placeholder size="40" value="<%=memberDTO.getAddr2()%>"> <span>상세주소</span>
+				</td>
+			</tr>
+					<!-- ----- DAUM 우편번호 API 시작 ----- -->
+					<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+					  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+					</div>
+			<tr>
+				<th> 휴대전화 </th>
+				<td> <input type="text" id="buyer_phone" name="buyer_phone" value="<%=memberDTO.getPhone()%>"> </td>
+			</tr>
 			
-			<!-- 상품 이미지 -->
-			<!-- 상품이 동물일때 -->
-			<%if(first_letter == 'a'){%>
+			<tr>
+				<th> 전화번호 </th>
+				<td> <input type="text" id="buyer_number" name="buyer_number" value="<%=memberDTO.getPhone()%>"> </td>
+			</tr>
+			
+			<tr>
+				<th> 이메일 </th>
+				<td> 
+					<input type="text" id="buyer_email" name="buyer_email" value="<%=memberDTO.getEmail().substring(0, memberDTO.getEmail().indexOf("@"))%>">@<input type="text" id="email_address_input" name="email_address_input" value="<%=memberDTO.getEmail().substring(memberDTO.getEmail().lastIndexOf("@")+1)%>">
+					<select name="email_address" class="emailSelect" onchange="changeEmail(this.value);"> 
+						<option value=""> - 이메일 선택 - </option>
+						<option value="naver.com"> naver.com </option>
+						<option value="daum.net"> daum.net </option>
+						<option value="nate.com"> nate.com </option>
+						<option value="hotmail.com"> hotmail.com </option>
+						<option value="yahoo.com"> yahoo.com </option>
+						<option value="직접입력" selected> 직접입력 </option>
+					</select> <br>
+					
+					<span>- 이메일을 통해 주문처리과정을 보내드립니다.	</span> <br>
+					<span>- 이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요</span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<div class="title"><h3>수령자 정보</h3> <p>*필수입력사항</p></div>
+		<table border="1" class="orderlist">
+		<colgroup>
+			<col style="width:10%;">
+			<col style="width: auto;">
+		</colgroup>
+			<tr>
+				<th> 배송지 선택 </th>
+				<td> <label> <input type="checkbox" id="chkBoxInfo"> 구매자 정보와 동일 </label> </td>
+			</tr>
+			
+			<tr>
+				<th> 수령하시는 분 </th>
+				<td> <input type="text" id="rece_name" name="rece_name" placeholder size="15" value=""> </td>
+			</tr>
+			<tr>
+				<th> 주소 </th>
+				<td> 
+					<input type="text" id="rece_zipcode" name="rece_zipcode" placeholder size="6" value="" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode('rece');">주소검색</button> <br>
+					<input type="text" id="rece_addr1" name="rece_addr1"  placeholder size="40" value="" readonly> <span>기본주소</span> <br>
+					<input type="text" id="rece_addr2" name="rece_addr2" placeholder size="40" value=""> <span>상세주소</span>
+				</td>
+			</tr>
+					<!-- ----- DAUM 우편번호 API 시작 ----- -->
+					<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+					  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+					</div>
+			<tr>
+				<th> 휴대전화 </th>
+				<td> <input type="text" id="rece_phone" name="rece_phone" value=> </td>
+			</tr>
+			
+			<tr>
+				<th> 전화번호 </th>
+				<td> <input type="text" id="rece_number" name="rece_number" value=> </td>
+			</tr>
+			
+			<tr>
+				<th> 배송메세지 </th>
+				<td> <textarea rows="5" cols="100" name="o_memo"></textarea> </td>
+			</tr>
+		</table>
+		
+		<table border="1" class="list">
+			<tr>
+				<th>총 주문금액</th>
+				<th>총 배송비</th>
+				<th>총 할인</th>
+				<th>결제 예정 금액</th>
+			</tr>
+			<tr>
+			
+				<!-- 총 주문금액 -->
 				<td>
-					<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<span><%=formatter.format(final_total_price)%></span>원
 				</td>
 				
-				<!-- 상품정보 (옵션이 있을때와 없을때) -->
-				<%if(bkdto.getB_option().equals("")){%>
-					<td>
-						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
-					</td>
-				<%}else{%>
-					<td>
-						<a href='./AnimalDetail.an?a_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
-					</td>
-				<%}%>
-			<!-- 상품이 물건일때 -->
-			<%} else if(first_letter == 'g') {%>
+				<!-- 총 배송비 -->
 				<td>
-					<a href='./GoodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-				</td>
-				
-				<!-- 상품정보 (옵션이 있을때와 없을때) -->
-				<%if(bkdto.getB_option().equals("")){%>
-					<td>
-						<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name()%> </a>
-					</td>
-				<%}else{%>
-					<td>
-						<a href='./oodsDetail.go?g_code=<%=bkdto.getB_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%> </a>
-					</td>
-				<%}%>
-			<%}%>
-			
-			
-			
-			<!-- 판매가(적립금) -->
-			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
-			<%} else{%>
-				<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
-			<%}%>
-			
-			<!-- 수량 -->
-			<td>
-				<!-- 장바구니 수량  -->
-				<span id="b_amount<%=i%>" name="b_amount<%=i%>"><%=bkdto.getB_amount()%></span>개
-			</td>
-			
-			<!-- 배송방법(고속버스 일때와 아닐때 -->
-			<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
-				<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%> <br>(+14,000원)</td>
-			<%} else {%>
-				<td id="b_delivery_method"><%=bkdto.getB_delivery_method()%></td>
-			<%}%>
-			
-			<!-- 배송비 
-				만약 합계가 50,000원 이상이면 배송비 무료, 이하이면 배송비 3,000원 
-				합계가 50,000원 이상인데 배송방법이 고속버스이면 14000원 표시
-				합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
-			-->
-			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<%if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 배송비 무료 </td>
-				<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 14,000원 </td>
-				<%}else if(pdto.getProduct_price_sale() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 17,000원 </td>
-				<%} else {%>
-					<td> 3,000원 </td>
-				<%}%>
-			<%} else{%>
-				<%if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && !bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 배송비 무료 </td>
-				<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() >= 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 14,000원 </td>
-				<%}else if(pdto.getProduct_price_origin() * bkdto.getB_amount() < 50000 && bkdto.getB_delivery_method().equals("고속버스")){%>
-					<td> 17,000원 </td>
-				<%} else {%>
-					<td> 3,000원 </td>
-				<%}%>
-			<%}%>
-			
-			<!-- 합계
-				(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
-				(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
-			<%if(pdto.getProduct_discount_rate() != 0){%>
-				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
-					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * (bkdto.getB_amount()) + Integer.parseInt("14000")%>">
-					</td>
-				<%} else {%>
-					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_sale() * bkdto.getB_amount())%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_sale() * bkdto.getB_amount()%>">
-					</td>
-				<%}%>
-			<%} else{%>
-				<%if(bkdto.getB_delivery_method().equals("고속버스")) {%>
-					<td>
-						 <span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()) + Integer.parseInt("14000"))%>원</span>
-						 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() * bkdto.getB_amount()) + Integer.parseInt("14000")%>">
-					</td>
-				<%} else {%>
-					<td>
-						<span id="total_product_price<%=i%>"> <%= formatter.format(pdto.getProduct_price_origin() * (bkdto.getB_amount()))%>원</span>
-						<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=pdto.getProduct_price_origin() * bkdto.getB_amount()%>">
-					</td>
-				<%}%>
-			<%}%>
-		</tr>
-		<%
-			}
-		%>
-			<input type="hidden" id="final_total_price" name="final_total_price" value="<%=final_total_price%>">
-		</tbody>
-	</table>
-	
-	<!-- 사용자 정보 입력 테이블 -->
-	<div class="orderArea">
-	<div class="title"><h3>구매자 정보</h3> <p>*필수입력사항</p></div>
-	<table border="1" class="orderlist">
-	<colgroup>
-		<col style="width:10%;">
-		<col style="width: auto;">
-	</colgroup>
-		<tbody class="addressform">
-		<tr>
-			<th> 구매하시는 분 </th>
-			<td> <input type="text" id="buyer_name" name="buyer_name" placeholder size="15" value="<%=memberDTO.getName()%>"> </td>
-		</tr>
-		<tr>
-			<th> 주소 </th>
-			<td> 
-				<input type="text" id="buyer_zipcode" name="zipcode" id="zipcode" placeholder size="6" maxlength="6" value="<%=memberDTO.getZipcode()%>" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode('buyer');">주소검색</button> <br>
-				<input type="text" id="buyer_addr1" name="addr1" id="addr1" placeholder size="40" value="<%=memberDTO.getAddr1()%>" readonly> <span>기본주소</span> <br>
-				<input type="text" id="buyer_addr2" name="addr2" id="addr2" placeholder size="40" value="<%=memberDTO.getAddr2()%>"> <span>상세주소</span>
-			</td>
-		</tr>
-				<!-- ----- DAUM 우편번호 API 시작 ----- -->
-				<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
-				  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-				</div>
-		<tr>
-			<th> 휴대전화 </th>
-			<td> <input type="text" id="buyer_phone" name="buyer_phone" value="<%=memberDTO.getPhone()%>"> </td>
-		</tr>
-		
-		<tr>
-			<th> 전화번호 </th>
-			<td> <input type="text" id="buyer_number" name="buyer_number" value="<%=memberDTO.getPhone()%>"> </td>
-		</tr>
-		
-		<tr>
-			<th> 이메일 </th>
-			<td> 
-				<input type="text" id="buyer_email" name="buyer_email" value="<%=memberDTO.getEmail().substring(0, memberDTO.getEmail().indexOf("@"))%>">@<input type="text" id="email_address_input" name="email_address_input" value="<%=memberDTO.getEmail().substring(memberDTO.getEmail().lastIndexOf("@")+1)%>">
-				<select name="email_address" class="emailSelect" onchange="changeEmail(this.value);"> 
-					<option value=""> - 이메일 선택 - </option>
-					<option value="naver.com"> naver.com </option>
-					<option value="daum.net"> daum.net </option>
-					<option value="nate.com"> nate.com </option>
-					<option value="hotmail.com"> hotmail.com </option>
-					<option value="yahoo.com"> yahoo.com </option>
-					<option value="직접입력" selected> 직접입력 </option>
-				</select> <br>
-				
-				<span>- 이메일을 통해 주문처리과정을 보내드립니다.	</span> <br>
-				<span>- 이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요</span>
-			</td>
-		</tr>
-		</tbody>
-	</table>
-	</div>
-	
-	<div class="title"><h3>수령자 정보</h3> <p>*필수입력사항</p></div>
-	<table border="1" class="orderlist">
-	<colgroup>
-		<col style="width:10%;">
-		<col style="width: auto;">
-	</colgroup>
-		<tr>
-			<th> 배송지 선택 </th>
-			<td> <label> <input type="checkbox" id="chkBoxInfo"> 구매자 정보와 동일 </label> </td>
-		</tr>
-		
-		<tr>
-			<th> 수령하시는 분 </th>
-			<td> <input type="text" id="rece_name" name="rece_name" placeholder size="15" value=""> </td>
-		</tr>
-		<tr>
-			<th> 주소 </th>
-			<td> 
-				<input type="text" id="rece_zipcode" name="zipcode" id="zipcode" placeholder size="6" value="" readonly> <button type="button" class="orderstar_btn" onclick="DaumPostcode('rece');">주소검색</button> <br>
-				<input type="text" id="rece_addr1" name="addr1" id="addr1" placeholder size="40" value="" readonly> <span>기본주소</span> <br>
-				<input type="text" id="rece_addr2" name="addr2" id="addr2" placeholder size="40" value=""> <span>상세주소</span>
-			</td>
-		</tr>
-				<!-- ----- DAUM 우편번호 API 시작 ----- -->
-				<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
-				  <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-				</div>
-		<tr>
-			<th> 휴대전화 </th>
-			<td> <input type="text" id="rece_phone" name="rece_phone" value=> </td>
-		</tr>
-		
-		<tr>
-			<th> 전화번호 </th>
-			<td> <input type="text" id="rece_number" name="rece_number" value=> </td>
-		</tr>
-		
-		<tr>
-			<th> 배송메세지 </th>
-			<td> <textarea rows="5" cols="100"></textarea> </td>
-		</tr>
-	</table>
-	
-	<table border="1" class="list">
-		<tr>
-			<th>총 주문금액</th>
-			<th>총 배송비</th>
-			<th>총 할인</th>
-			<th>결제 예정 금액</th>
-		</tr>
-		<tr>
-		
-			<!-- 총 주문금액 -->
-			<td>
-				<span><%=formatter.format(final_total_price)%></span>원
-			</td>
-			
-			<!-- 총 배송비 -->
-			<td>
-				<%
-					for (int i = 0; i < basketList.size(); i++) {
-						BasketDTO bkdto = (BasketDTO) basketList.get(i);
-						ProductDTO pdto = (ProductDTO) productInfoList.get(i);
-									
-						if(bkdto.getB_delivery_method().equals("고속버스")){
-							final_delivery_fee += 14000;
-						}					
-						
-						//할인율이 있을때
-						if(pdto.getProduct_discount_rate() != 0){
-							//tr한줄의 총 금액이 5만원보다 적을때
-							if((bkdto.getB_amount() * pdto.getProduct_price_sale()) < 50000){
-								final_delivery_fee += 3000;
-							}else{
-								final_delivery_fee += 0;
-							}
-						}
-						//할인율이 없을때
-						else if(pdto.getProduct_discount_rate() == 0){
-							//tr한줄의 총 금액이 5만원보다 적을때
-							if((bkdto.getB_amount() * pdto.getProduct_price_origin()) < 50000){
-								final_delivery_fee += 3000;
-							}else{
-								final_delivery_fee += 0;
-							}
-						}
-					}
-				%>
-				<span>+<%=formatter.format(final_delivery_fee)%></span>원
-			</td>
-			
-			<!-- 총 할인 금액 -->
-			<td>
-				-<span id="total_discount_rate">0</span>원
-			</td>
-			
-			<!-- 결제 에정 금액 -->
-			<td>
-				<span style="color: red;">=<%=formatter.format(final_total_price + final_delivery_fee)%>원</span>
-			</td>
-			
-		</tr>
-	</table>
-	
-	<!-- 쿠폰 및 적립금 조회 테이블 -->
-	<div class="title"><h3>Coupon / Discount <span>쿠폰/추가할인</span></h3></div>
-	<table border="1" class="orderlist">
-		<tr>
-			<th> 보유 쿠폰 할인 </th>
-			<td> 
-				<button type="button" class="orderstar_btn" onclick="toggleCoupons();"> 쿠폰 조회 </button> <span>(쿠폰 허용 상품 / 일부 쿠폰 제외)</span>
-			
-				<table border="1" id="couponsTable" class="coupon_table" style="display:none; width: 80%; height: 150px; overflow: scroll;">
-					<thead>
-					<tr>
-						<th>이미지</th>
-						<th>상품명</th>
-						<th>판매가</th>
-						<th>수량</th>				
-						<th>쿠폰선택</th>
-						<th>쿠폰할인</th>						
-					</tr>
-					</thead>
 					<%
 						for (int i = 0; i < basketList.size(); i++) {
 							BasketDTO bkdto = (BasketDTO) basketList.get(i);
 							ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+										
+							if(bkdto.getB_delivery_method().equals("고속버스")){
+								final_delivery_fee += 14000;
+							}					
 							
-							//b_code 값들 중에 맨 앞글자 따오기
-							char first_letter = bkdto.getB_code().charAt(0);
-					%>
-					<tr class="choice_tr">
-						<!-- 상품 이미지 -->
-						<!-- 상품이 동물일때 -->
-						<%if(first_letter == 'a'){%>
-							<td>
-								<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="80" height="80">
-							</td>
-							
-							<!-- 상품정보 (옵션이 있을때와 없을때) -->
-							<%if(bkdto.getB_option().equals("")){%>
-								<td>
-									<%=pdto.getProduct_name()%>
-								</td>
-							<%}else{%>
-								<td>
-									<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
-								</td>
-							<%}%>
-						<!-- 상품이 물건일때 -->
-						<%} else if(first_letter == 'g') {%>
-							<td>
-								<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100">
-							</td>
-							
-							<!-- 상품정보 (옵션이 있을때와 없을때) -->
-							<%if(bkdto.getB_option().equals("")){%>
-								<td>
-									<%=pdto.getProduct_name()%>
-								</td>
-							<%}else{%>
-								<td>
-									<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
-								</td>
-							<%}%>
-						<%}%>
-						
-						<!-- 판매가(적립금) -->
-						<%if(pdto.getProduct_discount_rate() != 0){%>
-							<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
-						<%} else{%>
-							<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
-						<%}%>
-						
-						<!-- 수량 -->
-						<td>
-							<!-- 장바구니 수량  -->
-							<span id="b_amount<%=i%>" name="b_amount<%=i%>"><%=bkdto.getB_amount()%></span>개
-						</td>
-						
-						<!-- 쿠폰선택 버튼 -->
-						<td> 
-							<button type="button" id="searchCouponBtn<%=i%>" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button>
-							<button type="button" id="cancelCouponBtn<%=i%>" onclick="cancelCoupon('<%=i%>');" style="display: none;"> 다시선택 </button>
-						</td>
-						
-						<!-- 쿠폰할인가  -->
-						<td> <span id="discount_rate<%=i%>">-0</span>원 </td>
-						
-					</tr>
-					<%
+							//할인율이 있을때
+							if(pdto.getProduct_discount_rate() != 0){
+								//tr한줄의 총 금액이 5만원보다 적을때
+								if((bkdto.getB_amount() * pdto.getProduct_price_sale()) < 50000){
+									final_delivery_fee += 3000;
+								}else{
+									final_delivery_fee += 0;
+								}
+							}
+							//할인율이 없을때
+							else if(pdto.getProduct_discount_rate() == 0){
+								//tr한줄의 총 금액이 5만원보다 적을때
+								if((bkdto.getB_amount() * pdto.getProduct_price_origin()) < 50000){
+									final_delivery_fee += 3000;
+								}else{
+									final_delivery_fee += 0;
+								}
+							}
 						}
 					%>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<th> 보유 적립금 사용 </th>
-			<td> 
-				<input type="text" id="use_My_Mileage" value="0" onclick="clickMyMileage();" onchange="changeMyMileage()">원
-				<label> 
-					<input type="checkbox" id="use_My_Mileage_Chkbox" onclick="useMyMileage();" > 
-					최대 사용 </label> (사용가능 적립금 <span id="limit_mileage" style="color: #09f; font-weight: bold;"><%=formatter.format(final_total_price * 0.07)%></span>원) 
-						<input type="hidden" id="limit_mileage_input"  name="limit_mileage" value=<%=final_total_price * 0.07%>>
-					총 보유 적립금 <span id="my_mileage" style="color: #f60; font-weight: bold;"><%=formatter.format(memberDTO.getMileage())%></span>원 <br>
-						<input type="hidden" id="my_mileage_input"  name="my_mileage" value=<%=memberDTO.getMileage()%>>
-				<span>- 보유 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다.</span> 
-			</td>
-		</tr>
-	</table>
-	
-	<!-- 결제 정보 테이블 -->
-	<div class="title"><h3>Payment info / Agreement <span>결제 정보/주문자 동의</span></h3></div>
-	<table border="1" class="orderlist">
-	<colgroup>
-		<col style="width:10%;">
-		<col style="width: auto;">
-	</colgroup>
-		<tr>
-			<th> 결제 수단 </th>
-			<td> 
-				<ul style="list-style:none; margin-bottom: 4%;">
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="신용카드" checked onclick="div_show(this.value, '신용카드');"> <span class="payment">신용카드</span> </label> </li>
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="무통장입금" onclick="div_show(this.value, '무통장입금');"> <span class="payment">가상계좌(무통장입금)</span> </label> </li>
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="카카오페이" onclick="div_show(this.value, '카카오페이');"> <span class="payment">카카오페이</span> </label> </li>
-					<li style="float:left;"> <label> <input type="radio" name="payment" value="네이버페이" onclick="div_show(this.value, '네이버페이');"> <span class="payment">네이버페이</span> </label> </li>
-				</ul>
-			</td>
-		</tr>
+					<span>+<%=formatter.format(final_delivery_fee)%></span>원
+				</td>
+				
+				<!-- 총 할인 금액 -->
+				<td>
+					-<span id="total_discount_rate">0</span>원
+				</td>
+				
+				<!-- 결제 에정 금액 -->
+				<td>
+					<span id="o_sum_money" name="o_sum_money" style="color: red;">=<%=formatter.format(final_total_price + final_delivery_fee)%>원</span>
+					<input type="hidden" id="o_sum_money_input" name="o_sum_money_input" value="<%=final_total_price + final_delivery_fee%>">
+				</td>
+				
+			</tr>
+		</table>
 		
-		<tr>
-			<th> 결제 안내 </th>
-
-				<td id="신용카드" style="padding:15px;"> 
-					<select>
-						<option> 카드 선택 </option>
-						<option> 현대카드 </option>
-						<option> 하나카드 </option>
-						<option> 카카오뱅크 </option>
-						<option> 하나(외환) </option>
-						<option> NH채움 </option>
-						<option> 우리카드 </option>
-						<option> 삼성카드 </option>
-					</select>
-					<span><br>
-						※ 할부는 50,000원 이상만 가능합니다. <br> <br>
-						안전결제(ISP)? (국민카드/BC카드/우리카드) <br>
-						온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인정보를 입력하지 않고 고객님이 사전에 미리 설정한 안전결제(ISP) 비밀번호만 입력, 결제하도록 하여 개인정보 유출 및 카드 도용을 방지하는 서비스입니다. <br> <br>
-						안심 클릭 결제? (삼성/외환/롯데/현대/신한/시티/하나/NH/수협/전북/광주/산업은행/제주은행) <br>
-						온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인 정보를 입력하지 않고 고객님이 사전에 미리 설정한 전자 상거래용 안심 클릭 비밀번호를 입력하여 카드 사용자 본인 여부를 확인함으로써 온라인상에서의 카드 도용을 방지하는 서비스입니다. <br>
-					</span>
-				</td>
+		<!-- 쿠폰 및 적립금 조회 테이블 -->
+		<div class="title"><h3>Coupon / Discount <span>쿠폰/추가할인</span></h3></div>
+		<table border="1" class="orderlist">
+			<tr>
+				<th> 보유 쿠폰 할인 </th>
+				<td> 
+					<button type="button" class="orderstar_btn" onclick="toggleCoupons();"> 쿠폰 조회 </button> <span>(쿠폰 허용 상품 / 일부 쿠폰 제외)</span>
 				
-				<td id="무통장입금" style="display:none; padding:15px;">
-					<select>
-						<option> ::: 선택해 주세요 ::: </option>
-						<option> 기업은행:2135159668464 주식회사갈라파고스 </option>
-					</select>
-					<input type="text" value="<%=memberDTO.getName()%>" style="text-align: center;" placeholder size="5" disabled> <br>
-					<span>가상 계좌 안내계좌 유효 기간 2020년 05월 22일 23시 59분 59초 <br>
-					가상계좌는 주문 시 고객님께 발급되는 일회성 계좌번호 이므로 입금자명이 다르더라도 입금 확인이 가능합니다. 
-					단, 선택하신 은행을 통해 결제 금액을 1원 단위까지 정확히 맞추셔야 합니다. 가상 계좌의 입금 유효 기간은 주문 후 2일 이내이며, 기간 초과 시 계좌번호는 소멸되어 입금되지 않습니다. 
-					구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상 계좌를 통한 재주문이 불가 합니다. 인터넷뱅킹, 텔레뱅킹, ATM/CD기계, 은행 창구 등에서 입금할 수 있습니다. <br>
-					ATM 기기는 100원 단위 입금이 되지 않으므로 통장 및 카드로 계좌이체 해주셔야 합니다. 은행 창구에서도 1원 단위 입금이 가능합니다. 자세한 내용은 FAQ를 확인하여 주시기 바랍니다.</span>
-				</td>
-				
-				<td id="카카오페이" style="display:none; padding:15px;">
-					<span>카카오페이 안내 <br>
-					카카오페이는 카카오톡에서 카드를 등록, 간단하게 비밀번호만으로 결제할 수 있는 빠르고 편리한 모바일 결제 서비스입니다. <br>
-					-지원 카드 : 모든 카드 등록/결제 가능</span>
-				</td>
-				
-				<td id="네이버페이" style="display:none; padding:15px;">
-					<span>네이버페이 안내 </span><br>
-					<br>
-					<span>- 주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.	 <br>
-					- 네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행계좌 정보를 등록하여 네이버페이 비밀번호로 결제할 수 있는 간편결제 서비스입니다. <br>
-					- 결제 가능한 신용카드: 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티, 카카오뱅크 <br>
-					- 결제 가능한 은행: NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국, 미래에셋대우, 광주, 대구, 전북, 새마을금고, 제주은행, 신협, 하나은행, 케이뱅크, 카카오뱅크, 삼성증권 <br>
-					- 네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 별 무이자, 청구할인 혜택을 받을 수 있습니다.</span>
-				</td>
-		</tr>
-		<tr>
-			<th> 
-				주문자 동의 <br>
-				<label> <input type="checkbox" id="chkThirdAgreeAll" onclick="checkThirdAgreeAll();"> 전체 동의 </label> 
-			</th>
-			<td style="padding: 15px;">
-				<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> <span class="payment">개인정보 제3자 제공 동의(필수)</span> </label><br>
-				<span class="payment"> 배송 등 거래를 위해 판매자에게 개인정보가 공유됩니다. <a href="javascript:void(0)" onclick="toggleThirdAgree();" return false;> <span id="thirdAgreeBtn"> 자세히 </span>  </a> </span><br>
-				
-					<div id="thirdAgreeDetail" style="display:none;  background-color: lightblue; width: 100%; height: 150px; overflow: scroll;">
-						<div style="margin:10px;">
-						
-							갈라파고스의 회원계정으로 상품 및 서비스를 구매하고자 할 경우, 갈라파고스는 거래 당사자간 원활한 의사소통 및 배송, 상담 등 거래이행을 위하여 필요한 최소한의 개인정보만을 갈라파고스 입점업체 판매자 및 배송업체에 아래와 같이 공유하고 있습니다. <br> <br>s
-							1. 갈라파고스는 귀하께서 갈라파고스 입점업체 판매자로부터 상품 및 서비스를 구매하고자 할 경우, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 24조의 2(개인정보 공유동의 등)에 따라 아래와 같은 사항은 안내하고 동의를 받아 귀하의 개인정보를 판매자에게 공유합니다. "개인정보 제3자 공유 동의"를 체크하시면 개인정보 공유에 대해 동의한 것으로 간주합니다. <br>
-							2. 개인정보를 공유받는자 : 위클리웨어 <br>
-							3. 공유하는 개인정보 항목 <br> <br>
-							- 구매자 정보: 성명, 전화번호, ID, 휴대전화 번호, 메일주소, 상품 구매정보 <br>
-							- 수령자 정보: 성명, 전화번호, 휴대전화 번호, 배송지 주소 <br> <br>
-							4. 개인정보를 공유받는 자의 이용 목적 : 판매자와 구매자의 거래의 원활한 진행, 본인의사의 확인, 고객 상담 및 불만처리, 상품과 경품 배송을 위한 배송지 확인 등 <br>
-							5. 개인정보를 공유받는 자의 개인정보 보유 및 이용 기간 : 개인정보 수집 및 이용 목적 달성 시까지 보관합니다. <br>
-							6. 동의 거부 시 불이익 : 본 개인정보 공유에 동의하지 않으시는 경우, 동의를 거부할 수 있으며, 이 경우 거래가 제한됩니다. <br>
+					<table border="1" id="couponsTable" class="coupon_table" style="display:none; width: 80%; height: 150px; overflow: scroll;">
+						<thead>
+						<tr>
+							<th>이미지</th>
+							<th>상품명</th>
+							<th>판매가</th>
+							<th>수량</th>				
+							<th>쿠폰선택</th>
+							<th>쿠폰할인</th>						
+						</tr>
+						</thead>
+						<%
+							for (int i = 0; i < basketList.size(); i++) {
+								BasketDTO bkdto = (BasketDTO) basketList.get(i);
+								ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+								
+								//b_code 값들 중에 맨 앞글자 따오기
+								char first_letter = bkdto.getB_code().charAt(0);
+						%>
+						<tr class="choice_tr">
+							<!-- 상품 이미지 -->
+							<!-- 상품이 동물일때 -->
+							<%if(first_letter == 'a'){%>
+								<td>
+									<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="80" height="80">
+								</td>
+								
+								<!-- 상품정보 (옵션이 있을때와 없을때) -->
+								<%if(bkdto.getB_option().equals("")){%>
+									<td>
+										<%=pdto.getProduct_name()%>
+									</td>
+								<%}else{%>
+									<td>
+										<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
+									</td>
+								<%}%>
+							<!-- 상품이 물건일때 -->
+							<%} else if(first_letter == 'g') {%>
+								<td>
+									<img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100">
+								</td>
+								
+								<!-- 상품정보 (옵션이 있을때와 없을때) -->
+								<%if(bkdto.getB_option().equals("")){%>
+									<td>
+										<%=pdto.getProduct_name()%>
+									</td>
+								<%}else{%>
+									<td>
+										<%=pdto.getProduct_name() + "<br>[옵션: " + bkdto.getB_option() + "]"%>
+									</td>
+								<%}%>
+							<%}%>
 							
-						</div>
-					</div>
-				
-				<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> 위 상품 정보 및 거래 조건을 확인하였으며, 구매 진행에 동의합니다.(필수) </label>
-			</td>
-		</tr>
-	</table>
+							<!-- 판매가(적립금) -->
+							<%if(pdto.getProduct_discount_rate() != 0){%>
+								<td><%=formatter.format(pdto.getProduct_price_sale())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>)</td>
+							<%} else{%>
+								<td> <%=formatter.format(pdto.getProduct_price_origin())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * bkdto.getB_amount())%>원</span>) </td>
+							<%}%>
+							
+							<!-- 수량 -->
+							<td>
+								<!-- 장바구니 수량  -->
+								<span id="b_amount<%=i%>" name="b_amount<%=i%>"><%=bkdto.getB_amount()%></span>개
+							</td>
+							
+							<!-- 쿠폰선택 버튼 -->
+							<td> 
+								<button type="button" id="searchCouponBtn<%=i%>" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button>
+								<button type="button" id="cancelCouponBtn<%=i%>" onclick="cancelCoupon('<%=i%>');" style="display: none;"> 다시선택 </button>
+							</td>
+							
+							<!-- 쿠폰할인가  -->
+							<td> <span id="discount_rate<%=i%>">-0</span>원 </td>
+							
+						</tr>
+						<%
+							}
+						%>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<th> 보유 적립금 사용 </th>
+				<td> 
+					<input type="text" id="use_My_Mileage" name="use_My_Mileage" value="0" onclick="clickMyMileage();" onchange="changeMyMileage()">원
+					<label> 
+						<input type="checkbox" id="use_My_Mileage_Chkbox" onclick="useMyMileage();" > 
+						최대 사용 </label> (사용가능 적립금 <span id="limit_mileage" style="color: #09f; font-weight: bold;"><%=formatter.format(final_total_price * 0.07)%></span>원) 
+							<input type="hidden" id="limit_mileage_input"  name="limit_mileage" value=<%=final_total_price * 0.07%>>
+						총 보유 적립금 <span id="my_mileage" style="color: #f60; font-weight: bold;"><%=formatter.format(memberDTO.getMileage())%></span>원 <br>
+							<input type="hidden" id="my_mileage_input"  name="my_mileage" value=<%=memberDTO.getMileage()%>>
+					<span>- 보유 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다.</span> 
+				</td>
+			</tr>
+		</table>
+		
+		<!-- 결제 정보 테이블 -->
+		<div class="title"><h3>Payment info / Agreement <span>결제 정보/주문자 동의</span></h3></div>
+		<table border="1" class="orderlist">
+		<colgroup>
+			<col style="width:10%;">
+			<col style="width: auto;">
+		</colgroup>
+			<tr>
+				<th> 결제 수단 </th>
+				<td> 
+					<ul style="list-style:none; margin-bottom: 4%;">
+						<li style="float:left;"> <label> <input type="radio" name="payment" value="신용카드" onclick="div_show(this.value, '신용카드');"> <span class="payment">신용카드</span> </label> </li>
+						<li style="float:left;"> <label> <input type="radio" name="payment" value="무통장입금" checked onclick="div_show(this.value, '무통장입금');"> <span class="payment">가상계좌(무통장입금)</span> </label> </li>
+						<li style="float:left;"> <label> <input type="radio" name="payment" value="카카오페이" onclick="div_show(this.value, '카카오페이');"> <span class="payment">카카오페이</span> </label> </li>
+						<li style="float:left;"> <label> <input type="radio" name="payment" value="네이버페이" onclick="div_show(this.value, '네이버페이');"> <span class="payment">네이버페이</span> </label> </li>
+					</ul>
+				</td>
+			</tr>
+			
+			<tr>
+				<th> 결제 안내 </th>
 	
-	<div class="payment_div"><input type="button" class="order_btn" value="PAYMENT(결제하기)"></div>
+					<td id="신용카드" style="display:none; padding:15px;"> 
+						<select>
+							<option> 카드 선택 </option>
+							<option> 현대카드 </option>
+							<option> 하나카드 </option>
+							<option> 카카오뱅크 </option>
+							<option> 하나(외환) </option>
+							<option> NH채움 </option>
+							<option> 우리카드 </option>
+							<option> 삼성카드 </option>
+						</select>
+						<span><br>
+							※ 할부는 50,000원 이상만 가능합니다. <br> <br>
+							안전결제(ISP)? (국민카드/BC카드/우리카드) <br>
+							온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인정보를 입력하지 않고 고객님이 사전에 미리 설정한 안전결제(ISP) 비밀번호만 입력, 결제하도록 하여 개인정보 유출 및 카드 도용을 방지하는 서비스입니다. <br> <br>
+							안심 클릭 결제? (삼성/외환/롯데/현대/신한/시티/하나/NH/수협/전북/광주/산업은행/제주은행) <br>
+							온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인 정보를 입력하지 않고 고객님이 사전에 미리 설정한 전자 상거래용 안심 클릭 비밀번호를 입력하여 카드 사용자 본인 여부를 확인함으로써 온라인상에서의 카드 도용을 방지하는 서비스입니다. <br>
+						</span>
+					</td>
+					
+					<td id="무통장입금" style="padding:15px;">
+						<select>
+							<option> ::: 선택해 주세요 ::: </option>
+							<option> 기업은행:2135159668464 주식회사갈라파고스 </option>
+						</select>
+						<input type="text" name="o_trade_payer_disabled" value="<%=memberDTO.getName()%>" style="text-align: center;" size="5" disabled> 
+						<input type="hidden" name="o_trade_payer" value="<%=memberDTO.getName()%>">
+						<br>
+						<span>가상 계좌 안내계좌 유효 기간 2020년 05월 22일 23시 59분 59초 <br>
+						가상계좌는 주문 시 고객님께 발급되는 일회성 계좌번호 이므로 입금자명이 다르더라도 입금 확인이 가능합니다. 
+						단, 선택하신 은행을 통해 결제 금액을 1원 단위까지 정확히 맞추셔야 합니다. 가상 계좌의 입금 유효 기간은 주문 후 2일 이내이며, 기간 초과 시 계좌번호는 소멸되어 입금되지 않습니다. 
+						구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상 계좌를 통한 재주문이 불가 합니다. 인터넷뱅킹, 텔레뱅킹, ATM/CD기계, 은행 창구 등에서 입금할 수 있습니다. <br>
+						ATM 기기는 100원 단위 입금이 되지 않으므로 통장 및 카드로 계좌이체 해주셔야 합니다. 은행 창구에서도 1원 단위 입금이 가능합니다. 자세한 내용은 FAQ를 확인하여 주시기 바랍니다.</span>
+					</td>
+					
+					<td id="카카오페이" style="display:none; padding:15px;">
+						<span>카카오페이 안내 <br>
+						카카오페이는 카카오톡에서 카드를 등록, 간단하게 비밀번호만으로 결제할 수 있는 빠르고 편리한 모바일 결제 서비스입니다. <br>
+						-지원 카드 : 모든 카드 등록/결제 가능</span>
+					</td>
+					
+					<td id="네이버페이" style="display:none; padding:15px;">
+						<span>네이버페이 안내 </span><br>
+						<br>
+						<span>- 주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.	 <br>
+						- 네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행계좌 정보를 등록하여 네이버페이 비밀번호로 결제할 수 있는 간편결제 서비스입니다. <br>
+						- 결제 가능한 신용카드: 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티, 카카오뱅크 <br>
+						- 결제 가능한 은행: NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국, 미래에셋대우, 광주, 대구, 전북, 새마을금고, 제주은행, 신협, 하나은행, 케이뱅크, 카카오뱅크, 삼성증권 <br>
+						- 네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 별 무이자, 청구할인 혜택을 받을 수 있습니다.</span>
+					</td>
+			</tr>
+			<tr>
+				<th> 
+					주문자 동의 <br>
+					<label> <input type="checkbox" id="chkThirdAgreeAll" onclick="checkThirdAgreeAll();"> 전체 동의 </label> 
+				</th>
+				<td style="padding: 15px;">
+					<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> <span class="payment">개인정보 제3자 제공 동의(필수)</span> </label><br>
+					<span class="payment"> 배송 등 거래를 위해 판매자에게 개인정보가 공유됩니다. <a href="javascript:void(0)" onclick="toggleThirdAgree();" return false;> <span id="thirdAgreeBtn"> 자세히 </span>  </a> </span><br>
+					
+						<div id="thirdAgreeDetail" style="display:none;  background-color: lightblue; width: 100%; height: 150px; overflow: scroll;">
+							<div style="margin:10px;">
+							
+								갈라파고스의 회원계정으로 상품 및 서비스를 구매하고자 할 경우, 갈라파고스는 거래 당사자간 원활한 의사소통 및 배송, 상담 등 거래이행을 위하여 필요한 최소한의 개인정보만을 갈라파고스 입점업체 판매자 및 배송업체에 아래와 같이 공유하고 있습니다. <br> <br>s
+								1. 갈라파고스는 귀하께서 갈라파고스 입점업체 판매자로부터 상품 및 서비스를 구매하고자 할 경우, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 24조의 2(개인정보 공유동의 등)에 따라 아래와 같은 사항은 안내하고 동의를 받아 귀하의 개인정보를 판매자에게 공유합니다. "개인정보 제3자 공유 동의"를 체크하시면 개인정보 공유에 대해 동의한 것으로 간주합니다. <br>
+								2. 개인정보를 공유받는자 : 위클리웨어 <br>
+								3. 공유하는 개인정보 항목 <br> <br>
+								- 구매자 정보: 성명, 전화번호, ID, 휴대전화 번호, 메일주소, 상품 구매정보 <br>
+								- 수령자 정보: 성명, 전화번호, 휴대전화 번호, 배송지 주소 <br> <br>
+								4. 개인정보를 공유받는 자의 이용 목적 : 판매자와 구매자의 거래의 원활한 진행, 본인의사의 확인, 고객 상담 및 불만처리, 상품과 경품 배송을 위한 배송지 확인 등 <br>
+								5. 개인정보를 공유받는 자의 개인정보 보유 및 이용 기간 : 개인정보 수집 및 이용 목적 달성 시까지 보관합니다. <br>
+								6. 동의 거부 시 불이익 : 본 개인정보 공유에 동의하지 않으시는 경우, 동의를 거부할 수 있으며, 이 경우 거래가 제한됩니다. <br>
+								
+							</div>
+						</div>
+					
+					<label> <input type="checkbox" id="chkThirdAgree" name="chkThirdAgree"> 위 상품 정보 및 거래 조건을 확인하였으며, 구매 진행에 동의합니다.(필수) </label>
+				</td>
+			</tr>
+		</table>
+	
+		<div class="payment_div"><input type="button" class="order_btn" value="PAYMENT(결제하기)" onclick="AddOrder();"></div>
+	</form>
 	
 	<!-- 이용 안내 -->
 	<div class="help">
@@ -637,7 +643,8 @@
 		basketList.push("${basketList}");
 	</c:forEach>
 	
-	var selectedCodes = ""; 			
+	var selectedCodes = "";
+	var selectedAmounts = ""; 
 	var selectedOptions = ""; 			
 	var selectedDeliveryMethods = ""; 	
 
@@ -960,9 +967,37 @@
        	document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
 		
     }
-    
-    
+	
+	//사용자가 구매하기(결제하기) 버튼을 눌렸을시
+	function AddOrder(){
+		
+		//제약조건
+		
+		
+		var selectedCodes = "";
+		var selectedAmounts = ""; 
+		var selectedOptions = ""; 			
+		var selectedDeliveryMethods = ""; 
+		
+		//넘길 상품들 정보 저장하기
+		//구매하기에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
+		for(var j=0; j<basketList.length; j++){
+			//selectedCodes 안에 사용자가 선택한 codes들 담기
+			selectedCodes += ($('#b_code'+j).val() + ", ");
+			selectedAmounts += ($('#b_amount'+j).val() + ", ");
+			selectedOptions += ($('#b_option'+j).val() + ", ");
+			selectedDeliveryMethods += ($('#b_delivery_method'+j).val() + ", ");
+		}
+
+		//추가된 values 변수를 태그에 담기
+		document.getElementById("selectedCodes").value = selectedCodes;
+		document.getElementById("selectedAmounts").value = selectedAmounts;
+		document.getElementById("selectedOptions").value = selectedOptions;
+		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
+		
+		document.fr.action="./OrderAdd.or";
+		document.fr.submit();
+	}
     
 </script> 
-
 </html>

@@ -69,6 +69,25 @@ public class OrderFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		//구매 정보 입력 한 후 구매하기 버튼 눌렸을시(구매하기 처리)
+		else if(command.equals("/OrderAdd.or")){
+			action = new OrderAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//구매 완료된 페이지 
+		else if(command.equals("/OrderComplete.or")){
+			action = new OrderCompleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		// 페이지 이동 처리
 		if (forward != null) {
