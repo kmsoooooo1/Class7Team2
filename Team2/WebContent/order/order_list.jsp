@@ -41,13 +41,13 @@
 		<h3> 주문 상품 정보 </h3>
 		<table border="1" class="list">
 			<tr>
-				<td> 주문일자<br>[주문번호] </td>
-				<td> 이미지 </td>
-				<td> 상품정보 </td>
-				<td> 수량 </td>
-				<td> 상품구매금액 </td>
-				<td> 주문처리상태 </td>
-				<td> 취소/교환/반품 </td>
+				<th> 주문일자<br>[주문번호] </th>
+				<th> 이미지 </th>
+				<th> 상품정보 </th>
+				<th> 수량 </th>
+				<th> 상품구매금액 </th>
+				<th> 주문처리상태 </th>
+				<th> 취소/교환/반품 </th>
 			</tr>
 			
 			<%
@@ -128,34 +128,11 @@
 					<td> <%=formatter.format(pdto.getProduct_price_origin() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>) </td>
 				<%}%>	
 				
-				
-				<!-- 합계
-					(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
-					(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
-				<%if(pdto.getProduct_discount_rate() != 0){%>
-					<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
-						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000"))%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000")%>">
-						</td>
-					<%} else {%>
-						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * odto.getO_p_amount())%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * odto.getO_p_amount()%>">
-						</td>
-					<%}%>
-				<%} else{%>
-					<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
-						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000"))%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * odto.getO_p_amount()) + Integer.parseInt("14000")%>">
-						</td>
-					<%} else {%>
-						<td>
-							<span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * (odto.getO_p_amount()))%>원</span>
-							<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * odto.getO_p_amount()%>">
-						</td>
-					<%}%>
+				<!-- 주문처리상태(o_status가 0이면 입금전 1이면 입금후 -->
+				<%if(odto.getO_status() == 0) {%>
+					<td> <span style="color: red;"> 입금전 </span> </td>
+				<%} else if(odto.getO_status() == 1) {%>
+					<td> <span style="color: green;"> 입금완료 </span> </td>
 				<%}%>
 				
 				<td>
