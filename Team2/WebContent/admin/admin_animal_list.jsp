@@ -108,7 +108,7 @@
 				<td><%=adto.getA_view_count()%></td>
 				<td><%=adto.getDate()%></td>
 				<td> <a href="./AnimalModify.aa?num=<%=adto.getNum()%>"><button type="button"> 수정 </button></a> </td>
-				<td> <a href=""><button type="button"> 삭제 </button></a> </td>
+				<td> <a href="./AnimalDeleteAction.aa?num=<%=adto.getNum()%>"><button type="button"> 삭제 </button></a> </td>
 			</tr>
 		</tbody>
 		<%}%>

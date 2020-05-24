@@ -385,6 +385,28 @@ public class AnimalDAO {
 	}
 	//modifyAnimals(adto)
 	
+	//deleteAnimals(num)
+	public void deleteAnimals(int num){
+		try {
+			con = getConnection();
+			
+			sql="delete from team2_animals where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println(num+"번 동물 삭제 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+	}
+	//deleteAnimals(num)
+	
+	
 	
 	//동물페이지 조회수 1업 시키는 함수
 	public void updateAnimalViewCount(String a_code){    	

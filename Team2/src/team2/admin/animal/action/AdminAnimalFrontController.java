@@ -99,6 +99,15 @@ public class AdminAnimalFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(command.equals("/AnimalDeleteAction.aa")){
+			action = new AnimalDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		// 페이지 이동처리 

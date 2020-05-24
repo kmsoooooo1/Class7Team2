@@ -77,6 +77,14 @@
 			</tr>
 			
 			<tr>
+				<td>
+					동물 상태<br>
+					(ex. 성체, 베이비, 해당사항 없으면 빈칸 유지)
+				</td>
+				<td><input type="text" name="a_status" value="<%=adto.getA_status()%>"></td>
+			</tr>
+			
+			<tr>
 				<td>동물 코드</td>
 				<td><input type="text" name="a_code" value="<%=adto.getA_code()%>"></td>
 			</tr>
