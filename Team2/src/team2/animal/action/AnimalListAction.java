@@ -32,8 +32,7 @@ public class AnimalListAction implements Action{
 		}
 
 		//total 게시판 글 수
-		int total = 0;
-		
+		int total = adao.animalTotalCount(category,sub_category, sub_category_index);
 		//  ----페이징 처리-----
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
@@ -52,8 +51,8 @@ public class AnimalListAction implements Action{
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(total);
 		
-//		System.out.println(pageMaker.getStartPage());
-//		System.out.println(pageMaker.getEndPage());
+		System.out.println("cri : "+cri);
+		System.out.println("pagemaker : "+pageMaker);
 		
 		// ----페이징 처리-----
 		
@@ -63,7 +62,7 @@ public class AnimalListAction implements Action{
 		request.setAttribute("animalList", animalList);
 		
 		//pageing
-		//request.setAttribute("cri", cri);
+		request.setAttribute("cri", cri);
 		request.setAttribute("pageMaker", pageMaker);
 		request.setAttribute("pageNum", pageNum);
 		
