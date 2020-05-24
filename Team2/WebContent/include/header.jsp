@@ -102,7 +102,39 @@
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
    <!-- 메인 메뉴 --> 
-   <nav id="nav_menu" class="nav_menu"> 
+   
+   <nav id="nav_menu" class="nav_menu">
+<!--       <ul class="sub_menu" id="sub_menu"> -->
+<!--          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 전체보기 </a> -->
+<!--             <div class="dropdown-content"> -->
+<!--       		<div class="nav_header"> -->
+<!--       		<h2> -->
+<!--       			전체보기 -->
+<!--       		</h2> -->
+<!--       		</div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--             </div>  -->
+<!--           </li> -->
       <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
