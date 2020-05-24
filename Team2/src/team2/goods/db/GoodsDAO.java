@@ -109,14 +109,14 @@ public class GoodsDAO {
 	}//insertGoods(gdto);
 	
 	//getGoodsList(); 관리자
-	public List<GoodsDTO> getGoodsList(){
+	public List<GoodsDTO> getGoodsList(Criteria cri){
 		
 		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
 		
 		try {
 			con = getConnection();
 			
-			sql="SELECT * FROM team2_goods";
+			sql="SELECT * FROM team2_goods order by num desc limit " + (cri.getPage()-1)*cri.getPerpageNum() + ", "+ cri.getPerpageNum();
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -244,6 +244,29 @@ public class GoodsDAO {
 		}
 		
 	}//modifyGoods(gdto);
+	
+	public int getTotalCount() {
+		
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "select count(num) from team2_goods";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("count(num)");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+	}
+	
 	
 	//deleteGoods(num) 관리자
 	public void deleteGoods(int num){
