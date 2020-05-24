@@ -104,37 +104,60 @@
    <!-- 메인 메뉴 --> 
    
    <nav id="nav_menu" class="nav_menu">
-<!--       <ul class="sub_menu" id="sub_menu"> -->
-<!--          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 전체보기 </a> -->
-<!--             <div class="dropdown-content"> -->
-<!--       		<div class="nav_header"> -->
-<!--       		<h2> -->
-<!--       			전체보기 -->
-<!--       		</h2> -->
-<!--       		</div> -->
-<!--       		<div class="nav_column"> -->
-<!--       		 <h3>test1</h3> -->
-<!--                <a href="#"> 리자드/모니터 </a> -->
-<!--                <a href="#"> 레오파드 게코 </a>  -->
-<!--                <a href="#"> 크레스티드 게코 </a> -->
-<!--                <a href="#"> 카멜레온 </a> -->
-<!--             </div> -->
-<!--       		<div class="nav_column"> -->
-<!--       		 <h3>test1</h3> -->
-<!--                <a href="#"> 리자드/모니터 </a> -->
-<!--                <a href="#"> 레오파드 게코 </a>  -->
-<!--                <a href="#"> 크레스티드 게코 </a> -->
-<!--                <a href="#"> 카멜레온 </a> -->
-<!--             </div> -->
-<!--       		<div class="nav_column"> -->
-<!--       		 <h3>test1</h3> -->
-<!--                <a href="#"> 리자드/모니터 </a> -->
-<!--                <a href="#"> 레오파드 게코 </a>  -->
-<!--                <a href="#"> 크레스티드 게코 </a> -->
-<!--                <a href="#"> 카멜레온 </a> -->
-<!--             </div> -->
-<!--             </div>  -->
-<!--           </li> -->
+      <ul class="sub_menu" id="sub_menu">
+         <li class="dropdown"><i class='fas fa-align-justify'></i>
+            <div class="dropdown-content">
+      		<div class="nav_header">
+      		<h2>
+      			전체보기
+      		</h2>
+      		</div>
+      		<div class="nav_row">
+      		<div class="nav_column">
+      		 <h3>도마뱀</h3>
+               <a href="#"> 리자드/모니터 </a>
+               <a href="#"> 레오파드 게코 </a> 
+               <a href="#"> 크레스티드 게코 </a>
+               <a href="#"> 카멜레온 </a>
+            </div>
+      		<div class="nav_column">
+      		 <h3>뱀</h3>
+               <a href="#"> 콘/킹/소형뱀 </a>
+               <a href="#"> 대형뱀 </a>
+            </div>
+      		<div class="nav_column">
+      		 <h3>거북</h3>
+               <a href="#"> 육지거북 </a>
+               <a href="#"> 수생/습지거북 </a> 
+            </div>
+      		<div class="nav_column">
+      		 <h3>먹이</h3>
+               <a href="#"> 칼슘/약품 </a>
+               <a href="#"> 생먹이 </a> 
+               <a href="#"> 냉동먹이 </a> 
+               <a href="#"> 인공사료 </a> 
+            </div>
+      		<div class="nav_column">
+      		 <h3>사육용품</h3>
+               <a href="#"> 사육장 </a>
+               <a href="#"> 장식/그릇 </a> 
+               <a href="#"> 램프 </a> 
+               <a href="#"> 바닥재 </a> 
+               <a href="#"> 온/습도 관련 </a> 
+               <a href="#"> 보조용품 </a> 
+               <a href="#"> 수족관 </a> 
+            </div>
+      		<div class="nav_column">
+      		 <h3>동물병원</h3>
+               <a href="#"> 바로가기 </a>
+            </div>
+      		<div class="nav_column">
+      		 <h3>이벤트</h3>
+               <a href="#"> 바로가기 </a>
+            </div>
+            </div>
+            </div> 
+          </li>
       <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
