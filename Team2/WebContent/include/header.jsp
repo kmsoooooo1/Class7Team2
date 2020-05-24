@@ -76,6 +76,7 @@
     </div>
    <%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
+   
 	%>
     <div class="notice_bar">
      <ul class="rolling"> 
