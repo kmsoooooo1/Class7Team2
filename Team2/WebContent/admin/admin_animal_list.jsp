@@ -112,23 +112,24 @@
   </div>
   
   <div class="bottom">
-	<ul id="pageList">
-		<c:if test="${pageMaker.prev }">
-		<li onclick="location.href='./AnimalList.aa?pageNum=${pageMaker.startPage-1 }'">
-			◀	
-		</li>
-		</c:if>
-		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
-		<li onclick="location.href='./AnimalList.aa?pageNum=${pageNum}'">
-			${pageNum }
-		</li>
-		</c:forEach>
-		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		<li onclick="location.href='./AnimalList.aa?pageNum=${pageMaker.endPage+1 }'">
-			▶
-		</li>
-		</c:if>
-	</ul>
+		<ul id="pageList">
+			<%if(pageMaker.isPrev()){ %>
+				<li onclick="location.href='./AnimalList.aa?&pageNum=<%=pageMaker.getStartPage()-1%>'">
+					◀	
+				</li>
+			<%}
+			for(int i = pageMaker.getStartPage(); i<=pageMaker.getEndPage(); i++){
+			%>
+				<li onclick="location.href='./AnimalList.aa?pageNum=<%=i%>'">
+					<%=i %>
+				</li>
+			<%}
+			if(pageMaker.isNext() && pageMaker.getEndPage() > 0){ %>
+				<li onclick="location.href='./AnimalList.aa?&pageNum=<%=pageMaker.getEndPage()+1%>'">
+					▶
+				</li>
+			<%} %>
+		</ul>
 	</div>
  </div>
 	<!-- FOOTER -->
