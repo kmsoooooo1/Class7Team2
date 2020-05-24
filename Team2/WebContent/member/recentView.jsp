@@ -23,9 +23,6 @@
 	<h3 class="recent_h3">최근 본 상품</h3>
 	
 <div class="recent_div">
-  <h3>
-  <a href="./recentView.me" class="seemore">더보기>></a>
-  </h3>
   <div class="contents">
   <table border="1" summary>
   <caption>최근 본 상품</caption>

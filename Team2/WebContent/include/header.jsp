@@ -102,7 +102,39 @@
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
    <!-- 메인 메뉴 --> 
-   <nav id="nav_menu" class="nav_menu"> 
+   
+   <nav id="nav_menu" class="nav_menu">
+<!--       <ul class="sub_menu" id="sub_menu"> -->
+<!--          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 전체보기 </a> -->
+<!--             <div class="dropdown-content"> -->
+<!--       		<div class="nav_header"> -->
+<!--       		<h2> -->
+<!--       			전체보기 -->
+<!--       		</h2> -->
+<!--       		</div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--             </div>  -->
+<!--           </li> -->
       <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
@@ -184,6 +216,15 @@ $(document).ready(function(){
 	$(".rolling").append($(".rolling li").first().clone());
 	
 });	
+	// 글자수 제한 30자 이상시 (뒤에...)
+	$(document).ready(function(){ 
+		$('.rolling li a').each(function(){
+			if ($(this).text().length > 20) 
+				$(this).html($(this).text().substr(0,20)+"...");
+			});
+		});
+
+
 
 //헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
 window.onscroll = function() {myFunction()};
