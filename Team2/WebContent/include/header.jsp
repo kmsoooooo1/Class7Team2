@@ -84,19 +84,22 @@
 		String category = (String)request.getAttribute("category");
 		String search = (String)request.getAttribute("search");
 		
-		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+		//System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 
 	%>
-	
     <div class="notice">
      <ul class="rolling"> 
        <%
-	    for(int i=0;i<6;i++){ 
-             BoardDTO bdto = (BoardDTO) boardList.get(i);
+       String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
+       	BoardDAO bdao = new BoardDAO();
+       	List<BoardDTO> boardNoticeList = bdao.getList(sql);
+       	bdao.closeDB();
+	    for(int i=0; i<boardNoticeList.size(); i++){ 
+             BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
 	  %>
       <li>
-       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
-		    	<%=bdto.getB_title() %>
+       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
+		    	 <%=bdto.getB_title()%> 
 	   </a>
 	  </li>
 	    <%} %>
