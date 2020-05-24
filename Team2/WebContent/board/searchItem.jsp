@@ -77,6 +77,12 @@
 	PageMaker pm = new PageMaker();
 	pm.setCri(cri);
 	pm.setTotalCount(list.size());
+	System.out.println(list);
+	int startList = cri.getPageStart();
+	int endList = startList + cri.getPerpageNum();
+	if(endList>list.size()){
+		endList = list.size();
+	}
 	
 	System.out.println("product : " + product);
 	System.out.println("cate : " + cate);
@@ -168,7 +174,9 @@
 						<th>DETAIL</th>						
 					</tr>
 			<%if(list.size()>0){ 
-				for(ProductDTO dto:list){%>
+				for(int i = startList; i<endList; i++){
+					ProductDTO dto = list.get(i);
+					%>
 					<tr class="choice_tr" onclick="choice('<%=dto.getP_code()%>');">
 						<td><%=dto.getP_code() %></td>
 						<td><img src="./upload/multiupload/<%=dto.getImg_src() %>" alt="" width="100" height="100"></td>

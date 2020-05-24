@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+* {
+	box-sizing: border-box;
+}
+
 .container{
 	position: relative;
 }

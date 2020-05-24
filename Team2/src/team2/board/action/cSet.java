@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class cSet {
 
-	public static final String[] Category = {"Notice","Review","QnA"};
+	public static final String[] Category = {"Notice","Review","QnA","All"};
 	public static final String[] ANIMAL = {"파충류","양서류"};
 	public static final String[] ANIMAL_R = {"도마뱀", "뱀", "거북"};
 	public static final String[] ANIMAL_A = {"프로그", "살라맨더", "팩맨"};

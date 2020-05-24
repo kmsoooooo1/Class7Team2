@@ -38,20 +38,46 @@
 	<!-- 장바구니 테이블 생성 -->
 	<div class="h2"><h2>ORDER COMPLETE</h2></div>
 	
+		<br>
+	
 		체크 로고
 	
-		고객님이 주문이 완료되었습니다.
+		고객님이 주문이 완료되었습니다. <br>
 		주문내역 및 배송에 관한 안내는 주문조회를 통하여 확인 가능합니다.
 		
-		주문번호: <%=orderList.get(0).getO_trade_num()%>
+		<br> 
+		<br>
+		
+		주문번호: <%=orderList.get(0).getO_trade_num()%> <br>
 		주문일자: <%=orderList.get(0).getO_date()%>
+		
+		<!-- 결제 정보 -->
+		<div>
+			<h3>결제 정보</h3>
+			
+			<table border="1" class="ordrelist">
+				<tr>
+					<td>최종결제금액</td>
+					<td><%=formatter.format(orderList.get(0).getO_sum_money())%></td>
+				</tr>
+				<tr>
+					<td> 결제수단 </td>
+					<td> 
+					
+						<%=orderList.get(0).getO_trade_type() %> <br>
+						입금자: <%=orderList.get(0).getO_trade_payer() %>, 계좌번호 : 기업은행 2135159668464 (주식회사갈라파고스) <br>
+					
+					</td>
+				</tr>
+			</table>
+		</div>
 
 		<div class="orderListArea">
+			<h3> 주문 상품 정보 </h3>
 		<table border="1" class="list">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 			<colgroup>
-				<col style="width:5%; ">
-				<col style="width:10%; ">
+				<col style="width:15%; ">
 				<col style="width:auto; ">
 				<col style="width:10%; ">
 				<col style="width:15%; ">
@@ -62,7 +88,6 @@
 			</colgroup>
 			<thead>
 			<tr>
-				<th scope="col"> <input type="checkbox" id="chkBoxAll" name="chkBoxAll"> </th>
 				<th scope="col">이미지</th>
 				<th scope="col">상품정보</td>
 				<th scope="col">판매가<br>(적립예정)</th>
@@ -70,7 +95,6 @@
 				<th scope="col">배송구분</th>
 				<th scope="col">배송비</th>
 				<th scope="col">합계</th>
-				<th scope="col">주문관리</th>
 			</tr>
 			</thead>
 			<%
@@ -98,8 +122,6 @@
 			%>
 			<tbody>
 			<tr>
-				<!-- 체크박스 -->
-				<td> <input type="checkbox" id="chkBox<%=i%>" value="<%=i%>"> </td>
 				
 				<!-- 상품 이미지 -->
 				<!-- 상품이 동물일때 -->
@@ -147,18 +169,14 @@
 				
 				<!-- 수량 -->
 				<td>
-					<!-- 장바구니 수량  --> 
-					<input type="text" id="b_amount<%=i%>" name="b_amount<%=i%>" value="<%=odto.getO_p_amount()%>" maxlength="3" size="3"  onchange='amountChange(<%=i%>)'>개
-					<!-- 수량 +/- 버튼 -->
-					<input type="button" id="amountPlus" name="amountPlus" value="+" onclick='plus(<%=i%>);'> 
-					<input type="button" id="amountMinus" name="amountMinus" value="-" onclick='minus(<%=i%>)'> <br>
+					<%=odto.getO_p_amount()%>개 
 				</td>
 				
 				<!-- 배송방법(고속버스 일때와 아닐때 -->
-				<%if(odto.getO_delivery_method().equals("고속버스")) {%>
-					<td id="b_delivery_method"><%=odto.getO_delivery_method()%> <br>(+14,000원)</td>
+				<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
+					<td id="b_delivery_method"><%=odto.getO_p_delivery_method()%> <br>(+14,000원)</td>
 				<%} else {%>
-					<td id="b_delivery_method"><%=odto.getO_delivery_method()%></td>
+					<td id="b_delivery_method"><%=odto.getO_p_delivery_method()%></td>
 				<%}%>
 				
 				<!-- 배송비 
@@ -167,21 +185,21 @@
 					합계가 50,000원 이하인데 배송방법이 고속버스이면 17000원 표시	
 				-->
 				<%if(pdto.getProduct_discount_rate() != 0){%>
-					<%if(pdto.getProduct_price_sale() * odto.getO_p_amount() >= 50000 && !odto.getO_delivery_method().equals("고속버스")){%>
+					<%if(pdto.getProduct_price_sale() * odto.getO_p_amount() >= 50000 && !odto.getO_p_delivery_method().equals("고속버스")){%>
 						<td> 배송비 무료 </td>
-					<%}else if(pdto.getProduct_price_sale() * odto.getO_p_amount() >= 50000 && odto.getO_delivery_method().equals("고속버스")){%>
+					<%}else if(pdto.getProduct_price_sale() * odto.getO_p_amount() >= 50000 && odto.getO_p_delivery_method().equals("고속버스")){%>
 						<td> 14,000원 </td>
-					<%}else if(pdto.getProduct_price_sale() * odto.getO_p_amount() < 50000 && odto.getO_delivery_method().equals("고속버스")){%>
+					<%}else if(pdto.getProduct_price_sale() * odto.getO_p_amount() < 50000 && odto.getO_p_delivery_method().equals("고속버스")){%>
 						<td> 17,000원 </td>
 					<%} else {%>
 						<td> 3,000원 </td>
 					<%}%>
 				<%} else{%>
-					<%if(pdto.getProduct_price_origin() * odto.getO_p_amount() >= 50000 && !odto.getO_delivery_method().equals("고속버스")){%>
+					<%if(pdto.getProduct_price_origin() * odto.getO_p_amount() >= 50000 && !odto.getO_p_delivery_method().equals("고속버스")){%>
 						<td> 배송비 무료 </td>
-					<%}else if(pdto.getProduct_price_origin() * odto.getO_p_amount() >= 50000 && odto.getO_delivery_method().equals("고속버스")){%>
+					<%}else if(pdto.getProduct_price_origin() * odto.getO_p_amount() >= 50000 && odto.getO_p_delivery_method().equals("고속버스")){%>
 						<td> 14,000원 </td>
-					<%}else if(pdto.getProduct_price_origin() * odto.getO_p_amount() < 50000 && odto.getO_delivery_method().equals("고속버스")){%>
+					<%}else if(pdto.getProduct_price_origin() * odto.getO_p_amount() < 50000 && odto.getO_p_delivery_method().equals("고속버스")){%>
 						<td> 17,000원 </td>
 					<%} else {%>
 						<td> 3,000원 </td>
@@ -192,7 +210,7 @@
 					(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
 					(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
 				<%if(pdto.getProduct_discount_rate() != 0){%>
-					<%if(odto.getO_delivery_method().equals("고속버스")) {%>
+					<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
 						<td>
 							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000"))%>원</span>
 							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000")%>">
@@ -204,7 +222,7 @@
 						</td>
 					<%}%>
 				<%} else{%>
-					<%if(odto.getO_delivery_method().equals("고속버스")) {%>
+					<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
 						<td>
 							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000"))%>원</span>
 							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * odto.getO_p_amount()) + Integer.parseInt("14000")%>">
@@ -225,17 +243,18 @@
 		</table>
 		</div>
 		
+		
 		<table border="1" class="list">
 			<tr>
-				<th>총 상품금액</th>
-				<th>총 배송비</th>
+				<th>총 주문금액</th>
+				<th>총 할인가</th>
 				<th>결제 예정 금액</th>
 			</tr>
 			<tr>
 			
 				<!-- 총 상품금액 -->
 				<td>
-					<span><%=formatter.format(final_total_price)%></span>원 
+					<span><%=formatter.format(orderList.get(0).getO_sum_money())%></span>원 
 				</td>
 				
 				<!-- 총 배송비 -->
@@ -245,7 +264,7 @@
 							OrderDTO odto = (OrderDTO) orderList.get(i);
 							ProductDTO pdto = (ProductDTO) productInfoList.get(i);
 										
-							if(odto.getO_delivery_method().equals("고속버스")){
+							if(odto.getO_p_delivery_method().equals("고속버스")){
 								final_delivery_fee += 14000;
 							}					
 							
@@ -269,7 +288,7 @@
 							}
 						}
 					%>
-					<span>+<%=formatter.format(final_delivery_fee)%></span>원
+					<span>-<%=formatter.format(final_delivery_fee)%></span>원
 				</td>
 				
 				<!-- 결제 에정 금액 -->
@@ -280,7 +299,43 @@
 			</tr>
 		</table>
 
-	<br>
+		<br>
+		
+		<!-- 배송지 정보 -->
+		<h3> 배송지 정보 </h3>
+
+		<table border="1" class="ordrelist">
+			<tr> 
+				<td> 받으시는분 </td>
+				<td> <%=orderList.get(0).getO_receive_name() %> </td>
+			</tr>
+			
+			<tr>
+				<td> 우편번호 </td>
+				<td> <%=orderList.get(0).getO_receive_zipcode() %> </td>
+			</tr>
+			
+			<tr>
+				<td> 주소 </td>
+				<td> <%=orderList.get(0).getO_receive_addr1() + " " + orderList.get(0).getO_receive_addr2() %> </td>
+			</tr>
+				
+			<tr>
+				<td> 휴대전화 </td>
+				<td> <%=orderList.get(0).getO_receive_mobile() %> </td>
+			</tr>
+			
+			<tr>
+				<td> 일반전화 </td>
+				<td> <%=orderList.get(0).getO_receive_phone() %> </td>
+			</tr>
+			
+			<tr>
+				<td> 배송메세지 </td>
+				<td> <%=orderList.get(0).getO_memo() %> </td>
+			</tr>
+	
+		</table>		
 
 	<div class="help">
 		<h3>이용안내</h3>
