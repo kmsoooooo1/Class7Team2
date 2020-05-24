@@ -90,7 +90,7 @@ public class OrderAddAction implements Action{
 			odto.setO_p_code(splitSeletedCodes[i].trim());
 			odto.setO_p_amount(Integer.parseInt(splitSelectedAmounts[i].trim()));
 			odto.setO_p_option(splitSelectedOptions[i].trim());
-			odto.setO_delivery_method(splitSelectedDeliveryMethods[i].trim());
+			odto.setO_p_delivery_method(splitSelectedDeliveryMethods[i].trim());
 			
 			//배송지 정보 저장
 			odto.setO_m_id(id);
@@ -116,11 +116,10 @@ public class OrderAddAction implements Action{
 		
 		//적립금
 		int mileage = Integer.parseInt(request.getParameter("use_My_Mileage"));
-
-		request.setAttribute("o_trade_num", o_trade_num);
+		
 		
 		//페이지 이동
-		forward.setPath("./OrderComplete.or");
+		forward.setPath("./OrderComplete.or?o_trade_num=" + o_trade_num);
 		forward.setRedirect(true);
 		return forward;
 	}
