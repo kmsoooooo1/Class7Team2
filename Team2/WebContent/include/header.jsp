@@ -173,7 +173,7 @@
    </div>
 <script>
 $(document).ready(function(){
-	var height =  $(".notice").height(); // 공지사항의 높이값을 구해주고
+	var height =  $(".notice_bar").height(); // 공지사항의 높이값을 구해주고
 	var num = $(".rolling li").length; // length로 공지사항의 개수를 알아볼수있음 
 	var max = height * num; 
 	var move = 0; // 초기값 설정

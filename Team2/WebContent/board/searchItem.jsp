@@ -35,7 +35,7 @@
 	AnimalDAO adao = new AnimalDAO();
 	if(product==null){
 		if(keyword==null || keyword.equals("")){
-			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));	
+			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));
 		}else{
 			list = PDAO.getProduct(adao.searchKeyword(keyword),gdao.searchKeyword(keyword));
 			 
