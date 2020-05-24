@@ -45,14 +45,17 @@
 		}
 		Cookie cook = new Cookie("item" + animalDetail.getA_code(),
 				URLEncoder.encode(
-						"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
-								+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
-								+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph()
-								+ "</td>" + "<td>" + price + "</td>"
-								+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
-								+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
-								+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
-								+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
+						"<li><input type='checkbox' class='chkBox' id='chkBox' name='chkBox' style='display: none;'>" 
+						+"<div class='div_info1'>"
+						+"<a href='./AnimalDetail.an?a_code="+animalDetail.getA_code()+"'><img src='./upload/multiupload/"+animalDetail.getA_thumbnail()+"' width='100' height='100'></a>"
+						+"</div>"
+						+"<div class='div_info div_wish'>"
+						+"<a href='./AnimalDetail.an?a_code="+animalDetail.getA_code()+"' class='name'>"+animalDetail.getA_morph()+"</a> <br>"
+						+"<div class='price'>"
+						+"<span>"+newformat_price_origin+"원</span>"
+						+"</div>"
+						+"</div></li>"
+						,
 						"UTF-8"));
 		cook.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook);
@@ -957,6 +960,10 @@
 		var popupX = (window.screen.width / 6) - (200 / 2); 
 		var popupY = (window.screen.height / 4) - (300 / 2);  
 		window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
+	}
+	
+	function resent(){
+		location.href="";
 	}
 </script>
 </html>
