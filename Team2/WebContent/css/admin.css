@@ -60,7 +60,7 @@ select{
 	height: 30px;
 }
 
-input[type="button"], button{
+input[type="button"], button, input[type="submit"]{
 	padding: 0 .95em;
     min-width: 70px;
     font-size: 11px;
@@ -87,11 +87,6 @@ span{
     background-color: #e2e2e2;
 }
 
-.admintable td{
-	text-align: center;
-	font-size: 16px;
-	
-}
 
 .admintable a{
 	margin-left: 5%;
@@ -99,9 +94,18 @@ span{
 	color: black;
 }
 
+#admintable td{
+	text-align: center;
+	font-size: 20px;
+}
 
+#admintable a:HOVER {
+	color: red;
+}
 
-
+#admintable th{
+	font-size: 20px;
+}
 
 
 
