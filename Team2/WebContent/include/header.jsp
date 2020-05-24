@@ -87,7 +87,7 @@
 		//System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 
 	%>
-    <div class="notice">
+    <div class="notice_bar">
      <ul class="rolling"> 
        <%
        String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
