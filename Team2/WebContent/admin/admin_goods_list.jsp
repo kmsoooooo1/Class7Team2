@@ -19,7 +19,6 @@
 	<%
 		//GoodsListAction 객체에서 저장된 정보 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>) request.getAttribute("goodsList");
-	
 		PageMaker pm = (PageMaker)request.getAttribute("pm");
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		int pageNum = (int)request.getAttribute("pageNum");
@@ -120,7 +119,7 @@
   <div class="bottom">
 	<ul id="pageList">
 		<c:if test="${pm.prev }">
-		<li onclick="location.href='./GoodsList.ag?&pageNum=${pm.startPage-1 }'">
+		<li onclick="location.href='./GoodsList.ag?pageNum=${pm.startPage-1 }'">
 			◀	
 		</li>
 		</c:if>
@@ -130,7 +129,7 @@
 		</li>
 		</c:forEach>
 		<c:if test="${pm.next && pm.endPage > 0}">
-		<li onclick="location.href='./GoodsList.ag?&pageNum=${pm.endPage+1 }'">
+		<li onclick="location.href='./GoodsList.ag?pageNum=${pm.endPage+1 }'">
 			▶
 		</li>
 		</c:if>

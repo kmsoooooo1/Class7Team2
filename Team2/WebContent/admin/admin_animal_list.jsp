@@ -1,7 +1,10 @@
+<%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +18,10 @@
 	<%
 		//AnimalListAction 객체에서 저장된 정보를 저장 
 		List<AnimalDTO> admin_animalList = (List<AnimalDTO>) request.getAttribute("admin_animalList");
+	
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		int pageNum = (int)request.getAttribute("pageNum");
 	%>
 	
 	<!-- Header -->
@@ -103,6 +110,26 @@
 	</table>
 	</div>
   </div>
+  
+  <div class="bottom">
+	<ul id="pageList">
+		<c:if test="${pageMaker.prev }">
+		<li onclick="location.href='./AnimalList.aa?pageNum=${pageMaker.startPage-1 }'">
+			◀	
+		</li>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+		<li onclick="location.href='./AnimalList.aa?pageNum=${pageNum}'">
+			${pageNum }
+		</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		<li onclick="location.href='./AnimalList.aa?pageNum=${pageMaker.endPage+1 }'">
+			▶
+		</li>
+		</c:if>
+	</ul>
+	</div>
  </div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
