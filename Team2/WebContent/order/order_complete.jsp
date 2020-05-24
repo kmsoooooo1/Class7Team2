@@ -38,14 +38,14 @@
 	<!-- 장바구니 테이블 생성 -->
 	<div class="h2"><h2>ORDER COMPLETE</h2></div>
 	
-		체크 로고
-	
+		<div class="orderInfo">	
 		고객님이 주문이 완료되었습니다.
 		주문내역 및 배송에 관한 안내는 주문조회를 통하여 확인 가능합니다.
 		
 		주문번호: <%=orderList.get(0).getO_trade_num()%>
 		주문일자: <%=orderList.get(0).getO_date()%>
-
+		</div>
+		
 		<div class="orderListArea">
 		<table border="1" class="list">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->

@@ -307,6 +307,14 @@
 	text-align: center;
 }
 
-
+.orderInfo{
+	width: 380px;
+    margin: 45px auto 0;
+    padding: 0 0 10px 130px;
+    color: #353535;
+    font-size: 11px;
+    line-height: 1.5;
+    background: url(../img/orderlogo.png) no-repeat 10px 1px;
+}
 
 
