@@ -39,49 +39,50 @@
 	<div class="h2"><h2>ORDER COMPLETE</h2></div>
 	
 		<div class="orderInfo">	
-		고객님이 주문이 완료되었습니다.
-		<br>
-	
-		체크 로고
-	
-		고객님이 주문이 완료되었습니다. <br>
-		주문내역 및 배송에 관한 안내는 주문조회를 통하여 확인 가능합니다.
-		
-		<br> 
-		<br>
-		
-		주문번호: <%=orderList.get(0).getO_trade_num()%> <br>
-		주문일자: <%=orderList.get(0).getO_date()%>
-<<<<<<< HEAD
+		<div style="float: left;">
+		<img class="logo_img" src="${pageContext.request.contextPath}/img/order_logo.png">
 		</div>
-		
-=======
+		<p>
+		<strong>고객님이 주문이 완료되었습니다.</strong>
+			주문내역 및 배송에 관한 안내는 주문조회를 통하여 확인 가능합니다.
+		</p>
+		<ul>
+			<li>
+				주문번호: <strong><%=orderList.get(0).getO_trade_num()%></strong>
+			</li>
+			<li>
+				주문일자: <strong><%=orderList.get(0).getO_date()%></strong>
+			</li>
+		</ul>
+		</div>
 		
 		<!-- 결제 정보 -->
 		<div>
-			<h3>결제 정보</h3>
+			<div class="title"><h3>결제 정보</h3></div>
 			
-			<table border="1" class="ordrelist">
+			<table border="1" class="orderlist">
+			<colgroup>
+				<col style="width:10%;">
+				<col style="width: auto;">
+			</colgroup>
 				<tr>
-					<td>최종결제금액</td>
+					<th>최종결제금액</th>
 					<td><%=formatter.format(orderList.get(0).getO_sum_money())%></td>
 				</tr>
 				<tr>
-					<td> 결제수단 </td>
+					<th> 결제수단 </th>
 					<td> 
-					
-						<%=orderList.get(0).getO_trade_type() %> <br>
-						입금자: <%=orderList.get(0).getO_trade_payer() %>, 계좌번호 : 기업은행 2135159668464 (주식회사갈라파고스) <br>
-					
+						<%=orderList.get(0).getO_trade_type() %> 
+						입금자: <%=orderList.get(0).getO_trade_payer() %><br>
+						계좌번호 : 기업은행 2135159668464 (주식회사갈라파고스)
 					</td>
 				</tr>
 			</table>
 		</div>
 
->>>>>>> refs/heads/master
 		<div class="orderListArea">
-			<h3> 주문 상품 정보 </h3>
-		<table border="1" class="list">
+			<div class="title"><h3> 주문 상품 정보 </h3></div>
+		<table border="1" class="orderlist">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 			<colgroup>
 				<col style="width:15%; ">
@@ -306,39 +307,41 @@
 			</tr>
 		</table>
 
-		<br>
-		
 		<!-- 배송지 정보 -->
-		<h3> 배송지 정보 </h3>
+		<div class="title"><h3> 배송지 정보 </h3></div>
 
-		<table border="1" class="ordrelist">
+		<table border="1" class="orderlist">
+		<colgroup>
+			<col style="width:10%;">
+			<col style="width: auto;">
+		</colgroup>
 			<tr> 
-				<td> 받으시는분 </td>
+				<th> 받으시는분 </th>
 				<td> <%=orderList.get(0).getO_receive_name() %> </td>
 			</tr>
 			
 			<tr>
-				<td> 우편번호 </td>
+				<th> 우편번호 </th>
 				<td> <%=orderList.get(0).getO_receive_zipcode() %> </td>
 			</tr>
 			
 			<tr>
-				<td> 주소 </td>
+				<th> 주소 </th>
 				<td> <%=orderList.get(0).getO_receive_addr1() + " " + orderList.get(0).getO_receive_addr2() %> </td>
 			</tr>
 				
 			<tr>
-				<td> 휴대전화 </td>
+				<th> 휴대전화 </th>
 				<td> <%=orderList.get(0).getO_receive_mobile() %> </td>
 			</tr>
 			
 			<tr>
-				<td> 일반전화 </td>
+				<th> 일반전화 </th>
 				<td> <%=orderList.get(0).getO_receive_phone() %> </td>
 			</tr>
 			
 			<tr>
-				<td> 배송메세지 </td>
+				<th> 배송메세지 </th>
 				<td> <%=orderList.get(0).getO_memo() %> </td>
 			</tr>
 	
@@ -347,20 +350,33 @@
 	<div class="help">
 		<h3>이용안내</h3>
 		<div class="inner">
-			<h4>장바구니 이용안내</h4>
 			<ol>
-				<li>해외배송 상품과 국내배송 상품은 함께 결제하실 수 없으니 장바구니 별로 따로 결제해 주시기 바랍니다.</li>
-				<li>해외배송 가능 상품의 경우 국내배송 장바구니에 담았다가 해외배송 장바구니로 이동하여 결제하실 수 있습니다.</li>
-				<li>선택하신 상품의 수량을 변경하시려면 수량변경 후 [변경] 버튼을 누르시면 됩니다.</li>
-				<li>[쇼핑계속하기] 버튼을 누르시면 쇼핑을 계속 하실 수 있습니다.</li>
-				<li>장바구니와 관심상품을 이용하여 원하시는 상품만 주문하거나 관심상품으로 등록하실 수 있습니다.</li>
-				<li>파일첨부 옵션은 동일상품을 장바구니에 추가할 경우 마지막에 업로드 한 파일로 교체됩니다.</li>
+				<li>비회원 주문의 경우, 주문번호를 꼭 기억하세요. 주문번호로 주문조회가 가능합니다.</li>
+				<li>배송은 결제완료 후 지역에 따라 3일 ~ 7일 가량이 소요됩니다.</li>
+				<li>상품별 자세한 배송과정은 주문조회를 통하여 조회하실 수 있습니다.</li>
+				<li>주문의 취소 및 환불, 교환에 관한 사항은 이용안내의 내용을 참고하십시오.</li>
 			</ol>
-			<h4>무이자할부 이용안내</h4>
+			<h4>세금계산서 발행 안내</h4>
 			<ol>
-				<li>상품별 무이자할부 혜택을 받으시려면 무이자할부 상품만 선택하여 [주문하기] 버튼을 눌러 주문/결제 하시면 됩니다.</li>
-				<li>[전체 상품 주문] 버튼을 누르시면 장바구니의 구분없이 선택된 모든 상품에 대한 주문/결제가 이루어집니다.</li>
-				<li>단, 전체 상품을 주문/결제하실 경우, 상품별 무이자할부 혜택을 받으실 수 없습니다.</li>
+				<li>부가가치세법 제 54조에 의거하여 세금계산서는 배송완료일로부터 다음달 10일까지만 요청하실 수 있습니다.</li>
+				<li>세금계산서는 사업자만 신청하실 수 있습니다.</li>
+				<li>배송이 완료된 주문에 한하여 세금계산서 발행신청이 가능합니다.</li>
+				<li>[세금계산서 신청]버튼을 눌러 세금계산서 신청양식을 작성한 후 팩스로 사업자등록증사본을 보내셔야 세금계산서 발생이 가능합니다.</li>
+				<li>[세금계산서 인쇄]버튼을 누르면 발행된 세금계산서를 인쇄하실 수 있습니다.</li>
+			</ol>
+			<h4>부가가치세법 변경에 따른 신용카드매출전표 및 세금계산서 변경안내</h4>
+			<ol>
+				<li>변경된 부가가치세법에 의거, 2004.7.1 이후 신용카드로 결제하신 주문에 대해서는 세금계산서 발행이 불가하며</li>
+				<li>신용카드매출전표로 부가가치세 신고를 하셔야 합니다.(부가가치세법 시행령 57조)</li>
+				<li>상기 부가가치세법 변경내용에 따라 신용카드 이외의 결제건에 대해서만 세금계산서 발행이 가능함을 양지하여 주시기 바랍니다.</li>
+			</ol>
+			<h4>현금영수증 이용안내</h4>
+			<ol>
+				<li>현금영수증은 1원 이상의 현금성거래(무통장입금, 실시간계좌이체,에스크로, 예치금)에 대해 발행이 됩니다.</li>
+				<li>현금영수증 발행 금액에는 배송비는 포함되고, 적립금사용액은 포함되지 않습니다.</li>
+				<li>발행신청 기간제한 현금영수증은 입금확인일로 부터 48시간안에 발행을 해야 합니다.</li>
+				<li>현금영수증 발행 취소의 경우는 시간 제한이 없습니다. (국세청의 정책에 따라 변경 될 수 있습니다.)</li>
+				<li>현금영수증이나 세금계산서 중 하나만 발행 가능 합니다.</li>
 			</ol>
 		</div>
 	</div>

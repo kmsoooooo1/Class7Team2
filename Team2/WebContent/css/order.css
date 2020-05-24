@@ -74,6 +74,7 @@
     color: #353535;
     font-size: 14px;
     line-height: 1.5;
+    margin-top: 30px;
 }
 
 .container colgroup{
@@ -218,6 +219,7 @@
 
 .inner ol li{
 	background-position: -484px 0;
+	color: #989799;
 }
 
 .orderArea{
@@ -308,13 +310,53 @@
 }
 
 .orderInfo{
-	width: 380px;
+	width: 60%;
     margin: 45px auto 0;
     padding: 0 0 10px 130px;
     color: #353535;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
-    background: url(../img/orderlogo.png) no-repeat 10px 1px;
 }
 
+.orderInfo p{
+	margin: 0 0 14px;
+    font-size: 12px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0;
+    padding: 0;
+}
 
+.orderInfo p strong{
+	display: block;
+    margin: 0 0 5px;
+    color: #000;
+    font-size: 14px;
+}
+
+.orderInfo ul{
+	display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+.orderInfo li{
+	list-style: none;
+}
+
+.logo_img{
+	width: 100px;
+	height: 100px;
+	margin-right: 20px;
+}
+
+.orderlist td{
+	padding-left: 10px;
+}
