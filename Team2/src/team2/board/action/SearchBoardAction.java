@@ -20,11 +20,21 @@ public class SearchBoardAction implements Action {
 		
 //		String category = (String)request.getParameter("b_category");
 
-		int c = Integer.parseInt(request.getParameter("category"));
+		int c = 3;
+		int pageSize = 10;
+		String search = "";
+		try{
+			 c = Integer.parseInt(request.getParameter("category"));
+			 pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			 search = (String) request.getParameter("search");
+		}catch(Exception e){
+			System.out.println(e);
+		}
+//		int c = Integer.parseInt(request.getParameter("category"));
+//		
+//		String search = (String) request.getParameter("search");
 		
-		String search = (String) request.getParameter("search");
-		
-		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+//		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		
 		cSet cset = new cSet();
 		

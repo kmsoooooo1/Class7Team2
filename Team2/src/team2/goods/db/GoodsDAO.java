@@ -509,7 +509,6 @@ public List<GoodsDTO> getGoodsList(){
 	
 	
 	//getGoodsDetailList(g_code) 상품 상세정보 가져오는 함수
-	// 수정 필요
 	public List<GoodsDTO> getGoodsDetailList(String g_code){
 		List<GoodsDTO> detailList = new ArrayList<GoodsDTO>();
 		
