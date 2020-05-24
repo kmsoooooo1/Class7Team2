@@ -325,7 +325,7 @@ public class BoardDAO {
 	////////////////////////////////////////////////////////////////////
 	
 	public void deleteBoard(int num) {
-		
+
 		try {
 			sql = "delete from team2_board where b_idx = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -334,9 +334,12 @@ public class BoardDAO {
 			pstmt.executeUpdate();
 			
 			System.out.println("DB 삭제 성공");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+
 	}
 
 	//관리자 삭제
@@ -396,8 +399,11 @@ public class BoardDAO {
 
 	public ArrayList<BoardDTO> searchTitle(cSet cset, String search, Criteria cri) {		
 		
-		sql = "select * from team2_board where b_category='"+cset.getCategory()+"' and b_title like '%"+search+"%' order by b_idx desc limit "+cri.getPageStart()+","+cri.getPerpageNum()+"";
-			
+		if(cset.getCategory().equals("All")){
+			sql = "select * from team2_board where b_title like '%"+search+"%' order by b_idx desc limit "+cri.getPageStart()+","+cri.getPerpageNum()+"";
+		}else{
+			sql = "select * from team2_board where b_category='"+cset.getCategory()+"' and b_title like '%"+search+"%' order by b_idx desc limit "+cri.getPageStart()+","+cri.getPerpageNum()+"";
+		}
 		System.out.println("searchTitle : "+sql);
 		
 		return searchBoard(sql);
@@ -408,11 +414,17 @@ public class BoardDAO {
 		int total = 0;
 		
 		try {
-			sql = "select count(*) from team2_board where b_category=? and b_title like ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, cset.getCategory());
-			pstmt.setString(2, '%'+search+'%');
+			if(cset.getCategory().equals("All")){
+				sql = "select count(*) from team2_board where b_title like ?";	
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, '%'+search+'%');
+			}else{
+				sql = "select count(*) from team2_board where b_category=? and b_title like ?";
 			
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cset.getCategory());
+				pstmt.setString(2, '%'+search+'%');
+				}
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
@@ -454,6 +466,37 @@ public class BoardDAO {
 		}
 		
 		return result;
+	}
+	
+	public int idCheck(int num, String id){
+		int check = 0;
+		
+		try {
+			sql = "select b_writer from team2_board where b_idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				
+				String writer = rs.getString(1);
+				System.out.println("이글의 작성자는 " + writer);
+				if(id.equals(writer)){
+					check = 1;
+				}else{
+					check = 0;
+				}
+			}
+			
+			System.out.println("아이디 체크 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return check;
 	}
 	
 		
