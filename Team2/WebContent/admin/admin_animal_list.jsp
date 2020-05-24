@@ -22,6 +22,10 @@
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		int pageNum = (int)request.getAttribute("pageNum");
+		
+		System.out.println("pm: " + pageMaker);
+		System.out.println("cri :" + cri);
+		
 	%>
 	
 	<!-- Header -->

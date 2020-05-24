@@ -17,7 +17,7 @@ public class AnimalListAction implements Action{
 		
 		AnimalDAO adao = new AnimalDAO();
 		
-		String category = request.getParameter("category");
+		String category = "all";
 		String sub_category = "";
 		String sub_category_index = "";
 		
@@ -43,9 +43,12 @@ public class AnimalListAction implements Action{
 		
 		
 		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category, sub_category_index, cri);
-		System.out.println("total : "+total);
-		total = admin_animalList.size();
+		List<AnimalDTO> admin_animalList2 = adao.getAnimalList(category, sub_category, sub_category_index);
+		
+		
+		total = admin_animalList2.size();
 		pageMaker.setTotalCount(total);
+		System.out.println("total : "+total);
 		
 		request.setAttribute("admin_animalList", admin_animalList);
 		request.setAttribute("cri", cri);
