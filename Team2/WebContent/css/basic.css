@@ -75,7 +75,7 @@ body{
 	height: 50px;
 }
 
-.rolling #rolling_li {
+.rolling li {
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
