@@ -180,6 +180,94 @@ public class AnimalDAO {
 		return animalList;
 	}
 	
+	public List<AnimalDTO> getAnimalList(String category, String sub_category, String sub_category_index) {
+		List<AnimalDTO> animalList = new ArrayList<AnimalDTO>();
+		try {
+			con = getConnection();
+			
+			//StringBuffer: 저장공간(메모리)
+			StringBuffer SQL = new StringBuffer();
+			
+			//SQL buffer 안에 sql 구문 넣어주기
+			
+			//만약 category가 all이고 sub_category가 없고 sub_category_index도 없을때(관리자 페이지에서 모든 동물을 부를때)
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+				SQL.append("select * from team2_animals order by num desc");
+			}
+			//만약 category가 파충류이면
+			else if(category.equals("파충류")){
+				SQL.append("select * from team2_animals where category = '파충류' ");
+				//만약 sub_category가 없으면
+				if(sub_category.equals("all")) {
+					SQL.append("order by num desc");
+				}
+				//만약 sub_category가 있으면
+				else {
+					SQL.append("AND sub_category = ? ");
+					//만약 sub_category_index가 없으면
+					if(sub_category_index.equals("all")){
+						SQL.append("order by num desc");
+					}
+					//만약 sub_category_index가 있으면
+					else {
+						SQL.append("AND sub_category_index = ? order by num desc");
+					}
+				}
+			}
+			
+			pstmt = con.prepareStatement(SQL.toString());
+			System.out.println(pstmt);
+			//?에 값 지정하기
+			if(category.equals("all") && sub_category.equals("") && sub_category_index.equals("")){
+				
+			}
+			else if(category.equals("파충류")){
+				if(sub_category.equals("all")) {
+				}
+				else {
+					pstmt.setString(1, sub_category);
+					if(sub_category_index.equals("all")){
+					}
+					else {
+						pstmt.setString(2, sub_category_index);
+					}
+				}
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				//동물이 존재하면
+				AnimalDTO adto = new AnimalDTO();
+				adto.setNum(rs.getInt("num"));
+				adto.setCategory(rs.getString("category"));
+				adto.setSub_category(rs.getString("sub_category"));
+				adto.setSub_category_index(rs.getString("sub_category_index"));
+				adto.setA_morph(rs.getString("a_morph"));
+				adto.setA_sex(rs.getString("a_sex"));
+				adto.setA_status(rs.getString("a_status"));
+				adto.setA_code(rs.getString("a_code"));
+				adto.setA_thumbnail(rs.getString("a_thumbnail"));
+				adto.setA_amount(rs.getInt("a_amount"));
+				adto.setA_price_origin(rs.getInt("a_price_origin"));
+				adto.setA_discount_rate(rs.getInt("a_discount_rate"));
+				adto.setA_price_sale(rs.getInt("a_price_sale"));
+				adto.setA_mileage(rs.getInt("a_mileage"));
+				adto.setContent(rs.getString("content"));
+				adto.setA_view_count(rs.getInt("a_view_count"));
+				adto.setDate(rs.getDate("date"));
+				animalList.add(adto);
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return animalList;
+	}
+	
+	
+	
 	//동물페이지 조회수 1업 시키는 함수
 	public void updateAnimalViewCount(String a_code){    	
     	try {
