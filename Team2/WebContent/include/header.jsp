@@ -91,7 +91,7 @@
     <div class="notice">
      <ul class="rolling"> 
        <%
-	    for(int i=0;i<boardList.size();i++){ 
+	    for(int i=0;i<6;i++){ 
              BoardDTO bdto = (BoardDTO) boardList.get(i);
 	  %>
       <li>
