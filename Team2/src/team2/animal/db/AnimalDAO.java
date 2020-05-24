@@ -299,6 +299,91 @@ public class AnimalDAO {
 		return animalList;
 	}
 	
+	//getAnimals(num)
+	public AnimalDTO getAnimals(int num){
+		AnimalDTO adto = null;
+		
+		try {
+			con = getConnection();
+			
+			sql = "select * from team2_animals where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				adto = new AnimalDTO();
+				
+				adto.setA_amount(rs.getInt("a_amount"));
+				adto.setA_code(rs.getString("a_code"));
+				adto.setA_discount_rate(rs.getInt("a_discount_rate"));
+				adto.setA_mileage(rs.getInt("a_mileage"));
+				adto.setA_morph(rs.getString("a_morph"));
+				adto.setA_price_origin(rs.getInt("a_price_origin"));
+				adto.setA_price_sale(rs.getInt("a_price_sale"));
+				adto.setA_sex(rs.getString("a_sex"));
+				adto.setA_status(rs.getString("a_status"));
+				adto.setA_thumbnail(rs.getString("a_thumbnail"));
+				adto.setA_view_count(rs.getInt("a_view_count"));
+				adto.setCategory(rs.getString("category"));
+				adto.setContent(rs.getString("content"));
+				adto.setDate(rs.getDate("date"));
+				adto.setNum(rs.getInt("num"));
+				adto.setSub_category(rs.getString("sub_category"));
+				adto.setSub_category_index(rs.getString("sub_category_index"));
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+		
+		return adto;
+	}//getAnimals(num)
+	
+	//modifyAnimals(adto)
+	public void modifyAnimals(AnimalDTO adto){
+		try {
+			con = getConnection();
+			
+			sql = "update team2_animals set "
+					+ "category=?,sub_category=?,sub_category_index=?,a_morph=?,a_sex=?,a_status=?,"
+					+ "a_code=?,a_thumbnail=?,a_amount=?,a_price_origin=?,a_discount_rate=?,"
+					+ "a_price_sale=?,a_mileage=?,content=? "
+					+ "where num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, adto.getCategory());
+			pstmt.setString(2, adto.getSub_category());
+			pstmt.setString(3, adto.getSub_category_index());
+			pstmt.setString(4, adto.getA_morph());
+			pstmt.setString(5, adto.getA_sex());
+			pstmt.setString(6, adto.getA_status());
+			pstmt.setString(7, adto.getA_code());
+			pstmt.setString(8, adto.getA_thumbnail());
+			pstmt.setInt(9, adto.getA_amount());
+			pstmt.setInt(10, adto.getA_price_origin());
+			pstmt.setInt(11, adto.getA_discount_rate());
+			pstmt.setInt(12, adto.getA_price_sale());
+			pstmt.setInt(13, adto.getA_mileage());
+			pstmt.setString(14, adto.getContent());
+			pstmt.setInt(15, adto.getNum());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("동물 정보 수정 완료");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+	}
+	//modifyAnimals(adto)
 	
 	
 	//동물페이지 조회수 1업 시키는 함수
