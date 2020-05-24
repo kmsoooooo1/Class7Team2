@@ -42,6 +42,7 @@ public class AnimalListAction implements Action{
 		pageMaker.setCri(cri);
 		
 		
+		
 		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category, sub_category_index, cri);
 		List<AnimalDTO> admin_animalList2 = adao.getAnimalList(category, sub_category, sub_category_index);
 		
