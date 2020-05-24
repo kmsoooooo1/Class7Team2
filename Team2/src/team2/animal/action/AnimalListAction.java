@@ -30,9 +30,20 @@ public class AnimalListAction implements Action{
 		if(sub_category_index == null) {
 			sub_category_index = "all";
 		}
-
+		
+			
+		aSet aset = new aSet();
+			
+		aset.setCategory(category);
+		aset.setSub_category(sub_category);
+		aset.setSub_category_index(sub_category_index);
+		
+		System.out.println(aset.toString());
+		
 		//total 게시판 글 수
 		int total = 0;
+		
+		total = adao.getAnimalCount(aset);
 		
 		//  ----페이징 처리-----
 		String pageNum = request.getParameter("pageNum");
