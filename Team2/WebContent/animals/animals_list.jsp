@@ -22,7 +22,7 @@
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
 		if (sub_category_index == null) {
-			sub_category_index = "";
+			sub_category_index = "all";
 		}
 
 		//AnimalListAction 객체에서 저장된 정보를 저장 
@@ -81,7 +81,7 @@
 		<%
 			}
 		%>
-		<span class="a_amount"> Total <%=animalList.size()%> items
+		<span class="a_amount"> Total <%=pageMaker.getTotalCount()%> items
 		</span>
 		<ul class="ul_wrap">
 
@@ -158,23 +158,23 @@
 
 		<div class="bottom">
 			<ul id="pageList">
-				<c:if test="${pageMaker.prev }">
-					<li
-						onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.startPage-1 }'">
-						◀</li>
-				</c:if>
-				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
-					var="pageNum">
-					<li
-						onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageNum}'">
-						${pageNum }</li>
-				</c:forEach>
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li
-						onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.endPage+1 }'">
-						▶</li>
-				</c:if>
-			</ul>
+			<%if(pageMaker.isPrev()){ %>
+				<li onclick="location.href='./AnimalList.an?category=<%=category%>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index %>&pageNum=<%=pageMaker.getStartPage()-1%>'">
+					◀	
+				</li>
+			<%}
+			for(int i = pageMaker.getStartPage(); i<=pageMaker.getEndPage(); i++){
+			%>
+				<li onclick="location.href='./AnimalList.an?category=<%=category%>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index %>&pageNum=<%=i%>'">
+					<%=i %>
+				</li>
+			<%}
+			if(pageMaker.isNext() && pageMaker.getEndPage() > 0){ %>
+				<li onclick="location.href='./AnimalList.an?category=<%=category%>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index %>&pageNum=<%=pageMaker.getEndPage()+1%>'">
+					▶
+				</li>
+			<%} %>
+		</ul>
 		</div>
 
 	</div>

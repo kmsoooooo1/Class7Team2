@@ -119,7 +119,7 @@
   <div class="bottom">
 	<ul id="pageList">
 		<c:if test="${pm.prev }">
-		<li onclick="location.href='./GoodsList.ag?&pageNum=${pm.startPage-1 }'">
+		<li onclick="location.href='./GoodsList.ag?pageNum=${pm.startPage-1 }'">
 			◀	
 		</li>
 		</c:if>
@@ -129,7 +129,7 @@
 		</li>
 		</c:forEach>
 		<c:if test="${pm.next && pm.endPage > 0}">
-		<li onclick="location.href='./GoodsList.ag?&pageNum=${pm.endPage+1 }'">
+		<li onclick="location.href='./GoodsList.ag?pageNum=${pm.endPage+1 }'">
 			▶
 		</li>
 		</c:if>

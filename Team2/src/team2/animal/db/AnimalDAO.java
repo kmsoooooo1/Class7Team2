@@ -48,6 +48,39 @@ public class AnimalDAO {
 		}
 	}
 	
+	public int animalTotalCount(String category, String sub_category, String sub_category_index) {
+		int result = 0;
+		
+		if(!category.equals("all")) {
+			sql = "select count(num) from team2_animals where category='" + category + "'";
+		}else {
+			sql = "select count(num) from team2_animals";
+		}
+		
+		if(!sub_category.equals("all")) {
+			sql = sql + " and sub_category='"+sub_category + "'";
+		}
+		if(!sub_category_index.equals("all") ) {
+			sql = sql + " and sub_category_index='"+sub_category_index + "'";
+		}
+		
+		System.out.println(sql);
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return result;
+	}
+	
 	//새로운 동물 추가하는 함수
 	public void insertAnimal(AnimalDTO adto) {
 		int num = 0;
