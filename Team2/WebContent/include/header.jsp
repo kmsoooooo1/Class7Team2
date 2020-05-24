@@ -76,12 +76,9 @@
     </div>
    <%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
+   
 	%>
-	
     <div class="notice_bar">
-<!--     <a href="./BoardList.bo?category=0"> -->
-<!-- 	 <i class="far fa-envelope"><span>Notice</span></i> -->
-<!-- 	</a> -->
      <ul class="rolling"> 
        <%
        String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
@@ -91,7 +88,7 @@
 	    for(int i=0; i<boardNoticeList.size(); i++){ 
              BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
 	  %>
-      <li id="rolling_li">
+      <li>
        <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
 		    	 <%=bdto.getB_title()%> 
 	   </a>
@@ -187,13 +184,6 @@ $(document).ready(function(){
 	$(".rolling").append($(".rolling li").first().clone());
 	
 });	
-	// 공지사항 롤링 페이지 글자수 제한 (30자 이상시 ...)
-	$(document).ready(function(){
-	 $('.rolling li a').each(function(){
-		 if ($(this).text().length > 30)
-			$(this).html($(this).text().substr(0,30)+"..."); 
-	});
-});
 
 //헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
 window.onscroll = function() {myFunction()};

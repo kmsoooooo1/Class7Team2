@@ -155,6 +155,52 @@ public class GoodsDAO {
 		return goodsList;
 	}//getGoodsList();
 	
+public List<GoodsDTO> getGoodsList(){
+		
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		
+		try {
+			con = getConnection();
+			
+			sql="SELECT * FROM team2_goods order by num desc";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				GoodsDTO gdto = new GoodsDTO();
+				gdto.setNum(rs.getInt("num"));
+				gdto.setCategory(rs.getString("category"));
+				gdto.setSub_category(rs.getString("sub_category"));
+				gdto.setSub_category_index(rs.getString("sub_category_index"));
+				gdto.setG_name(rs.getString("g_name"));
+				gdto.setG_code(rs.getString("g_code"));
+				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
+				gdto.setG_amount(rs.getInt("g_amount"));
+				gdto.setG_price_origin(rs.getInt("g_price_origin"));
+				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
+				gdto.setG_price_sale(rs.getInt("g_price_sale"));
+				gdto.setG_mileage(rs.getInt("g_mileage"));
+				gdto.setG_delivery(rs.getString("g_delivery"));
+				gdto.setG_option(rs.getString("g_option"));
+				gdto.setG_option_price(rs.getInt("g_option_price"));
+				gdto.setContent(rs.getString("content"));
+				gdto.setG_view_count(rs.getInt("g_view_count"));
+				gdto.setDate(rs.getDate("date"));
+				
+				goodsList.add(gdto);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return goodsList;
+	}//getGoodsList();
+	
 	//getGoods(num); 관리자
 	public GoodsDTO getGoods(int num){
 		

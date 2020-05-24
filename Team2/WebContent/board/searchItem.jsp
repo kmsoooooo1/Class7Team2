@@ -1,3 +1,5 @@
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
 <%@page import="team2.board.db.PDAO"%>
 <%@page import="team2.board.db.ProductDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,6 +11,7 @@
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,6 +23,11 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String c_str = request.getParameter("C");
+	String page_str = request.getParameter("pageNum");
+	int pagea = 0;
+	if(page_str!=null){
+		pagea = Integer.parseInt(page_str);
+	}
 	int c = 0;
 	if(c_str != null){
 		c = Integer.parseInt(c_str);
@@ -35,7 +43,7 @@
 	AnimalDAO adao = new AnimalDAO();
 	if(product==null){
 		if(keyword==null || keyword.equals("")){
-			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));	
+			list = PDAO.getProduct(gdao.getGoodsList(), adao.getAnimalList("all", "", ""));
 		}else{
 			list = PDAO.getProduct(adao.searchKeyword(keyword),gdao.searchKeyword(keyword));
 			 
@@ -62,10 +70,21 @@
 	gdao.closeDB();
 	adao.closeDB();
 	
+	Criteria cri = new Criteria();
+	cri.setPage(pagea);
+	cri.setPerpageNum(20);
+	System.out.println("size : "+list.size());
+	PageMaker pm = new PageMaker();
+	pm.setCri(cri);
+	pm.setTotalCount(list.size());
+	
 	System.out.println("product : " + product);
 	System.out.println("cate : " + cate);
 	System.out.println("kind : " + kind);
 	System.out.println("keyword : " + keyword);
+	
+	System.out.println(cri);
+	System.out.println(pm);
 	
 	String[] cList = {};
 		
@@ -167,6 +186,26 @@
 				</table>
 			</div>
 		</div>
+	</div>
+	<div class="bottom">
+		<ul id="pageList">
+			<%if(pm.isPrev()){ %>
+				<li onclick="location.href='./searchItem.jsp?&pageNum=<%=pm.getStartPage()-1%>'">
+					◀	
+				</li>
+			<%}
+			for(int i = pm.getStartPage(); i<=pm.getEndPage(); i++){
+			%>
+				<li onclick="location.href='./searchItem.jsp?pageNum=<%=i%>'">
+					<%=i %>
+				</li>
+			<%}
+			if(pm.isNext() && pm.getEndPage() > 0){ %>
+				<li onclick="location.href='./searchItem.jsp?&pageNum=<%=pm.getEndPage()+1%>'">
+					▶
+				</li>
+			<%} %>
+		</ul>
 	</div>
 	<jsp:include page="/include/footer.jsp"/>
 </body>
