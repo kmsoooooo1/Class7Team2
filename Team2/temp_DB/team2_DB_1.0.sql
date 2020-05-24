@@ -28,8 +28,9 @@ CREATE TABLE `team2_order` (
   `o_num` int(11) NOT NULL,
   `o_trade_num` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `o_p_code` text COLLATE utf8_unicode_ci,
-  `o_p_amount` text COLLATE utf8_unicode_ci,
+  `o_p_amount` int(11) DEFAULT NULL,
   `o_p_option` text COLLATE utf8_unicode_ci,
+  `o_p_delivery_method` text COLLATE utf8_unicode_ci,
   `o_m_id` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `o_receive_name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `o_receive_zipcode` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE `team2_order` (
 
 LOCK TABLES `team2_order` WRITE;
 /*!40000 ALTER TABLE `team2_order` DISABLE KEYS */;
-INSERT INTO `team2_order` VALUES (1,'20200524-1','g-404, a-103, a-103, ','1, 1, 1, ',', , , ','coduo25','박정훈','46294','부산 금정구 금강로 225 (장전동, 벽산블루밍디자인시티)','208동 2104호','01062419520','01062419520','test',165500,'무통장입금','박정훈','2020-05-24','','2020-05-24',0);
+INSERT INTO `team2_order` VALUES (1,'20200524-1','g-404',1,'','일반포장','coduo25','박정훈','46294','부산 금정구 금강로 225 (장전동, 벽산블루밍디자인시티)','208동 2104호','01062419520','01062419520','test',165500,'무통장입금','박정훈','2020-05-24','','2020-05-24',0),(2,'20200524-1','a-103',1,'','퀵서비스','coduo25','박정훈','46294','부산 금정구 금강로 225 (장전동, 벽산블루밍디자인시티)','208동 2104호','01062419520','01062419520','test',165500,'무통장입금','박정훈','2020-05-24','','2020-05-24',0),(3,'20200524-1','a-103',1,'','일반포장','coduo25','박정훈','46294','부산 금정구 금강로 225 (장전동, 벽산블루밍디자인시티)','208동 2104호','01062419520','01062419520','test',165500,'무통장입금','박정훈','2020-05-24','','2020-05-24',0);
 /*!40000 ALTER TABLE `team2_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-24  4:07:30
+-- Dump completed on 2020-05-24 11:14:53

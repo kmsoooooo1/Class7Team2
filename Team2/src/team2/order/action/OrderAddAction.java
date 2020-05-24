@@ -79,30 +79,38 @@ public class OrderAddAction implements Action{
 		
 		//수령하는 자 정보 저장하기 --------------------------------
 		OrderDTO odto = new OrderDTO();
+		OrderDAO odao = new OrderDAO();
+		
+		String o_trade_num = "";
+		
+		int max_O_Num = odao.find_MaxO_num(id);
 		
 		//구매하고자 하는 물건들 코드, 옵션들 저장하기
-		odto.setO_p_code(selectedCodes);
-		odto.setO_p_amount(selectedAmounts);
-		odto.setO_p_option(selectedOptions);
+		for(int i=0; i<splitSeletedCodes.length-1; i++){
+			odto.setO_p_code(splitSeletedCodes[i].trim());
+			odto.setO_p_amount(Integer.parseInt(splitSelectedAmounts[i].trim()));
+			odto.setO_p_option(splitSelectedOptions[i].trim());
+			odto.setO_delivery_method(splitSelectedDeliveryMethods[i].trim());
+			
+			//배송지 정보 저장
+			odto.setO_m_id(id);
+			
+			odto.setO_receive_name(request.getParameter("rece_name"));
+			odto.setO_receive_mobile(request.getParameter("rece_phone"));
+			odto.setO_receive_phone(request.getParameter("rece_number"));
+			odto.setO_receive_zipcode(request.getParameter("rece_zipcode"));
+			odto.setO_receive_addr1(request.getParameter("rece_addr1"));
+			odto.setO_receive_addr2(request.getParameter("rece_addr2"));
+			odto.setO_memo(request.getParameter("o_memo"));
+			odto.setO_sum_money(Integer.parseInt(request.getParameter("o_sum_money_input")));
+			
+			//결제 정보 저장
+			odto.setO_trade_type(request.getParameter("payment"));
+			odto.setO_trade_payer(request.getParameter("o_trade_payer"));
 		
-		//배송지 정보 저장
-		odto.setO_m_id(id);
-		odto.setO_receive_name(request.getParameter("rece_name"));
-		odto.setO_receive_mobile(request.getParameter("rece_phone"));
-		odto.setO_receive_phone(request.getParameter("rece_number"));
-		odto.setO_receive_zipcode(request.getParameter("rece_zipcode"));
-		odto.setO_receive_addr1(request.getParameter("rece_addr1"));
-		odto.setO_receive_addr2(request.getParameter("rece_addr2"));
-		odto.setO_memo(request.getParameter("o_memo"));
-		odto.setO_sum_money(Integer.parseInt(request.getParameter("o_sum_money_input")));
-		
-		//결제 정보 저장
-		odto.setO_trade_type(request.getParameter("payment"));
-		odto.setO_trade_payer(request.getParameter("o_trade_payer"));
-		
-		OrderDAO odao = new OrderDAO();
-		String o_trade_num = odao.addOrder(odto);
-
+			o_trade_num = odao.addOrder(odto, max_O_Num);
+		}
+	
 		//쿠폰
 		
 		

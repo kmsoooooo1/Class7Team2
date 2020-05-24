@@ -7,8 +7,9 @@ public class OrderDTO {
 	private int o_num;
 	private String o_trade_num;
 	private String o_p_code;
-	private String o_p_amount;
+	private int o_p_amount;
 	private String o_p_option;
+	private String o_delivery_method;
 	private String o_m_id;
 	private String o_receive_name;
 	private String o_receive_zipcode;
@@ -43,10 +44,10 @@ public class OrderDTO {
 	public void setO_p_code(String o_p_code) {
 		this.o_p_code = o_p_code;
 	}
-	public String getO_p_amount() {
+	public int getO_p_amount() {
 		return o_p_amount;
 	}
-	public void setO_p_amount(String o_p_amount) {
+	public void setO_p_amount(int o_p_amount) {
 		this.o_p_amount = o_p_amount;
 	}
 	public String getO_p_option() {
@@ -54,6 +55,12 @@ public class OrderDTO {
 	}
 	public void setO_p_option(String o_p_option) {
 		this.o_p_option = o_p_option;
+	}
+	public String getO_delivery_method() {
+		return o_delivery_method;
+	}
+	public void setO_delivery_method(String o_delivery_method) {
+		this.o_delivery_method = o_delivery_method;
 	}
 	public String getO_m_id() {
 		return o_m_id;

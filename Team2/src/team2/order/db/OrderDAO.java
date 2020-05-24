@@ -45,8 +45,30 @@ public class OrderDAO {
 		}
 	}
 	
+	//현재 DB에 나의 주문 번호 첫번째 값 가지기 위한 함수 
+	public int find_MaxO_num(String id){
+		int o_first_num = 0;
+		
+		try {
+			con = getConnection();
+			sql = "select max(o_num) from team2_order where o_m_id = ? limit 1";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()){
+				o_first_num = rs.getInt(1) + 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return o_first_num;
+	}
+	
 	//주문한정보 저장하는 함수
-	public String addOrder(OrderDTO odto){
+	public String addOrder(OrderDTO odto, int o_first_num){
 		String o_trade_num = "";
 		
 		int o_num = 0;
@@ -63,34 +85,37 @@ public class OrderDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				o_num = rs.getInt(1) + 1;
+			}else{
+				o_num = 1;
 			}
-			
+
 			// 주문번호
-			trade_num = o_num;
+			trade_num = o_first_num;
 				
-			sql = "insert into team2_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?, now(), ?)";
+			sql = "insert into team2_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?, now(), ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, o_num);
 			pstmt.setString(2, sdf.format(cal.getTime()).toString() + "-" + trade_num); // 20200331-1
 			pstmt.setString(3, odto.getO_p_code());
-			pstmt.setString(4, odto.getO_p_amount());
+			pstmt.setInt(4, odto.getO_p_amount());
 			pstmt.setString(5, odto.getO_p_option());
+			pstmt.setString(6, odto.getO_delivery_method());
 			
-			pstmt.setString(6, odto.getO_m_id());
-			pstmt.setString(7, odto.getO_receive_name());
-			pstmt.setString(8, odto.getO_receive_zipcode());
-			pstmt.setString(9, odto.getO_receive_addr1());
-			pstmt.setString(10, odto.getO_receive_addr2());
-			pstmt.setString(11, odto.getO_receive_mobile());
-			pstmt.setString(12, odto.getO_receive_phone());
-			pstmt.setString(13, odto.getO_memo());
+			pstmt.setString(7, odto.getO_m_id());
+			pstmt.setString(8, odto.getO_receive_name());
+			pstmt.setString(9, odto.getO_receive_zipcode());
+			pstmt.setString(10, odto.getO_receive_addr1());
+			pstmt.setString(11, odto.getO_receive_addr2());
+			pstmt.setString(12, odto.getO_receive_mobile());
+			pstmt.setString(13, odto.getO_receive_phone());
+			pstmt.setString(14, odto.getO_memo());
 			
-			pstmt.setInt(14, odto.getO_sum_money());
-			pstmt.setString(15, odto.getO_trade_type());
-			pstmt.setString(16, odto.getO_trade_payer());
+			pstmt.setInt(15, odto.getO_sum_money());
+			pstmt.setString(16, odto.getO_trade_type());
+			pstmt.setString(17, odto.getO_trade_payer());
 			
-			pstmt.setString(17, "");
-			pstmt.setInt(18, 0);
+			pstmt.setString(18, "");
+			pstmt.setInt(19, 0);
 			
 			pstmt.executeUpdate();
 			
@@ -128,11 +153,11 @@ public class OrderDAO {
 			pstmt.setString(2, o_trade_num);
 			rs = pstmt.executeQuery();
 
-			if(rs.next()) {
+			while(rs.next()) {
 				OrderDTO odto = new OrderDTO();
 				odto.setO_trade_num(rs.getString("o_trade_num"));
 				odto.setO_p_code(rs.getString("o_p_code"));
-				odto.setO_p_amount(rs.getString("o_p_amount"));
+				odto.setO_p_amount(rs.getInt("o_p_amount"));
 				odto.setO_p_option(rs.getString("o_p_option"));
 				
 				odto.setO_receive_name(rs.getString("o_receive_name"));
@@ -152,12 +177,7 @@ public class OrderDAO {
 				odto.setO_date(rs.getDate("o_date"));
 				odto.setO_status(rs.getInt("o_status"));
 				orderList.add(odto);
-				
-				String splitSeletedCodes[] = odto.getO_p_code().split(",");
-				String splitSelectedAmounts[] = odto.getO_p_amount().split(",");
-				String splitSelectedOptions[] = odto.getO_p_option().split(",");
-
-				
+	
 				//b_code 값들 중에 맨 앞글자 따오기
 				char first_letter = rs.getString("b_code").charAt(0);
 				
