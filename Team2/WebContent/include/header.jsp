@@ -184,6 +184,15 @@ $(document).ready(function(){
 	$(".rolling").append($(".rolling li").first().clone());
 	
 });	
+	// 글자수 제한 30자 이상시 (뒤에...)
+	$(document).ready(function(){ 
+		$('.rolling li a').each(function(){
+			if ($(this).text().length > 20) 
+				$(this).html($(this).text().substr(0,20)+"...");
+			});
+		});
+
+
 
 //헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
 window.onscroll = function() {myFunction()};
