@@ -109,14 +109,14 @@ public class GoodsDAO {
 	}//insertGoods(gdto);
 	
 	//getGoodsList(); 관리자
-	public List<GoodsDTO> getGoodsList(){
+	public List<GoodsDTO> getGoodsList(Criteria cri){
 		
 		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
 		
 		try {
 			con = getConnection();
 			
-			sql="SELECT * FROM team2_goods order by num desc";
+			sql="SELECT * FROM team2_goods order by num desc limit " + (cri.getPage()-1)*cri.getPerpageNum() + ", "+ cri.getPerpageNum();
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -245,6 +245,29 @@ public class GoodsDAO {
 		
 	}//modifyGoods(gdto);
 	
+	public int getTotalCount() {
+		
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "select count(num) from team2_goods";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("count(num)");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+	}
+	
+	
 	//deleteGoods(num) 관리자
 	public void deleteGoods(int num){
 		try {
@@ -264,56 +287,6 @@ public class GoodsDAO {
 			closeDB();
 		}
 	}//deleteGoods(num)
-	
-//	//AdminGoodsPage(cri)
-//	public List<GoodsDTO> AdminGoodsPage(String category, Criteria cri){
-//		
-//		List<GoodsDTO> list = new ArrayList<>();
-//		
-//		try {
-//			con = getConnection();
-//			
-//			sql="select * from team2_goods where category ='" +category+ "' order by num desc limit " + cri.getPageStart() + ", " + cri.getPerpageNum();
-//			
-//			pstmt = con.prepareStatement(sql);
-//			rs = pstmt.executeQuery();
-//			
-//			while(rs.next()){
-//				GoodsDTO gdto = new GoodsDTO();
-//				
-//				gdto.setCategory(rs.getString("category"));
-//				gdto.setContent(rs.getString("content"));
-//				gdto.setDate(rs.getDate("date"));
-//				gdto.setG_amount(rs.getInt("g_amount"));
-//				gdto.setG_code(rs.getString("g_code"));
-//				gdto.setG_delivery(rs.getString("g_delivery"));
-//				gdto.setG_discount_rate(rs.getInt("g_discount_rate"));
-//				gdto.setG_mileage(rs.getInt("g_mileage"));
-//				gdto.setG_name(rs.getString("g_name"));
-//				gdto.setG_option(rs.getString("g_option"));
-//				gdto.setG_option_price(rs.getInt("g_option_price"));
-//				gdto.setG_price_origin(rs.getInt("g_price_origin"));
-//				gdto.setG_price_sale(rs.getInt("g_price_sale"));
-//				gdto.setG_thumbnail(rs.getString("g_thumbnail"));
-//				gdto.setG_view_count(rs.getInt("g_view_count"));
-//				gdto.setNum(rs.getInt("num"));
-//				gdto.setSub_category(rs.getString("sub_category"));
-//				gdto.setSub_category_index(rs.getString("sub_category_index"));
-//				
-//				list.add(gdto);
-//			}
-//		
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally{
-//			closeDB();
-//		}
-//		
-//		return list;
-//		
-//	}//AdminGoodsPage(cri)
-	
 	
 	// 관리자 제어 끝 일반사용자 제어 시작
 	

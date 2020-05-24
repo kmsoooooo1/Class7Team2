@@ -1,9 +1,10 @@
-<%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,14 +20,9 @@
 		//GoodsListAction 객체에서 저장된 정보 저장
 		List<GoodsDTO> goodsList = (List<GoodsDTO>) request.getAttribute("goodsList");
 	
-		//paging 사용 객체
-// 		Criteria cri = (Criteria)request.getAttribute("cri");
-// 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
-// 		String pageNum = (String)request.getAttribute("pageNum");
-		
-// 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
-	
-	
+		PageMaker pm = (PageMaker)request.getAttribute("pm");
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		int pageNum = (int)request.getAttribute("pageNum");
 	%>
 	
 	<!-- Header -->
@@ -121,10 +117,27 @@
 	</div>	
 	<a href="./GoodsAdd.ag"><button>상품 추가하기</button></a>
   </div>
+  <div class="bottom">
+	<ul id="pageList">
+		<c:if test="${pm.prev }">
+		<li onclick="location.href='./GoodsList.ag?&pageNum=${pm.startPage-1 }'">
+			◀	
+		</li>
+		</c:if>
+		<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="pageNum" >
+		<li onclick="location.href='./GoodsList.ag?pageNum=${pageNum}'">
+			${pageNum }
+		</li>
+		</c:forEach>
+		<c:if test="${pm.next && pm.endPage > 0}">
+		<li onclick="location.href='./GoodsList.ag?&pageNum=${pm.endPage+1 }'">
+			▶
+		</li>
+		</c:if>
+	</ul>
+	</div>
  </div>
- 
- 
-  <!-- FOOTER -->
-  <jsp:include page="/include/footer.jsp"/>
+	<!-- FOOTER -->
+	<jsp:include page="/include/footer.jsp"/>
 </body>
 </html>

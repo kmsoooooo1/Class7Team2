@@ -1,3 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="team2.board.db.BoardDAO"%>
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.db.BoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -68,18 +74,39 @@
    </li>
    	  </ul>
     </div>
-    
+   <%
+		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		
+		//페이지번호 & 카테고리번호
+		String pageNum = (String)request.getAttribute("pageNum");
+		String category = (String)request.getAttribute("category");
+		String search = (String)request.getAttribute("search");
+		
+		//System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+
+	%>
     <div class="notice">
-     <ul class="rolling">
-      <li><a href="#">공지사항 내용1</a></li>
-      <li><a href="#">공지사항 내용2</a></li>
-      <li><a href="#">공지사항 내용3</a></li>
-      <li><a href="#">공지사항 내용4</a></li>
-      <li><a href="#">공지사항 내용5</a></li>
-      <li><a href="#">공지사항 내용6</a></li>
+     <ul class="rolling"> 
+       <%
+       String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
+       	BoardDAO bdao = new BoardDAO();
+       	List<BoardDTO> boardNoticeList = bdao.getList(sql);
+       	bdao.closeDB();
+	    for(int i=0; i<boardNoticeList.size(); i++){ 
+             BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
+	  %>
+      <li>
+       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
+		    	 <%=bdto.getB_title()%> 
+	   </a>
+	  </li>
+	    <%} %>
+	  
      </ul>
     </div>
- </div>
+   </div>
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
