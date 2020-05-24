@@ -19,6 +19,7 @@
 		//AnimalListAction 객체에서 저장된 정보를 저장 
 		List<AnimalDTO> admin_animalList = (List<AnimalDTO>) request.getAttribute("admin_animalList");
 	
+	
 		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		int pageNum = (int)request.getAttribute("pageNum");
