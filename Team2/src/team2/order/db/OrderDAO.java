@@ -72,7 +72,7 @@ public class OrderDAO {
 		String o_trade_num = "";
 		
 		int o_num = 0;
-		int trade_num = 0;
+		int trade_num = o_first_num;
 		
 		Calendar cal = Calendar.getInstance();
 
@@ -88,9 +88,6 @@ public class OrderDAO {
 			}else{
 				o_num = 1;
 			}
-
-			// 주문번호
-			trade_num = o_first_num;
 				
 			sql = "insert into team2_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?, now(), ?)";
 			pstmt = con.prepareStatement(sql);
@@ -99,7 +96,7 @@ public class OrderDAO {
 			pstmt.setString(3, odto.getO_p_code());
 			pstmt.setInt(4, odto.getO_p_amount());
 			pstmt.setString(5, odto.getO_p_option());
-			pstmt.setString(6, odto.getO_delivery_method());
+			pstmt.setString(6, odto.getO_p_delivery_method());
 			
 			pstmt.setString(7, odto.getO_m_id());
 			pstmt.setString(8, odto.getO_receive_name());
@@ -147,7 +144,7 @@ public class OrderDAO {
 		try {
 			con = getConnection();
 			// 본인의 정보만 가지고이동, o_trade_num기준으로 내림차순 정렬
-			sql = "select * where o_m_id = ? and where o_trade_num = ?";
+			sql = "select * from team2_order where o_m_id = ? and o_trade_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, o_m_id);
 			pstmt.setString(2, o_trade_num);
@@ -159,6 +156,7 @@ public class OrderDAO {
 				odto.setO_p_code(rs.getString("o_p_code"));
 				odto.setO_p_amount(rs.getInt("o_p_amount"));
 				odto.setO_p_option(rs.getString("o_p_option"));
+				odto.setO_p_delivery_method(rs.getString("o_p_delivery_method"));
 				
 				odto.setO_receive_name(rs.getString("o_receive_name"));
 				odto.setO_receive_zipcode(rs.getString("o_receive_zipcode"));
@@ -179,7 +177,7 @@ public class OrderDAO {
 				orderList.add(odto);
 	
 				//b_code 값들 중에 맨 앞글자 따오기
-				char first_letter = rs.getString("b_code").charAt(0);
+				char first_letter = rs.getString("o_p_code").charAt(0);
 				
 				//만약 b_code의 앞에 한글자가 a이면 동물 DB로 들어가기
 				if(first_letter == 'a'){
