@@ -36,7 +36,7 @@ function doAction(){
 
 function doDelete(){
 	
-	alert("삭제");
+	alert("삭제 완료");
 	document.fr2.submit();
 	
 };
@@ -67,8 +67,8 @@ function doDelete(){
 	}
 		
 	
-// 	System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
-	System.out.println("category : " +category+"/search : "+search);
+	System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
+	System.out.println("category : " +category+"/c : "+c);
 
 	
 %>

@@ -44,8 +44,11 @@ public class AnimalListAction implements Action{
 		
 		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category, sub_category_index, cri);
 		System.out.println("total : "+total);
-		total = admin_animalList.size();
+		total = adao.animalTotalCount(category, "all", "all");
 		pageMaker.setTotalCount(total);
+		
+		System.out.println(cri);
+		System.out.println(pageMaker);
 		
 		request.setAttribute("admin_animalList", admin_animalList);
 		request.setAttribute("cri", cri);

@@ -11,6 +11,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">	
+
+var img_files = []; //추가할 파일
+
+$(document).ready(function() {
+	$("#input_imgs").on("change", addFiles);
+			
+}); 
+
 </script>
 </head>
 <body>
@@ -36,6 +44,15 @@
 	}
 	
 	System.out.println("c : " + c );
+	
+	if(c==0){
+		if(!id2.equals("admin")){%>
+		<script type="text/javascript">
+			alert("관리자만 사용 할 수 있는 페이지입니다.");
+			history.back();
+		</script>	
+<%	}
+	}
 	
 	String p_code = request.getParameter("CODE");
 %>
@@ -73,6 +90,7 @@
 				<textarea name="ir1" id="ir1" style="width:100%;min-width:260px;">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
 			</div>
 			
+		</form>
 			<div class="input_wrap">
 				<span class="board_title">첨부파일</span>
 				<input type="button" value="이미지 첨부하기" onclick="filesumit()"> 
@@ -91,19 +109,13 @@
 				<button class="input_btn" type="button" onclick="return save();">등록하기</button>
 				<button class="input_btn" type="button" onclick="">목록으로</button>
 			</div>
-        </form>
+
 	</div>
 	<jsp:include page="/include/footer.jsp"/>	
 </body>
 
 <script type="text/javascript">
 
-var img_files = []; //추가할 파일
-
-	$(document).ready(function() {
-		$("#input_imgs").on("change", addFiles);
-				
-	}); 
 	
 	function filesumit() {
 		$("#input_imgs").trigger('click');
@@ -113,7 +125,8 @@ var img_files = []; //추가할 파일
 	function addFiles(e) {
 		
 		img_files = [];
-	
+		$(".imgs_wrap").empty();
+		
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
 		
@@ -128,7 +141,7 @@ var img_files = []; //추가할 파일
 
 	        var reader = new FileReader();
 	        reader.onload = function(e) {
-	            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" ><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' id=\"img_id_"+index+"\"></a>";
+	            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' ></a>";
 	        	$(".imgs_wrap").append(html);
 	            index++;
 	        }
@@ -140,7 +153,7 @@ var img_files = []; //추가할 파일
 	
 	//추가할 파일 삭제
 	function deleteFiles(index) {
-		alert("index delete : "+img_files[index]);
+// 		alert("index delete : "+index);
 	
 		img_files.splice(index, 1);
 	
@@ -157,8 +170,10 @@ var img_files = []; //추가할 파일
 		var form = $('#fr')[0];
 		var formData = new FormData(form);
 		
-		for(var index=0; index < img_files.length; index++){
-			formData.append('files', img_files[index]);
+// 		alert("img_files.length = " + img_files.length);
+		
+		for(var i=0; i < img_files.length; i++){
+			formData.append('files', img_files[i]);
 		}
 	
 		$.ajax({
