@@ -162,7 +162,7 @@
 		</div>
 	<%} %>
 	
-	<span class="a_amount"> Total <%=goodsList.size() %> items </span>
+	<span class="a_amount"> Total <%=pageMaker.getTotalCount() %> items </span>
 	<ul class="ul_wrap">
 		<%
 			int size = goodsList.size();
