@@ -29,6 +29,10 @@
 		String pageNum = (String)request.getParameter("pageNum");
 		String num = request.getParameter("num");
 		String id2 = (String)session.getAttribute("id");
+		//비로그인 시 예외처리
+		if(id2==null){
+			id2 = "";
+		}
 		CommentDAO cdao = new CommentDAO();
 		List<CommentDTO> list = cdao.getList(Integer.parseInt(num));
 		cdao.closeDB();
