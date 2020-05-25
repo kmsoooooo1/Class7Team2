@@ -29,7 +29,7 @@ public class AdminOrderListAction implements Action{
 		
 		OrderDAO odao = new OrderDAO();
 		
-		Vector vec = odao.getOrderList("coduo25");
+		Vector vec = odao.getOrderList();
 		
 		ArrayList orderList = (ArrayList) vec.get(0);
 		ArrayList productInfoList = (ArrayList) vec.get(1);

@@ -59,6 +59,16 @@ public class AdminOrderFrontController extends HttpServlet {
 			}
 		}
 		
+		//관리자가 운송장번호를 수정했을때
+		else if(command.equals("/AdminUpdateOrderStatus.ao")){
+			action = new AdminUpdateOrderStatusAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 
 		// 페이지 이동 처리
