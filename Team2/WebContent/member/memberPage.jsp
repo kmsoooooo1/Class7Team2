@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Vector"%>
+<%@page import="team2.coupon.db.CouponDTO"%>
+<%@page import="team2.couponMember.db.CouponMemberDTO"%>
+<%@page import="team2.coupon.db.CouponDAO"%>
 <%@page import="team2.product.db.ProductDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.order.db.OrderDTO"%>
@@ -72,7 +77,15 @@
 			
 // 		}
 		
-
+		
+		int countCouponNum = mdao.countCoupons(id);
+		
+		CouponDAO cdao = new CouponDAO();
+		
+		Vector vec = cdao.getMemberCouponsList(id);
+		
+		ArrayList memberCouponList = (ArrayList) vec.get(0);
+		ArrayList couponInfoList = (ArrayList) vec.get(1);
 		
 		
 	 %>
@@ -152,7 +165,7 @@
      <li>
       <strong class="mileage_strong">쿠폰</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span">0개</span>
+       <span class="mileage_span"><%=countCouponNum%>개</span>
       </strong>
        <a href="${pageContext.request.contextPath}/member/coupon.jsp"
           onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
@@ -420,27 +433,68 @@
    <table border="1" summary>
     <caption>내 쿠폰 목록</caption>
     <colgroup>
-    	<col style="width: 160px;">
-    	<col style="width: 100px;">
+    	<col style="width: 10%;">
     	<col style="width: auto;">
-    	<col style="width: 60px;">
-    	<col style="width: 150px;">
-    	<col style="width: 140px;">
+    	<col style="width: 10%;">
+    	<col style="width: 10%;">
+    	<col style="width: 20%;">
     </colgroup>
     <thead>
     <tr>
      <th scope="col">번호</th>
      <th scope="col">쿠폰명</th>
-     <th scope="col">쿠폰적용 상품</th>
      <th scope="col">구매금액</th>
-     <th scope="col">쿠폰 혜택</th>
+     <th scope="col">쿠폰적용 상품</th>
      <th scope="col">사용가능 기간</th>
     </tr>
     </thead>
+    <%
+    if(couponInfoList.size()>0){ 
+		for(int i = 0; i < couponInfoList.size(); i++){
+			CouponMemberDTO cmdto = (CouponMemberDTO) memberCouponList.get(i);
+			CouponDTO cdto = (CouponDTO) couponInfoList.get(i);
+    %>
+    <tbody>
+    	<tr class="choice_tr1">
+			<!-- 쿠폰 번호 -->
+			<td>
+				<%=couponInfoList.size() - i%>
+			</td>
+		
+			<!-- 할인쿠폰명 -->
+			<td>
+				<%=cdto.getCo_name()%>
+			</td>
+			
+			<!-- 할인금액 -->
+			<td>
+				<%=cdto.getCo_rate()%>원
+				<input type="hidden" id="co_rate<%=i%>" name="co_rate<%=i%>" value="<%=cdto.getCo_rate()%>">
+			</td>
+			
+			<!-- 사용가능대상 -->
+			<td>
+				<%=cdto.getCo_target()%>
+			</td>
+			
+			<!-- 사용기한 -->
+			<td>
+				<%=cdto.getCo_startDate()%>-<%=cdto.getCo_endDate()%>
+			</td>
+		</tr>
+		<%} %>
+    </tbody>
+    </table>
+    <% 
+    	
+	}else{
+    
+	%>
    </table>
     <p class="empty">
      	보유하고 계신 쿠폰 내역이 없습니다.
     </p>
+   <%} %>
   </div>
  </div>
  
