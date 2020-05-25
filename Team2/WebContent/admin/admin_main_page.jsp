@@ -19,7 +19,7 @@
 	<div class="contents">
 	<h2>관리자 메인페이지</h2>
 		<!-- 관리자 동물 파트 -->
-		<table border="1" class="admintable">
+		<table border="1" class="admintable" id="admintable">
 		<colgroup>
 			<col style="width:20%;">
 			<col style="width: auto;">

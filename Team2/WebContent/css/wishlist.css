@@ -81,7 +81,7 @@ h2 {
 .div_info {
 /* 	border: 1px solid blue; */
 	float: left;
-	width: 70%;
+	width: 55%;
 }
 
 .div_wish{
@@ -96,12 +96,14 @@ h2 {
 	font-weight: bold;
 	text-align: left;
 	width: 100%;
-	white-space: pre-wrap;
 }
 
 div_info .price{
 	margin-left: 0 !important;
+	
 }
+
+
 
 button{
 	margin-top: 15px;	
