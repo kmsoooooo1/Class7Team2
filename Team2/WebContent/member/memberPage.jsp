@@ -144,7 +144,7 @@
      <li>
       <strong class="mileage_strong">적립금</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span">2,000원</span>
+       <span class="mileage_span"><%=mdto.getMileage() %>원</span>
       </strong>
        <a href="#">조회</a>
      </li>
@@ -154,8 +154,8 @@
       <strong class="mileage_strong2">
        <span class="mileage_span">0개</span>
       </strong>
-       <a href="${pageContext.request.contextPath}/order/searchCoupon.jsp"
-       	  onclick="window.open(this.href,'쿠폰조회','width=800,height=800')return false;">조회</a>
+       <a href="${pageContext.request.contextPath}/member/coupon.jsp"
+          onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
      </li>
     </ul>
    </div>
@@ -172,7 +172,7 @@
    <!-- 혜택정보(한국) -->
     <div class="benefit_contents">
      <p>
-      <span class="benefit_span">
+      <span class="benefit_span" style="font-size: 13px;">
        "저희 쇼핑몰을 이용해 주셔서 감사합니다."
        <strong class="benefit_strong">
         <span>
@@ -538,4 +538,5 @@
 <!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 </body>
+
 </html>
