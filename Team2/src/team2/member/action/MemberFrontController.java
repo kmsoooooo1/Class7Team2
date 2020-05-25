@@ -220,7 +220,10 @@ public class MemberFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-			
+		else if(command.equals("/Coupon.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/coupon.jsp");
+		}
 	
 		
 		// 페이지 이동처리 

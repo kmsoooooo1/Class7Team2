@@ -18,7 +18,7 @@
 	
 	<div id="container">
 		<div class="page_title">
-			<span> Mileage </span>
+			<span> Mileage (적립금) </span>
 		</div>
 	
 			<div class="inner" style="margin: 20px;">
