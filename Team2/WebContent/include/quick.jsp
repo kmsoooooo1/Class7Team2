@@ -24,7 +24,7 @@
            		<i class="fas fa-comment-dots"></i>
            		<span>카톡 상담</span>
            	</a>
-           	<a href="#" class="order_quick">
+           	<a href="./OrderList.or" class="order_quick">
            		<i class="fas fa-shipping-fast"></i>
            		<span>주문 상품</span>
            	</a>
