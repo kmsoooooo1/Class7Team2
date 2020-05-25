@@ -41,7 +41,7 @@ public class AnimalModifyAction implements Action{
 		adto.setA_sex(multi.getParameter("a_sex"));
 		adto.setA_status(multi.getParameter("a_status"));
 		adto.setA_code(multi.getParameter("a_code"));
-		adto.setA_thumbnail(multi.getParameter("a_thumbnail"));
+		adto.setA_thumbnail(multi.getFilesystemName("a_thumbnail"));
 		adto.setA_amount(Integer.parseInt(multi.getParameter("a_amount")));
 		adto.setA_price_origin(Integer.parseInt(multi.getParameter("a_price_origin")));
 		adto.setA_discount_rate(Integer.parseInt(multi.getParameter("a_discount_rate")));

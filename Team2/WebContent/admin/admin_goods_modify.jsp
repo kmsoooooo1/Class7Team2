@@ -20,7 +20,7 @@
 	
 	
 	<!-- Main Content -->
-	<form action="./GoodsModifyAction.ag" method="post" name="fr" enctype="multipart/form-data">
+	<form action="./GoodsModifyAction.ag" method="post" enctype="multipart/form-data">
 	
 	  <input type="hidden" id="num" name="num" value="<%=gdto.getNum()%>">
 	  <input type="hidden" id="sub_category_sel" name="sub_category_sel" value="<%=gdto.getSub_category()%>">

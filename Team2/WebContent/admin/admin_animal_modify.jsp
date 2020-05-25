@@ -90,8 +90,8 @@
 			</tr>
 			
 			<tr>
-				<td>동물 썸네일 이미지</td>
-				<td><input type="file" name="a_thumbnail" value="<%=adto.getA_thumbnail()%>"></td>
+				<td>동물 썸네일용 이미지</td>
+				<td><input type="file" name="a_thumbnail"></td>
 			</tr>
 			
 			<tr>
@@ -253,14 +253,6 @@
 
 
 </script>
-
-
-
-
-
-
-
-
 
 
 </html>
