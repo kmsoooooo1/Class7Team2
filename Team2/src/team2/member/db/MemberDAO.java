@@ -778,6 +778,7 @@ public class MemberDAO {
 		return countCouponNum;
 
 	}
+
 	
 	public List<MemberPointDTO> getMileage(String id){
 		List<MemberPointDTO> pointList = new ArrayList<MemberPointDTO>();
