@@ -162,4 +162,16 @@
   </servlet-mapping>  
   <!-- 쿠폰 관리 페이지 -->
   
+  <!-- 관리자 쿠폰 관리 페이지 -->
+  <servlet>
+     <servlet-name>AdminOrderFrontController</servlet-name>
+     <servlet-class>team2.admin.order.action.AdminOrderFrontController</servlet-class>
+  </servlet> 
+  
+  <servlet-mapping>
+     <servlet-name>AdminOrderFrontController</servlet-name>
+     <url-pattern>*.ao</url-pattern>
+  </servlet-mapping>  
+  <!-- 관리자 쿠폰 관리 페이지 -->
+  
 </web-app>

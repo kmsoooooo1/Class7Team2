@@ -27,7 +27,7 @@
 %>
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
-	
+	<div id="main_body">
 	<!-- Main Content -->
 	<!-- 메인슬라이드 -->
   	<div class="swiper-container first">
@@ -295,7 +295,7 @@ for (var i = 0; i < btns.length; i++) {
 }
 </script>
 	
-	
+	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>	
 
