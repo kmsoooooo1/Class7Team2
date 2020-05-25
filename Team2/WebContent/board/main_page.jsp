@@ -97,6 +97,7 @@
 			  <img src="${pageContext.request.contextPath}/upload/multiupload/<%=adto.getA_thumbnail()%>">
 			 </a>
 			</div>
+			<p class="name"><%=adto.getA_morph() %></p>
 		<%} %>
 
 	</div>
