@@ -318,17 +318,17 @@
 	<tbody>
 		<%
 		// 쿠키 얻어오기
-		Cookie[] cook = request.getCookies();
-		if(cook!= null){
-			for(int i=0; i<cook.length; i++){
+		Cookie[] cook1 = request.getCookies();
+		if(cook1!= null){
+			for(int i=0; i<cook1.length; i++){
 				
 			// 전송된 쿠키 이름 얻어오기
-			String name1 = cook[i].getName();
-			// 쿠키 이름에 item이 포함되어 있다면
-			if(name1.indexOf("item")!= -1){
+			String name1 = cook1[i].getName();
+			// 쿠키 이름에 cookie가 포함되어 있다면
+			if(name1.indexOf("cookie")!= -1){
 		
 			// 해당 value얻어오기
-			String value = cook[i].getValue();
+			String value = cook1[i].getValue();
 			
 			String item = URLDecoder.decode(value, "UTF-8");
 			out.println(item);

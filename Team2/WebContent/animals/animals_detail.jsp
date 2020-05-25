@@ -63,6 +63,21 @@
 						"UTF-8"));
 		cook.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook);
+		
+		Cookie cook1 = new Cookie("cookie" + animalDetail.getA_code(),
+				URLEncoder.encode(
+						"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
+								+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
+								+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph()
+								+ "</td>" + "<td>" + price + "</td>"
+								+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
+								+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
+								+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
+								+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
+						"UTF-8"));
+		cook1.setMaxAge(60 * 60); // 한시간 유지
+		response.addCookie(cook1);
+		
 	%>
 
 	<!-- Header -->
