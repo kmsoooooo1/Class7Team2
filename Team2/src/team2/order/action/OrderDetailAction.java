@@ -30,17 +30,32 @@ public class OrderDetailAction implements Action{
 		
 		//주문번호 넘겨받기
 		String o_trade_num = request.getParameter("o_trade_num");
+		String o_m_id = request.getParameter("o_m_id");
 		
 		OrderDAO odao = new OrderDAO();
 		
-		Vector vec = odao.getOrderList(id, o_trade_num);
-		
-		ArrayList orderList = (ArrayList) vec.get(0);
-		ArrayList productInfoList = (ArrayList) vec.get(1);
-		
-		//request 영역에 저장
-		request.setAttribute("orderList", orderList);
-		request.setAttribute("productInfoList", productInfoList);
+		if(id.equals("admin")){
+			
+			Vector vec = odao.getOrderList(o_m_id, o_trade_num);
+			
+			ArrayList orderList = (ArrayList) vec.get(0);
+			ArrayList productInfoList = (ArrayList) vec.get(1);
+			
+			//request 영역에 저장
+			request.setAttribute("orderList", orderList);
+			request.setAttribute("productInfoList", productInfoList);
+			
+		}else{
+			
+			Vector vec = odao.getOrderList(id, o_trade_num);
+			
+			ArrayList orderList = (ArrayList) vec.get(0);
+			ArrayList productInfoList = (ArrayList) vec.get(1);
+			
+			//request 영역에 저장
+			request.setAttribute("orderList", orderList);
+			request.setAttribute("productInfoList", productInfoList);
+		}
 		
 		forward.setPath("./order/order_detail.jsp");
 		forward.setRedirect(false);

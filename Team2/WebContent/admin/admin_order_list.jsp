@@ -107,7 +107,7 @@
 							<!-- 주문일자, 주문번호 -->
 							<td> 
 								<%=orderList.get(0).getO_date()%> <br>
-								<a href="#"> [<%=orderList.get(0).getO_trade_num()%>] </a>
+								<a href="./OrderDetail.or?o_trade_num=<%=orderList.get(0).getO_trade_num()%>&o_m_id=<%=odto.getO_m_id()%>"> [<%=orderList.get(0).getO_trade_num()%>] </a>
 							</td>
 							
 							<!-- 수령인 -->

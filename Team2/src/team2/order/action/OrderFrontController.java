@@ -108,6 +108,16 @@ public class OrderFrontController extends HttpServlet{
 			}
 		}
 		
+		//입금 확인해서 o_status 1로 바꾸는 함수 처리
+		else if(command.equals("/OrderModiStatus.or")){
+			action = new OrderModiStatusAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		// 페이지 이동 처리
 		if (forward != null) {

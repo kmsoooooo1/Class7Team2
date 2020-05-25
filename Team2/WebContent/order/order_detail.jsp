@@ -61,10 +61,14 @@
 						<td> 
 							<span style="color: red;"> 입금전 </span> 
 							<!-- 입금완료(임시) -->
-							<button type="button" style="margin-left: 10px;" onclick="changeO_status()"> 입금완료(임시) </button>
+							<button type="button" style="margin-left: 10px;" onclick="changeO_status('<%=orderList.get(0).getO_trade_num()%>')"> 입금완료(임시) </button>
 						</td>
 					<%} else if(orderList.get(0).getO_status() == 1) {%>
-						<td> <span style="color: green;"> 입금완료 </span> </td>
+						<td> 
+							<span style="color: green;"> 입금완료 </span>
+							<!-- 입금완료(임시) -->
+							<button type="button" style="margin-left: 10px; text-decoration: line-through;" disabled> 입금완료(임시) </button> 
+						</td>
 					<%} else if(orderList.get(0).getO_status() == 2) {%>
 						<td> <span style="color: blue;"> 배송중 </span> </td>
 					<%} else if (orderList.get(0).getO_status() == 3) {%>
@@ -357,8 +361,19 @@
 </body>
 <script type="text/javascript">
 
-	function changeO_status(){
-		alert("테스트");
+	function changeO_status(o_trade_num){
+		$.ajax({
+			type:'get',
+			url:'./OrderModiStatus.or',
+			data:'o_trade_num='+o_trade_num,
+			dataType: 'html',
+			success:function(data) {
+				alert("입금 확인했습니다.");
+   				window.location.reload(); //현재 페이지 새로고침
+   			},error:function(request,status,error){
+			 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			}
+		});
 	}
 
 </script>
