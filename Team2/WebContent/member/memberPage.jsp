@@ -121,7 +121,7 @@
 	 <!-- 최근 본 상품 -->
 	 <li><a href="./recentView.me">최근 본 상품</a></li>
 	 <!-- 내가쓴글 -->
-	 <li><a href="./BoardList.bo">내 게시글</a></li>
+	 <li><a href="./myBoard.bo">내 게시글</a></li>
     </ul>
     </div>
     <div class="userButton">

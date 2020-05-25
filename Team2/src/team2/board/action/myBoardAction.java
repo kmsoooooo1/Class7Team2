@@ -23,7 +23,18 @@ public class myBoardAction implements Action {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		
-		String c_str = request.getParameter("C");
+		String c_str = request.getParameter("category");
+		
+		
+		//검색 + 페이지 크기 초기값설정
+		int pageSize = 10;
+		String search = "";
+		try{
+			 pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			 search = (String) request.getParameter("search");
+		}catch(Exception e){
+			System.out.println(e);
+		}
 		
 		int c = 1;
 		if(c_str!=null){
@@ -33,6 +44,10 @@ public class myBoardAction implements Action {
 		cSet set = new cSet();
 		set.setC(c);
 		
+		System.out.println("category : "+c+"/search : "+search);
+		
+		System.out.println("cset = "+set);
+		
 		String page_str = request.getParameter("page");
 		int page = 1;
 		if(page_str!=null){
@@ -41,15 +56,8 @@ public class myBoardAction implements Action {
 		
 		List<BoardDTO> list = dao.getMyBoard(id,c);
 		Criteria cri = new Criteria();
-		cri.setPage(page);
 		
-		int pageSize = 20;
-		if(c==1){
-			pageSize = 8;
-		}else{
-			pageSize = 20;
-		}
-		
+		cri.setPage(page);		
 		cri.setPerpageNum(pageSize);
 		
 		PageMaker pm = new PageMaker();
@@ -61,9 +69,10 @@ public class myBoardAction implements Action {
 		request.setAttribute("cri", cri);
 		request.setAttribute("pm", pm);
 		request.setAttribute("page", page);
+		request.setAttribute("c", c);
 		
 		dao.closeDB();
-		
+		forward.setPath("./board/myBoard.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

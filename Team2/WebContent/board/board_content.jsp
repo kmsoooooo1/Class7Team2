@@ -107,14 +107,18 @@
 				</table>
 				
 				<div class="button">
+					<%
+						if(bdto.getB_writer().equals(id2) || id2.equals("admin")){
+					%>
 					<input type="button" value="수정"
 						onclick="location.href='./BoardUpdate.bo?pageNum=<%=pageNum%>&num=<%=bdto.getB_idx()%>'">
 					<input type="button" value="삭제"
 						onclick="location.href='./BoardDelete.bo?num=<%=bdto.getB_idx()%>&category=<%=bdto.getB_category() %>'">
-					<input type="button" value="댓글"
-						onclick="">
+					 <%
+						}
+					 %>
 					<input type="button" value="목록이동"
-						onclick="location.href='./BoardMain.bo'">
+						onclick="location.href='javascript:history.back()'">
 				</div>
 			</div>
 		</div>
