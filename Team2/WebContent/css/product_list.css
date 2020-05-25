@@ -39,7 +39,7 @@ body {
 }
 .ul_wrap li{
 	width:25%;
-	height:380px;
+	height:400px;
 	float:left;
 	margin-bottom: 80px;
 }
@@ -49,17 +49,74 @@ body {
 	clear: both;
 }
 .list_img{
-	width: 80%;
-	height: auto;
-	max-height: 18em;
+	width: 300px;
+	height: 300px;
 	margin: 0 auto;
 }
 
-.product_detail {
-	font-size: 12px;
-	float:left;
-	margin: 15px 100px 0 35px;
+.product_img_wrap{
+	width: 100%;
 }
+
+.product_name{
+	display: block;
+	width: 100%;
+	height: 40px;
+	text-align: left;
+	padding:0.5em 2.5em 0;
+}
+
+.product_name a{
+	font-size: 0.9em;
+	font-weight: bold;
+	text-decoration: none;
+    color: black;
+}
+
+.origin_price{
+	display:block;
+	width: 100%;
+	text-align:left;
+	height: 30px;
+	padding:0.5em 2.5em 0;
+}
+.product_option_wrap{
+	width: 100%;
+	height:30px;
+	padding:0.5em 2.5em 0;
+}
+.product_option_wrap span{
+	display: block;
+}
+
+.sale_price{
+	width:70%;
+	height: 100%;
+	float:left;
+	text-align: left;
+	font-size: 0.9em;
+	color: #f0163a;
+	font-weight: bold;
+}
+.sold_out{
+	width: 30%;
+	height: 100%;
+	float: right;
+	background-color: #cd6860;
+	color: white;
+	font-size: 0.5em;
+	 border: 1px solid #cd6860;
+}
+
+.product_option_wrap:after{
+	display: block;
+	content:"";
+	clear: both;
+}
+
+
+
+
 
 /* 페이징 처리 */
 

@@ -754,5 +754,28 @@ public class MemberDAO {
 		return check;
 	}
 	
-	
+	public int countCoupons(String id){
+		int countCouponNum = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql = "SELECT count(co_num) FROM team2_project.team2_coupon_member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				countCouponNum = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return countCouponNum;
+
+	}
 }

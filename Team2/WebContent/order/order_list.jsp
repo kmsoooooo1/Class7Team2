@@ -56,22 +56,11 @@
 				if(orderList.size() == 0){
 			%>
 				<tr>
-					<td style="text-align: center;"> 구매 내역이 없습니다. </td>
+					<td colspan="7" style="text-align: center;"> 구매 내역이 없습니다. </td>
 				</tr>
 			<%
 				}else {
-					for(int i = 0; i < trade_num_List.size(); i++) {
-						OrderDTO odto = (OrderDTO) orderList.get(i);
-				%>
-					<tr> 
-						<td rowspan="<%=trade_num_List.size()%>"> 
-							<%=orderList.get(0).getO_date()%> <br>
-							<a href="#"> [<%=odto.getO_trade_num()%>] </a>
-						</td>
-					</tr>				
-			
-				<%	
-					}
+					
 					for (int i = 0; i < orderList.size(); i++) {
 						OrderDTO odto = (OrderDTO) orderList.get(i);
 						ProductDTO pdto = (ProductDTO) productInfoList.get(i);
@@ -86,71 +75,74 @@
 						//b_code 값들 중에 맨 앞글자 따오기
 						char first_letter = odto.getO_p_code().charAt(0);
 			%>
+			
 				<tr>
-					
-					
-				<!-- 상품 이미지 -->
-				<!-- 상품이 동물일때 -->
-				<%if(first_letter == 'a'){%>
-					<td>
-						<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+					<td class="first"> 
+						<%=orderList.get(0).getO_date()%> <br>
+						<a href="./OrderDetail.or?o_trade_num=<%=odto.getO_trade_num()%>"> [<%=odto.getO_trade_num()%>] </a>
 					</td>
-					
-					<!-- 상품정보 (옵션이 있을때와 없을때) -->
-					<%if(odto.getO_p_option().equals("")){%>
+				
+					<!-- 상품 이미지 -->
+					<!-- 상품이 동물일때 -->
+					<%if(first_letter == 'a'){%>
 						<td>
-							<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%> </a>
+							<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
 						</td>
-					<%}else{%>
+						
+						<!-- 상품정보 (옵션이 있을때와 없을때) -->
+						<%if(odto.getO_p_option().equals("")){%>
+							<td>
+								<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%> </a>
+							</td>
+						<%}else{%>
+							<td>
+								<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%> </a>
+							</td>
+						<%}%>
+					<!-- 상품이 물건일때 -->
+					<%} else if(first_letter == 'g') {%>
 						<td>
-							<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%> </a>
+							<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
 						</td>
+						
+						<!-- 상품정보 (옵션이 있을때와 없을때) -->
+						<%if(odto.getO_p_option().equals("")){%>
+							<td>
+								<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%> </a>
+							</td>
+						<%}else{%>
+							<td>
+								<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%> </a>
+							</td>
+						<%}%>
 					<%}%>
-				<!-- 상품이 물건일때 -->
-				<%} else if(first_letter == 'g') {%>
+					
+					<!-- 수량 -->
 					<td>
-						<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
+						<%=odto.getO_p_amount()%>개 
 					</td>
+				
+					<!-- 판매가(적립금) -->
+					<%if(pdto.getProduct_discount_rate() != 0){%>
+						<td><%=formatter.format(pdto.getProduct_price_sale() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>)</td>
+					<%} else{%>
+						<td> <%=formatter.format(pdto.getProduct_price_origin() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>) </td>
+					<%}%>	
 					
-					<!-- 상품정보 (옵션이 있을때와 없을때) -->
-					<%if(odto.getO_p_option().equals("")){%>
-						<td>
-							<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%> </a>
-						</td>
-					<%}else{%>
-						<td>
-							<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%> </a>
-						</td>
+					<!-- 입금상태  o_status가 0이면 입금전 1이면 입금후 2이면 배송중-->
+					<%if(odto.getO_status() == 0) {%>
+						<td> <span style="color: red;"> 입금전 </span> </td>
+					<%} else if(odto.getO_status() == 1) {%>
+						<td> <span style="color: green;"> 입금완료 </span> </td>
+					<%} else if(odto.getO_status() == 2) {%>
+						<td> <span style="color: blue;"> 배송중 </span> </td>
 					<%}%>
-				<%}%>
+					
+					<td>
+					 - 
+					</td>
 				
-				<!-- 수량 -->
-				<td>
-					<%=odto.getO_p_amount()%>개 
-				</td>
-			
-				<!-- 판매가(적립금) -->
-				<%if(pdto.getProduct_discount_rate() != 0){%>
-					<td><%=formatter.format(pdto.getProduct_price_sale() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>)</td>
-				<%} else{%>
-					<td> <%=formatter.format(pdto.getProduct_price_origin() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>) </td>
-				<%}%>	
-				
-				<!-- 입금상태  o_status가 0이면 입금전 1이면 입금후 2이면 배송중-->
-				<%if(odto.getO_status() == 0) {%>
-					<td> <span style="color: red;"> 입금전 </span> </td>
-				<%} else if(odto.getO_status() == 1) {%>
-					<td> <span style="color: green;"> 입금완료 </span> </td>
-				<%} else if(odto.getO_status() == 2) {%>
-					<td> <span style="color: blue;"> 배송중 </span> </td>
-				<%}%>
-				
-				<td>
-				 - 
-				</td>
-			
 				</tr>
-			</tr>
 
 			<%
 					}
@@ -166,4 +158,16 @@
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
 
 </body>
+<script type="text/javascript">
+
+	$(".first").each(function() {
+		var rows = $(".first:contains('" + $(this).text() + "')");
+		if (rows.length > 1) {
+		  rows.eq(0).attr("rowspan", rows.length);
+		  rows.not(":eq(0)").remove();
+		}
+	});
+	
+</script>
+
 </html>

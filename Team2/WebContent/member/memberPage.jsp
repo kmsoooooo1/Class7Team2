@@ -1,3 +1,9 @@
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Vector"%>
+<%@page import="team2.coupon.db.CouponDTO"%>
+<%@page import="team2.couponMember.db.CouponMemberDTO"%>
+<%@page import="team2.coupon.db.CouponDAO"%>
 <%@page import="team2.product.db.ProductDTO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="team2.order.db.OrderDTO"%>
@@ -16,7 +22,6 @@
 <link href="${pageContext.request.contextPath}/css/mypage.css?ver=2" rel="stylesheet">
 <title>마이 페이지</title>
 <style type="text/css">
-
 </style>
 </head>
 <body>
@@ -52,7 +57,6 @@
 		int final_delivery_fee = 0; //총 배송비
 		
 		//////////////////////
-
 		String sdata = (String)request.getAttribute("sdata");
 		
 		String[] data = sdata.split(",");
@@ -71,8 +75,14 @@
 // 		}else{
 			
 // 		}
+		int countCouponNum = mdao.countCoupons(id);
 		
-
+		CouponDAO cdao = new CouponDAO();
+		
+		Vector vec = cdao.getMemberCouponsList(id);
+		
+		ArrayList memberCouponList = (ArrayList) vec.get(0);
+		ArrayList couponInfoList = (ArrayList) vec.get(1);
 		
 		
 	 %>
@@ -144,7 +154,7 @@
      <li>
       <strong class="mileage_strong">적립금</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span">2,000원</span>
+       <span class="mileage_span"><%=mdto.getMileage() %>원</span>
       </strong>
        <a href="#">조회</a>
      </li>
@@ -152,10 +162,10 @@
      <li>
       <strong class="mileage_strong">쿠폰</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span">0개</span>
+       <span class="mileage_span"><%=countCouponNum%>개</span>
       </strong>
-       <a href="${pageContext.request.contextPath}/order/searchCoupon.jsp"
-       	  onclick="window.open(this.href,'쿠폰조회','width=800,height=800')return false;">조회</a>
+       <a href="${pageContext.request.contextPath}/member/coupon.jsp"
+          onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
      </li>
     </ul>
    </div>
@@ -172,7 +182,7 @@
    <!-- 혜택정보(한국) -->
     <div class="benefit_contents">
      <p>
-      <span class="benefit_span">
+      <span class="benefit_span" style="font-size: 13px;">
        "저희 쇼핑몰을 이용해 주셔서 감사합니다."
        <strong class="benefit_strong">
         <span>
@@ -246,7 +256,7 @@
  <!-- 주문 상품 정보 -->
  <div class="info_div">
   <h3>주문상품정보
-   <a href="#" class="seemore">더보기>></a>
+   <a href="./OrderList.or" class="seemore">더보기>></a>
   </h3>
   <div class="contents">
    <table border="1" summary>
@@ -281,133 +291,145 @@
 	 	   </colgroup>
 		
 			<%
-				if(orderList.size() == 0){
-			%>
-				<tr>
-					<td style="text-align: center;"> 구매 내역이 없습니다. </td>
-				</tr>
-			<%
-				}else {
-			%>
-			<tr>
-					<td rowspan="<%=orderList.size()%>"> 
-						<%=orderList.get(0).getO_date()%> <br>
-						<a href="#"> [<%=orderList.get(0).getO_trade_num()%>] </a>
-					</td>
-			<% 
-					for (int i = 0; i < orderList.size(); i++) {
-						OrderDTO odto = (OrderDTO) orderList.get(i);
-						ProductDTO pdto = (ProductDTO) productInfoList.get(i);
-						
-						//총 상품금액 계산
-						if(pdto.getProduct_discount_rate() != 0){
-							final_total_price += (odto.getO_p_amount() * (pdto.getProduct_price_sale() + pdto.getProduct_option_price()));
-						}else{
-							final_total_price += (odto.getO_p_amount() * (pdto.getProduct_price_origin() + pdto.getProduct_option_price()));						
-						}
-							
-						//b_code 값들 중에 맨 앞글자 따오기
-						char first_letter = odto.getO_p_code().charAt(0);
-			%>
-				
-					
-				<!-- 상품 이미지 -->
-				<!-- 상품이 동물일때 -->
-				<%if(first_letter == 'a'){%>
-					<td>
-						<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="50" height="50"> </a>
-					</td>
-					
-					<!-- 상품정보 (옵션이 있을때와 없을때) -->
-					<%if(odto.getO_p_option().equals("")){%>
-						<td>
-							<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%> </a>
-						</td>
-					<%}else{%>
-						<td>
-							<a href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%> </a>
-						</td>
-					<%}%>
-				<!-- 상품이 물건일때 -->
-				<%} else if(first_letter == 'g') {%>
-					<td>
-						<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <img src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>" width="100" height="100"> </a>
-					</td>
-					
-					<!-- 상품정보 (옵션이 있을때와 없을때) -->
-					<%if(odto.getO_p_option().equals("")){%>
-						<td>
-							<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%> </a>
-						</td>
-					<%}else{%>
-						<td>
-							<a href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%> </a>
-						</td>
-					<%}%>
-				<%}%>
-				
-				<!-- 수량 -->
-				<td>
-					<%=odto.getO_p_amount()%>개 
-				</td>
-			
-				<!-- 판매가(적립금) -->
-				<%if(pdto.getProduct_discount_rate() != 0){%>
-					<td><%=formatter.format(pdto.getProduct_price_sale() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>)</td>
-				<%} else{%>
-					<td> <%=formatter.format(pdto.getProduct_price_origin() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>) </td>
-				<%}%>	
-				
-				
-				<!-- 합계
-					(고속버스 일때 +14000하기, 아닐때는 수량과 곱하기) 
-					(할인율이 있으면 세일된 가격으로 곱하기, 할인율이 없으면 원가로 곱하기) -->
-				<%if(pdto.getProduct_discount_rate() != 0){%>
-					<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
-						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000"))%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000")%>">
-						</td>
-					<%} else {%>
-						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * odto.getO_p_amount())%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_sale() + pdto.getProduct_option_price()) * odto.getO_p_amount()%>">
-						</td>
-					<%}%>
-				<%} else{%>
-					<%if(odto.getO_p_delivery_method().equals("고속버스")) {%>
-						<td>
-							 <span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * (odto.getO_p_amount()) + Integer.parseInt("14000"))%>원</span>
-							 <input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * odto.getO_p_amount()) + Integer.parseInt("14000")%>">
-						</td>
-					<%} else {%>
-						<td>
-							<span id="total_product_price<%=i%>"> <%= formatter.format((pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * (odto.getO_p_amount()))%>원</span>
-							<input type="hidden" id="total_product_price<%=i%>_input" name="total_product_price<%=i%>_input" value="<%=(pdto.getProduct_price_origin() + pdto.getProduct_option_price()) * odto.getO_p_amount()%>">
-						</td>
-					<%}%>
-				<%}%>
-				
-				<td>
-				 - 
-				</td>
-			
-				</tr>
-			</tr>
+									if (orderList.size() == 0) {
+								%>
+								<tr>
+									<td style="text-align: center;">구매 내역이 없습니다.</td>
+								</tr>
+								<%
+									} else {
+										for (int i = 0; i < orderList.size(); i++) {
+												OrderDTO odto = (OrderDTO) orderList.get(i);
+												ProductDTO pdto = (ProductDTO) productInfoList.get(i);
+	
+												//총 상품금액 계산
+												if (pdto.getProduct_discount_rate() != 0) {
+													final_total_price += (odto.getO_p_amount()
+															* (pdto.getProduct_price_sale() + pdto.getProduct_option_price()));
+												} else {
+													final_total_price += (odto.getO_p_amount()
+															* (pdto.getProduct_price_origin() + pdto.getProduct_option_price()));
+												}
+	
+												//b_code 값들 중에 맨 앞글자 따오기
+												char first_letter = odto.getO_p_code().charAt(0);
+								%>
+								<tr>
+									<td class="first">
+										<%=orderList.get(0).getO_date()%> <br> 
+										<a href="./OrderDetail.or?o_trade_num=<%=odto.getO_trade_num()%>"> [<%=odto.getO_trade_num()%>]
+									</a></td>
 
-			<%
-					}
-				}
-			%>
+									<!-- 상품 이미지 -->
+									<!-- 상품이 동물일때 -->
+									<%
+										if (first_letter == 'a') {
+									%>
+									<td><a
+										href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <img
+											src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>"
+											width="50" height="50">
+									</a></td>
+
+									<!-- 상품정보 (옵션이 있을때와 없을때) -->
+									<%
+										if (odto.getO_p_option().equals("")) {
+									%>
+									<td><a
+										href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%>
+									</a></td>
+									<%
+										} else {
+									%>
+									<td><a
+										href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%>
+									</a></td>
+									<%
+										}
+									%>
+									<!-- 상품이 물건일때 -->
+									<%
+										} else if (first_letter == 'g') {
+									%>
+									<td><a
+										href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <img
+											src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>"
+											width="100" height="100">
+									</a></td>
+
+									<!-- 상품정보 (옵션이 있을때와 없을때) -->
+									<%
+										if (odto.getO_p_option().equals("")) {
+									%>
+									<td><a
+										href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%>
+									</a></td>
+									<%
+										} else {
+									%>
+									<td><a
+										href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%>
+									</a></td>
+									<%
+										}
+									%>
+									<%
+										}
+									%>
+
+									<!-- 수량 -->
+									<td><%=odto.getO_p_amount()%>개</td>
+
+									<!-- 판매가(적립금) -->
+									<%
+										if (pdto.getProduct_discount_rate() != 0) {
+									%>
+									<td><%=formatter.format(pdto.getProduct_price_sale() + pdto.getProduct_option_price())%>원
+										<br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>)</td>
+									<%
+										} else {
+									%>
+									<td><%=formatter.format(pdto.getProduct_price_origin() + pdto.getProduct_option_price())%>원
+										<br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>)
+									</td>
+									<%
+										}
+									%>
+
+									<!-- 입금상태  o_status가 0이면 입금전 1이면 입금후 2이면 배송중-->
+									<%
+										if (odto.getO_status() == 0) {
+									%>
+									<td><span style="color: red;"> 입금전 </span></td>
+									<%
+										} else if (odto.getO_status() == 1) {
+									%>
+									<td><span style="color: green;"> 입금완료 </span></td>
+									<%
+										} else if (odto.getO_status() == 2) {
+									%>
+									<td><span style="color: blue;"> 배송중 </span></td>
+									<%
+										} else if (odto.getO_status() == 3) {
+									%>
+									<td><span style="color: black;"> 배송완료 </span></td>
+									<%
+										}
+									%>
+
+								</tr>
+
+								<%
+										}
+									}
+								%>
 			
 		</table>
 	    <!-- orderList 추가 -->
     
     
    </table>
-    <p class="empty">
-     	주문 내역이 없습니다.
-    </p>
+
   </div>
  </div>
  
@@ -420,27 +442,68 @@
    <table border="1" summary>
     <caption>내 쿠폰 목록</caption>
     <colgroup>
-    	<col style="width: 160px;">
-    	<col style="width: 100px;">
+    	<col style="width: 10%;">
     	<col style="width: auto;">
-    	<col style="width: 60px;">
-    	<col style="width: 150px;">
-    	<col style="width: 140px;">
+    	<col style="width: 10%;">
+    	<col style="width: 10%;">
+    	<col style="width: 20%;">
     </colgroup>
     <thead>
     <tr>
      <th scope="col">번호</th>
      <th scope="col">쿠폰명</th>
-     <th scope="col">쿠폰적용 상품</th>
      <th scope="col">구매금액</th>
-     <th scope="col">쿠폰 혜택</th>
+     <th scope="col">쿠폰적용 상품</th>
      <th scope="col">사용가능 기간</th>
     </tr>
     </thead>
+    <%
+    if(couponInfoList.size()>0){ 
+		for(int i = 0; i < couponInfoList.size(); i++){
+			CouponMemberDTO cmdto = (CouponMemberDTO) memberCouponList.get(i);
+			CouponDTO cdto = (CouponDTO) couponInfoList.get(i);
+    %>
+    <tbody>
+    	<tr class="choice_tr1">
+			<!-- 쿠폰 번호 -->
+			<td>
+				<%=couponInfoList.size() - i%>
+			</td>
+		
+			<!-- 할인쿠폰명 -->
+			<td>
+				<%=cdto.getCo_name()%>
+			</td>
+			
+			<!-- 할인금액 -->
+			<td>
+				<%=cdto.getCo_rate()%>원
+				<input type="hidden" id="co_rate<%=i%>" name="co_rate<%=i%>" value="<%=cdto.getCo_rate()%>">
+			</td>
+			
+			<!-- 사용가능대상 -->
+			<td>
+				<%=cdto.getCo_target()%>
+			</td>
+			
+			<!-- 사용기한 -->
+			<td>
+				<%=cdto.getCo_startDate()%>-<%=cdto.getCo_endDate()%>
+			</td>
+		</tr>
+		<%} %>
+    </tbody>
+    </table>
+    <% 
+    	
+	}else{
+    
+	%>
    </table>
     <p class="empty">
      	보유하고 계신 쿠폰 내역이 없습니다.
     </p>
+   <%} %>
   </div>
  </div>
  
@@ -538,4 +601,15 @@
 <!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 </body>
+<script type="text/javascript">
+
+	$(".first").each(function() {
+		var rows = $(".first:contains('" + $(this).text() + "')");
+		if (rows.length > 1) {
+		  rows.eq(0).attr("rowspan", rows.length);
+		  rows.not(":eq(0)").remove();
+		}
+	});
+	
+</script>
 </html>

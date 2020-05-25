@@ -120,6 +120,15 @@ public class OrderDAO {
 			o_num++;
 			
 			o_trade_num = sdf.format(cal.getTime()).toString() + "-" + trade_num;
+			
+			//장바구니 DB 들어가서 추가하고자 하는  삭제시키기
+			sql = "delete from team2_basket where b_code = ? and b_option = ? and b_delivery_method = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, odto.getO_p_code());
+			pstmt.setString(2, odto.getO_p_option());
+			pstmt.setString(3, odto.getO_p_delivery_method());
+			pstmt.executeUpdate();
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

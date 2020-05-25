@@ -67,6 +67,11 @@
 	border-collapse: collapse;
 	margin-bottom: 50px;
 }
+
+.list_table td{
+	text-align: center;
+}
+
 .choice_tr{
 	border-bottom: 1px solid #aaa;
 }

@@ -82,7 +82,7 @@
 								+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph()
 								+ "</td>" + "<td>" + price1 + "원</td>"
 								+ "<td>"+animalDetail.getA_mileage()+"</td>"
-								+ "<td><a class='recent_a' href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()+"'>상품 보러가기>>></a></td> </tr>",
+								+ "<td><a class='recent_a' href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()+"'>상품 보러가기</a></td> </tr>",
 						"UTF-8"));
 		cook1.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook1);

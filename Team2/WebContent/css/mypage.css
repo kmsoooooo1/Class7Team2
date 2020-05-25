@@ -23,6 +23,10 @@
     margin: 5px auto 50px;
 }
 
+.member_h2{
+	margin-top: 35px;	
+}
+
 .member_h3{
 	min-height: 30px;
     margin: 0 0 20px;
@@ -302,7 +306,7 @@ strong{
 	font-weight: bold;
 }
 
-.order_div{
+.order_div, .info_div, .recent_div, .coupon_div, .board_div{
 	position: relative;
     margin-bottom: 50px;
 }
@@ -452,7 +456,7 @@ thead th{
 
 .recent_a{
 	text-decoration: none;
-	font-size: 15px;
+	font-size: 13px;
 	color: blue;
 }
 
