@@ -222,7 +222,7 @@
 								<td class="selected_td">
 									<input type="text" id="g_amount_<%=goodsDetail.getG_delivery()%>"
 									name="g_amount_<%=goodsDetail.getG_delivery()%>" value=1
-									maxlength="3" size="3" onkeyup='amountChange("<%=goodsDetail.getG_delivery()%>");'>
+									maxlength="3" size="3" >
 									<input type="button" class='g_amount_btn' id="amountPlus" name="amountPlus" value="+"
 									onclick='plus("<%=goodsDetail.getG_delivery()%>");'> 
 									<input type="button" class='g_amount_btn' id="amountMinus" name="amountMinus" value="-"
@@ -1136,18 +1136,11 @@
 
 	//주문수량 키보드로 변경시 tr한줄의 총 금액과 마일리지 및 모든 옵션의 총 금액 제어 ----------------------------------------------------------
 	//일반포장일 때
-	function amountChange(delivery_method){
-		var delivery_method = document.getElementById('delivery_method').value;
-	
-		var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
-		var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
-		var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
-		var g_mileage = document.getElementById('g_mileage').value;				//적립금
-	
-		var total_price = Number(document.getElementById('total_product_price_' + delivery_method + '_input').value); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
+// 	function amountChange(delivery_method){
+		
 	
 		//사용자가 수량 input 태그에 마우스를 클릭했을시 입력되어있던 수량을 저장하기
- 		$('#g_amount_' + delivery_method).on('focusin', function(){
+ 		$('#g_amount_일반포장').on('focusin', function(){
 			//console.log("저장된 value : " + $(this).val());
 			
 			//사용자가 키보드로 입력하기 전 수량
@@ -1155,10 +1148,20 @@
  		});
 		
  		//사용자가 수량 input 태그에 키보드로 새로운 수량을 입력했을시
- 		$('#g_amount_' + delivery_method).on('change', function(){
+ 		$('#g_amount_일반포장').on('change', function(){
+ 			
+ 			var delivery_method = document.getElementById('delivery_method').value;
+ 			
+ 			var g_price_origin = document.getElementById('g_price_origin').value;	//오리지날 판매가
+ 			var g_discount_rate = document.getElementById('g_discount_rate').value;	//할인율
+ 			var g_price_sale = document.getElementById('g_price_sale').value;		//할인된 판매가
+ 			var g_mileage = document.getElementById('g_mileage').value;				//적립금
+ 		
+ 			var total_price = Number(document.getElementById('total_product_price_' + delivery_method + '_input').value); //하나의 tr(배송)의 총 판매가 String -> Int 형변환
+ 			
  			var previousAmount = $(this).data('val'); 	//사용자가 키보드로 입력하기 전 수량
 		    var currentAmount = $(this).val();			//사용자가 키보드로 입력 한 수량
-
+		    
 		    //사용자가 키보드로 input에 0보다 작은수를 입력했을시
 			if(currentAmount < 1) {
 				alert("상품의 최소 구매량은 1개입니다.");
@@ -1251,8 +1254,8 @@
 			}
 		    
 			//태그에 추가하기
-// 			$('#final_total_price_normal').text(final_total_price_normal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-// 			$('#final_total_amount_normal').text(final_total_amount_normal);
+			$('#final_total_price_normal').text(final_total_price_normal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			$('#final_total_amount_normal').text(final_total_amount_normal);
  			
  			
  		});
@@ -1316,7 +1319,7 @@
 				
 // 			}
 		
-	} //amountChange()
+// 	} //amountChange()
 	
 	
 	//사용자가 '+'를 눌렸을시---------------------------------------------------------------------------
