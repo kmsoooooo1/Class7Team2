@@ -429,9 +429,7 @@
     
     
    </table>
-    <p class="empty">
-     	주문 내역이 없습니다.
-    </p>
+
   </div>
  </div>
  
