@@ -1741,6 +1741,7 @@
 		}
 		
 		//일반포장일 때
+
 		if(document.getElementById("delivery_method").value == "일반포장"){
 			count = 1;
 			
