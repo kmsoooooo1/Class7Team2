@@ -156,7 +156,7 @@
  <div id="body"> 
  <div class="main">
 
-<h1>반려동물</h1>
+<h2 class="ani">반려동물</h2>
 
 
 <h2>습성</h2>
