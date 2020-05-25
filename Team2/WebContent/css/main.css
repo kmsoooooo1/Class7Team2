@@ -4,6 +4,12 @@
 * {
   box-sizing: border-box;
 }
+
+#main_body {
+	width: 80%;
+	margin: 0 auto;
+}
+
   html, body {
       position: relative;
       height: 100%;
@@ -18,7 +24,7 @@
 
     }
     .swiper-container {
-      width: 80%;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -35,9 +41,9 @@
   	}
   
    .banner_img {
-  	width: 80%;
+  	width: 100%;
   	display: inline-block;
-  	max-width: 250px;
+  	max-width: 301px;
   	position: relative;
   }
   
@@ -49,7 +55,7 @@
   }
   
   .banner_img2 img{
-   width: 80%;
+   width: 100%;
    margin: 0;
    padding: 0;
   }
@@ -81,7 +87,7 @@
   }
   
   	.newlist {
-  		width: 80%;
+  		width: 100%;
   		margin: 0 auto;
   		padding: 0;
   	}
@@ -126,7 +132,7 @@
 
 /* Center website */
 .main {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
 }
