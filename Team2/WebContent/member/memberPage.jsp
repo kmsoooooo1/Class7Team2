@@ -329,7 +329,7 @@
 									<td><a
 										href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <img
 											src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>"
-											width="50" height="50">
+											width="100" height="100">
 									</a></td>
 
 									<!-- 상품정보 (옵션이 있을때와 없을때) -->
