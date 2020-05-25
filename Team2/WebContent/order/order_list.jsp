@@ -77,7 +77,7 @@
 			%>
 			
 				<tr>
-					<td rowspan="<%=orderList.size()%>"> 
+					<td class="first"> 
 						<%=orderList.get(0).getO_date()%> <br>
 						<a href="./OrderDetail.or?o_trade_num=<%=odto.getO_trade_num()%>"> [<%=odto.getO_trade_num()%>] </a>
 					</td>
@@ -158,4 +158,16 @@
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
 
 </body>
+<script type="text/javascript">
+
+	$(".first").each(function() {
+		var rows = $(".first:contains('" + $(this).text() + "')");
+		if (rows.length > 1) {
+		  rows.eq(0).attr("rowspan", rows.length);
+		  rows.not(":eq(0)").remove();
+		}
+	});
+	
+</script>
+
 </html>

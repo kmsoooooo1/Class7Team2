@@ -96,52 +96,26 @@
 			%>
 			<li>
 				<div class="list_wrap">
-
-					<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img class="list_img" src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> 
-					
-					<br> 
-					
-					<span class="product_detail" style="margin: 15px 40px 0 35px;">
-						<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>' style="text-decoration: none; color: black;">
+					<div class="product_img_wrap">
+						<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'><img class="list_img" src="./upload/multiupload/<%=adto.getA_thumbnail()%>"></a> 
+					</div>
+					<span class="product_name">
+						<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'">
 							<%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%>
 						</a>
 					</span>
-					
-					<br>
-					
+					<span class="origin_price"><%=newformat_price_origin%>원</span>
+					<div class="product_option_wrap">
 					<%
 						if (adto.getA_discount_rate() != 0) { //만약 할인율이 있으면
 					%>
-
-					<span class="product_detail" style="text-decoration: line-through"> <%=newformat_price_origin%>원 <br> </span>
-				
-					<br> <br>
-				
-					<span class="product_detail" style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span> 
-						
-					<br>
-					<%
-						} else { //없으면
-					%>
-					
-					<span class="product_detail">
-						<%=newformat_price_origin%>원 <br>
-					</span>
-					
-					<%
-						}
-					%>
-
-					<!-- 만약 수량이 0이면 soldout 문구 띄우기 -->
-					<%
-						if (adto.getA_amount() == 0) {
-					%>
-					<span
-						style="background-color: #cd6860; color: white; font-size: 6px; border: 1px solid #cd6860;">
-						SOLD OUT </span>
-					<%
-						}
-					%>
+						<span class="sale_price"> 할인판매가 : <%=newformat_price_sale%>원 </span> 
+					<%	}%>
+						<!-- 만약 수량이 0이면 soldout 문구 띄우기 -->
+					<%	if (adto.getA_amount() == 0) {	%>
+						<span class="sold_out">SOLD OUT</span>
+					<%	}%>
+					</div>
 				</div>
 			</li>
 			<%

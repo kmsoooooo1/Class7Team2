@@ -85,7 +85,7 @@
 								+ "' width='150' height='150'></a> </td>" + "<td>" + detailList.get(0).getG_name()
 								+ "</td>" + "<td>" + price1 + "원</td>"
 								+ "<td>"+detailList.get(0).getG_mileage()+"</td>"
-								+ "<td><a 'recent_a' href='./GoodsDetail.go?g_code="+detailList.get(0).getG_code()+"'>상품 보러가기>>></a></td> </tr>",
+								+ "<td><a 'recent_a' href='./GoodsDetail.go?g_code="+detailList.get(0).getG_code()+"'>상품 보러가기</a></td> </tr>",
 						"UTF-8"));
 		cook1.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook1);
