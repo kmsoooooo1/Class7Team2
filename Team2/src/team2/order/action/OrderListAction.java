@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import team2.order.db.OrderDAO;
+import team2.order.db.OrderDTO;
 
 public class OrderListAction implements Action{
 	
@@ -33,9 +34,13 @@ public class OrderListAction implements Action{
 		ArrayList orderList = (ArrayList) vec.get(0);
 		ArrayList productInfoList = (ArrayList) vec.get(1);
 		
+		ArrayList trade_num_List = (ArrayList) odao.getTradeNumList(id);
+		
 		//request 영역에 저장
 		request.setAttribute("orderList", orderList);
 		request.setAttribute("productInfoList", productInfoList);
+		
+		request.setAttribute("trade_num_List", trade_num_List);
 		
 		forward.setPath("./order/order_list.jsp");
 		forward.setRedirect(false); //forwarding 해야한다.

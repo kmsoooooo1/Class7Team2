@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Vector;
 
 import javax.naming.Context;
@@ -472,6 +473,30 @@ public class OrderDAO {
 			closeDB();
 		}
 		
+	}
+	
+	//o_trade_num 만 가지고 오는 함수
+	public List<OrderDTO> getTradeNumList(String id){
+		ArrayList trade_num_List = new ArrayList();
+		try {
+			con = getConnection();
+			sql = "select * from team2_order where o_m_id = ? group by o_trade_num";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				OrderDTO odto = new OrderDTO();
+				odto.setO_trade_num(rs.getString("o_trade_num"));
+				trade_num_List.add(odto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return trade_num_List;
 	}
 
 	

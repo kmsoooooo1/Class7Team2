@@ -220,26 +220,26 @@
     <ul class="order_ul">
      <li>
       <span class="order_span">입금전</span>
-      <a href="#">
+      <a href="#" style="color: black; text-decoration: none;">
        <span><%=data[0] %></span>
       </a>
      </li>
      <li>
       <span class="order_span">배송준비중</span>
-      <a href="#">
+      <a href="#" style="color: black; text-decoration: none;">
        <span><%=data[1] %></span>
       </a>
      </li>
      <li>
       <span class="order_span">배송중</span>
-      <a href="#">
-       <span>0</span>
+      <a href="#" style="color: black; text-decoration: none;">
+       <span><%=data[2] %></span>
       </a>
      </li>
      <li>
       <span class="order_span">배송완료</span>
-      <a href="#">
-       <span>0</span>
+      <a href="#" style="color: black; text-decoration: none;">
+       <span><%=data[3] %></span>
       </a>
      </li>
     </ul>

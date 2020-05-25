@@ -23,6 +23,8 @@
 		List<OrderDTO> orderList = (List<OrderDTO>) request.getAttribute("orderList");
 		List productInfoList = (List) request.getAttribute("productInfoList");
 		
+		List<OrderDTO> trade_num_List = (List<OrderDTO>) request.getAttribute("trade_num_List");
+		
 		//###,###,###원 표기하기 위해서 format 바꾸기
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###");
 		
@@ -58,13 +60,18 @@
 				</tr>
 			<%
 				}else {
-			%>
-			<tr>
-					<td rowspan="<%=orderList.size()%>"> 
-						<%=orderList.get(0).getO_date()%> <br>
-						<a href="#"> [<%=orderList.get(0).getO_trade_num()%>] </a>
-					</td>
-			<% 
+					for(int i = 0; i < trade_num_List.size(); i++) {
+						OrderDTO odto = (OrderDTO) orderList.get(i);
+				%>
+					<tr> 
+						<td rowspan="<%=trade_num_List.size()%>"> 
+							<%=orderList.get(0).getO_date()%> <br>
+							<a href="#"> [<%=odto.getO_trade_num()%>] </a>
+						</td>
+					</tr>				
+			
+				<%	
+					}
 					for (int i = 0; i < orderList.size(); i++) {
 						OrderDTO odto = (OrderDTO) orderList.get(i);
 						ProductDTO pdto = (ProductDTO) productInfoList.get(i);
@@ -79,7 +86,8 @@
 						//b_code 값들 중에 맨 앞글자 따오기
 						char first_letter = odto.getO_p_code().charAt(0);
 			%>
-				
+				<tr>
+					
 					
 				<!-- 상품 이미지 -->
 				<!-- 상품이 동물일때 -->
@@ -128,11 +136,13 @@
 					<td> <%=formatter.format(pdto.getProduct_price_origin() + pdto.getProduct_option_price())%>원 <br> (적 <span id="total_product_mileage<%=i%>"><%=formatter.format(pdto.getProduct_mileage() * odto.getO_p_amount())%>원</span>) </td>
 				<%}%>	
 				
-				<!-- 주문처리상태(o_status가 0이면 입금전 1이면 입금후 -->
+				<!-- 입금상태  o_status가 0이면 입금전 1이면 입금후 2이면 배송중-->
 				<%if(odto.getO_status() == 0) {%>
 					<td> <span style="color: red;"> 입금전 </span> </td>
 				<%} else if(odto.getO_status() == 1) {%>
 					<td> <span style="color: green;"> 입금완료 </span> </td>
+				<%} else if(odto.getO_status() == 2) {%>
+					<td> <span style="color: blue;"> 배송중 </span> </td>
 				<%}%>
 				
 				<td>

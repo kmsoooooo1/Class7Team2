@@ -126,9 +126,12 @@ public class MemberFrontController extends HttpServlet{
 			}
 		// 마이 페이지 이동	
 		}else if(command.equals("/MemberPage.me")){
-			forward = new ActionForward();
-			forward.setPath("./member/memberPage.jsp");
-			forward.setRedirect(false);
+			action = new MemberOrderListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		// 회원 목록페이지 이동	
 		}else if(command.equals("/MemberList.me")){
 			System.out.println("/MemberList.me 주소 호출");
@@ -207,17 +210,6 @@ public class MemberFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./company/privacy.jsp");
 			forward.setRedirect(false);
-		}
-		
-		//
-		else if(command.equals("/MemberOrder.me")){ 
-			System.out.println("/MemberOrder.me 주소 요청");
-			action = new MemberOrderListAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 			
 	
