@@ -1,3 +1,4 @@
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Vector"%>
 <%@page import="team2.coupon.db.CouponDTO"%>
@@ -76,8 +77,7 @@
 // 		}else{
 			
 // 		}
-		
-		
+
 		int countCouponNum = mdao.countCoupons(id);
 		
 		CouponDAO cdao = new CouponDAO();

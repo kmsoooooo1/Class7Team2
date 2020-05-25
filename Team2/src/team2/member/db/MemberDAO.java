@@ -778,5 +778,4 @@ public class MemberDAO {
 		return countCouponNum;
 
 	}
-		
 }
