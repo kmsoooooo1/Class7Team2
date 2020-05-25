@@ -209,6 +209,17 @@ public class MemberFrontController extends HttpServlet{
 			forward.setRedirect(false);
 		}
 		
+		//
+		else if(command.equals("/MemberOrder.me")){ 
+			System.out.println("/MemberOrder.me 주소 요청");
+			action = new MemberOrderListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+			
 	
 		
 		// 페이지 이동처리 
