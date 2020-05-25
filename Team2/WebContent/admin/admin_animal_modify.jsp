@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/admin.css?ver=2" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>관리자 동물 수정 페이지</title>
 </head>
 <body>
@@ -18,13 +20,20 @@
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
+	<div class="container">
+	<div class="contents">
+	<h2>관리자 동물 수정 페이지</h2>
 	<form action="./AnimalModifyAction.aa" method="post" name="fr" enctype="multipart/form-data">
 	
 		<input type="hidden" id="num" name="num" value="<%=adto.getNum()%>">
 		<input type="hidden" id="sub_category_sel" name="sub_category_sel" value="<%=adto.getSub_category()%>">
 		<input type="hidden" id="sub_category_index_sel" name="sub_category_index_sel" value="<%=adto.getSub_category_index()%>">
 	
-		<table border="1">
+		<table border="1" class="admintable">
+			<colgroup>
+				<col style="width:20%;">
+				<col style="width: auto;">
+			</colgroup>
 			<tr>
 				<td>카테고리</td>
 				<td>
@@ -124,13 +133,14 @@
 			<tr>
 				<td colspan="2"> 
 					<input type="submit" value="동물정보수정">
-					<input type="reset" value="다시 등록">
+					<button type="reset">다시등록</button>
 				</td>
 		   </tr>
 		</table>
 	
 	</form>
-	
+	</div>
+	</div>
 	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>

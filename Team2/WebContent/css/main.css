@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+/*font-family: 'Nanum Gothic', sans-serif;*/
 
 * {
   box-sizing: border-box;
@@ -17,6 +18,18 @@
       padding: 0;
 
     }
+    
+    h1 {
+    	font-family: 'Nanum Gothic', sans-serif;
+		text-align: center;
+		border-bottom: 2px solid;
+		padding-bottom: 15px;
+    }
+    h2 {
+    	font-family: 'Nanum Gothic', sans-serif;
+    	text-align: center;
+    }
+    
     .swiper-container {
       width: 80%;
       margin-left: auto;
@@ -52,6 +65,24 @@
    width: 80%;
    margin: 0;
    padding: 0;
+  }
+  
+  #myBtnContainer {
+  	text-align: center;
+  }
+  
+  .btn{
+  	padding: 0 .95em;
+    min-width: 70px;
+    font-size: 11px;
+    height: 30px;
+    line-height: 27px;
+    font-weight: normal;
+    border: 1px solid #e3e3e3;
+    border-bottom-color: #c7c7c7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    background: #fff;
+    
   }
   
   

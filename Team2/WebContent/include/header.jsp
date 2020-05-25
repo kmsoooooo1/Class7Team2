@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/basic.css?ver=2" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 </head>
 <body>
