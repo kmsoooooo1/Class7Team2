@@ -35,13 +35,17 @@
 		// 상품에 대한 정보를 쿠키에 담기
 		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
 		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
-		int price = 0;
+		String price = "";
 		// 할인율이 있으면
 		if (animalDetail.getA_discount_rate() != 0) {
-			price = animalDetail.getA_price_sale();
+			price = "<span style='text-decoration: line-through; color: gray; font-size: 14px;'>"+newformat_price_origin+"원</span>"
+					+ "<span style='color: black; font-size: 14px;'>"+newformat_price_sale+"원</span>"
+					+ "<span style='color: red; font-size: 14px;'>"+animalDetail.getA_discount_rate()+"%</span>";
+			
 			// 할인율이 없으면
 		} else {
-			price = animalDetail.getA_price_origin();
+			price = "<span style='color: black; font-size: 14px;'>"+newformat_price_origin+"원</span>"
+					+ "<span style='color: red; font-size: 14px;'>"+animalDetail.getA_discount_rate()+"%</span>";
 		}
 		Cookie cook = new Cookie("item" + animalDetail.getA_code(),
 				URLEncoder.encode(
@@ -52,7 +56,7 @@
 						+"<div class='div_info div_wish'>"
 						+"<a href='./AnimalDetail.an?a_code="+animalDetail.getA_code()+"' class='name'>"+animalDetail.getA_morph()+"</a> <br>"
 						+"<div class='price'>"
-						+"<span>"+newformat_price_origin+"원</span>"
+						+price
 						+"</div>"
 						+"</div></li>"
 						,
@@ -961,9 +965,6 @@
 		var popupY = (window.screen.height / 4) - (300 / 2);  
 		window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
 	}
-	
-	function resent(){
-		location.href="";
-	}
+
 </script>
 </html>

@@ -26,6 +26,7 @@
 	</div>
 	
 	<ul class="ul_wrap">
+	
 	<div class="list_wrap">
 		<%
 		// 쿠키 얻어오기
@@ -51,18 +52,8 @@
 	</div>
 	</ul>
 	<div class="div_btn">
-		<div id="btn1"> <button type="button" class="btns" onclick="checkBoxOn();">편집</button> </div>
-		<div id="btn2" style="display: none;">
-			<button class="btns" onclick="dellChkBox();">삭제</button>
-			<button class="btns" onclick="cancel();">취소</button>
-		</div>
 	</div>
-
-	
 	<ul id="pageList">
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
 	</ul>
 	
 	</div>	
