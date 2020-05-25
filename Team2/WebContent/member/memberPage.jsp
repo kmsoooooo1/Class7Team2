@@ -156,7 +156,8 @@
       <strong class="mileage_strong2">
        <span class="mileage_span"><%=mdto.getMileage() %>원</span>
       </strong>
-       <a href="#">조회</a>
+       <a href="./Mileage.me"
+          onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
      </li>
      <!-- 쿠폰 -->
      <li>
@@ -164,7 +165,7 @@
       <strong class="mileage_strong2">
        <span class="mileage_span"><%=countCouponNum%>개</span>
       </strong>
-       <a href="${pageContext.request.contextPath}/member/coupon.jsp"
+       <a href="./Coupon.me"
           onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
      </li>
     </ul>
@@ -436,7 +437,6 @@
  <!-- 내 쿠폰 목 -->
  <div class="coupon_div">
   <h3>내 쿠폰 목록
-   <a href="#" class="seemore">더보기>></a>
   </h3>
   <div class="contents">
    <table border="1" summary>
