@@ -76,7 +76,6 @@
     </div>
    <%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
-
 	%>
     <div class="notice_bar">
      <ul class="rolling"> 
@@ -239,15 +238,10 @@ $(document).ready(function(){
 				$(this).html($(this).text().substr(0,20)+"...");
 			});
 		});
-
-
-
 //헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
 window.onscroll = function() {myFunction()};
-
 	var navbar = document.getElementById("sub_menu");
 	var sticky = navbar.offsetTop;
-
 	function myFunction() {
   	if (window.pageYOffset >= sticky) {
   	  navbar.classList.add("sticky")
@@ -255,7 +249,6 @@ window.onscroll = function() {myFunction()};
   	  navbar.classList.remove("sticky");
  	}
 }
-
 </script>
 </body>
 

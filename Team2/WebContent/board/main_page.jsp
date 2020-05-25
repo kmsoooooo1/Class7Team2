@@ -8,9 +8,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>메인 페이지</title>
 <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/swiper.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <%
@@ -151,11 +152,12 @@
    <img src="${pageContext.request.contextPath}/img/가게내부.png">
   </div>
  </div>
+ 
  <div id="body"> 
  <div class="main">
 
-<h1>반려동물</h1>
-<hr>
+<h2 class="ani">반려동물</h2>
+
 
 <h2>습성</h2>
 
