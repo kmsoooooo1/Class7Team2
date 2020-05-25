@@ -36,25 +36,39 @@
 	<div class="container">
 	<div class="contents">
 	<!-- 장바구니 테이블 생성 -->
-	<div class="h2"><h2>ORDER COMPLETE</h2></div>
+	<div class="h2"><h2>주문 상세 조회</h2></div>
 	
-		<div class="orderInfo">	
-		<div style="float: left;">
-		<img class="logo_img" src="${pageContext.request.contextPath}/img/order_logo.png">
+		<!-- 주문정보 -->
+		<div>
+			<div class="title"><h3>주문 정보</h3></div>
+			<table border="1" class="orderlist">
+				<colgroup>
+					<col style="width:10%;">
+					<col style="width: auto;">
+				</colgroup>
+				<tr>
+					<th>주문번호</th>
+					<td><strong><%=orderList.get(0).getO_trade_num()%></strong></td>
+				</tr>
+				<tr>
+					<th>주문일자</th>
+					<td><strong><%=orderList.get(0).getO_date()%></strong></td>
+				</tr>
+				<tr>
+					<th>주문자</th>
+					<!-- 입금상태  o_status가 0이면 입금전 1이면 입금후 2이면 배송중-->
+					<%if(orderList.get(0).getO_status() == 0) {%>
+						<td> <span style="color: red;"> 입금전 </span> </td>
+					<%} else if(orderList.get(0).getO_status() == 1) {%>
+						<td> <span style="color: green;"> 입금완료 </span> </td>
+					<%} else if(orderList.get(0).getO_status() == 2) {%>
+						<td> <span style="color: blue;"> 배송중 </span> </td>
+					<%}%>
+				</tr>
+			</table>
 		</div>
-		<p>
-		<strong>고객님이 주문이 완료되었습니다.</strong>
-			주문내역 및 배송에 관한 안내는 주문조회를 통하여 확인 가능합니다.
-		</p>
-		<ul>
-			<li>
-				주문번호: <strong><%=orderList.get(0).getO_trade_num()%></strong>
-			</li>
-			<li>
-				주문일자: <strong><%=orderList.get(0).getO_date()%></strong>
-			</li>
-		</ul>
-		</div>
+	
+		
 		
 		<!-- 결제 정보 -->
 		<div>
@@ -110,7 +124,7 @@
 			
 			%>
 				</table>
-				<p class="empty">장바구니가 비었습니다.</p>
+				<p class="empty">구매내역이 비어있습니다.</p>
 			<%
 				}
 				for (int i = 0; i < orderList.size(); i++) {
@@ -250,62 +264,6 @@
 		</tbody>
 		</table>
 		</div>
-		
-		
-		<table border="1" class="list">
-			<tr>
-				<th>총 주문금액</th>
-				<th>총 할인가</th>
-				<th>결제 예정 금액</th>
-			</tr>
-			<tr>
-			
-				<!-- 총 상품금액 -->
-				<td>
-					<span><%=formatter.format(orderList.get(0).getO_sum_money())%></span>원 
-				</td>
-				
-				<!-- 총 배송비 -->
-				<td>
-					<%
-						for (int i = 0; i < orderList.size(); i++) {
-							OrderDTO odto = (OrderDTO) orderList.get(i);
-							ProductDTO pdto = (ProductDTO) productInfoList.get(i);
-										
-							if(odto.getO_p_delivery_method().equals("고속버스")){
-								final_delivery_fee += 14000;
-							}					
-							
-							//할인율이 있을때
-							if(pdto.getProduct_discount_rate() != 0){
-								//tr한줄의 총 금액이 5만원보다 적을때
-								if((odto.getO_p_amount() * pdto.getProduct_price_sale()) < 50000){
-									final_delivery_fee += 3000;
-								}else{
-									final_delivery_fee += 0;
-								}
-							}
-							//할인율이 없을때
-							else if(pdto.getProduct_discount_rate() == 0){
-								//tr한줄의 총 금액이 5만원보다 적을때
-								if((odto.getO_p_amount() * pdto.getProduct_price_origin()) < 50000){
-									final_delivery_fee += 3000;
-								}else{
-									final_delivery_fee += 0;
-								}
-							}
-						}
-					%>
-					<span>-<%=formatter.format(final_delivery_fee)%></span>원
-				</td>
-				
-				<!-- 결제 에정 금액 -->
-				<td>
-					<span>=<%=formatter.format(final_total_price + final_delivery_fee)%></span>원
-				</td>
-				
-			</tr>
-		</table>
 
 		<!-- 배송지 정보 -->
 		<div class="title"><h3> 배송지 정보 </h3></div>

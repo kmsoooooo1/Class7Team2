@@ -26,9 +26,8 @@
 		</colgroup>
 		<tr>
 			<th> 동물 파트 </th>
-			<td colspan="2"><a href="./AnimalList.aa?category=all">모든 동물 리스트</a></td>
-			<td colspan="2"><a href="./AnimalAdd.aa">동물 추가하기</a></td>
-			<td colspan="2"><a href="./AnimalNew.aa">동물 신상리스트</a></td>
+			<td colspan="3"><a href="./AnimalList.aa?category=all"> 모든 동물 리스트 </a></td>
+			<td colspan="3"><a href="./AnimalAdd.aa">동물 추가하기</a></td>
 		</tr>
 		<!-- 관리자 상품 파트 -->
 		<tr>
@@ -40,7 +39,7 @@
 		<tr>
 			<th> 멤버 파트 </th>
 			<td colspan="3"><a href="./MemberList.me">회원 리스트 보기</a></td>
-			<td colspan="3"><a href="https://center-pf.kakao.com/_iLxlxexb/chats">카카오 상담 내역보기</a></td>
+			<td colspan="3"><a href="https://center-pf.kakao.com/_iLxlxexb/chats" target="_blank">카카오 상담 내역보기</a></td>
 		</tr>
 		<!-- 관리자 쿠폰 파트 -->
 		<tr>
@@ -52,6 +51,11 @@
 		<tr>
 			<th> 게시판 파트 </th>
 			<td colspan="6"><a href="./AdminBoard.bo">회원 리스트 보기</a></td>
+		</tr>
+		<!-- 관리자 주문 파트 -->
+		<tr>
+			<th> 주문 파트 </th>
+			<td colspan="6"><a href="./AdminOrderList.ao"> 주문 리스트 </a> </td>
 		</tr>
 		</table>
 	</div>

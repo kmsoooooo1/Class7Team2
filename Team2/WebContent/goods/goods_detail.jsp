@@ -21,10 +21,6 @@
 </head>
 <body>
 
-
-	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
-
 	<%
 		String id = (String) session.getAttribute("id");
 		if (id == null) {
@@ -43,32 +39,61 @@
 		String newformat_price_sale = formatter.format(detailList.get(0).getG_price_sale());
 
 		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
-		int price = 0;
-
+		String price = "";
 		// 할인율이 있으면
-		if (detailList.get(0).getG_discount_rate() != 0) {
-			price = detailList.get(0).getG_price_sale();
+		if (detailList.get(0).getG_discount_rate()!= 0) {
+			price = "<span style='text-decoration: line-through; color: gray; font-size: 14px;'>"+newformat_price_origin+"원</span>"
+					+ "<span style='color: black; font-size: 14px;'>"+newformat_price_sale+"원</span>"
+					+ "<span style='color: red; font-size: 14px;'>"+detailList.get(0).getG_discount_rate()+"%</span>";
+			
 			// 할인율이 없으면
 		} else {
-			price = detailList.get(0).getG_price_origin();
+			price = "<span style='color: black; font-size: 14px;'>"+newformat_price_origin+"원</span>"
+					+ "<span style='color: red; font-size: 14px;'>"+detailList.get(0).getG_discount_rate()+"%</span>";
 		}
-
-		// 상품에 대한 정보를 쿠키에 담기
-		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
-		Cookie cook = new Cookie("item" + detailList.get(0).getG_code(), URLEncoder.encode(
-
-				"<tr> <td> <a href='./goodsDetail.go?g_code=" + detailList.get(0).getG_code()
-						+ "'> <img src='./upload/multiupload/" + detailList.get(0).getG_thumbnail()
-						+ "' width='150' height='150'></a> </td>" + "<td>" + detailList.get(0).getG_name() + "</td>"
-						+ "<td>" + price + "</td>"
-						+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
-						+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
-						+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
-						+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
-				"UTF-8"));
+		
+		int price1 = 0;
+		// 할인율이 있으면
+		if (detailList.get(0).getG_discount_rate() != 0) {
+			price1 = detailList.get(0).getG_price_sale();
+			// 할인율이 없으면
+		} else {
+			price1 = detailList.get(0).getG_price_origin();
+		}
+		
+		Cookie cook = new Cookie("item" + detailList.get(0).getG_code(),
+				URLEncoder.encode(
+						"<li><input type='checkbox' class='chkBox' id='chkBox' name='chkBox' style='display: none;'>" 
+						+"<div class='div_info1'>"
+						+"<a href='./GoodsDetail.go?g_code="+detailList.get(0).getG_code()+"'><img src='./upload/multiupload/"+detailList.get(0).getG_thumbnail()+"' width='100' height='100'></a>"
+						+"</div>"
+						+"<div class='div_info div_wish'>"
+						+"<a href='./GoodsDetail.go?g_code="+detailList.get(0).getG_code()+"' class='name'>"+detailList.get(0).getG_name()+"</a> <br>"
+						+"<div class='price'>"
+						+price
+						+"</div>"
+						+"</div></li>"
+						,
+						"UTF-8"));
 		cook.setMaxAge(60 * 60); // 한시간 유지
 		response.addCookie(cook);
+		
+		Cookie cook1 = new Cookie("cookie" + detailList.get(0).getG_code(),
+				URLEncoder.encode(
+						"<tr> <td> <a href='./GoodsDetail.go?g_code=" + detailList.get(0).getG_code()
+								+ "'> <img src='./upload/multiupload/" + detailList.get(0).getG_thumbnail()
+								+ "' width='150' height='150'></a> </td>" + "<td>" + detailList.get(0).getG_name()
+								+ "</td>" + "<td>" + price1 + "원</td>"
+								+ "<td>"+detailList.get(0).getG_mileage()+"</td>"
+								+ "<td><a 'recent_a' href='./GoodsDetail.go?g_code="+detailList.get(0).getG_code()+"'>상품 보러가기>>></a></td> </tr>",
+						"UTF-8"));
+		cook1.setMaxAge(60 * 60); // 한시간 유지
+		response.addCookie(cook1);
+		
 	%>
+
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
 
 	<!-- Main Content -->
 

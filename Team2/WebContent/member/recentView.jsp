@@ -10,7 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<link href="${pageContext.request.contextPath}/css/mypage.css?ver=2" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/wishlist.css" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>최근 본 상품</title>
 <style type="text/css">
 </style>
@@ -18,31 +19,15 @@
 <body>
 	<!-- Header -->
 	<jsp:include page="/include/header.jsp" />
-<div class="member_div">
- <div class="content">
-	<h3 class="recent_h3">최근 본 상품</h3>
+
+	<div class="container">
+	<div class="div_name">
+	<h2>최근 본 상품</h2>
+	</div>
 	
-<div class="recent_div">
-  <div class="contents">
-  <table border="1" summary>
-  <caption>최근 본 상품</caption>
-  <colgroup>
-    	<col style="width: 100px;">
-    	<col style="width: auto;">
-    	<col style="width: 220px;">
-    	<col style="width: 140px;">
-    	<col style="width: 210px;">
-    </colgroup>
-  	<thead>
-	<tr>
-		<th scope="col">이미지</th>
-		<th scope="col">상품명</th>
-		<th scope="col">판매가</th>
-		<th scope="col">옵션정보</th>
-		<th scope="col">주문</th>
-	</tr>
-	</thead>
-	<tbody>
+	<ul class="ul_wrap">
+	
+	<div class="list_wrap">
 		<%
 		// 쿠키 얻어오기
 		Cookie[] cook = request.getCookies();
@@ -61,20 +46,18 @@
 			out.println(item);
 		
 			}
+			}
 		}
-				%>
-	</tbody>
-	</table>
-	<%
-		}else{
-	%>
-				<p class=""> 최근 본 상품이 없습니다.</p>
-		<%} %>
- </div>
- </div>
-
-</div>
-</div>
+		%>
+	</div>
+	</ul>
+	<div class="div_btn">
+	</div>
+	<ul id="pageList">
+	</ul>
+	
+	</div>	
+	
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>
 	

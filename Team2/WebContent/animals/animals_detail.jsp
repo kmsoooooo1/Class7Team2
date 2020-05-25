@@ -35,27 +35,58 @@
 		// 상품에 대한 정보를 쿠키에 담기
 		// 쿠키에 한글은 저장되지 않으므로 encode함수로 인코딩해야 한다.
 		// 할인율 유무에 따라 최근 본 상품 페이지에 가격표시
-		int price = 0;
+		String price = "";
 		// 할인율이 있으면
 		if (animalDetail.getA_discount_rate() != 0) {
-			price = animalDetail.getA_price_sale();
+			price = "<span style='text-decoration: line-through; color: gray; font-size: 14px;'>"+newformat_price_origin+"원</span>"
+					+ "<span style='color: black; font-size: 14px;'>"+newformat_price_sale+"원</span>"
+					+ "<span style='color: red; font-size: 14px;'>"+animalDetail.getA_discount_rate()+"%</span>";
+			
 			// 할인율이 없으면
 		} else {
-			price = animalDetail.getA_price_origin();
+			price = "<span style='color: black; font-size: 14px;'>"+newformat_price_origin+"원</span>"
+					+ "<span style='color: red; font-size: 14px;'>"+animalDetail.getA_discount_rate()+"%</span>";
 		}
+		
+		int price1 = 0;
+		// 할인율이 있으면
+		if (animalDetail.getA_discount_rate() != 0) {
+			price1 = animalDetail.getA_price_sale();
+			// 할인율이 없으면
+		} else {
+			price1 = animalDetail.getA_price_origin();
+		}
+		
+		
 		Cookie cook = new Cookie("item" + animalDetail.getA_code(),
+				URLEncoder.encode(
+						"<li><input type='checkbox' class='chkBox' id='chkBox' name='chkBox' style='display: none;'>" 
+						+"<div class='div_info1'>"
+						+"<a href='./AnimalDetail.an?a_code="+animalDetail.getA_code()+"'><img src='./upload/multiupload/"+animalDetail.getA_thumbnail()+"' width='100' height='100'></a>"
+						+"</div>"
+						+"<div class='div_info div_wish'>"
+						+"<a href='./AnimalDetail.an?a_code="+animalDetail.getA_code()+"' class='name'>"+animalDetail.getA_morph()+"</a> <br>"
+						+"<div class='price'>"
+						+price
+						+"</div>"
+						+"</div></li>"
+						,
+						"UTF-8"));
+		cook.setMaxAge(60 * 60); // 한시간 유지
+		response.addCookie(cook);
+		
+		Cookie cook1 = new Cookie("cookie" + animalDetail.getA_code(),
 				URLEncoder.encode(
 						"<tr> <td> <a href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()
 								+ "'> <img src='./upload/multiupload/" + animalDetail.getA_thumbnail()
 								+ "' width='150' height='150'></a> </td>" + "<td>" + animalDetail.getA_morph()
-								+ "</td>" + "<td>" + price + "</td>"
-								+ "<td> <select><option selected disabled>- [필수]배송방법을 선택해 주세요 -</option><option disabled> --------------- </option>"
-								+ "<option> 일반포장 </option><option>퀵서비스(착불)</option><option>지하철택배(착불)</option>"
-								+ "<option> 고속버스택배 (+14,000원) </option><option> 매장방문수령 </option></select> </td>"
-								+ "<td> <input type='button' value='담기'><br> <input type='button' value='주문'><br> <input type='button' value='삭제'></td> </tr>",
+								+ "</td>" + "<td>" + price1 + "원</td>"
+								+ "<td>"+animalDetail.getA_mileage()+"</td>"
+								+ "<td><a class='recent_a' href='./AnimalDetail.an?a_code=" + animalDetail.getA_code()+"'>상품 보러가기>>></a></td> </tr>",
 						"UTF-8"));
-		cook.setMaxAge(60 * 60); // 한시간 유지
-		response.addCookie(cook);
+		cook1.setMaxAge(60 * 60); // 한시간 유지
+		response.addCookie(cook1);
+		
 	%>
 
 	<!-- Header -->
@@ -958,5 +989,6 @@
 		var popupY = (window.screen.height / 4) - (300 / 2);  
 		window.open('https://pf.kakao.com/_iLxlxexb','windows','width=600,height=670,left='+popupX+',top='+popupY+',scrollbars=yes');
 	}
+
 </script>
 </html>

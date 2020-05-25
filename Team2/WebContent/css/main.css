@@ -1,9 +1,16 @@
 @CHARSET "UTF-8";
 
+/*font-family: 'Nanum Gothic', sans-serif;*/
 
 * {
   box-sizing: border-box;
 }
+
+#main_body {
+	width: 80%;
+	margin: 0 auto;
+}
+
   html, body {
       position: relative;
       height: 100%;
@@ -17,8 +24,20 @@
       padding: 0;
 
     }
+    
+    .ani {
+    	font-family: 'Nanum Gothic', sans-serif;
+		text-align: center;
+		border-bottom: 2px solid;
+		padding-bottom: 15px;
+    }
+    h2 {
+    	font-family: 'Nanum Gothic', sans-serif;
+    	text-align: center;
+    }
+    
     .swiper-container {
-      width: 80%;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -35,9 +54,9 @@
   	}
   
    .banner_img {
-  	width: 80%;
+  	width: 100%;
   	display: inline-block;
-  	max-width: 250px;
+  	max-width: 301px;
   	position: relative;
   }
   
@@ -49,9 +68,27 @@
   }
   
   .banner_img2 img{
-   width: 80%;
+   width: 100%;
    margin: 0;
    padding: 0;
+  }
+  
+  #myBtnContainer {
+  	text-align: center;
+  }
+  
+  .btn{
+  	padding: 0 .95em;
+    min-width: 70px;
+    font-size: 11px;
+    height: 30px;
+    line-height: 27px;
+    font-weight: normal;
+    border: 1px solid #e3e3e3;
+    border-bottom-color: #c7c7c7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    background: #fff;
+    
   }
   
   
@@ -81,7 +118,7 @@
   }
   
   	.newlist {
-  		width: 80%;
+  		width: 100%;
   		margin: 0 auto;
   		padding: 0;
   	}
@@ -126,7 +163,7 @@
 
 /* Center website */
 .main {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
 }
