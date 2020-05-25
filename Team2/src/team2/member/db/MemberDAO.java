@@ -778,5 +778,48 @@ public class MemberDAO {
 		return countCouponNum;
 
 	}
+	
+	public List<MemberPointDTO> getMileage(String id){
+		List<MemberPointDTO> pointList = new ArrayList<MemberPointDTO>();
+		
+		try {
+			con = getConnection();
+			sql = "select * from team2_dailypointcheck where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MemberPointDTO mpdto = new MemberPointDTO();
+				mpdto.setId(rs.getString("id"));
+				mpdto.setPoint(rs.getInt("point"));
+				mpdto.setPoint_description(rs.getString("point_description"));
+				mpdto.setDate(rs.getDate("date"));
+				
+				pointList.add(mpdto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			closeDB();
+		}
+		
+		return pointList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 }
