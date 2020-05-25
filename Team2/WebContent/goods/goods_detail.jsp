@@ -1165,6 +1165,7 @@
 				currentAmount = parseInt("1");
 				$("#g_amount_" + delivery_method).val(currentAmount);
 			}else{
+				
 				//변경 전 수량이 변경 후 수량보다 클때
 			   	if(previousAmount > currentAmount){
 			   		//final_total_amount 태그 제어
