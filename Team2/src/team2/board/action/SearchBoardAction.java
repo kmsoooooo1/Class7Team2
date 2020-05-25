@@ -19,7 +19,10 @@ public class SearchBoardAction implements Action {
 		BoardDAO bdao = new BoardDAO();
 		
 //		String category = (String)request.getParameter("b_category");
-
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		
 		int c = 3;
 		int pageSize = 10;
 		String search = "";
