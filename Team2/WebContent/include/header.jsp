@@ -105,60 +105,53 @@
    
    <nav id="nav_menu" class="nav_menu">
       <ul class="sub_menu" id="sub_menu">
-         <li class="dropdown"><i class='fas fa-align-justify'></i>
-            <div class="dropdown-content">
-      		<div class="nav_header">
-      		<h2>
-      			전체보기
-      		</h2>
-      		</div>
+         <li class="dropdown"><a href="./Main.me" class="dropbtn"><i class='fas fa-align-justify'></i></a>
+            <div class="dropdown-content">	
       		<div class="nav_row">
       		<div class="nav_column">
-      		 <h3>도마뱀</h3>
-               <a href="#"> 리자드/모니터 </a>
-               <a href="#"> 레오파드 게코 </a> 
-               <a href="#"> 크레스티드 게코 </a>
-               <a href="#"> 카멜레온 </a>
+      		 <a href="./AnimalList.an?category=파충류&sub_category=도마뱀"><h3>도마뱀</h3></a>
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> 
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a>
             </div>
       		<div class="nav_column">
-      		 <h3>뱀</h3>
-               <a href="#"> 콘/킹/소형뱀 </a>
-               <a href="#"> 대형뱀 </a>
+      		 <a href=""><h3>뱀</h3></a>
+               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=콘/킹/소형뱀"> 콘/킹/소형뱀 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=대형뱀"> 대형뱀 </a>
             </div>
       		<div class="nav_column">
-      		 <h3>거북</h3>
-               <a href="#"> 육지거북 </a>
-               <a href="#"> 수생/습지거북 </a> 
+      		 <a href=""><h3>거북</h3></a>
+               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북"> 육지거북 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=수생/습지 거북"> 수생/습지거북 </a> 
             </div>
       		<div class="nav_column">
-      		 <h3>먹이</h3>
-               <a href="#"> 칼슘/약품 </a>
-               <a href="#"> 생먹이 </a> 
-               <a href="#"> 냉동먹이 </a> 
-               <a href="#"> 인공사료 </a> 
+      		 <a href=""><h3>먹이</h3></a>
+               <a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a>
+               <a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a> 
+               <a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a> 
+               <a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a> 
             </div>
       		<div class="nav_column">
-      		 <h3>사육용품</h3>
-               <a href="#"> 사육장 </a>
-               <a href="#"> 장식/그릇 </a> 
-               <a href="#"> 램프 </a> 
-               <a href="#"> 바닥재 </a> 
-               <a href="#"> 온/습도 관련 </a> 
-               <a href="#"> 보조용품 </a> 
-               <a href="#"> 수족관 </a> 
+      		 <a href=""><h3>사육용품</h3></a>
+               <a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
+               <a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇"> 장식/그릇 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=램프"> 램프 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=바닥재"> 바닥재 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련"> 온/습도 관련 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=보조용품"> 보조용품 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=수족관"> 수족관 </a> 
             </div>
       		<div class="nav_column">
-      		 <h3>동물병원</h3>
-               <a href="#"> 바로가기 </a>
+      		 <a href="./aHospital.bo"><h3>동물병원</h3></a>
             </div>
       		<div class="nav_column">
-      		 <h3>이벤트</h3>
-               <a href="#"> 바로가기 </a>
+      		 <a href="./CouponList.co"><h3>이벤트</h3></a>
+      		</div> 
             </div>
             </div>
-            </div> 
+           
           </li>
-      <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
