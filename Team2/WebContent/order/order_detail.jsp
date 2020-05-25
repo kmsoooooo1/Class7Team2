@@ -58,12 +58,21 @@
 					<th>주문자</th>
 					<!-- 입금상태  o_status가 0이면 입금전 1이면 입금후 2이면 배송중-->
 					<%if(orderList.get(0).getO_status() == 0) {%>
-						<td> <span style="color: red;"> 입금전 </span> </td>
+						<td> 
+							<span style="color: red;"> 입금전 </span> 
+							<!-- 입금완료(임시) -->
+							<button type="button" style="margin-left: 10px;" onclick="changeO_status()"> 입금완료(임시) </button>
+						</td>
 					<%} else if(orderList.get(0).getO_status() == 1) {%>
 						<td> <span style="color: green;"> 입금완료 </span> </td>
 					<%} else if(orderList.get(0).getO_status() == 2) {%>
 						<td> <span style="color: blue;"> 배송중 </span> </td>
+					<%} else if (orderList.get(0).getO_status() == 3) {%>
+						<td><span style="color: black;"> 배송완료 </span></td>
 					<%}%>
+					
+					
+					
 				</tr>
 			</table>
 		</div>
@@ -81,10 +90,10 @@
 			</colgroup>
 				<tr>
 					<th>최종결제금액</th>
-					<td><%=formatter.format(orderList.get(0).getO_sum_money())%></td>
+					<td><%=formatter.format(orderList.get(0).getO_sum_money())%>원</td>
 				</tr>
 				<tr>
-					<th> 결제수단 </th>
+					<th style="height: 80px;"> 결제수단 </th>
 					<td> 
 						<%=orderList.get(0).getO_trade_type() %> 
 						입금자: <%=orderList.get(0).getO_trade_payer() %><br>
@@ -346,4 +355,11 @@
 	<footer> <jsp:include page="/include/footer.jsp" /> </footer>
 
 </body>
+<script type="text/javascript">
+
+	function changeO_status(){
+		alert("테스트");
+	}
+
+</script>
 </html>
