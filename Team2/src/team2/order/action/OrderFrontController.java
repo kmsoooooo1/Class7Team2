@@ -98,6 +98,16 @@ public class OrderFrontController extends HttpServlet{
 			}
 		}
 		
+		//주문내역 상세페이지 처리
+		else if(command.equals("/OrderDetail.or")){
+			action = new OrderDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		// 페이지 이동 처리
 		if (forward != null) {

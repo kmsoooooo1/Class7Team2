@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import team2.order.db.OrderDAO;
-import team2.order.db.OrderDTO;
 
-public class OrderListAction implements Action{
-	
+public class OrderDetailAction implements Action{
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -26,27 +25,26 @@ public class OrderListAction implements Action{
 			return forward;
 		}
 		
+		//한글처리
+		request.setCharacterEncoding("UTF-8");
+		
+		//주문번호 넘겨받기
+		String o_trade_num = request.getParameter("o_trade_num");
 		
 		OrderDAO odao = new OrderDAO();
 		
-		Vector vec = odao.getOrderList(id);
+		Vector vec = odao.getOrderList(id, o_trade_num);
 		
 		ArrayList orderList = (ArrayList) vec.get(0);
 		ArrayList productInfoList = (ArrayList) vec.get(1);
-		
-		ArrayList<OrderDTO> trade_num_List = (ArrayList<OrderDTO>) odao.getTradeNumList(id);
 		
 		//request 영역에 저장
 		request.setAttribute("orderList", orderList);
 		request.setAttribute("productInfoList", productInfoList);
 		
-		request.setAttribute("trade_num_List", trade_num_List);
-		
-		forward.setPath("./order/order_list.jsp");
-		forward.setRedirect(false); //forwarding 해야한다.
+		forward.setPath("./order/order_detail.jsp");
+		forward.setRedirect(false);
 		return forward;
 	}
-		
-	
 	
 }
