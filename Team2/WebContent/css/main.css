@@ -29,11 +29,12 @@
     	font-family: 'Nanum Gothic', sans-serif;
 		text-align: center;
 		border-bottom: 2px solid;
-		padding-bottom: 15px;
+		padding-bottom: 30px;
     }
     h2 {
     	font-family: 'Nanum Gothic', sans-serif;
     	text-align: center;
+    	margin: 40px auto;
     }
     
     .swiper-container {
@@ -69,7 +70,7 @@
   
   .banner_img2 img{
    width: 100%;
-   margin: 0;
+   margin-top: 50px;
    padding: 0;
   }
   
