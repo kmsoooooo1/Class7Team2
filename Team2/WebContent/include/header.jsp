@@ -105,66 +105,49 @@
    <nav id="nav_menu" class="nav_menu">
       <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./Main.me" class="dropbtn"><i class='fas fa-align-justify'></i></a>
-            <div class="dropdown-content_total">	
-	      		<div class="nav_row">
-		      		<div class="L">
-			      		<div class="nav_column">
-			      		 <a href="./AnimalList.an?category=파충류&sub_category=도마뱀"><h3>도마뱀</h3></a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> 
-			               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a>
-			            </div>
-			      		<div class="nav_column">
-			      		 <a href=""><h3>뱀</h3></a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=콘/킹/소형뱀"> 콘/킹/소형뱀 </a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=대형뱀"> 대형뱀 </a>
-			            </div>
-			      		<div class="nav_column">
-			      		 <a href=""><h3>거북</h3></a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북"> 육지거북 </a>
-			               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=수생/습지 거북"> 수생/습지거북 </a> 
-			            </div>
-			      		<div class="nav_column">
-			      		 <a href=""><h3>먹이</h3></a>
-			               <a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a>
-			               <a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a> 
-			               <a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a> 
-			               <a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a> 
-			            </div>
-			      		<div class="nav_column">
-			      		 <a href=""><h3>사육용품</h3></a>
-			               <a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
-			               <a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇"> 장식/그릇 </a> 
-			               <a href="./GoodsList.go?category=사육용품&sub_category=램프"> 램프 </a> 
-			               <a href="./GoodsList.go?category=사육용품&sub_category=바닥재"> 바닥재 </a> 
-			               <a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련"> 온/습도 관련 </a> 
-			               <a href="./GoodsList.go?category=사육용품&sub_category=보조용품"> 보조용품 </a> 
-			               <a href="./GoodsList.go?category=사육용품&sub_category=수족관"> 수족관 </a> 
-			            </div>
-			      		<div class="nav_column">
-			      		 <a href="#"><h3>기타</h3></a>
-			      		 <a href="./aHospital.bo"> 동물병원 </a>
-			      		 <a href="./CouponList.co"> 이벤트 </a>
-			            </div>
-		            </div>
-		            <div class="R">
-			      		<div class="nav_column">
-			      		 	   <a href="#"><h3>커뮤니티</h3></a>
-				      		   <a href="./BoardList.bo?category=0"> 공지사항 </a>
-				               <a href="./BoardList.bo?category=1"> 상품후기 </a> 
-				               <a href="./BoardList.bo?category=2"> Q&A </a>
-		               	</div>
-			      		 <div class="nav_column">
-			      		 <a href="#"><h3>쇼핑몰 정보</h3></a>
-			      		   <a href="./Company.me"> 회사소개 </a>
-			               <a href="./Agreement.me"> 이용약관 </a> 
-			               <a href="./Privacy.me"> 개인정보취급방침 </a> 
-			               <a href="#"> 이용안내 </a> 
-			               <a href="#"> 제휴문의 </a> 
-			      		</div>
-		      		</div> 
-	            </div>
+            <div class="dropdown-content">	
+      		<div class="nav_row">
+      		<div class="nav_column">
+      		 <a href="./AnimalList.an?category=파충류&sub_category=도마뱀"><h3>도마뱀</h3></a>
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> 
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a>
+            </div>
+      		<div class="nav_column">
+      		 <a href=""><h3>뱀</h3></a>
+               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=콘/킹/소형뱀"> 콘/킹/소형뱀 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=대형뱀"> 대형뱀 </a>
+            </div>
+      		<div class="nav_column">
+      		 <a href=""><h3>거북</h3></a>
+               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북"> 육지거북 </a>
+               <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=수생/습지 거북"> 수생/습지거북 </a> 
+            </div>
+      		<div class="nav_column">
+      		 <a href=""><h3>먹이</h3></a>
+               <a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a>
+               <a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a> 
+               <a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a> 
+               <a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a> 
+            </div>
+      		<div class="nav_column">
+      		 <a href=""><h3>사육용품</h3></a>
+               <a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
+               <a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇"> 장식/그릇 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=램프"> 램프 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=바닥재"> 바닥재 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=온/습도 관련"> 온/습도 관련 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=보조용품"> 보조용품 </a> 
+               <a href="./GoodsList.go?category=사육용품&sub_category=수족관"> 수족관 </a> 
+            </div>
+      		<div class="nav_column">
+      		 <a href="./aHospital.bo"><h3>동물병원</h3></a>
+            </div>
+      		<div class="nav_column">
+      		 <a href="./CouponList.co"><h3>이벤트</h3></a>
+      		</div> 
+            </div>
             </div>
            
           </li>
