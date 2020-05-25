@@ -22,10 +22,7 @@ public class myBoardAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
-		
-//		String c_str = request.getParameter("category");
-		
-		
+
 		//검색 + 페이지 크기 초기값설정
 		int c = 3;
 		int pageSize = 10;
@@ -45,12 +42,6 @@ public class myBoardAction implements Action {
 		System.out.println("category : "+c+"/search : "+search);
 		
 		System.out.println("cset = "+set);
-		
-//		String page_str = request.getParameter("page");
-//		int page = 1;
-//		if(page_str!=null){
-//			page=Integer.parseInt(page_str);
-//		}
 		
 		int total = dao.getWriterCount(id, set);
 		

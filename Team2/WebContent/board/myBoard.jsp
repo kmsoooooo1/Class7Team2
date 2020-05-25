@@ -23,8 +23,7 @@
 
 	//페이지번호 & 카테고리번호
 	String pageNum = (String)request.getAttribute("pageNum");
-// 	String category = (String)request.getAttribute("category");
-// 	String search = (String)request.getAttribute("search");
+
 	
 %>
 	<!-- content -->
