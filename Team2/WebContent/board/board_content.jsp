@@ -23,7 +23,7 @@
 </head>
 <body>
  <jsp:include page="/include/header.jsp" /> 
- 
+  
 	<%
 		BoardDTO bdto = (BoardDTO)request.getAttribute("bdto");
 		String pageNum = (String)request.getParameter("pageNum");
