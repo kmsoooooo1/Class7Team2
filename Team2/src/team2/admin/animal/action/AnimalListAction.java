@@ -17,7 +17,7 @@ public class AnimalListAction implements Action{
 		
 		AnimalDAO adao = new AnimalDAO();
 		
-		String category = request.getParameter("category");
+		String category = "all";
 		String sub_category = "";
 		String sub_category_index = "";
 		
@@ -31,7 +31,7 @@ public class AnimalListAction implements Action{
 		}
 		int currentPage = Integer.parseInt(pageNum);
 	
-		int pageSize = 8;
+		int pageSize = 15;
 		
 		Criteria cri = new Criteria();
 		
@@ -40,11 +40,24 @@ public class AnimalListAction implements Action{
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(total);
+		
+		
 		
 		List<AnimalDTO> admin_animalList = adao.getAnimalList(category, sub_category, sub_category_index, cri);
+
+		System.out.println("total : "+total);
+		total = adao.animalTotalCount(category, "all", "all");
+
+		pageMaker.setTotalCount(total);
+		System.out.println("total : "+total);
 		
-		request.setAttribute("admin_animalList", admin_animalList); 
+		System.out.println(cri);
+		System.out.println(pageMaker);
+		
+		request.setAttribute("admin_animalList", admin_animalList);
+		request.setAttribute("cri", cri);
+		request.setAttribute("pageMaker", pageMaker);
+		request.setAttribute("pageNum", currentPage);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./admin/admin_animal_list.jsp");

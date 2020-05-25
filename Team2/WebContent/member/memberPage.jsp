@@ -74,7 +74,7 @@
     
     <ul>
      <!-- 주문조회 -->
-     <li><a href="#">주문 내역</a></li>
+     <li><a href="./OrderList.or">주문 내역</a></li>
      <!-- 장바구니 -->
      <li><a href="./BasketList.ba">장바구니</a></li>
 	 <!-- 관심상품 -->

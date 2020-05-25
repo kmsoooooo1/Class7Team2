@@ -22,7 +22,7 @@
 		String sub_category = request.getParameter("sub_category");
 		String sub_category_index = request.getParameter("sub_category_index");
 		if (sub_category_index == null) {
-			sub_category_index = "";
+			sub_category_index = "all";
 		}
 
 		//AnimalListAction 객체에서 저장된 정보를 저장 
@@ -72,7 +72,7 @@
 		%>
 		<div class="menu">
 			<input type="button" value="전체보기" class="a_btn"
-				onclick="location.href='./AnimalList.an?category=파충류sub_category=거북'"> <input
+				onclick="location.href='./AnimalList.an?category=파충류&sub_category=거북'"> <input
 				type="button" value="육지거북" class="a_btn"
 				onclick="location.href='./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북'">
 			<input type="button" value="수생/습지 거북" class="a_btn"
@@ -81,7 +81,7 @@
 		<%
 			}
 		%>
-		<span class="a_amount"> Total <%=animalList.size()%> items
+		<span class="a_amount"> Total <%=pageMaker.getTotalCount()%> items
 		</span>
 		<ul class="ul_wrap">
 
@@ -96,24 +96,38 @@
 			%>
 			<li>
 				<div class="list_wrap">
-					<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img
-						class="list_img"
-						src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300"
-						height="300">
-					</a> <br> <a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'>
-						<%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%>
-					</a>
+
+					<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>'> <img class="list_img" src="./upload/multiupload/<%=adto.getA_thumbnail()%>" width="300" height="300"> </a> 
+					
+					<br> 
+					
+					<span class="product_detail" style="margin: 15px 40px 0 35px;">
+						<a href='./AnimalDetail.an?a_code=<%=adto.getA_code()%>' style="text-decoration: none; color: black;">
+							<%=adto.getA_morph()%>/<%=adto.getA_sex()%>/<%=adto.getA_status()%>
+						</a>
+					</span>
+					
+					<br>
+					
 					<%
 						if (adto.getA_discount_rate() != 0) { //만약 할인율이 있으면
 					%>
-					<span style="text-decoration: line-through"> <%=newformat_price_origin%>원
-					</span> <br> <span style="color: #f0163a; font-weight: bold;">
-						할인판매가 : <%=newformat_price_sale%>원
-					</span> <br>
+
+					<span class="product_detail" style="text-decoration: line-through"> <%=newformat_price_origin%>원 <br> </span>
+				
+					<br> <br>
+				
+					<span class="product_detail" style="color: #f0163a; font-weight: bold;"> 할인판매가 : <%=newformat_price_sale%>원 </span> 
+						
+					<br>
 					<%
 						} else { //없으면
 					%>
-					<%=newformat_price_origin%>원 <br>
+					
+					<span class="product_detail">
+						<%=newformat_price_origin%>원 <br>
+					</span>
+					
 					<%
 						}
 					%>
@@ -144,23 +158,23 @@
 
 		<div class="bottom">
 			<ul id="pageList">
-				<c:if test="${pageMaker.prev }">
-					<li
-						onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.startPage-1 }'">
-						◀</li>
-				</c:if>
-				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
-					var="pageNum">
-					<li
-						onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageNum}'">
-						${pageNum }</li>
-				</c:forEach>
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li
-						onclick="location.href='./AnimalList.an?category=<%=category %>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index%>&pageNum=${pageMaker.endPage+1 }'">
-						▶</li>
-				</c:if>
-			</ul>
+			<%if(pageMaker.isPrev()){ %>
+				<li onclick="location.href='./AnimalList.an?category=<%=category%>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index %>&pageNum=<%=pageMaker.getStartPage()-1%>'">
+					◀	
+				</li>
+			<%}
+			for(int i = pageMaker.getStartPage(); i<=pageMaker.getEndPage(); i++){
+			%>
+				<li onclick="location.href='./AnimalList.an?category=<%=category%>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index %>&pageNum=<%=i%>'">
+					<%=i %>
+				</li>
+			<%}
+			if(pageMaker.isNext() && pageMaker.getEndPage() > 0){ %>
+				<li onclick="location.href='./AnimalList.an?category=<%=category%>&sub_category=<%=sub_category %>&sub_category_index=<%=sub_category_index %>&pageNum=<%=pageMaker.getEndPage()+1%>'">
+					▶
+				</li>
+			<%} %>
+		</ul>
 		</div>
 
 	</div>

@@ -33,7 +33,7 @@ var img_files = []; //추가할 파일
 		if(old_files != ""){
 //			alert("old_files : "+old_files);
 			for(var index=0; index<old_files.length; index++){
-				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteOldFiles("+index+")\" ><img src=" + conPath +"/"+old_files[index]+"  width='150' height='120' id=\"img_id_"+index+"\"></a>";
+				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteOldFiles("+index+")\" id=\"old_img_id_"+index+"\"><img src=" + conPath +"/"+old_files[index]+"  width='150' height='120' ></a>";
 		 	   $(".imgs_wrap").append(html);
 			}
 		}
@@ -80,7 +80,7 @@ var img_files = []; //추가할 파일
 			File upFile = new File(realPath+files[i]);
 		
 			System.out.println("upFile : " +upFile);
-
+			
 			%>
 				<script type="text/javascript">
 				
@@ -199,6 +199,16 @@ var img_files = []; //추가할 파일
 
 	//파일 추가
 	function addFiles(e) {
+
+// 		$(".imgs_wrap").empty();
+
+// 		alert("img_files.length" +img_files.length);
+		
+// 		alert("old_files.length" +old_files.length);
+	
+		for(var i=0; i <= img_files.length; i++){
+			deleteFiles(i);
+		}
 		
 		img_files = [];
 	
@@ -217,7 +227,7 @@ var img_files = []; //추가할 파일
 // 	        alert("img_files" + img_files);
 	        var reader = new FileReader();
 	        reader.onload = function(e) {
-                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" ><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' id=\"img_id_"+index+"\"></a>";
+                var html = "<a href=\"javascript:void(0);\" onclick=\"deleteFiles("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' width='150' height='120' ></a>";
 	        	$(".imgs_wrap").append(html);
 	            index++;
             }
@@ -229,7 +239,7 @@ var img_files = []; //추가할 파일
     
 	//추가할 파일 삭제
     function deleteFiles(index) {
-//     	alert("index delete : "+img_files[index]);
+//     	alert("index delete : "+index);
 
     	img_files.splice(index, 1);
 
@@ -240,12 +250,12 @@ var img_files = []; //추가할 파일
     
 	//저장된 파일 삭제
     function deleteOldFiles(index) {
-    	alert("index delete : "+old_files[index]);
+//     	alert("index delete : "+index);
 
     	old_files.splice(index, 1);
 
-        var img_id = "#img_id_"+index;
-        $(img_id).remove(); 
+        var old_img_id = "#old_img_id_"+index;
+        $(old_img_id).remove(); 
                
     }
 
@@ -257,7 +267,7 @@ var img_files = []; //추가할 파일
 		var form = $('#fr')[0];
 		var formData = new FormData(form);
 		
-		if(old_files!=""){
+		if(old_files!="" && old_files!=null){
 			for(var i=0; i < old_files.length; i++){
 // 				alert("test : " + old_files[i]);
 				formData.append('old', old_files[i]);

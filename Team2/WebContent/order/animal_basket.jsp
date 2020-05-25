@@ -12,12 +12,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<link href="${pageContext.request.contextPath}/css/order.css?ver=2" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/order.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <body>
 
+	<!-- Header -->
+	<header> <jsp:include page="/include/header.jsp" /> </header>
+	
 	<%
 		List basketList = (List) request.getAttribute("basketList");
 		List productInfoList = (List) request.getAttribute("productInfoList");
@@ -29,15 +32,13 @@
 		int final_delivery_fee = 0; //총 배송비
 	%>
 
-	<!-- Header -->
-	<header> <jsp:include page="/include/header.jsp" /> </header>
 	<div class="container">
 	<div class="contents">
 	<!-- 장바구니 테이블 생성 -->
 	<div class="h2"><h2>CART</h2></div>
 	<form action="" method="post" name="fr"> 
 	
-		<input type="hidden" id="selectedCodes" name="seletedCodes" value="">
+		<input type="hidden" id="selectedCodes" name="selectedCodes" value="">
 		<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 		<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
 		
@@ -305,13 +306,13 @@
 		<div class="orderbtn_div">
 		<button type="button" class="order_btn" onclick="orderAll();"> 전체상품주문 </button>
 		<button type="button" class="order_btn" onclick="orderSelected();"> 선택상품주문 </button>
-		<input type="button" class="order_btn" value="쇼핑계속하기">
+		<button type="button" class="order_btn" onclick="location.href='./Main.me';">쇼핑계속하기</button>
 		</div>
 	</form>
 	
 	<br>
 
-	<div class="help">
+	<div class="help"> 
 		<h3>이용안내</h3>
 		<div class="inner">
 			<h4>장바구니 이용안내</h4>

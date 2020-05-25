@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>관리자 동물 추가 페이지</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/admin.css?ver=2" rel="stylesheet">

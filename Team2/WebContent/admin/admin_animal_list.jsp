@@ -1,7 +1,10 @@
+<%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.animal.db.AnimalDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +18,15 @@
 	<%
 		//AnimalListAction 객체에서 저장된 정보를 저장 
 		List<AnimalDTO> admin_animalList = (List<AnimalDTO>) request.getAttribute("admin_animalList");
+	
+	
+		PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		int pageNum = (int)request.getAttribute("pageNum");
+		
+		System.out.println("pm: " + pageMaker);
+		System.out.println("cri :" + cri);
+		
 	%>
 	
 	<!-- Header -->
@@ -95,14 +107,35 @@
 				<td><%=adto.getA_mileage()%></td>
 				<td><%=adto.getA_view_count()%></td>
 				<td><%=adto.getDate()%></td>
-				<td> <a href=""><button type="button"> 수정 </button></a> </td>
-				<td> <a href=""><button type="button"> 삭제 </button></a> </td>
+				<td> <a href="./AnimalModify.aa?num=<%=adto.getNum()%>"><button type="button"> 수정 </button></a> </td>
+				<td> <a href="./AnimalDeleteAction.aa?num=<%=adto.getNum()%>"><button type="button"> 삭제 </button></a> </td>
 			</tr>
 		</tbody>
 		<%}%>
 	</table>
 	</div>
   </div>
+  
+  <div class="bottom">
+		<ul id="pageList">
+			<%if(pageMaker.isPrev()){ %>
+				<li onclick="location.href='./AnimalList.aa?&pageNum=<%=pageMaker.getStartPage()-1%>'">
+					◀	
+				</li>
+			<%}
+			for(int i = pageMaker.getStartPage(); i<=pageMaker.getEndPage(); i++){
+			%>
+				<li onclick="location.href='./AnimalList.aa?pageNum=<%=i%>'">
+					<%=i %>
+				</li>
+			<%}
+			if(pageMaker.isNext() && pageMaker.getEndPage() > 0){ %>
+				<li onclick="location.href='./AnimalList.aa?&pageNum=<%=pageMaker.getEndPage()+1%>'">
+					▶
+				</li>
+			<%} %>
+		</ul>
+	</div>
  </div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>

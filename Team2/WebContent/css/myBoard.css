@@ -1,4 +1,7 @@
 @charset "utf-8";
+* {
+	box-sizing: border-box;
+}
 
 .list a{text-decoration: none;}
 .list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}

@@ -1,3 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="team2.board.db.BoardDAO"%>
+<%@page import="team2.board.action.PageMaker"%>
+<%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.db.BoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -68,24 +74,68 @@
    </li>
    	  </ul>
     </div>
-    
-    <div class="notice">
-     <ul class="rolling">
-      <li><a href="#">공지사항 내용1</a></li>
-      <li><a href="#">공지사항 내용2</a></li>
-      <li><a href="#">공지사항 내용3</a></li>
-      <li><a href="#">공지사항 내용4</a></li>
-      <li><a href="#">공지사항 내용5</a></li>
-      <li><a href="#">공지사항 내용6</a></li>
+   <%
+		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
+
+	%>
+    <div class="notice_bar">
+     <ul class="rolling"> 
+       <%
+       String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
+       	BoardDAO bdao = new BoardDAO();
+       	List<BoardDTO> boardNoticeList = bdao.getList(sql);
+       	bdao.closeDB();
+	    for(int i=0; i<boardNoticeList.size(); i++){ 
+             BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
+	  %>
+      <li>
+       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
+		    	 <%=bdto.getB_title()%> 
+	   </a>
+	  </li>
+	    <%} %>
+	  
      </ul>
     </div>
- </div>
+   </div>
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
     </div>  
    <!-- 메인 메뉴 --> 
-   <nav id="nav_menu" class="nav_menu"> 
-      <ul class="sub_menu">
+   
+   <nav id="nav_menu" class="nav_menu">
+<!--       <ul class="sub_menu" id="sub_menu"> -->
+<!--          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 전체보기 </a> -->
+<!--             <div class="dropdown-content"> -->
+<!--       		<div class="nav_header"> -->
+<!--       		<h2> -->
+<!--       			전체보기 -->
+<!--       		</h2> -->
+<!--       		</div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--       		<div class="nav_column"> -->
+<!--       		 <h3>test1</h3> -->
+<!--                <a href="#"> 리자드/모니터 </a> -->
+<!--                <a href="#"> 레오파드 게코 </a>  -->
+<!--                <a href="#"> 크레스티드 게코 </a> -->
+<!--                <a href="#"> 카멜레온 </a> -->
+<!--             </div> -->
+<!--             </div>  -->
+<!--           </li> -->
+      <ul class="sub_menu" id="sub_menu">
          <li class="dropdown"><a href="./AnimalList.an?category=파충류&sub_category=도마뱀" class="dropbtn"> 도마뱀 </a>
             <div class="dropdown-content">
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
@@ -110,11 +160,11 @@
          </li>
          
          
-         <li class="dropdown"> <a href="./AnimalList.an?category=양서류" class="dropbtn"> 양서류 </a>
+         <li class="dropdown"> <a href="#" class="dropbtn"> 양서류 </a>
             <div class="dropdown-content">
-                <a href="./AnimalList.an?category=양서류&sub_category=프로그"> 프로그 </a>
-                <a href="./AnimalList.an?category=양서류&sub_category=살라맨더"> 살라맨더 </a>
-                <a href="./AnimalList.an?category=양서류&sub_category=팩맨"> 팩맨 </a>
+                <a href="#"> 프로그 </a>
+                <a href="#"> 살라맨더 </a>
+                <a href="#"> 팩맨 </a>
             </div>
          </li>
          
@@ -146,7 +196,7 @@
    </div>
 <script>
 $(document).ready(function(){
-	var height =  $(".notice").height(); // 공지사항의 높이값을 구해주고
+	var height =  $(".notice_bar").height(); // 공지사항의 높이값을 구해주고
 	var num = $(".rolling li").length; // length로 공지사항의 개수를 알아볼수있음 
 	var max = height * num; 
 	var move = 0; // 초기값 설정
@@ -165,7 +215,31 @@ $(document).ready(function(){
 	// 올리다 보면 마지막이 안보여서 clone을 통해 첫번째 li복사
 	$(".rolling").append($(".rolling li").first().clone());
 	
-});		
+});	
+	// 글자수 제한 30자 이상시 (뒤에...)
+	$(document).ready(function(){ 
+		$('.rolling li a').each(function(){
+			if ($(this).text().length > 20) 
+				$(this).html($(this).text().substr(0,20)+"...");
+			});
+		});
+
+
+
+//헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
+window.onscroll = function() {myFunction()};
+
+	var navbar = document.getElementById("sub_menu");
+	var sticky = navbar.offsetTop;
+
+	function myFunction() {
+  	if (window.pageYOffset >= sticky) {
+  	  navbar.classList.add("sticky")
+  	}else {
+  	  navbar.classList.remove("sticky");
+ 	}
+}
+
 </script>
 </body>
 

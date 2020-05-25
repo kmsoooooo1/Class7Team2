@@ -128,8 +128,10 @@ public class insertBoardAction implements Action {
 		BoardDAO dao = new BoardDAO();
 		
 		//	insert 동작 실행
-		int chk = dao.insertBoard(dto);
-		
+		int chk = 0;
+		for(int i=0; i<50; i++){
+		chk = dao.insertBoard(dto);
+		}
 		//	dao 자원 해제
 		dao.closeDB();
 		

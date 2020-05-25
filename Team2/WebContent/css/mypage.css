@@ -1,4 +1,9 @@
 @CHARSET "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
 .member_div{
 	padding: 0;
 	margin: 0;

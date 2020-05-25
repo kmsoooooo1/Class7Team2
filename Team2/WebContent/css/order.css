@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+*{
+	box-sizing: border-box;
+}
+
 .container{
 	position: relative;
 }
@@ -20,7 +24,7 @@
     text-transform: uppercase;
 }
 
-a{
+.container a{
 	text-decoration: none;
     color: #000;
     outline: none;
@@ -42,14 +46,14 @@ a{
     font-size: 14px;
 }
 
-table{
+.container table{
     width: 100%;
     border: 0;
     border-spacing: 0;
     border-collapse: collapse;
 }
 
-input{
+.container input{
 	font-size: 100%;
     color: #353535;
     vertical-align: middle;
@@ -57,7 +61,7 @@ input{
     font-family: "Roboto","Arial","돋움","Dotum","Apple SD Gothic Neo","Apple Gothic",sans-serif;
 }
 
-input[type="checkbox"]{
+.container input[type="checkbox"]{
 	width: 13px;
     height: 13px;
     border: 0;
@@ -70,23 +74,24 @@ input[type="checkbox"]{
     color: #353535;
     font-size: 14px;
     line-height: 1.5;
+    margin-top: 30px;
 }
 
-colgroup{
+.container colgroup{
 	display: table-column-group;
 }
 
-col{
+.container col{
 	display: table-column;
 }
 
-thead{
+.container thead{
 	display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
 }
 
-tr{
+.container tr{
 	display: table-row;
     vertical-align: inherit;
     border-color: inherit;
@@ -214,13 +219,14 @@ tr{
 
 .inner ol li{
 	background-position: -484px 0;
+	color: #989799;
 }
 
 .orderArea{
 	margin-top: 30px;
 }
 
-input[type="text"]{
+.container input[type="text"]{
 	height: 22px;
     line-height: 24px;
     padding: 2px 8px;
@@ -303,6 +309,54 @@ input[type="text"]{
 	text-align: center;
 }
 
+.orderInfo{
+	width: 60%;
+    margin: 45px auto 0;
+    padding: 0 0 10px 130px;
+    color: #353535;
+    font-size: 12px;
+    line-height: 1.5;
+}
 
+.orderInfo p{
+	margin: 0 0 14px;
+    font-size: 12px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0;
+    padding: 0;
+}
 
+.orderInfo p strong{
+	display: block;
+    margin: 0 0 5px;
+    color: #000;
+    font-size: 14px;
+}
 
+.orderInfo ul{
+	display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+.orderInfo li{
+	list-style: none;
+}
+
+.logo_img{
+	width: 100px;
+	height: 100px;
+	margin-right: 20px;
+}
+
+.orderlist td{
+	padding-left: 10px;
+}

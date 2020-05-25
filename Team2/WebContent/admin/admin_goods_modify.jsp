@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<title>Insert title here</title>
+<title>관리자 상품 수정 페이지</title>
 </head>
 <body>
 	
@@ -116,7 +116,7 @@
 		  
 		  <tr> <!-- content -->
 		   <td colspan="2">
-		   		<textarea name="ir1" id="ir1" rows="10" cols="100">
+		   		<textarea name="ir1" id="ir1" rows="10" cols="100" style="width: 500px;">
 		   		   <br>
 					<span style="font-weight: bold"> 관련 동물(종) </span> :  
 				   <br>

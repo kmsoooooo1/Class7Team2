@@ -182,9 +182,13 @@ public class BoardFrontController extends HttpServlet {
 		}else if(command.equals("/AdminBoard.bo")){
 			System.out.println("/AdminBoard.bo 주소 처리");
 				
-			forward = new ActionForward();
-			forward.setPath("./board/adminBoard.jsp");
-			forward.setRedirect(false);
+			action = new SearchBoardAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if(command.equals("/SearchBoard.bo")){
 			System.out.println("/SearchBoard.bo 주소 처리");
 				

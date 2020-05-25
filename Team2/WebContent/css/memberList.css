@@ -81,7 +81,39 @@
 	text-align:center;
 	margin: 0;
 	padding: 0;
-}	
+}
+
+#pageList{
+	list-style: none;
+	margin: 2em auto;
+	padding: 0;
+	width: max-content;
+}
+
+#pageList li{
+	font-size: 0.8em;
+	color: #888;
+	font-weight: bold;
+	float:left;
+	display:inline-block;
+	width: 2.5em;
+	height: 2.5em;
+	line-height: 2.5em;
+	border:1px solid #ccc;
+}
+
+#pageList li:hover{
+	background-color: #ccc;
+	cursor: pointer;
+}
+#pageList li:FIRST-CHILD{
+	margin-left: 0;
+}
+#pageList:after{
+	display: block;
+	content:"";
+	clear: both;
+}
 
 
 
