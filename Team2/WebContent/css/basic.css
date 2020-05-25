@@ -47,55 +47,63 @@ body{
 }
 /* LOGO_END */
 
+/* Notice-Rolling START */
 
-
-/* HEADER_START */
-.nav_row {
-	width: 100%;
+.rolling_top_menu {
+	width: 80%;
 	
 }
 
-.dropdown-content_total {
-/* 	display:none */
-  display: block;
-  position: absolute;
-  background-color: white;
-  width: 600px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 5;
-}
-
-.nav_column {
-	width: 100%;
-	background-color: #333;
-	border: 1px solid white;
-}
-
-.L {
-	width: 80%;
-	height: 100%;
+.notice_bar {
+	width: 50%;
+	height: 50px;
+	overflow: hidden;
+	background-color: #fff;
+	text-align: right;
+	margin: 0;
+	padding: 0;
 	float: left;
 }
 
-.R {
-	width: 20%;
-	height: 100%;
-	float: left;
-}
 
-.nav_row:after {
+.rolling_top_menu:after {
 	display: block;
 	content: "";
 	clear: both;
 }
 
-.nav_column > h3 {
-	font-size: 12px;
-	font-weight: 400;
-	background-color: #ccc;
-	color: #555;
+.rolling {
+	position: relative;
+	width: 100%;
+	height: 50px;
+}
+
+.rolling li {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	list-style: none;
+	
+}
+/* Notice-Rolling END */
+
+
+/* HEADER_START */
+
+.nav_column {
+	float: left;
+	width: 30%;
 	padding: 0;
-	margin: 0 auto;
+	margin: 0;
+	background-color: #fff;
+	height: 25%;
+	z-index: 98;
+}
+
+.nav_column h3 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #555;
 	letter-spacing: 0.5px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -106,7 +114,7 @@ body{
 
 .nav_column a {
   float: none;
-  color: black;
+  color: #fff;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
@@ -135,13 +143,13 @@ body{
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 480px) {
   .nav_column {
-    width: 50%;
+    width: 100%;
     height: auto;
   }
 }
 @media screen and (max-width: 736px) {
   .nav_column {
-    width: 50%;
+    width: 100%;
     height: auto;
     
   }
@@ -221,10 +229,6 @@ body{
   text-decoration: none;
 }
 
-.dropdown a li {
-	color: black;
-}
-
  .dropdown a:hover, .dropdown:hover .dropbtn {
   background-color: red;
 }
@@ -253,9 +257,6 @@ body{
 .dropdown-content a:hover {background-color: #f1f1f1;}
 
 .dropdown:hover .dropdown-content {
-  display: block;
-}
-.dropdown:hover .dropdown-content_total {
   display: block;
 }
 /* HEADER_END */
@@ -580,45 +581,6 @@ body{
 
 /* sidebar 끝*/
 
-/* Notice-Rolling START */
-
-.rolling_top_menu {
-	width: 80%;
-	
-}
-
-.notice_bar {
-	width: 50%;
-	height: 50px;
-	overflow: hidden;
-	background-color: #fff;
-	text-align: right;
-	margin: 0;
-	padding: 0;
-	float: left;
-}
-
-
-.rolling_top_menu:after {
-	display: block;
-	content: "";
-	clear: both;
-}
-
-.rolling {
-	position: relative;
-	width: 100%;
-	height: 50px;
-}
-
-.rolling li {
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	list-style: none;
-	
-}
-/* Notice-Rolling END */
 
 
 
