@@ -297,7 +297,7 @@
   <a href="./recentView.me" class="seemore">더보기>></a>
   </h3>
   <div class="contents">
-  <table border="1" summary>
+  <table border="1" class="recent_table">
   <caption>최근 본 상품</caption>
   <colgroup>
     	<col style="width: 100px;">
@@ -311,8 +311,8 @@
 		<th scope="col">이미지</th>
 		<th scope="col">상품명</th>
 		<th scope="col">판매가</th>
-		<th scope="col">옵션정보</th>
-		<th scope="col">주문</th>
+		<th scope="col">적립금</th>
+		<th scope="col">상품정보</th>
 	</tr>
 	</thead>
 	<tbody>

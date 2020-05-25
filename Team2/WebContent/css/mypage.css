@@ -446,10 +446,19 @@ thead th{
     color: #555;
 }
 
+.recent_table td{
+	font-size: 14px;
+}
 
+.recent_a{
+	text-decoration: none;
+	font-size: 15px;
+	color: blue;
+}
 
-
-
+.recent_a:HOVER {
+	color: red;
+}
 
 
 
