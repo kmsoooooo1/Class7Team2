@@ -69,6 +69,8 @@ body {
 .product_name a{
 	font-size: 0.9em;
 	font-weight: bold;
+	text-decoration: none;
+    color: black;
 }
 
 .origin_price{
