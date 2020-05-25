@@ -211,7 +211,19 @@ public class MemberFrontController extends HttpServlet{
 			forward.setPath("./company/privacy.jsp");
 			forward.setRedirect(false);
 		}
-			
+		// 적립금 확인페이지
+		else if(command.equals("/Mileage.me")){
+			action = new MemberMileageAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/Coupon.me")){
+			forward = new ActionForward();
+			forward.setPath("./member/coupon.jsp");
+		}
 	
 		
 		// 페이지 이동처리 

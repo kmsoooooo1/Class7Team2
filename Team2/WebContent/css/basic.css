@@ -101,7 +101,7 @@ body{
 }
 
 .nav_column h3 {
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #555;
 	letter-spacing: 0.5px;
@@ -121,6 +121,7 @@ body{
   text-overflow: ellipsis;
   text-decoration: none;
   outline: none;
+  padding: 15px 12px;
 }
 
 .nav_column ul > li > a {

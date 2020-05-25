@@ -201,10 +201,15 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-//		else if(command.equals("/my.bo")){
-//			action = new myBoardAction();
-//			forward = action.execute(request, response);
-//		}
+		else if(command.equals("/myBoard.bo")){
+			System.out.println("/myBoard.bo 주소 처리");
+			action = new myBoardAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		//action
 		
