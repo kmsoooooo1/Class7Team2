@@ -107,7 +107,7 @@ public class WishlistDAO {
 			con = getConnection();
 			
 			// 장바구니 정보 저장
-			sql = "select * from team2_wishlist where id=?";
+			sql = "select * from team2_wishlist where id=? order by w_num desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			

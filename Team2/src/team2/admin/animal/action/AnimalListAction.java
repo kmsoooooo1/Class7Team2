@@ -47,6 +47,7 @@ public class AnimalListAction implements Action{
 
 		System.out.println("total : "+total);
 		total = adao.animalTotalCount(category, "all", "all");
+
 		pageMaker.setTotalCount(total);
 		System.out.println("total : "+total);
 		

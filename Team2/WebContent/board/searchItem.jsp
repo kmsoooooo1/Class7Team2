@@ -70,27 +70,10 @@
 	gdao.closeDB();
 	adao.closeDB();
 	
-	Criteria cri = new Criteria();
-	cri.setPage(pagea);
-	cri.setPerpageNum(20);
-	System.out.println("size : "+list.size());
-	PageMaker pm = new PageMaker();
-	pm.setCri(cri);
-	pm.setTotalCount(list.size());
-	System.out.println(list);
-	int startList = cri.getPageStart();
-	int endList = startList + cri.getPerpageNum();
-	if(endList>list.size()){
-		endList = list.size();
-	}
-	
 	System.out.println("product : " + product);
 	System.out.println("cate : " + cate);
 	System.out.println("kind : " + kind);
 	System.out.println("keyword : " + keyword);
-	
-	System.out.println(cri);
-	System.out.println(pm);
 	
 	String[] cList = {};
 		
@@ -174,8 +157,7 @@
 						<th>DETAIL</th>						
 					</tr>
 			<%if(list.size()>0){ 
-				for(int i = startList; i<endList; i++){
-					ProductDTO dto = list.get(i);
+				for(ProductDTO dto:list){
 					%>
 					<tr class="choice_tr" onclick="choice('<%=dto.getP_code()%>');">
 						<td><%=dto.getP_code() %></td>
@@ -194,26 +176,6 @@
 				</table>
 			</div>
 		</div>
-	</div>
-	<div class="bottom">
-		<ul id="pageList">
-			<%if(pm.isPrev()){ %>
-				<li onclick="location.href='./searchItem.jsp?&pageNum=<%=pm.getStartPage()-1%>'">
-					◀	
-				</li>
-			<%}
-			for(int i = pm.getStartPage(); i<=pm.getEndPage(); i++){
-			%>
-				<li onclick="location.href='./searchItem.jsp?pageNum=<%=i%>'">
-					<%=i %>
-				</li>
-			<%}
-			if(pm.isNext() && pm.getEndPage() > 0){ %>
-				<li onclick="location.href='./searchItem.jsp?&pageNum=<%=pm.getEndPage()+1%>'">
-					▶
-				</li>
-			<%} %>
-		</ul>
 	</div>
 	<jsp:include page="/include/footer.jsp"/>
 </body>
