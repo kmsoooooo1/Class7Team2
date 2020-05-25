@@ -56,20 +56,22 @@
 				if(orderList.size() == 0){
 			%>
 				<tr>
-					<td style="text-align: center;"> 구매 내역이 없습니다. </td>
+					<td colspan="7" style="text-align: center;"> 구매 내역이 없습니다. </td>
 				</tr>
 			<%
 				}else {
 					for(int i = 0; i < trade_num_List.size(); i++) {
-						OrderDTO odto = (OrderDTO) orderList.get(i);
+						OrderDTO odto = (OrderDTO) trade_num_List.get(i);
 				%>
 					<tr> 
 						<td rowspan="<%=trade_num_List.size()%>"> 
 							<%=orderList.get(0).getO_date()%> <br>
-							<a href="#"> [<%=odto.getO_trade_num()%>] </a>
+							<a href="./OrderDetail.or?o_trade_num=<%=odto.getO_trade_num()%>"> [<%=odto.getO_trade_num()%>] </a>
 						</td>
+						<td> 테스트 </td>
+						<td> 테스트 </td>
 					</tr>				
-			
+					
 				<%	
 					}
 					for (int i = 0; i < orderList.size(); i++) {
@@ -88,6 +90,10 @@
 			%>
 				<tr>
 					
+					<td rowspan="<%=trade_num_List.size()%>" >
+						<%=orderList.get(0).getO_date()%> <br>
+						<a href="./OrderDetail.or?o_trade_num=<%=odto.getO_trade_num()%>"> [<%=odto.getO_trade_num()%>] </a>
+					</td>
 					
 				<!-- 상품 이미지 -->
 				<!-- 상품이 동물일때 -->

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import team2.basket.db.BasketDAO;
 import team2.order.db.OrderDAO;
 
 public class OrderCompleteAction implements Action{
@@ -34,7 +35,7 @@ public class OrderCompleteAction implements Action{
 		OrderDAO odao = new OrderDAO();
 		
 		Vector vec = odao.getOrderList(id, o_trade_num);
-		
+
 		ArrayList orderList = (ArrayList) vec.get(0);
 		ArrayList productInfoList = (ArrayList) vec.get(1);
 		
