@@ -140,35 +140,13 @@
        <span class="mileage_span2">(0회)</span> 	
       </strong>      
      </li>
-     <!-- 예치금 -->
-     <li>
-      <strong class="mileage_strong">예치금</strong>
-      <strong class="mileage_strong2">
-       <span class="mileage_span">0원</span>
-      </strong>
-       <a href="#">조회</a>
-     </li>
      <!-- 가용 적립금 -->
      <li>
-      <strong class="mileage_strong">가용 적립금</strong>
+      <strong class="mileage_strong">적립금</strong>
       <strong class="mileage_strong2">
        <span class="mileage_span">2,000원</span>
       </strong>
        <a href="#">조회</a>
-     </li>
-     <!-- 총 적립금 -->
-     <li>
-      <strong class="mileage_strong">총적립금</strong>
-      <strong class="mileage_strong2">
-       <span class="mileage_span">2,000원</span>
-      </strong>
-     </li>
-     <!-- 사용 적립금 -->
-     <li>
-      <strong class="mileage_strong">사용 적립금</strong>
-      <strong class="mileage_strong2">
-       <span class="mileage_span">0원</span>
-      </strong>
      </li>
      <!-- 쿠폰 -->
      <li>
@@ -176,7 +154,8 @@
       <strong class="mileage_strong2">
        <span class="mileage_span">0개</span>
       </strong>
-       <a href="#">조회</a>
+       <a href="${pageContext.request.contextPath}/order/searchCoupon.jsp"
+       	  onclick="window.open(this.href,'쿠폰조회','width=800,height=800')return false;">조회</a>
      </li>
     </ul>
    </div>
