@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${pageContext.request.contextPath}/css/memberList.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>관리자 동물리스트 관리 페이지</title>
 </head>
 <body>
 
@@ -107,8 +107,8 @@
 				<td><%=adto.getA_mileage()%></td>
 				<td><%=adto.getA_view_count()%></td>
 				<td><%=adto.getDate()%></td>
-				<td> <a href=""><button type="button"> 수정 </button></a> </td>
-				<td> <a href=""><button type="button"> 삭제 </button></a> </td>
+				<td> <a href="./AnimalModify.aa?num=<%=adto.getNum()%>"><button type="button"> 수정 </button></a> </td>
+				<td> <a href="./AnimalDeleteAction.aa?num=<%=adto.getNum()%>"><button type="button"> 삭제 </button></a> </td>
 			</tr>
 		</tbody>
 		<%}%>

@@ -1,130 +1,153 @@
+<%@page import="team2.animal.db.AnimalDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자 동물 추가 페이지</title>
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/admin.css?ver=2" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관리자 동물 수정 페이지</title>
 </head>
 <body>
-
+	<%
+		AnimalDTO adto = (AnimalDTO)request.getAttribute("adto");
+	%>
+	
 	<!-- Header -->
 	<header> <jsp:include page="/include/header.jsp" /> </header>
 	
 	<!-- Main Content -->
-	
 	<div class="container">
 	<div class="contents">
-	<h2> 관리자 동물등록 페이지 </h2>
-	<form name="fr" action="./AnimalAddAction.aa" method="post" enctype="multipart/form-data"> 
+	<h2>관리자 동물 수정 페이지</h2>
+	<form action="./AnimalModifyAction.aa" method="post" name="fr" enctype="multipart/form-data">
+	
+		<input type="hidden" id="num" name="num" value="<%=adto.getNum()%>">
+		<input type="hidden" id="sub_category_sel" name="sub_category_sel" value="<%=adto.getSub_category()%>">
+		<input type="hidden" id="sub_category_index_sel" name="sub_category_index_sel" value="<%=adto.getSub_category_index()%>">
+	
 		<table border="1" class="admintable">
 			<colgroup>
 				<col style="width:20%;">
 				<col style="width: auto;">
 			</colgroup>
 			<tr>
-				<th> 카테고리 </th>
+				<td>카테고리</td>
 				<td>
 					<!-- 동물 카테고리 -->
 					<select name="category" onchange="categoryChange(this)">
-						<option value="default"> 종을 선택해주세요 </option>
-						<option value="파충류"> 파충류 </option>
-						<option value="양서류"> 양서류 </option>
+						<option value="default"
+						<%if(adto.getCategory().equals("default")){%> selected <%}%>
+						>종을 선택하세요</option>
+						<option value="파충류"
+						<%if(adto.getCategory().equals("파충류")){%> selected <%}%>
+						>파충류</option>
+						<option value="양서류"
+						<%if(adto.getCategory().equals("양서류")){%> selected <%}%>
+						>양서류</option>
 					</select>
 					<!-- 동물 서브 카테고리 -->
-					<select name="sub_category" id="sub_category" onchange="sub_categoryChange(this)">
-						<option> 서브 종을 선택해주세요 </option>
+					<select name="sub_category"  id="sub_category" onchange="sub_categoryChange(this)">
+						<option><%=adto.getSub_category()%></option>
 					</select>
 					<!-- 동물 최종 카테고리 -->
 					<select name="sub_category_index" id="sub_category_index">
-						<option> 서서브 종을 선택해주세요 </option>
+						<option><%=adto.getSub_category_index()%></option>
 					</select>
 				</td>
 			</tr>
+			
 			<tr>
-				<th> 동물 모프 (종의 이름)  </th>
-				<td> <input type="text" name="a_morph"> </td>
+				<td>동물 모프(종의 이름)</td>
+				<td><input type="text" name="a_morph" value="<%=adto.getA_morph()%>"></td>
 			</tr>
+			
 			<tr>
-				<th> 동물 성별 </th>
-				<td> 
+				<td>동물 성별</td>
+				<td>
 					<select name="a_sex">
-						<option value="default"> 성별을 선택해주세요 </option>
-						<option value="암컷"> 암컷 </option>
-						<option value="수컷"> 수컷 </option>
-						<option value="성별없음"> 성별없음 </option>
-					</select> 
+						<option value="default"
+						<%if(adto.getA_sex().equals("default")){ %> selected <%} %>
+						>성별을 선택해주세요</option>
+						<option value="암컷"
+						<%if(adto.getA_sex().equals("암컷")){ %> selected <%} %>
+						>암컷</option>
+						<option value="수컷"
+						<%if(adto.getA_sex().equals("수컷")){ %> selected <%} %>
+ 						>수컷</option>
+						<option value="성별없음"
+						<%if(adto.getA_sex().equals("성별없음")){ %> selected <%} %>
+						>성별없음</option>
+					</select>
 				</td>
 			</tr>
+			
 			<tr>
-				<th> 
-					동물 상태 <br>
+				<td>
+					동물 상태<br>
 					(ex. 성체, 베이비, 해당사항 없으면 빈칸 유지)
-				</th>
-				<td> <input type="text" name="a_status"> </td>
+				</td>
+				<td><input type="text" name="a_status" value="<%=adto.getA_status()%>"></td>
+			</tr>
+			
+			<tr>
+				<td>동물 코드</td>
+				<td><input type="text" name="a_code" value="<%=adto.getA_code()%>"></td>
+			</tr>
+			
+			<tr>
+				<td>동물 썸네일용 이미지</td>
+				<td><input type="file" name="a_thumbnail"></td>
+			</tr>
+			
+			<tr>
+				<td>동물 보유 수량</td>
+				<td><input type="text" name="a_amount" value="<%=adto.getA_amount()%>"></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="3">동물 가격</td>
+				<td>판매가(할인전) : <input type="text" id="a_price_origin_val" name="a_price_origin" value="<%=adto.getA_price_origin()%>"></td>
 			</tr>
 			<tr>
-				<th> 동물 코드 </th>
-				<td> <input type="text" name="a_code"> </td>
+				<td>할인율(없으면 0 기재) : <input type="text" id="a_discount_rate_val" name="a_discount_rate" value="<%=adto.getA_discount_rate()%>" onkeyup="calDiscount()">%</td>
 			</tr>
 			<tr>
-				<th> 동물 썸네일용 이미지 </th>
-				<td> <input type="file" name="a_thumbnail"> </td>
+				<td>판매가(할인후) : <input  type="text" id="a_price_sale_val" name="a_price_sale" value="<%=adto.getA_price_sale()%>">원 </td>
 			</tr>
+			
 			<tr>
-				<th> 동물 보유 수량 </th>
-				<td> <input type="text" name="a_amount"> </td>
+				<td>적립금</td>
+				<td><input  type="text" id="a_mileage_val" name="a_mileage" value="<%=adto.getA_mileage()%>">원 </td>
 			</tr>
+			
 			<tr>
-				<th rowspan="3"> 동물 가격 </th>
-				<td><span> 판매가(할인전) : </span> <input id="a_price_origin_val" type="text" name="a_price_origin" value="" onkeyup="calMileage()">원 </td>
-			</tr>
-			<tr>
-				<td><span> 할인율(없으면 0 기재) : </span> <input id="a_discount_rate_val" type="text" name="a_discount_rate" onkeyup="calDiscount()">%</td>
-			</tr>
-			<tr>
-				<td><span> 판매가(할인후) : </span> <input id="a_price_sale_val" type="text" name="a_price_sale">원 </td>
-			</tr>
-			<tr>
-				<th> 적립금 </th>
-				<td> <input id="a_mileage_val" type="text" name="a_mileage">원 </td>
-			</tr>
-			<tr>
-				<td colspan="2"> 
-					<textarea name="ir1" id="ir1" rows="10" cols="100">
-						<br>
-							<span style="font-weight: bold"> 학명 </span> : <br>
-							<span style="font-weight: bold"> 서식지 </span> : <br>
-							<span style="font-weight: bold"> 수명 </span> : <br>
-							<span style="font-weight: bold"> 크기 </span> : <br>		
-							<span style="font-weight: bold"> 습성  </span> : <br>
-							<span style="font-weight: bold"> 온도 </span> : <br>
-							<span style="font-weight: bold"> 습도 </span> : <br>	
-							<span style="font-weight: bold"> 특징 </span> : <br><br>
-						<br>
-					</textarea> 
+				<td colspan="2">
+					<textarea name="ir1" id="ir1" rows="10" cols="100"></textarea>
 				</td>
 			</tr>
+			
 			<tr>
 				<td colspan="2"> 
-					<input type="button" onclick="return save();" value="추가하기"/>
-					<button type="reset" value="취소">취소</button>
+					<input type="submit" value="동물정보수정">
+					<button type="reset">다시등록</button>
 				</td>
-			</tr>
+		   </tr>
 		</table>
+	
 	</form>
 	</div>
 	</div>
+	
 	<!-- FOOTER -->
 	<footer> <jsp:include page="/include/footer.jsp"/> </footer>
- 
 </body>
-<script type="text/javascript">
 
+<script type="text/javascript">
+	//editer
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 	 oAppRef: oEditors,
@@ -137,7 +160,7 @@
 	    oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 	    document.fr.submit();
 	};
-
+	
 	//첫번째 카테고리를 선택했을시
 	function categoryChange(e){
 		var animal_p = ["서브 종을 선택해주세요", "도마뱀", "뱀", "거북"]; 	//파충류 선택했을시 나오는 리스트
@@ -237,8 +260,9 @@
         var mult = Math.floor(origin_price * dec);				// 12000 * 0.014
         $('#a_mileage_val').val(Math.round(mult/100) * 100);	// 둘째자리부터 반올림해서 표시 1260 이면 1300으로
 	}
-    
+
+
 </script>
-	
+
 
 </html>
