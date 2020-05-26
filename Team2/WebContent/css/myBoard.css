@@ -3,10 +3,19 @@
 	box-sizing: border-box;
 }
 
+.container{
+	width: 100%;
+	text-align: center;
+}
+
 .list a{text-decoration: none;}
 .list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}
 
 
+.table_wrap{
+	width: 80%;
+	margin: 30px auto 50px;
+}
 
 .list {
 	width: 100%;
@@ -88,6 +97,10 @@
 	color:#fff;
 	border:1px solid #f40;
 	background-color:#f40;
+}
+
+.paging-div{
+	margin: 30px 0 80px;
 }
 
 .fa{
