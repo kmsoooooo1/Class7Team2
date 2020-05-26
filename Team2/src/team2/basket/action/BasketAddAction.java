@@ -26,7 +26,7 @@ public class BasketAddAction implements Action {
 			forward.setRedirect(true);
 			return forward;
 		}
-		System.out.println("addaction 호출");
+		
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -39,7 +39,6 @@ public class BasketAddAction implements Action {
 		//넘어온 값들의 수량들(b_amount)
 		//사용자가 추가한 배송방법들의 수량들 리스트 가지고 오기
 		String selectedAmounts = request.getParameter("selectedAmounts");
-		
 		//옵션(b_option)
 		String selectedOptions = request.getParameter("selectedOptions");
 		//동물페이지에서는 옵션이 없기 때문에 상품페이지에서 관리하면된다. 여기서는 DB에 임의적으로 넣어야 하기 때문에 적는거다.
