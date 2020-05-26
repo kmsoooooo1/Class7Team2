@@ -15,8 +15,7 @@
 <div class="contents">
  <form action="./MemberIDFindAction.me" method="post" class="box">
   <h2>아이디 찾기</h2>
-   <label>가입하신 이메일 주소를 입력해주세요</label><br>
-   <input type="text" name="email" placeholder="Email">
+   <input type="text" name="email" placeholder="가입하신 이메일을 적어주세요">
    <input type="submit" class="submit" value="아이디 찾기">
    <input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
  </form>

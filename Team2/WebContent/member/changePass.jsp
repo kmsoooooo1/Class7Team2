@@ -18,8 +18,8 @@
 <div class="contents">
  <form action="./MemberChangePassAction.me" method="post" class="box">
   <h2><%=id %>님의 새 비밀번호 변경!</h2>
-   <input type="password" name="pass" placeholder="PASSWORD"><br>
-   <input type="password" name="passc" placeholder="PASSWORD_CHECK"><br>
+   <input type="password" name="pass" placeholder="비밀번호를 입력하세요"><br>
+   <input type="password" name="passc" placeholder="비밀번호 확인"><br>
    <input type="hidden" name="id" value="<%=id %>">
    <input type="submit" value="비밀번호 변경">
    <input type="button" value="변경 취소" onclick="location.href='./MemberLogin.me';" class="btn">

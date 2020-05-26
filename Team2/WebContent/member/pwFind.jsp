@@ -15,10 +15,8 @@
 <div class="contents">
  <form action="./MemberPWFindAction.me" method="post" class="box">
   <h2>비밀번호 찾기</h2>
-  <label>가입하신 이메일 주소를 입력해주세요</label>
-   <input type="text" name="email" placeholder="Email"><br>
-  <label>아이디를 입력해주세요</label>
-   <input type="text" name="id" placeholder="ID">
+   <input type="text" name="email" placeholder="가입하신 이메일주소를 입력해주세요."><br>
+   <input type="text" name="id" placeholder="아이디를 입력해주세요.">
    <input type="submit" value="비밀번호 찾기">
    <input type="button" class="btn" value="로그인 페이지로" onclick="location.href='./MemberLogin.me';">
  </form>
