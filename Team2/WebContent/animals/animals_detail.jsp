@@ -926,13 +926,16 @@
 		}
 		//배송방법을 선택했을시
 		else {
-			var isBasket = confirm("구매하시겠습니까?");
-			if(isBasket) {
-				document.fr.action="";
-				document.fr.submit();
-			} else {
-				return false;
+			for(var i=0; i<count; i++){
+				//selectedArray[i] -> 선택된 배송방법의 value들
+				selectedAmounts += ($('#a_amount_' + selectedArray[i]).val() + ", ");
 			}
+			
+			//추가된 values 변수를 태그에 담기
+			$("#selectedAmounts").val(selectedAmounts);
+			
+			document.fr.action="./BasketAdd2.ba";
+			document.fr.submit();
 		}
 	}
 	
