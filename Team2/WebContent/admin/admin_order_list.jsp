@@ -107,7 +107,7 @@
 							<!-- 주문일자, 주문번호 -->
 							<td> 
 								<%=orderList.get(0).getO_date()%> <br>
-								<a href="#"> [<%=orderList.get(0).getO_trade_num()%>] </a>
+								<a href="./OrderDetail.or?o_trade_num=<%=orderList.get(0).getO_trade_num()%>&o_m_id=<%=odto.getO_m_id()%>"> [<%=orderList.get(0).getO_trade_num()%>] </a>
 							</td>
 							
 							<!-- 수령인 -->
@@ -144,6 +144,8 @@
 								<td> <span style="color: green;"> 입금완료 </span> </td>
 							<%} else if(odto.getO_status() == 2) {%>
 								<td> <span style="color: blue;"> 배송중 </span> </td>
+							<%} else if (odto.getO_status() == 3) {%>
+								<td><span style="color: black;"> 배송완료 </span></td>
 							<%}%>
 							
 							<!-- 운송장번호입력 -->

@@ -168,6 +168,7 @@ public class OrderDAO {
 				odto.setO_p_option(rs.getString("o_p_option"));
 				odto.setO_p_delivery_method(rs.getString("o_p_delivery_method"));
 				
+				odto.setO_m_id(o_m_id);
 				odto.setO_receive_name(rs.getString("o_receive_name"));
 				odto.setO_receive_zipcode(rs.getString("o_receive_zipcode"));
 				odto.setO_receive_addr1(rs.getString("o_receive_addr1"));
@@ -274,6 +275,7 @@ public class OrderDAO {
 				odto.setO_p_option(rs.getString("o_p_option"));
 				odto.setO_p_delivery_method(rs.getString("o_p_delivery_method"));
 				
+				odto.setO_m_id(o_m_id);
 				odto.setO_receive_name(rs.getString("o_receive_name"));
 				odto.setO_receive_zipcode(rs.getString("o_receive_zipcode"));
 				odto.setO_receive_addr1(rs.getString("o_receive_addr1"));
@@ -377,6 +379,7 @@ public class OrderDAO {
 				odto.setO_p_option(rs.getString("o_p_option"));
 				odto.setO_p_delivery_method(rs.getString("o_p_delivery_method"));
 				
+				odto.setO_m_id(rs.getString("o_m_id"));
 				odto.setO_receive_name(rs.getString("o_receive_name"));
 				odto.setO_receive_zipcode(rs.getString("o_receive_zipcode"));
 				odto.setO_receive_addr1(rs.getString("o_receive_addr1"));
@@ -506,6 +509,31 @@ public class OrderDAO {
 			closeDB();
 		}
 		return trade_num_List;
+	}
+	
+	//o_status 수정하는 함수
+	public void modiStatus(String o_trade_num){
+		try {
+			con = getConnection();
+			sql = "SELECT * FROM team2_order where o_trade_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, o_trade_num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				//운송장번호 추가하기
+				sql = "update team2_order set o_status = ? where o_trade_num = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, 1);
+				pstmt.setString(2, o_trade_num);
+				pstmt.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
 	}
 
 	
