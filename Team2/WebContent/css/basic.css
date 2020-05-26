@@ -456,7 +456,7 @@ body{
   color: white;
 }
 
-.basket_quick span,.recent_quick span,.kakao_quick span,.order_quick span,.interest_quick span,.search_quick span,.up_quick span,.down_quick span{
+.basket_quick span,.recent_quick span,.kakao_quick span,.order_quick span,.interest_quick span,.up_quick span,.down_quick span{
 	position: absolute;
 	width: 100px;
 	color: #FFFFFF;
@@ -470,7 +470,7 @@ body{
 }
 
 .basket_quick span:AFTER, .recent_quick span:AFTER, .kakao_quick span:AFTER,
-.order_quick span:AFTER, .interest_quick span:AFTER, .search_quick span:AFTER,
+.order_quick span:AFTER, .interest_quick span:AFTER,
 .up_quick span:AFTER, .down_quick span:AFTER {
 	content: '';
 	position: absolute;
@@ -487,7 +487,7 @@ body{
 .basket_quick:HOVER.basket_quick span{
 	display: block;
 	opacity: 0.8;
-	top: -3%;
+	top: -4%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -496,7 +496,7 @@ body{
 .recent_quick:HOVER.recent_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 9%;
+	top: 10%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -505,7 +505,7 @@ body{
 .kakao_quick:HOVER.kakao_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 21%;
+	top: 24%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -513,7 +513,7 @@ body{
 .order_quick:HOVER.order_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 33%;
+	top: 38%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -522,16 +522,7 @@ body{
 .interest_quick:HOVER.interest_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 45%;
-	left: 95%;
-	margin-left: -76px;
-	z-index: 999;
-}
-
-.search_quick:HOVER.search_quick span{
-	display: block;
-	opacity: 0.8;
-	top: 57%;
+	top: 52%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -540,7 +531,7 @@ body{
 .up_quick:HOVER.up_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 69%;
+	top: 66%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -549,7 +540,7 @@ body{
 .down_quick:HOVER.down_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 81%;
+	top: 80%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
