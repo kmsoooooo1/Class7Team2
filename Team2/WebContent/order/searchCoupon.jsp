@@ -40,7 +40,7 @@
 		String total_discount_rate = request.getParameter("total_discount_rate");
 		
 		int total_price_input = Integer.parseInt(request.getParameter("total_price_input"));
-		int total_delivery_fee = Integer.parseInt(request.getParameter("total_delivery_fee"));
+		String total_delivery_fee = request.getParameter("total_delivery_fee");
 		
 		//coupon DB 접근해서 리스트 가져오기
 		CouponDAO cdao = new CouponDAO();
