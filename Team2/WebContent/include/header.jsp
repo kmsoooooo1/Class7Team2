@@ -93,7 +93,7 @@
 		%>
 			<li>
 				<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
-					<p> 
+					<p class="rolling_li_p"> 
 						<%=bdto.getB_title()%> 
 					</p>
 				</a>
