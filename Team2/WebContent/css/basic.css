@@ -116,13 +116,13 @@ body{
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 480px) {
-  .nav_column {
+  .nav_column .notice_bar .notice_title {
     width: 100%;
     height: auto;
   }
 }
 @media screen and (max-width: 736px) {
-  .nav_column {
+  .nav_column .notice_bar .notice_title {
     width: 100%;
     height: auto;
     
@@ -457,7 +457,7 @@ body{
   color: white;
 }
 
-.basket_quick span,.recent_quick span,.kakao_quick span,.order_quick span,.interest_quick span,.search_quick span,.up_quick span,.down_quick span{
+.basket_quick span,.recent_quick span,.kakao_quick span,.order_quick span,.interest_quick span,.up_quick span,.down_quick span{
 	position: absolute;
 	width: 100px;
 	color: #FFFFFF;
@@ -471,7 +471,7 @@ body{
 }
 
 .basket_quick span:AFTER, .recent_quick span:AFTER, .kakao_quick span:AFTER,
-.order_quick span:AFTER, .interest_quick span:AFTER, .search_quick span:AFTER,
+.order_quick span:AFTER, .interest_quick span:AFTER,
 .up_quick span:AFTER, .down_quick span:AFTER {
 	content: '';
 	position: absolute;
@@ -488,7 +488,7 @@ body{
 .basket_quick:HOVER.basket_quick span{
 	display: block;
 	opacity: 0.8;
-	top: -3%;
+	top: -4%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -497,7 +497,7 @@ body{
 .recent_quick:HOVER.recent_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 9%;
+	top: 10%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -506,7 +506,7 @@ body{
 .kakao_quick:HOVER.kakao_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 21%;
+	top: 24%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -514,7 +514,7 @@ body{
 .order_quick:HOVER.order_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 33%;
+	top: 38%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -523,16 +523,7 @@ body{
 .interest_quick:HOVER.interest_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 45%;
-	left: 95%;
-	margin-left: -76px;
-	z-index: 999;
-}
-
-.search_quick:HOVER.search_quick span{
-	display: block;
-	opacity: 0.8;
-	top: 57%;
+	top: 52%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -541,7 +532,7 @@ body{
 .up_quick:HOVER.up_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 69%;
+	top: 66%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -550,7 +541,7 @@ body{
 .down_quick:HOVER.down_quick span{
 	display: block;
 	opacity: 0.8;
-	top: 81%;
+	top: 80%;
 	left: 95%;
 	margin-left: -76px;
 	z-index: 999;
@@ -590,10 +581,12 @@ body{
 
 .fa-envelope-o:before {
 	content: "\f003";
+	color: black;
 }
 
 .notice_bar .notice_title a:after {
 	content: "NOTICE";
+	color: black;
 }
 
 .rolling_top_menu:after {
@@ -614,8 +607,8 @@ body{
 
 .rolling li {
 	width: 100%;
-	height: 19px;
-	line-height: 19px;
+	height: 24px;
+	line-height: 24px;
 	list-style: none;	
 }
 
@@ -633,6 +626,3 @@ body{
 	font-weight: bold;
 }
 /* Notice-Rolling END */
-
-
-		

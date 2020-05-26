@@ -15,8 +15,8 @@
   <li><a href="./Company.me">회사소개</a></li>
   <li><a href="./Agreement.me">이용약관</a></li>
   <li><a href="./Privacy.me">개인정보취급방침</a></li>
-  <li><a href="#">이용안내</a></li>
-  <li><a href="#">제휴문의</a></li>
+  <li><a href="./Guide.me">이용안내</a></li>
+  <li><a href="./Inquiry.me">제휴문의</a></li>
  </ul>
  <ul class="icons">
   <li>

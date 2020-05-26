@@ -167,7 +167,7 @@
 			
 			<input type="email" id="email" name="email" placeholder="이메일"><br></br>
 			<div class="div_text">
-            <textarea  cols="36" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
+            <textarea  cols="70" rows="14" class="textarea" readonly>Community 서비스약관 (2020. 1. 01 부터 유효)
 
 제1조(목적 등)
 
@@ -431,13 +431,13 @@ var passDoubleCheck;
 function checkValidPW() {
 	//비밀번호 조건에 부합하지 않으면
 	if(!/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val())){            
-        $('#pwConstraintMsg').text('사용 할 수 없는 비밀번호 입니다.').css({'color':'red', 'font-size':12});
+        $('#pwConstraintMsg').text('사용 할 수 없는 비밀번호 입니다.(영문/숫자 조합 8자리 이상)').css({'color':'#ff80ff', 'font-size':14});
         $('#pass').val($('#pass').val()).focus();
         passCheck = false;
     } 
 	//비밀번호 조건에 부합한다면
 	else if(/^(?=.*[a-z])(?=.*[0-9]).{8,25}$/.test($('#pass').val())) {
-    	$('#pwConstraintMsg').text('사용가능한 비밀번호 입니다.').css({'color':'green', 'font-size':12});
+    	$('#pwConstraintMsg').text('사용가능한 비밀번호 입니다.').css({'color':'#00ff40', 'font-size':14});
     	passCheck = true;
     }
 }
@@ -446,13 +446,13 @@ function checkValidPW() {
 function checkSamePW() {
 	//비밀번호와 비밀번호확인란이 같지 않으면
 	if(document.joinform.pass.value != document.joinform.user_pass_confirm.value ){
-		$('#pwConfirmMsg').text(' 비밀번호가 다릅니다.').css({'color':'red', 'font-size':12});
+		$('#pwConfirmMsg').text(' 비밀번호가 다릅니다.').css({'color':'#ff80ff', 'font-size':14});
 		$('#user_pass_confirm').val($('#user_pass_confirm').val()).focus();
 		passDoubleCheck = false;
     }
 	//비밀번호와 비밀번호확인란이 같으면
 	else {
-    	$('#pwConfirmMsg').text('비밀번호가 일치합니다.').css({'color':'green', 'font-size':12});	
+    	$('#pwConfirmMsg').text('비밀번호가 일치합니다.').css({'color':'#00ff40', 'font-size':14});	
     	passDoubleCheck = true;
     }
 }

@@ -32,10 +32,7 @@
            		<i class="fas fa-heart"></i>
            		<span>관심 상품</span>
            	</a>
-           	<a href="#" class="search_quick">
-           		<i class="fas fa-search"></i>
-           		<span> 검색 </span>
-           	</a>
+           
            	<a href="#h-group" class="up_quick">
            		<i class="fas fa-angle-double-up"></i>
            		<span>맨위로</span>
