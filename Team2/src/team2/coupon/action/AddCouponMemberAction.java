@@ -27,7 +27,7 @@ public class AddCouponMemberAction  implements Action{
 		
 		//넘어온 값 받기
 		cmdto.setId(id);
-		cmdto.setCo_num(Integer.parseInt(request.getParameter("c_num")));
+		cmdto.setCo_num(request.getParameter("c_num"));
 	
 		CouponDAO cdao = new CouponDAO();
 		int check = cdao.insertCouponMember(cmdto);

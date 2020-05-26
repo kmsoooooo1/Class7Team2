@@ -116,15 +116,18 @@ public class OrderAddAction implements Action{
 		if(co_num == null){
 			co_num = "";
 		}
+		
 		for(int i=0; i<splitSelected_co_num_list.length-1; i++){
 			CouponMemberDTO cmdto = new CouponMemberDTO();
 			CouponDAO cdao = new CouponDAO();
 			
 			cmdto.setId(id);
-			cmdto.setCo_num(Integer.parseInt(splitSelected_co_num_list[i].trim()));
+			System.out.println(splitSelected_co_num_list[i].trim());
+			cmdto.setCo_num(splitSelected_co_num_list[i].trim());
 			
 			cdao.deleteMemberCoupon(cmdto);
 		}
+
 		
 		//적립금
 		int mileage = Integer.parseInt(request.getParameter("use_My_Mileage"));

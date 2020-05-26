@@ -88,6 +88,7 @@
 				for(int i = 0; i < couponInfoList.size(); i++){
 					CouponMemberDTO cmdto = (CouponMemberDTO) memberCouponList.get(i);
 					CouponDTO cdto = (CouponDTO) couponInfoList.get(i);
+					System.out.println(cmdto);
 			%>
 					<tr class="choice_tr1">
 					

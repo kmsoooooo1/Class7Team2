@@ -129,7 +129,7 @@ public class CouponDAO {
 			
 			while(rs.next()){
 				CouponMemberDTO cmdto = new CouponMemberDTO();
-				cmdto.setCo_num(rs.getInt("co_num"));
+				cmdto.setCo_num(rs.getString("co_num"));
 				cmdto.setId(rs.getString("id"));
 				cmdto.setNum(rs.getInt("num"));
 				cmdto.setUsed(rs.getString("used"));
@@ -137,7 +137,7 @@ public class CouponDAO {
 				
 				sql = "select * from team2_coupon_admin where num = ?";
 				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setInt(1, cmdto.getCo_num());
+				pstmt2.setString(1, cmdto.getCo_num());
 				rs2 = pstmt2.executeQuery();
 				
 				if(rs2.next()){
@@ -177,7 +177,7 @@ public class CouponDAO {
 			sql = "select * from team2_coupon_member where id = ? and co_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cmdto.getId());
-			pstmt.setInt(2, cmdto.getCo_num());
+			pstmt.setString(2, cmdto.getCo_num());
 			rs = pstmt.executeQuery();
 			
 			//DB에 같은 쿠폰이 존재하면
@@ -197,7 +197,7 @@ public class CouponDAO {
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1, num);
 				pstmt2.setString(2, cmdto.getId());
-				pstmt2.setInt(3, cmdto.getCo_num());
+				pstmt2.setString(3, cmdto.getCo_num());
 				pstmt2.setString(4, "NO");
 				pstmt2.executeUpdate();
 				check = 1;
@@ -272,7 +272,7 @@ public class CouponDAO {
 			sql = "delete from team2_coupon_member where id = ? and co_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cmdto.getId());
-			pstmt.setInt(2, cmdto.getCo_num());
+			pstmt.setString(2, cmdto.getCo_num());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

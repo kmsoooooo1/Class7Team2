@@ -4,7 +4,7 @@ public class CouponMemberDTO {
 	
 	private int num;
 	private String id;
-	private int co_num;
+	private String co_num;
 	private String used;
 	
 	public int getNum() {
@@ -19,10 +19,10 @@ public class CouponMemberDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getCo_num() {
+	public String getCo_num() {
 		return co_num;
 	}
-	public void setCo_num(int co_num) {
+	public void setCo_num(String co_num) {
 		this.co_num = co_num;
 	}
 	public String getUsed() {
@@ -31,10 +31,10 @@ public class CouponMemberDTO {
 	public void setUsed(String used) {
 		this.used = used;
 	}
-	
 	@Override
 	public String toString() {
 		return "CouponMemberDTO [num=" + num + ", id=" + id + ", co_num=" + co_num + ", used=" + used + "]";
 	}
 
+	
 }
