@@ -88,9 +88,9 @@ function doDelete(){
 				<c:if test="${pageSize eq 10}">selected </c:if>> 10</option>
 		 	<option value="5"
 		 		<c:if test="${pageSize eq 5}">selected </c:if>>5</option>
-		 	<option value="7"
-		 		<c:if test="${pageSize eq 20}">selected </c:if>>20</option>
 		 	<option value="20"
+		 		<c:if test="${pageSize eq 20}">selected </c:if>>20</option>
+		 	<option value="40"
 		 		<c:if test="${pageSize eq 40}">selected </c:if>>40</option>
 		 </select>	
 		 

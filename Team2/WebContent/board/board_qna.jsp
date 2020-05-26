@@ -44,6 +44,10 @@ function doAction(){
 		
 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
 
+		String id = (String)session.getAttribute("id");
+		if(id==null){
+			id = "x";
+		}
 	%>
 <div class="board">	
 	
@@ -118,8 +122,11 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
-
-		<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?c=2'">
+		<%
+		if(!id.equals("x")){
+		%>
+			<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?c=2'">
+		<%} %>
 		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">

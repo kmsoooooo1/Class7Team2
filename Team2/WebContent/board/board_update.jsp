@@ -206,7 +206,7 @@ var img_files = []; //추가할 파일
 		
 // 		alert("old_files.length" +old_files.length);
 	
-		for(var i=0; i <= img_files.length; i++){
+		for(var i=0; i < img_files.length+1; i++){
 			deleteFiles(i);
 		}
 		
