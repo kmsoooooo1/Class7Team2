@@ -162,8 +162,8 @@
       		 <a href="./Company.me"> 회사소개 </a>
       		 <a href="./Agreement.me"> 이용약관 </a>
       		 <a href="./Privacy.me"> 개인정보취급방침 </a>
-      		 <a href="#"> 이용안내 </a>
-      		 <a href="#"> 제휴문의 </a>
+      		 <a href="./Guide.me"> 이용안내 </a>
+      		 <a href="./Inquiry.me"> 제휴문의 </a>
       		</div> 
             </div>
             </div>
