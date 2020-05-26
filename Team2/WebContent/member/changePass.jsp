@@ -15,11 +15,10 @@
 <%
 	String id=request.getParameter("id");
 %>
-<div>
+<div class="contents">
  <form action="./MemberChangePassAction.me" method="post" class="box">
   <h2><%=id %>님의 새 비밀번호 변경!</h2>
    <input type="password" name="pass" placeholder="PASSWORD"><br>
-  	<label>비밀번호 확인</label>
    <input type="password" name="passc" placeholder="PASSWORD_CHECK"><br>
    <input type="hidden" name="id" value="<%=id %>">
    <input type="submit" value="비밀번호 변경">

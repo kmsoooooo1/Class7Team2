@@ -360,3 +360,23 @@
 .orderlist td{
 	padding-left: 10px;
 }
+
+span.paymentType{
+	color: black;
+	line-height: 1.4em;
+}
+
+#orderInfo, #orderInfo th{
+	text-align: center;
+}
+
+#paymentInfo td{
+	padding: 15px;
+	line-height: 1.4em;
+}
+
+
+
+
+
+

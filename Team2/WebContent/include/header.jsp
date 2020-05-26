@@ -78,23 +78,28 @@
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 	%>
     <div class="notice_bar">
-     <ul class="rolling"> 
-       <%
-       String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
-       	BoardDAO bdao = new BoardDAO();
-       	List<BoardDTO> boardNoticeList = bdao.getList(sql);
-       	bdao.closeDB();
-	    for(int i=0; i<boardNoticeList.size(); i++){ 
-             BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
-	  %>
-      <li>
-       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
-		    	 <%=bdto.getB_title()%> 
-	   </a>
-	  </li>
-	    <%} %>
-	  
-     </ul>
+	    <div class="notice_title">
+	    	<a href="./BoardList.bo?category=0"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+	    </div>
+		<ul class="rolling"> 
+		<%
+			String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
+			BoardDAO bdao = new BoardDAO();
+			List<BoardDTO> boardNoticeList = bdao.getList(sql);
+			bdao.closeDB();
+			
+			for(int i=0; i<boardNoticeList.size(); i++){ 
+				BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
+		%>
+			<li>
+				<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
+					<p> 
+						<%=bdto.getB_title()%> 
+					</p>
+				</a>
+			</li>
+		  <%} %>
+		</ul>
     </div>
    </div>
     <div id="logo">
@@ -108,31 +113,33 @@
             <div class="dropdown-content">	
       		<div class="nav_row">
       		<div class="nav_column">
-      		 <a href="./AnimalList.an?category=파충류&sub_category=도마뱀"><h3>도마뱀</h3></a>
+      		 <div>
+      		 	<a href="./AnimalList.an?category=파충류&sub_category=도마뱀"><h3>도마뱀</h3></a>
+             </div>
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=리자드/모니터"> 리자드/모니터 </a>
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=레오파드 게코"> 레오파드 게코 </a> 
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=크레스티드 게코"> 크레스티드 게코 </a>
                <a href="./AnimalList.an?category=파충류&sub_category=도마뱀&sub_category_index=카멜레온"> 카멜레온 </a>
-            </div>
-      		<div class="nav_column">
-      		 <a href=""><h3>뱀</h3></a>
+               
+                <a href="./AnimalList.an?category=파충류&sub_category=뱀"><h3>뱀</h3></a>
+              
                <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=콘/킹/소형뱀"> 콘/킹/소형뱀 </a>
                <a href="./AnimalList.an?category=파충류&sub_category=뱀&sub_category_index=대형뱀"> 대형뱀 </a>
             </div>
       		<div class="nav_column">
-      		 <a href=""><h3>거북</h3></a>
+      		 <a href="./AnimalList.an?category=파충류&sub_category=거북"><h3>거북</h3></a>
                <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=육지거북"> 육지거북 </a>
                <a href="./AnimalList.an?category=파충류&sub_category=거북&sub_category_index=수생/습지 거북"> 수생/습지거북 </a> 
-            </div>
-      		<div class="nav_column">
-      		 <a href=""><h3>먹이</h3></a>
+              
+               <a href="./GoodsList.go?category=먹이"><h3>먹이</h3></a>
+              
                <a href="./GoodsList.go?category=먹이&sub_category=칼슘/약품"> 칼슘/약품 </a>
                <a href="./GoodsList.go?category=먹이&sub_category=생먹이"> 생먹이 </a> 
                <a href="./GoodsList.go?category=먹이&sub_category=냉동먹이"> 냉동먹이 </a> 
-               <a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a> 
+               <a href="./GoodsList.go?category=먹이&sub_category=인공사료"> 인공사료 </a>
             </div>
       		<div class="nav_column">
-      		 <a href=""><h3>사육용품</h3></a>
+      		 <a href="./GoodsList.go?category=사육용품"><h3>사육용품</h3></a>
                <a href="./GoodsList.go?category=사육용품&sub_category=사육장"> 사육장 </a>
                <a href="./GoodsList.go?category=사육용품&sub_category=장식/그릇"> 장식/그릇 </a> 
                <a href="./GoodsList.go?category=사육용품&sub_category=램프"> 램프 </a> 
@@ -142,10 +149,21 @@
                <a href="./GoodsList.go?category=사육용품&sub_category=수족관"> 수족관 </a> 
             </div>
       		<div class="nav_column">
-      		 <a href="./aHospital.bo"><h3>동물병원</h3></a>
+      		 <a href="#"><h3>기타</h3></a>
+      		 <a href="./aHospital.bo"> 동물병원 </a>
+      		 <a href="./CouponList.co"> 이벤트 </a>
+      		  <a href="#"><h3>커뮤니티</h3></a>
+      		 <a href="./BoardList.bo?category=0"> 공지사항 </a>
+      		 <a href="./BoardList.bo?category=1"> 상품후기 </a>
+      		 <a href="./BoardList.bo?category=2"> Q&A </a>
             </div>
       		<div class="nav_column">
-      		 <a href="./CouponList.co"><h3>이벤트</h3></a>
+      		 <a href="#"><h3>기업정보</h3></a>
+      		 <a href="./Company.me"> 회사소개 </a>
+      		 <a href="./Agreement.me"> 이용약관 </a>
+      		 <a href="./Privacy.me"> 개인정보취급방침 </a>
+      		 <a href="./Guide.me"> 이용안내 </a>
+      		 <a href="./Inquiry.me"> 제휴문의 </a>
       		</div> 
             </div>
             </div>
@@ -234,8 +252,8 @@ $(document).ready(function(){
 	// 글자수 제한 30자 이상시 (뒤에...)
 	$(document).ready(function(){ 
 		$('.rolling li a').each(function(){
-			if ($(this).text().length > 20) 
-				$(this).html($(this).text().substr(0,20)+"...");
+			if ($(this).text().length > 40) 
+				$(this).html($(this).text().substr(0,40)+"...");
 			});
 		});
 //헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
