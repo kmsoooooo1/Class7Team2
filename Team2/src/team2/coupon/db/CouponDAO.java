@@ -209,5 +209,77 @@ public class CouponDAO {
 		}
 		return check;
 	}
+
+	//일반 사용자가 쿠폰을 적용시켰을때 used 항목을 임시적으로 temp_YES 로 바꾸기
+	public void modiCo_num(String id, int co_num, String used_value){
+		try {
+			con = getConnection();
+			//DB에 같은 쿠폰이 들어있는지 확인하기
+			sql = "select * from team2_coupon_member where id = ? and co_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, co_num);
+			rs = pstmt.executeQuery();
+			
+			//DB에 같은 쿠폰이 존재하면
+			if(rs.next()){
+				sql = "update team2_coupon_member set used = ? where id = ? and co_num = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, used_value);
+				pstmt.setString(2, id);
+				pstmt.setInt(3, co_num);
+				System.out.println(pstmt);
+				pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
+	
+	//일반 사용자가 쿠폰을 적용시켰을때 used 항목을 다시 NO로 고치기
+	public void modiCo_num(String id, int co_num){
+		try {
+			con = getConnection();
+			//DB에 같은 쿠폰이 들어있는지 확인하기
+			sql = "select * from team2_coupon_member where id = ? and co_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, co_num);
+			rs = pstmt.executeQuery();
+			
+			//DB에 같은 쿠폰이 존재하면
+			if(rs.next()){
+				sql = "update team2_coupon_member set used = ? where id = ? and co_num = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "NO");
+				pstmt.setString(2, id);
+				pstmt.setInt(3, co_num);
+				pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
+	
+	//일반사용자가 쿠폰을 쓰면 삭제하는 함수
+	public void deleteMemberCoupon(CouponMemberDTO cmdto) {
+		try {
+			con = getConnection();
+			sql = "delete from team2_coupon_member where id = ? and co_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cmdto.getId());
+			pstmt.setInt(2, cmdto.getCo_num());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
+	
 	
 }

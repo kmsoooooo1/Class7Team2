@@ -21,6 +21,8 @@
 <body>
 
 	<%
+		String id = (String) session.getAttribute("id");
+	
 		List basketList = (List) request.getAttribute("basketList");
 		List productInfoList = (List) request.getAttribute("productInfoList");
 		
@@ -46,6 +48,7 @@
 			<input type="hidden" id="selectedAmounts" name="selectedAmounts" value="">
 			<input type="hidden" id="selectedOptions" name="selectedOptions" value="">  
 			<input type="hidden" id="selectedDeliveryMethods" name="selectedDeliveryMethods" value="">
+			<input type="hidden" id="selected_co_num_list" name="selected_co_num_list" value="">
 		
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 			<colgroup>
@@ -454,6 +457,8 @@
 							<td> 
 								<button type="button" id="searchCouponBtn<%=i%>" onclick="searchCoupon('<%=i%>');"> 쿠폰선택 </button>
 								<button type="button" id="cancelCouponBtn<%=i%>" onclick="cancelCoupon('<%=i%>');" style="display: none;"> 다시선택 </button>
+								<input type="hidden" id="id" value="<%=id%>">
+								<input type="hidden" id="selected_co_num<%=i%>" value="">
 							</td>
 							
 							<!-- 쿠폰할인가  -->
@@ -855,12 +860,30 @@
 		
 		document.getElementById("discount_rate" + i).innerHTML = 0;
 		
+		var id = document.getElementById("id").value;
+		
+		var selected_co_num = document.getElementById("selected_co_num"+i).value;
+		
+		document.getElementById("selected_co_num"+i).value = "";
+		
 		//결제 예정금액 계산하기
 		o_sum_money_input = (total_price_input + total_delivery_fee) - total_discount_rate;
 		document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
 		document.getElementById("o_sum_money_input").value = o_sum_money_input;
 		
-		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate + '&total_price_input=' + total_price_input + '&total_delivery_fee=' + total_delivery_fee, '_blank','width=800,height=700',false);
+		$.ajax({
+			type:'post',
+			url:'./CouponModiDefault.co',
+			data:'id='+id+'&co_num='+selected_co_num,
+			dataType: 'html',
+			success:function(data) {
+				window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate + '&total_price_input=' + total_price_input + '&total_delivery_fee=' + total_delivery_fee, '_blank','width=800,height=700',false);
+   			},error:function(request,status,error){
+			 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			}
+		});
+		
+		
     }
     
     //적립금 최대 사용 눌렸을시
@@ -1058,6 +1081,7 @@
 		var selectedAmounts = ""; 
 		var selectedOptions = ""; 			
 		var selectedDeliveryMethods = ""; 
+		var selectedCoupons = "";
 		
 		//넘길 상품들 정보 저장하기
 		//구매하기에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
@@ -1067,13 +1091,15 @@
 			selectedAmounts += ($('#b_amount'+j).val() + ", ");
 			selectedOptions += ($('#b_option'+j).val() + ", ");
 			selectedDeliveryMethods += ($('#b_delivery_method'+j).val() + ", ");
+			selectedCoupons += ($('#selected_co_num'+j).val() + ", ");
 		}
-
+		
 		//추가된 values 변수를 태그에 담기
 		document.getElementById("selectedCodes").value = selectedCodes;
 		document.getElementById("selectedAmounts").value = selectedAmounts;
 		document.getElementById("selectedOptions").value = selectedOptions;
 		document.getElementById("selectedDeliveryMethods").value = selectedDeliveryMethods;
+		document.getElementById("selected_co_num_list").value = selectedCoupons;
 		
 		document.fr.action="./OrderAdd.or";
 		document.fr.submit();

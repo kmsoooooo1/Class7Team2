@@ -1,7 +1,8 @@
+<%@page import="team2.coupon.db.CouponDAO"%>
 <%@page import="team2.couponMember.db.CouponMemberDTO"%>
 <%@page import="java.util.Vector"%>
 <%@page import="team2.coupon.db.CouponDTO"%>
-<%@page import="team2.coupon.db.CouponDAO"%>
+
 <%@page import="team2.member.db.MemberDAO"%>
 <%@page import="team2.basket.db.BasketDAO"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -22,6 +23,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="${pageContext.request.contextPath}/css/searchItem.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
@@ -54,6 +56,7 @@
 	
 	<div id="container">
 	
+		<input type="hidden" id="id" name="id" value="<%=id%>">
 		<input type="hidden" id="num" name="num" value="<%=num%>">
 		<input type="hidden" id="total_discount_rate" name="total_discount_rate" value="<%=total_discount_rate%>">
 		<input type="hidden" id="total_price_input" value="<%=total_price_input%>">
@@ -91,6 +94,7 @@
 						<!-- 쿠폰 번호 -->
 						<td>
 							<%=cmdto.getNum()%>
+							<input type="hidden" id="co_num<%=i%>" value="<%=cmdto.getCo_num()%>">
 						</td>
 					
 						<!-- 할인쿠폰명 -->
@@ -117,10 +121,15 @@
 						<!-- 사용여부 -->
 						<td>
 							<%if(cdto.getCo_target().equals(category)){%>
-								<input type="button" value="적용하기" onclick="setParentsText('<%=i%>')">
+									<%if(cmdto.getUsed().equals("TEMP_USED")){%>
+										<input type="button" value="다른상품에 적용중" style="opacity: 0.3; pointer-events: none;">
+									<%} else{ %>
+										<input type="button" value="적용하기" onclick="setParentsText('<%=i%>')">
+									<%} %>
 							<%}else{%>
 								<button type="button" style="opacity: 0.3; pointer-events: none;"> 적용불가 </button>
 							<%}%>
+							<input type="hidden" id="used_value" value=<%=cmdto.getUsed()%> >
 						</td>
 					</tr>
 			<%		
@@ -143,6 +152,10 @@
 	
 	function setParentsText(i) {
 		
+		var id = document.getElementById('id').value;
+		
+		var co_num = document.getElementById('co_num' + i).value;
+		
 		var num = document.getElementById('num').value;
 		
 		var total_discount_rate = document.getElementById('total_discount_rate').value;
@@ -154,6 +167,10 @@
 		var o_sum_money_input = 0;
 		o_sum_money_input = (Number(document.getElementById('total_price_input').value) + Number(document.getElementById('total_delivery_fee').value)) - total_discount_rate;
 		
+		var used_value = document.getElementById('used_value').value;
+		
+		used_value = document.getElementById('used_value').value;
+		
 		opener.document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
 		opener.document.getElementById("discount_rate" + num).innerHTML = document.getElementById("co_rate" + i).value;
 		
@@ -164,7 +181,20 @@
 		opener.document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
 		opener.document.getElementById("o_sum_money_input").value = o_sum_money_input;
 		
-		window.close();
+		opener.document.getElementById('selected_co_num'+num).value = co_num;
+		
+		$.ajax({
+			type:'post',
+			url:'./CouponModi.co',
+			data:'id='+id+'&co_num='+co_num + '&used_value=' + used_value,
+			dataType: 'html',
+			success:function(data) {
+				window.close();
+   			},error:function(request,status,error){
+			 	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			}
+		});
+	
 	}
 	
 </script>

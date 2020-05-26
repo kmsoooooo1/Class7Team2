@@ -42,7 +42,7 @@
 				</colgroup>
 				<thead>
 				  <tr>
-				    <th>No.</th>
+				    <th>분류</th>
 				    <th>제목</th>
 				    <th>글쓴이</th>
 				    <th>날짜</th>
@@ -55,7 +55,7 @@
 			  %>
 				<tbody>
 				  <tr>
-				    <td><%=bdto.getB_idx() %></td>
+				    <td><%=bdto.getB_category() %></td>
 				    <td class="title">
 				    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
 				    	<%=bdto.getB_title() %>

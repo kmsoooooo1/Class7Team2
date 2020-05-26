@@ -154,6 +154,7 @@ public class MemberOrderListAction implements Action {
 		request.setAttribute("productInfoList", productInfoList);
 		request.setAttribute("sdata", sdata);
 		
+		dao.closeDB();
 		
 		forward.setPath("./member/memberPage.jsp");
 		forward.setRedirect(false); //forwarding 해야한다.
