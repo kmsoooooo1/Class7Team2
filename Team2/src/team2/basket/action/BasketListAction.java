@@ -37,9 +37,33 @@ public class BasketListAction implements Action {
 		
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("productInfoList", productInfoList);
+	
+		String chk = "no";
+		int chkSize = 1;
+		try{
+			chk = request.getParameter("chk");
+			chkSize = Integer.parseInt(request.getParameter("chkSize"));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			if(chk == null){
+				chk = "no";
+			}
+		
+		System.out.println("chk============="+chk);
+		System.out.println("chkSize============="+chkSize);
+		if(chk.equals("ok")){
+			
+			request.setAttribute("chkSize", chkSize);
+			
+			forward.setPath("./order/animal_basket2.jsp");
+			forward.setRedirect(false);
+			
+		}else{
 		
 		forward.setPath("./order/animal_basket.jsp");
 		forward.setRedirect(false);
+		}
 		
 		return forward;
 	}
