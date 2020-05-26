@@ -116,13 +116,13 @@ body{
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 480px) {
-  .nav_column {
+  .nav_column .notice_bar .notice_title {
     width: 100%;
     height: auto;
   }
 }
 @media screen and (max-width: 736px) {
-  .nav_column {
+  .nav_column .notice_bar .notice_title {
     width: 100%;
     height: auto;
     
