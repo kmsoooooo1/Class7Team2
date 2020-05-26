@@ -22,48 +22,68 @@ public class myBoardAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
+
+		//검색 + 페이지 크기 초기값설정
+		int c = 3;
+		int pageSize = 10;
+		String search = "";
 		
-		String c_str = request.getParameter("C");
-		
-		int c = 1;
-		if(c_str!=null){
-			c = Integer.parseInt(c_str);
+		try{
+			 c = Integer.parseInt(request.getParameter("category"));
+			 pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			 search = (String) request.getParameter("search");
+		}catch(Exception e){
+			System.out.println(e);
 		}
 		
 		cSet set = new cSet();
 		set.setC(c);
 		
-		String page_str = request.getParameter("page");
-		int page = 1;
-		if(page_str!=null){
-			page=Integer.parseInt(page_str);
+		System.out.println("category : "+c+"/search : "+search);
+		
+		System.out.println("cset = "+set);
+		
+		int total = dao.getWriterCount(id, set);
+		
+		//  ----페이징 처리-----
+		
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null){
+			pageNum = "1";
 		}
 		
-		List<BoardDTO> list = dao.getMyBoard(id,c);
+		int currentPage = Integer.parseInt(pageNum);
+					
 		Criteria cri = new Criteria();
-		cri.setPage(page);
 		
-		int pageSize = 20;
-		if(c==1){
-			pageSize = 8;
-		}else{
-			pageSize = 20;
-		}
-		
+		cri.setPage(currentPage);
 		cri.setPerpageNum(pageSize);
 		
-		PageMaker pm = new PageMaker();
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(total);
 		
-		pm.setCri(cri);
-		pm.setTotalCount(dao.getWriterCount(id, c));
+		System.out.println(pageMaker.getStartPage());
+		System.out.println(pageMaker.getEndPage());
 		
+	// ----페이징 처리-----
+		
+		List<BoardDTO> list = dao.getMyBoard(id,set,cri);
+
 		request.setAttribute("list", list);
 		request.setAttribute("cri", cri);
-		request.setAttribute("pm", pm);
-		request.setAttribute("page", page);
+		request.setAttribute("pageMaker", pageMaker);
+		request.setAttribute("pageNum", pageNum);		
+		//카테고리별 전송 값
+		request.setAttribute("c", set.getC());	
+		
+		//검색 search 값
+		request.setAttribute("search", search);
+		request.setAttribute("category", set.getCategory());
+
 		
 		dao.closeDB();
-		
+		forward.setPath("./board/myBoard.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

@@ -63,17 +63,21 @@ function doAction(){
 			BoardDTO bdto = (BoardDTO) boardList.get(i);
 		
 			String image = bdto.getB_file();
-		
-			if(image == null){
-				image = "no.jpg";
-			}
+			String imgPath = null;
+			
+			//데체이미지 처리
+			if(image == null || image == ""){
+				 imgPath = request.getContextPath()+"/img/noImage.jpg";
+			}else{
 		   
-			String array[] = image.split(",");
-			String conPath = request.getContextPath()+"/upload/board";
-			String imgPath = conPath+"\\"+array[0];
+				String array[] = image.split(",");
+				String conPath = request.getContextPath()+"/upload/board";
+				 imgPath = conPath+"\\"+array[0];
+			}
 	%>
 		    <li class="li_list">
-		   		<img class="list_img" src="<%=imgPath %>" onclick="location.href='./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>'">
+		   		<img class="list_img" src="<%=imgPath%>"
+		   		onclick="location.href='./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>'">
 		    	<div class="subject">
 		    		<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
 		    			<%=bdto.getB_title() %>

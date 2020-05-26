@@ -1,7 +1,9 @@
+<%@page import="team2.board.action.PageMaker"%>
 <%@page import="team2.board.action.Criteria"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,6 +19,12 @@
 <%
 	List<BoardDTO> list = (ArrayList<BoardDTO>)request.getAttribute("list");
 	Criteria cri = (Criteria)request.getAttribute("cri");
+	PageMaker pageMaker = (PageMaker)request.getAttribute("pageMaker");
+
+	//페이지번호 & 카테고리번호
+	String pageNum = (String)request.getAttribute("pageNum");
+
+	
 %>
 	<!-- content -->
 	<div class="container">
@@ -34,7 +42,7 @@
 				</colgroup>
 				<thead>
 				  <tr>
-				    <th>No.</th>
+				    <th>분류</th>
 				    <th>제목</th>
 				    <th>글쓴이</th>
 				    <th>날짜</th>
@@ -47,7 +55,7 @@
 			  %>
 				<tbody>
 				  <tr>
-				    <td><%=bdto.getB_idx() %></td>
+				    <td><%=bdto.getB_category() %></td>
 				    <td class="title">
 				    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
 				    	<%=bdto.getB_title() %>
@@ -70,7 +78,26 @@
 			<%} %>
 			</table>
 		</div>
-		<div class="bottom"></div>
+		
+		<div class="paging-div">
+			<ul class="paging">
+			<c:if test="${pageMaker.prev }">
+				<li>
+					<a href='<c:url value="./myBoard.bo?category=${c}&pageNum=${pageMaker.startPage-1 }&search=${search}"/>'><i class="fa left">◀</i></a>	
+				</li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum" >
+				<li>
+					<a href='<c:url value="./myBoard.bo?category=${c}&pageNum=${pageNum}&search=${search}&pageSize=${pageSize }"/>'><i class="fa">${pageNum }</i></a>
+				</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li>
+					<a href='<c:url value="./myBoard.bo?category=${c}&pageNum=${pageMaker.endPage+1 }&search=${search}"/>'><i class="fa right">▶</i></a>
+				</li>
+			</c:if>
+			</ul>
+		</div>
 	</div>
 	<!-- FOOTER -->
 	<jsp:include page="/include/footer.jsp"/>

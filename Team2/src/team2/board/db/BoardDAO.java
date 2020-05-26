@@ -438,15 +438,29 @@ public class BoardDAO {
 		return total;
 	}
 
-	public List<BoardDTO> getMyBoard(String id, int c) {
+	public List<BoardDTO> getMyBoard(String id, cSet cset, Criteria cri) {
 		// TODO Auto-generated method stub
-		String sql = "select * from team2_board where b_writer='" + id + "' and b_category='"+ cSet.Category[c]+"'";
+		String sql = "";
+		if(cset.getCategory().equals("All")){
+			sql = "select * from team2_board where b_writer='" + id + "' order by b_idx desc limit "+cri.getPageStart()+" , "+cri.getPerpageNum();
+		}else{
+			sql = "select * from team2_board where b_writer='" + id + "' and b_category='"+ cset.getCategory()+"' order by b_idx desc limit "+cri.getPageStart()+" , "+cri.getPerpageNum();
+		}
+
 		
 		return getList(sql);
 	}
 	
-	public int getWriterCount(String id, int c){
-		String sql = "select count(b_idx) from team2_board where b_writer='" + id + "' and category='" + cSet.Category[c] + "'";
+	public int getWriterCount(String id, cSet cset){
+		
+		String sql = "";
+		if(cset.getCategory().equals("All")){
+			 sql = "select count(b_idx) from team2_board where b_writer='" + id + "' ";
+
+		}else{
+			 sql = "select count(b_idx) from team2_board where b_writer='" + id + "' and b_category='" + cset.getCategory() + "'";
+
+			}
 		
 		return getCount(sql);
 	}

@@ -16,7 +16,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script>
-<title>테스트</title>
+<title>상품 페이지</title>
 </head>
 <body>
 
@@ -912,13 +912,6 @@
 			
 			document.fr.action="./BasketAdd.ba";
 			document.fr.submit();
-			
-			var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
-			if(goBasket){
-				location.href="./BasketList.ba";
-			}else if(!goBasket){
-				window.location.reload(); //현재 페이지 새로고침
-			}
 			
 		}
 	}

@@ -3,10 +3,19 @@
 	box-sizing: border-box;
 }
 
+.container{
+	width: 100%;
+	text-align: center;
+}
+
 .list a{text-decoration: none;}
 .list a:HOVER, .wrap a:ACTIVE, .list a:FOCUS {text-decoration: underline;}
 
 
+.table_wrap{
+	width: 80%;
+	margin: 30px auto 50px;
+}
 
 .list {
 	width: 100%;
@@ -48,4 +57,52 @@
 
 .list td.title {
 	text-align: left;
+}
+
+/* 페이징  */
+.paging {
+	display:table;
+	margin-left: auto;
+ 	margin-right: auto;
+	text-align: center;
+	list-style:none;
+}
+
+.paging li {
+	float:left;
+	display : inline-block;
+	text-align: center;
+}
+.paging:AFTER {
+	display: block;
+	content: "";
+	clear: both;
+}
+.paging li a {
+	padding:4px;
+	margin-right:3px;
+	width:15px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+
+.paging li a:LINK {
+	text-decoration: none;
+}
+
+.paging li a:hover, .paging li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+
+.paging-div{
+	margin: 30px 0 80px;
+}
+
+.fa{
+	font-style: normal;
 }
