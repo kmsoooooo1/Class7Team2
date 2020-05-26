@@ -35,7 +35,11 @@ function doAction(){
 		String search = (String)request.getAttribute("search");
 		
 		System.out.println("pageMaker : " +pageMaker+"/pageNum : "+pageNum);
-
+		
+		String id = (String)session.getAttribute("id");
+		if(id==null){
+			id = "x";
+		}
 	%>
 <div class="board">	
 
@@ -107,7 +111,11 @@ function doAction(){
 	
 	<div class="bottom">
 		<div class="button">
+		<%
+		if(id.equals("admin")){
+		%>
 			<input type="button" value="글 쓰기" onclick="location.href='./Insert.bo?C=0'">
+		<%} %>
 		</div>
 	<ul class="paging">
 	<c:if test="${pageMaker.prev }">
