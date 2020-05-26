@@ -89,9 +89,9 @@ function doDelete(){
 		 	<option value="5"
 		 		<c:if test="${pageSize eq 5}">selected </c:if>>5</option>
 		 	<option value="7"
-		 		<c:if test="${pageSize eq 7}">selected </c:if>>7</option>
-		 	<option value="20"
 		 		<c:if test="${pageSize eq 20}">selected </c:if>>20</option>
+		 	<option value="20"
+		 		<c:if test="${pageSize eq 40}">selected </c:if>>40</option>
 		 </select>	
 		 
 		 <c:set var="ca_cset" value="<%=c%>" />

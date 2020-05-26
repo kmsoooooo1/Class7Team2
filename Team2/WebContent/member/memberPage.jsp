@@ -1,4 +1,6 @@
 
+<%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Vector"%>
 <%@page import="team2.coupon.db.CouponDTO"%>
@@ -83,6 +85,11 @@
 		
 		ArrayList memberCouponList = (ArrayList) vec.get(0);
 		ArrayList couponInfoList = (ArrayList) vec.get(1);
+		
+		
+		//내 게시글
+		List<BoardDTO> myBoardlist = (ArrayList<BoardDTO>)request.getAttribute("myBoardlist");
+		Criteria cri = (Criteria)request.getAttribute("cri");
 		
 		
 	 %>
@@ -295,7 +302,7 @@
 									if (orderList.size() == 0) {
 								%>
 								<tr>
-									<td style="text-align: center;">구매 내역이 없습니다.</td>
+									<td class="empty" colspan="6">구매 내역이 없습니다.</td>
 								</tr>
 								<%
 									} else {
@@ -566,7 +573,7 @@
  <!-- 내 게시글 -->
  <div class="board_div">
   <h3>내 게시글
-   <a href="#" class="seemore">더보기>></a>
+   <a href="./myBoard.bo" class="seemore">더보기>></a>
   </h3>
   <div class="contents">
    <table border="1" summary>
@@ -589,10 +596,38 @@
      <th scope="col">조회수</th>
     </tr>
     </thead>
-   </table>
-    <p class="empty">
-     	게시글이 없습니다.
-    </p>
+    			  <%
+			  if(myBoardlist.size()>0){
+				  for(BoardDTO bdto:myBoardlist){
+			  %>
+				<tbody>
+				  <tr>
+				    <td><%=bdto.getB_idx() %></td>
+				    <td><%=bdto.getB_category() %></td>
+				    <td class="title">
+				    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+				    	<%=bdto.getB_title() %>
+				    	</a>
+				    </td>
+				    
+				    <td><%=bdto.getB_writer() %></td>
+				    <td><%=bdto.getB_reg_date() %></td>
+				    <td><%=bdto.getB_view() %></td>
+				  </tr>
+				 </tbody>
+			  <%}
+			  }else{
+				%>
+				<tr>
+				    <td colspan="6"  class="empty">
+				     	게시글이 없습니다.
+				    </td>
+				</tr>
+			<%} %>
+	   </table>
+<!--     <p class="empty"> -->
+<!--      	게시글이 없습니다. -->
+<!--     </p> -->
   </div>
  </div>
  
