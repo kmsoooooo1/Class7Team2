@@ -78,28 +78,28 @@
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 	%>
     <div class="notice_bar">
-    <div class="notice_title">
-    <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-    </div>
-     <ul class="rolling"> 
-       <%
-       String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
-       	BoardDAO bdao = new BoardDAO();
-       	List<BoardDTO> boardNoticeList = bdao.getList(sql);
-       	bdao.closeDB();
-	    for(int i=0; i<boardNoticeList.size(); i++){ 
-             BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
-	  %>
-      <li>
-       <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
-		<p> 
-		    	 <%=bdto.getB_title()%> 
-	    </p>
-	   </a>
-	  </li>
-	    <%} %>
-	  
-     </ul>
+	    <div class="notice_title">
+	    	<a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+	    </div>
+		<ul class="rolling"> 
+		<%
+			String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
+			BoardDAO bdao = new BoardDAO();
+			List<BoardDTO> boardNoticeList = bdao.getList(sql);
+			bdao.closeDB();
+			
+			for(int i=0; i<boardNoticeList.size(); i++){ 
+				BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
+		%>
+			<li>
+				<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
+					<p> 
+						<%=bdto.getB_title()%> 
+					</p>
+				</a>
+			</li>
+		  <%} %>
+		</ul>
     </div>
    </div>
     <div id="logo">
@@ -248,8 +248,8 @@ $(document).ready(function(){
 	// 글자수 제한 30자 이상시 (뒤에...)
 	$(document).ready(function(){ 
 		$('.rolling li a').each(function(){
-			if ($(this).text().length > 20) 
-				$(this).html($(this).text().substr(0,20)+"...");
+			if ($(this).text().length > 40) 
+				$(this).html($(this).text().substr(0,40)+"...");
 			});
 		});
 //헤더 스크롤 내려도 메뉴바 상단에 고정시키는 스크립트
