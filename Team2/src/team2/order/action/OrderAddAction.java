@@ -1,14 +1,11 @@
 package team2.order.action;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
-import team2.basket.db.BasketDAO;
-import team2.basket.db.BasketDTO;
+import team2.coupon.db.CouponDAO;
+import team2.couponMember.db.CouponMemberDTO;
 import team2.order.db.OrderDAO;
 import team2.order.db.OrderDTO;
 
@@ -46,12 +43,15 @@ public class OrderAddAction implements Action{
 		//넘어온 배송방법들
 		String selectedDeliveryMethods = request.getParameter("selectedDeliveryMethods");
 		
+		String selected_co_num_list = request.getParameter("selected_co_num_list");
+		
 		// split()을 이용해 ','를 기준으로 문자열을 자른다.
         // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
 		String splitSeletedCodes[] = selectedCodes.split(",");
 		String splitSelectedAmounts[] = selectedAmounts.split(",");
 		String splitSelectedOptions[] = selectedOptions.split(",");
 		String splitSelectedDeliveryMethods[] = selectedDeliveryMethods.split(",");
+		String splitSelected_co_num_list[] = selected_co_num_list.split(",");
 
 		//장바구니 안에 있는 상품정보 가져오기 --------------------------------
 //		BasketDAO bdao = new BasketDAO();
@@ -112,7 +112,19 @@ public class OrderAddAction implements Action{
 		}
 	
 		//쿠폰
-		
+		String co_num = request.getParameter("co_num");
+		if(co_num == null){
+			co_num = "";
+		}
+		for(int i=0; i<splitSelected_co_num_list.length-1; i++){
+			CouponMemberDTO cmdto = new CouponMemberDTO();
+			CouponDAO cdao = new CouponDAO();
+			
+			cmdto.setId(id);
+			cmdto.setCo_num(Integer.parseInt(splitSelected_co_num_list[i].trim()));
+			
+			cdao.deleteMemberCoupon(cmdto);
+		}
 		
 		//적립금
 		int mileage = Integer.parseInt(request.getParameter("use_My_Mileage"));

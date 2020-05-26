@@ -67,6 +67,27 @@ public class CouponFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		//임시 사용 처리하기
+		else if(command.equals("/order/CouponModi.co")){
+			action = new ModiCouponUsedAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//임시 사용 되도릴기
+		else if(command.equals("/CouponModiDefault.co")){
+			action = new ModiCouponModiDefaultAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		
 		// 페이지 이동처리 
 		if(forward != null){ // 페이지 이동정보가 있을때 
