@@ -323,6 +323,7 @@
 				<!-- 총 주문금액 -->
 				<td>
 					<span><%=formatter.format(final_total_price)%></span>원
+					<input type="hidden" id="total_price_input" value="<%=final_total_price%>">
 				</td>
 				
 				<!-- 총 배송비 -->
@@ -356,17 +357,17 @@
 							}
 						}
 					%>
-					<span>+<%=formatter.format(final_delivery_fee)%></span>원
+					+<span id="total_delivery_fee"><%=formatter.format(final_delivery_fee)%></span>원
 				</td>
 				
 				<!-- 총 할인 금액 -->
 				<td>
-					-<span id="total_discount_rate">0</span>원
+					<span style="color: green;">-<span id="total_discount_rate">0</span>원</span>
 				</td>
 				
 				<!-- 결제 에정 금액 -->
 				<td>
-					<span id="o_sum_money" name="o_sum_money" style="color: red;">=<%=formatter.format(final_total_price + final_delivery_fee)%>원</span>
+					<span style="color: red;">=<span id="o_sum_money"><%=formatter.format(final_total_price + final_delivery_fee)%></span>원</span>
 					<input type="hidden" id="o_sum_money_input" name="o_sum_money_input" value="<%=final_total_price + final_delivery_fee%>">
 				</td>
 				
@@ -781,6 +782,17 @@
     
     //쿠폰조회 버튼 눌렸을시
     function searchCoupon(i){
+    	
+    	//------------------------------------------------------------------------------------------
+    	//총 주문금액
+    	var total_price_input = Number(document.getElementById('total_price_input').value);
+    	//총 배송비
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	//결제 예정금액
+    	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
+    	//항상! 
+    	//총 주문금액 + 총 배송비 - 총 할인가 = 결제 예정금액
+    	//------------------------------------------------------------------------------------------
 
     	//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
 		for(var j=0; j<basketList.length; j++){
@@ -799,11 +811,22 @@
 		
 		var num = i;
 		
-		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate, '_blank','width=800,height=700',false);
+		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate + '&total_price_input=' + total_price_input + '&total_delivery_fee=' + total_delivery_fee, '_blank','width=800,height=700',false);
     }
     
     //쿠폰 다시선택 버튼 눌렸을때
     function cancelCoupon(i){ 
+    	
+    	//------------------------------------------------------------------------------------------
+    	//총 주문금액
+    	var total_price_input = Number(document.getElementById('total_price_input').value);
+    	//총 배송비
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	//결제 예정금액
+    	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
+    	//항상! 
+    	//총 주문금액 + 총 배송비 - 총 할인가 = 결제 예정금액
+    	//------------------------------------------------------------------------------------------
     	
     	//장바구니에 담긴 모든 상품 한번 훑어서 selected 된 값만 input hidden 값에 넣기
 		for(var j=0; j<basketList.length; j++){
@@ -832,7 +855,12 @@
 		
 		document.getElementById("discount_rate" + i).innerHTML = 0;
 		
-		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate, '_blank','width=800,height=700',false);
+		//결제 예정금액 계산하기
+		o_sum_money_input = (total_price_input + total_delivery_fee) - total_discount_rate;
+		document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
+		document.getElementById("o_sum_money_input").value = o_sum_money_input;
+		
+		window.open('${pageContext.request.contextPath}/order/searchCoupon.jsp?b_category=' + $('#b_category'+i).val() + '&num=' + num + '&total_discount_rate=' + total_discount_rate + '&total_price_input=' + total_price_input + '&total_delivery_fee=' + total_delivery_fee, '_blank','width=800,height=700',false);
     }
     
     //적립금 최대 사용 눌렸을시
@@ -852,6 +880,17 @@
     	//input 안에 입력되어있던 값 가져오기
 		var pre_use_My_Mileage = Number(document.getElementById('use_My_Mileage').value);
     	
+    	//------------------------------------------------------------------------------------------
+    	//총 주문금액
+    	var total_price_input = Number(document.getElementById('total_price_input').value);
+    	//총 배송비
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	//결제 예정금액
+    	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
+    	//항상! 
+    	//총 주문금액 + 총 배송비 - 총 할인가 = 결제 예정금액
+    	//------------------------------------------------------------------------------------------
+
     	if(chk){
     		//안눌려진 상태에서 체크했을때
     		
@@ -872,8 +911,12 @@
 				total_discount_rate += Number(my_mileage.toFixed(0) - pre_use_My_Mileage);
         		
         		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
-
         	}
+    		
+        	//결제 예정금액 계산하기
+    		o_sum_money_input = (total_price_input + total_delivery_fee) - total_discount_rate;
+    		document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
+    		document.getElementById("o_sum_money_input").value = o_sum_money_input;
     		
     		$('#use_My_Mileage_Chkbox').prop("checked", true);
     		
@@ -896,6 +939,11 @@
         		document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
         	}
 
+        	//결제 예정금액 계산하기
+    		o_sum_money_input = (total_price_input + total_delivery_fee) - total_discount_rate;
+    		document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
+    		document.getElementById("o_sum_money_input").value = o_sum_money_input;
+    		
     		$('#use_My_Mileage_Chkbox').prop("checked", false);
 
     	}	
@@ -915,6 +963,17 @@
 		//총 할인가
     	var total_discount_rate = Number(document.getElementById('total_discount_rate').innerHTML);
 		
+    	//------------------------------------------------------------------------------------------
+    	//총 주문금액
+    	var total_price_input = Number(document.getElementById('total_price_input').value);
+    	//총 배송비
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	//결제 예정금액
+    	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
+    	//항상! 
+    	//총 주문금액 + 총 배송비 - 총 할인가 = 결제 예정금액
+    	//------------------------------------------------------------------------------------------
+		
 		//새로운 할인가
 		total_discount_rate -= pre_use_My_Mileage;
 		
@@ -923,9 +982,10 @@
     	//input 안에 빈 값넣기
     	document.getElementById('use_My_Mileage').value = "";
     	
-    	$('#use_My_Mileage').change(function(){
-    		
-    	});
+    	//결제 예정금액 계산하기
+		o_sum_money_input = (total_price_input + total_delivery_fee) - total_discount_rate;
+		document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
+		document.getElementById("o_sum_money_input").value = o_sum_money_input;
     }
     
 	//사용자가 적립금을 입력할때 값을 총할인가에 저장하기
@@ -939,23 +999,38 @@
        	//총 할인가
        	var total_discount_rate = Number(document.getElementById('total_discount_rate').innerHTML);
        	
+     	//------------------------------------------------------------------------------------------
+    	//총 주문금액
+    	var total_price_input = Number(document.getElementById('total_price_input').value);
+    	//총 배송비
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	//결제 예정금액
+    	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
+    	//항상! 
+    	//총 주문금액 + 총 배송비 - 총 할인가 = 결제 예정금액
+    	//------------------------------------------------------------------------------------------
+
        	//입력 되는 값
        	var use_My_Mileage = Number(document.getElementById('use_My_Mileage').value);
        	
        	if(use_My_Mileage > my_mileage){
        		alert("보유 적립금보다 높은 금액을 입력하셨습니다.");
-       		document.getElementById('use_My_Mileage').value = "";
+       		document.getElementById('use_My_Mileage').value = 0;
        		document.getElementById('use_My_Mileage').focus();
        		
-       		total_discount_rate += Number(document.getElementById('use_My_Mileage').value);
+       		use_My_Mileage = 0;
+       		
+       		total_discount_rate += Number(use_My_Mileage);
        	}
        	
        	else if(use_My_Mileage > limit_mileage){
        		alert("최대 사용가능 적립금은 " + limit_mileage + " 입니다.");
-       		document.getElementById('use_My_Mileage').value = "";
+       		document.getElementById('use_My_Mileage').value = 0;
        		document.getElementById('use_My_Mileage').focus();	
+		
+       		use_My_Mileage = 0;
        		
-       		total_discount_rate += Number(document.getElementById('use_My_Mileage').value);
+       		total_discount_rate += Number(use_My_Mileage);
        	}
        	
        	if(use_My_Mileage == ""){
@@ -963,6 +1038,11 @@
        	}else {
        		total_discount_rate += use_My_Mileage;
        	}
+       	
+      	//결제 예정금액 계산하기
+		o_sum_money_input = (total_price_input + total_delivery_fee) - total_discount_rate;
+		document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
+		document.getElementById("o_sum_money_input").value = o_sum_money_input;
        
        	document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
 		

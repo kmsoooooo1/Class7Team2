@@ -136,6 +136,8 @@
 						<td> <span style="color: green;"> 입금완료 </span> </td>
 					<%} else if(odto.getO_status() == 2) {%>
 						<td> <span style="color: blue;"> 배송중 </span> </td>
+					<%} else if (odto.getO_status() == 3) {%>
+						<td><span style="color: black;"> 배송완료 </span></td>
 					<%}%>
 					
 					<td>

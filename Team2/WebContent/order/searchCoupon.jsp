@@ -37,6 +37,9 @@
 		
 		String total_discount_rate = request.getParameter("total_discount_rate");
 		
+		int total_price_input = Integer.parseInt(request.getParameter("total_price_input"));
+		int total_delivery_fee = Integer.parseInt(request.getParameter("total_delivery_fee"));
+		
 		//coupon DB 접근해서 리스트 가져오기
 		CouponDAO cdao = new CouponDAO();
 		
@@ -53,6 +56,8 @@
 	
 		<input type="hidden" id="num" name="num" value="<%=num%>">
 		<input type="hidden" id="total_discount_rate" name="total_discount_rate" value="<%=total_discount_rate%>">
+		<input type="hidden" id="total_price_input" value="<%=total_price_input%>">
+		<input type="hidden" id="total_delivery_fee" value="<%=total_delivery_fee%>">
 		
 		<div class="page_title">
 			<span> Coupons </span>
@@ -146,12 +151,18 @@
 		
 		total_discount_rate += Number(document.getElementById('co_rate' + i).value);
 		
+		var o_sum_money_input = 0;
+		o_sum_money_input = (Number(document.getElementById('total_price_input').value) + Number(document.getElementById('total_delivery_fee').value)) - total_discount_rate;
+		
 		opener.document.getElementById("total_discount_rate").innerHTML = total_discount_rate;
 		opener.document.getElementById("discount_rate" + num).innerHTML = document.getElementById("co_rate" + i).value;
 		
 		opener.document.getElementById('searchCouponBtn' + num).style.display = "none";
 		
 		opener.document.getElementById('cancelCouponBtn' + num).style.display = "";
+		
+		opener.document.getElementById("o_sum_money").innerHTML = o_sum_money_input;
+		opener.document.getElementById("o_sum_money_input").value = o_sum_money_input;
 		
 		window.close();
 	}
