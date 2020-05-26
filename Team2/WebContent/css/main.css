@@ -153,11 +153,11 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      height: 40%;
+      height: 400px;
 	}
 	.second img {
       width: 100%;
-      height: 100%;
+      height: 230px;
 	}
 
 
