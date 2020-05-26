@@ -345,13 +345,13 @@
 				<%
 					if (odto.getO_p_option().equals("")) {
 				%>
-				<td><a
+				<td><a class="orderInfo_td"
 					href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%>
 				</a></td>
 				<%
 					} else {
 				%>
-				<td><a
+				<td><a class="orderInfo_td"
 					href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%>
 				</a></td>
 				<%
@@ -371,13 +371,13 @@
 				<%
 					if (odto.getO_p_option().equals("")) {
 				%>
-				<td class="orderInfo_td"><a
+				<td><a class="orderInfo_td"
 					href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name()%>
 				</a></td>
 				<%
 					} else {
 				%>
-				<td class="orderInfo_td"><a
+				<td><a class="orderInfo_td"
 					href='./GoodsDetail.go?g_code=<%=odto.getO_p_code()%>'> <%=pdto.getProduct_name() + "<br>[옵션: " + odto.getO_p_option() + "]"%>
 				</a></td>
 				<%
