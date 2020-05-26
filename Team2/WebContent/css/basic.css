@@ -589,10 +589,12 @@ body{
 
 .fa-envelope-o:before {
 	content: "\f003";
+	color: black;
 }
 
 .notice_bar .notice_title a:after {
 	content: "NOTICE";
+	color: black;
 }
 
 .rolling_top_menu:after {
@@ -613,8 +615,8 @@ body{
 
 .rolling li {
 	width: 100%;
-	height: 19px;
-	line-height: 19px;
+	height: 24px;
+	line-height: 24px;
 	list-style: none;	
 }
 
@@ -632,6 +634,3 @@ body{
 	font-weight: bold;
 }
 /* Notice-Rolling END */
-
-
-		
