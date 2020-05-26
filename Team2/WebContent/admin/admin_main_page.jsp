@@ -50,7 +50,7 @@
 		<!-- 관리자 게시판 파트 -->
 		<tr>
 			<th> 게시판 파트 </th>
-			<td colspan="6"><a href="./AdminBoard.bo">회원 리스트 보기</a></td>
+			<td colspan="6"><a href="./AdminBoard.bo">게시판 리스트 보기</a></td>
 		</tr>
 		<!-- 관리자 주문 파트 -->
 		<tr>

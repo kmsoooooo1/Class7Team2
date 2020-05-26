@@ -1,4 +1,7 @@
 
+<%@page import="team2.order.db.OrderDAO"%>
+<%@page import="team2.board.action.Criteria"%>
+<%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Vector"%>
 <%@page import="team2.coupon.db.CouponDTO"%>
@@ -75,8 +78,10 @@
 // 		}else{
 			
 // 		}
+		// 쿠폰 보유 개수 확인
 		int countCouponNum = mdao.countCoupons(id);
 		
+		// 보유 쿠폰 확인
 		CouponDAO cdao = new CouponDAO();
 		
 		Vector vec = cdao.getMemberCouponsList(id);
@@ -85,7 +90,23 @@
 		ArrayList couponInfoList = (ArrayList) vec.get(1);
 		
 		
+		//내 게시글
+		List<BoardDTO> myBoardlist = (ArrayList<BoardDTO>)request.getAttribute("myBoardlist");
+		Criteria cri = (Criteria)request.getAttribute("cri");
+		
+		// 총 주문 금액 계산
+		int order_total_price = 0;
+		for(int i=0; i<orderList.size(); i++){
+				order_total_price = orderList.get(i).getO_sum_money() + order_total_price;
+		}
+		
+		// 주문횟수 확인
+		OrderDAO odao = new OrderDAO();
+		int countOrderNum = odao.countOrder(id);
+		
+		
 	 %>
+		
  
  <div class="member_div">
  <div class="content">
@@ -145,16 +166,16 @@
      <li>
       <strong class="mileage_strong">총 주문</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span">0원</span>
+       <span class="mileage_span"><%=formatter.format(order_total_price) %>원</span>
        	
-       <span class="mileage_span2">(0회)</span> 	
+       <span class="mileage_span2">(<%=countOrderNum %>회)</span> 	
       </strong>      
      </li>
      <!-- 가용 적립금 -->
      <li>
       <strong class="mileage_strong">적립금</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span"><%=mdto.getMileage() %>원</span>
+       <span class="mileage_span"><%=formatter.format(mdto.getMileage()) %>원</span>
       </strong>
        <a href="./Mileage.me"
           onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
@@ -295,7 +316,7 @@
 									if (orderList.size() == 0) {
 								%>
 								<tr>
-									<td style="text-align: center;">구매 내역이 없습니다.</td>
+									<td class="empty" colspan="6">구매 내역이 없습니다.</td>
 								</tr>
 								<%
 									} else {
@@ -329,7 +350,7 @@
 									<td><a
 										href='./AnimalDetail.an?a_code=<%=odto.getO_p_code()%>'> <img
 											src="./upload/multiupload/<%=pdto.getProduct_thumbnail()%>"
-											width="50" height="50">
+											width="100" height="100">
 									</a></td>
 
 									<!-- 상품정보 (옵션이 있을때와 없을때) -->
@@ -566,7 +587,7 @@
  <!-- 내 게시글 -->
  <div class="board_div">
   <h3>내 게시글
-   <a href="#" class="seemore">더보기>></a>
+   <a href="./myBoard.bo" class="seemore">더보기>></a>
   </h3>
   <div class="contents">
    <table border="1" summary>
@@ -589,10 +610,38 @@
      <th scope="col">조회수</th>
     </tr>
     </thead>
-   </table>
-    <p class="empty">
-     	게시글이 없습니다.
-    </p>
+    			  <%
+			  if(myBoardlist.size()>0){
+				  for(BoardDTO bdto:myBoardlist){
+			  %>
+				<tbody>
+				  <tr>
+				    <td><%=bdto.getB_idx() %></td>
+				    <td><%=bdto.getB_category() %></td>
+				    <td class="title">
+				    <a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>&pageNum=<%=cri.getPage()%>">
+				    	<%=bdto.getB_title() %>
+				    	</a>
+				    </td>
+				    
+				    <td><%=bdto.getB_writer() %></td>
+				    <td><%=bdto.getB_reg_date() %></td>
+				    <td><%=bdto.getB_view() %></td>
+				  </tr>
+				 </tbody>
+			  <%}
+			  }else{
+				%>
+				<tr>
+				    <td colspan="6"  class="empty">
+				     	게시글이 없습니다.
+				    </td>
+				</tr>
+			<%} %>
+	   </table>
+<!--     <p class="empty"> -->
+<!--      	게시글이 없습니다. -->
+<!--     </p> -->
   </div>
  </div>
  

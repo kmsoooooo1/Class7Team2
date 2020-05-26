@@ -15,6 +15,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import team2.member.db.MemberPointDTO;
 import team2.product.db.ProductDTO;
 
 public class OrderDAO {
@@ -535,8 +536,34 @@ public class OrderDAO {
 			closeDB();
 		}
 	}
-
 	
+	// 총주문 횟수 구하기
+	public int countOrder(String id){
+		int countOrderNum = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql = "SELECT o_trade_num FROM team2_order where o_m_id=? group by o_trade_num";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				countOrderNum += 1;
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return countOrderNum;
+
+	}
 	
 	
 	
