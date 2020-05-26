@@ -73,9 +73,7 @@ public class myBoardAction implements Action {
 		request.setAttribute("list", list);
 		request.setAttribute("cri", cri);
 		request.setAttribute("pageMaker", pageMaker);
-		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("c", c);
-		
+		request.setAttribute("pageNum", pageNum);		
 		//카테고리별 전송 값
 		request.setAttribute("c", set.getC());	
 		
