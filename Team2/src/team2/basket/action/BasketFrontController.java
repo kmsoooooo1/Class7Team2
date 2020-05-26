@@ -86,7 +86,16 @@ public class BasketFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		
+		// 구매하기 리스트 페이지로 이동
+		else if(command.equals("/BasketAdd2.ba")) {
+			action = new BasketAdd2Action();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
 		
 		// 페이지 이동 처리
 		if (forward != null) {

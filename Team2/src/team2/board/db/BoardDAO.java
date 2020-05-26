@@ -299,7 +299,6 @@ public class BoardDAO {
 				dto.setB_file(rs.getString("b_file"));
 				dto.setB_p_code(rs.getString("b_p_code"));
 				
-				System.out.println(dto);
 				list.add(dto);
 			}
 		} catch (SQLException e) {

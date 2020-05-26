@@ -1872,20 +1872,82 @@
 	
 	//구매하기 버튼을 클릭했을시
 	function valueOrderChecked() {
-		//만약 배송방법을 선택하지 않았다면
-		if(document.getElementById("delivery_method").value == ""){
-			alert("배송옵션을 선택해주세요");
-			document.fr.delivery_method.focus();
-			return false;
+// 		//만약 배송방법을 선택하지 않았다면
+// 		if(document.getElementById("delivery_method").value == ""){
+// 			alert("배송옵션을 선택해주세요");
+// 			document.fr.delivery_method.focus();
+// 			return false;
+// 		}
+// 		//배송방법을 선택했을시
+// 		else {
+// 			var isBasket = confirm("구매하시겠습니까?");
+// 			if(isBasket) {
+// 				document.fr.action="";
+// 				document.fr.sbmit();
+// 			} else {
+// 				return false;
+// 			}
+// 		}
+		// 배송선택 테이블이 존재할 때
+		if(document.getElementById("detail_select_delivery")){
+			
+			if(document.getElementById("delivery_method").value == ""){
+				alert("필수옵션을 선택해주세요");
+				document.fr.delivery_method.focus();
+				return false;	
+			}else{
+				for(var i=0; i<count; i++){
+					//selectedArray[i] -> 선택된 배송방법의 value들
+					selectedAmounts += ($('#g_amount_' + selectedArray[i]).val() + ", ")
+				} 
+				
+				//추가된 values 변수를 태그에 담기
+				$("#selectedAmounts").val(selectedAmounts);
+				
+				document.fr.action="./BasketAdd2.ba";
+				document.fr.submit();
+				
+			}	
 		}
-		//배송방법을 선택했을시
-		else {
-			var isBasket = confirm("구매하시겠습니까?");
-			if(isBasket) {
-				document.fr.action="";
-				document.fr.sbmit();
-			} else {
+		// 옵션선택 테이블이 존재할 때
+		if(document.getElementById("detail_select_option")){
+			if(document.getElementById("option_method").value == ""){
+				alert("필수옵션을 선택해주세요");
+				document.fr.option_method.focus();
 				return false;
+			}else{
+				for(var i=0; i<count; i++){
+					//selectedArray[i] -> 선택된 배송방법의 value들
+					selectedAmounts += (document.getElementById('g_amount_' + selectedArray[i]).value + ", ");
+				}
+				
+				//추가된 values 변수를 태그에 담기
+				//$("#selectedAmounts").val(selectedAmounts);
+				document.getElementById('selectedAmounts').value = selectedAmounts;
+				
+				document.fr.action="./BasketAdd2.ba";
+				document.fr.submit();
+
+			}	
+		}
+		
+		//일반포장일 때
+		if(document.getElementById("detail_select_delivery") == null){
+			if(document.getElementById("delivery_method").value == "일반포장"){
+				count = 1;
+				
+				selectedValues = "일반포장,";
+				$('#selectedValues').val(selectedValues);
+				
+				//selectedArray[i] -> 선택된 배송방법의 value들
+				selectedAmounts += ($('#g_amount_일반포장').val() + ", ")
+				
+				//추가된 values 변수를 태그에 담기
+				$("#selectedAmounts").val(selectedAmounts);
+				
+				document.fr.action="./BasketAdd2.ba";
+				document.fr.submit();
+
 			}
 		}
 	}
