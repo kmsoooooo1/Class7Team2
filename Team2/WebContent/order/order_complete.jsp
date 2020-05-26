@@ -255,7 +255,7 @@
 		<table border="1" class="list">
 			<tr>
 				<th>총 주문금액</th>
-				<th>총 할인가</th>
+				<th>총 배송비</th>
 				<th>결제 예정 금액</th>
 			</tr>
 			<tr>
@@ -296,12 +296,12 @@
 							}
 						}
 					%>
-					<span>-<%=formatter.format(final_delivery_fee)%></span>원
+					<span>+<%=formatter.format(final_delivery_fee)%></span>원
 				</td>
 				
 				<!-- 결제 에정 금액 -->
 				<td>
-					<span>=<%=formatter.format(final_total_price + final_delivery_fee)%></span>원
+					<span>=<%=formatter.format(orderList.get(0).getO_sum_money() + final_delivery_fee)%></span>원
 				</td>
 				
 			</tr>
