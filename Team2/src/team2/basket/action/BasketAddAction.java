@@ -26,6 +26,7 @@ public class BasketAddAction implements Action {
 			forward.setRedirect(true);
 			return forward;
 		}
+		System.out.println("addaction 호출");
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -52,10 +53,10 @@ public class BasketAddAction implements Action {
 		//사용자가 추가한 배송방법 리스트 가지고 오기
 		String selectedValues = request.getParameter("selectedValues");
 
-		System.out.println(b_code);
-		System.out.println(selectedAmounts);
-		System.out.println(selectedOptions);
-		System.out.println(selectedValues);
+//		System.out.println(b_code);
+//		System.out.println(selectedAmounts);
+//		System.out.println(selectedOptions);
+//		System.out.println(selectedValues);
 		
 		// split()을 이용해 ','를 기준으로 문자열을 자른다.
         // split()은 지정한 문자를 기준으로 문자열을 잘라 배열로 반환한다.
@@ -73,6 +74,23 @@ public class BasketAddAction implements Action {
 			//추가하기
 			bkdao.basketAdd(bkdto);
 		}
+		
+		
+		
+		response.setContentType("text/html; charset=UTF-8");
+		 
+		PrintWriter out = response.getWriter();
+		 
+		out.println("<script>");
+		out.println("var goBasket = confirm('장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?');");
+		out.println("if(goBasket){");
+		out.println("location.href='./BasketList.ba';");
+		out.println("}else if(!goBasket){ ");
+		out.println("history.back();}");
+		out.println("</script>");
+		
+		out.close();
+			
 		
 //		forward.setPath("./BasketList.ba");
 //		forward.setRedirect(true);

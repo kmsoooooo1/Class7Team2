@@ -1824,12 +1824,6 @@
 				document.fr.action="./BasketAdd.ba";
 				document.fr.submit();
 				
-				var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
-				if(goBasket){
-					location.href="./BasketList.ba";
-				}else if(!goBasket){
-					window.location.reload(); //현재 페이지 새로고침
-				}
 			}	
 		}
 		// 옵션선택 테이블이 존재할 때
@@ -1850,13 +1844,7 @@
 				
 				document.fr.action="./BasketAdd.ba";
 				document.fr.submit();
-				
-				var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
-				if(goBasket){
-					location.href="./BasketList.ba";
-				}else if(!goBasket){
-					window.location.reload(); //현재 페이지 새로고침
-				}
+
 			}	
 		}
 		
@@ -1876,13 +1864,7 @@
 				
 				document.fr.action="./BasketAdd.ba";
 				document.fr.submit();
-				
-				var goBasket = confirm("장바구니에 담겼습니다. \n장바구니로 이동하시겠습니까?");
-				if(goBasket){
-					location.href="./BasketList.ba";
-				}else if(!goBasket){
-					window.location.reload(); //현재 페이지 새로고침
-				}
+
 			}
 		}
 

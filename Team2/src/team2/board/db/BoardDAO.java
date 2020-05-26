@@ -442,9 +442,9 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		String sql = "";
 		if(cset.getCategory().equals("All")){
-			sql = "select * from team2_board where b_writer='" + id + "'  limit "+cri.getPageStart()+" , "+cri.getPerpageNum();
+			sql = "select * from team2_board where b_writer='" + id + "' order by b_idx desc limit "+cri.getPageStart()+" , "+cri.getPerpageNum();
 		}else{
-			sql = "select * from team2_board where b_writer='" + id + "' and b_category='"+ cset.getCategory()+"' limit "+cri.getPageStart()+" , "+cri.getPerpageNum();
+			sql = "select * from team2_board where b_writer='" + id + "' and b_category='"+ cset.getCategory()+"' order by b_idx desc limit "+cri.getPageStart()+" , "+cri.getPerpageNum();
 		}
 
 		
