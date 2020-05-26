@@ -11,6 +11,8 @@ public class CouponDTO {
 	private String co_status;
 	private String co_image;
 	
+	private String used;
+	
 	public int getNum() {
 		return num;
 	}
@@ -59,12 +61,11 @@ public class CouponDTO {
 	public void setCo_image(String co_image) {
 		this.co_image = co_image;
 	}
-	
-	@Override
-	public String toString() {
-		return "CouponDTO [num=" + num + ", co_target=" + co_target + ", co_name=" + co_name + ", co_rate=" + co_rate
-				+ ", co_startDate=" + co_startDate + ", co_endDate=" + co_endDate + ", co_status=" + co_status
-				+ ", co_image=" + co_image + "]";
+	public String getUsed() {
+		return used;
 	}
-
+	public void setUsed(String used) {
+		this.used = used;
+	}
+	
 }

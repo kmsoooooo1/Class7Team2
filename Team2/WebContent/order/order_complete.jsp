@@ -60,7 +60,7 @@
 		<div>
 			<div class="title"><h3>결제 정보</h3></div>
 			
-			<table border="1" class="orderlist">
+			<table border="1" class="orderlist" id="paymentInfo">
 			<colgroup>
 				<col style="width:10%;">
 				<col style="width: auto;">

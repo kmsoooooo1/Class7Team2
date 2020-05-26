@@ -100,8 +100,8 @@
 					<th style="height: 80px;"> 결제수단 </th>
 					<td> 
 						<%=orderList.get(0).getO_trade_type() %> 
-						입금자: <%=orderList.get(0).getO_trade_payer() %><br>
-						계좌번호 : 기업은행 2135159668464 (주식회사갈라파고스)
+						<span class="paymentType">입금자: <%=orderList.get(0).getO_trade_payer() %></span><br>
+						<span class="paymentType">계좌번호 : 기업은행 2135159668464 (주식회사갈라파고스)</span>
 					</td>
 				</tr>
 			</table>
@@ -109,7 +109,7 @@
 
 		<div class="orderListArea">
 			<div class="title"><h3> 주문 상품 정보 </h3></div>
-		<table border="1" class="orderlist">
+		<table border="1" class="orderlist" id="orderInfo">
 			<!-- 번호,사진,제품명,크기,색상, 수량, 가격, 취소 -->
 			<colgroup>
 				<col style="width:15%; ">
