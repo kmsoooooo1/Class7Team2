@@ -1,4 +1,5 @@
 
+<%@page import="team2.order.db.OrderDAO"%>
 <%@page import="team2.board.action.Criteria"%>
 <%@page import="team2.board.db.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -77,8 +78,10 @@
 // 		}else{
 			
 // 		}
+		// 쿠폰 보유 개수 확인
 		int countCouponNum = mdao.countCoupons(id);
 		
+		// 보유 쿠폰 확인
 		CouponDAO cdao = new CouponDAO();
 		
 		Vector vec = cdao.getMemberCouponsList(id);
@@ -91,8 +94,19 @@
 		List<BoardDTO> myBoardlist = (ArrayList<BoardDTO>)request.getAttribute("myBoardlist");
 		Criteria cri = (Criteria)request.getAttribute("cri");
 		
+		// 총 주문 금액 계산
+		int order_total_price = 0;
+		for(int i=0; i<orderList.size(); i++){
+				order_total_price = orderList.get(i).getO_sum_money() + order_total_price;
+		}
+		
+		// 주문횟수 확인
+		OrderDAO odao = new OrderDAO();
+		int countOrderNum = odao.countOrder(id);
+		
 		
 	 %>
+		
  
  <div class="member_div">
  <div class="content">
@@ -152,16 +166,16 @@
      <li>
       <strong class="mileage_strong">총 주문</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span">0원</span>
+       <span class="mileage_span"><%=formatter.format(order_total_price) %>원</span>
        	
-       <span class="mileage_span2">(0회)</span> 	
+       <span class="mileage_span2">(<%=countOrderNum %>회)</span> 	
       </strong>      
      </li>
      <!-- 가용 적립금 -->
      <li>
       <strong class="mileage_strong">적립금</strong>
       <strong class="mileage_strong2">
-       <span class="mileage_span"><%=mdto.getMileage() %>원</span>
+       <span class="mileage_span"><%=formatter.format(mdto.getMileage()) %>원</span>
       </strong>
        <a href="./Mileage.me"
           onclick="window.open(this.href,'_blank','width=900, height=500, top=200, left=600, toolbars=no, scrollbars=yes'); return false;">조회</a>
