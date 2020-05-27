@@ -361,6 +361,7 @@
 						}
 					%>
 					+<span id="total_delivery_fee"><%=formatter.format(final_delivery_fee)%></span>원
+					<input type="hidden" id="total_delivery_fee_input" value=<%=final_delivery_fee%>>
 				</td>
 				
 				<!-- 총 할인 금액 -->
@@ -792,7 +793,7 @@
     	//총 주문금액
     	var total_price_input = Number(document.getElementById('total_price_input').value);
     	//총 배송비
-    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee_input').value);
     	//결제 예정금액
     	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
     	//항상! 
@@ -825,8 +826,11 @@
     	//------------------------------------------------------------------------------------------
     	//총 주문금액
     	var total_price_input = Number(document.getElementById('total_price_input').value);
+    	
+    	document.getElementById('total_delivery_fee').value = 0;
+    	
     	//총 배송비
-    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').innerHTML);
+    	var total_delivery_fee = Number(document.getElementById('total_delivery_fee').value);
     	//결제 예정금액
     	var o_sum_money_input = 0; //document.getElementById('o_sum_money_input').value;
     	//항상! 
@@ -1075,7 +1079,11 @@
 	function AddOrder(){
 		
 		//제약조건
-		
+// 		if(document.getElementById("rece_name").value == ""){
+// 			alert("수령인을 입력해 주세요.");
+// 			document.getElementById("rece_name").focus();
+// 			return false;
+// 		}
 		
 		var selectedCodes = "";
 		var selectedAmounts = ""; 

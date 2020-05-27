@@ -69,13 +69,12 @@
 	
 	var dataList = [];
 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-	if (navigator.geolocation) {
+	if (true) {
 	    
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	        
-	        var lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
+
+	        var lat = 35.1544453, // 위도
+            lon = 129.060646; // 경도
 	        
             console.log('수정위치 : '+lat + ', ' + lon);
             
@@ -88,8 +87,7 @@
 	        ps.keywordSearch('동물병원', placesSearchCB,{
         		location: new kakao.maps.LatLng(lat, lon)}
         	);
-	            
-	      });
+	           
 	    
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 	    

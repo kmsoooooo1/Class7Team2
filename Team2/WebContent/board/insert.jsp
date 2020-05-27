@@ -107,7 +107,7 @@ $(document).ready(function() {
 	        </div>
 	        <div class="btn_wrap">
 				<button class="input_btn" type="button" onclick="return save();">등록하기</button>
-				<button class="input_btn" type="button" onclick="">목록으로</button>
+				<button class="input_btn" type="button" onclick="history.back();">목록으로</button>
 			</div>
 
 	</div>
