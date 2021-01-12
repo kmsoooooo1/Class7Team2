@@ -77,11 +77,11 @@
    <%
 		ArrayList boardList = (ArrayList)request.getAttribute("boardList");
 	%>
-    <div class="notice_bar">
-	    <div class="notice_title">
-	    	<a href="./BoardList.bo?category=0"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-	    </div>
-		<ul class="rolling"> 
+<!--     <div class="notice_bar"> -->
+<!-- 	    <div class="notice_title"> -->
+<!-- 	    	<a href="./BoardList.bo?category=0"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> -->
+<!-- 	    </div> -->
+<!-- 		<ul class="rolling">  -->
 		<%
 			String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
 			BoardDAO bdao = new BoardDAO();
@@ -91,16 +91,16 @@
 			for(int i=0; i<boardNoticeList.size(); i++){ 
 				BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
 		%>
-			<li>
-				<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>">
-					<p class="rolling_li_p"> 
-						<%=bdto.getB_title()%> 
-					</p>
-				</a>
-			</li>
+<!-- 			<li> -->
+<%-- 				<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>"> --%>
+<!-- 					<p class="rolling_li_p">  -->
+<%-- 						<%=bdto.getB_title()%>  --%>
+<!-- 					</p> -->
+<!-- 				</a> -->
+<!-- 			</li> -->
 		  <%} %>
-		</ul>
-    </div>
+<!-- 		</ul> -->
+<!--     </div> -->
    </div>
     <div id="logo">
       <a href="./Main.me" id="logo" class="title_logo">GALAPAGOS</a>
