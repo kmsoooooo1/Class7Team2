@@ -4,7 +4,7 @@
 		name="jdbc/team2"
 		auth="Container"
 		type="javax.sql.DataSource"
-		url="jdbc:mysql://localhost:3306/team2_project"
+		url="jdbc:mysql://127.0.0.1:3306/team2_project"
 		username="jspid"
 		password="jsppass"
 		driverClassName="com.mysql.jdbc.Driver"
