@@ -83,13 +83,13 @@
 <!-- 	    </div> -->
 <!-- 		<ul class="rolling">  -->
 		<%
-			String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
-			BoardDAO bdao = new BoardDAO();
-			List<BoardDTO> boardNoticeList = bdao.getList(sql);
-			bdao.closeDB();
+// 			String sql = "select * from team2_board where b_category = 'Notice' limit 6;";
+// 			BoardDAO bdao = new BoardDAO();
+// 			List<BoardDTO> boardNoticeList = bdao.getList(sql);
+// 			bdao.closeDB();
 			
-			for(int i=0; i<boardNoticeList.size(); i++){ 
-				BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
+// 			for(int i=0; i<boardNoticeList.size(); i++){ 
+// 				BoardDTO bdto = (BoardDTO) boardNoticeList.get(i);
 		%>
 <!-- 			<li> -->
 <%-- 				<a href="./BoardContent.bo?num=<%=bdto.getB_idx()%>"> --%>
@@ -98,7 +98,9 @@
 <!-- 					</p> -->
 <!-- 				</a> -->
 <!-- 			</li> -->
-		  <%} %>
+		  <%
+// 		  } 
+		  %>
 <!-- 		</ul> -->
 <!--     </div> -->
    </div>

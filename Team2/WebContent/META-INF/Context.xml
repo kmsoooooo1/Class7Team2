@@ -4,7 +4,7 @@
 		name="jdbc/team2"
 		auth="Container"
 		type="javax.sql.DataSource"
-		url="jdbc:mysql://183.111.138.246:3306/galpagos"
+		url="jdbc:mysql://galpagos.cafe24.com:3306/galpagos"
 		username="galpagos"
 		password="q1w2e37847^^"
 		driverClassName="com.mysql.jdbc.Driver"
